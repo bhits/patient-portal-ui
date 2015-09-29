@@ -1,0 +1,65 @@
+{
+    "name": "testbed",
+    "version": "0.0.1",
+    "description": "Proof of concept",
+    "title": "TestBed",
+    "author": {
+        "name": "TestBed"
+    },
+    "homepage": "N/A",
+    "repository": {
+        "type": "N/A",
+        "url": "N/A"
+    },
+    "bugs": {
+        "url": "N/A"
+    },
+    "licenses": [
+        {
+            "type": "N/A",
+            "url": "N/A"
+        }
+    ],
+    "devDependencies": {
+        "karma-chrome-launcher": "0.1.x",
+        "karma-script-launcher": "0.1.x",
+        "karma-firefox-launcher": "0.1.x",
+        "karma-html2js-preprocessor": "0.1.x",
+        "karma-ng-html2js-preprocessor": "0.1.x",
+        "karma-jasmine": "0.1.x",
+        "requirejs": "2.1.x",
+        "karma-requirejs": "0.2.x",
+        "karma-phantomjs-launcher": "0.1.x",
+        "karma": "0.10.x",
+        "karma-ie-launcher": "0.1.x",
+        "karma-junit-reporter": "0.2.x",
+        "karma-coverage": "0.1.x",
+        "grunt-contrib-compress": "0.6.x",
+        "grunt": "0.4.x",
+        "grunt-contrib-jshint": "0.8.x",
+        "grunt-contrib-uglify": "0.3.x",
+        "grunt-contrib-watch": "0.5.x",
+        "grunt-contrib-concat": "0.3.x",
+        "grunt-recess": "0.5.x",
+        "grunt-contrib-clean": "0.5.x",
+        "grunt-contrib-copy": "0.5.x",
+        "grunt-karma": "0.6.x",
+        "grunt-html2js": "0.2.x",
+        "grunt-autoprefixer": "0.6.x",
+        "grunt-contrib-htmlmin": "0.2.x",
+        "grunt-contrib-imagemin": "0.5.x",
+        "grunt-bower-task": "0.4.x",
+        "grunt-ngmin": "0.0.x",
+        "grunt-svgmin": "0.3.x",
+        "grunt-usemin": "2.0.x",
+        "jshint-stylish": "0.1.x",
+        "load-grunt-tasks": "0.3.x",
+        "time-grunt": "0.2.x",
+        "grunt-bump": "0.0.x",
+        "grunt-contrib-cssmin": "0.12.2",
+        "grunt-ng-constant": "1.1.0"
+    },
+    "engines": {
+        "node": ">= 0.8.4"
+    }
+}

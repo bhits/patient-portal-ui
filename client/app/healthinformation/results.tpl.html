@@ -1,0 +1,37 @@
+﻿<div class="row">
+    <div class="col-lg-12" id="results">
+        <div class="ibox panel panel-darkblue float-e-margins">
+            <div class="ibox-title modified panel-heading">
+                <h2>Results
+                </h2>
+                <div ibox-tools  total="{{results.length}}"></div>
+            </div>
+            <div class="ibox-content modified">
+                <div class="row">
+                    <div class="col-lg-12 ">
+                        <div class="panel" ng-repeat="result in results" ng-hide="results.length==0">
+                            <div class="panel-heading item-heading alert-info">
+                                <i class="fa fa-info-circle"></i> <span ng-bind="result.Name"></span>
+                            </div>
+                            <div class="panel-body">
+                                <p>
+                                    <label for="result-specific-test-{{$index}}">Specific Test:</label> <span ng-bind="result.SpecificTest" name="result-specific-test-{{$index}}" id="result-specific-test-{{$index}}"></span>
+                                </p>
+                                <p>
+                                    <label for="result-test-result-{{$index}}">Specific Test:</label> <span ng-bind="result.TestResults" name="result-test-result-{{$index}}" id="result-test-result-{{$index}}"></span>
+                                </p>
+                                <p>
+                                    <label for="result-lab-{{$index}}">Lab:</label> <span ng-bind="result.Lab" name="result-lab-{{$index}}" id="result-lab-{{$index}}"></span>
+                                </p>
+                                <p>
+                                    <label for="result-date-reported-{{$index}}">Date Reported:</label> <span ng-bind="result.SpecificTest" name="result-date-reported-{{$index}}" id="result-date-reported-{{$index}}"></span>
+                                </p>
+                            </div>
+                        </div>
+                        <no-data-alert data="results"></no-data-alert>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

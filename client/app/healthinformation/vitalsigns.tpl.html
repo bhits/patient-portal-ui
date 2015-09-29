@@ -1,0 +1,42 @@
+﻿<div class="row">
+    <div class="col-lg-12" id="vitalSigns">
+        <div class="ibox panel panel-darkblue float-e-margins">
+            <div class="ibox-title modified panel-heading ">
+                <h2>Vital Signs
+                </h2>
+                <div ibox-tools  total="{{vitalsigns.length}}"></div>
+            </div>
+            <div class="ibox-content modified">
+                <div class="row">
+                    <div class="col-lg-12 ">
+                        <div class="panel" ng-repeat="vitalsign in vitalsigns" ng-hide=" vitalsigns==0">
+                            <div class="panel-heading item-heading alert-info">
+                                <i class="fa fa-info-circle"></i> <span ng-bind="vitalsign.Name"></span>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <label for="vitalsigns-type-{{$index}}">Type:</label> <span ng-bind="vitalsign.Type.DisplayName" name="vitalsigns-type-{{$index}}" id="vitalsigns-type-{{$index}}"></span>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label for="vitalsigns-interpretation-{{$index}}">Interpretation:</label> <span ng-bind="vitalsign.Interpretation.DisplayName" name="vitalsigns-interpretation-{{$index}}" id="vitalsigns-interpretation-{{$index}}"></span>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <label for="vitalsigns-value-{{$index}}">Value:</label> <span ng-bind="vitalsign.Value" name="vitalsigns-value-{{$index}}" id="vitalsigns-value-{{$index}}"></span>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label for="vitalsigns-unit-{{$index}}">Unit:</label> <span ng-bind="vitalsign.Unit" name="vitalsigns-unit-{{$index}}" id="vitalsigns-unit-{{$index}}"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <no-data-alert data="vitalsigns"></no-data-alert>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

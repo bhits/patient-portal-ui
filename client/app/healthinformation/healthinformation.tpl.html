@@ -1,0 +1,90 @@
+﻿<div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-sm-10 ">
+            <h2>Health Information</h2>
+            <ol class="breadcrumb">
+                <li class="active">
+                    <strong>Health Information</strong>
+                </li>
+            </ol>
+        </div>
+</div>
+
+<div  class="row border-bottom row-padding-10" id="sticktoolbar" >
+        <div class="col-xs-5 col-sm-6" >
+            <input icheck type="checkbox" ng-model="toggleMenu" ng-checked="toggleSectionWithoutData()"> Hide sections with no data.
+        </div>
+
+        <div class="col-xs-7 col-sm-6">
+            <div class="pull-right">
+                <button class="btn btn-sm btn-primary dark-green" type="button" ng-click="expandAllAccordions()">Expand All</button>
+                <button class="btn btn-sm btn-primary dark-green" type="button" ng-click="collapseAllAccordions()">Collapse All</button>
+            </div>
+        </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+
+       <div class="row" ng-show="toggleMenu" id="noPatientDataAlertSection" >
+            <div class="col-sm-12" >
+                <div class="alert alert-warning alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    You are currently viewing only the sections that contain NEW health information.
+                </div>
+            </div>
+        </div>
+
+        <!-- PATIENT DEMOGRAPHICS-->
+        <demographics-accordion patientdemographics="patientDemographics" ccdheader="ccdheader" ></demographics-accordion>
+
+        <!--MEDICATIONS-->
+        <medications-accordion medications="medications" ng-hide="toggleMenu && !toggleMedications"  ></medications-accordion>
+
+        <!--ALERTS-->
+        <alerts-accordion alerts="allergies" ng-hide="toggleMenu && !toggleAlert"  ></alerts-accordion>
+
+        <!--RESULTS-->
+        <results-accordion results="results" ng-hide="toggleMenu && !toggleResults"  ></results-accordion>
+
+        <!--EENCOUNTERS-->
+        <encounters-accordion encounters="encounters" ng-hide="toggleMenu && !toggleEncounters" ></encounters-accordion>
+
+        <!--PROBLEM LIST-->
+        <problems-accordion problems="problems" ng-hide="toggleMenu && !toggleProblems"  ></problems-accordion>
+
+        <!--VITAL SIGNALS-->
+        <vitalsigns-accordion vitalsigns="vitalsigns" ng-hide="toggleMenu && !toggleVitalSigns" ></vitalsigns-accordion>
+
+        <!--PROCEDURES-->
+        <procedures-accordion procedures="procedures" ng-hide="toggleMenu && !toggleProcedure" ></procedures-accordion>
+
+        <!--PLANS CARE-->
+        <!--<planofcares-accordion planofcares="planofcares" ng-hide="toggleMenu && !togglePlanOfCare" ></planofcares-accordion>-->
+
+        <!--&lt;!&ndash;FAMILY HISTORY&ndash;&gt;-->
+        <!--<familyhistories-accordion familyhistories="familyhistories" ng-hide="toggleMenu && !toggleSocialHistory" ></familyhistories-accordion>-->
+
+        <!--&lt;!&ndash;HEALTHCARE PROVIDERS&ndash;&gt;-->
+        <!--<healthcareproviders-accordion healthcareproviders="healthcareproviders" ng-hide="toggleMenu && !toggleHealthcareProviders" ></healthcareproviders-accordion>-->
+
+        <!--&lt;!&ndash;Social Histories&ndash;&gt;-->
+        <!--<socialhistories-accordion socialhistories="socialhistories" ng-hide="toggleMenu && !toggleSocialHistory" ></socialhistories-accordion>-->
+
+        <!--&lt;!&ndash;Advanced Directives&ndash;&gt;-->
+        <!--<advanceddirectives-accordion advanceddirectives="advanceddirectives" ng-hide="toggleMenu && !toggleAdvancedDirectives" ></advanceddirectives-accordion>-->
+
+        <!--&lt;!&ndash;FUNCTIONAL STATUS&ndash;&gt;-->
+        <!--<functionalstatus-accordion functionalstatus="functionalstatus" ng-hide="toggleMenu && !toggleFunctionalStatus" ></functionalstatus-accordion>-->
+
+        <!--&lt;!&ndash;SUPPORT&ndash;&gt;-->
+        <!--<support-accordion supports="supports" ng-hide="toggleMenu && !toggleSupport" ></support-accordion>-->
+
+        <!--&lt;!&ndash;SUPPORT&ndash;&gt;-->
+        <!--<payers-accordion payers="payers" ng-hide="toggleMenu && !togglePayers" ></payers-accordion>-->
+
+        <!--&lt;!&ndash;Immunization&ndash;&gt;-->
+        <!--<immunizations-accordion immunizations="immunizations" ng-hide="toggleMenu && !toggleImmunization" ></immunizations-accordion>-->
+
+        <!--&lt;!&ndash;Medical Equipment&ndash;&gt;-->
+        <!--<medicalequipments-accordion medicalequipments="medicalequipments" ng-hide="toggleMenu && !toggleMedicalEquipment" ></medicalequipments-accordion>-->
+
+</div>

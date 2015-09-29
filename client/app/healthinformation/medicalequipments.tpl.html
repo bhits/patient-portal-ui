@@ -1,0 +1,26 @@
+﻿<div class="row">
+    <div class="col-lg-12" id="medicalequipment">
+        <div class="ibox panel panel-darkblue float-e-margins">
+            <div class="ibox-title modified panel-heading ">
+                <h5>Medical Equipment
+                </h5>
+                <div ibox-tools  total="{{medicalequipments.length}}"></div>
+            </div>
+            <div class="ibox-content modified">
+                <div class="row">
+                    <div class="col-lg-12 ">
+                        <div class="panel"  ng-repeat="medicalequipment in medicalequipments" ng-hide="medicalequipments.length==0">
+                            <div class="panel-heading item-heading alert-info">
+                                <i class="fa fa-info-circle"></i> <span ng-bind="medicalequipment.Name"></span>
+                            </div>
+                            <div class="panel-body">
+
+                            </div>
+                        </div>
+                        <no-data-alert data="medicalequipments"></no-data-alert>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

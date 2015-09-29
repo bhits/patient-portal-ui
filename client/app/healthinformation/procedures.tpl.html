@@ -1,0 +1,47 @@
+﻿<div class="row">
+    <div class="col-lg-12" id="procedures">
+        <div class="ibox panel panel-darkblue float-e-margins">
+            <div class="ibox-title modified panel-heading ">
+                <h2>Procedures
+                </h2>
+                <div ibox-tools  total="{{procedures.length}}"></div>
+            </div>
+            <div class="ibox-content modified">
+                <div class="row">
+                    <div class="col-lg-12 ">
+                        <div class="panel" ng-repeat="procedure in procedures" ng-hide="procedures.length==0">
+                            <div class="panel-heading item-heading alert-info">
+                                <i class="fa fa-info-circle"></i> <span ng-bind="procedure.Name"></span>
+                            </div>
+                            <div class="panel-body">
+                                <p>
+                                    <label for="procedure-date-{{$index}}">Date:</label> <span ng-bind="procedure.Date " name="procedure-date-{{$index}}" id="procedure-date-{{$index}}"></span>
+                                </p>
+                                <p>
+                                    <label for="procedure-status-{{$index}}">Status:</label> <span ng-bind="procedure.Status" name="procedure-status-{{$index}}" id="procedure-status-{{$index}}"></span>
+                                </p>
+
+                                <p>
+                                    <label for="procedure-indication-{{$index}}">Indications:</label> <span ng-bind="procedure.Indications" name="procedure-indication-{{$index}}" id="procedure-indication-{{$index}}"></span>
+                                </p>
+
+                                <p>
+                                    <label for="procedure-indication-{{$index}}">Attending Physcian:</label> <span ng-bind="procedure.AttendingPhyscian" name="procedure-attendingPhyscian-{{$index}}" id="procedure-attendingPhyscian-{{$index}}"></span>
+                                </p>
+
+                                <p>
+                                    <label for="procedure-facility-{{$index}}">Facility:</label> <span ng-bind="procedure.Facility.Name" name="procedure-facility-{{$index}}" id="procedure-facility-{{$index}}"></span>
+                                </p>
+
+                                <p>
+                                    <label for="procedure-specimens-{{$index}}">Specimens:</label> <span ng-bind="procedure.Specimens" name="procedure-specimens-{{$index}}" id="procedure-Specimens-{{$index}}"></span>
+                                </p>
+                            </div>
+                        </div>
+                        <no-data-alert data="procedures"></no-data-alert>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

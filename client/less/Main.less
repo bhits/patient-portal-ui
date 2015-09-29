@@ -1,0 +1,316 @@
+/*modifications*/
+.ibox-title.modified {
+  border-style: none;
+  border-width: 0;
+  padding-top: 10px;
+}
+
+
+.ibox-content.modified {
+    border-style: none;
+    border-width: 0;
+    background-color: transparent;
+
+    p {
+      margin-bottom: 7px;
+    }
+}
+
+ .panel-heading.item-heading {
+   padding: 5px 15px;
+   border-radius: 4px;
+ }
+
+.navbar-top-links.modified li:last-child {
+    @media (max-width: 767px) {
+        margin-right: 0;
+
+    }
+}
+
+.custom-header.modified {
+    height: auto;
+}
+
+.custom-login-column.modified {
+  height: 550px;
+}
+
+@footer-margin: auto;
+
+
+
+// WCAG 2.0 AA Compliance Modifications
+.dark-green {
+    background-color: #256357;
+    border-color: #256357;
+}
+
+
+body.ng-scope.pace-done.grey{
+color:#262727;
+}
+
+
+.green-white
+{
+  background-color: #ffffff;
+  color: #256357;
+
+}
+
+
+//home page
+
+.nav-header .light-blue {
+  color:#aed8ff;
+}
+
+
+.nav.navbar-right .dark-grey{
+color:#262727;
+}
+
+//End of WCAG 2.0 AA Compliance Modifications
+
+
+/*mixins*/
+.side-padding(@paddingAmount) {
+     padding-left: @paddingAmount;
+     padding-right: @paddingAmount;
+ }
+
+/*end mixins*/
+
+/*PALETTE*/
+
+.bg-white-page {
+  background-color: #fff;
+}
+/*.darkblue-panel {
+    background-color: #4D565E;
+    border-color: #4D565E;
+  color: #000;
+}*/
+
+.panel-darkblue {
+  border-color: #50687F;
+
+    & > .panel-heading {
+    background-color: #50687F;
+    border-color: #50687F;
+    color: #fff;
+  }
+}
+
+.page-bg-white {
+  position: absolute;
+  background-color: #fff;
+    width: 100%;
+  height: 100%;
+  bottom: 0;
+}
+
+.mediumgray-bg {
+  background-color: #b3b3b3;
+}
+
+
+/* HEADER */
+
+
+.custom-header {
+  width: 100%;
+  height: 80px;
+  padding: 2px 2px 2px 10px;
+}
+
+/* TOP NAV BAR */
+
+
+.margin-left-220 {
+  margin-left: 220px;
+}
+//
+//.margin-left-70 {
+//  margin-ft: 70px;
+//}
+
+.margin-left-0 {
+  margin-left: 0px;
+}
+
+.height-60 {
+  height: 60px;
+}
+.navbar-fixed-top.height-60 {
+  height: 60px;
+}
+
+/* SIDE BAR */
+
+.fix-sidebar {
+  position: fixed;
+  height: 100%;
+  overflow-y: auto;
+  top: 0;
+  bottom: 0;
+}
+
+/* CONTENT */
+
+.padding-top-60 {
+  padding-top: 60px;
+}
+
+.ibox-title h5 {
+    margin-top: 2px;
+}
+
+.badge-icon {
+    margin-left: 5px;
+}
+
+.custom-login-column {
+  height: 500px;
+  padding-top: 20px;
+  max-width: 900px;
+}
+
+.no-padding-right {
+    padding-right: 0;
+}
+
+.login-logo {
+  padding: 10px 0 0 30px;
+}
+
+.info-link {
+  padding: 10px 30px 0 0;
+}
+
+.left-right-padding-0 {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+// Will be revisit for stickyheader
+//.fixed-header {
+//    position: fixed;
+//    top:55px;
+//    left:220px;
+//    min-width: 90%;
+//    background: #fff;
+//    z-index: 1000;
+//}
+
+/* FOOTER */
+
+.footer-container {
+  padding: 40px;
+  margin-right: @footer-margin;
+  margin-left: @footer-margin;
+  background-color: #fff;
+}
+
+/* FORMS */
+
+
+/* GENERAL*/
+
+.side-padding10 {
+    .side-padding(10px);
+}
+
+.top-padding10 {
+  padding-top: 10px;
+}
+
+.row-padding-10 {
+    padding: 10px;
+}
+
+/* LOGIN CONTENT */
+
+.custom-margin-top{
+padding-top: 10px;
+}
+
+
+.login-content-align {
+  background-color: #fff;
+  align: left;
+  justify-content: space-around;
+}
+
+.set-margin-bottom(@value) {
+  margin-bottom: @value;
+}
+
+
+.set-padding-bottom(@value) {
+  padding-bottom: @value;
+}
+
+.margin-bottom-10{
+  .set-margin-bottom(10px)
+}
+
+
+.padding-bottom-15{
+  .set-padding-bottom(15px)
+}
+
+
+.feed-element a{
+  font-weight: bold;
+}
+
+.feed-element i{
+  margin-left: 5px;
+}
+
+.alert-margin-top
+{
+  margin-top: 15px;
+  margin-left: 15px;
+}
+
+.ibox-rounded{
+  border-radius: 4px;
+}
+
+.custom-no-margin-top{
+      margin-top: 0;
+}
+
+.icon-border{
+  padding: 8px 5px 4px 5px;
+  width: 60px;
+  height: 60px;
+  display: inline-block;
+  border-radius: 50%;
+  border: 1px solid;
+}
+
+.ibox-title h3{
+  display: inline-block;
+  margin: 0 0 7px;
+  padding: 0;
+  text-overflow: ellipsis;
+  float: left;
+  font-size: 18px;
+}
+//
+//health information page
+
+.ibox-title h2{
+  display: inline-block;
+  margin: 0 0 7px;
+  padding: 0;
+  text-overflow: ellipsis;
+  float: left;
+}
+
+.label-top-margin{
+  margin-top: 5px;
+}

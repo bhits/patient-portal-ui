@@ -1,0 +1,69 @@
+﻿ <div class="row">
+    <div class="col-sm-12" id="demographics">
+        <div class="ibox panel panel-darkblue float-e-margins">
+            <div class="ibox-title  modified panel-heading">
+                <h2>Demographics</h2>
+                <div ibox-tools   total=""></div>
+            </div>
+            <div class="ibox-content modified">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <p>
+                            <label for="patientName">Patient Name:</label> <span ng-bind="patientdemographics.Names[0].GivenName" id="patientName"></span>
+                        </p>
+                        <p>
+                            <label for="patientSSN">SSN: </label> <span ng-bind="patientdemographics.SSN" id="patientSSN"></span>
+                        </p>
+                        <p>
+                            <label for="patientSex">Sex: </label> <span ng-bind="patientdemographics.AdministrativeGender.DisplayName" id="patientSex"></span>
+                        </p>
+                        <p>
+                            <label for="patientDOB">Birthdate: </label> <span ng-bind="patientdemographics.BirthDate" id="patientDOB"></span>
+                        </p>
+                        <p>
+                            <label for="patientAddress">Address: </label> <span ng-bind="patientdemographics.Contacts[0].Address.StreetName1" id="patientAddress"></span> <span ng-bind="patientdemographics.Contacts[0].Address.City"></span>
+                        </p>
+                        <p>
+                            <label for="patientContactInfo">Contact Info: </label> <span ng-bind="patientdemographics.ContactInfo" id="patientContactInfo"></span>
+                        </p>
+                        <p>
+                            <label for="patientMaritalStatus">Marital Status: </label> <span ng-bind="patientdemographics.MaritalStatus.DisplayName" id="patientMaritalStatus"></span>
+                        </p>
+                        <p>
+                            <label for="patientReligion">Religion: </label> <span ng-bind="patientdemographics.Religion.DisplayName" id="patientReligion"></span>
+                        </p>
+                        <p>
+                            <label for="patientLanguage">Language: </label> <span ng-bind="ccdheader.Language.DisplayName" id="patientLanguage"></span>
+                        </p>
+                        <p>
+                            <label for="patientGuardian">Guardian: </label> <span ng-bind="ccdheader.Custodian.Name" id="patientGuardian"></span>
+                        </p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p>
+                            <label for="author">Author of Record: </label>  <span ng-bind="ccdheader.Author.Name.GivenName" id="author"></span> <span ng-bind="ccdheader.Author.Name.FamilyName"></span>
+                        </p>
+                        <p>
+                            <label for="timerecord">Time Record Development: </label> <span ng-bind="ccdheader.DateRecordDeveloped" id="timerecord"></span>
+                        </p>
+                        <p>
+                            <label for="patientAssignment">Assignment: </label> <span ng-bind="ccdheader.Assignment" id="patientAssignment"></span>
+                        </p>
+                        <p>
+                            <label for="patientInformationReceipt">Information Recipient: </label> <span ng-bind="ccdheader.InformationRecipient.Name.GivenName" id="patientInformationReceipt"></span>  <span ng-bind="ccdheader.InformationRecipient.Name.FamilyName"></span>:
+                        </p>
+                        <p>
+                            <label for="patientLegalAuthentication">Legal Authentication: </label> <span ng-bind="ccdheader.LegalAuthenticator.Name.GivenName" id="patientLegalAuthentication"></span> <span ng-bind="ccdheader.LegalAuthenticator.Name.FamilyName"></span>
+                        </p>
+                        <p>
+                            <label for="patrientRepOrganization">Representative Organization: </label> <span ng-bind="ccdheader.DocumentationOf.Performer.RepresentedOrganization.Name" id="patrientRepOrganization"></span>
+                        </p>
+                        <p>
+                            <label for="patientPerformer">Performer: </label> <span ng-bind="ccdheader.DocumentationOf" id="patientPerformer"></span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
