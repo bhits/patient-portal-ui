@@ -4,6 +4,8 @@
 
 'use strict';
 
+
+
 angular.module("app.providerModule", ['ui.router', 'app.providerService', 'app.providerDirectives'])
 
     .config(['$stateProvider', function ($stateProvider) {
@@ -16,23 +18,21 @@ angular.module("app.providerModule", ['ui.router', 'app.providerService', 'app.p
                 })
                 .state('provider.list', {
                     url: '/list',
-                    params: { scrollTo : null, expand: null},
                     data: { pageTitle: 'Provider List' },
                     templateUrl: 'app/provider/tmpl/provider-list.tpl.html',
                     controller: 'ProviderListController'
                 })
                 .state('provider.lookup', {
                     url: '/lookup',
-                    params: { scrollTo : null, expand: null},
                     data: { pageTitle: 'Provider lookup' },
                     templateUrl: 'app/provider/tmpl/provider-lookup.tpl.html',
                     controller: 'ProviderLookupController'
-                });
+                }) ;
          }
     ])
 
-    .controller('ProviderListController', ['$scope','ProviderService',
-        function ($scope, ProviderService) {
+    .controller('ProviderListController', ['$scope','ProviderService', function ($scope, ProviderService) {
+        $scope.providers = ProviderService.getProviders();
 
     }])
 

@@ -31,37 +31,33 @@
 
                     <table class="table table-bordered table-striped table-hover">
                         <thead>
-                        <tr>
-                            <th></th>
-                            <th>Name/Facility</th>
-                            <th>Specialty</th>
-                            <th>NPI</th>
-                            <th>Contact Number</th>
-                            <th>Address</th>
-                        </tr>
+                            <tr>
+                                <th></th>
+                                <th>Name/Facility</th>
+                                <th>Specialty</th>
+                                <th>NPI</th>
+                                <th>Contact Number</th>
+                                <th>Address</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td><button type="button" class="btn btn-danger btn-xs">
-															<span class="fa fa-minus fa-white"></span>
-														</button></td>
-                            <td>Washington, George</td>
-                            <td>Clinical</td>
-                            <td>1234567890</td>
-                            <td>(123) 456-7890</td>
-                            <td>123 Main Street, Anytown, MD 12345</td>
-                        </tr>
-                        <tr>
-                            <td><button type="button" class="btn btn-default btn-xs" disabled="disabled">
-                                <span class="fa fa-minus fa-white"></span>
-                            </button></td>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                        </tr>
-
+                            <tr ng-repeat="provider in providers">
+                                <td>
+                                    <button type="button" class="btn btn-xs" ng-class="{ 'btn-danger' : provider.activeConsent, 'btn-default': provider.activeConsent} ">
+                                        <span class="fa fa-minus fa-white"></span>
+                                    </button>
+                                </td>
+                                <td> <span ng-bind="provider.firstName"></span>,<span ng-bind="provider.lastName"></span> </td>
+                                <td> <span ng-bind="provider.providerTaxonomyDescription"></span></td>
+                                <td> <span ng-bind="provider.npi"></span> </td>
+                                <td> <span ng-bind="provider.practiceLocationAddressTelephoneNumber"></span> </td>
+                                <td>
+                                    <span ng-bind="provider.firstLinePracticeLocationAddress"></span>,
+                                    <span ng-bind="provider.practiceLocationAddressCityName"></span>,
+                                    <span ng-bind="provider.practiceLocationAddressStateName"></span>,
+                                    <span ng-bind="provider.practiceLocationAddressPostalCode"></span>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
 
