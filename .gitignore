@@ -27,6 +27,7 @@ bin
 .idea_modules/
 *.ipr
 *.iws
+*.iml
 # IntelliJ #
 out/
 # Others #
