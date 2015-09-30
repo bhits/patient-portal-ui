@@ -12,7 +12,7 @@ angular.module('app.healthInformationDirectivesModule', [])
                 patientdemographics : "=",
                 ccdheader: '='
             },
-            templateUrl: 'app/healthinformation/demographics.tpl.html',
+            templateUrl: 'app/healthinformation/tmpl/demographics.tpl.html',
             link: function ($scope, $element) {
             }
         };
@@ -28,7 +28,7 @@ angular.module('app.healthInformationDirectivesModule', [])
             scope: {
                 alerts : "="
             },
-            templateUrl: 'app/healthinformation/alerts.tpl.html',
+            templateUrl: 'app/healthinformation/tmpl/alerts.tpl.html',
             link: function ($scope, $element) {
             }
         };
@@ -44,7 +44,7 @@ angular.module('app.healthInformationDirectivesModule', [])
             scope: {
                 medications : "="
             },
-            templateUrl: 'app/healthinformation/medications.tpl.html',
+            templateUrl: 'app/healthinformation/tmpl/medications.tpl.html',
             link: function ($scope, $element) {
             }
         };
@@ -61,7 +61,7 @@ angular.module('app.healthInformationDirectivesModule', [])
             scope: {
                 encounters : "="
             },
-            templateUrl: 'app/healthinformation/encounters.tpl.html',
+            templateUrl: 'app/healthinformation/tmpl/encounters.tpl.html',
             link: function ($scope, $element) {
             }
         };
@@ -77,7 +77,7 @@ angular.module('app.healthInformationDirectivesModule', [])
             scope: {
                 problems : "="
             },
-            templateUrl: 'app/healthinformation/problems.tpl.html',
+            templateUrl: 'app/healthinformation/tmpl/problems.tpl.html',
             link: function ($scope, $element) {
             }
         };
@@ -94,7 +94,7 @@ angular.module('app.healthInformationDirectivesModule', [])
             scope: {
                 procedures : "="
             },
-            templateUrl: 'app/healthinformation/procedures.tpl.html',
+            templateUrl: 'app/healthinformation/tmpl/procedures.tpl.html',
             link: function ($scope, $element) {
             }
         };
@@ -110,7 +110,7 @@ angular.module('app.healthInformationDirectivesModule', [])
             scope: {
                 planofcares : "="
             },
-            templateUrl: 'app/healthinformation/planofcares.tpl.html',
+            templateUrl: 'app/healthinformation/tmpl/planofcares.tpl.html',
             link: function ($scope, $element) {
             }
         };
@@ -126,7 +126,7 @@ angular.module('app.healthInformationDirectivesModule', [])
             scope: {
                 payers : "="
             },
-            templateUrl: 'app/healthinformation/payers.tpl.html',
+            templateUrl: 'app/healthinformation/tmpl/payers.tpl.html',
             link: function ($scope, $element) {
             }
         };
@@ -143,7 +143,7 @@ angular.module('app.healthInformationDirectivesModule', [])
             scope: {
                 healthcareproviders : "="
             },
-            templateUrl: 'app/healthinformation/healthcareproviders.tpl.html',
+            templateUrl: 'app/healthinformation/tmpl/healthcareproviders.tpl.html',
             link: function ($scope, $element) {
             }
         };
@@ -159,7 +159,7 @@ angular.module('app.healthInformationDirectivesModule', [])
             scope: {
                 functionalstatus : "="
             },
-            templateUrl: 'app/healthinformation/functionalstatus.tpl.html',
+            templateUrl: 'app/healthinformation/tmpl/functionalstatus.tpl.html',
             link: function ($scope, $element) {
             }
         };
@@ -175,7 +175,7 @@ angular.module('app.healthInformationDirectivesModule', [])
         scope: {
             vitalsigns : "="
         },
-        templateUrl: 'app/healthinformation/vitalsigns.tpl.html',
+        templateUrl: 'app/healthinformation/tmpl/vitalsigns.tpl.html',
         link: function ($scope, $element) {
         }
     };
@@ -191,7 +191,7 @@ angular.module('app.healthInformationDirectivesModule', [])
         scope: {
             supports : "="
         },
-        templateUrl: 'app/healthinformation/support.tpl.html',
+        templateUrl: 'app/healthinformation/tmpl/support.tpl.html',
         link: function ($scope, $element) {
         }
     };
@@ -207,7 +207,7 @@ angular.module('app.healthInformationDirectivesModule', [])
             scope: {
                 advanceddirectives : "="
             },
-            templateUrl: 'app/healthinformation/advanceddirectives.tpl.html',
+            templateUrl: 'app/healthinformation/tmpl/advanceddirectives.tpl.html',
             link: function ($scope, $element) {
             }
         };
@@ -224,7 +224,7 @@ angular.module('app.healthInformationDirectivesModule', [])
             scope: {
                 socialhistories : "="
             },
-            templateUrl: 'app/healthinformation/socialhistories.tpl.html',
+            templateUrl: 'app/healthinformation/tmpl/socialhistories.tpl.html',
             link: function ($scope, $element) {
             }
         };
@@ -241,7 +241,7 @@ angular.module('app.healthInformationDirectivesModule', [])
             scope: {
                 familyhistories : "="
             },
-            templateUrl: 'app/healthinformation/familyhistories.tpl.html',
+            templateUrl: 'app/healthinformation/tmpl/familyhistories.tpl.html',
             link: function ($scope, $element) {
             }
         };
@@ -258,7 +258,7 @@ angular.module('app.healthInformationDirectivesModule', [])
             scope: {
                 medicalequipments : "="
             },
-            templateUrl: 'app/healthinformation/medicalequipments.tpl.html',
+            templateUrl: 'app/healthinformation/tmpl/medicalequipments.tpl.html',
             link: function ($scope, $element) {
             }
         };
@@ -275,7 +275,7 @@ angular.module('app.healthInformationDirectivesModule', [])
             scope: {
                 immunizations : "="
             },
-            templateUrl: 'app/healthinformation/immunizations.tpl.html',
+            templateUrl: 'app/healthinformation/tmpl/immunizations.tpl.html',
             link: function ($scope, $element) {
             }
         };
@@ -291,7 +291,7 @@ angular.module('app.healthInformationDirectivesModule', [])
             scope: {
                 results : "="
             },
-            templateUrl: 'app/healthinformation/results.tpl.html',
+            templateUrl: 'app/healthinformation/tmpl/results.tpl.html',
             link: function ($scope, $element) {
             }
         };

@@ -5,39 +5,40 @@
 
 angular.module("app.healthInformationModule", ['ui.router', 'app.servicesModule', 'app.healthInformationService', 'app.healthInformationDirectivesModule'])
 
-.config(['$stateProvider', function ($stateProvider) {
-    $stateProvider
-                .state('patient', {
-                    abstract: true,
-                    url: '/patient',
-                    templateUrl: 'app/common/content.tpl.html'
-                })
-                .state('patient.healthinformation', {
-                    url: '/healthinformation',
-                    params: { scrollTo : null, expand: null},
-                    data: { pageTitle: 'Health Information' },
-                    templateUrl: 'app/healthinformation/healthinformation.tpl.html',
-                    controller: 'HealthInformationController',
-                    resolve: {
-                        patientData: ['HealthInformationService', '$q', '$log','utilityService',  function(HealthInformationService, $q, $log, utilityService){
+    .config(['$stateProvider', function ($stateProvider) {
+        $stateProvider
+            .state('patient', {
+                abstract: true,
+                url: '/patient',
+                templateUrl: 'app/common/content.tpl.html'
+            })
+            .state('patient.healthinformation', {
+                url: '/healthinformation',
+                params: { scrollTo : null, expand: null},
+                data: { pageTitle: 'Health Information' },
+                templateUrl: 'app/healthinformation/tmpl/healthinformation.tpl.html',
+                controller: 'HealthInformationController',
+                resolve: {
+                    patientData: ['HealthInformationService', '$q', '$log','utilityService',  function(HealthInformationService, $q, $log, utilityService){
 
-                                var deferred = $q.defer();
+                        var deferred = $q.defer();
 
-                                var healthInformationResource = HealthInformationService.getHealthInformationResource();
-                                var healthInformationData = healthInformationResource.get(
-                                    {emrn: '2323'},
-                                    function(response){ return response;},
-                                    function(response){ return response ;});
+                        var healthInformationResource = HealthInformationService.getHealthInformationResource();
+                        var healthInformationData = healthInformationResource.get(
+                            {emrn: '2323'},
+                            function(response){ return response;},
+                            function(response){ return response ;});
 
-                                $q.all([healthInformationData.$promise]).then(function(response) {
-                                    deferred.resolve(response);
-                                });
-                                return deferred.promise;
-                        }]
-                    }
-                });
-      }
+                        $q.all([healthInformationData.$promise]).then(function(response) {
+                            deferred.resolve(response);
+                        });
+                        return deferred.promise;
+                    }]
+                }
+            });
+    }
 ])
+
 
 .controller('HealthInformationController', ['$scope','$stateParams', '$state','utilityService', 'patientData','HealthInformationService', '$rootScope',
                                    function ($scope, $stateParams, $state, utilityService, patientData, HealthInformationService, $rootScope) {
