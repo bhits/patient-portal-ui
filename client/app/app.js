@@ -8,6 +8,7 @@ angular.module('app',
               'angular-loading-bar',
               'ngIdle',
               'ui.bootstrap',
+              'ngAria',
               'app.homeModule',         // App modules start here
               'app.healthInformationModule',
               'app.accessModule',
