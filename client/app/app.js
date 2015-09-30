@@ -14,7 +14,8 @@ angular.module('app',
               'app.directivesModule',    // Common modules start here
               'app.servicesModule',
               'app.interceptorModule',
-              'app.authenticationModule'
+              'app.authenticationModule',
+              'app.providerModule'
             ])
 /**
  *  idle + timeout
