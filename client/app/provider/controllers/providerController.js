@@ -30,9 +30,34 @@ angular.module("app.providerModule", ['ui.router', 'app.providerService', 'app.p
                 }) ;
          }
     ])
+    .controller('ProviderListController', ['$scope','ProviderService','$modal', function ($scope, ProviderService, $modal) {
 
-    .controller('ProviderListController', ['$scope','ProviderService', function ($scope, ProviderService) {
+        // The list of providers from the backend service
         $scope.providers = ProviderService.getProviders();
+
+        /**
+         *  Opens the confirm delete modal
+         *
+         * @param size - The size of the modal
+         */
+        $scope.openDeleteProviderModal = function (size) {
+            var modalInstance = $modal.open({
+                templateUrl: 'app/provider/tmpl/provider-delete-modal.tpl.html',
+                size: size,
+                controller: ['$scope','$modalInstance', function ($scope, $modalInstance) {
+
+                    $scope.ok = function (npi) {
+                        ProviderService.deleteProvider(npi);
+                        $modalInstance.close();
+                    };
+
+                    $scope.cancel = function () {
+                        $modalInstance.dismiss('cancel');
+                    };
+                }]
+            });
+        };
+
 
     }])
 

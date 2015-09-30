@@ -4,9 +4,13 @@
 
 'use strict';
 
+/**
+ * The provider service
+ *
+ */
 angular.module("app.providerService", ['ngResource', 'app.config'])
 
-    .factory('ProviderService', ['$resource', 'ENVService', function($resource, ENVService){
+    .factory('ProviderService', ['$resource', 'ENVService','$log', function($resource, ENVService, $log){
 
         //var providerResource = $resource(ENVService.apiBaseUrl + "/ccda/getccdajson", {emrn:'@emrn'});
 
@@ -22,11 +26,28 @@ angular.module("app.providerService", ['ngResource', 'app.config'])
 
         return {
             /**
-             * Gets the Health Information resource object
-             * @returns {Object} patientResource - The patient resource object
+             * Gets the providers resource object
+             * @returns {Object} providers - The providers resource object
              */
             getProviders: function(){
                 return providers;
+            },
+            /**
+             * Deletes provider by npi
+             */
+            deleteProvider: function(npi){
+                $log.info("Deleting provider");
+            },
+            /**
+             * Adds provider
+             *
+             */
+            /**
+             *  Adds provider
+              * @param provider - the provider to be added
+             */
+            addProviders: function(provider){
+                $log.info("Adding provider");
             },
 
             lookupProviders: function(){
