@@ -28,8 +28,6 @@ describe('app.accessModule ', function(){
     });
 });
 
-
-
 describe("app.accessModule LoginController ", function() {
 
     beforeEach(module('ui.router'));

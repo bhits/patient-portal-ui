@@ -14,7 +14,7 @@ angular.module("app.providerModule", [ 'app.providerService', 'app.providerDirec
                     abstract: true,
                     url: '/provider',
                     data: { pageTitle: 'Provider' },
-                    templateUrl: 'app/common/content.tpl.html'
+                    templateUrl: 'app/tmpl/content.tpl.html'
                 })
                 .state('provider.list', {
                     url: '/list',

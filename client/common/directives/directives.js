@@ -48,7 +48,7 @@ angular.module('app.directivesModule', [])
             scope: {
                 total: '@'
             },
-            templateUrl: 'app/common/ibox_tools.tpl.html',
+            templateUrl: 'app/tmpl/ibox_tools.tpl.html',
             controller: function ($scope, $element) {
                 var ibox = $element.closest('div.ibox');
                 var icon = $element.find('i:first');

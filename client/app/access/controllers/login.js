@@ -13,7 +13,7 @@ angular.module("app.accessModule", ['app.authenticationModule', 'ngIdle', 'app.c
            .state('login', {
                url: "/login",
                data: { pageTitle: 'Login' },
-               templateUrl: "app/access/login.tpl.html",
+               templateUrl: "app/access/tmpl/login.tpl.html",
                controller: 'LoginController'
            });
     }
