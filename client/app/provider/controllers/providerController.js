@@ -6,7 +6,7 @@
 
 
 
-angular.module("app.providerModule", ['ui.router', 'app.providerService', 'app.providerDirectives'])
+angular.module("app.providerModule", [ 'app.providerService', 'app.providerDirectives'])
 
     .config(['$stateProvider', function ($stateProvider) {
             $stateProvider

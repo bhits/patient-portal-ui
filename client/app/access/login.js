@@ -5,7 +5,7 @@
  * .
  *
  */
-angular.module("app.accessModule", ['ui.router', 'app.authenticationModule', 'ngIdle', 'app.config', 'app.servicesModule'])
+angular.module("app.accessModule", ['app.authenticationModule', 'ngIdle', 'app.config', 'app.servicesModule'])
 
 .config(['$stateProvider', function ($stateProvider) {
            

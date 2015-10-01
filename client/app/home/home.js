@@ -3,7 +3,7 @@
 /**
  * Manages the home page
  */
-angular.module("app.homeModule", ['ui.router', 'app.servicesModule'])
+angular.module("app.homeModule", ['app.servicesModule'])
 
 .config(['$stateProvider', function ($stateProvider) {
             $stateProvider

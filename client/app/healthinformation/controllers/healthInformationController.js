@@ -3,7 +3,7 @@
  * Responsible for the Health Information Menu
  */
 
-angular.module("app.healthInformationModule", ['ui.router', 'app.servicesModule', 'app.healthInformationService', 'app.healthInformationDirectivesModule'])
+angular.module("app.healthInformationModule", ['app.servicesModule', 'app.healthInformationService', 'app.healthInformationDirectivesModule'])
 
     .config(['$stateProvider', function ($stateProvider) {
         $stateProvider
