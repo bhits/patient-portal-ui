@@ -27,8 +27,12 @@
                         <li ui-sref-active="active" >
                             <a ui-sref="index.home"><i class="fa fa-home"></i> <span class="nav-label">Home</span></a>
                         </li>
-                        <li ui-sref-active="active" >
-                            <a ui-sref="provider.list"><i class="fa fa-user-md"></i> <span class="nav-label">Provider</span></a>
+                        <li ng-class="{active: $state.includes('provider')}" >
+                            <a href=""><i class="fa fa-user-md"></i> <span class="nav-label">Provider</span><span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level" ng-class="{'in': $state.includes('provider')}">
+                                <li ui-sref-active="active"><a ui-sref="provider.list">List</a></li>
+                                <li ui-sref-active="active"><a ui-sref="provider.lookup">Lookup</a></li>
+                            </ul>
                         </li>
 
                         <li ng-class="{active: $state.includes('patient')}" ng-show="showHealthInformationMenu" ng-click="routeToHealthInformation()">

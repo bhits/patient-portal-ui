@@ -1,4 +1,3 @@
-
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-sm-10">
         <h1>Provider List</h1>
@@ -19,6 +18,53 @@
                 </p>
             </div>
         </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h2>Current Healthcare Providers</h2>
+
+                    <div ibox-tools></div>
+                </div>
+                <div class="ibox-content">
+
+                    <table class="table table-bordered table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <td></td>
+                                <th>Name/Facility</th>
+                                <th>Specialty</th>
+                                <th>NPI</th>
+                                <th>Contact Number</th>
+                                <th>Address</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="provider in providers">
+                                <td>
+                                    <button type="button" class="btn btn-xs" ng-class="{ 'btn-danger' : !provider.activeConsent, 'btn-default': provider.activeConsent} " ng-disabled="provider.activeConsent" ng-click="openDeleteProviderModal('sm')">
+                                        <span class="fa fa-minus fa-white"></span>
+                                    </button>
+                                </td>
+                                <td> <span ng-bind="provider.firstName"></span>,<span ng-bind="provider.lastName"></span> </td>
+                                <td> <span ng-bind="provider.providerTaxonomyDescription"></span></td>
+                                <td> <span ng-bind="provider.npi"></span> </td>
+                                <td> <span ng-bind="provider.practiceLocationAddressTelephoneNumber"></span> </td>
+                                <td>
+                                    <span ng-bind="provider.firstLinePracticeLocationAddress"></span>,
+                                    <span ng-bind="provider.practiceLocationAddressCityName"></span>,
+                                    <span ng-bind="provider.practiceLocationAddressStateName"></span>,
+                                    <span ng-bind="provider.practiceLocationAddressPostalCode"></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
     </div>
 
 </div>

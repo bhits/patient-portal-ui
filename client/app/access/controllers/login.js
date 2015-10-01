@@ -5,7 +5,7 @@
  * .
  *
  */
-angular.module("app.accessModule", ['ui.router', 'app.authenticationModule', 'ngIdle', 'app.config', 'app.servicesModule'])
+angular.module("app.accessModule", ['app.authenticationModule', 'ngIdle', 'app.config', 'app.servicesModule'])
 
 .config(['$stateProvider', function ($stateProvider) {
            
@@ -13,7 +13,7 @@ angular.module("app.accessModule", ['ui.router', 'app.authenticationModule', 'ng
            .state('login', {
                url: "/login",
                data: { pageTitle: 'Login' },
-               templateUrl: "app/access/login.tpl.html",
+               templateUrl: "app/access/tmpl/login.tpl.html",
                controller: 'LoginController'
            });
     }

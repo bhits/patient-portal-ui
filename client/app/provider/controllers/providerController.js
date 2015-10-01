@@ -4,39 +4,61 @@
 
 'use strict';
 
-angular.module("app.providerModule", ['ui.router', 'app.providerService', 'app.providerDirectives'])
+
+angular.module("app.providerModule", [ 'app.providerService', 'app.providerDirectives'])
 
     .config(['$stateProvider', function ($stateProvider) {
-        $stateProvider
-            .state('provider', {
-                abstract: true,
-                url: '/provider',
-                data: {pageTitle: 'Provider'},
-                templateUrl: 'app/common/content.tpl.html'
-            })
-            .state('provider.list', {
-                url: '/list',
-                params: {scrollTo: null, expand: null},
-                data: {pageTitle: 'Provider List'},
-                templateUrl: 'app/provider/tmpl/provider-list.tpl.html',
-                controller: 'ProviderListController'
-            })
-            .state('provider.lookup', {
-                url: '/lookup',
-                params: {scrollTo: null, expand: null},
-                data: {pageTitle: 'Provider lookup'},
-                templateUrl: 'app/provider/tmpl/provider-lookup.tpl.html',
-                controller: 'ProviderLookupController'
-            });
-    }
+            $stateProvider
+                .state('provider', {
+                    abstract: true,
+                    url: '/provider',
+                    data: { pageTitle: 'Provider' },
+                    templateUrl: 'common/tmpl/content.tpl.html'
+                })
+                .state('provider.list', {
+                    url: '/list',
+                    data: { pageTitle: 'Provider List' },
+                    templateUrl: 'app/provider/tmpl/provider-list.tpl.html',
+                    controller: 'ProviderListController'
+                })
+                .state('provider.lookup', {
+                    url: '/lookup',
+                    data: { pageTitle: 'Provider lookup' },
+                    templateUrl: 'app/provider/tmpl/provider-lookup.tpl.html',
+                    controller: 'ProviderLookupController'
+                }) ;
+         }
     ])
 
-    .controller('ProviderListController', ['$scope', 'ProviderService',
-        function ($scope, ProviderService) {
+    .controller('ProviderListController', ['$scope','ProviderService','$modal', function ($scope, ProviderService, $modal) {
+        // The list of providers from the backend service
+        $scope.providers = ProviderService.getProviders();
 
-        }])
+        /**
+         *  Opens the confirm delete modal
+         *
+         * @param size - The size of the modal
+         */
+        $scope.openDeleteProviderModal = function (size) {
+            var modalInstance = $modal.open({
+                templateUrl: 'app/provider/tmpl/provider-delete-modal.tpl.html',
+                size: size,
+                controller: ['$scope','$modalInstance', function ($scope, $modalInstance) {
 
-    .controller('ProviderLookupController', ['$scope', 'ProviderService',
+                    $scope.ok = function (npi) {
+                        ProviderService.deleteProvider(npi);
+                        $modalInstance.close();
+                    };
+
+                    $scope.cancel = function () {
+                        $modalInstance.dismiss('cancel');
+                    };
+                }]
+            });
+        };
+    }])
+
+    .controller('ProviderLookupController', ['$scope','ProviderService',
         function ($scope, ProviderService) {
 
             $scope.showSearch = true;
@@ -46,7 +68,7 @@ angular.module("app.providerModule", ['ui.router', 'app.providerService', 'app.p
                 var queryParameters = $scope.plsQueryParameters;
                 queryParameters.phone = queryParameters.phone1 + queryParameters.phone2 + queryParameters.phone3;
                 console.log(queryParameters);
-                ProviderService.getProviders(queryParameters).get({pageNumber: pageNumber},
+                ProviderService.lookupProviders(queryParameters).get({pageNumber: pageNumber},
                     function (response) {
                         console.log("SUCCESS:");
                         console.log(response);

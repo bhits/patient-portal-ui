@@ -8,6 +8,7 @@ angular.module('app',
               'angular-loading-bar',
               'ngIdle',
               'ui.bootstrap',
+              'ngAria',
               'app.homeModule',         // App modules start here
               'app.healthInformationModule',
               'app.accessModule',
@@ -90,7 +91,7 @@ angular.module('app',
         $scope.closeModals();
 
         $scope.warning = $modal.open({
-            templateUrl: 'app/common/warning-dialog.tpl.html',
+            templateUrl: 'app/tmpl/warning-dialog.tpl.html',
             controller: ModalInstanceCtrl
         });
     });

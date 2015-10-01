@@ -25,14 +25,8 @@ describe('app.accessModule ', function(){
         beforeEach(function() {
             dependencies = module.value('app').requires;
         });
-
-        it("should have ui.router as a dependency", function() {
-            expect(hasModule('ui.router')).toEqual(true);
-        });
     });
 });
-
-
 
 describe("app.accessModule LoginController ", function() {
 

@@ -1,23 +1,24 @@
 {
-    "name": "testbed",
+    "name": "patient-portal",
     "version": "0.0.1",
-    "description": "Proof of concept",
-    "title": "TestBed",
+    "description": "",
+    "title": "Patient Portal",
+    "private": true,
     "author": {
-        "name": "TestBed"
+        "name": ""
     },
-    "homepage": "N/A",
+    "homepage": "",
     "repository": {
-        "type": "N/A",
-        "url": "N/A"
+        "type": "",
+        "url": ""
     },
     "bugs": {
-        "url": "N/A"
+        "url": ""
     },
     "licenses": [
         {
-            "type": "N/A",
-            "url": "N/A"
+            "type": "",
+            "url": ""
         }
     ],
     "devDependencies": {
