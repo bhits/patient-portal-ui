@@ -10,7 +10,7 @@ angular.module("app.healthInformationModule", ['app.servicesModule', 'app.health
             .state('patient', {
                 abstract: true,
                 url: '/patient',
-                templateUrl: 'app/tmpl/content.tpl.html'
+                templateUrl: 'common/tmpl/content.tpl.html'
             })
             .state('patient.healthinformation', {
                 url: '/healthinformation',
