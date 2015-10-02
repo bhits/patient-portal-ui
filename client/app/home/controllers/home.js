@@ -3,7 +3,7 @@
 /**
  * Manages the home page
  */
-angular.module("app.homeModule", ['ui.router', 'app.servicesModule'])
+angular.module("app.homeModule", ['app.servicesModule'])
 
 .config(['$stateProvider', function ($stateProvider) {
             $stateProvider
@@ -11,11 +11,11 @@ angular.module("app.homeModule", ['ui.router', 'app.servicesModule'])
                     abstract: true,
                     url: '/index',
                     data: { pageTitle: 'Home' },
-                    templateUrl: 'app/common/content.tpl.html'
+                    templateUrl: 'common/tmpl/content.tpl.html'
                 })
                 .state('index.home', {
                     url: '/home',
-                    templateUrl: 'app/home/home.tpl.html',
+                    templateUrl: 'app/home/tmpl/home.tpl.html',
                     data: { pageTitle: 'Home' },
                     controller: 'HomeController'
                 });

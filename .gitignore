@@ -5,6 +5,9 @@ client/vendor
 # Built application, report and coverage
 client/target
 
+# Generated configuration module
+client/app/config
+
 # Dependency directory
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git-
 client/node_modules

@@ -68,7 +68,7 @@ angular.module('app',
 
     $scope.authentication = AuthenticationService.authentication;
 
-    $scope.currentDate = utilityService.getYear();
+    //$scope.currentDate = utilityService.getYear();
 
     $scope.closeModals = function closeModals() {
         if ($scope.warning) {
@@ -91,7 +91,7 @@ angular.module('app',
         $scope.closeModals();
 
         $scope.warning = $modal.open({
-            templateUrl: 'app/common/warning-dialog.tpl.html',
+            templateUrl: 'app/tmpl/warning-dialog.tpl.html',
             controller: ModalInstanceCtrl
         });
     });

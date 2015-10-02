@@ -12,14 +12,6 @@ angular.module('app.servicesModule', [])
  .factory('utilityService', ['$location', '$anchorScroll', function ($location, $anchorScroll) {
         var showHealthInformationMenu = false;
         return {
-            /**
-             * Returns the current year.
-             *
-             * @returns {int} - the current year.
-             */
-            getYear : function(){
-                return (new Date()).getFullYear();
-            },
 
             /**
              * Redirects to the set path.

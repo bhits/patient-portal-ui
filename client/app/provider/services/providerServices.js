@@ -12,8 +12,6 @@ angular.module("app.providerService", ['ngResource', 'app.config'])
 
     .factory('ProviderService', ['$resource', 'ENVService','$log', function($resource, ENVService, $log){
 
-        //var providerResource = $resource(ENVService.apiBaseUrl + "/ccda/getccdajson", {emrn:'@emrn'});
-
         var providers = [
                 {firstName: "LUQUIN", lastName: "TERESA",  providerTaxonomyDescription: "Counselor" , npi: "1568797520",practiceLocationAddressTelephoneNumber: "(760) 353-6151", firstLinePracticeLocationAddress: "107 S 5TH ST", practiceLocationAddressCityName: "EL CENTRO", practiceLocationAddressStateName: "CA", practiceLocationAddressPostalCode: "92243" ,  activeConsent: true},
                 {firstName: "HOANG", lastName: "DAN",  providerTaxonomyDescription: "Pharmacist" , npi: "1740515725",practiceLocationAddressTelephoneNumber: "(951) 486-4490", firstLinePracticeLocationAddress: "26520 CACTUS AVE", practiceLocationAddressCityName: " MORENO VALLEY", practiceLocationAddressStateName: "CA", practiceLocationAddressPostalCode: "92555", activeConsent: false  },
@@ -25,11 +23,8 @@ angular.module("app.providerService", ['ngResource', 'app.config'])
             ];
 
         return {
-            /**
-             * Gets the providers resource object
-             * @returns {Object} providers - The providers resource object
-             */
-            getProviders: function(){
+
+            getProviders: function () {
                 return providers;
             },
             /**
@@ -49,9 +44,25 @@ angular.module("app.providerService", ['ngResource', 'app.config'])
             addProviders: function(provider){
                 $log.info("Adding provider");
             },
+            /**
+             * Gets the Provider Lookup Service resource object
+             * @returns {Object} providerResource - The provider resource object
+             */
+            lookupProviders: function(plsQueryParameters, pageNumber){
+                var queryParameters = "";
 
-            lookupProviders: function(){
-                return null;
+                queryParameters = plsQueryParameters.usstate ? queryParameters + "/usstate/" + plsQueryParameters.usstate : queryParameters;
+                queryParameters = plsQueryParameters.city ? queryParameters + "/city/" + plsQueryParameters.city : queryParameters;
+                queryParameters = plsQueryParameters.zipcode ? queryParameters + "/zipcode/" + plsQueryParameters.zipcode : queryParameters;
+                queryParameters = plsQueryParameters.gender ? queryParameters + "/gender/" + plsQueryParameters.gender : queryParameters;
+                queryParameters = plsQueryParameters.specialty ? queryParameters + "/specialty/" + plsQueryParameters.specialty : queryParameters;
+                queryParameters = plsQueryParameters.phone ? queryParameters + "/phone/" + plsQueryParameters.phone : queryParameters;
+                queryParameters = plsQueryParameters.firstname ? queryParameters + "/firstname/" + plsQueryParameters.firstname : queryParameters;
+                queryParameters = plsQueryParameters.lastname ? queryParameters + "/lastname/" + plsQueryParameters.lastname : queryParameters;
+                queryParameters = plsQueryParameters.facilityname ? queryParameters + "/facilityname/" + plsQueryParameters.facilityname : queryParameters;
+
+                var providerResource = $resource(ENVService.plsApiBaseUrl + "/pageNumber/:pageNumber" + queryParameters, {pageNumber: '@pageNumber'});
+                return providerResource;
             }
         };
     }]);

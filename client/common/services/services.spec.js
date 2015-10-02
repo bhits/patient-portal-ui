@@ -44,11 +44,11 @@ describe('app.servicesModule ', function() {
         });
     });
 
-    it('should have getCurrentDate function', function () {
+    xit('should have getCurrentDate function', function () {
         expect(angular.isFunction(utilityService.getYear)).toBeTruthy();
     });
 
-    it('should return a today\'s date', function () {
+    xit('should return a today\'s date', function () {
         var year = new Date().getFullYear();
         expect(utilityService.getYear()).toEqual(year);
     });

@@ -26,10 +26,6 @@ describe('app.homeModule ', function(){
             dependencies = module.value('app').requires;
         });
 
-        it("should have ui.router as a dependency", function() {
-            expect(hasModule('ui.router')).toEqual(true);
-        });
-
         it("should have app.servicesModule as a dependency", function() {
             expect(hasModule('app.servicesModule')).toEqual(true);
         });
