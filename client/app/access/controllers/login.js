@@ -8,7 +8,7 @@
 angular.module("app.accessModule", ['app.authenticationModule', 'ngIdle', 'app.config', 'app.servicesModule'])
 
 .config(['$stateProvider', function ($stateProvider) {
-           
+
     $stateProvider
            .state('login', {
                url: "/login",

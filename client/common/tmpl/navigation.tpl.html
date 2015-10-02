@@ -16,7 +16,7 @@
                                 <ul class="dropdown-menu animated fadeInRight m-t-xs">
                                     <li><a href="">Profile</a></li>
                                     <li class="divider"></li>
-                                    <li><a href="" ng-click="logOut()">Logout</a></li>
+                                    <li><a href="" ng-click="logout()">Logout</a></li>
                                 </ul>
                             </div>
                             <div class="logo-element">
@@ -35,96 +35,96 @@
                             </ul>
                         </li>
 
-                        <li ng-class="{active: $state.includes('patient')}" ng-show="showHealthInformationMenu" ng-click="routeToHealthInformation()">
+                        <li ng-class="{active: $state.includes('patient')}" ng-show="showhealthinformationmenu" ng-click="routetohealthinformation()">
                             <a href=""><i class="fa fa-stethoscope"></i> <span class="nav-label"> Health Information</span> <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level" ng-class="{'in': ($state.includes('patient') )}">
-                                <li ui-sref-active="active" ng-hide="hideSection && !toggleDemographics" >
-                                        <a href="" ng-click="scrollToAndExpand('demographics', false)">
-                                            <i class="fa" ng-class="{'fa-circle': toggleDemographics, 'fa-circle-o':!toggleDemographics }"></i>Demographics
+                                <li ui-sref-active="active" ng-hide="hidesection && !toggledemographics" >
+                                        <a href="" ng-click="scrolltoandexpand({target: 'demographics', expand:false})">
+                                            <i class="fa" ng-class="{'fa-circle': toggledemographics, 'fa-circle-o':!toggledemographics }"></i>Demographics
                                         </a>
                                 </li>
-                                <li ui-sref-active="active" ng-hide="hideSection && !toggleMedications" >
-                                    <a  href="" ng-click="scrollToAndExpand('medications', false)">
-                                        <i class="fa " ng-class="{'fa-circle': toggleMedications, 'fa-circle-o': !toggleMedications }"></i>Medications
+                                <li ui-sref-active="active" ng-hide="hidesection && !togglemedications" >
+                                    <a  href="" ng-click="scrolltoandexpand({target: 'medications', expand:false})">
+                                        <i class="fa " ng-class="{'fa-circle': togglemedications, 'fa-circle-o': !togglemedications }"></i>Medications
                                     </a>
                                 </li>
-                                <li ui-sref-active="active" ng-hide="hideSection && !toggleAlerts" >
-                                    <a  href="" ng-click="scrollToAndExpand('alerts', false)">
-                                        <i class="fa " ng-class="{'fa-circle': toggleAlerts, 'fa-circle-o': !toggleAlerts }"></i>Alerts
+                                <li ui-sref-active="active" ng-hide="hidesection && !togglealerts" >
+                                    <a  href="" ng-click="scrolltoandexpand({target: 'alerts', expand:false})">
+                                        <i class="fa " ng-class="{'fa-circle': togglealerts, 'fa-circle-o': !togglealerts }"></i>Alerts
                                     </a>
                                 </li>
-                                <li ui-sref-active="active" ng-hide="hideSection && !toggleResults" >
-                                    <a  href="" ng-click="scrollToAndExpand('results', true)">
-                                        <i class="fa " ng-class="{'fa-circle': toggleResults, 'fa-circle-o': !toggleResults }" ></i>Results
+                                <li ui-sref-active="active" ng-hide="hidesection && !toggleresults" >
+                                    <a  href="" ng-click="scrolltoandexpand({target: 'results', expand:true})">
+                                        <i class="fa " ng-class="{'fa-circle': toggleresults, 'fa-circle-o': !toggleresults }" ></i>Results
                                     </a>
                                 </li>
-                                <li ui-sref-active="active" ng-hide="hideSection && !toggleEncounters" >
-                                    <a  href="" ng-click="scrollToAndExpand('encounters', true)">
-                                        <i class="fa " ng-class="{'fa-circle': toggleEncounters, 'fa-circle-o': !toggleEncounters }" ></i>Encounters
+                                <li ui-sref-active="active" ng-hide="hidesection && !toggleencounters" >
+                                    <a  href="" ng-click="scrolltoandexpand({target: 'encounters', expand:true})">
+                                        <i class="fa " ng-class="{'fa-circle': toggleencounters, 'fa-circle-o': !toggleencounters }" ></i>Encounters
                                     </a>
                                 </li>
-                                <li ui-sref-active="active" ng-hide="hideSection && !toggleProblems" >
-                                    <a  href="" ng-click="scrollToAndExpand('problems', false)">
-                                        <i class="fa " ng-class="{'fa-circle': toggleProblems, 'fa-circle-o': !toggleProblems }" ></i>Problems
+                                <li ui-sref-active="active" ng-hide="hidesection && !toggleproblems" >
+                                    <a  href="" ng-click="scrolltoandexpand({target: 'problems', expand:false})">
+                                        <i class="fa " ng-class="{'fa-circle': toggleproblems, 'fa-circle-o': !toggleproblems }" ></i>Problems
                                     </a>
                                 </li>
-                                <li ui-sref-active="active" ng-hide="hideSection && !toggleVitalSigns" >
-                                    <a  href="" ng-click="scrollToAndExpand('vitalSigns', true)">
-                                        <i class="fa " ng-class="{'fa-circle': toggleVitalSigns, 'fa-circle-o': !toggleVitalSigns }" ></i>Vital Signs
+                                <li ui-sref-active="active" ng-hide="hidesection && !togglevitalSigns" >
+                                    <a  href="" ng-click="scrolltoandexpand({target: 'vitalSigns', expand:true})">
+                                        <i class="fa " ng-class="{'fa-circle': togglevitalSigns, 'fa-circle-o': !togglevitalSigns }" ></i>Vital Signs
                                     </a>
                                 </li>
-                                <li ui-sref-active="active" ng-hide="hideSection && !toggleProcedure" >
-                                    <a  href="" ng-click="scrollToAndExpand('procedures', false)">
-                                        <i class="fa "  ng-class="{'fa-circle': toggleProcedure, 'fa-circle-o': !toggleProcedure }"  ></i>Procedures
+                                <li ui-sref-active="active" ng-hide="hidesection && !toggleprocedure" >
+                                    <a  href="" ng-click="scrolltoandexpand({target: 'procedures', expand:false})">
+                                        <i class="fa "  ng-class="{'fa-circle': toggleprocedure, 'fa-circle-o': !toggleprocedure }"  ></i>Procedures
                                     </a>
                                 </li>
-                                <!--<li ui-sref-active="active" ng-hide="hideSection && !togglePlanOfCare" >-->
-                                    <!--<a  href="" ng-click="scrollToAndExpand('planofcare', true)">-->
+                                <!--<li ui-sref-active="active" ng-hide="hidesection && !togglePlanOfCare" >-->
+                                    <!--<a  href="" ng-click="scrolltoandexpand('planofcare', true)">-->
                                         <!--<i class="fa " ng-class="{'fa-circle': togglePlanOfCare, 'fa-circle-o': !togglePlanOfCare }"  ></i>Plan of Care-->
                                     <!--</a>-->
                                 <!--</li>-->
-                                <!--<li ui-sref-active="active" ng-hide="hideSection && !toggleFamilyHistory" >-->
-                                    <!--<a  href="" ng-click="scrollToAndExpand('familyhistory', true)">-->
+                                <!--<li ui-sref-active="active" ng-hide="hidesection && !toggleFamilyHistory" >-->
+                                    <!--<a  href="" ng-click="scrolltoandexpand('familyhistory', true)">-->
                                         <!--<i class="fa " ng-class="{'fa-circle': toggleFamilyHistory, 'fa-circle-o': !toggleFamilyHistory }" ></i>Family History-->
                                     <!--</a>-->
                                 <!--</li>-->
-                                <!--<li ui-sref-active="active" ng-hide="hideSection && !toggleHealthcareProviders" >-->
-                                    <!--<a  href="" ng-click="scrollToAndExpand('healthcareproviders', true)">-->
+                                <!--<li ui-sref-active="active" ng-hide="hidesection && !toggleHealthcareProviders" >-->
+                                    <!--<a  href="" ng-click="scrolltoandexpand('healthcareproviders', true)">-->
                                         <!--<i class="fa " ng-class="{'fa-circle': toggleFamilyHistory, 'fa-circle-o': !toggleFamilyHistory }" ></i>Healthcare Providers-->
                                     <!--</a>-->
                                 <!--</li>-->
-                                <!--<li ui-sref-active="active" ng-hide="hideSection && !toggleSocialHistory" >-->
-                                    <!--<a  href="" ng-click="scrollToAndExpand('socialhistory', true)">-->
+                                <!--<li ui-sref-active="active" ng-hide="hidesection && !toggleSocialHistory" >-->
+                                    <!--<a  href="" ng-click="scrolltoandexpand('socialhistory', true)">-->
                                         <!--<i class="fa "  ng-class="{'fa-circle': toggleSocialHistory, 'fa-circle-o':  !toggleSocialHistory }"></i>Social History-->
                                     <!--</a>-->
                                 <!--</li>-->
-                                <!--<li ui-sref-active="active" ng-hide="hideSection && !toggleAdvancedDirectives" >-->
-                                    <!--<a  href="" ng-click="scrollToAndExpand('advanceddirectives', true)">-->
+                                <!--<li ui-sref-active="active" ng-hide="hidesection && !toggleAdvancedDirectives" >-->
+                                    <!--<a  href="" ng-click="scrolltoandexpand('advanceddirectives', true)">-->
                                         <!--<i class="fa "  ng-class="{'fa-circle': toggleAdvancedDirectives, 'fa-circle-o': !toggleAdvancedDirectives }" ></i>Advanced Directives-->
                                     <!--</a>-->
                                 <!--</li>-->
-                                <!--<li ui-sref-active="active" ng-hide="hideSection && !toggleFunctionalStatus" >-->
-                                    <!--<a  href="" ng-click="scrollToAndExpand('functionalstatus', true)">-->
+                                <!--<li ui-sref-active="active" ng-hide="hidesection && !toggleFunctionalStatus" >-->
+                                    <!--<a  href="" ng-click="scrolltoandexpand('functionalstatus', true)">-->
                                         <!--<i class="fa " ng-class="{'fa-circle': toggleFunctionalStatus, 'fa-circle-o': !toggleFunctionalStatus }" ></i>Functional Status-->
                                     <!--</a>-->
                                 <!--</li>-->
-                                <!--<li ui-sref-active="active" ng-hide="hideSection && !toggleSupport" >-->
-                                    <!--<a  href="" ng-click="scrollToAndExpand('support', true)">-->
+                                <!--<li ui-sref-active="active" ng-hide="hidesection && !toggleSupport" >-->
+                                    <!--<a  href="" ng-click="scrolltoandexpand('support', true)">-->
                                         <!--<i class="fa " ng-class="{'fa-circle': toggleSupport, 'fa-circle-o': !toggleSupport }" ></i>Support-->
                                     <!--</a>-->
                                 <!--</li>-->
-                                <!--<li ui-sref-active="active" ng-hide="hideSection && !togglePayers" >-->
-                                    <!--<a  href="" ng-click="scrollToAndExpand('payers', true)">-->
+                                <!--<li ui-sref-active="active" ng-hide="hidesection && !togglePayers" >-->
+                                    <!--<a  href="" ng-click="scrolltoandexpand('payers', true)">-->
                                         <!--<i class="fa " ng-class="{'fa-circle': togglePayers, 'fa-circle-o': !togglePayers }" ></i>Payers-->
                                     <!--</a>-->
                                 <!--</li>-->
-                                <!--<li ui-sref-active="active" ng-hide="hideSection && !toggleImmunization" >-->
-                                    <!--<a  href="" ng-click="scrollToAndExpand('immunization', true)">-->
+                                <!--<li ui-sref-active="active" ng-hide="hidesection && !toggleImmunization" >-->
+                                    <!--<a  href="" ng-click="scrolltoandexpand('immunization', true)">-->
                                         <!--<i class="fa " ng-class="{'fa-circle': toggleImmunization, 'fa-circle-o': !toggleImmunization }" ></i>Immunizations-->
                                     <!--</a>-->
                                 <!--</li>-->
-                                <!--<li ui-sref-active="active" ng-hide="hideSection && !toggleMedicalEquipment" >-->
-                                    <!--<a  href="" ng-click="scrollToAndExpand('medicalequipment', true)">-->
+                                <!--<li ui-sref-active="active" ng-hide="hidesection && !toggleMedicalEquipment" >-->
+                                    <!--<a  href="" ng-click="scrolltoandexpand('medicalequipment', true)">-->
                                         <!--<i class="fa "  ng-class="{'fa-circle': toggleMedicalEquipment, 'fa-circle-o': !toggleMedicalEquipment }" ></i>Medical Equipment-->
                                     <!--</a>-->
                                 <!--</li>-->

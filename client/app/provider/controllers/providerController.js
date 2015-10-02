@@ -94,4 +94,4 @@ angular.module("app.providerModule", [ 'app.providerService', 'app.providerDirec
                 return summary;
             };
 
-        }]);
+    }]);

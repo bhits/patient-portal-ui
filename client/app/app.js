@@ -68,7 +68,7 @@ angular.module('app',
 
     $scope.authentication = AuthenticationService.authentication;
 
-    $scope.currentDate = utilityService.getYear();
+    //$scope.currentDate = utilityService.getYear();
 
     $scope.closeModals = function closeModals() {
         if ($scope.warning) {
