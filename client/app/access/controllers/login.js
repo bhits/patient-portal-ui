@@ -1,59 +1,70 @@
-﻿'use strict';
+﻿(function () {
 
-/**
- * Responsible for user login using the AuthenticationService
- * .
- *
- */
-angular.module("app.accessModule", ['app.authenticationModule', 'ngIdle', 'app.config', 'app.servicesModule'])
+    'use strict';
 
-.config(['$stateProvider', function ($stateProvider) {
+    function config($stateProvider){
+            $stateProvider
+                .state('login', {
+                    url: "/login",
+                    data: { pageTitle: 'Login' },
+                    templateUrl: "app/access/tmpl/login.tpl.html",
+                    controllerAs: "loginVm",
+                    controller: 'LoginController'
+                });
+        }
 
-    $stateProvider
-           .state('login', {
-               url: "/login",
-               data: { pageTitle: 'Login' },
-               templateUrl: "app/access/tmpl/login.tpl.html",
-               controller: 'LoginController'
-           });
-    }
-])
 
-/**
- * The Login Controller.
- *
- * @param {Object} $scope - The Angularjs scope
- * @param {Object} $state - The ui-router state service
- * @param {Object} AuthenticationService - The authentication service
- * @param {Object} Idle - The ngIdle service
- *
-  */
-.controller('LoginController', ['$scope', '$state', 'AuthenticationService', 'Idle','ENVService', 'utilityService', function ($scope, $state, AuthenticationService, Idle, ENVService, utilityService) {
-    // The login object
-    $scope.loginData = {userName: "", password: ""};
-
-    $scope.version = ENVService.version;
     /**
-     * Login user using the AuthenticationService.
-     * On success starts ngIdle and redirects to home screen.
+     * The Login Controller.
+     *
+     * @param {Object} $scope - The Angularjs scope
+     * @param {Object} $state - The ui-router state service
+     * @param {Object} AuthenticationService - The authentication service
+     * @param {Object} Idle - The ngIdle service
+     *
      */
-    $scope.login = function () {
-        AuthenticationService.login($scope.loginData).then(function (response) {
+    function LoginController($scope, $state, AuthenticationService, Idle, ENVService, utilityService) {
+        var loginVm = this;
 
-                if(angular.isDefined(response.Error) && response.Error !== null ){
-                    $scope.message = "Invalid username and/or password." ;
-                }else{
-                    Idle.watch();
-                    $state.go('index.home');
-                }
-        },
-         function (err) {
-             $scope.message = "Invalid username and/or password." ;
-         });
-    };
+        // The login object
+        loginVm.loginData = {userName: "", password: ""};
 
-    $scope.scrollTo = function(scrollToId){
-        utilityService.scrollTo(scrollToId);
-    };
+        loginVm.version = ENVService.version;
+        /**
+         * Login user using the AuthenticationService.
+         * On success starts ngIdle and redirects to home screen.
+         */
+        loginVm.login = function () {
+            AuthenticationService.login(loginVm.loginData).then(function (response) {
 
-}]);
+                    if(angular.isDefined(response.Error) && response.Error !== null ){
+                        loginVm.message = "Invalid username and/or password." ;
+                    }else{
+                        Idle.watch();
+                        $state.go('index.home');
+                    }
+                },
+                function (err) {
+                    loginVm.message = "Invalid username and/or password." ;
+                });
+        };
+
+        loginVm.scrollTo = function(scrollToId){
+            utilityService.scrollTo(scrollToId);
+        };
+    }
+
+    /**
+     * Responsible for user login using the AuthenticationService
+     */
+    angular.module("app.accessModule",
+        [
+            'app.authenticationModule',
+            'ngIdle',
+            'app.config',
+            'app.servicesModule'
+        ])
+        .config(config)
+        .controller('LoginController',LoginController);
+
+})();

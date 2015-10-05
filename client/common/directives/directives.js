@@ -159,7 +159,7 @@ angular.module('app.directivesModule', [])
     ])
 
 /**
- * minimalizaSidebar - Directive for minimalize sidebar
+ * Icheck directive
  */
     .directive('icheck', ['$timeout', function ($timeout) {
         return {
@@ -191,64 +191,6 @@ angular.module('app.directivesModule', [])
                         }
                     });
                 });
-            }
-
-        };
-    }
-    ])
-    .directive('appFooter', [ function () {
-            return {
-                restrict: 'E',
-                templateUrl: 'common/tmpl/footer.tpl.html',
-                controller: function ($scope) {
-                    /**
-                     * Returns the current year.
-                     */
-                    $scope.currentDate = (new Date()).getFullYear();
-                }
-            };
-        }
-    ])
-
-    .directive('appTopNavbar', [ function () {
-            return {
-                restrict: 'E',
-                scope: {
-                    logout:"&",
-                    togglesidebar: "&",
-                    authentication:"@",
-                    togglebar:'@'
-                },
-                templateUrl: 'common/tmpl/topnavbar.tpl.html',
-                controller: function ($scope) {
-                }
-            };
-        }
-    ])
-
-    .directive('appLeftNavigation', ['$state', function ($state) {
-        return {
-            restrict: 'E',
-            scope: {
-                logout:"&",
-                scrolltoandexpand: "&",
-                routetohealthinformation:"&",
-                showhealthinformationmenu:"=",
-                authentication:"=",
-                togglebar:"=",
-                hidesection:"=",
-                toggledemographics:"=",
-                togglemedications:"=",
-                togglealerts:"=",
-                toggleresults:"=",
-                toggleencounters:"=",
-                toggleproblems:"=",
-                togglevitalSigns:"=",
-                toggleprocedure:"="
-            },
-            templateUrl: 'common/tmpl/navigation.tpl.html',
-            controller: function ($scope) {
-                $scope.$state = $state;
             }
 
         };

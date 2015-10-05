@@ -29,7 +29,7 @@
                                             <div class="row">
                                                 <label class="col-lg-4 control-label no-padding-right" for="userName">User name</label>
                                                 <div class="col-lg-8">
-                                                    <input type="text" class=" form-control" id="userName" placeholder="Username" data-ng-model="loginData.userName" required autofocus>
+                                                    <input type="text" class=" form-control" id="userName" placeholder="Username" data-ng-model="loginVm.loginData.userName" required autofocus>
                                                 </div>
                                             </div>
                                         </div>
@@ -37,20 +37,20 @@
                                            <div class="row">
                                                <label class="col-lg-4 control-label no-padding-right" for="password">Password</label>
                                                <div class="col-lg-8">
-                                                   <input type="password" id="password" class="form-control" placeholder="Password" data-ng-model="loginData.password" required>
+                                                   <input type="password" id="password" class="form-control" placeholder="Password" data-ng-model="loginVm.loginData.password" required>
                                                </div>
                                            </div>
                                         </div>
-                                        <button type="submit" class="btn btn-primary dark-green block full-width m-b" data-ng-click="login()">Login</button>
+                                        <button type="submit" class="btn btn-primary dark-green block full-width m-b" data-ng-click="loginVm.login()">Login</button>
                                         <div data-ng-hide="message == ''" class=" text-center has-error">
-                                            <span class="control-label">{{message}}</span>
+                                            <span class="control-label">{{::loginVm.message}}</span>
                                         </div>
                                         <p class="text-muted text-center">
                                             <br/>
                                             <a href=""> <small>Forgot password?</small> </a>
                                         </p>
                                     </form>
-                                    <p class="m-t text-center"> Version: {{version}} </p>
+                                    <p class="m-t text-center"> Version: {{::loginVm.version}} </p>
                                 </div>
                             </div>
                         </div>
@@ -68,7 +68,7 @@
                         An HIE Patient Portal is a secure online website that gives you convenient 24-hour access to your personal health record from anywhere using an internet connection. It can help you to become more informed about your health care and thus to be more involved in your health care.
                     </p>
                     <span>
-                        <a href="" class="btn btn-xs btn-primary dark-green" ng-click="scrollTo('aboutHIEPortal')">Read More</a>
+                        <a href="" class="btn btn-xs btn-primary dark-green" ng-click="loginVm.scrollTo('aboutHIEPortal')">Read More</a>
                     </span>
                 </div>
                 <div class="col-md-4 padding-bottom-15">
@@ -80,7 +80,7 @@
                     </p>
 
                     <span >
-                        <a href="" class="btn btn-xs btn-primary dark-green" ng-click="scrollTo('patientPortalHelpMe')">Read More</a>
+                        <a href="" class="btn btn-xs btn-primary dark-green" ng-click="loginVm.scrollTo('patientPortalHelpMe')">Read More</a>
                     </span>
 
                 </div>
@@ -92,7 +92,7 @@
                         Yes. Your HIE Patient Portal has many privacy and security safeguards designed to protect your health information. Even though your health information is online, it is private and only accessible by authorized people, such as your health care providers.
                     </p>
                     <span >
-                        <a href="" class="btn btn-xs btn-primary dark-green" ng-click="scrollTo('informationPrivacySecure')">Read More</a>
+                        <a href="" class="btn btn-xs btn-primary dark-green" ng-click="loginVm.scrollTo('informationPrivacySecure')">Read More</a>
 
                     </span>
                 </div>
@@ -126,7 +126,7 @@
                         </p>
                         <h4>How to Navigate Your HIE Portal?</h4>
                         <p>
-                            This brief presentation will demonstrate how to log in and navigate through your HIE Patient Portal, view your health records, manage your prescriptions, add health information, review reminders, access health education materials, and more.<br><br><a href="" class="btn btn-xs btn-primary dark-green" ng-click="scrollTo('topPage')">Back to Top</a>
+                            This brief presentation will demonstrate how to log in and navigate through your HIE Patient Portal, view your health records, manage your prescriptions, add health information, review reminders, access health education materials, and more.<br><br><a href="" class="btn btn-xs btn-primary dark-green" ng-click="loginVm.scrollTo('topPage')">Back to Top</a>
                         </p>
                    </div>
                  </div>
@@ -178,7 +178,7 @@
                                 <strong>Manage Online Billing and Payment:</strong> You can use your HIE Patient Portal to view your billing and payment information and to make medical payments online.
                             </p></li>
                         </ul>
-                        <a href="" class="btn btn-xs btn-primary dark-green" ng-click="scrollTo('topPage')">Back to Top</a>
+                        <a href="" class="btn btn-xs btn-primary dark-green" ng-click="loginVm.scrollTo('topPage')">Back to Top</a>
                     </div>
                 </div>
             </div>
@@ -200,7 +200,7 @@
                         </p>
                         <h4>How can I Keep my Health Information Safe?</h4>
                         <p>
-                            You can help to keep your information safe by using normal safe internet practices. For instance, use a strong password and update it often. Do not share your username or password with others. You should log on to the EHR Patient Portal only from a personal or secure computer and not a public computer.<br><br> <a href="" class="btn btn-xs btn-primary dark-green" ng-click="scrollTo('topPage')">Back to top</a>
+                            You can help to keep your information safe by using normal safe internet practices. For instance, use a strong password and update it often. Do not share your username or password with others. You should log on to the EHR Patient Portal only from a personal or secure computer and not a public computer.<br><br> <a href="" class="btn btn-xs btn-primary dark-green" ng-click="loginVm.scrollTo('topPage')">Back to top</a>
                         </p>
                     </div>
                  </div>

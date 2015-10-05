@@ -28,7 +28,7 @@ describe('app.accessModule ', function(){
     });
 });
 
-describe("app.accessModule LoginController ", function() {
+xdescribe("app.accessModule LoginController ", function() {
 
     beforeEach(module('ui.router'));
     beforeEach(module('app.authenticationModule'));

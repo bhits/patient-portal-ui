@@ -11,20 +11,20 @@
 
 <div  class="row border-bottom row-padding-10" id="sticktoolbar" >
         <div class="col-xs-5 col-sm-6" >
-            <input icheck type="checkbox" ng-model="toggleMenu" ng-checked="toggleSectionWithoutData()"> Hide sections with no data.
+            <input icheck type="checkbox" ng-model="HealthInformationVm.toggleMenu" ng-checked="HealthInformationVm.toggleSectionWithoutData()"> Hide sections with no data.
         </div>
 
         <div class="col-xs-7 col-sm-6">
             <div class="pull-right">
-                <button class="btn btn-sm btn-primary dark-green" type="button" ng-click="expandAllAccordions()">Expand All</button>
-                <button class="btn btn-sm btn-primary dark-green" type="button" ng-click="collapseAllAccordions()">Collapse All</button>
+                <button class="btn btn-sm btn-primary dark-green" type="button" ng-click="HealthInformationVm.expandAllAccordions()">Expand All</button>
+                <button class="btn btn-sm btn-primary dark-green" type="button" ng-click="HealthInformationVm.collapseAllAccordions()">Collapse All</button>
             </div>
         </div>
 </div>
 
 <div class="wrapper wrapper-content animated fadeInRight">
 
-       <div class="row" ng-show="toggleMenu" id="noPatientDataAlertSection" >
+       <div class="row" ng-show="HealthInformationVm.toggleMenu" id="noPatientDataAlertSection" >
             <div class="col-sm-12" >
                 <div class="alert alert-warning alert-dismissible" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -34,28 +34,28 @@
         </div>
 
         <!-- PATIENT DEMOGRAPHICS-->
-        <demographics-accordion patientdemographics="patientDemographics" ccdheader="ccdheader" ></demographics-accordion>
+        <demographics-accordion patientdemographics="HealthInformationVm.patientDemographics" ccdheader="ccdheader" ></demographics-accordion>
 
         <!--MEDICATIONS-->
-        <medications-accordion medications="medications" ng-hide="toggleMenu && !toggleMedications"  ></medications-accordion>
+        <medications-accordion medications="HealthInformationVm.medications" ng-hide="HealthInformationVm.toggleMenu && !AppVm.toggleMedications"  ></medications-accordion>
 
         <!--ALERTS-->
-        <alerts-accordion alerts="allergies" ng-hide="toggleMenu && !toggleAlert"  ></alerts-accordion>
+        <alerts-accordion alerts="HealthInformationVm.allergies" ng-hide="HealthInformationVm.toggleMenu && !AppVm.toggleAlert"  ></alerts-accordion>
 
         <!--RESULTS-->
-        <results-accordion results="results" ng-hide="toggleMenu && !toggleResults"  ></results-accordion>
+        <results-accordion results="HealthInformationVm.results" ng-hide="HealthInformationVm.toggleMenu && !AppVm.toggleResults"  ></results-accordion>
 
         <!--EENCOUNTERS-->
-        <encounters-accordion encounters="encounters" ng-hide="toggleMenu && !toggleEncounters" ></encounters-accordion>
+        <encounters-accordion encounters="HealthInformationVm.encounters" ng-hide="HealthInformationVm.toggleMenu && !AppVm.toggleEncounters" ></encounters-accordion>
 
         <!--PROBLEM LIST-->
-        <problems-accordion problems="problems" ng-hide="toggleMenu && !toggleProblems"  ></problems-accordion>
+        <problems-accordion problems="HealthInformationVm.problems" ng-hide="HealthInformationVm.toggleMenu && !AppVm.toggleProblems"  ></problems-accordion>
 
         <!--VITAL SIGNALS-->
-        <vitalsigns-accordion vitalsigns="vitalsigns" ng-hide="toggleMenu && !toggleVitalSigns" ></vitalsigns-accordion>
+        <vitalsigns-accordion vitalsigns="HealthInformationVm.vitalsigns" ng-hide="HealthInformationVm.toggleMenu && !AppVm.toggleVitalSigns" ></vitalsigns-accordion>
 
         <!--PROCEDURES-->
-        <procedures-accordion procedures="procedures" ng-hide="toggleMenu && !toggleProcedure" ></procedures-accordion>
+        <procedures-accordion procedures="HealthInformationVm.procedures" ng-hide="HealthInformationVm.toggleMenu && !AppVm.toggleProcedure" ></procedures-accordion>
 
         <!--PLANS CARE-->
         <!--<planofcares-accordion planofcares="planofcares" ng-hide="toggleMenu && !togglePlanOfCare" ></planofcares-accordion>-->

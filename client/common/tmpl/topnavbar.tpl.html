@@ -1,10 +1,10 @@
 
-<nav class="navbar navbar-fixed-top height-55 gray-bg border-bottom" role="navigation" style="margin-bottom: 0;" ng-class="{'margin-left-220': togglebar}">
+<nav class="navbar navbar-fixed-top height-55 gray-bg border-bottom" role="navigation" style="margin-bottom: 0;" ng-class="{'margin-left-220': AppVm.togglebar}">
     <div class="container-fluid">
         <div class="row ">
             <div class="col-sm-12">
                 <div class="navbar-header">
-                    <span minimaliza-sidebar togglesidebar="togglesidebar()"></span>
+                    <span minimaliza-sidebar togglesidebar="AppVm.toggleSideBar()"></span>
                 </div>
                 <div class="pull-right">
                     <div class="navbar-brand top-padding10">
@@ -14,11 +14,11 @@
                 <ul class="nav navbar-top-links modified navbar-right">
                     <li>
                     <span class="m-r-sm welcome-message">
-                        Welcome <span ng-bind="authentication.userName">.</span>
+                        Welcome <span ng-bind="AppVm.authentication.userName">.</span>
                     </span>
                     </li>
                     <li>
-                        <a class="dark-grey" href="" ng-click="logout()">
+                        <a class="dark-grey" href="" ng-click="AppVm.logOut();">
                             <i class="fa fa-sign-out"></i> Log out
                         </a>
                     </li>

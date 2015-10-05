@@ -1,11 +1,141 @@
-﻿'use strict';
-/**
- * Responsible for the Health Information Menu
- */
+﻿
+(function () {
 
-angular.module("app.healthInformationModule", ['app.servicesModule', 'app.healthInformationService', 'app.healthInformationDirectivesModule'])
+    'use strict';
 
-    .config(['$stateProvider', function ($stateProvider) {
+    /**
+     *
+     *
+     * @param $scope
+     * @param $stateParams
+     * @param $state
+     * @param utilityService
+     * @param patientData
+     * @param HealthInformationService
+     * @param $rootScope
+     * @constructor
+     */
+    function HealthInformationController($scope, $stateParams, $state, utilityService, patientData, HealthInformationService, $rootScope){
+        var HealthInformationVm = this;
+
+        // Set the Health Information flag to true to make it visible.
+        //$scope.setShowHealthInformationMenu(true);
+
+        //$scope.$emit("ShowHealthInformationMenu", {showHealthInformationMenu: true});
+
+        $scope.showHealthInformationMenu = utilityService.getShowHealthInformationMenu();
+
+        HealthInformationVm.toggleMenu = false;
+
+        // Process the resolved patient CCDA data coming from the backend
+        HealthInformationVm.healthinfotmation = HealthInformationService.getHealthInformation(patientData[0]);
+        HealthInformationVm.ccdheader =  HealthInformationService.getSectionByName(HealthInformationVm.healthinfotmation, 'CCDAHeader');
+        HealthInformationVm.patientDemographics =  HealthInformationService.getSectionByName(HealthInformationVm.ccdheader, 'DemographicInformation');
+        HealthInformationVm.allergies = HealthInformationService.getSectionCollectionByName(HealthInformationVm.healthinfotmation, 'AllergySection', 'Allergies');
+        HealthInformationVm.results = HealthInformationService.getSectionCollectionByName(HealthInformationVm.healthinfotmation, 'ResultSection','Results' );
+        //$scope.encounters = HealthInformationService.getSectionCollectionByName($scope.healthinfotmation, 'EncounterSection', 'Encounters');
+        HealthInformationVm.encounters = [];
+        HealthInformationVm.medications = HealthInformationService.getSectionCollectionByName(HealthInformationVm.healthinfotmation, 'MedicationSection', 'Medications');
+        HealthInformationVm.problems = HealthInformationService.getSectionCollectionByName(HealthInformationVm.healthinfotmation, 'ProblemSection', 'Problems');
+        //$scope.vitalsigns = HealthInformationService.getSectionCollectionByName($scope.healthinfotmation, 'VitalSignSection','VitalSigns');
+        HealthInformationVm.vitalsigns = [];
+        HealthInformationVm.procedures = HealthInformationService.getSectionCollectionByName(HealthInformationVm.healthinfotmation, 'ProcedureSection','Procedures');
+        HealthInformationVm.planofcares = [];
+        HealthInformationVm.familyhistories = [];
+        HealthInformationVm.healthcareproviders = [];
+        HealthInformationVm.socialhistories = [];
+        HealthInformationVm.advanceddirectives = [];
+        HealthInformationVm.functionalstatus = [];
+        HealthInformationVm.supports = [];
+        HealthInformationVm.payers = [];
+        HealthInformationVm.immunizations = [];
+        HealthInformationVm.medicalequipments = [];
+
+        /**
+         *
+         * @param target
+         */
+        HealthInformationVm.handleScroll = function(target){
+            var menuToggleFlags = HealthInformationService.calculateMenuToggleFlags(HealthInformationVm.healthinfotmation);
+            utilityService.scrollTo(target);
+        };
+
+        if(utilityService.isDefinedAndNotNull($stateParams.scrollTo) && utilityService.isDefinedAndNotNull($stateParams.expand) ){
+            HealthInformationVm.handleScroll($stateParams.scrollTo);
+
+        }else{
+            HealthInformationVm.noPatientDataAlert = false;
+            console.log("Missing error parameter .");
+        }
+
+
+        /**
+         *  Scroll to a specific position in the page when the ScrollTo event is fired.
+         *
+         *  @param {Object} event - The event object
+         *  @param {Object} arg - Object containing the position to scroll to in the page
+         */
+        $scope.$on('ScrollTo', function(event, args) {
+            HealthInformationVm.handleScroll(args.to);
+        });
+
+        /**
+         *  Expands all the accordion
+         */
+        HealthInformationVm.expandAllAccordions = function(){
+            HealthInformationVm.noPatientDataAlert = false;
+            $rootScope.$broadcast('ExpandAccordions', { expand:true });
+        };
+
+        /**
+         * Collapse all the accordion
+         */
+        HealthInformationVm.collapseAllAccordions = function(){
+            HealthInformationVm.noPatientDataAlert = false;
+            $rootScope.$broadcast('CollapseAccordions', { collapse:true });
+        };
+
+        /**
+         * Hide /show sections with data or without data
+         *
+         */
+        HealthInformationVm.toggleSectionWithoutData = function(){
+            // Process CCDA to determine which sections does not contain data.
+            var menuToggleFlags = HealthInformationService.calculateMenuToggleFlags(HealthInformationVm.healthinfotmation);
+            menuToggleFlags.toggleMenu = HealthInformationVm.toggleMenu;
+            $rootScope.$broadcast('ToggleMenuItemWithoutData', menuToggleFlags);
+        };
+    }
+
+    /**
+     * Resovlve the patient health information from the PHR using the Health Information Service
+     *
+     * @type {{patientData: *[]}}
+     */
+    HealthInformationController.resolve = {
+        patientData: ['HealthInformationService', '$q', '$log','utilityService',  function(HealthInformationService, $q, $log, utilityService){
+
+            var deferred = $q.defer();
+
+            var healthInformationResource = HealthInformationService.getHealthInformationResource();
+            var healthInformationData = healthInformationResource.get(
+                {emrn: '2323'},
+                function(response){ return response;},
+                function(response){ return response ;});
+
+            $q.all([healthInformationData.$promise]).then(function(response) {
+                deferred.resolve(response);
+            });
+            return deferred.promise;
+        }]
+    };
+
+    /**
+     * The health Information Config function
+     *
+     * @param $stateProvider
+     */
+    function config($stateProvider){
         $stateProvider
             .state('patient', {
                 abstract: true,
@@ -18,98 +148,21 @@ angular.module("app.healthInformationModule", ['app.servicesModule', 'app.health
                 data: { pageTitle: 'Health Information' },
                 templateUrl: 'app/healthinformation/tmpl/healthinformation.tpl.html',
                 controller: 'HealthInformationController',
-                resolve: {
-                    patientData: ['HealthInformationService', '$q', '$log','utilityService',  function(HealthInformationService, $q, $log, utilityService){
-
-                        var deferred = $q.defer();
-
-                        var healthInformationResource = HealthInformationService.getHealthInformationResource();
-                        var healthInformationData = healthInformationResource.get(
-                            {emrn: '2323'},
-                            function(response){ return response;},
-                            function(response){ return response ;});
-
-                        $q.all([healthInformationData.$promise]).then(function(response) {
-                            deferred.resolve(response);
-                        });
-                        return deferred.promise;
-                    }]
-                }
+                controllerAs: 'HealthInformationVm',
+                resolve: HealthInformationController.resolve
             });
     }
-])
-
-
-.controller('HealthInformationController', ['$scope','$stateParams', '$state','utilityService', 'patientData','HealthInformationService', '$rootScope',
-                                   function ($scope, $stateParams, $state, utilityService, patientData, HealthInformationService, $rootScope) {
-    // Set the Health Information flag to true to make it visible.
-    $scope.setShowHealthInformationMenu(true);
-
-    $scope.toggleMenu = false;
-
-    // Process the resolved patient CCDA data coming from the backend
-    $scope.healthinfotmation = HealthInformationService.getHealthInformation(patientData[0]);
-    $scope.ccdheader =  HealthInformationService.getSectionByName($scope.healthinfotmation, 'CCDAHeader');
-    $scope.patientDemographics =  HealthInformationService.getSectionByName($scope.ccdheader, 'DemographicInformation');
-    $scope.allergies = HealthInformationService.getSectionCollectionByName($scope.healthinfotmation, 'AllergySection', 'Allergies');
-    $scope.results = HealthInformationService.getSectionCollectionByName($scope.healthinfotmation, 'ResultSection','Results' );
-    //$scope.encounters = HealthInformationService.getSectionCollectionByName($scope.healthinfotmation, 'EncounterSection', 'Encounters');
-    $scope.encounters = [];
-    $scope.medications = HealthInformationService.getSectionCollectionByName($scope.healthinfotmation, 'MedicationSection', 'Medications');
-    $scope.problems = HealthInformationService.getSectionCollectionByName($scope.healthinfotmation, 'ProblemSection', 'Problems');
-    //$scope.vitalsigns = HealthInformationService.getSectionCollectionByName($scope.healthinfotmation, 'VitalSignSection','VitalSigns');
-    $scope.vitalsigns = [];
-    $scope.procedures = HealthInformationService.getSectionCollectionByName($scope.healthinfotmation, 'ProcedureSection','Procedures');
-    $scope.planofcares = [];
-    $scope.familyhistories = [];
-    $scope.healthcareproviders = [];
-    $scope.socialhistories = [];
-    $scope.advanceddirectives = [];
-    $scope.functionalstatus = [];
-    $scope.supports = [];
-    $scope.payers = [];
-    $scope.immunizations = [];
-    $scope.medicalequipments = [];
-
-   $scope.handleScroll = function(target){
-       var menuToggleFlags = HealthInformationService.calculateMenuToggleFlags($scope.healthinfotmation);
-       utilityService.scrollTo(target);
-   };
-
-    if(utilityService.isDefinedAndNotNull($stateParams.scrollTo) && utilityService.isDefinedAndNotNull($stateParams.expand) ){
-        $scope.handleScroll($stateParams.scrollTo);
-       
-    }else{
-        $scope.noPatientDataAlert = false;
-        console.log("Missing error parameter .");
-    }
-
 
     /**
-     *  Scroll to a specific position in the page when the ScrollTo event is fired.
-     *
-     *  @param {Object} event - The event object
-     *  @param {Object} arg - Object containing the position to scroll to in the page
+     *  The health Information mmodule
      */
-    $scope.$on('ScrollTo', function(event, args) {
-        $scope.handleScroll(args.to);
-    });
-
-    $scope.expandAllAccordions = function(){
-        $scope.noPatientDataAlert = false;
-        $rootScope.$broadcast('ExpandAccordions', { expand:true });
-    };
-
-    $scope.collapseAllAccordions = function(){
-        $scope.noPatientDataAlert = false;
-        $rootScope.$broadcast('CollapseAccordions', { collapse:true });
-    };
-
-    $scope.toggleSectionWithoutData = function(){
-        // Process CCDA to determine which sections does not contain data.
-        var menuToggleFlags = HealthInformationService.calculateMenuToggleFlags($scope.healthinfotmation);
-        menuToggleFlags.toggleMenu = $scope.toggleMenu;
-        $rootScope.$broadcast('ToggleMenuItemWithoutData', menuToggleFlags);
-    };
-
-}]);
+    angular.module("app.healthInformationModule",
+        [
+            'ui.router',
+            'app.servicesModule',
+            'app.healthInformationService',
+            'app.healthInformationDirectivesModule'
+        ])
+        .config(config)
+        .controller('HealthInformationController', HealthInformationController);
+})();
