@@ -14,8 +14,16 @@ angular.module("app.providerDirectives", [])
             },
             templateUrl: 'app/provider/tmpl/provider-lookup-result.tpl.html',
             controller: ['$scope', function ($scope) {
+                console.log("providerLookupResult directive controller:");
+                console.log($scope);
                 $location.hash('provider_lookup_result');
                 $anchorScroll();
+
+                $scope.isEmptyResult = function () {
+                    var isEmpty = !$scope.providerLookupResult || !$scope.providerLookupResult.providers || $scope.providerLookupResult.providers.length === 0;
+                    console.log("isEmpty:" + isEmpty);
+                    return isEmpty;
+                };
 
                 $scope.getProviderName = function (provider) {
                     var providerName = '';

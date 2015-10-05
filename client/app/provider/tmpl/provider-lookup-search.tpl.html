@@ -25,7 +25,8 @@
                                 <div class="form-group">
                                     <label for="state" class="control-label">State</label>
                                     <select id="state" class="form-control m-b" name="account"
-                                            ng-model="plsQueryParameters.usstate">
+                                            ng-model="plsQueryParameters.usstate"
+                                            ng-disabled="plsQueryParameters.zipcode">
                                         <option value="">-- Please Select --</option>
                                         <option value="DC">DISTRICT OF COLUMBIA</option>
                                         <option value="MD">MARYLAND</option>
@@ -35,7 +36,8 @@
                                 <div class="form-group">
                                     <label class="control-label">City</label>
                                     <Input class="form-control m-b" type="text" placeholder="Enter City"
-                                           ng-model="plsQueryParameters.city"/>
+                                           ng-model="plsQueryParameters.city"
+                                           ng-disabled="!plsQueryParameters.usstate"/>
                                 </div>
                             </div>
                             <div class="col-sm-1 m-b">
@@ -48,7 +50,8 @@
                                     <div class="col-sm-5 form-group">
                                         <label class="control-label">Zip Code</label>
                                         <Input class="form-control m-b" type="text" placeholder="Enter Zip Code"
-                                               ng-model="plsQueryParameters.zipcode"/>
+                                               ng-model="plsQueryParameters.zipcode"
+                                               ng-disabled="plsQueryParameters.usstate"/>
                                     </div>
                                 </div>
                             </div>
@@ -70,12 +73,14 @@
                                 <div class="form-group">
                                     <label class="control-label">Provider Last Name</label>
                                     <Input class="form-control m-b" type="text" placeholder="Last Name"
-                                           ng-model="plsQueryParameters.lastname"/>
+                                           ng-model="plsQueryParameters.lastname"
+                                           ng-disabled="plsQueryParameters.facilityname"/>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">First Name (Optional)</label>
                                     <Input class="form-control m-b" type="text" placeholder="First Name"
-                                           ng-model="plsQueryParameters.firstname"/>
+                                           ng-model="plsQueryParameters.firstname"
+                                           ng-disabled="!plsQueryParameters.lastname"/>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-md-6">
@@ -106,7 +111,8 @@
                                 <div class="form-group">
                                     <label class="control-label">Facility Name</label>
                                     <Input class="form-control m-b" type="text" placeholder="Facility Name"
-                                           ng-model="plsQueryParameters.facilityname"/>
+                                           ng-model="plsQueryParameters.facilityname"
+                                           ng-disabled="plsQueryParameters.lastname"/>
                                 </div>
                             </div>
                         </div>
@@ -115,7 +121,9 @@
                             <div class="col-sm-12">
                                 <button class="btn btn-sm m-r" type="reset">Clear All</button>
                                 <button class="btn btn-sm btn-primary dark-green" type="button"
-                                        ng-click="lookupProvider(0)"><strong>Search</strong>
+                                        ng-click="lookupProvider(0)"
+                                        ng-disabled="!((plsQueryParameters.usstate || plsQueryParameters.zipcode) && (plsQueryParameters.lastname || plsQueryParameters.facilityname))">
+                                    <strong>Search</strong>
                                 </button>
                             </div>
                         </div>
