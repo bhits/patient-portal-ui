@@ -8,12 +8,12 @@
 angular.module("app.accessModule", ['app.authenticationModule', 'ngIdle', 'app.config', 'app.servicesModule'])
 
 .config(['$stateProvider', function ($stateProvider) {
-           
+
     $stateProvider
            .state('login', {
                url: "/login",
                data: { pageTitle: 'Login' },
-               templateUrl: "app/access/login.tpl.html",
+               templateUrl: "app/access/tmpl/login.tpl.html",
                controller: 'LoginController'
            });
     }

@@ -1,0 +1,41 @@
+﻿<!-- Wrapper-->
+<div id="wrapper" >
+    <div class="container-fluid left-right-padding-0">
+        <!-- Navigation -->
+        <!--<div ng-include="'common/tmpl/navigation.tpl.html'"></div>-->
+
+        <app-left-navigation
+                authentication="authentication"
+                logout="logOut()"
+                routetohealthinformation="routeToHealthInformation()"
+                scrolltoandexpand="scrollToAndExpand(target,expand)"
+                showhealthinformationmenu="showHealthInformationMenu"
+                hidesection="hideSection"
+                toggledemographics="toggleDemographics"
+                togglemedications="toggleMedications"
+                togglealerts="toggleAlerts"
+                toggleresults="toggleResults"
+                toggleencounters="toggleEncounters"
+                toggleproblems="toggleProblems"
+                togglevitalSigns="toggleVitalSigns"
+                toggleprocedure="toggleProcedure" ></app-left-navigation>
+
+        <!-- Page wraper -->
+        <!-- ng-class with current state name give you the ability to extended customization your view -->
+        <div id="page-wrapper" class="bg-white-page {{$state.current.name}}">
+
+            <!-- Page wrapper -->
+            <app-top-navbar togglesidebar="toggleSideBar()" authentication="authentication" togglebar="togglebar" logout="logOut()"></app-top-navbar>
+
+            <!-- Main view  -->
+            <!-- padding-top-60 ensure the content don't scroll under the top-navbar-->
+            <div ui-view class="padding-top-60"></div>
+
+            <!-- Footer -->
+            <app-footer></app-footer>
+
+        </div>
+        <!-- End page wrapper-->
+    </div>
+</div>
+<!-- End wrapper-->

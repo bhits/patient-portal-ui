@@ -79,7 +79,8 @@ module.exports = {
             'vendor/angular-loading-bar/build/loading-bar.js',
             'vendor/angular-utf8-base64/angular-utf8-base64.js',
             'vendor/angular-jwt/dist/angular-jwt.js',
-            'vendor/angular-aria/angular-aria.js'
+            'vendor/angular-aria/angular-aria.js',
+            'vendor/angular-ui-router/release/angular-ui-router.js'
         ],
         css: [
             'vendor/angular-loading-bar/build/loading-bar.css'
