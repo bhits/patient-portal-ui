@@ -43,7 +43,7 @@
                         <tbody>
                             <tr ng-repeat="provider in providers">
                                 <td>
-                                    <button type="button" class="btn btn-xs" ng-class="{ 'btn-danger' : !provider.activeConsent, 'btn-default': provider.activeConsent} " ng-disabled="provider.activeConsent" ng-click="openDeleteProviderModal('sm')">
+                                    <button type="button" class="btn btn-xs" ng-class="{ 'btn-red' : !provider.activeConsent, 'btn-grey': provider.activeConsent} " ng-disabled="provider.activeConsent" ng-click="openDeleteProviderModal('sm')">
                                         <div class="fa fa-minus">
                                              <span class="sr-only">delete provider</span>
                                         </div>
