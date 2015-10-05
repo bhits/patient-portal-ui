@@ -1,0 +1,25 @@
+<div class="row" id="provider_lookup_result">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="panel panel-darkblue">
+            <div class="ibox-title modified panel-heading">
+                <h2>Search Results</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-md-offset-3">
+        <div class="panel panel-default" ng-repeat="provider in providerLookupResult.providers">
+            <div class="panel-heading">
+                <h4>{{getProviderName(provider)}}&nbsp;<span>[NPI: {{provider.npi}}]</span></h4>
+                <button type="button" class="btn btn-xs btn-primary dark-green"><i class="fa fa-plus"></i></button>
+                &nbsp;Add this Provider.
+            </div>
+            <div class="panel-body">
+                <p>{{provider.healthcareProviderTaxonomy_1}}</p>
+
+                <p>{{getProviderAddressAsArray(provider)}}</p>
+
+                <p>{{formatPhoneNumber(provider.providerBusinessPracticeLocationAddressTelephoneNumber)}}</p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,132 @@
+<div>
+    <div class="row">
+        <div class="col-sm-12" id="demographics">
+            <div class="ibox panel panel-darkblue float-e-margins">
+                <div class="ibox-title  modified panel-heading">
+                    <h2>Search by: Provider location</h2>
+
+                    <div ibox-tools></div>
+                </div>
+                <div class="ibox-content modified" ng-model="boxContent">
+                    <form role="form">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="alert alert-info">
+                                    <span class="btn btn-success btn-circle">1</span>&nbsp;<b>Step 1.</b> Please enter
+                                    the
+                                    provider <b>State and City</b> OR <b>Zip Code</b>.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <h3 class="m-t-none m-b">Enter State and City.</h3>
+
+                                <div class="form-group">
+                                    <label for="state" class="control-label">State</label>
+                                    <select id="state" class="form-control m-b" name="account"
+                                            ng-model="plsQueryParameters.usstate">
+                                        <option value="">-- Please Select --</option>
+                                        <option value="DC">DISTRICT OF COLUMBIA</option>
+                                        <option value="MD">MARYLAND</option>
+                                        <option value="PA">VIRGINIA</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">City</label>
+                                    <Input class="form-control m-b" type="text" placeholder="Enter City"
+                                           ng-model="plsQueryParameters.city"/>
+                                </div>
+                            </div>
+                            <div class="col-sm-1 m-b">
+                                <p>OR</p>
+                            </div>
+                            <div class="col-sm-5">
+                                <h3 class="m-t-none m-b">Enter Zip Code</h3>
+
+                                <div class="row">
+                                    <div class="col-sm-5 form-group">
+                                        <label class="control-label">Zip Code</label>
+                                        <Input class="form-control m-b" type="text" placeholder="Enter Zip Code"
+                                               ng-model="plsQueryParameters.zipcode"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="alert alert-info">
+                                    <span class="btn btn-success btn-circle">2</span>&nbsp;<b>Step 2.</b> Please enter
+                                    the
+                                    <b>Facility Name</b> OR <b>Provider Name and
+                                    Other Criteria</b>.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <h3 class="m-t-none m-b">Enter Provider Name and Other Critieria</h3>
+
+                                <div class="form-group">
+                                    <label class="control-label">Provider Last Name</label>
+                                    <Input class="form-control m-b" type="text" placeholder="Last Name"
+                                           ng-model="plsQueryParameters.lastname"/>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">First Name (Optional)</label>
+                                    <Input class="form-control m-b" type="text" placeholder="First Name"
+                                           ng-model="plsQueryParameters.firstname"/>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label for="gender" class="control-label">Gender</label>
+                                        <select id="gender" class="form-control m-b"
+                                                ng-model="plsQueryParameters.gender">
+                                            <option>Please Select</option>
+                                            <option value="M">Male</option>
+                                            <option value="F">Female</option>
+                                            <option>Rather not say</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label class="control-label">Telephone (Optional)</label>
+                                        <Input class="form-control m-b" type="tel" placeholder="Telephone"
+                                               ng-model="plsQueryParameters.phone"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-1 m-b">
+                                <p>OR</p>
+                            </div>
+                            <div class="col-sm-5">
+
+                                <h3 class="m-t-none m-b">Facility Name</h3>
+
+                                <div class="form-group">
+                                    <label class="control-label">Facility Name</label>
+                                    <Input class="form-control m-b" type="text" placeholder="Facility Name"
+                                           ng-model="plsQueryParameters.facilityname"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <button class="btn btn-sm m-r" type="reset">Clear All</button>
+                                <button class="btn btn-sm btn-primary dark-green" type="button"
+                                        ng-click="lookupProvider(0)"><strong>Search</strong>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <provider-lookup-result ng-if="providerLookupResult"
+                                provider-lookup-result="providerLookupResult"></provider-lookup-result>
+    </div>
+</div>
