@@ -9,21 +9,16 @@
     <div class="col-md-6 col-md-offset-3">
         <div class="panel panel-default" ng-repeat="provider in providerLookupResult.providers">
             <div class="panel-heading">
-                <h4>{{provider.providerOrganizationName}}&nbsp;<span>[NPI: {{provider.npi}}]</span></h4>
+                <h4>{{getProviderName(provider)}}&nbsp;<span>[NPI: {{provider.npi}}]</span></h4>
                 <button type="button" class="btn btn-xs btn-primary dark-green"><i class="fa fa-plus"></i></button>
                 &nbsp;Add this Provider.
             </div>
             <div class="panel-body">
-                <p>Sleep Disorder Diagnostic</p>
+                <p>{{provider.healthcareProviderTaxonomy_1}}</p>
 
-                <p>{{provider.providerFirstLineBusinessPracticeLocationAddress + ', ' +
-                    provider.providerSecondLineBusinessPracticeLocationAddress + ', ' +
-                    provider.providerBusinessPracticeLocationAddressCityName + ', ' +
-                    provider.providerBusinessPracticeLocationAddressStateName + ', ' +
-                    provider.providerBusinessPracticeLocationAddressPostalCode
-                    }}</p>
+                <p>{{getProviderAddressAsArray(provider)}}</p>
 
-                <p>{{provider.providerBusinessPracticeLocationAddressTelephoneNumber}}</p>
+                <p>{{formatPhoneNumber(provider.providerBusinessPracticeLocationAddressTelephoneNumber)}}</p>
             </div>
         </div>
     </div>
