@@ -74,7 +74,7 @@
 
         appVm.authentication = AuthenticationService.authentication;
 
-        //$scope.currentDate = utilityService.getYear();
+        appVm.currentDate = utilityService.getYear();
 
         appVm.closeModals = function closeModals() {
             if (appVm.warning) {

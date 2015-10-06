@@ -1,17 +1,23 @@
-﻿'use strict';
+﻿(function () {
 
-/*
- * General utility module for the application
- */
-angular.module('app.servicesModule', [])
+    'use strict';
 
- /*
- * The utility service
- *
- */
- .factory('utilityService', ['$location', '$anchorScroll', function ($location, $anchorScroll) {
+    /*
+     * The utility service
+     *
+     */
+    function UtilityService($location, $anchorScroll) {
         var showHealthInformationMenu = false;
         return {
+
+            /**
+             * Returns the current year.
+             *
+             * @returns {int} - the current year.
+             */
+            getYear : function(){
+                return (new Date()).getFullYear();
+            },
 
             /**
              * Redirects to the set path.
@@ -67,4 +73,11 @@ angular.module('app.servicesModule', [])
                 $anchorScroll();
             }
         };
- }]);
+    }
+
+    /*
+     * General utility module for the application
+     */
+    angular.module('app.servicesModule', [])
+        .factory('utilityService',UtilityService);
+})();
