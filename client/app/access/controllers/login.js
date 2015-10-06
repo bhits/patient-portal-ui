@@ -23,6 +23,8 @@
      * @param {Object} Idle - The ngIdle service
      *
      */
+
+
     function LoginController($scope, $state, AuthenticationService, Idle, ENVService, utilityService) {
         var loginVm = this;
 
