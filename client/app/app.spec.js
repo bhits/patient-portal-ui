@@ -75,7 +75,7 @@ describe('app module', function(){
         });
 
         it("should have app.interceptorModule as a dependency", function() {
-            expect(hasModule('app.interceptorModule')).toEqual(true);
+            expect(hasModule('app.authInterceptorModule')).toEqual(true);
         });
 
         it("should have app.authenticationModule as a dependency", function() {

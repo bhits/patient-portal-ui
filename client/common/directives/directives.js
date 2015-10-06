@@ -1,10 +1,11 @@
-﻿'use strict';
+﻿(function () {
 
-angular.module('app.directivesModule', [])
+    'use strict';
+
     /**
-    * pageTitle - Directive for set Page title - mata title
-    */
-    .directive('pageTitle', ['$rootScope', '$timeout', function ($rootScope, $timeout) {
+     * pageTitle - Directive for set Page title - mata title
+     */
+    function PageTitle($rootScope, $timeout){
         return {
             link: function (scope, element) {
                 var listener = function (event, toState, toParams, fromState, fromParams) {
@@ -21,11 +22,12 @@ angular.module('app.directivesModule', [])
                 $rootScope.$on('$stateChangeStart', listener);
             }
         };
-    }])
+    }
+
     /**
      * sideNavigation - Directive for run metsiMenu on sidebar navigation
      */
-    .directive('sideNavigation', ['$timeout', function ($timeout) {
+    function SideNavigation($timeout){
         return {
             restrict: 'A',
             link: function (scope, element) {
@@ -36,13 +38,9 @@ angular.module('app.directivesModule', [])
                 });
             }
         };
-    }])
+    }
 
-
-    /**
-     * iboxTools - Directive for iBox tools elements in right corner of ibox
-     */
-    .directive('iboxTools', ['$timeout', function ($timeout) {
+    function IboxTools($timeout){
         return {
             restrict: 'A',
             scope: {
@@ -113,55 +111,51 @@ angular.module('app.directivesModule', [])
         };
     }
 
-    ])
     /**
      * minimalizaSidebar - Directive for minimalize sidebar
      */
-    .directive('minimalizaSidebar', ['$timeout', function ($timeout) {
+    function MinimalizaSidebar($timeout){
         return {
-                restrict: 'A',
-                scope: {
-                    togglesidebar : "&"
-                },
-                template: '<a class="navbar-minimalize minimalize-styl-2 btn btn-primary dark-green"  ng-click="minimalize()"><i class="fa fa-bars"></i></a>',
-                controller: function ($scope, $element) {
+            restrict: 'A',
+            scope: {
+                togglesidebar : "&"
+            },
+            template: '<a class="navbar-minimalize minimalize-styl-2 btn btn-primary dark-green"  ng-click="minimalize()"><i class="fa fa-bars"></i></a>',
+            controller: function ($scope, $element) {
 
-                    $scope.minimalize = function () {
+                $scope.minimalize = function () {
 
-                        $scope.togglesidebar();
+                    $scope.togglesidebar();
 
-                       // Side Navbar
-                        $("body").toggleClass("mini-navbar");
+                    // Side Navbar
+                    $("body").toggleClass("mini-navbar");
 
-                        if (!$('body').hasClass('mini-navbar') || $('body').hasClass('body-small')) {
-                            // Hide menu in order to smoothly turn on when maximize menu
-                            $('#side-menu').hide();
-                            // For smoothly turn on menu
-                            setTimeout(
-                                function () {
-                                    $('#side-menu').fadeIn(500);
-                                }, 100);
-                        } else if ($('body').hasClass('fixed-sidebar')) {
-                            $('#side-menu').hide();
-                            setTimeout(
-                                function () {
-                                    $('#side-menu').fadeIn(500);
-                                }, 300);
-                        } else {
-                            // Remove all inline style from jquery fadeIn function to reset menu state
-                            $('#side-menu').removeAttr('style');
-                        }
-                    };
-                }
-            };
-        }
-
-    ])
-
-/**
- * Icheck directive
- */
-    .directive('icheck', ['$timeout', function ($timeout) {
+                    if (!$('body').hasClass('mini-navbar') || $('body').hasClass('body-small')) {
+                        // Hide menu in order to smoothly turn on when maximize menu
+                        $('#side-menu').hide();
+                        // For smoothly turn on menu
+                        setTimeout(
+                            function () {
+                                $('#side-menu').fadeIn(500);
+                            }, 100);
+                    } else if ($('body').hasClass('fixed-sidebar')) {
+                        $('#side-menu').hide();
+                        setTimeout(
+                            function () {
+                                $('#side-menu').fadeIn(500);
+                            }, 300);
+                    } else {
+                        // Remove all inline style from jquery fadeIn function to reset menu state
+                        $('#side-menu').removeAttr('style');
+                    }
+                };
+            }
+        };
+    }
+    /**
+     * Icheck directive
+     */
+    function Icheck($timeout){
         return {
             restrict: 'A',
             require: 'ngModel',
@@ -195,6 +189,12 @@ angular.module('app.directivesModule', [])
 
         };
     }
-    ])
-;
+
+    angular.module('app.directivesModule', [])
+        .directive('pageTitle',PageTitle)
+        .directive('sideNavigation', SideNavigation)
+        .directive('iboxTools',IboxTools)
+        .directive('minimalizaSidebar',MinimalizaSidebar)
+        .directive('icheck', Icheck);
+})();
 

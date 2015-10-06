@@ -4,11 +4,11 @@
 
 'use strict';
 
-describe('app.interceptorModule ', function(){
+describe('app.authInterceptorModule ', function(){
     var module;
 
     beforeEach(function() {
-        module = angular.module("app.interceptorModule");
+        module = angular.module("app.authInterceptorModule");
     });
 
     it("should be registered", function() {
@@ -23,7 +23,7 @@ describe('app.interceptorModule ', function(){
             return dependencies.indexOf(m) >= 0;
         };
         beforeEach(function() {
-            dependencies = module.value('app.interceptorModule').requires;
+            dependencies = module.value('app.authInterceptorModule').requires;
         });
 
         it("should have LocalStorageModule as a dependency", function() {
@@ -40,13 +40,13 @@ describe('app.interceptorModule ', function(){
     });
 });
 
-describe('app.interceptorModule, AuthInterceptorService ', function(){
+describe('app.authInterceptorModule, AuthInterceptorService ', function(){
     var utilityService, localStorageService, q, jwtHelper, AuthInterceptorService, config, location, AuthenticationService, injector;
 
     beforeEach(module('LocalStorageModule'));
     beforeEach(module('angular-jwt'));
     beforeEach(module('app.servicesModule'));
-    beforeEach(module('app.interceptorModule'));
+    beforeEach(module('app.authInterceptorModule'));
     beforeEach(module('app.authenticationModule'));
 
     beforeEach(inject(function($injector, _localStorageService_, _$q_, _jwtHelper_, _AuthInterceptorService_, _$location_){

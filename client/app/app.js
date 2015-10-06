@@ -74,7 +74,7 @@
 
         appVm.authentication = AuthenticationService.authentication;
 
-        //$scope.currentDate = utilityService.getYear();
+        appVm.currentDate = utilityService.getYear();
 
         appVm.closeModals = function closeModals() {
             if (appVm.warning) {
@@ -236,7 +236,7 @@
           'app.providerModule',
           'app.directivesModule',    // Common modules start here
           'app.servicesModule',
-          'app.interceptorModule',
+          'app.authInterceptorModule',
           'app.authenticationModule'
         ])
         .constant("idleConfigParams", ngIdleParams)

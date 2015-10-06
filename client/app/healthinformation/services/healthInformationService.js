@@ -1,13 +1,12 @@
-﻿'use strict';
+﻿(function () {
 
-angular.module("app.healthInformationService", ['ngResource', 'app.config'])
+'use strict';
 
-    .factory('HealthInformationService', ['$resource', 'ENVService', function($resource, ENVService){
-
+    function HealthInformationService($resource, ENVService){
         var patientResource = $resource(ENVService.apiBaseUrl + "/ccda/getccdajson", {emrn:'@emrn'});
 
         var isDefineAndNotNull = function(value){
-           return (angular.isDefined(value) && value !== null );
+            return (angular.isDefined(value) && value !== null );
         };
 
         return {
@@ -83,4 +82,9 @@ angular.module("app.healthInformationService", ['ngResource', 'app.config'])
                 return menuItems;
             }
         };
-    }]);
+    }
+
+
+    angular.module("app.healthInformationService", ['ngResource', 'app.config'])
+     .factory('HealthInformationService', HealthInformationService);
+})();
