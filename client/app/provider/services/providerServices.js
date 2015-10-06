@@ -10,7 +10,7 @@
  */
 angular.module("app.providerService", ['ngResource', 'app.config'])
 
-    .factory('ProviderService', ['$resource', 'ENVService','$log', function($resource, ENVService, $log){
+    .factory('ProviderService', ['$resource', 'ENVService', '$log', function ($resource, ENVService, $log) {
 
         var providers = [
                 {firstName: "LUQUIN", lastName: "TERESA",  providerTaxonomyDescription: "Counselor" , npi: "1568797520",practiceLocationAddressTelephoneNumber: "(760) 353-6151", firstLinePracticeLocationAddress: "107 S 5TH ST", practiceLocationAddressCityName: "EL CENTRO", practiceLocationAddressStateName: "CA", practiceLocationAddressPostalCode: "92243" ,  activeConsent: true},
@@ -30,7 +30,7 @@ angular.module("app.providerService", ['ngResource', 'app.config'])
             /**
              * Deletes provider by npi
              */
-            deleteProvider: function(npi){
+            deleteProvider: function (npi) {
                 $log.info("Deleting provider");
             },
             /**
@@ -39,16 +39,16 @@ angular.module("app.providerService", ['ngResource', 'app.config'])
              */
             /**
              *  Adds provider
-              * @param provider - the provider to be added
+             * @param provider - the provider to be added
              */
-            addProviders: function(provider){
+            addProviders: function (provider) {
                 $log.info("Adding provider");
             },
             /**
              * Gets the Provider Lookup Service resource object
              * @returns {Object} providerResource - The provider resource object
              */
-            lookupProviders: function(plsQueryParameters, pageNumber){
+            lookupProviders: function (plsQueryParameters, pageNumber) {
                 var queryParameters = "";
 
                 queryParameters = plsQueryParameters.usstate ? queryParameters + "/usstate/" + plsQueryParameters.usstate : queryParameters;
@@ -63,9 +63,21 @@ angular.module("app.providerService", ['ngResource', 'app.config'])
 
                 var providerResource = $resource(ENVService.plsApiBaseUrl + "/pageNumber/:pageNumber" + queryParameters, {pageNumber: '@pageNumber'});
                 return providerResource;
+            },
+
+            /**
+             * Checks if the providerLookupResult object contains no providers.
+             * @param providerLookupResult
+             * @returns {boolean}
+             */
+            isEmptyLookupResult: function (providerLookupResult) {
+                var empty = false;
+                if (!providerLookupResult || !providerLookupResult.providers || providerLookupResult.providers.length === 0) {
+                    empty = true;
+                }
+                return empty;
             }
         };
     }]);
-
 
 

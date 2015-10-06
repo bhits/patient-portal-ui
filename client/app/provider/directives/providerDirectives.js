@@ -6,7 +6,7 @@
 
 angular.module("app.providerDirectives", [])
 
-    .directive('providerLookupResult', ['$location', '$anchorScroll', function ($location, $anchorScroll) {
+    .directive('providerLookupResult', ['$location', '$anchorScroll', '$timeout', 'ProviderService', function ($location, $anchorScroll, $timeout, ProviderService) {
         return {
             restrict: 'E',
             scope: {
@@ -16,13 +16,14 @@ angular.module("app.providerDirectives", [])
             controller: ['$scope', function ($scope) {
                 console.log("providerLookupResult directive controller:");
                 console.log($scope);
-                $location.hash('provider_lookup_result');
-                $anchorScroll();
+
+                $timeout(function () {
+                    $location.hash('provider_lookup_result');
+                    $anchorScroll();
+                }, 200);
 
                 $scope.isEmptyResult = function () {
-                    var isEmpty = !$scope.providerLookupResult || !$scope.providerLookupResult.providers || $scope.providerLookupResult.providers.length === 0;
-                    console.log("isEmpty:" + isEmpty);
-                    return isEmpty;
+                    return ProviderService.isEmptyLookupResult($scope.providerLookupResult);
                 };
 
                 $scope.getProviderName = function (provider) {
@@ -67,22 +68,37 @@ angular.module("app.providerDirectives", [])
             restrict: 'E',
             scope: {},
             templateUrl: 'app/provider/tmpl/provider-lookup-search.tpl.html',
-            controller: ['$scope', '$location', 'ProviderService',
-                function ($scope, $location, ProviderService) {
+            controller: ['$scope', '$location', '$element', '$timeout', 'ProviderService',
+                function ($scope, $location, $element, $timeout, ProviderService) {
 
                     $scope.showSearch = true;
+
+                    function collapseSearchAccordion() {
+                        var ibox = $element.find('div.ibox');
+                        var icon = $element.find('i:first');
+                        var content = ibox.find('div.ibox-content');
+                        content.slideToggle(200);
+                        // Toggle icon from up to down
+                        icon.toggleClass('fa-chevron-up').toggleClass('fa-chevron-down');
+                        ibox.toggleClass('').toggleClass('border-bottom');
+                        $timeout(function () {
+                            ibox.resize();
+                            ibox.find('[id^=map-]').resize();
+                        }, 50);
+                    }
 
                     $scope.lookupProvider = function (pageNumber) {
                         $location.hash('');
                         delete $scope.providerLookupResult;
-                        console.log($scope);
                         $scope.showSearch = false;
                         var queryParameters = $scope.plsQueryParameters;
-                        console.log(queryParameters);
                         ProviderService.lookupProviders(queryParameters).get({pageNumber: pageNumber},
                             function (response) {
                                 console.log("SUCCESS:");
                                 console.log(response);
+                                if (!ProviderService.isEmptyLookupResult(response)) {
+                                    collapseSearchAccordion();
+                                }
                                 $scope.providerLookupResult = response;
                                 console.log($scope.paginationSummary);
                             },
