@@ -4,24 +4,20 @@
     'use strict';
 
     /**
+     * The health Information Cotnroller
      *
+     * @param $scope - The AngulularJS scope service.
+     * @param $stateParams - The state parameter service.
+     * @param $state - The state srevice.
+     * @param utilityService - The application utility service.
+     * @param patientData - The health information resolved data from the backend
+     * @param HealthInformationService - The health information service.
+     * @param $rootScope - The Angularjs root scope service.
      *
-     * @param $scope
-     * @param $stateParams
-     * @param $state
-     * @param utilityService
-     * @param patientData
-     * @param HealthInformationService
-     * @param $rootScope
      * @constructor
      */
     function HealthInformationController($scope, $stateParams, $state, utilityService, patientData, HealthInformationService, $rootScope){
         var HealthInformationVm = this;
-
-        // Set the Health Information flag to true to make it visible.
-        //$scope.setShowHealthInformationMenu(true);
-
-        //$scope.$emit("ShowHealthInformationMenu", {showHealthInformationMenu: true});
 
         $scope.showHealthInformationMenu = utilityService.getShowHealthInformationMenu();
 
