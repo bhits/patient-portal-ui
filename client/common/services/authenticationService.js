@@ -1,17 +1,20 @@
-﻿'use strict';
+﻿(function(){
 
-angular.module('app.authenticationModule',
-    [ 
-      'ngResource',
-      'ab-base64',
-      'LocalStorageModule',
-      'angular-jwt',
-      'app.servicesModule',
-      'app.config'
-    ])
-
-    .factory('AuthenticationService', ['$q', 'localStorageService', '$resource', 'base64', 'jwtHelper','utilityService', 'ENVService', '$http',
-                              function ($q, localStorageService, $resource, base64, jwtHelper, utilityService, ENVService, $http) {
+    'use strict';
+    /**
+     *
+     * @param $q
+     * @param localStorageService
+     * @param $resource
+     * @param base64
+     * @param jwtHelper
+     * @param utilityService
+     * @param ENVService
+     * @param $http
+     * @returns {{login: Function, logOut: Function, fillAuthData: Function, authentication: {isAuth: boolean, userName: string}, clearCache: Function, revokeToken: Function}}
+     * @constructor
+     */
+    function AuthenticationService($q, localStorageService, $resource, base64, jwtHelper, utilityService, ENVService, $http){
         //The identity server URL
         var serviceBase = ENVService.stsBaseUri;
         var loginUrl = serviceBase + "/get/";
@@ -51,22 +54,22 @@ angular.module('app.authenticationModule',
         };
 
         /*
-        *   Creates the login Resource Object.
-        *
-        *   @params {object} loginData - The login object, contains username and password.
-        *
-        *   @return {object} The login Resource object.
-        */
+         *   Creates the login Resource Object.
+         *
+         *   @params {object} loginData - The login object, contains username and password.
+         *
+         *   @return {object} The login Resource object.
+         */
         var createLoginResource = function(loginData){
 
             if(utilityService.isDefinedAndNotNull(loginData.userName) && utilityService.isDefinedAndNotNull(loginData.password) ){
                 return $resource(loginUrl,{},
-                        {   get: {
-                                method: 'GET',
-                                params: {},
-                                headers: { Authorization: 'Basic ' + base64.encode(loginData.userName + ":" + loginData.password), 'Content-Type': 'application/json; charset=utf-8' }
-                             }
-                         }
+                    {   get: {
+                        method: 'GET',
+                        params: {},
+                        headers: { Authorization: 'Basic ' + base64.encode(loginData.userName + ":" + loginData.password), 'Content-Type': 'application/json; charset=utf-8' }
+                    }
+                    }
                 );
             }else{
                 console.log("Error in creating login resource.");
@@ -155,5 +158,17 @@ angular.module('app.authenticationModule',
                 revokeTokenResource.save(data, successCB, errorCB);
             }
         };
-    }])
-;
+    }
+
+    angular.module('app.authenticationModule',
+        [
+          'ngResource',
+          'ab-base64',
+          'LocalStorageModule',
+          'angular-jwt',
+          'app.servicesModule',
+          'app.config'
+        ])
+        .factory('AuthenticationService',AuthenticationService);
+
+})();

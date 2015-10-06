@@ -1,7 +1,17 @@
 ﻿(function () {
 
     'use strict';
-
+    /**
+     *
+     * @param $q
+     * @param $location
+     * @param localStorageService
+     * @param $injector
+     * @param jwtHelper
+     * @param utilityService
+     * @returns {{request: Function, responseError: Function}}
+     * @constructor
+     */
     function AuthInterceptorService($q, $location, localStorageService, $injector, jwtHelper, utilityService){
         /*
          *   Log out the user
