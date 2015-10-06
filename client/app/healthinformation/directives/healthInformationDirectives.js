@@ -235,7 +235,10 @@
         };
     }
 
-
+    /**
+     *  The patient health information directives
+     *
+     */
     angular.module('app.healthInformationDirectivesModule', [])
         .directive('demographicsAccordion', DemographicsAccordion)
         .directive('alertsAccordion', AlertsAccordion)
