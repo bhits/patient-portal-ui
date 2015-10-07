@@ -17,9 +17,30 @@ angular.module("app.providerModule", [ 'app.providerService', 'app.providerDirec
             })
             .state('provider.list', {
                 url: '/list',
-                data: { pageTitle: 'Provider List' },
+                data: {pageTitle: 'Provider List'},
                 templateUrl: 'app/provider/tmpl/provider-list.tpl.html',
-                controller: 'ProviderListController'
+                controller: 'ProviderListController',
+                resolve: {
+                    providers: ['ProviderService', '$q', '$log', 'utilityService', function (ProviderService, $q, $log, utilityService) {
+
+                        var deferred = $q.defer();
+
+                        var providerResource = ProviderService.getProviders();
+                        var providersData = providerResource.query(
+                            function (response) {
+                                return response;
+                            },
+                            function (response) {
+                                return response;
+                            });
+
+                        providersData.$promise.then(function(response) {
+                            deferred.resolve(response);
+                        });
+
+                        return deferred.promise;
+                    }]
+                }
             })
             .state('provider.lookup', {
                 url: '/lookup',
@@ -30,23 +51,35 @@ angular.module("app.providerModule", [ 'app.providerService', 'app.providerDirec
     }
     ])
 
-    .controller('ProviderListController', ['$scope','ProviderService','$modal', function ($scope, ProviderService, $modal) {
+    .controller('ProviderListController', ['$scope','providers','$modal','ProviderService', function ($scope, providers, $modal, ProviderService) {
         // The list of providers from the backend service
-        $scope.providers = ProviderService.getProviders();
+        $scope.providers = providers;
 
         /**
          *  Opens the confirm delete modal
          *
          * @param size - The size of the modal
          */
-        $scope.openDeleteProviderModal = function (size) {
+        $scope.openDeleteProviderModal = function (provider, size) {
             var modalInstance = $modal.open({
                 templateUrl: 'app/provider/tmpl/provider-delete-modal.tpl.html',
                 size: size,
-                controller: ['$scope','$modalInstance', function ($scope, $modalInstance) {
+                resolve: {
+                    npi: function () {
+                        return provider;
+                    }
+                },
+                controller: ['$scope','$modalInstance', 'npi', function ($scope, $modalInstance, provider) {
+                    $scope.provider = provider;
+                    $scope.ok = function () {
+                        ProviderService.deleteProvider($scope.provider.npi,
+                            function(data){
 
-                    $scope.ok = function (npi) {
-                        ProviderService.deleteProvider(npi);
+                            },
+                            function(data){
+
+                            }
+                        );
                         $modalInstance.close();
                     };
 
