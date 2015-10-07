@@ -8,7 +8,7 @@
                     <div ibox-tools></div>
                 </div>
                 <div class="ibox-content modified" ng-model="boxContent">
-                    <form role="form">
+                    <form role="form" name="providerSearchForm">
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="alert alert-info">
@@ -30,12 +30,13 @@
                                         <option value="">-- Please Select --</option>
                                         <option value="DC">DISTRICT OF COLUMBIA</option>
                                         <option value="MD">MARYLAND</option>
-                                        <option value="PA">VIRGINIA</option>
+                                        <option value="VA">VIRGINIA</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">City</label>
                                     <Input class="form-control m-b" type="text" placeholder="Enter City"
+                                           name="providerCity"
                                            ng-model="plsQueryParameters.city"
                                            ng-disabled="!plsQueryParameters.usstate"/>
                                 </div>
@@ -111,8 +112,11 @@
                                 <div class="form-group">
                                     <label class="control-label">Facility Name</label>
                                     <Input class="form-control m-b" type="text" placeholder="Facility Name"
-                                           ng-model="plsQueryParameters.facilityname"
-                                           ng-disabled="plsQueryParameters.lastname"/>
+                                           ng-model="plsQueryParameters.facilityname" ng-minlength="2"
+                                           name="providerFacility" ng-disabled="plsQueryParameters.lastname"/>
+                                    <!--<div ng-messages="providerSearchForm.providerFacility.$error" style="color:maroon" role="alert">
+                                        <div ng-message="minlength">Your field is too short</div>
+                                    </div>-->
                                 </div>
                             </div>
                         </div>
@@ -133,8 +137,15 @@
         </div>
     </div>
 
+    <!--<div>
+        <pre>
+            {{providerSearchForm | json}}
+        </pre>
+    </div>-->
+
     <div class="row">
         <provider-lookup-result ng-if="providerLookupResult"
-                                provider-lookup-result="providerLookupResult"></provider-lookup-result>
+                                provider-lookup-result="providerLookupResult"
+                                query-parameters="plsQueryParameters"></provider-lookup-result>
     </div>
 </div>

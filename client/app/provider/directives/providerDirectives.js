@@ -10,17 +10,30 @@ angular.module("app.providerDirectives", [])
         return {
             restrict: 'E',
             scope: {
-                providerLookupResult: '='
+                providerLookupResult: '=',
+                queryParameters: '='
             },
             templateUrl: 'app/provider/tmpl/provider-lookup-result.tpl.html',
             controller: ['$scope', function ($scope) {
-                console.log("providerLookupResult directive controller:");
-                console.log($scope);
+                $scope.totalItems = $scope.providerLookupResult.totalNumberOfProviders;
+                $scope.currentPage = $scope.providerLookupResult.currentPage + 1;
 
                 $timeout(function () {
                     $location.hash('provider_lookup_result');
                     $anchorScroll();
                 }, 200);
+
+                $scope.loadPage = function (page) {
+                    $scope.currentPage = page;
+                    ProviderService.lookupProviders($scope.queryParameters, $scope.currentPage - 1,
+                        function (response) {
+                            $scope.providerLookupResult = response;
+                        },
+                        function (response) {
+                            delete $scope.providerLookupResult;
+                        }
+                    );
+                };
 
                 $scope.isEmptyResult = function () {
                     return ProviderService.isEmptyLookupResult($scope.providerLookupResult);
@@ -92,19 +105,15 @@ angular.module("app.providerDirectives", [])
                         delete $scope.providerLookupResult;
                         $scope.showSearch = false;
                         var queryParameters = $scope.plsQueryParameters;
-                        ProviderService.lookupProviders(queryParameters).get({pageNumber: pageNumber},
+                        ProviderService.lookupProviders(queryParameters, pageNumber,
                             function (response) {
-                                console.log("SUCCESS:");
-                                console.log(response);
                                 if (!ProviderService.isEmptyLookupResult(response)) {
                                     collapseSearchAccordion();
                                 }
                                 $scope.providerLookupResult = response;
-                                console.log($scope.paginationSummary);
                             },
                             function (response) {
-                                console.log("ERROR:");
-                                console.log(response);
+                                delete $scope.providerLookupResult;
                             }
                         );
                     };
@@ -124,5 +133,4 @@ angular.module("app.providerDirectives", [])
         };
 
     })
-
 ;

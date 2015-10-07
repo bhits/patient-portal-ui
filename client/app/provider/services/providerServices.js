@@ -48,9 +48,9 @@ angular.module("app.providerService", ['ngResource', 'app.config'])
              * Gets the Provider Lookup Service resource object
              * @returns {Object} providerResource - The provider resource object
              */
-            lookupProviders: function (plsQueryParameters, pageNumber) {
-                var queryParameters = "";
 
+            lookupProviders: function (plsQueryParameters, page, onSuccess, onError) {
+                var queryParameters = "";
                 queryParameters = plsQueryParameters.usstate ? queryParameters + "/usstate/" + plsQueryParameters.usstate : queryParameters;
                 queryParameters = plsQueryParameters.city ? queryParameters + "/city/" + plsQueryParameters.city : queryParameters;
                 queryParameters = plsQueryParameters.zipcode ? queryParameters + "/zipcode/" + plsQueryParameters.zipcode : queryParameters;
@@ -61,8 +61,9 @@ angular.module("app.providerService", ['ngResource', 'app.config'])
                 queryParameters = plsQueryParameters.lastname ? queryParameters + "/lastname/" + plsQueryParameters.lastname : queryParameters;
                 queryParameters = plsQueryParameters.facilityname ? queryParameters + "/facilityname/" + plsQueryParameters.facilityname : queryParameters;
 
-                var providerResource = $resource(ENVService.plsApiBaseUrl + "/pageNumber/:pageNumber" + queryParameters, {pageNumber: '@pageNumber'});
-                return providerResource;
+                var providerResource = $resource(ENVService.plsApiBaseUrl + "/pageNumber/:pageNumber" + queryParameters, {pageNumber: page});
+                var providerLookupResponse = providerResource.get({pageNumber: page}, onSuccess, onError);
+                return providerLookupResponse;
             },
 
             /**
