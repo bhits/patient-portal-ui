@@ -70,8 +70,8 @@ angular.module("app.providerDirectives", [])
                             return typeof element === 'string' && element.length > 0;
                         });
                     return providerAddressArray.join(", ");
-
                 };
+
             }]
         };
     }])
@@ -82,9 +82,42 @@ angular.module("app.providerDirectives", [])
             scope: {},
             templateUrl: 'app/provider/tmpl/provider-lookup-search.tpl.html',
             controller: ['$scope', '$location', '$element', '$timeout', 'ProviderService',
+
                 function ($scope, $location, $element, $timeout, ProviderService) {
 
                     $scope.showSearch = true;
+                    $scope.formMinlength = 2;
+                    $scope.formMaxlength = 10;
+
+                    $scope.$watch('plsQueryParameters.usstate', function (newValue) {
+                        if (!newValue) {
+                            if ($scope.plsQueryParameters && $scope.plsQueryParameters.city) {
+                                delete $scope.plsQueryParameters.city;
+                            }
+                        }
+                    });
+
+                    $scope.$watch('plsQueryParameters.lastname', function (newValue) {
+                        if (!newValue) {
+                            if ($scope.plsQueryParameters && $scope.plsQueryParameters.firstname) {
+                                $scope.plsQueryParameters.firstname = "";
+                            }
+                            if ($scope.plsQueryParameters && $scope.plsQueryParameters.gender) {
+                                $scope.plsQueryParameters.gender = "";
+                            }
+                            if ($scope.plsQueryParameters && $scope.plsQueryParameters.phone) {
+                                $scope.plsQueryParameters.phone = "";
+                            }
+                        }
+                    });
+
+                    $scope.$watch('plsQueryParameters.facilityname', function (newValue) {
+                        if (!newValue) {
+                            if ($scope.plsQueryParameters && $scope.plsQueryParameters.phone) {
+                                $scope.plsQueryParameters.phone = "";
+                            }
+                        }
+                    });
 
                     function collapseSearchAccordion() {
                         var ibox = $element.find('div.ibox');
@@ -128,6 +161,14 @@ angular.module("app.providerDirectives", [])
                         var total = ($scope.providerLookupResult.totalNumberOfProviders);
                         var summary = 'Showing '.concat(rangeStart, ' to ', rangeEnd, ' of ', total, ' entries');
                         return summary;
+                    };
+
+                    $scope.reset = function (form) {
+                        if (form) {
+                            form.$setPristine();
+                            form.$setUntouched();
+                            $scope.plsQueryParameters = {};
+                        }
                     };
                 }]
         };

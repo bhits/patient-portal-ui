@@ -24,21 +24,28 @@
 
                                 <div class="form-group">
                                     <label for="state" class="control-label">State</label>
-                                    <select id="state" class="form-control m-b" name="account"
+                                    <select id="state" class="form-control m-b" name="providerState"
                                             ng-model="plsQueryParameters.usstate"
-                                            ng-disabled="plsQueryParameters.zipcode">
+                                            ng-disabled="plsQueryParameters.zipcode || providerSearchForm.providerZipCode.$invalid">
                                         <option value="">-- Please Select --</option>
                                         <option value="DC">DISTRICT OF COLUMBIA</option>
                                         <option value="MD">MARYLAND</option>
                                         <option value="VA">VIRGINIA</option>
                                     </select>
                                 </div>
-                                <div class="form-group">
-                                    <label class="control-label">City</label>
+                                <div class="form-group" ng-if="plsQueryParameters.usstate">
+                                    <label class="control-label">City (Required)</label>
                                     <Input class="form-control m-b" type="text" placeholder="Enter City"
                                            name="providerCity"
                                            ng-model="plsQueryParameters.city"
-                                           ng-disabled="!plsQueryParameters.usstate"/>
+                                           ng-disabled="!plsQueryParameters.usstate"
+                                           ng-minlength="formMinlength" ng-maxlength="formMaxlength"/>
+
+                                    <div ng-messages="providerSearchForm.providerCity.$error"
+                                         class="text-alert" role="alert">
+                                        <div ng-message="minlength">Minimum 2 characters</div>
+                                        <div ng-message="maxlength">Maximum 10 characters</div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-sm-1 m-b">
@@ -50,9 +57,17 @@
                                 <div class="row">
                                     <div class="col-sm-5 form-group">
                                         <label class="control-label">Zip Code</label>
-                                        <Input class="form-control m-b" type="text" placeholder="Enter Zip Code"
+                                        <Input class="form-control m-b" type="text" name="providerZipCode"
+                                               placeholder="Enter Zip Code"
                                                ng-model="plsQueryParameters.zipcode"
-                                               ng-disabled="plsQueryParameters.usstate"/>
+                                               ng-disabled="plsQueryParameters.usstate"
+                                               ng-minlength="5" ng-maxlength="5"/>
+
+                                        <div ng-messages="providerSearchForm.providerZipCode.$error"
+                                             class="text-alert" role="alert">
+                                            <div ng-message="minlength">Exactly 5 digits</div>
+                                            <div ng-message="maxlength">Exactly 5 digits</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -69,36 +84,59 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-5">
-                                <h3 class="m-t-none m-b">Enter Provider Name and Other Critieria</h3>
+                                <h3 class="m-t-none m-b">Enter Provider Name and Other Criteria</h3>
 
                                 <div class="form-group">
                                     <label class="control-label">Provider Last Name</label>
-                                    <Input class="form-control m-b" type="text" placeholder="Last Name"
+                                    <Input class="form-control m-b" type="text" name="providerLastName"
+                                           placeholder="Last Name"
                                            ng-model="plsQueryParameters.lastname"
-                                           ng-disabled="plsQueryParameters.facilityname"/>
+                                           ng-disabled="plsQueryParameters.facilityname || providerSearchForm.providerFacilityName.$invalid"
+                                           ng-minlength="formMinlength" ng-maxlength="formMaxlength"/>
+
+                                    <div ng-messages="providerSearchForm.providerLastName.$error"
+                                         class="text-alert" role="alert">
+                                        <div ng-message="minlength">Minimum 2 characters</div>
+                                        <div ng-message="maxlength">Maximum 10 characters</div>
+                                    </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" ng-if="plsQueryParameters.lastname">
                                     <label class="control-label">First Name (Optional)</label>
-                                    <Input class="form-control m-b" type="text" placeholder="First Name"
+                                    <Input class="form-control m-b" type="text" name="providerFirstName"
+                                           placeholder="First Name"
                                            ng-model="plsQueryParameters.firstname"
-                                           ng-disabled="!plsQueryParameters.lastname"/>
+                                           ng-disabled="!plsQueryParameters.lastname"
+                                           ng-minlength="formMinlength" ng-maxlength="formMaxlength"/>
+
+                                    <div ng-messages="providerSearchForm.providerFirstName.$error"
+                                         class="text-alert" role="alert">
+                                        <div ng-message="minlength">Minimum 2 characters</div>
+                                        <div ng-message="maxlength">Maximum 10 characters</div>
+                                    </div>
                                 </div>
                                 <div class="row">
-                                    <div class="form-group col-md-6">
-                                        <label for="gender" class="control-label">Gender</label>
-                                        <select id="gender" class="form-control m-b"
-                                                ng-model="plsQueryParameters.gender">
-                                            <option>Please Select</option>
+                                    <div class="form-group col-md-6" ng-if="plsQueryParameters.lastname">
+                                        <label for="gender" class="control-label">Gender (Optional)</label>
+                                        <select id="gender" class="form-control m-b" name="providerGender"
+                                                ng-model="plsQueryParameters.gender"
+                                                ng-disabled="!plsQueryParameters.lastname">
+                                            <option value="">Please Select</option>
                                             <option value="M">Male</option>
                                             <option value="F">Female</option>
-                                            <option>Rather not say</option>
                                         </select>
                                     </div>
 
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-6" ng-if="plsQueryParameters.lastname">
                                         <label class="control-label">Telephone (Optional)</label>
                                         <Input class="form-control m-b" type="tel" placeholder="Telephone"
-                                               ng-model="plsQueryParameters.phone"/>
+                                               name="providerPhone" ng-model="plsQueryParameters.phone"
+                                               ng-pattern="/\d{3}-\d{3}-\d{4}/"
+                                               data-mask="999-999-9999"/>
+
+                                        <div ng-messages="providerSearchForm.providerPhone.$error"
+                                             class="text-alert" role="alert">
+                                            <div ng-message="pattern">Phone pattern must be 123-456-7890</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -112,21 +150,40 @@
                                 <div class="form-group">
                                     <label class="control-label">Facility Name</label>
                                     <Input class="form-control m-b" type="text" placeholder="Facility Name"
-                                           ng-model="plsQueryParameters.facilityname" ng-minlength="2"
-                                           name="providerFacility" ng-disabled="plsQueryParameters.lastname"/>
-                                    <!--<div ng-messages="providerSearchForm.providerFacility.$error" style="color:maroon" role="alert">
-                                        <div ng-message="minlength">Your field is too short</div>
-                                    </div>-->
+                                           ng-model="plsQueryParameters.facilityname" ng-minlength="formMinlength"
+                                           ng-maxlength="formMaxlength"
+                                           name="providerFacilityName"
+                                           ng-disabled="plsQueryParameters.lastname || providerSearchForm.providerLastName.$invalid"/>
+
+                                    <div ng-messages="providerSearchForm.providerFacilityName.$error"
+                                         class="text-alert" role="alert">
+                                        <div ng-message="minlength">Minimum 2 characters</div>
+                                        <div ng-message="maxlength">Maximum 10 characters</div>
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-if="plsQueryParameters.facilityname">
+                                    <label class="control-label">Telephone (Optional)</label>
+                                    <Input class="form-control m-b" type="tel" placeholder="Telephone"
+                                           name="providerPhoneForFacility" ng-model="plsQueryParameters.phone"
+                                           ng-pattern="/\d{3}-\d{3}-\d{4}/"
+                                           data-mask="999-999-9999"/>
+
+                                    <div ng-messages="providerSearchForm.providerPhoneForFacility.$error"
+                                         class="text-alert" role="alert">
+                                        <div ng-message="pattern">Phone pattern must be 123-456-7890</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
                         <div class="row">
                             <div class="col-sm-12">
-                                <button class="btn btn-sm m-r" type="reset">Clear All</button>
+                                <button class="btn btn-sm m-r" type="reset" ng-click="reset(providerSearchForm)">Clear
+                                    All
+                                </button>
                                 <button class="btn btn-sm btn-primary dark-green" type="button"
                                         ng-click="lookupProvider(0)"
-                                        ng-disabled="!((plsQueryParameters.usstate || plsQueryParameters.zipcode) && (plsQueryParameters.lastname || plsQueryParameters.facilityname))">
+                                        ng-disabled="providerSearchForm.$invalid || !(((plsQueryParameters.usstate && plsQueryParameters.city)|| plsQueryParameters.zipcode) && (plsQueryParameters.lastname || plsQueryParameters.facilityname))">
                                     <strong>Search</strong>
                                 </button>
                             </div>
