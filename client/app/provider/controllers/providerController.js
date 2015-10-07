@@ -5,7 +5,7 @@
 'use strict';
 
 
-angular.module("app.providerModule", [ 'app.providerService', 'app.providerDirectives'])
+angular.module("app.providerModule", [ 'app.providerService', 'app.providerDirectives',  'ngMessages'])
 
     .config(['$stateProvider', function ($stateProvider) {
         $stateProvider
@@ -45,8 +45,7 @@ angular.module("app.providerModule", [ 'app.providerService', 'app.providerDirec
             .state('provider.lookup', {
                 url: '/lookup',
                 data: { pageTitle: 'Provider lookup' },
-                templateUrl: 'app/provider/tmpl/provider-lookup.tpl.html',
-                controller: 'ProviderLookupController'
+                templateUrl: 'app/provider/tmpl/provider-lookup.tpl.html'
             }) ;
     }
     ])
@@ -90,9 +89,4 @@ angular.module("app.providerModule", [ 'app.providerService', 'app.providerDirec
             });
         };
     }])
-
-    .controller('ProviderLookupController', ['$scope',
-        function ($scope) {
-
-        }])
 ;
