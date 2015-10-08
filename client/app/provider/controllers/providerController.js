@@ -55,7 +55,36 @@ angular.module("app.providerModule", [ 'app.providerService', 'app.providerDirec
         $scope.providers = providers;
 
         /**
-         *  Opens the confirm delete modal
+         * The controller for the delete provider modal.
+         *
+         * @param $scope - The modal scope
+         * @param $modalInstance - modal instance
+         * @param provider - The passed provider instance to be deleted
+         *
+         * @constructor
+         */
+        function DeleteProviderModalController ($scope, $modalInstance, provider) {
+            $scope.npi = provider.npi;
+            $scope.provider = provider;
+            $scope.ok = function () {
+                ProviderService.deleteProvider($scope.npi,
+                    function(data){
+
+                    },
+                    function(data){
+
+                    }
+                );
+                $modalInstance.close();
+            };
+
+            $scope.cancel = function () {
+                $modalInstance.dismiss('cancel');
+            };
+        }
+
+        /**
+         * Opens the confirm delete modal
          *
          * @param size - The size of the modal
          */
@@ -68,25 +97,7 @@ angular.module("app.providerModule", [ 'app.providerService', 'app.providerDirec
                         return provider;
                     }
                 },
-                controller: ['$scope','$modalInstance', 'provider', function ($scope, $modalInstance, provider) {
-                    $scope.npi = provider.npi;
-                    $scope.provider = provider;
-                    $scope.ok = function () {
-                        ProviderService.deleteProvider($scope.npi,
-                            function(data){
-
-                            },
-                            function(data){
-
-                            }
-                        );
-                        $modalInstance.close();
-                    };
-
-                    $scope.cancel = function () {
-                        $modalInstance.dismiss('cancel');
-                    };
-                }]
+                controller: DeleteProviderModalController
             });
         };
     }])
