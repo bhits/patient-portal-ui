@@ -64,14 +64,15 @@ angular.module("app.providerModule", [ 'app.providerService', 'app.providerDirec
                 templateUrl: 'app/provider/tmpl/provider-delete-modal.tpl.html',
                 size: size,
                 resolve: {
-                    npi: function () {
+                    provider: function () {
                         return provider;
                     }
                 },
-                controller: ['$scope','$modalInstance', 'npi', function ($scope, $modalInstance, provider) {
+                controller: ['$scope','$modalInstance', 'provider', function ($scope, $modalInstance, provider) {
+                    $scope.npi = provider.npi;
                     $scope.provider = provider;
                     $scope.ok = function () {
-                        ProviderService.deleteProvider($scope.provider.npi,
+                        ProviderService.deleteProvider($scope.npi,
                             function(data){
 
                             },
