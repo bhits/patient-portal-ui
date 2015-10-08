@@ -5,7 +5,7 @@
 'use strict';
 
 
-angular.module("app.providerModule", [ 'app.providerService', 'app.providerDirectives',  'ngMessages'])
+angular.module("app.providerModule", [ 'app.providerService', 'app.providerDirectives', 'ngMessages', 'app.notificationModule'])
 
     .config(['$stateProvider', function ($stateProvider) {
         $stateProvider
@@ -50,9 +50,10 @@ angular.module("app.providerModule", [ 'app.providerService', 'app.providerDirec
     }
     ])
 
-    .controller('ProviderListController', ['$scope','providers','$modal','ProviderService', function ($scope, providers, $modal, ProviderService) {
+    .controller('ProviderListController', ['$scope','providers','$modal','ProviderService','notificationService', function ($scope, providers, $modal, ProviderService, notificationService) {
         // The list of providers from the backend service
-        $scope.providers = providers;
+        //$scope.providers = providers;
+        $scope.providers = [];
 
         /**
          * The controller for the delete provider modal.
@@ -63,16 +64,19 @@ angular.module("app.providerModule", [ 'app.providerService', 'app.providerDirec
          *
          * @constructor
          */
-        function DeleteProviderModalController ($scope, $modalInstance, provider) {
+        function DeleteProviderModalController ($scope, $modalInstance, provider, notificationService) {
             $scope.npi = provider.npi;
             $scope.provider = provider;
+
             $scope.ok = function () {
+                notificationService.success('Success in deleting provider');
                 ProviderService.deleteProvider($scope.npi,
                     function(data){
+                        notificationService.success('Success in deleting provider');
 
                     },
                     function(data){
-
+                        notificationService.error('Error in deleting provider');
                     }
                 );
                 $modalInstance.close();
