@@ -46,6 +46,9 @@
                                         <div ng-message="minlength">Minimum 2 characters</div>
                                         <div ng-message="maxlength">Maximum 10 characters</div>
                                     </div>
+                                    <div class="info-blue italic m-b">
+                                        Please clear "Enter Zip Code" information to add "Enter State and City" information.
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-sm-1 m-b">
@@ -68,6 +71,9 @@
                                             <div ng-message="minlength">Exactly 5 digits</div>
                                             <div ng-message="maxlength">Exactly 5 digits</div>
                                         </div>
+                                    </div>
+                                    <div class="col-sm-12 info-blue italic m-b m-t-n">
+                                        Please clear "Enter State and City" information to add "Enter Zip Code" information.
                                     </div>
                                 </div>
                             </div>
@@ -139,6 +145,9 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="info-blue italic m-b">
+                                    Please clear "Facility Name" information to add "Enter Provider Name and Other Criteria" information.
+                                </div>
                             </div>
                             <div class="col-sm-1 m-b">
                                 <p>OR</p>
@@ -160,6 +169,9 @@
                                         <div ng-message="minlength">Minimum 2 characters</div>
                                         <div ng-message="maxlength">Maximum 10 characters</div>
                                     </div>
+                                    <div class="info-blue italic m-b">
+                                        Please clear "Enter Provider Name and Other Criteria" information to add "Facility Name" information.
+                                    </div>
                                 </div>
                                 <div class="form-group" ng-if="plsQueryParameters.facilityname">
                                     <label class="control-label">Telephone (Optional)</label>
@@ -177,15 +189,22 @@
                         </div>
                         <div class="hr-line-dashed"></div>
                         <div class="row">
-                            <div class="col-sm-12">
-                                <button class="btn btn-sm m-r" type="reset" ng-click="reset(providerSearchForm)">Clear
+                            <div class="col-xs-6 col-sm-2">
+                                <button class="btn btn-block btn-sm m-r" type="reset" ng-click="reset(providerSearchForm)">Clear
                                     All
                                 </button>
-                                <button class="btn btn-sm btn-primary dark-green" type="button"
+                            </div>
+                            <div class="col-xs-6 col-sm-2">
+                                <button class="btn btn-block btn-sm btn-primary dark-green" type="button"
                                         ng-click="lookupProvider(0)"
                                         ng-disabled="providerSearchForm.$invalid || !(((plsQueryParameters.usstate && plsQueryParameters.city)|| plsQueryParameters.zipcode) && (plsQueryParameters.lastname || plsQueryParameters.facilityname))">
                                     <strong>Search</strong>
                                 </button>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="info-blue italic m-b">
+                                    Please complete ALL required fields to activate Search.
+                                </div>
                             </div>
                         </div>
                     </form>
