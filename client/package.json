@@ -30,7 +30,7 @@
         "karma-jasmine": "0.1.x",
         "requirejs": "2.1.x",
         "karma-requirejs": "0.2.x",
-        "karma-phantomjs-launcher": "0.1.x",
+        "karma-phantomjs-launcher": "0.2.x",
         "karma": "0.10.x",
         "karma-ie-launcher": "0.1.x",
         "karma-junit-reporter": "0.2.x",

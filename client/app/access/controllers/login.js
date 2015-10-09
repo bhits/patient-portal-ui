@@ -17,7 +17,6 @@
     /**
      * The Login Controller.
      *
-     * @param {Object} $scope - The Angularjs scope
      * @param {Object} $state - The ui-router state service
      * @param {Object} AuthenticationService - The authentication service
      * @param {Object} Idle - The ngIdle service
@@ -25,7 +24,7 @@
      */
 
 
-    function LoginController($scope, $state, AuthenticationService, Idle, ENVService, utilityService) {
+    function LoginController($state, AuthenticationService, Idle, ENVService, utilityService) {
         var loginVm = this;
 
         // The login object

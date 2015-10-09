@@ -52,8 +52,7 @@ angular.module("app.providerModule", [ 'app.providerService', 'app.providerDirec
 
     .controller('ProviderListController', ['$scope','providers','$modal','ProviderService','notificationService', function ($scope, providers, $modal, ProviderService, notificationService) {
         // The list of providers from the backend service
-        //$scope.providers = providers;
-        $scope.providers = [];
+        $scope.providers = providers;
 
         /**
          * The controller for the delete provider modal.
