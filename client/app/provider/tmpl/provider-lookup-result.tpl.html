@@ -1,16 +1,31 @@
-<div class="row" id="provider_lookup_result">
-    <div ng-if="isEmptyResult()" class="col-md-6 col-md-offset-3">
-        <div class="alert alert-danger">Sorry, no results found.</div>
+<div id="provider_lookup_result">
+    <div class="row">
+        <div class="col-md-6" ng-if="isEmptyResult()">
+            <div class="alert alert-danger">Sorry, no results found.</div>
+        </div>
     </div>
-    <div ng-if="!isEmptyResult()">
-        <div class="col-md-6 col-md-offset-3">
+    <div class="row">
+        <div class="col-md-6" ng-if="!isEmptyResult()">
             <div class="panel panel-darkblue">
                 <div class="ibox-title modified panel-heading">
                     <h2>Search Results</h2>
                 </div>
             </div>
         </div>
-        <div class="col-md-6 col-md-offset-3">
+    </div>
+    <div class="row">
+        <div class="col-md-6" ng-if="!isEmptyResult()">
+            <div class="text-center">
+                <pagination total-items="pagination.totalItems"
+                            ng-model="pagination.currentPage"
+                            ng-change="loadPage()" max-size="pagination.maxSize"
+                            class="pagination-sm"
+                            boundary-links="true"></pagination>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6" ng-if="!isEmptyResult()">
             <div class="panel panel-default" ng-repeat="provider in providerLookupResult.providers">
                 <div class="panel-heading">
                     <h4>{{getProviderName(provider)}}&nbsp;<span>[NPI: {{provider.npi}}]</span></h4>
@@ -26,15 +41,16 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6 col-md-offset-3">
+    </div>
+    <div class="row">
+        <div class="col-md-6" ng-if="!isEmptyResult()">
             <div class="text-center">
-                <pagination total-items="providerLookupResult.totalNumberOfProviders"
-                            ng-model="currentPage"
-                            ng-change="loadPage(currentPage)" max-size="providerLookupResult.itemsPerPage"
+                <pagination total-items="pagination.totalItems"
+                            ng-model="pagination.currentPage"
+                            ng-change="loadPage()" max-size="pagination.maxSize"
                             class="pagination-sm"
                             boundary-links="true"></pagination>
             </div>
         </div>
     </div>
-
 </div>
