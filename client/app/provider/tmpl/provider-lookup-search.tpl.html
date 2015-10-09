@@ -19,7 +19,8 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-5">
+                            <div class="col-sm-5"
+                                 ng-class="{'light-grey': providerSearchForm.providerZipCode.$viewValue}">
                                 <h3 class="m-t-none m-b">Enter State and City.</h3>
 
                                 <div class="form-group">
@@ -38,6 +39,11 @@
                                          class="text-alert" role="alert">
                                         <div ng-message="required">Required</div>
                                     </div>-->
+                                    <div class="info-blue italic m-b"
+                                         ng-if="providerSearchForm.providerZipCode.$viewValue">
+                                        Please clear "Enter Zip Code" information to add "Enter State and City"
+                                        information.
+                                    </div>
                                 </div>
                                 <div class="form-group" ng-if="plsQueryParameters.usstate">
                                     <label class="control-label">City (Required)</label>
@@ -53,15 +59,13 @@
                                         <div ng-message="maxlength">Maximum 10 characters</div>
                                         <div ng-message="required">Required</div>
                                     </div>
-                                    <div class="info-blue italic m-b">
-                                        Please clear "Enter Zip Code" information to add "Enter State and City" information.
-                                    </div>
                                 </div>
                             </div>
                             <div class="col-sm-1 m-b">
                                 <p>OR</p>
                             </div>
-                            <div class="col-sm-5">
+                            <div class="col-sm-5"
+                                 ng-class="{'light-grey': providerSearchForm.providerState.$viewValue}">
                                 <h3 class="m-t-none m-b">Enter Zip Code</h3>
 
                                 <div class="row">
@@ -82,8 +86,10 @@
                                             <!--<div ng-message="required">Required</div>-->
                                         </div>
                                     </div>
-                                    <div class="col-sm-12 info-blue italic m-b m-t-n">
-                                        Please clear "Enter State and City" information to add "Enter Zip Code" information.
+                                    <div class="col-sm-12 info-blue italic m-b m-t-n"
+                                         ng-if="providerSearchForm.providerState.$viewValue">
+                                        Please clear "Enter State and City" information to add "Enter Zip Code"
+                                        information.
                                     </div>
                                 </div>
                             </div>
@@ -99,7 +105,8 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-5">
+                            <div class="col-sm-5"
+                                 ng-class="{'light-grey': providerSearchForm.providerFacilityName.$viewValue}">
                                 <h3 class="m-t-none m-b">Enter Provider Name and Other Criteria</h3>
 
                                 <div class="form-group">
@@ -155,14 +162,17 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="info-blue italic m-b">
-                                    Please clear "Facility Name" information to add "Enter Provider Name and Other Criteria" information.
+                                <div class="info-blue italic m-b"
+                                     ng-if="providerSearchForm.providerFacilityName.$viewValue">
+                                    Please clear "Facility Name" information to add "Enter Provider Name and Other
+                                    Criteria" information.
                                 </div>
                             </div>
                             <div class="col-sm-1 m-b">
                                 <p>OR</p>
                             </div>
-                            <div class="col-sm-5">
+                            <div class="col-sm-5"
+                                 ng-class="{'light-grey': providerSearchForm.providerLastName.$viewValue}">
 
                                 <h3 class="m-t-none m-b">Facility Name</h3>
 
@@ -180,8 +190,10 @@
                                         <div ng-message="maxlength">Maximum 10 characters</div>
                                         <!--<div ng-message="required">Required</div>-->
                                     </div>
-                                    <div class="info-blue italic m-b">
-                                        Please clear "Enter Provider Name and Other Criteria" information to add "Facility Name" information.
+                                    <div class="info-blue italic m-b"
+                                         ng-if="providerSearchForm.providerLastName.$viewValue">
+                                        Please clear "Enter Provider Name and Other Criteria" information to add
+                                        "Facility Name" information.
                                     </div>
                                 </div>
                                 <div class="form-group" ng-if="plsQueryParameters.facilityname">
