@@ -29,6 +29,10 @@ describe('app.homeModule ', function(){
         it("should have app.servicesModule as a dependency", function() {
             expect(hasModule('app.servicesModule')).toEqual(true);
         });
+
+        it("should have ui.routere as a dependency", function() {
+            expect(hasModule('ui.router')).toEqual(true);
+        });
     });
 });
 
