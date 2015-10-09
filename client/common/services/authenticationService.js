@@ -44,13 +44,12 @@
 
         // The success callback
         var successCb = function(data){
-            console.log("AuthenticationService: Success in processing request");
-
+            //console.log("AuthenticationService: Success in processing request");
         };
 
         // The error callback.
         var errorCb = function(data){
-            console.log("AuthenticationService: Error in processing request");
+            //console.log("AuthenticationService: Error in processing request");
         };
 
         /*
