@@ -29,13 +29,14 @@
             <div class="panel panel-default" ng-repeat="provider in providerLookupResult.providers">
                 <div class="panel-heading">
                     <h4>{{getProviderName(provider)}}&nbsp;<span>[NPI: {{provider.npi}}]</span></h4>
-                    <button type="button" class="btn btn-xs btn-primary dark-green"><i class="fa fa-plus"></i></button>
+                    <button type="button" class="btn btn-xs btn-primary dark-green"
+                            ng-click="addProvider(provider.npi)"><i class="fa fa-plus"></i></button>
                     &nbsp;Add this Provider.
                 </div>
                 <div class="panel-body">
                     <p>{{provider.healthcareProviderTaxonomy_1}}</p>
 
-                    <p>{{getProviderAddressAsArray(provider)}}</p>
+                    <p>{{getProviderAddress(provider)}}</p>
 
                     <p>{{formatPhoneNumber(provider.providerBusinessPracticeLocationAddressTelephoneNumber)}}</p>
                 </div>

@@ -6,7 +6,7 @@
 
 angular.module("app.providerDirectives", [])
 
-    .directive('providerLookupResult', ['$timeout', 'utilityService', 'ProviderService', function ($timeout, utilityService, ProviderService) {
+    .directive('providerLookupResult', ['$timeout', '$state', 'utilityService', 'ProviderService', function ($timeout, $state, utilityService, ProviderService) {
         return {
             restrict: 'E',
             scope: {
@@ -57,7 +57,7 @@ angular.module("app.providerDirectives", [])
                     return phoneNumber.slice(0, 3) + "-" + phoneNumber.slice(3, 6) + "-" + phoneNumber.slice(6, 10) + (phoneNumber.length > 10 ? '-' + phoneNumber.slice(10) : '');
                 };
 
-                $scope.getProviderAddressAsArray = function (provider) {
+                $scope.getProviderAddress = function (provider) {
                     function formatZipCode(zipCode) {
                         var formattedZipCode = zipCode;
                         if (typeof zipCode === 'string' && zipCode.length > 5) {
@@ -74,6 +74,17 @@ angular.module("app.providerDirectives", [])
                             return typeof element === 'string' && element.length > 0;
                         });
                     return providerAddressArray.join(", ");
+                };
+
+                $scope.addProvider = function (npi) {
+                    function onSuccess() {
+                        $state.go('provider.list');
+                    }
+
+                    function onError(err) {
+                    }
+
+                    ProviderService.addProvider(npi, onSuccess, onError);
                 };
 
             }]

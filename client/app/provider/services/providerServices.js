@@ -2,10 +2,10 @@
  * Created by tomson.ngassa on 9/30/2015.
  */
 
-(function(){
+(function () {
     'use strict';
 
-    function ProviderService($resource, ENVService, $log){
+    function ProviderService($resource, ENVService, $log) {
         return {
 
             getProviders: function () {
@@ -18,17 +18,17 @@
             deleteProvider: function (npi, success, error) {
                 $log.info("Deleting provider with npi: " + npi);
             },
+
             /**
-             * Adds provider
-             *
+             * Adds a single provider to a patient's provider list
+             * @param npi npi of the provider to be added
+             * @param success success callback
+             * @param error error callback
              */
-            /**
-             *  Adds provider
-             * @param provider - the provider to be added
-             */
-            addProviders: function (provider) {
-                $log.info("Adding provider");
+            addProvider: function (npi, success, error) {
+                $log.info("Adding provider NPI: " + npi);
             },
+
             /**
              * Gets the Provider Lookup Service resource object
              * @returns {Object} providerResource - The provider resource object
@@ -65,6 +65,7 @@
             },
         };
     }
+
     /**
      * The provider service
      *
