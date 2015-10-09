@@ -590,7 +590,8 @@ module.exports = function (grunt) {
                         version:'<%= pkg.version %>',
                         stsBaseUri: 'https://sts-dev.feisystems.com/identity/tokens',
                         apiBaseUrl: 'https://testbed-api-dev.feisystems.com',
-                        plsApiBaseUrl: 'http://localhost:8080/pls/providers'
+                        plsApiBaseUrl: 'http://localhost:8080/pls/providers',
+                        pcmApiBaseUrl: 'https://localhost:8443/pcm/patients'
                     }
                 }
             },

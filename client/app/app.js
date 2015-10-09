@@ -237,7 +237,8 @@
           'app.directivesModule',    // Common modules start here
           'app.servicesModule',
           'app.authInterceptorModule',
-          'app.authenticationModule'
+          'app.authenticationModule',
+          'app.filtersModule'
         ])
         .constant("idleConfigParams", ngIdleParams)
         .config(appConfig)
