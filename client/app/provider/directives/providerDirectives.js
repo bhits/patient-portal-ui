@@ -6,7 +6,7 @@
 
 angular.module("app.providerDirectives", [])
 
-    .directive('providerLookupResult', ['$location', '$anchorScroll', '$timeout', 'ProviderService', function ($location, $anchorScroll, $timeout, ProviderService) {
+    .directive('providerLookupResult', ['$timeout', 'utilityService', 'ProviderService', function ($timeout, utilityService, ProviderService) {
         return {
             restrict: 'E',
             scope: {
@@ -15,19 +15,23 @@ angular.module("app.providerDirectives", [])
             },
             templateUrl: 'app/provider/tmpl/provider-lookup-result.tpl.html',
             controller: ['$scope', function ($scope) {
-                $scope.totalItems = $scope.providerLookupResult.totalNumberOfProviders;
-                $scope.currentPage = $scope.providerLookupResult.currentPage + 1;
+                $scope.pagination = {};
+                $scope.pagination.totalItems = $scope.providerLookupResult.totalNumberOfProviders;
+                $scope.pagination.currentPage = $scope.providerLookupResult.currentPage + 1;
+                $scope.pagination.maxSize = 10;
 
-                $timeout(function () {
-                    $location.hash('provider_lookup_result');
-                    $anchorScroll();
-                }, 200);
+                function scrollToSearchResults() {
+                    utilityService.scrollTo('provider_lookup_result');
+                }
 
-                $scope.loadPage = function (page) {
-                    $scope.currentPage = page;
-                    ProviderService.lookupProviders($scope.queryParameters, $scope.currentPage - 1,
+                $timeout(scrollToSearchResults, 200);
+
+                $scope.loadPage = function () {
+                    ProviderService.lookupProviders($scope.queryParameters, $scope.pagination.currentPage - 1,
                         function (response) {
                             $scope.providerLookupResult = response;
+                            $scope.pagination.totalItems = $scope.providerLookupResult.totalNumberOfProviders;
+                            scrollToSearchResults();
                         },
                         function (response) {
                             delete $scope.providerLookupResult;
@@ -81,18 +85,31 @@ angular.module("app.providerDirectives", [])
             restrict: 'E',
             scope: {},
             templateUrl: 'app/provider/tmpl/provider-lookup-search.tpl.html',
-            controller: ['$scope', '$location', '$element', '$timeout', 'ProviderService',
+            controller: ['$scope', '$location', '$element', '$timeout', '$state', 'ProviderService',
 
-                function ($scope, $location, $element, $timeout, ProviderService) {
+                function ($scope, $location, $element, $timeout, $state, ProviderService) {
 
-                    $scope.showSearch = true;
                     $scope.formMinlength = 2;
                     $scope.formMaxlength = 10;
+                    $scope.firstPage = 0;
+
+                    var plsQueryParametersMaster = {
+                        usstate: "",
+                        city: "",
+                        zipcode: "",
+                        lastname: "",
+                        firstname: "",
+                        gender: "",
+                        phone: "",
+                        facilityname: ""
+                    };
+
+                    $scope.plsQueryParameters = angular.copy(plsQueryParametersMaster);
 
                     $scope.$watch('plsQueryParameters.usstate', function (newValue) {
                         if (!newValue) {
                             if ($scope.plsQueryParameters && $scope.plsQueryParameters.city) {
-                                delete $scope.plsQueryParameters.city;
+                                $scope.plsQueryParameters.city = "";
                             }
                         }
                     });
@@ -136,7 +153,6 @@ angular.module("app.providerDirectives", [])
                     $scope.lookupProvider = function (pageNumber) {
                         $location.hash('');
                         delete $scope.providerLookupResult;
-                        $scope.showSearch = false;
                         var queryParameters = $scope.plsQueryParameters;
                         ProviderService.lookupProviders(queryParameters, pageNumber,
                             function (response) {
@@ -151,10 +167,6 @@ angular.module("app.providerDirectives", [])
                         );
                     };
 
-                    $scope.getTotalPageNumber = function (totalPages) {
-                        return new Array(totalPages);
-                    };
-
                     $scope.paginationSummary = function () {
                         var rangeStart = ($scope.providerLookupResult.currentPage * $scope.providerLookupResult.itemsPerPage + 1);
                         var rangeEnd = (Math.min(($scope.providerLookupResult.totalNumberOfProviders), ($scope.providerLookupResult.currentPage * $scope.providerLookupResult.itemsPerPage + $scope.providerLookupResult.itemsPerPage)));
@@ -163,11 +175,11 @@ angular.module("app.providerDirectives", [])
                         return summary;
                     };
 
-                    $scope.reset = function (form) {
-                        if (form) {
-                            form.$setPristine();
-                            form.$setUntouched();
-                            $scope.plsQueryParameters = {};
+                    $scope.reset = function () {
+                        if ($scope.providerSearchForm) {
+                            $scope.providerSearchForm.$setPristine();
+                            $scope.providerSearchForm.$setUntouched();
+                            $scope.plsQueryParameters = angular.copy(plsQueryParametersMaster);
                         }
                     };
                 }]
