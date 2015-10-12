@@ -4,7 +4,7 @@
 
 'use strict';
 
-angular.module("app.providerDirectives", [])
+angular.module("app.providerDirectives", ['app.providerFiltersModule'])
 
     .directive('providerLookupResult', ['$timeout', '$state', 'utilityService', 'ProviderService', function ($timeout, $state, utilityService, ProviderService) {
         return {
@@ -43,48 +43,23 @@ angular.module("app.providerDirectives", [])
                     return ProviderService.isEmptyLookupResult($scope.providerLookupResult);
                 };
 
-                $scope.getProviderName = function (provider) {
-                    var providerName = '';
-                    if (provider && provider.entityType === 'Organization') {
-                        providerName = provider.providerOrganizationName;
-                    } else if (provider && provider.entityType === 'Individual') {
-                        providerName = provider.providerLastName + ', ' + provider.providerFirstName + (provider.providerMiddleName ? ' ' + provider.providerMiddleName : '');
-                    }
-                    return providerName;
-                };
-
-                $scope.formatPhoneNumber = function (phoneNumber) {
-                    return phoneNumber.slice(0, 3) + "-" + phoneNumber.slice(3, 6) + "-" + phoneNumber.slice(6, 10) + (phoneNumber.length > 10 ? '-' + phoneNumber.slice(10) : '');
-                };
-
-                $scope.getProviderAddress = function (provider) {
-                    function formatZipCode(zipCode) {
-                        var formattedZipCode = zipCode;
-                        if (typeof zipCode === 'string' && zipCode.length > 5) {
-                            formattedZipCode = zipCode.slice(0, 5) + "-" + zipCode.slice(5);
-                        }
-                        return formattedZipCode;
-                    }
-
-                    var providerAddressArray = [provider.providerFirstLineBusinessPracticeLocationAddress,
-                        provider.providerSecondLineBusinessPracticeLocationAddress,
-                        provider.providerBusinessPracticeLocationAddressCityName,
-                        provider.providerBusinessPracticeLocationAddressStateName,
-                        formatZipCode(provider.providerBusinessPracticeLocationAddressPostalCode)].filter(function (element) {
-                            return typeof element === 'string' && element.length > 0;
-                        });
-                    return providerAddressArray.join(", ");
-                };
-
                 $scope.addProvider = function (npi) {
-                    function onSuccess() {
+                    function success() {
                         $state.go('provider.list');
                     }
 
-                    function onError(err) {
+                    function error(err) {
                     }
 
-                    ProviderService.addProvider(npi, onSuccess, onError);
+                    ProviderService.addProvider(npi, success, error);
+                };
+
+                $scope.paginationSummary = function () {
+                    var rangeStart = ($scope.providerLookupResult.currentPage * $scope.providerLookupResult.itemsPerPage + 1);
+                    var rangeEnd = (Math.min(($scope.providerLookupResult.totalNumberOfProviders), ($scope.providerLookupResult.currentPage * $scope.providerLookupResult.itemsPerPage + $scope.providerLookupResult.itemsPerPage)));
+                    var total = ($scope.providerLookupResult.totalNumberOfProviders);
+                    var summary = 'Showing '.concat(rangeStart, ' to ', rangeEnd, ' of ', total, ' entries');
+                    return summary;
                 };
 
             }]
@@ -176,14 +151,6 @@ angular.module("app.providerDirectives", [])
                                 delete $scope.providerLookupResult;
                             }
                         );
-                    };
-
-                    $scope.paginationSummary = function () {
-                        var rangeStart = ($scope.providerLookupResult.currentPage * $scope.providerLookupResult.itemsPerPage + 1);
-                        var rangeEnd = (Math.min(($scope.providerLookupResult.totalNumberOfProviders), ($scope.providerLookupResult.currentPage * $scope.providerLookupResult.itemsPerPage + $scope.providerLookupResult.itemsPerPage)));
-                        var total = ($scope.providerLookupResult.totalNumberOfProviders);
-                        var summary = 'Showing '.concat(rangeStart, ' to ', rangeEnd, ' of ', total, ' entries');
-                        return summary;
                     };
 
                     $scope.reset = function () {
