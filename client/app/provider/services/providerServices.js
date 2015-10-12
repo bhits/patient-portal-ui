@@ -31,10 +31,12 @@
 
             /**
              * Gets the Provider Lookup Service resource object
-             * @returns {Object} providerResource - The provider resource object
+             * @param plsQueryParameters
+             * @param page
+             * @param success
+             * @param error
              */
-
-            lookupProviders: function (plsQueryParameters, page, onSuccess, onError) {
+            lookupProviders: function (plsQueryParameters, page, success, error) {
                 var queryParameters = "";
                 queryParameters = plsQueryParameters.usstate ? queryParameters + "/usstate/" + plsQueryParameters.usstate : queryParameters;
                 queryParameters = plsQueryParameters.city ? queryParameters + "/city/" + plsQueryParameters.city : queryParameters;
@@ -47,8 +49,7 @@
                 queryParameters = plsQueryParameters.facilityname ? queryParameters + "/facilityname/" + plsQueryParameters.facilityname : queryParameters;
 
                 var providerResource = $resource(ENVService.plsApiBaseUrl + "/pageNumber/:pageNumber" + queryParameters, {pageNumber: page});
-                var providerLookupResponse = providerResource.get({pageNumber: page}, onSuccess, onError);
-                return providerLookupResponse;
+                providerResource.get({pageNumber: page}, success, error);
             },
 
             /**
