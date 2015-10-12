@@ -50,7 +50,7 @@ angular.module("app.providerModule", [ 'app.providerService', 'app.providerDirec
     }
     ])
 
-    .controller('ProviderListController', ['$scope','providers','$modal','ProviderService','notificationService', function ($scope, providers, $modal, ProviderService, notificationService) {
+    .controller('ProviderListController', ['$scope','providers','$modal','ProviderService','notificationService','$state', function ($scope, providers, $modal, ProviderService, notificationService, $state) {
         // The list of providers from the backend service
         $scope.providers = providers;
 
@@ -63,14 +63,14 @@ angular.module("app.providerModule", [ 'app.providerService', 'app.providerDirec
          *
          * @constructor
          */
-        function DeleteProviderModalController ($scope, $modalInstance, provider, notificationService) {
+        function DeleteProviderModalController ($scope, $modalInstance, provider, notificationService, $state) {
             $scope.npi = provider.npi;
             $scope.provider = provider;
 
             $scope.ok = function () {
-                notificationService.success('Success in deleting provider');
                 ProviderService.deleteProvider($scope.npi,
                     function(data){
+                        $state.go($state.current, {}, {reload: true});
                         notificationService.success('Success in deleting provider');
 
                     },
