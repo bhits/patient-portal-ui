@@ -164,6 +164,10 @@
                             ProviderLookupSearchVm.plsQueryParameters = angular.copy(plsQueryParametersMaster);
                         }
                     };
+
+                    ProviderLookupSearchVm.formViewValue = function (form, fieldName) {
+                        return form[fieldName].$viewValue;
+                    };
                 }]
         };
     }
