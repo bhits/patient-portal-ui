@@ -141,18 +141,20 @@
 
                     ProviderLookupSearchVm.lookupProvider = function (pageNumber) {
                         $location.hash('');
-                        delete ProviderLookupSearchVm.providerLookupResult;
+                        ProviderLookupSearchVm.providerLookupResult = null;
                         var queryParameters = ProviderLookupSearchVm.plsQueryParameters;
                         ProviderService.lookupProviders(queryParameters, pageNumber,
                             function (response) {
                                 if (!ProviderService.isEmptyLookupResult(response)) {
                                     collapseSearchAccordion();
+                                    ProviderLookupSearchVm.providerLookupResult = response;
+                                } else {
+                                    notificationService.error('Sorry, no results found.');
                                 }
-                                ProviderLookupSearchVm.providerLookupResult = response;
+
                             },
                             function (response) {
                                 notificationService.error('Failed to lookup providers, please try again later...');
-                                delete ProviderLookupSearchVm.providerLookupResult;
                             }
                         );
                     };
