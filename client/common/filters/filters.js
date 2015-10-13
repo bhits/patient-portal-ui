@@ -30,11 +30,22 @@
     }
 
     /**
+     * If the parameter is string and contains at least one character, returns the string.
+     * Otherwise, returns undefined.
+     */
+    function HasString() {
+        return function (str) {
+            return angular.isDefined(str) && angular.isString(str) && str.length > 0 ? str : undefined;
+        };
+    }
+
+    /**
      * The generalize filter for the application
      *
      */
     angular.module('app.filtersModule', [])
         .filter('phone', PhoneNumberFilter)
-        .filter('zip', ZipFilter);
+        .filter('zip', ZipFilter)
+        .filter('hasString', HasString);
 })();
 
