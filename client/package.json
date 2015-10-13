@@ -21,6 +21,9 @@
             "url": ""
         }
     ],
+    "dependencies": {
+        "bower": "~1.5.3"
+    },
     "devDependencies": {
         "karma-chrome-launcher": "0.1.x",
         "karma-script-launcher": "0.1.x",
@@ -30,7 +33,7 @@
         "karma-jasmine": "0.1.x",
         "requirejs": "2.1.x",
         "karma-requirejs": "0.2.x",
-        "karma-phantomjs-launcher": "0.2.x",
+        "karma-phantomjs-launcher": "0.1.x",
         "karma": "0.10.x",
         "karma-ie-launcher": "0.1.x",
         "karma-junit-reporter": "0.2.x",
@@ -58,7 +61,8 @@
         "time-grunt": "0.2.x",
         "grunt-bump": "0.0.x",
         "grunt-contrib-cssmin": "0.12.2",
-        "grunt-ng-constant": "1.1.0"
+        "grunt-ng-constant": "1.1.0",
+        "grunt-war": "0.4.x"
     },
     "engines": {
         "node": ">= 0.8.4"
