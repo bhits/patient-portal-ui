@@ -27,14 +27,14 @@
     /**
      * Filter to format provider address from PLS
      */
-    function PLSProviderAddressFilter(filter) {
+    function PLSProviderAddressFilter(utilityService) {
         return function (provider) {
             var providerAddressArray = [provider.providerFirstLineBusinessPracticeLocationAddress,
                 provider.providerSecondLineBusinessPracticeLocationAddress,
                 provider.providerBusinessPracticeLocationAddressCityName,
                 provider.providerBusinessPracticeLocationAddressStateName,
-                filter('zip')(provider.providerBusinessPracticeLocationAddressPostalCode)].filter(function (element) {
-                    return angular.isDefined(element) && angular.isString(element) && element.length > 0;
+                utilityService.formatZipCode(provider.providerBusinessPracticeLocationAddressPostalCode)].filter(function (element) {
+                    return !!utilityService.hasString(element);
                 });
             return providerAddressArray.join(", ");
         };
@@ -84,9 +84,9 @@
         };
     }
 
-    angular.module('app.providerFiltersModule', ['app.filtersModule'])
+    angular.module('app.providerFiltersModule', ['app.servicesModule'])
         .filter('plsName', PLSProviderNameFilter)
-        .filter('plsAddress', ['$filter', PLSProviderAddressFilter])
+        .filter('plsAddress', ['utilityService', PLSProviderAddressFilter])
         .filter('pcmProviderAddress', PCMProviderAddressFilter)
         .filter('pcmProviderNameOrFacility', PCMProviderNameOrFacilityFilter);
 })();

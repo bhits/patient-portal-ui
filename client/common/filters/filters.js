@@ -19,13 +19,9 @@
     /**
      * Filter to format zip code
      */
-    function ZipFilter() {
+    function ZipFilter(utilityService) {
         return function (zipCode) {
-            var formattedZipCode = parseInt(zipCode).toString();
-            if (formattedZipCode.toString().length > 5) {
-                formattedZipCode = formattedZipCode.slice(0, 5) + "-" + formattedZipCode.slice(5);
-            }
-            return formattedZipCode;
+            return utilityService.formatZipCode(zipCode);
         };
     }
 
@@ -33,9 +29,9 @@
      * If the parameter is string and contains at least one character, returns the string.
      * Otherwise, returns undefined.
      */
-    function HasString() {
+    function HasString(utilityService) {
         return function (str) {
-            return angular.isDefined(str) && angular.isString(str) && str.length > 0 ? str : undefined;
+            return utilityService.hasString(str);
         };
     }
 
@@ -43,9 +39,9 @@
      * The generalize filter for the application
      *
      */
-    angular.module('app.filtersModule', [])
+    angular.module('app.filtersModule', ['app.servicesModule'])
         .filter('phone', PhoneNumberFilter)
-        .filter('zip', ZipFilter)
-        .filter('hasString', HasString);
+        .filter('zip', ['utilityService', ZipFilter])
+        .filter('hasString', ['utilityService', HasString]);
 })();
 
