@@ -29,6 +29,7 @@
              */
             addProvider: function (npi, success, error) {
                 $log.info("Adding provider NPI: " + npi);
+                providers.save({npi: npi},success, error);
             },
 
             /**

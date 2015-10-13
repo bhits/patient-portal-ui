@@ -20,8 +20,6 @@
         IdleProvider.idle(idleConfigParams.idle); // in seconds
         IdleProvider.timeout(idleConfigParams.timeout); // in seconds
         KeepaliveProvider.interval(idleConfigParams.keepalive); // in seconds
-
-        $httpProvider.defaults.headers.common['Access-Control-Allow-Headers'] = "*" ;
     }
 
     /**
@@ -223,13 +221,6 @@
 
     angular.module('app',
         [
-          'templates-app',          // Third party libraries start here
-          'templates-common',
-          'ui.router',
-          'angular-loading-bar',
-          'ngIdle',
-          'ui.bootstrap',
-          'ngAria',
           'app.homeModule',         // App modules start here
           'app.healthInformationModule',
           'app.accessModule',
@@ -238,7 +229,14 @@
           'app.servicesModule',
           'app.authInterceptorModule',
           'app.authenticationModule',
-          'app.filtersModule'
+          'app.filtersModule',
+          'templates-app',          // Third party libraries start here
+          'templates-common',
+          'ui.router',
+          'ngIdle',
+          'ui.bootstrap',
+          'ngAria',
+          'angular-loading-bar'
         ])
         .constant("idleConfigParams", ngIdleParams)
         .config(appConfig)

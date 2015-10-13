@@ -5,7 +5,14 @@
 'use strict';
 
 
-angular.module("app.providerModule", [ 'app.providerService', 'app.providerDirectives', 'ngMessages', 'app.notificationModule'])
+angular.module("app.providerModule",
+    [
+        'app.providerService',
+        'app.providerDirectives',
+        'ngMessages',
+        'app.notificationModule',
+        'app.providerFiltersModule'
+    ])
 
     .config(['$stateProvider', function ($stateProvider) {
         $stateProvider
