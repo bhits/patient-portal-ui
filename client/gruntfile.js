@@ -377,7 +377,7 @@ module.exports = function (grunt) {
                     type: 'html',
                     dir: '<%= build_reports_dir %>/unit/coverage/'
                 },
-                browsers: ['PhantomJS_custom'] //'IE' doesn't work
+                browsers: ['PhantomJS_custom'] //'IE' doesn't work   ['Chrome', 'Firefox']
             },
             // This watch can be run by itself, but cannot run with Grunt Watch.
             // And can be used for debug (open the development tools in chrome, insert debugger statement in js script)
@@ -385,7 +385,7 @@ module.exports = function (grunt) {
                 singleRun: false,
                 autoWatch: true,
                 background: false,
-                browsers: ['PhantomJS_custom']
+                browsers: ['Chrome']
 
             }
         },
@@ -599,11 +599,25 @@ module.exports = function (grunt) {
         },
 
         /*
-        'git-describe': {
-            me: {
+         * Build a WAR (web archive) without Maven or the JVM installed.
+         */
+        war: {
+            target: {
+                options: {
+                    war_dist_folder: '<%= build_war_dir %>',    /* Folder where to generate the WAR. */
+                    war_name: '<%= pkg.name %>',    /* The name fo the WAR file (.war will be the extension) */
+                    webxml_display_name: '<%= pkg.name %>',
+                },
+                files: [
+                    {
+                        expand: true,
+                        cwd: '<%= build_debug_dir %>',
+                        src: ['**'],
+                        dest: ''
+                    }
+                ]
             }
-        },
-        */
+        }
     };
 
     grunt.initConfig(grunt.util._.extend(taskConfig, userConfig));
@@ -748,7 +762,7 @@ module.exports = function (grunt) {
                 taskList.push('ngconstant:dev');
             }
 
-            taskList.push( 'clean:all', 'bower:install','html2js', 'jshint-all', 'recess:build','concat:build_css', 'copy:build_app_assets',
+            taskList.push('html2js', 'jshint-all', 'recess:build','concat:build_css', 'copy:build_app_assets',
                            'copy:build_vendor_assets','copy:build_appjs', 'copy:build_vendorjs', 'index:build', 'karmaconfig');
 
             if (target === targetEnum.debug || target === targetEnum.dist || target === targetEnum.dev  ) {
@@ -757,13 +771,10 @@ module.exports = function (grunt) {
                 taskList.push('karma:ci');
             }
 
-            if (target === targetEnum.dev || target === targetEnum.debug ) {
-                taskList = taskList.concat(['compile']);
+            if (target === targetEnum.dev || target === targetEnum.debug || target === targetEnum.dist ||target === targetEnum.ci) {
+                taskList = taskList.concat(['compile', 'war']);
             }
 
-            if (target === targetEnum.dist ||target === targetEnum.ci) {
-                taskList = taskList.concat(['compile','compress']);
-            }
         }
 
         grunt.task.run(taskList);

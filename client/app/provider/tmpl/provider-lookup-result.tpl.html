@@ -30,9 +30,12 @@
             <div class="panel panel-default"
                  ng-repeat="provider in ProviderLookupResultVm.providerLookupResult.providers">
                 <div class="panel-heading">
-                    <h4>{{provider | plsName}}&nbsp;<span>[NPI: {{provider.npi}}]</span></h4>
+                    <h3>{{provider | plsName}}&nbsp;<span>[NPI: {{provider.npi}}]</span></h3>
                     <button type="button" class="btn btn-xs btn-primary dark-green"
-                            ng-click="ProviderLookupResultVm.addProvider(provider.npi)"><i class="fa fa-plus"></i>
+                            ng-click="ProviderLookupResultVm.addProvider(provider.npi)">
+                            <i class="fa fa-plus">
+                                <span class="sr-only">Add Provider</span>
+                            </i>
                     </button>
                     &nbsp;Add this Provider.
                 </div>

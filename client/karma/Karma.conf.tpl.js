@@ -53,7 +53,7 @@ module.exports = function (karma) {
         * open and the tests will automatically occur there during the build. This has
         * the aesthetic advantage of not launching a browser every time you save.
         */
-        browsers: ['PhantomJS', 'PhantomJS_custom'],
+        browsers: ['Chrome'],
 
         /**
         * How to report, by default.

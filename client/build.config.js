@@ -11,6 +11,7 @@ module.exports = {
     build_debug_dir: '<%=build_dir%>' + 'debug',
     build_dist_dir: '<%=build_dir%>' + 'dist',
     build_reports_dir: '<%=build_dir%>' + '.reports',
+    build_war_dir: '<%=build_dir%>',
     config_dir: 'app/config' ,
 
     /**
