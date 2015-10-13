@@ -2,39 +2,44 @@
  * Created by tomson.ngassa on 9/30/2015.
  */
 
-(function(){
+(function () {
     'use strict';
 
-    function ProviderService($resource, ENVService, $log){
+    function ProviderService($resource, ENVService, $log) {
+        var providers = $resource(ENVService.pcmApiBaseUrl + "/providers/:npi",  { npi:'@npi'});
+
         return {
 
             getProviders: function () {
-                var providers = $resource(ENVService.pcmApiBaseUrl + "/connectionMain/");
                 return providers;
             },
             /**
              * Deletes provider by npi
              */
             deleteProvider: function (npi, success, error) {
-                $log.info("Deleting provider with npi: " + npi);
+                providers.delete({npi: npi},success, error);
+
             },
+
             /**
-             * Adds provider
-             *
+             * Adds a single provider to a patient's provider list
+             * @param npi npi of the provider to be added
+             * @param success success callback
+             * @param error error callback
              */
-            /**
-             *  Adds provider
-             * @param provider - the provider to be added
-             */
-            addProviders: function (provider) {
-                $log.info("Adding provider");
+            addProvider: function (npi, success, error) {
+                $log.info("Adding provider NPI: " + npi);
+                providers.save({npi: npi},success, error);
             },
+
             /**
              * Gets the Provider Lookup Service resource object
-             * @returns {Object} providerResource - The provider resource object
+             * @param plsQueryParameters
+             * @param page
+             * @param success
+             * @param error
              */
-
-            lookupProviders: function (plsQueryParameters, page, onSuccess, onError) {
+            lookupProviders: function (plsQueryParameters, page, success, error) {
                 var queryParameters = "";
                 queryParameters = plsQueryParameters.usstate ? queryParameters + "/usstate/" + plsQueryParameters.usstate : queryParameters;
                 queryParameters = plsQueryParameters.city ? queryParameters + "/city/" + plsQueryParameters.city : queryParameters;
@@ -47,8 +52,7 @@
                 queryParameters = plsQueryParameters.facilityname ? queryParameters + "/facilityname/" + plsQueryParameters.facilityname : queryParameters;
 
                 var providerResource = $resource(ENVService.plsApiBaseUrl + "/pageNumber/:pageNumber" + queryParameters, {pageNumber: page});
-                var providerLookupResponse = providerResource.get({pageNumber: page}, onSuccess, onError);
-                return providerLookupResponse;
+                providerResource.get({pageNumber: page}, success, error);
             },
 
             /**
@@ -65,6 +69,7 @@
             },
         };
     }
+
     /**
      * The provider service
      *

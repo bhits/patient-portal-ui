@@ -1,6 +1,6 @@
 'use strict';
 
-describe('app module', function(){
+xdescribe('app module', function(){
     var module;
 
     beforeEach(function() {
@@ -62,11 +62,11 @@ describe('app module', function(){
             expect(hasModule('app.accessModule')).toEqual(true);
         });
 
-        xit("should have app.directivesModule as a dependency", function() {
+        it("should have app.directivesModule as a dependency", function() {
             expect(hasModule('app.directivesModule')).toEqual(true);
         });
 
-        xit("should have app.filtersModule as a dependency", function() {
+        it("should have app.filtersModule as a dependency", function() {
             expect(hasModule('app.filtersModule')).toEqual(true);
         });
 
@@ -87,17 +87,31 @@ describe('app module', function(){
 xdescribe("app AppController ", function() {
 
     beforeEach(module('ui.router'));
+    beforeEach(module('ngIdle'));
+    beforeEach(module('angular-loading-bar'));
+    beforeEach(module('app.authenticationModule'));
+    beforeEach(module('app.authenticationModule'));
+    beforeEach(module('ui.bootstrap'));
+    beforeEach(module('templates-app'));
+    beforeEach(module('ui.bootstrap'));
+    beforeEach(module('templates-common'));
+    beforeEach(module('ngAria'));
+    beforeEach(module('app.directivesModule'));
+    beforeEach(module('app.servicesModule'));
+    beforeEach(module('app.filtersModule'));
+    beforeEach(module('app.homeModule'));
+    beforeEach(module('app.healthInformationModule'));
+    beforeEach(module('app.providerModule'));
     beforeEach(module('app'));
 
-    var scope, rootScope, state,stateParams,anchorScroll,location,utilityService, AuthenticationService, Idle;
 
-    beforeEach(inject(function($rootScope, $controller, $state, $stateParams, $anchorScroll, $location, _utilityService_, _AuthenticationService_, _Idle_) {
+    var controller, scope, rootScope, state,anchorScroll,utilityService, AuthenticationService, Idle;
+
+    beforeEach(inject(function($rootScope, $controller, $state, $anchorScroll, _utilityService_, _AuthenticationService_, _Idle_, _$modal_, _idleConfigParams_) {
         rootScope = $rootScope;
         scope = $rootScope.$new();
         state = $state;
-        stateParams = $stateParams;
         anchorScroll = $anchorScroll;
-        location = $location;
         utilityService = _utilityService_;
         AuthenticationService = _AuthenticationService_;
         Idle = _Idle_;
@@ -109,25 +123,27 @@ xdescribe("app AppController ", function() {
         spyOn(AuthenticationService, 'logOut').andCallThrough();
         spyOn(Idle, 'unwatch').andCallThrough();
 
-        $controller('AppController', {
+        controller = $controller('AppController', {
             $scope: scope,
-            $state: state,
-            $stateParams: stateParams,
-            $location: location,
-            utilityService: utilityService,
-            AuthenticationService: AuthenticationService
-
+            AuthenticationService: _AuthenticationService_,
+            $state: $state,
+            utilityService: _utilityService_,
+            $modal:_$modal_,
+            Idle: _Idle_,
+            idleConfigParams: _idleConfigParams_,
+            rootScope: $rootScope
         });
     }));
 
 
-    it('should set Health Information Menu.', function(){
-        expect(scope.showHealthInformationMenu).toBeFalsy();
-        scope.setShowHealthInformationMenu(true);
-        expect(scope.showHealthInformationMenu).toBeTruthy();
+    it('should show Health Information Menu.', function(){
+        console.log(controller);
+        expect(controller.healthInformationMenu).toBeFalsy();
+        controller.setShowHealthInformationMenu();
+        expect(controller.healthInformationMenu).toBeTruthy();
     });
 
-    it('should scroll to and expand', function(){
+    xit('should scroll to and expand', function(){
         var arg1 = {to: "a"};
         var arg2 = {expand: false};
         scope.scrollToAndExpand("a", false);

@@ -53,7 +53,7 @@ module.exports = function (karma) {
         * open and the tests will automatically occur there during the build. This has
         * the aesthetic advantage of not launching a browser every time you save.
         */
-        browsers: ['Chrome'],
+        browsers: ['PhantomJS', 'PhantomJS_custom'],
 
         /**
         * How to report, by default.
@@ -109,6 +109,27 @@ module.exports = function (karma) {
             'karma-jasmine',
             'karma-ng-html2js-preprocessor',
             'karma-coverage'
-        ]
+        ],
+
+        // you can define custom flags
+        customLaunchers: {
+            'PhantomJS_custom': {
+                base: 'PhantomJS',
+                    options: {
+                    windowName: 'my-window',
+                        settings: {
+                        webSecurityEnabled: false
+                    },
+                },
+                flags: ['--load-images=true'],
+                    debug: true
+            }
+         },
+
+        phantomjsLauncher: {
+            // Have phantomjs exit if a ResourceError is encountered (useful if karma exits without killing phantom)
+            exitOnResourceError: true
+        }
+
     });
 };

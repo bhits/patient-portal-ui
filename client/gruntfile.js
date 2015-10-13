@@ -364,20 +364,20 @@ module.exports = function (grunt) {
                 background: true, // The background option will tell grunt to run karma in a child process so it doesn't block subsequent grunt tasks
                 singleRun: false,
                 autoWatch: false,
-                browsers: ['PhantomJS']
+                browsers: ['PhantomJS_custom']
             },
             // ci target is for CI
             ci: {
                 singleRun: true,
                 reporters: ['dots', 'junit', 'coverage'],
                 junitReporter: {
-                    outputFile: '<%= build_reports_dir %>/unit/karma-junit-rpt.xml'
+                    outputFile: '<%= build_reports_dir %>/unit/test-result.xml'
                 },
                 coverageReporter: {
                     type: 'html',
                     dir: '<%= build_reports_dir %>/unit/coverage/'
                 },
-                browsers: ['Chrome', 'Firefox'] //'IE' doesn't work
+                browsers: ['PhantomJS_custom'] //'IE' doesn't work
             },
             // This watch can be run by itself, but cannot run with Grunt Watch.
             // And can be used for debug (open the development tools in chrome, insert debugger statement in js script)
@@ -385,7 +385,7 @@ module.exports = function (grunt) {
                 singleRun: false,
                 autoWatch: true,
                 background: false,
-                browsers: ['Chrome']
+                browsers: ['PhantomJS_custom']
 
             }
         },
@@ -567,19 +567,6 @@ module.exports = function (grunt) {
                 name: 'app.config',
             },
             // Environment targets
-            local: {
-                options: {
-                    dest: '<%= config_dir %>/config.js'
-                },
-                constants: {
-                    ENVService: {
-                        name: 'Local',
-                        version:'<%= pkg.version %>',
-                        stsBaseUri: 'https://localhost:44390/identity/tokens',
-                        apiBaseUrl: 'https://localhost:44350'
-                    }
-                }
-            },
             dev: {
                 options: {
                     dest: '<%= config_dir %>/config.js'
@@ -606,33 +593,6 @@ module.exports = function (grunt) {
                         version:'<%= pkg.version %>',
                         stsBaseUri:"https://testbed-sts-qa.feisystems.com/identity/tokens",
                         apiBaseUrl:"https://testbed-api-qa.feisystems.com"
-                    }
-                }
-            },
-            demo: {
-                options: {
-                    dest: '<%= config_dir %>/config.js'
-                },
-                constants: {
-                    ENVService: {
-                        name: 'Demo',
-                        version:'<%= pkg.version %>',
-                        stsBaseUri:"https://patientportal-sts-demo.feisystems.com/identity/tokens",
-                        apiBaseUrl:"https://patientportal-api-demo.feisystems.com"
-                    }
-                }
-            },
-
-            prod: {
-                options: {
-                    dest: '<%= config_dir %>/config.js'
-                },
-                constants: {
-                    ENVService: {
-                        name: 'Production',
-                        version:'<%= pkg.version %>',
-                        stsBaseUri: 'https://sts-dev.feisystems.com/identity/tokens',
-                        apiBaseUrl: 'https://testbed-api-dev.feisystems.com/user'
                     }
                 }
             }
@@ -730,7 +690,6 @@ module.exports = function (grunt) {
     // Alias task for karma:watch. Run this task after grunt build
     grunt.registerTask('karma-watch', ['karma:watch']);
 
-    grunt.registerTask('build-local', 'build:local');
     /**
      * The `build` task gets your app ready to run for development and testing.
      */
@@ -742,24 +701,14 @@ module.exports = function (grunt) {
     grunt.registerTask('build-dist', 'build:dist');
 
     /**
-     * Snake case build:demo
-     */
-    grunt.registerTask('build-demo', 'build:demo');
-
-    /**
-     * Snake case build:test
-     */
-    grunt.registerTask('build-test', 'build:test');
-    /**
      * Snake case build:dev
      */
     grunt.registerTask('build-dev', 'build:dev');
 
     /**
-     * Snake case build:prod
+     * Snake case build:ci
      */
-    grunt.registerTask('build-prod', 'build:prod');
-
+    grunt.registerTask('build-ci', 'build:ci');
     /**
      * Snake case build:all
      */
@@ -776,15 +725,13 @@ module.exports = function (grunt) {
     grunt.registerTask('build', function (target) {
         var targetEnum = {
             dev: 'dev',
-            test: 'test',
-            demo: 'demo',
             debug: 'debug',
             dist: 'dist',
             all: 'all',
-            local: 'local'
+            ci: 'ci'
         };
 
-        if (!target || !(target === targetEnum.debug || target === targetEnum.local || target === targetEnum.dist || target === targetEnum.all || target === targetEnum.dev || target === targetEnum.test || target === targetEnum.demo || target === targetEnum.prod)) {
+        if (!target || !(target === targetEnum.debug || target === targetEnum.dist || target === targetEnum.all || target === targetEnum.dev || target === targetEnum.ci)) {
             grunt.log.writeln("Running build task dist target (build:dist) by default.");
             target = targetEnum.dist;
         }
@@ -792,34 +739,30 @@ module.exports = function (grunt) {
         var taskList;
 
         if (target === targetEnum.all) {
-            taskList = ['build:debug', 'build:dist'];
+            taskList = ['build:debug', 'build:dist', 'build:ci'];
         }
         else {
             taskList = ['clean', 'bower:install'];
 
             if (target === targetEnum.dev ) {
                 taskList.push('ngconstant:dev');
-            }else if (target === targetEnum.test ) {
-                taskList.push('ngconstant:test');
-            }else if(target === targetEnum.demo ) {
-                taskList.push('ngconstant:demo');
-            }else if (target === targetEnum.prod ) {
-                taskList.push('ngconstant:prod');
-            }
-            else if (target === targetEnum.local ) {
-                taskList.push('ngconstant:local');
             }
 
-            taskList.push( 'html2js', 'jshint-all', 'recess:build','concat:build_css', 'copy:build_app_assets',
+            taskList.push( 'clean:all', 'bower:install','html2js', 'jshint-all', 'recess:build','concat:build_css', 'copy:build_app_assets',
                            'copy:build_vendor_assets','copy:build_appjs', 'copy:build_vendorjs', 'index:build', 'karmaconfig');
 
-            if (target === targetEnum.debug || target === targetEnum.local || target === targetEnum.dist || target === targetEnum.dev || target === targetEnum.test || target === targetEnum.demo || target === targetEnum.prod) {
+            if (target === targetEnum.debug || target === targetEnum.dist || target === targetEnum.dev  ) {
                 taskList.push('karma:unit');
+            }else if(target === targetEnum.ci){
+                taskList.push('karma:ci');
             }
 
-            if (target === targetEnum.dist ||target === targetEnum.dev || target === targetEnum.test || target === targetEnum.demo || target === targetEnum.prod ) {
-                // taskList = taskList.concat(['compile', 'save-version', 'compress']);
-                taskList = taskList.concat(['compile', 'compress']);
+            if (target === targetEnum.dev || target === targetEnum.debug ) {
+                taskList = taskList.concat(['compile']);
+            }
+
+            if (target === targetEnum.dist ||target === targetEnum.ci) {
+                taskList = taskList.concat(['compile','compress']);
             }
         }
 

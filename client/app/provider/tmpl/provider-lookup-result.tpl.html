@@ -1,11 +1,16 @@
 <div id="provider_lookup_result">
     <div class="row">
-        <div class="col-md-6" ng-if="isEmptyResult()">
+        <div class="col-md-6" ng-if="ProviderLookupResultVm.error">
+            <div class="alert alert-danger">Internal server error.</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6" ng-if="ProviderLookupResultVm.isEmptyResult()">
             <div class="alert alert-danger">Sorry, no results found.</div>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6" ng-if="!isEmptyResult()">
+        <div class="col-md-6" ng-if="!ProviderLookupResultVm.isEmptyResult()">
             <div class="panel panel-darkblue">
                 <div class="ibox-title modified panel-heading">
                     <h2>Search Results</h2>
@@ -14,40 +19,45 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6" ng-if="!isEmptyResult()">
+        <div class="col-md-6" ng-if="!ProviderLookupResultVm.isEmptyResult()">
             <div class="text-center">
-                <pagination total-items="pagination.totalItems"
-                            ng-model="pagination.currentPage"
-                            ng-change="loadPage()" max-size="pagination.maxSize"
+                <pagination total-items="ProviderLookupResultVm.pagination.totalItems"
+                            ng-model="ProviderLookupResultVm.pagination.currentPage"
+                            ng-change="ProviderLookupResultVm.loadPage()"
+                            max-size="ProviderLookupResultVm.pagination.maxSize"
                             class="pagination-sm"
                             boundary-links="true"></pagination>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6" ng-if="!isEmptyResult()">
-            <div class="panel panel-default" ng-repeat="provider in providerLookupResult.providers">
+        <div class="col-md-6" ng-if="!ProviderLookupResultVm.isEmptyResult()">
+            <div class="panel panel-default"
+                 ng-repeat="provider in ProviderLookupResultVm.providerLookupResult.providers">
                 <div class="panel-heading">
-                    <h4>{{getProviderName(provider)}}&nbsp;<span>[NPI: {{provider.npi}}]</span></h4>
-                    <button type="button" class="btn btn-xs btn-primary dark-green"><i class="fa fa-plus"></i></button>
+                    <h4>{{provider | plsName}}&nbsp;<span>[NPI: {{provider.npi}}]</span></h4>
+                    <button type="button" class="btn btn-xs btn-primary dark-green"
+                            ng-click="ProviderLookupResultVm.addProvider(provider.npi)"><i class="fa fa-plus"></i>
+                    </button>
                     &nbsp;Add this Provider.
                 </div>
                 <div class="panel-body">
                     <p>{{provider.healthcareProviderTaxonomy_1}}</p>
 
-                    <p>{{getProviderAddressAsArray(provider)}}</p>
+                    <p>{{provider | plsAddress}}</p>
 
-                    <p>{{formatPhoneNumber(provider.providerBusinessPracticeLocationAddressTelephoneNumber)}}</p>
+                    <p>{{provider.providerBusinessPracticeLocationAddressTelephoneNumber | phone}}</p>
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6" ng-if="!isEmptyResult()">
+        <div class="col-md-6" ng-if="!ProviderLookupResultVm.isEmptyResult()">
             <div class="text-center">
-                <pagination total-items="pagination.totalItems"
-                            ng-model="pagination.currentPage"
-                            ng-change="loadPage()" max-size="pagination.maxSize"
+                <pagination total-items="ProviderLookupResultVm.pagination.totalItems"
+                            ng-model="ProviderLookupResultVm.pagination.currentPage"
+                            ng-change="ProviderLookupResultVm.loadPage()"
+                            max-size="ProviderLookupResultVm.pagination.maxSize"
                             class="pagination-sm"
                             boundary-links="true"></pagination>
             </div>

@@ -235,6 +235,20 @@
         };
     }
 
+    function NoDataAlert() {
+        return {
+            restrict: 'E',
+            scope: {
+                data: "="
+            },
+            template: '<div class="alert alert-warning " role="alert" ng-show="data.length == 0">' +
+            'No data is available.' +
+            '</div>',
+            link: function ($scope, $element) {
+            }
+        };
+    }
+
     /**
      *  The patient health information directives
      *
@@ -257,6 +271,7 @@
         .directive('familyhistoriesAccordion',FamilyhistoriesAccordion)
         .directive('medicalequipmentsAccordion',MedicalequipmentsAccordion)
         .directive('immunizationsAccordion',ImmunizationsAccordion)
-        .directive('resultsAccordion',ResultsAccordion);
+        .directive('resultsAccordion',ResultsAccordion)
+        .directive('noDataAlert',NoDataAlert);
 
 })();
