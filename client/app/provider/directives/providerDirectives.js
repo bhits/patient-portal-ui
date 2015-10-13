@@ -7,7 +7,7 @@
 
     'use strict';
 
-    function ProviderLookupResult($timeout, $state, utilityService, ProviderService) {
+    function ProviderLookupResult() {
         return {
             restrict: 'E',
             scope: {
@@ -17,7 +17,7 @@
             templateUrl: 'app/provider/tmpl/provider-lookup-result.tpl.html',
             controllerAs: 'ProviderLookupResultVm',
             bindToController: true,
-            controller: [function () {
+            controller: ['$timeout', '$state', 'utilityService', 'ProviderService', function ($timeout, $state, utilityService, ProviderService) {
                 var ProviderLookupResultVm = this;
                 ProviderLookupResultVm.pagination = {};
                 ProviderLookupResultVm.pagination.totalItems = ProviderLookupResultVm.providerLookupResult.totalNumberOfProviders;
@@ -80,8 +80,8 @@
             templateUrl: 'app/provider/tmpl/provider-lookup-search.tpl.html',
             controllerAs: 'ProviderLookupSearchVm',
             bindToController: true,
-            controller: ['$location', '$element', '$timeout', '$state', '$filter', 'ProviderService',
-                function ($location, $element, $timeout, $state, $filter, ProviderService) {
+            controller: ['$location', '$element', '$timeout', '$state', 'utilityService', 'ProviderService',
+                function ($location, $element, $timeout, $state, utilityService, ProviderService) {
                     var ProviderLookupSearchVm = this;
                     ProviderLookupSearchVm.formMinlength = 2;
                     ProviderLookupSearchVm.formMaxlength = 10;
@@ -102,13 +102,13 @@
                     ProviderLookupSearchVm.plsQueryParameters = angular.copy(plsQueryParametersMaster);
 
                     ProviderLookupSearchVm.usstateChanged = function () {
-                        if (!$filter('hasString')(ProviderLookupSearchVm.plsQueryParameters.usstate)) {
+                        if (!utilityService.hasString(ProviderLookupSearchVm.plsQueryParameters.usstate)) {
                             ProviderLookupSearchVm.plsQueryParameters.city = "";
                         }
                     };
 
                     ProviderLookupSearchVm.lastnameChanged = function () {
-                        if (!$filter('hasString')(ProviderLookupSearchVm.plsQueryParameters.lastname)) {
+                        if (!utilityService.hasString(ProviderLookupSearchVm.plsQueryParameters.lastname)) {
                             ProviderLookupSearchVm.plsQueryParameters.firstname = "";
                             ProviderLookupSearchVm.plsQueryParameters.gender = "";
                             ProviderLookupSearchVm.plsQueryParameters.phone = "";
@@ -116,7 +116,7 @@
                     };
 
                     ProviderLookupSearchVm.facilitynameChanged = function () {
-                        if (!$filter('hasString')(ProviderLookupSearchVm.plsQueryParameters.facilityname)) {
+                        if (!utilityService.hasString(ProviderLookupSearchVm.plsQueryParameters.facilityname)) {
                             ProviderLookupSearchVm.plsQueryParameters.phone = "";
                         }
                     };
@@ -166,7 +166,7 @@
         };
     }
 
-    angular.module("app.providerDirectives", ['app.providerFiltersModule'])
-        .directive('providerLookupResult', ['$timeout', '$state', 'utilityService', 'ProviderService', ProviderLookupResult])
+    angular.module("app.providerDirectives", ['app.servicesModule', 'app.providerFiltersModule'])
+        .directive('providerLookupResult', ProviderLookupResult)
         .directive('providerLookupSearch', ProviderLookupSearch);
 })();
