@@ -54,12 +54,12 @@
                                     </button>
                                 </td>
                                 <td>
-                                    {{ provider|nameorfacility }}
+                                    {{ provider|pcmProviderNameOrFacility }}
                                 </td>
                                 <td> <span ng-bind="provider.npi"></span> </td>
                                 <td> <span ng-bind="provider.practiceLocationAddressTelephoneNumber"></span> </td>
                                 <td>
-                                    {{provider|address}}
+                                    {{provider|pcmProviderAddress}}
                                 </td>
                             </tr>
                         </tbody>

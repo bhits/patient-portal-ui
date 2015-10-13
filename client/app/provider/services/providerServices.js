@@ -6,17 +6,19 @@
     'use strict';
 
     function ProviderService($resource, ENVService, $log) {
+        var providers = $resource(ENVService.pcmApiBaseUrl + "/providers/:npi",  { npi:'@npi'});
+
         return {
 
             getProviders: function () {
-                var providers = $resource(ENVService.pcmApiBaseUrl + "/connectionMain/");
                 return providers;
             },
             /**
              * Deletes provider by npi
              */
             deleteProvider: function (npi, success, error) {
-                $log.info("Deleting provider with npi: " + npi);
+                providers.delete({npi: npi},success, error);
+
             },
 
             /**
@@ -27,6 +29,7 @@
              */
             addProvider: function (npi, success, error) {
                 $log.info("Adding provider NPI: " + npi);
+                providers.save({npi: npi},success, error);
             },
 
             /**
