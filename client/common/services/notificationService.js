@@ -23,7 +23,7 @@
                 notify({ message: msg, duration: duration, classes: 'alert-success', templateUrl: templateUrl});
             },
             error: function(msg){
-                notify({ message: msg, duration: duration, classes: 'alert-warning', templateUrl: templateUrl});
+                notify({ message: msg, duration: duration, classes: 'alert-danger', templateUrl: templateUrl});
             }
         };
     }
