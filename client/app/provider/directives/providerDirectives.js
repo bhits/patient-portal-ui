@@ -35,7 +35,7 @@
                     var newPage = ProviderLookupResultVm.pagination.currentPage;
                     ProviderLookupResultVm.pagination.currentPage = oldPage;
 
-                    function success(response) {
+                    function loadPageSuccess(response) {
                         oldPage = newPage;
                         ProviderLookupResultVm.pagination.currentPage = newPage;
                         ProviderLookupResultVm.providerLookupResult = response;
@@ -43,11 +43,11 @@
                         scrollToSearchResults();
                     }
 
-                    function error(response) {
+                    function loadPageError(response) {
                         notificationService.error("Failed to load the page, please try again later...");
                     }
 
-                    ProviderService.lookupProviders(ProviderLookupResultVm.queryParameters, newPage - 1, success, error);
+                    ProviderService.lookupProviders(ProviderLookupResultVm.queryParameters, newPage - 1, loadPageSuccess, loadPageError);
                 };
 
                 ProviderLookupResultVm.isEmptyResult = function () {
@@ -55,15 +55,15 @@
                 };
 
                 ProviderLookupResultVm.addProvider = function (npi) {
-                    function success() {
+                    function addProviderSuccess() {
                         $state.go('provider.list');
                     }
 
-                    function error(err) {
+                    function addProviderError(err) {
                         notificationService.error("Failed to add the provider, please try again later...");
                     }
 
-                    ProviderService.addProvider(npi, success, error);
+                    ProviderService.addProvider(npi, addProviderSuccess, addProviderError);
                 };
 
                 ProviderLookupResultVm.paginationSummary = function () {
