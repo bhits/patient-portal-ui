@@ -583,7 +583,7 @@ module.exports = function (grunt) {
                 }
             },
 
-            test: {
+            qa: {
                 options: {
                     dest: '<%= config_dir %>/config.js'
                 },
@@ -591,8 +591,10 @@ module.exports = function (grunt) {
                     ENVService: {
                         name: 'QA',
                         version:'<%= pkg.version %>',
-                        stsBaseUri:"https://testbed-sts-qa.feisystems.com/identity/tokens",
-                        apiBaseUrl:"https://testbed-api-qa.feisystems.com"
+                        stsBaseUri: 'https://sts-dev.feisystems.com/identity/tokens',
+                        apiBaseUrl: 'https://testbed-api-dev.feisystems.com',
+                        plsApiBaseUrl: 'https://bhitsqaapp02:8443/pls/providers',
+                        pcmApiBaseUrl: 'https://bhitsqaapp02:8443/pcm/patients'
                     }
                 }
             }
@@ -710,23 +712,19 @@ module.exports = function (grunt) {
     grunt.registerTask('build-debug', 'build:debug');
 
     /**
-     * Snake case build:dist
-     */
-    grunt.registerTask('build-dist', 'build:dist');
-
-    /**
      * Snake case build:dev
      */
     grunt.registerTask('build-dev', 'build:dev');
 
     /**
+     * Snake case build:dev
+     */
+    grunt.registerTask('build-qa', 'build:qa');
+
+    /**
      * Snake case build:ci
      */
     grunt.registerTask('build-ci', 'build:ci');
-    /**
-     * Snake case build:all
-     */
-    grunt.registerTask('build-all', 'build:all');
 
     grunt.registerTask('version', 'Shows version number', function () {
         var pkg = grunt.file.readJSON('package.json');
@@ -739,42 +737,33 @@ module.exports = function (grunt) {
     grunt.registerTask('build', function (target) {
         var targetEnum = {
             dev: 'dev',
+            qa: 'qa',
             debug: 'debug',
             dist: 'dist',
-            all: 'all',
             ci: 'ci'
         };
 
-        if (!target || !(target === targetEnum.debug || target === targetEnum.dist || target === targetEnum.all || target === targetEnum.dev || target === targetEnum.ci)) {
-            grunt.log.writeln("Running build task dist target (build:dist) by default.");
-            target = targetEnum.dist;
-        }
-
         var taskList;
 
-        if (target === targetEnum.all) {
-            taskList = ['build:debug', 'build:dist', 'build:ci'];
+        taskList = ['clean', 'bower:install'];
+
+        if (target === targetEnum.dev || target === targetEnum.ci ) {
+            taskList.push('ngconstant:dev');
+        }else if (target === targetEnum.qa ) {
+            taskList.push('ngconstant:qa');
         }
-        else {
-            taskList = ['clean', 'bower:install'];
 
-            if (target === targetEnum.dev ) {
-                taskList.push('ngconstant:dev');
-            }
+        taskList.push('html2js', 'jshint-all', 'recess:build','concat:build_css', 'copy:build_app_assets',
+                       'copy:build_vendor_assets','copy:build_appjs', 'copy:build_vendorjs', 'index:build', 'karmaconfig');
 
-            taskList.push('html2js', 'jshint-all', 'recess:build','concat:build_css', 'copy:build_app_assets',
-                           'copy:build_vendor_assets','copy:build_appjs', 'copy:build_vendorjs', 'index:build', 'karmaconfig');
+        if (target === targetEnum.debug || target === targetEnum.dist || target === targetEnum.dev  ) {
+            taskList.push('karma:unit');
+        }else if(target === targetEnum.ci){
+            taskList.push('karma:ci');
+        }
 
-            if (target === targetEnum.debug || target === targetEnum.dist || target === targetEnum.dev  ) {
-                taskList.push('karma:unit');
-            }else if(target === targetEnum.ci){
-                taskList.push('karma:ci');
-            }
-
-            if (target === targetEnum.dev || target === targetEnum.debug || target === targetEnum.dist ||target === targetEnum.ci) {
-                taskList = taskList.concat(['compile', 'war']);
-            }
-
+        if (target === targetEnum.dev || target === targetEnum.debug || target === targetEnum.dist || target === targetEnum.qa ||target === targetEnum.ci) {
+            taskList = taskList.concat(['compile', 'war']);
         }
 
         grunt.task.run(taskList);
