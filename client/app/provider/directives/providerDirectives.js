@@ -17,13 +17,13 @@
             templateUrl: 'app/provider/tmpl/provider-lookup-result.tpl.html',
             controllerAs: 'ProviderLookupResultVm',
             bindToController: true,
-            controller: ['$timeout', '$state', 'utilityService', 'ProviderService', function ($timeout, $state, utilityService, ProviderService) {
+            controller: ['$timeout', '$state', 'utilityService', 'ProviderService', 'notificationService', function ($timeout, $state, utilityService, ProviderService, notificationService) {
                 var ProviderLookupResultVm = this;
                 ProviderLookupResultVm.pagination = {};
                 ProviderLookupResultVm.pagination.totalItems = ProviderLookupResultVm.providerLookupResult.totalNumberOfProviders;
                 ProviderLookupResultVm.pagination.currentPage = ProviderLookupResultVm.providerLookupResult.currentPage + 1;
                 ProviderLookupResultVm.pagination.maxSize = 10;
-                ProviderLookupResultVm.error = '';
+                var oldPage = ProviderLookupResultVm.pagination.currentPage;
 
                 function scrollToSearchResults() {
                     utilityService.scrollTo('provider_lookup_result');
@@ -32,16 +32,22 @@
                 $timeout(scrollToSearchResults, 200);
 
                 ProviderLookupResultVm.loadPage = function () {
-                    ProviderService.lookupProviders(ProviderLookupResultVm.queryParameters, ProviderLookupResultVm.pagination.currentPage - 1,
-                        function (response) {
-                            ProviderLookupResultVm.providerLookupResult = response;
-                            ProviderLookupResultVm.pagination.totalItems = ProviderLookupResultVm.providerLookupResult.totalNumberOfProviders;
-                            scrollToSearchResults();
-                        },
-                        function (response) {
-                            delete ProviderLookupResultVm.providerLookupResult;
-                        }
-                    );
+                    var newPage = ProviderLookupResultVm.pagination.currentPage;
+                    ProviderLookupResultVm.pagination.currentPage = oldPage;
+
+                    function loadPageSuccess(response) {
+                        oldPage = newPage;
+                        ProviderLookupResultVm.pagination.currentPage = newPage;
+                        ProviderLookupResultVm.providerLookupResult = response;
+                        ProviderLookupResultVm.pagination.totalItems = ProviderLookupResultVm.providerLookupResult.totalNumberOfProviders;
+                        scrollToSearchResults();
+                    }
+
+                    function loadPageError(response) {
+                        notificationService.error("Failed to load the page, please try again later...");
+                    }
+
+                    ProviderService.lookupProviders(ProviderLookupResultVm.queryParameters, newPage - 1, loadPageSuccess, loadPageError);
                 };
 
                 ProviderLookupResultVm.isEmptyResult = function () {
@@ -49,16 +55,15 @@
                 };
 
                 ProviderLookupResultVm.addProvider = function (npi) {
-                    ProviderLookupResultVm.error = '';
-                    function success() {
+                    function addProviderSuccess() {
                         $state.go('provider.list');
                     }
 
-                    function error(err) {
-                        ProviderLookupResultVm.error = err;
+                    function addProviderError(err) {
+                        notificationService.error("Failed to add the provider, please try again later...");
                     }
 
-                    ProviderService.addProvider(npi, success, error);
+                    ProviderService.addProvider(npi, addProviderSuccess, addProviderError);
                 };
 
                 ProviderLookupResultVm.paginationSummary = function () {
@@ -80,13 +85,12 @@
             templateUrl: 'app/provider/tmpl/provider-lookup-search.tpl.html',
             controllerAs: 'ProviderLookupSearchVm',
             bindToController: true,
-            controller: ['$location', '$element', '$timeout', '$state', 'utilityService', 'ProviderService',
-                function ($location, $element, $timeout, $state, utilityService, ProviderService) {
+            controller: ['$location', '$element', '$timeout', '$state', 'utilityService', 'ProviderService', 'notificationService',
+                function ($location, $element, $timeout, $state, utilityService, ProviderService, notificationService) {
                     var ProviderLookupSearchVm = this;
                     ProviderLookupSearchVm.formMinlength = 2;
                     ProviderLookupSearchVm.formMaxlength = 10;
                     ProviderLookupSearchVm.firstPage = 0;
-                    ProviderLookupSearchVm.error = "";
 
                     var plsQueryParametersMaster = {
                         usstate: "",
@@ -136,31 +140,35 @@
                     }
 
                     ProviderLookupSearchVm.lookupProvider = function (pageNumber) {
-                        ProviderLookupSearchVm.error = '';
                         $location.hash('');
-                        delete ProviderLookupSearchVm.providerLookupResult;
+                        ProviderLookupSearchVm.providerLookupResult = null;
                         var queryParameters = ProviderLookupSearchVm.plsQueryParameters;
                         ProviderService.lookupProviders(queryParameters, pageNumber,
                             function (response) {
                                 if (!ProviderService.isEmptyLookupResult(response)) {
                                     collapseSearchAccordion();
+                                    ProviderLookupSearchVm.providerLookupResult = response;
+                                } else {
+                                    notificationService.error('Sorry, no results found.');
                                 }
-                                ProviderLookupSearchVm.providerLookupResult = response;
+
                             },
                             function (response) {
-                                ProviderLookupSearchVm.error = response;
-                                delete ProviderLookupSearchVm.providerLookupResult;
+                                notificationService.error('Failed to lookup providers, please try again later...');
                             }
                         );
                     };
 
                     ProviderLookupSearchVm.reset = function (providerSearchForm) {
                         if (providerSearchForm) {
-                            ProviderLookupSearchVm.error = '';
                             providerSearchForm.$setPristine();
                             providerSearchForm.$setUntouched();
                             ProviderLookupSearchVm.plsQueryParameters = angular.copy(plsQueryParametersMaster);
                         }
+                    };
+
+                    ProviderLookupSearchVm.formViewValue = function (form, fieldName) {
+                        return form[fieldName].$viewValue;
                     };
                 }]
         };
