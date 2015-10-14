@@ -47,7 +47,7 @@
      *
      * @constructor
      */
-    function pcmProviderAddress() {
+    function pcmProviderAddress(utilityService) {
 
         return function (provider) {
             var addressStr = "";
@@ -61,7 +61,7 @@
                 addressStr += ", " + provider.practiceLocationAddressStateName;
             }
             if (angular.isDefined(provider.practiceLocationAddressPostalCode)) {
-                addressStr += ", " + provider.practiceLocationAddressPostalCode;
+                addressStr += ", " + utilityService.formatZipCode(provider.practiceLocationAddressPostalCode);
             }
 
             return addressStr;
