@@ -47,7 +47,7 @@
      *
      * @constructor
      */
-    function PCMProviderAddressFilter() {
+    function pcmProviderAddress() {
 
         return function (provider) {
             var addressStr = "";
@@ -87,6 +87,6 @@
     angular.module('app.providerFiltersModule', ['app.servicesModule'])
         .filter('plsName', PLSProviderNameFilter)
         .filter('plsAddress', ['utilityService', PLSProviderAddressFilter])
-        .filter('pcmProviderAddress', PCMProviderAddressFilter)
+        .filter('pcmProviderAddress', pcmProviderAddress)
         .filter('pcmProviderNameOrFacility', PCMProviderNameOrFacilityFilter);
 })();

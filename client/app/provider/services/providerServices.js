@@ -5,7 +5,7 @@
 (function () {
     'use strict';
 
-    function ProviderService($resource, ENVService, $log) {
+    function ProviderService($resource, ENVService) {
         var providers = $resource(ENVService.pcmApiBaseUrl + "/providers/:npi",  { npi:'@npi'});
 
         return {
@@ -28,7 +28,6 @@
              * @param error error callback
              */
             addProvider: function (npi, success, error) {
-                $log.info("Adding provider NPI: " + npi);
                 providers.save({npi: npi},success, error);
             },
 
