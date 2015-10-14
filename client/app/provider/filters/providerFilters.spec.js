@@ -32,38 +32,42 @@ describe('app.providerFiltersModule ', function(){
     });
 });
 
-xdescribe('app.providerFiltersModule ', function () {
+describe('app.providerFiltersModule ', function () {
 
-    var pcmProviderAddress, pcmNameorfacility, utilityService;
+    var pcmProviderAddress, pcmNameorfacility, mockUtilityService;
 
     beforeEach(module('app.servicesModule'));
     beforeEach(module('app.providerFiltersModule'));
 
-    beforeEach(inject(function (_pcmProviderAddress_, _pcmProviderNameOrFacility_, _utilityService_) {
-        pcmProviderAddress = _pcmProviderAddress_;
-        pcmNameorfacility = _pcmProviderNameOrFacility_;
-        utilityService = _utilityService_;
+    beforeEach(inject(function (_pcmProviderAddressFilter_, _pcmProviderNameOrFacilityFilter_, _utilityService_) {
+        pcmProviderAddress = _pcmProviderAddressFilter_;
+        pcmNameorfacility = _pcmProviderNameOrFacilityFilter_;
+        mockUtilityService = _utilityService_;
 
     }));
 
-    it('should filter address ', function () {
-
-        //var provider = {firstLinePracticeLocationAddress: "7175 Columbia Gateway", practiceLocationAddressCityName: "Columbia", practiceLocationAddressStateName: "MD", practiceLocationAddressPostalCode: "21044"};
-        //expect(pcmProviderAddress(provider)).toEqual("7175 Columbia Gateway, Columbia, MD, 21044");
-        //
-        //var provider1 = {firstLinePracticeLocationAddress: "7175 Columbia Gateway", practiceLocationAddressCityName: "", practiceLocationAddressStateName: "MD", practiceLocationAddressPostalCode: "21044"};
-        //expect(pcmProviderAddress(provider1)).toEqual("7175 Columbia Gateway, , MD, 21044");
-        //
-        //var provider2 = {firstLinePracticeLocationAddress: "", practiceLocationAddressCityName: "", practiceLocationAddressStateName: "", practiceLocationAddressPostalCode: ""};
-        //expect(pcmProviderAddress(provider2)).toEqual(", , , ");
+    it('should filter address with', function () {
+        spyOn(mockUtilityService, 'formatZipCode').andReturn("21044");
+        var provider = {firstLinePracticeLocationAddress: "7175 Columbia Gateway", practiceLocationAddressCityName: "Columbia", practiceLocationAddressStateName: "MD", practiceLocationAddressPostalCode: "21044"};
+        expect(pcmProviderAddress(provider)).toEqual("7175 Columbia Gateway, Columbia, MD, 21044");
+        expect(mockUtilityService.formatZipCode).toHaveBeenCalledWith('21044');
     });
 
-    xit('should return first name and last name for Individual provider or facility name for orgnization provider', function () {
-        //var provider = {firstName: "firstName", lastName: "lastName", entityType: "Individual"};
-        //expect(pcmNameorfacility(provider)).toEqual("lastName,firstName");
-        //var provider1 = {orgName: "orgName", entityType: "Organization"};
-        //expect(pcmNameorfacility(provider1)).toEqual("orgName");
+    it('should filter address without no address fields', function () {
+        spyOn(mockUtilityService, 'formatZipCode').andReturn("");
+        var provider1 = {firstLinePracticeLocationAddress: "", practiceLocationAddressCityName: "", practiceLocationAddressStateName: "", practiceLocationAddressPostalCode: ""};
+        expect(pcmProviderAddress(provider1)).toEqual(", , , ");
+        expect(mockUtilityService.formatZipCode).toHaveBeenCalledWith('');
+    });
 
+    it('should filter individual provider name ', function () {
+        var provider = {firstName: "firstName", lastName: "lastName", entityType: "Individual", orgName: "Organization"};
+        expect(pcmNameorfacility(provider)).toEqual("lastName,firstName");
+    });
+
+    it('should filter provider facility name ', function () {
+        var provider = {firstName: "firstName", lastName: "lastName", entityType: "Organization", orgName: "Organization"};
+        expect(pcmNameorfacility(provider)).toEqual("Organization");
     });
 
 });
