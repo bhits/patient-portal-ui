@@ -40,12 +40,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-if="providers.length === 0">
+                            <tr ng-if="ProviderListVm.providers.length === 0">
                                 <td colspan="5" class="text-center"> No provider has been added.</td>
                             </tr>
-                            <tr ng-repeat="provider in providers">
+                            <tr ng-repeat="provider in ProviderListVm.providers">
                                 <td>
-                                    <button type="button" class="btn btn-xs" ng-class="{ 'btn-red' : provider.deletable, 'btn-grey': !provider.deletable} " ng-disabled="!provider.deletable" ng-click="openDeleteProviderModal(provider, 'sm')">
+                                    <button type="button" class="btn btn-xs" ng-class="{ 'btn-red' : provider.deletable, 'btn-grey': !provider.deletable} " ng-disabled="!provider.deletable" ng-click="ProviderListVm.openDeleteProviderModal(provider, 'sm')">
                                         <div class="fa fa-minus">
                                              <span class="sr-only">delete provider</span>
                                              <span class="sr-only" ng-bind="provider.lastName"></span>
@@ -54,10 +54,10 @@
                                     </button>
                                 </td>
                                 <td>
-                                    {{ provider|pcmProviderNameOrFacility }}
+                                    <span ng-bind=" provider|pcmProviderNameOrFacility"></span>
                                 </td>
                                 <td> <span ng-bind="provider.npi"></span> </td>
-                                <td> <span ng-bind="provider.practiceLocationAddressTelephoneNumber"></span> </td>
+                                <td> <span ng-bind="provider.practiceLocationAddressTelephoneNumber | phone"></span> </td>
                                 <td>
                                     {{provider|pcmProviderAddress}}
                                 </td>

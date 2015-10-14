@@ -131,7 +131,7 @@
      *
      * @param $stateProvider
      */
-    function config($stateProvider){
+    function Config($stateProvider){
         $stateProvider
             .state('patient', {
                 abstract: true,
@@ -159,6 +159,6 @@
             'app.healthInformationService',
             'app.healthInformationDirectivesModule'
         ])
-        .config(config)
+        .config(Config)
         .controller('HealthInformationController', HealthInformationController);
 })();
