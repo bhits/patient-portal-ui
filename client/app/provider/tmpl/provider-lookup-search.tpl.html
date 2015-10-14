@@ -48,8 +48,8 @@
                                     </div>
                                 </div>
                                 <div class="form-group" ng-if="ProviderLookupSearchVm.plsQueryParameters.usstate">
-                                    <label class="control-label">City (Required)</label>
-                                    <Input class="form-control m-b" type="text" placeholder="Enter City"
+                                    <label for="city" class="control-label">City (Required)</label>
+                                    <Input id="city" class="form-control m-b" type="text" placeholder="Enter City"
                                            name="providerCity"
                                            ng-model="ProviderLookupSearchVm.plsQueryParameters.city"
                                            ng-minlength="ProviderLookupSearchVm.formMinlength"
@@ -73,8 +73,8 @@
 
                                 <div class="row">
                                     <div class="col-sm-5 form-group">
-                                        <label class="control-label">Zip Code</label>
-                                        <Input class="form-control m-b" type="text" name="providerZipCode"
+                                        <label for="zip" class="control-label">Zip Code</label>
+                                        <Input id="zip" class="form-control m-b" type="text" name="providerZipCode"
                                                placeholder="Enter Zip Code"
                                                ng-model="ProviderLookupSearchVm.plsQueryParameters.zipcode"
                                                ng-disabled="ProviderLookupSearchVm.formViewValue(providerSearchForm, 'providerState')"
@@ -114,8 +114,8 @@
                                 <h3 class="m-t-none m-b">Enter Provider Name and Other Criteria</h3>
 
                                 <div class="form-group">
-                                    <label class="control-label">Provider Last Name</label>
-                                    <Input class="form-control m-b" type="text" name="providerLastName"
+                                    <label for="last_name" class="control-label">Provider Last Name</label>
+                                    <Input id="last_name" class="form-control m-b" type="text" name="providerLastName"
                                            placeholder="Last Name"
                                            ng-model="ProviderLookupSearchVm.plsQueryParameters.lastname"
                                            ng-change="ProviderLookupSearchVm.lastnameChanged()"
@@ -132,8 +132,8 @@
                                     </div>
                                 </div>
                                 <div class="form-group" ng-if="ProviderLookupSearchVm.plsQueryParameters.lastname">
-                                    <label class="control-label">First Name (Optional)</label>
-                                    <Input class="form-control m-b" type="text" name="providerFirstName"
+                                    <label for="first_name" class="control-label">First Name (Optional)</label>
+                                    <Input id="first_name" class="form-control m-b" type="text" name="providerFirstName"
                                            placeholder="First Name"
                                            ng-model="ProviderLookupSearchVm.plsQueryParameters.firstname"
                                            ng-minlength="ProviderLookupSearchVm.formMinlength"
@@ -159,8 +159,10 @@
 
                                     <div class="form-group col-md-6"
                                          ng-if="ProviderLookupSearchVm.plsQueryParameters.lastname">
-                                        <label class="control-label">Telephone (Optional)</label>
-                                        <Input class="form-control m-b" type="tel" placeholder="Telephone"
+                                        <label for="individual_provider_telephone" class="control-label">Telephone
+                                            (Optional)</label>
+                                        <Input id="individual_provider_telephone" class="form-control m-b" type="tel"
+                                               placeholder="Telephone"
                                                name="providerPhone"
                                                ng-model="ProviderLookupSearchVm.plsQueryParameters.phone"
                                                ng-pattern="/\d{3}-\d{3}-\d{4}/"
@@ -187,8 +189,9 @@
                                 <h3 class="m-t-none m-b">Facility Name</h3>
 
                                 <div class="form-group">
-                                    <label class="control-label">Facility Name</label>
-                                    <Input class="form-control m-b" type="text" placeholder="Facility Name"
+                                    <label for="facility_name" class="control-label">Facility Name</label>
+                                    <Input id="facility_name" class="form-control m-b" type="text"
+                                           placeholder="Facility Name"
                                            ng-model="ProviderLookupSearchVm.plsQueryParameters.facilityname"
                                            ng-change="ProviderLookupSearchVm.facilitynameChanged()"
                                            ng-minlength="ProviderLookupSearchVm.formMinlength"
@@ -210,8 +213,10 @@
                                     </div>
                                 </div>
                                 <div class="form-group" ng-if="ProviderLookupSearchVm.plsQueryParameters.facilityname">
-                                    <label class="control-label">Telephone (Optional)</label>
-                                    <Input class="form-control m-b" type="tel" placeholder="Telephone"
+                                    <label for="organizational_provider_telephone" class="control-label">Telephone
+                                        (Optional)</label>
+                                    <Input id="organizational_provider_telephone" class="form-control m-b" type="tel"
+                                           placeholder="Telephone"
                                            name="providerPhoneForFacility"
                                            ng-model="ProviderLookupSearchVm.plsQueryParameters.phone"
                                            ng-pattern="/\d{3}-\d{3}-\d{4}/"
