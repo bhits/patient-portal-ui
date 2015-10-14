@@ -37,10 +37,6 @@ describe('app.providerModule ', function(){
             expect(hasModule('app.providerDirectives')).toEqual(true);
         });
 
-        it("should have app.ngMessages as a dependency", function() {
-            expect(hasModule('ngMessages')).toEqual(true);
-        });
-
         it("should have app.notificationModule as a dependency", function() {
             expect(hasModule('app.notificationModule')).toEqual(true);
         });
@@ -51,16 +47,17 @@ describe('app.providerModule ', function(){
     });
 });
 
-xdescribe("app.accessModule LoginController ", function() {
+xdescribe("app.providerModule ProviderListController ", function() {
+
 
     beforeEach(module('app.providerService'));
-    beforeEach(module('ngMessages'));
     beforeEach(module('app.notificationModule'));
     beforeEach(module('app.providerFiltersModule'));
+    beforeEach(module('app.filtersModule'));
     beforeEach(module('app.providerDirectives'));
     beforeEach(module('app.providerModule'));
 
-    var scope, state, rootScope, Idle, AuthenticationService, deferred;
+    var scope, state, rootScope, Idle, AuthenticationService, deferred, controller;
 
     beforeEach(inject(function($rootScope, $controller, $state, _Idle_, _$q_, _AuthenticationService_) {
         rootScope = $rootScope;
@@ -74,7 +71,7 @@ xdescribe("app.accessModule LoginController ", function() {
         deferred.resolve({Error: { message:"Invalid username and/or password."}});
         spyOn(AuthenticationService, 'login').andReturn(deferred.promise);
 
-        $controller('LoginController', {
+        controller = $controller('ProviderListController', {
             $scope: scope,
             $state: state,
             Idle: Idle,
@@ -82,96 +79,68 @@ xdescribe("app.accessModule LoginController ", function() {
         });
     }));
 
-    xit('should login user ', function(){
-        //state.go('login');
+    it('should open delete provider modal ', function(){
 
-        scope.loginData = {userName: "bob", passowrd: 'bob'};
-        scope.login();
-        rootScope.$apply();
-        expect(scope.message).toBe('Invalid username and/or password.');
+
     });
 
 });
 
-xdescribe("app.healthInformationModule HealthInformationController ", function() {
-
-    beforeEach(module('ui.router'));
-    beforeEach(module('app.servicesModule'));
-    beforeEach(module('app.healthInformationModule'));
-
-    beforeEach(function(){
-        this.addMatchers({
-            toEqualData: function(expected) {
-                return angular.equals(this.actual, expected);
-            }
-        });
-    });
-
-    var scope, HealthInformationService, utilityService, patientData, anchorScroll, spyObject, state,stateParams, location, httpBackend, rootScope;
-
-    beforeEach(inject(function($rootScope, $controller, $state,$stateParams,  $anchorScroll, $location, $httpBackend,_$q_, _utilityService_, _HealthInformationService_) {
-        rootScope = $rootScope;
-        scope = $rootScope.$new();
-        state = $state;
-        stateParams = $stateParams;
-        anchorScroll = $anchorScroll;
-        location = $location;
-        httpBackend = $httpBackend;
-        utilityService = _utilityService_;
-        var deferred = _$q_.defer();
-        HealthInformationService = _HealthInformationService_;
-
-        patientData = {};
-
-        scope.setShowHealthInformationMenu = function(b){};
-
-        var data = {
-            "CCDAHeader": {
-                Assignment: "Allopathic and Osteopathic Physicians",
-                AuthorOfRecord: "Henry Seven",
-                DateRecordDeveloped: "0001-01-01T00:00:00",
-                InformationRecipient: "Henry Seven, Good Health Clinic",
-                LegalAuthenticator: "Henry Seven"
-            }
-        };
-        deferred.resolve(data);
-        spyOn(HealthInformationService, 'getCCDAHeader').andReturn(deferred.promise);
-
-        spyOn(scope, 'setShowHealthInformationMenu').andCallThrough();
-
-        spyOn(utilityService, 'scrollTo').andCallThrough();
-
-        spyOn(scope, "$on");
-
-        $controller('HealthInformationController', {
-            $scope: scope,
-            $state: state,
-            $stateParams: stateParams,
-            utilityService: utilityService,
-            patientData: patientData,
-            HealthInformationService: HealthInformationService
-        });
-
-        scope.$apply();
-    }));
-
-
-    it('should scroll to ', function(){
-        stateParams.scrollTo = 'allergies';
-        stateParams.expand = 'none';
-        expect(scope.$on).toHaveBeenCalled();
-    });
-
-    it("should load resolve data", function(){
-        stateParams.scrollTo = 'allergies';
-        stateParams.expand = 'none';
-        state.go("patient.healthinformation");
-        httpBackend.expectGET('app/common/content.tpl.html').respond(200);
-        httpBackend.expectGET('https://testbed-api-dev.feisystems.com/ccda/getccdajson?emrn=2323').respond(200);
-        httpBackend.expectGET('app/healthinformation/healthinformation.tpl.html').respond(200);
-
-        rootScope.$digest();
-        expect(HealthInformationService.getCCDAHeader ).toHaveBeenCalled();
-    });
-
-});
+//xdescribe("app.healthInformationModule HealthInformationController ", function() {
+//
+//    beforeEach(module('ui.router'));
+//    beforeEach(module('ui.bootstrap'));
+//    beforeEach(module('app.servicesModule'));
+//    beforeEach(module('app.notificationModule'));
+//    beforeEach(module('app.providerService'));
+//    beforeEach(module('app.healthInformationModule'));
+//
+//    beforeEach(function(){
+//        this.addMatchers({
+//            toEqualData: function(expected) {
+//                return angular.equals(this.actual, expected);
+//            }
+//        });
+//    });
+//
+//    var scope, ProviderService, utilityService, providers, state,modal, log, httpBackend, rootScope, notificationService;
+//
+//    beforeEach(inject(function($rootScope, $controller, $state, _$modal_, _utilityService_, _ProviderService_, _notificationService_, _providers_) {
+//        rootScope = $rootScope;
+//        scope = $rootScope.$new();
+//        state = $state;
+//        modal = _$modal_;
+//        utilityService = _utilityService_;
+//        ProviderService = _ProviderService_;
+//        notificationService = _notificationService_;
+//        providers = _providers_;
+//
+//        //deferred.resolve(data);
+//        //spyOn(HealthInformationService, 'getCCDAHeader').andReturn(deferred.promise);
+//        //
+//        //spyOn(scope, 'setShowHealthInformationMenu').andCallThrough();
+//        //
+//        //spyOn(utilityService, 'scrollTo').andCallThrough();
+//        //
+//        //spyOn(scope, "$on");
+//
+//        $controller('ProviderListController', {
+//            $scope: scope,
+//            providers: providers,
+//            $modal: modal,
+//            ProviderService: ProviderService,
+//            notificationService: notificationService,
+//            $state: state
+//        });
+//
+//    }));
+//
+//
+//    it('should scroll to ', function(){
+//        stateParams.scrollTo = 'allergies';
+//        stateParams.expand = 'none';
+//        expect(scope.$on).toHaveBeenCalled();
+//    });
+//
+//
+//});
