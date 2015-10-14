@@ -48,17 +48,17 @@ describe('app.providerFiltersModule ', function () {
     }));
 
     it('should filter address with', function () {
-        spyOn(mockUtilityService, 'formatZipCode').andReturn("21044");
+        spyOn(utilityService, 'formatZipCode').andReturn("21044");
         var provider = {firstLinePracticeLocationAddress: "7175 Columbia Gateway", practiceLocationAddressCityName: "Columbia", practiceLocationAddressStateName: "MD", practiceLocationAddressPostalCode: "21044"};
         expect(pcmProviderAddress(provider)).toEqual("7175 Columbia Gateway, Columbia, MD, 21044");
-        expect(mockUtilityService.formatZipCode).toHaveBeenCalledWith('21044');
+        expect(utilityService.formatZipCode).toHaveBeenCalledWith('21044');
     });
 
     it('should filter address without no address fields', function () {
-        spyOn(mockUtilityService, 'formatZipCode').andReturn("");
+        spyOn(utilityService, 'formatZipCode').andReturn("");
         var provider1 = {firstLinePracticeLocationAddress: "", practiceLocationAddressCityName: "", practiceLocationAddressStateName: "", practiceLocationAddressPostalCode: ""};
         expect(pcmProviderAddress(provider1)).toEqual(", , , ");
-        expect(mockUtilityService.formatZipCode).toHaveBeenCalledWith('');
+        expect(utilityService.formatZipCode).toHaveBeenCalledWith('');
     });
 
     it('should filter individual provider name ', function () {
