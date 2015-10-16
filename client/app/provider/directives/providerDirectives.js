@@ -89,7 +89,7 @@
                 function ($location, $element, $timeout, $state, utilityService, ProviderService, notificationService) {
                     var ProviderLookupSearchVm = this;
                     ProviderLookupSearchVm.formMinlength = 2;
-                    ProviderLookupSearchVm.formMaxlength = 10;
+                    ProviderLookupSearchVm.formMaxlength = 30;
                     ProviderLookupSearchVm.firstPage = 0;
 
                     var plsQueryParametersMaster = {
