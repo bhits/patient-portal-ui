@@ -31,6 +31,7 @@
          *
          * @constructor
          */
+
         function DeleteProviderModalController ($scope, $modalInstance, provider, notificationService, $state) {
             $scope.npi = provider.npi;
             $scope.provider = provider;

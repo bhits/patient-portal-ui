@@ -1,6 +1,6 @@
 'use strict';
 
-xdescribe('app module', function(){
+describe('app module', function(){
     var module;
 
     beforeEach(function() {
@@ -84,7 +84,7 @@ xdescribe('app module', function(){
     });
 });
 
-xdescribe("app AppController ", function() {
+describe("app AppController ", function() {
 
     beforeEach(module('ui.router'));
     beforeEach(module('ngIdle'));
@@ -137,16 +137,15 @@ xdescribe("app AppController ", function() {
 
 
     it('should show Health Information Menu.', function(){
-        console.log(controller);
         expect(controller.healthInformationMenu).toBeFalsy();
-        controller.setShowHealthInformationMenu();
+        controller.showHealthInformationMenu();
         expect(controller.healthInformationMenu).toBeTruthy();
     });
 
-    xit('should scroll to and expand', function(){
+    it('should scroll to and expand', function(){
         var arg1 = {to: "a"};
         var arg2 = {expand: false};
-        scope.scrollToAndExpand("a", false);
+        controller.scrollToAndExpand("a", false);
         expect(scope.$broadcast).toHaveBeenCalledWith("ScrollTo", arg1);
         expect(scope.$broadcast).toHaveBeenCalledWith("ExpandAccordion", arg2);
     });
@@ -154,18 +153,30 @@ xdescribe("app AppController ", function() {
     xit('should route to Health Information .', function(){
         state.current.name = "home";
         spyOn(state, 'go').andCallThrough();
-        scope.routeToHealthInformation();
+        controller.routeToHealthInformation();
         expect(state.current.name ).toEqual("patient.healthinformation");
     });
 
     xit('should log out user.', function(){
-        scope.logOut();
-        expect( scope.showHealthInformationMenu).toBeFalsy();
+        controller.logOut();
+        expect( controller.showHealthInformationMenu).toBeFalsy();
     });
 
     xit('should close modal', function(){
         //scope.warning = false;
         scope.closeModals();
         expect( scope.warning).toBeNull();
+    });
+
+    xit('should  handle ToggleMenuItemWithoutData event', function(){
+        var menuItems = {
+            demographics: true,
+            medications: true,
+            alerts:true
+
+        };
+        spyOn(scope, '$on').andCallThrough();
+        rootScope.$broadcast('ToggleMenuItemWithoutData', menuItems);
+        expect(scope.$on).toHaveBeenCalledWith(menuItems);
     });
 });
