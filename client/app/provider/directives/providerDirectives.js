@@ -149,7 +149,7 @@
                                     collapseSearchAccordion();
                                     ProviderLookupSearchVm.providerLookupResult = response;
                                 } else {
-                                    notificationService.error('Sorry, no results found.');
+                                    notificationService.info('Sorry, no results found.');
                                 }
 
                             },
