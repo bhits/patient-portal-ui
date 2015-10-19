@@ -20,7 +20,13 @@
 
         return {
             success: function(msg){
+                notify({ message: msg, duration: duration, classes: 'alert-info', templateUrl: templateUrl});
+            },
+            info: function(msg){
                 notify({ message: msg, duration: duration, classes: 'alert-success', templateUrl: templateUrl});
+            },
+            warn: function(msg){
+                notify({ message: msg, duration: duration, classes: 'alert-warning', templateUrl: templateUrl});
             },
             error: function(msg){
                 notify({ message: msg, duration: duration, classes: 'alert-danger', templateUrl: templateUrl});
