@@ -58,8 +58,12 @@
 
                                     <div ng-messages="providerSearchForm.providerCity.$error"
                                          class="text-alert" role="alert">
-                                        <div ng-message="minlength">Minimum 2 characters</div>
-                                        <div ng-message="maxlength">Maximum 10 characters</div>
+                                        <div ng-message="minlength">Minimum {{ProviderLookupSearchVm.formMinlength}}
+                                            characters
+                                        </div>
+                                        <div ng-message="maxlength">Maximum {{ProviderLookupSearchVm.formMaxlength}}
+                                            characters
+                                        </div>
                                         <div ng-message="required">Required</div>
                                     </div>
                                 </div>
@@ -126,8 +130,12 @@
 
                                     <div ng-messages="providerSearchForm.providerLastName.$error"
                                          class="text-alert" role="alert">
-                                        <div ng-message="minlength">Minimum 2 characters</div>
-                                        <div ng-message="maxlength">Maximum 30 characters</div>
+                                        <div ng-message="minlength">Minimum {{ProviderLookupSearchVm.formMinlength}}
+                                            characters
+                                        </div>
+                                        <div ng-message="maxlength">Maximum {{ProviderLookupSearchVm.formMaxlength}}
+                                            characters
+                                        </div>
                                         <!--<div ng-message="required">Required</div>-->
                                     </div>
                                 </div>
@@ -141,8 +149,12 @@
 
                                     <div ng-messages="providerSearchForm.providerFirstName.$error"
                                          class="text-alert" role="alert">
-                                        <div ng-message="minlength">Minimum 2 characters</div>
-                                        <div ng-message="maxlength">Maximum 10 characters</div>
+                                        <div ng-message="minlength">Minimum {{ProviderLookupSearchVm.formMinlength}}
+                                            characters
+                                        </div>
+                                        <div ng-message="maxlength">Maximum {{ProviderLookupSearchVm.formMaxlength}}
+                                            characters
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -202,8 +214,12 @@
 
                                     <div ng-messages="providerSearchForm.providerFacilityName.$error"
                                          class="text-alert" role="alert">
-                                        <div ng-message="minlength">Minimum 2 characters</div>
-                                        <div ng-message="maxlength">Maximum 30 characters</div>
+                                        <div ng-message="minlength">Minimum {{ProviderLookupSearchVm.formMinlength}}
+                                            characters
+                                        </div>
+                                        <div ng-message="maxlength">Maximum {{ProviderLookupSearchVm.formMaxlength}}
+                                            characters
+                                        </div>
                                         <!--<div ng-message="required">Required</div>-->
                                     </div>
                                     <div class="info-blue italic m-b"
