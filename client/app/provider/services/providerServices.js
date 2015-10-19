@@ -6,7 +6,7 @@
     'use strict';
 
     function ProviderService($resource, ENVService) {
-        var providers = $resource(ENVService.pcmApiBaseUrl + "/providers/:npi",  { npi:'@npi'});
+        var providers = $resource(ENVService.pcmApiBaseUrl + "/providers/:npi", {npi: '@npi'});
 
         return {
 
@@ -17,7 +17,7 @@
              * Deletes provider by npi
              */
             deleteProvider: function (npi, success, error) {
-                providers.delete({npi: npi},success, error);
+                providers.delete({npi: npi}, success, error);
 
             },
 
@@ -28,7 +28,7 @@
              * @param error error callback
              */
             addProvider: function (npi, success, error) {
-                providers.save({npi: npi},success, error);
+                providers.save({npi: npi}, success, error);
             },
 
             /**
@@ -66,6 +66,25 @@
                 }
                 return empty;
             },
+
+            /**
+             * Checks if the given npi is already in the providersData
+             * @param providersData
+             * @param npi
+             * @returns {boolean}
+             */
+            hasNpi: function (providersData, npi) {
+                var isAlreadyAdded = false;
+                if (angular.isDefined(providersData) && angular.isArray(providersData) && providersData.length > 0) {
+                    for (var i = 0; i < providersData.length; i++) {
+                        if (npi === providersData[i].npi) {
+                            isAlreadyAdded = true;
+                            break;
+                        }
+                    }
+                }
+                return isAlreadyAdded;
+            }
         };
     }
 

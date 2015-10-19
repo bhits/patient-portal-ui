@@ -29,7 +29,17 @@
                     utilityService.scrollTo('provider_lookup_result');
                 }
 
+                function getCurrentProviderList() {
+                    return ProviderService.getProviders().query(angular.identity, angular.identity);
+                }
+
+                ProviderLookupResultVm.providersData = getCurrentProviderList();
+
                 $timeout(scrollToSearchResults, 200);
+
+                ProviderLookupResultVm.isProviderAlreadyAdded = function (npi) {
+                    return ProviderService.hasNpi(ProviderLookupResultVm.providersData, npi);
+                };
 
                 ProviderLookupResultVm.loadPage = function () {
                     var newPage = ProviderLookupResultVm.pagination.currentPage;
@@ -40,6 +50,7 @@
                         ProviderLookupResultVm.pagination.currentPage = newPage;
                         ProviderLookupResultVm.providerLookupResult = response;
                         ProviderLookupResultVm.pagination.totalItems = ProviderLookupResultVm.providerLookupResult.totalNumberOfProviders;
+                        ProviderLookupResultVm.providersData = getCurrentProviderList();
                         scrollToSearchResults();
                     }
 
