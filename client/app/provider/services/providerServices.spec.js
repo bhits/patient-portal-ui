@@ -201,4 +201,33 @@ describe('app.providerService ', function () {
         // Assert
         expect(result).toEqual(expectedResult);
     });
+
+    it('should verify if ', function () {
+        // Arrange
+        var providerLookupResult = {
+            someProperty: 'somePropertyValue',
+            providers: [{someObjectPropert: 'someObjectPropertyValue'}]
+        };
+        var expectedResult = false;
+
+        // Act
+        var result = ProviderServices.isEmptyLookupResult(providerLookupResult);
+
+        // Assert
+        expect(result).toEqual(expectedResult);
+    });
+
+    it('should verify provider in list of providers ', function () {
+        var providerData = [{deletable: false, entityType: "Individual", firstLinePracticeLocationAddress: "600 N WOLFE ST", firstName: "MONICA", lastName: "VAN DONGEN", npi: "1083949036", orgName: null, practiceLocationAddressCityName: "BALTIMORE", practiceLocationAddressCountryCode: "US", practiceLocationAddressPostalCode: "212870005", practiceLocationAddressStateName: "MD", practiceLocationAddressTelephoneNumber: "4106141937", providerTaxonomyDescription: "Family", secondLinePracticeLocationAddress: "BLALOCK 412"}];
+        expect(ProviderServices.hasNpi(providerData, '1083949036')).toBeTruthy();
+
+        var providerData = [];
+        expect(ProviderServices.hasNpi(providerData, '1083949036')).toBeFalsy();
+
+        var providerData = {};
+        expect(ProviderServices.hasNpi(providerData, '1083949036')).toBeFalsy();
+    });
+
+
+
 });
