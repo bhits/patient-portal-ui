@@ -27,11 +27,20 @@
             <li ui-sref-active="active" >
                 <a ui-sref="index.home"><i class="fa fa-home"></i> <span class="nav-label">Home</span></a>
             </li>
+
+            <!--<li ng-class="{active: $state.includes('consent')}" >-->
+                <!--<a href=""><i class="fa fa-user-md"></i> <span class="nav-label">Consents</span><span class="fa arrow"></span></a>-->
+                <!--<ul class="nav nav-second-level" ng-class="{'in': $state.includes('consent')}">-->
+                    <!--<li ui-sref-active="active"><a ui-sref="consent.list">List</a></li>-->
+                    <!--<li ui-sref-active="active"><a ui-sref="consent.create">Create</a></li>-->
+                <!--</ul>-->
+            <!--</li>-->
+
             <li ng-class="{active: $state.includes('provider')}" >
                 <a href=""><i class="fa fa-user-md"></i> <span class="nav-label">Providers</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level" ng-class="{'in': $state.includes('provider')}">
-                    <li ui-sref-active="active"><a ui-sref="provider.list">List</a></li>
-                    <li ui-sref-active="active"><a ui-sref="provider.lookup">Lookup</a></li>
+                    <li ui-sref-active="active"><a ui-sref="provider.list">List Providers</a></li>
+                    <li ui-sref-active="active"><a ui-sref="provider.lookup">Search Providers</a></li>
                 </ul>
             </li>
 
