@@ -59,7 +59,7 @@
         "jshint-stylish": "0.1.x",
         "load-grunt-tasks": "0.3.x",
         "time-grunt": "0.2.x",
-        "grunt-bump": "0.0.x",
+        "grunt-bump": "0.6.x",
         "grunt-contrib-cssmin": "0.12.2",
         "grunt-ng-constant": "1.1.0",
         "grunt-war": "0.4.x"
