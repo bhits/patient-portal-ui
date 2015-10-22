@@ -84,7 +84,7 @@
 
             var deferred = $q.defer();
 
-            var providerResource = ProviderService.getProviders();
+            var providerResource = ProviderService.getProvidersResource();
             var providersData = providerResource.query(
                 function (response) {
                     return response;

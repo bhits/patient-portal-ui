@@ -20,7 +20,7 @@
         };
     }
 
-    function SelectProvider($modal) {
+    function SelectProvider($modal, ProviderService) {
         return {
             restrict: 'E',
             replace: false,
@@ -31,10 +31,16 @@
             },
             bindToController: true,
             controllerAs: 'SelectProviderVm',
-            controller: ['$scope', 'ConsentService','$modal', function ($scope, ConsentService, $modal) {
+            controller: ['$scope', 'ConsentService','$modal', 'ProviderService', function ($scope, ConsentService, $modal, ProviderService) {
                 var SelectProviderVm = this;
 
                 SelectProviderVm.fieldplaceholder = SelectProviderVm.modaltitle === 'Authorize' ? "The following individual or organization" : "To disclose my information to";
+
+                ProviderService.getProviders(function(response){
+                    SelectProviderVm.providers = response;
+                }, function(error){
+                    console.log("Error: in getting providers");
+                });
 
                 function SelectProviderModalController ($scope, $modalInstance, notificationService, modalTitle) {
                     $scope.title = modalTitle;
@@ -154,10 +160,10 @@
         };
     }
 
-    angular.module("app.consentDirectives", ['app.consentServices'])
+    angular.module("app.consentDirectives", ['app.consentServices', 'app.providerService'])
         .directive('createConsent', CreateConsent)
-        .directive('selectProvider', ['$modal', SelectProvider])
-        .directive('medicalInformation', ['$modal', MedicalInformation])
-        .directive('purposeOfUse', ['$modal', PurposeOfUse])
+        .directive('selectProvider', SelectProvider)
+        .directive('medicalInformation', MedicalInformation)
+        .directive('purposeOfUse', PurposeOfUse)
         .directive('consentTerm', ConsentTerm);
 })();

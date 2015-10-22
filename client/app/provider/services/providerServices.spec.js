@@ -53,7 +53,7 @@ describe('app.providerService ', function () {
     });
 
     it('should providers resource function', function () {
-        expect(angular.isFunction(ProviderServices.getProviders())).toNotBe(null);
+        expect(angular.isFunction(ProviderServices.getProvidersResource())).toNotBe(null);
     });
 
     it('should add Providers', function () {

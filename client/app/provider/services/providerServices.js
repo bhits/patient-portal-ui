@@ -10,7 +10,11 @@
 
         return {
 
-            getProviders: function () {
+            getProviders: function (success, error) {
+                providers.query(success, error);
+            },
+
+            getProvidersResource: function () {
                 return providers;
             },
             /**

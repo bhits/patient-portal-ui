@@ -30,7 +30,7 @@
                 }
 
                 function getCurrentProviderList() {
-                    return ProviderService.getProviders().query(angular.identity, angular.identity);
+                    return ProviderService.getProvidersResource().query(angular.identity, angular.identity);
                 }
 
                 ProviderLookupResultVm.providersData = getCurrentProviderList();
