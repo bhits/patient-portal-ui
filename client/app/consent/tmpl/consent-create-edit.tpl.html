@@ -1,3 +1,4 @@
+
 <form action="">
     <h1> I, Dob, hereby authorize... </h1>
     <div class="hr-line-dashed"></div>
@@ -13,16 +14,22 @@
     </div>
     <div class="hr-line-dashed"></div>
     <div class="row">
-        <div class="col-sm-4"><input type="text" class="form-control"></div>
+        <div class="col-sm-4">
+            <medical-information ng-model="CreateConsentVm.consent.medicalInformation"></medical-information>
+        </div>
 
     </div>
     <div class="hr-line-dashed"></div>
     <div class="row">
-        <div class="col-sm-4"><input type="text" class="form-control"></div>
+        <div class="col-sm-4">
+            <purpose-of-use ng-model="CreateConsentVm.consent.purposeOfUse"></purpose-of-use>
+        </div>
     </div>
     <div class="hr-line-dashed"></div>
     <div class="row">
-        <div class="col-sm-4"><input type="text" class="form-control"></div>
+        <div class="col-sm-4">
+            <consent-term ng-model="CreateConsentVm.consent.consentTerm"></consent-term>
+        </div>
     </div>
 
     <div class="hr-line-dashed"></div>

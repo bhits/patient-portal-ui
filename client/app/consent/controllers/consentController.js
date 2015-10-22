@@ -36,5 +36,4 @@
         ])
         .config(ConsentConfig);
 
-
 })();
