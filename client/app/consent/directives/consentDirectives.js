@@ -192,8 +192,11 @@
         }
     }
 
-    angular.module("app.consentDirectives", ['app.consentServices'])
-    angular.module("app.consentDirectives", ['app.consentServices', 'app.providerService'])
+    angular.module("app.consentDirectives",
+        [
+            'app.consentServices',
+            'app.providerService'
+        ])
         .directive('createConsent', CreateConsent)
         .directive('consentCard', ConsentCard)
         .directive('consentCardList', ConsentCardList)
