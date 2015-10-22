@@ -154,10 +154,44 @@
         };
     }
 
+    function ConsentCard() {
+        var directive = {
+            scope: {consent: '='},
+            restrict: 'E',
+            templateUrl: 'app/consent/tmpl/consent-card.tpl.html',
+            controller: ['ConsentService', consentCardController],
+            controllerAs: 'ConsentCardVm'
+        };
+        return directive;
+
+        function consentCardController(ConsentService){
+
+        }
+    }
+
+    function ConsentCardList() {
+        var directive = {
+            restrict: 'E',
+            scope: {},
+            templateUrl: 'app/consent/tmpl/consent-card-list.tpl.html',
+            controller: ['ConsentService', ConsentCardListController],
+            controllerAs: 'ConsentCardListVm'
+        };
+        return directive;
+
+        function ConsentCardListController(ConsentService) {
+            var ConsentCardListVm = this;
+            ConsentCardListVm.consentList = ConsentService.listConsent(1);
+            console.log(ConsentCardListVm.consentList);
+        }
+    }
+
     angular.module("app.consentDirectives", ['app.consentServices'])
         .directive('createConsent', CreateConsent)
         .directive('selectProvider', ['$modal', SelectProvider])
         .directive('medicalInformation', ['$modal', MedicalInformation])
         .directive('purposeOfUse', ['$modal', PurposeOfUse])
-        .directive('consentTerm', ConsentTerm);
+        .directive('consentTerm', ConsentTerm)
+        .directive('consentCard', ConsentCard)
+        .directive('consentCardList', ConsentCardList);
 })();
