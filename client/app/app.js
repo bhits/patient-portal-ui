@@ -225,6 +225,7 @@
           'app.healthInformationModule',
           'app.accessModule',
           'app.providerModule',
+          'app.consentModule',
           'app.directivesModule',    // Common modules start here
           'app.servicesModule',
           'app.authInterceptorModule',
