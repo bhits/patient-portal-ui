@@ -5,7 +5,7 @@
     /**
      * pageTitle - Directive for set Page title - mata title
      */
-    function PageTitle($rootScope, $timeout){
+    function PageTitle($rootScope, $timeout) {
         return {
             link: function (scope, element) {
                 var listener = function (event, toState, toParams, fromState, fromParams) {
@@ -27,7 +27,7 @@
     /**
      * sideNavigation - Directive for run metsiMenu on sidebar navigation
      */
-    function SideNavigation($timeout){
+    function SideNavigation($timeout) {
         return {
             restrict: 'A',
             link: function (scope, element) {
@@ -40,7 +40,7 @@
         };
     }
 
-    function IboxTools($timeout){
+    function IboxTools($timeout) {
         return {
             restrict: 'A',
             scope: {
@@ -114,11 +114,11 @@
     /**
      * minimalizaSidebar - Directive for minimalize sidebar
      */
-    function MinimalizaSidebar($timeout){
+    function MinimalizaSidebar($timeout) {
         return {
             restrict: 'A',
             scope: {
-                togglesidebar : "&"
+                togglesidebar: "&"
             },
             template: '<a class="navbar-minimalize minimalize-styl-2 btn btn-primary dark-green"  ng-click="minimalize()"><i class="fa fa-bars"></i></a>',
             controller: function ($scope, $element) {
@@ -152,19 +152,20 @@
             }
         };
     }
+
     /**
      * Icheck directive
      */
-    function Icheck($timeout){
+    function Icheck($timeout) {
         return {
             restrict: 'A',
             require: 'ngModel',
-            link: function($scope, element, $attrs, ngModel) {
-                return $timeout(function() {
+            link: function ($scope, element, $attrs, ngModel) {
+                return $timeout(function () {
                     var value;
                     value = $attrs.value;
 
-                    $scope.$watch($attrs.ngModel, function(newValue){
+                    $scope.$watch($attrs.ngModel, function (newValue) {
                         $(element).iCheck('update');
                     });
 
@@ -172,14 +173,14 @@
                         checkboxClass: 'icheckbox_square-green',
                         radioClass: 'iradio_square-green'
 
-                    }).on('ifChanged', function(event) {
+                    }).on('ifChanged', function (event) {
                         if ($(element).attr('type') === 'checkbox' && $attrs.ngModel) {
-                            $scope.$apply(function() {
+                            $scope.$apply(function () {
                                 return ngModel.$setViewValue(event.target.checked);
                             });
                         }
                         if ($(element).attr('type') === 'radio' && $attrs.ngModel) {
-                            return $scope.$apply(function() {
+                            return $scope.$apply(function () {
                                 return ngModel.$setViewValue(value);
                             });
                         }
@@ -190,11 +191,26 @@
         };
     }
 
+    /**
+     * Wraps the main content to display
+     * @returns {{restrict: string, transclude: boolean, scope: {title: string}, templateUrl: string}}
+     * @constructor
+     */
+    function ContentWrapper() {
+        return {
+            restrict: 'E',
+            transclude: true,
+            scope: {title: '@'},
+            templateUrl: 'common/tmpl/content-wrapper.tpl.html'
+        };
+    }
+
     angular.module('app.directivesModule', [])
-        .directive('pageTitle',PageTitle)
+        .directive('pageTitle', PageTitle)
         .directive('sideNavigation', SideNavigation)
-        .directive('iboxTools',IboxTools)
-        .directive('minimalizaSidebar',MinimalizaSidebar)
-        .directive('icheck', Icheck);
+        .directive('iboxTools', IboxTools)
+        .directive('minimalizaSidebar', MinimalizaSidebar)
+        .directive('icheck', Icheck)
+        .directive('contentWrapper', ContentWrapper);
 })();
 
