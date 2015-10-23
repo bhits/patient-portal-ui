@@ -88,7 +88,16 @@
                     }
                 }
                 return isAlreadyAdded;
-            }
+            },
+
+            isIndividualProvider: function(provider){
+                return angular.isDefined(provider) && angular.equals(provider.entityType, 'Individual');
+            },
+
+            isOrganizationProvider: function(provider){
+                return angular.isDefined(provider) && angular.equals(provider.entityType, 'Organization');
+            },
+
         };
     }
 

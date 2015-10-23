@@ -20,7 +20,7 @@
         };
     }
 
-    function SelectProvider($modal, ProviderService) {
+    function SelectProvider($modal, ProviderService, ConsentService) {
         return {
             restrict: 'E',
             replace: false,
@@ -33,6 +33,7 @@
             controllerAs: 'SelectProviderVm',
             controller: ['$scope', 'ConsentService', '$modal', 'ProviderService', function ($scope, ConsentService, $modal, ProviderService) {
                 var SelectProviderVm = this;
+                //SelectProviderVm.selectedProviders = ConsentService.getSelectedProviders();
 
                 SelectProviderVm.fieldplaceholder = SelectProviderVm.modaltitle === 'Authorize' ? "The following individual or organization" : "To disclose my information to";
 
@@ -42,9 +43,26 @@
                     console.log("Error: in getting providers");
                 });
 
-                function SelectProviderModalController($scope, $modalInstance, notificationService, modalTitle) {
-                    $scope.title = modalTitle;
+                function SelectProviderModalController ($scope, $modalInstance, notificationService, data, ProviderService, ConsentService) {
+
+                    $scope.selectedProviders = ConsentService.getSelectedProviders();
+
+                    $scope.title = data.modalTitle;
+                    $scope.consent = {
+                        selectedProviders:[]
+                    };
+                    $scope.providerData = ConsentService.prepareProviderList($scope.selectedProviders, data.providers);
+
+                    $scope.isOrganizationProvider = function(provider){
+                        return ProviderService.isOrganizationProvider(provider);
+                    };
+
+                    $scope.isIndividualProvider = function(provider){
+                        return ProviderService.isIndividualProvider(provider);
+                    };
+
                     $scope.ok = function () {
+                        ConsentService.setSelectedProviders($scope.consent.selectedProviders);
                         $modalInstance.close();
                     };
 
@@ -58,8 +76,11 @@
                         templateUrl: 'app/consent/tmpl/consent-select-provider-modal.tpl.html',
 
                         resolve: {
-                            modalTitle: function () {
-                                return SelectProviderVm.modaltitle;
+                            data: function () {
+                                return {
+                                    modalTitle:  SelectProviderVm.modaltitle,
+                                   providers: SelectProviderVm.providers
+                            };
                             }
                         },
                         controller: SelectProviderModalController
@@ -223,7 +244,9 @@
     angular.module("app.consentDirectives",
         [
             'app.consentServices',
-            'app.providerService'
+            'app.providerService',
+            'app.providerFiltersModule',
+            'checklist-model'
         ])
         .directive('createConsent', CreateConsent)
         .directive('consentCard', ConsentCard)
