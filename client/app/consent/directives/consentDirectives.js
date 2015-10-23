@@ -27,22 +27,22 @@
             templateUrl: 'app/consent/tmpl/consent-select-provider.tpl.html',
             require: '?ngModel',
             scope: {
-                modaltitle:"="
+                modaltitle: "="
             },
             bindToController: true,
             controllerAs: 'SelectProviderVm',
-            controller: ['$scope', 'ConsentService','$modal', 'ProviderService', function ($scope, ConsentService, $modal, ProviderService) {
+            controller: ['$scope', 'ConsentService', '$modal', 'ProviderService', function ($scope, ConsentService, $modal, ProviderService) {
                 var SelectProviderVm = this;
 
                 SelectProviderVm.fieldplaceholder = SelectProviderVm.modaltitle === 'Authorize' ? "The following individual or organization" : "To disclose my information to";
 
-                ProviderService.getProviders(function(response){
+                ProviderService.getProviders(function (response) {
                     SelectProviderVm.providers = response;
-                }, function(error){
+                }, function (error) {
                     console.log("Error: in getting providers");
                 });
 
-                function SelectProviderModalController ($scope, $modalInstance, notificationService, modalTitle) {
+                function SelectProviderModalController($scope, $modalInstance, notificationService, modalTitle) {
                     $scope.title = modalTitle;
                     $scope.ok = function () {
                         $modalInstance.close();
@@ -76,14 +76,14 @@
             templateUrl: 'app/consent/tmpl/consent-medical-information.tpl.html',
             require: '?ngModel',
             scope: {
-                data:"="
+                data: "="
             },
             bindToController: true,
             controllerAs: 'MedicalInformationVm',
-            controller: ['$scope', 'ConsentService','$modal', function ($scope, ConsentService, $modal) {
+            controller: ['$scope', 'ConsentService', '$modal', function ($scope, ConsentService, $modal) {
                 var MedicalInformationVm = this;
 
-                function MedicalInformationModalController ($scope, $modalInstance) {
+                function MedicalInformationModalController($scope, $modalInstance) {
                     $scope.ok = function () {
                         $modalInstance.close();
                     };
@@ -117,10 +117,10 @@
             require: '?ngModel',
             bindToController: true,
             controllerAs: 'PurposeOfUseVm',
-            controller: ['$scope', 'ConsentService','$modal', function ($scope, ConsentService, $modal) {
+            controller: ['$scope', 'ConsentService', '$modal', function ($scope, ConsentService, $modal) {
                 var PurposeOfUseVm = this;
 
-                function PurposeOfUseModalController ($scope, $modalInstance) {
+                function PurposeOfUseModalController($scope, $modalInstance) {
                     $scope.ok = function () {
                         $modalInstance.close();
                     };
