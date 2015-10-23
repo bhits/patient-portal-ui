@@ -3,7 +3,6 @@
         <h4 class="modal-title"> <span ng-bind="title"></span></h4>
     </div>
     <div class="modal-body">
-        <form>
                 <p ng-if="title === 'Authorize'">Please select <strong>one</strong> individual or organization authorized to share your information:</p>
                 <p ng-if="title === 'Disclosure'">Please select <strong>one</strong> individual or organization for disclosure:</p>
                 <div class="row">
@@ -20,7 +19,6 @@
                                     </div>
                                 </div>
                         </div>
-
                     </div>
                 </div>
                 <div class="row">
@@ -39,7 +37,6 @@
                     </div>
                 </div>
         </form>
-    </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-white" ng-click="cancel()">Cancel</button>
         <button type="button" class="btn btn-primary" ng-click="ok()">Add Selected</button>

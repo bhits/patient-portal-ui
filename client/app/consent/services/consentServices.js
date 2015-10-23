@@ -68,6 +68,8 @@
                 }
                 ];
                 return consentList;
+                */
+                consentResource.query({pageNumber: page}, success, error);
             },
 
             setSelectedProviders : function(provider){
@@ -88,9 +90,6 @@
                 }
                 return providerList;
              }
-                return consentList;*/
-                consentResource.query({pageNumber: page}, success, error);
-            }
         };
     }
 
