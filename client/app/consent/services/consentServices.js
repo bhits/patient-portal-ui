@@ -6,7 +6,7 @@
     'use strict';
 
     function ConsentService($resource, ENVService) {
-        var consentResource = $resource(ENVService.pcmApiBaseUrl + "/providers/:npi", {npi: '@npi'});
+        var consentResource = $resource(ENVService.pcmApiBaseUrl + "/consents/pageNumber/:pageNumber", {pageNumber: '@pageNumber'});
 
         return {
 
@@ -21,8 +21,8 @@
             updateConsent: function(consent, success, error) {
             },
 
-            listConsent: function(patientId) {
-                var consentList = [{
+            listConsent: function(page, success, error) {
+                /*var consentList = [{
                     "id": "1",
                     "toDiscloseName": ["VAN DONGEN, MONICA"],
                     "isMadeToName": ["GRIMES, MICHAEL"],
@@ -56,7 +56,8 @@
                     "medicalInformationNotDisclosed": true
                 }
                 ];
-                return consentList;
+                return consentList;*/
+                consentResource.query({pageNumber: page}, success, error);
             }
         };
     }

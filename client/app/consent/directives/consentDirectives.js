@@ -170,7 +170,7 @@
         };
         return directive;
 
-        function consentCardController(ConsentService){
+        function consentCardController(ConsentService) {
 
         }
     }
@@ -180,15 +180,25 @@
             restrict: 'E',
             scope: {},
             templateUrl: 'app/consent/tmpl/consent-card-list.tpl.html',
-            controller: ['ConsentService', ConsentCardListController],
+            controller: ['ConsentService', 'notificationService', ConsentCardListController],
             controllerAs: 'ConsentCardListVm'
         };
         return directive;
 
-        function ConsentCardListController(ConsentService) {
+        function ConsentCardListController(ConsentService, notificationService) {
             var ConsentCardListVm = this;
-            ConsentCardListVm.consentList = ConsentService.listConsent(1);
-            console.log(ConsentCardListVm.consentList);
+            ConsentCardListVm.consentList = [];
+
+            function success(response) {
+                ConsentCardListVm.consentList = response;
+                notificationService.success('Successfully retrieved consent list.');
+            }
+
+            function error(response) {
+                notificationService.error('Failed to get consent list, please try again later...');
+            }
+
+            ConsentCardListVm.consentList = ConsentService.listConsent(0, success, error);
         }
     }
 
