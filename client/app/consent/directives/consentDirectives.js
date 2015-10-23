@@ -165,13 +165,32 @@
             scope: {consent: '='},
             restrict: 'E',
             templateUrl: 'app/consent/tmpl/consent-card.tpl.html',
-            controller: ['ConsentService', consentCardController],
+            controller: ['$modal', 'ConsentService', ConsentCardController],
             controllerAs: 'ConsentCardVm'
         };
         return directive;
 
-        function consentCardController(ConsentService) {
+        function ConsentCardController($modal, ConsentService) {
+            var ConsentCardVm = this;
+            ConsentCardVm.openManageConsentModal = openManageConsentModal;
+            ConsentCardVm.consentState = ConsentService.resolveConsentState;
 
+            function openManageConsentModal(consent) {
+                $modal.open({
+                    templateUrl: 'app/consent/tmpl/consent-list-manage-options-modal-' + ConsentService.resolveConsentState(consent) + '.tpl.html',
+                    controller: ['$modalInstance', ManageConsentModalController],
+                    controllerAs: 'ManageConsentModalVm'
+                });
+            }
+
+            function ManageConsentModalController($modalInstance) {
+                var ManageConsentModalVm = this;
+                ManageConsentModalVm.cancel = cancel;
+
+                function cancel() {
+                    $modalInstance.dismiss('cancel');
+                }
+            }
         }
     }
 
@@ -191,7 +210,6 @@
 
             function success(response) {
                 ConsentCardListVm.consentList = response;
-                notificationService.success('Successfully retrieved consent list.');
             }
 
             function error(response) {

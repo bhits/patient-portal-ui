@@ -10,7 +10,7 @@
     <div class="ibox-content">
         <div class="well">
             <h3>
-                Status: <strong><span ng-bind="consent.consentStage"/></strong>
+                Consent State: <strong><span ng-bind="ConsentCardVm.consentState(consent) | uppercase"/></strong>
             </h3>
         </div>
         <div class="well">
@@ -22,7 +22,8 @@
             <span ng-bind="consent.shareForPurposeOfUseCodes"/>
         </div>
         <div class="well">
-            <button class="btn btn-primary">Manage Consent</button>
+            <button class="btn btn-primary" ng-click="ConsentCardVm.openManageConsentModal(consent)">Manage Consent
+            </button>
         </div>
     </div>
 </div>
