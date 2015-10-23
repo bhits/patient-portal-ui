@@ -27,19 +27,19 @@
             templateUrl: 'app/consent/tmpl/consent-select-provider.tpl.html',
             require: '?ngModel',
             scope: {
-                modaltitle:"="
+                modaltitle: "="
             },
             bindToController: true,
             controllerAs: 'SelectProviderVm',
-            controller: ['$scope', 'ConsentService','$modal', 'ProviderService', function ($scope, ConsentService, $modal, ProviderService) {
+            controller: ['$scope', 'ConsentService', '$modal', 'ProviderService', function ($scope, ConsentService, $modal, ProviderService) {
                 var SelectProviderVm = this;
                 //SelectProviderVm.selectedProviders = ConsentService.getSelectedProviders();
 
                 SelectProviderVm.fieldplaceholder = SelectProviderVm.modaltitle === 'Authorize' ? "The following individual or organization" : "To disclose my information to";
 
-                ProviderService.getProviders(function(response){
+                ProviderService.getProviders(function (response) {
                     SelectProviderVm.providers = response;
-                }, function(error){
+                }, function (error) {
                     console.log("Error: in getting providers");
                 });
 
@@ -97,14 +97,14 @@
             templateUrl: 'app/consent/tmpl/consent-medical-information.tpl.html',
             require: '?ngModel',
             scope: {
-                data:"="
+                data: "="
             },
             bindToController: true,
             controllerAs: 'MedicalInformationVm',
-            controller: ['$scope', 'ConsentService','$modal', function ($scope, ConsentService, $modal) {
+            controller: ['$scope', 'ConsentService', '$modal', function ($scope, ConsentService, $modal) {
                 var MedicalInformationVm = this;
 
-                function MedicalInformationModalController ($scope, $modalInstance) {
+                function MedicalInformationModalController($scope, $modalInstance) {
                     $scope.ok = function () {
                         $modalInstance.close();
                     };
@@ -138,10 +138,10 @@
             require: '?ngModel',
             bindToController: true,
             controllerAs: 'PurposeOfUseVm',
-            controller: ['$scope', 'ConsentService','$modal', function ($scope, ConsentService, $modal) {
+            controller: ['$scope', 'ConsentService', '$modal', function ($scope, ConsentService, $modal) {
                 var PurposeOfUseVm = this;
 
-                function PurposeOfUseModalController ($scope, $modalInstance) {
+                function PurposeOfUseModalController($scope, $modalInstance) {
                     $scope.ok = function () {
                         $modalInstance.close();
                     };
@@ -191,7 +191,7 @@
         };
         return directive;
 
-        function consentCardController(ConsentService){
+        function consentCardController(ConsentService) {
 
         }
     }
@@ -201,15 +201,25 @@
             restrict: 'E',
             scope: {},
             templateUrl: 'app/consent/tmpl/consent-card-list.tpl.html',
-            controller: ['ConsentService', ConsentCardListController],
+            controller: ['ConsentService', 'notificationService', ConsentCardListController],
             controllerAs: 'ConsentCardListVm'
         };
         return directive;
 
-        function ConsentCardListController(ConsentService) {
+        function ConsentCardListController(ConsentService, notificationService) {
             var ConsentCardListVm = this;
-            ConsentCardListVm.consentList = ConsentService.listConsent(1);
-            console.log(ConsentCardListVm.consentList);
+            ConsentCardListVm.consentList = [];
+
+            function success(response) {
+                ConsentCardListVm.consentList = response;
+                notificationService.success('Successfully retrieved consent list.');
+            }
+
+            function error(response) {
+                notificationService.error('Failed to get consent list, please try again later...');
+            }
+
+            ConsentCardListVm.consentList = ConsentService.listConsent(0, success, error);
         }
     }
 
