@@ -7,6 +7,17 @@
 
     function ConsentService($resource, ENVService) {
         var consentResource = $resource(ENVService.pcmApiBaseUrl + "/providers/:npi", {npi: '@npi'});
+        var selectedProvider = [];
+
+        //To be refactore
+        var hasNPI = function(list, npi){
+            for(var j = 0; j< list.length; j++ ) {
+                if(npi === list[j]) {
+                    return true;
+                }
+            }
+            return false;
+        };
 
         return {
 
@@ -57,7 +68,26 @@
                 }
                 ];
                 return consentList;
-            }
+            },
+
+            setSelectedProviders : function(provider){
+                selectedProvider = provider;
+            },
+
+            getSelectedProviders : function(provider){
+              return  selectedProvider;
+            },
+            prepareProviderList : function(selectedProviders, providers){
+                var providerList = [];
+                for(var i = 0; i< providers.length; i++ ) {
+                    if(hasNPI(selectedProviders, providers[i].npi)){
+                        providerList.push({isDisabled: true, provider:providers[i]});
+                    }else{
+                        providerList.push({isDisabled: false, provider: providers[i]});
+                    }
+                }
+                return providerList;
+             }
         };
     }
 
