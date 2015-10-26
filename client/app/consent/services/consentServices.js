@@ -10,9 +10,9 @@
         var selectedProvider = [];
 
         //To be refactore
-        var hasNPI = function(list, npi){
-            for(var j = 0; j< list.length; j++ ) {
-                if(npi === list[j]) {
+        var hasNPI = function (list, npi) {
+            for (var j = 0; j < list.length; j++) {
+                if (npi === list[j]) {
                     return true;
                 }
             }
@@ -33,7 +33,7 @@
             },
 
             listConsent: function (page, success, error) {
-                /*var consentList = [{
+                var consentList = [{
                     "id": "1",
                     "toDiscloseName": ["VAN DONGEN, MONICA"],
                     "isMadeToName": ["GRIMES, MICHAEL"],
@@ -99,28 +99,30 @@
                     "medicalInformationNotDisclosed": true
                 }
                 ];
-                return consentList;*/
-                consentResource.query({pageNumber: page}, success, error);
+                return consentList;
+
+                //consentResource.query({pageNumber: page}, success, error);
             },
 
-            setSelectedProviders : function(provider){
+            setSelectedProviders: function (provider) {
                 selectedProvider = provider;
             },
 
-            getSelectedProviders : function(provider){
-              return  selectedProvider;
+            getSelectedProviders: function (provider) {
+                return selectedProvider;
             },
-            prepareProviderList : function(selectedProviders, providers){
+
+            prepareProviderList: function (selectedProviders, providers) {
                 var providerList = [];
-                for(var i = 0; i< providers.length; i++ ) {
-                    if(hasNPI(selectedProviders, providers[i].npi)){
-                        providerList.push({isDisabled: true, provider:providers[i]});
-                    }else{
+                for (var i = 0; i < providers.length; i++) {
+                    if (hasNPI(selectedProviders, providers[i].npi)) {
+                        providerList.push({isDisabled: true, provider: providers[i]});
+                    } else {
                         providerList.push({isDisabled: false, provider: providers[i]});
                     }
                 }
                 return providerList;
-             },
+            },
 
             resolveConsentState: function (consent) {
                 var state = 'error';
