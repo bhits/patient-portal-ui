@@ -6,10 +6,19 @@
     <div class="modal-body">
         <strong>I want to:</strong>
         <ul class="list-group">
-            <li class="list-group-item"><button class="btn btn-success">View Signed Consent</button></li>
-            <li class="list-group-item"><button class="btn btn-success">Export to XACML</button></li>
-            <li class="list-group-item"><button class="btn btn-success">Try My Consent Settings against My Medical Record before Sharing</button></li>
-            <li class="list-group-item"><button class="btn btn-success">Withdrawal</button></li>
+            <li class="list-group-item">
+                <button class="btn btn-success">View Signed Consent</button>
+            </li>
+            <li class="list-group-item">
+                <button class="btn btn-success">Export to XACML</button>
+            </li>
+            <li class="list-group-item">
+                <button class="btn btn-success">Try My Consent Settings against My Medical Record before Sharing
+                </button>
+            </li>
+            <li class="list-group-item">
+                <button class="btn btn-success" ng-click="ManageConsentModalVm.revoke()">Withdrawal</button>
+            </li>
         </ul>
     </div>
 </div>

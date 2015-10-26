@@ -199,17 +199,28 @@
             function openManageConsentModal(consent) {
                 $modal.open({
                     templateUrl: 'app/consent/tmpl/consent-list-manage-options-modal-' + ConsentService.resolveConsentState(consent) + '.tpl.html',
-                    controller: ['$modalInstance', ManageConsentModalController],
-                    controllerAs: 'ManageConsentModalVm'
+                    controller: ['$state', '$modalInstance', 'consent', ManageConsentModalController],
+                    controllerAs: 'ManageConsentModalVm',
+                    resolve: {
+                        consent: function () {
+                            return consent;
+                        }
+                    }
                 });
             }
 
-            function ManageConsentModalController($modalInstance) {
+            function ManageConsentModalController($state, $modalInstance, consent) {
                 var ManageConsentModalVm = this;
                 ManageConsentModalVm.cancel = cancel;
+                ManageConsentModalVm.revoke = revoke;
 
                 function cancel() {
                     $modalInstance.dismiss('cancel');
+                }
+
+                function revoke() {
+                    $state.go('consent.revoke', {consent: consent});
+                    $modalInstance.close();
                 }
             }
         }
