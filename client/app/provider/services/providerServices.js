@@ -55,7 +55,14 @@
                 queryParameters = plsQueryParameters.facilityname ? queryParameters + "/facilityname/" + plsQueryParameters.facilityname : queryParameters;
 
                 var providerResource = $resource(ENVService.plsApiBaseUrl + "/pageNumber/:pageNumber" + queryParameters, {pageNumber: page});
-                providerResource.get({pageNumber: page}, success, error);
+                providerResource.get({pageNumber: page - 1}, adjustPageOnSuccessResponse, error);
+
+                function adjustPageOnSuccessResponse(response){
+                    if (angular.isDefined(response.currentPage) && angular.isNumber(response.currentPage)) {
+                        response.currentPage += 1;
+                    }
+                    (success || angular.identity)(response);
+                }
             },
 
             /**
