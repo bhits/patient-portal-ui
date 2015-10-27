@@ -19,10 +19,12 @@
             bindToController: true,
             controller: ['$timeout', '$state', 'utilityService', 'ProviderService', 'notificationService', function ($timeout, $state, utilityService, ProviderService, notificationService) {
                 var ProviderLookupResultVm = this;
-                ProviderLookupResultVm.pagination = {};
-                ProviderLookupResultVm.pagination.totalItems = ProviderLookupResultVm.providerLookupResult.totalNumberOfProviders;
-                ProviderLookupResultVm.pagination.currentPage = ProviderLookupResultVm.providerLookupResult.currentPage + 1;
-                ProviderLookupResultVm.pagination.maxSize = 10;
+                ProviderLookupResultVm.pagination = {
+                    totalItems: ProviderLookupResultVm.providerLookupResult.totalNumberOfProviders,
+                    currentPage: ProviderLookupResultVm.providerLookupResult.currentPage,
+                    itemsPerPage: ProviderLookupResultVm.providerLookupResult.itemsPerPage,
+                    maxSize: 10
+                };
                 var oldPage = ProviderLookupResultVm.pagination.currentPage;
 
                 function scrollToSearchResults() {
@@ -50,6 +52,7 @@
                         ProviderLookupResultVm.pagination.currentPage = newPage;
                         ProviderLookupResultVm.providerLookupResult = response;
                         ProviderLookupResultVm.pagination.totalItems = ProviderLookupResultVm.providerLookupResult.totalNumberOfProviders;
+                        ProviderLookupResultVm.pagination.itemsPerPage = ProviderLookupResultVm.providerLookupResult.itemsPerPage;
                         ProviderLookupResultVm.providersData = getCurrentProviderList();
                         scrollToSearchResults();
                     }
@@ -58,7 +61,7 @@
                         notificationService.error("Failed to load the page, please try again later...");
                     }
 
-                    ProviderService.lookupProviders(ProviderLookupResultVm.queryParameters, newPage - 1, loadPageSuccess, loadPageError);
+                    ProviderService.lookupProviders(ProviderLookupResultVm.queryParameters, newPage, loadPageSuccess, loadPageError);
                 };
 
                 ProviderLookupResultVm.isEmptyResult = function () {
@@ -101,7 +104,7 @@
                     var ProviderLookupSearchVm = this;
                     ProviderLookupSearchVm.formMinlength = 2;
                     ProviderLookupSearchVm.formMaxlength = 30;
-                    ProviderLookupSearchVm.firstPage = 0;
+                    ProviderLookupSearchVm.firstPage = 1;
 
                     var plsQueryParametersMaster = {
                         usstate: "",

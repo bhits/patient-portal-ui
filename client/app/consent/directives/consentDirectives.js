@@ -43,21 +43,21 @@
                     console.log("Error: in getting providers");
                 });
 
-                function SelectProviderModalController ($scope, $modalInstance, notificationService, data, ProviderService, ConsentService) {
+                function SelectProviderModalController($scope, $modalInstance, notificationService, data, ProviderService, ConsentService) {
 
                     $scope.selectedProviders = ConsentService.getSelectedProviders();
 
                     $scope.title = data.modalTitle;
                     $scope.consent = {
-                        selectedProviders:[]
+                        selectedProviders: []
                     };
                     $scope.providerData = ConsentService.prepareProviderList($scope.selectedProviders, data.providers);
 
-                    $scope.isOrganizationProvider = function(provider){
+                    $scope.isOrganizationProvider = function (provider) {
                         return ProviderService.isOrganizationProvider(provider);
                     };
 
-                    $scope.isIndividualProvider = function(provider){
+                    $scope.isIndividualProvider = function (provider) {
                         return ProviderService.isIndividualProvider(provider);
                     };
 
@@ -78,9 +78,9 @@
                         resolve: {
                             data: function () {
                                 return {
-                                    modalTitle:  SelectProviderVm.modaltitle,
-                                   providers: SelectProviderVm.providers
-                            };
+                                    modalTitle: SelectProviderVm.modaltitle,
+                                    providers: SelectProviderVm.providers
+                                };
                             }
                         },
                         controller: SelectProviderModalController
@@ -186,13 +186,43 @@
             scope: {consent: '='},
             restrict: 'E',
             templateUrl: 'app/consent/tmpl/consent-card.tpl.html',
-            controller: ['ConsentService', consentCardController],
+            controller: ['$modal', 'ConsentService', ConsentCardController],
             controllerAs: 'ConsentCardVm'
         };
         return directive;
 
-        function consentCardController(ConsentService) {
+        function ConsentCardController($modal, ConsentService) {
+            var ConsentCardVm = this;
+            ConsentCardVm.openManageConsentModal = openManageConsentModal;
+            ConsentCardVm.consentState = ConsentService.resolveConsentState;
 
+            function openManageConsentModal(consent) {
+                $modal.open({
+                    templateUrl: 'app/consent/tmpl/consent-list-manage-options-modal-' + ConsentService.resolveConsentState(consent) + '.tpl.html',
+                    controller: ['$state', '$modalInstance', 'consent', ManageConsentModalController],
+                    controllerAs: 'ManageConsentModalVm',
+                    resolve: {
+                        consent: function () {
+                            return consent;
+                        }
+                    }
+                });
+            }
+
+            function ManageConsentModalController($state, $modalInstance, consent) {
+                var ManageConsentModalVm = this;
+                ManageConsentModalVm.cancel = cancel;
+                ManageConsentModalVm.revoke = revoke;
+
+                function cancel() {
+                    $modalInstance.dismiss('cancel');
+                }
+
+                function revoke() {
+                    $state.go('consent.revoke', {consent: consent});
+                    $modalInstance.close();
+                }
+            }
         }
     }
 
@@ -201,25 +231,42 @@
             restrict: 'E',
             scope: {},
             templateUrl: 'app/consent/tmpl/consent-card-list.tpl.html',
-            controller: ['ConsentService', 'notificationService', ConsentCardListController],
+            controller: ['ConsentService', 'notificationService', 'utilityService', ConsentCardListController],
             controllerAs: 'ConsentCardListVm'
         };
         return directive;
 
-        function ConsentCardListController(ConsentService, notificationService) {
+        function ConsentCardListController(ConsentService, notificationService, utilityService) {
             var ConsentCardListVm = this;
-            ConsentCardListVm.consentList = [];
+            var oldPage = 1;
+            ConsentCardListVm.consentList = {};
+            ConsentCardListVm.pagination = {totalItems: 0, currentPage: oldPage, itemsPerPage: 5, maxSize: 10};
+            ConsentCardListVm.loadPage = loadPage;
+
+            ConsentCardListVm.loadPage();
+
+            function updatePagination(response) {
+                ConsentCardListVm.pagination.totalItems = response.totalItems;
+                ConsentCardListVm.pagination.currentPage = response.currentPage;
+                ConsentCardListVm.pagination.itemsPerPage = response.itemsPerPage;
+            }
 
             function success(response) {
+                oldPage = response.currentPage;
+                updatePagination(response);
                 ConsentCardListVm.consentList = response;
-                notificationService.success('Successfully retrieved consent list.');
+                utilityService.scrollTo('content_wrapper');
             }
 
             function error(response) {
-                notificationService.error('Failed to get consent list, please try again later...');
+                notificationService.error('Failed to get the consent list, please try again later...');
             }
 
-            ConsentCardListVm.consentList = ConsentService.listConsent(0, success, error);
+            function loadPage() {
+                var newPage = ConsentCardListVm.pagination.currentPage;
+                ConsentCardListVm.pagination.currentPage = oldPage;
+                ConsentService.listConsent(newPage, success, error);
+            }
         }
     }
 

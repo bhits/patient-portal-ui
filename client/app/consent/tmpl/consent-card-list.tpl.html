@@ -1,5 +1,23 @@
-<div>
-    <div ng-repeat="consent in ConsentCardListVm.consentList">
+<div id="consent_list">
+    <div class="text-center">
+        <pagination total-items="ConsentCardListVm.pagination.totalItems"
+                    items-per-page="ConsentCardListVm.pagination.itemsPerPage"
+                    ng-model="ConsentCardListVm.pagination.currentPage"
+                    ng-change="ConsentCardListVm.loadPage()"
+                    max-size="ConsentCardListVm.pagination.maxSize"
+                    class="pagination-sm"
+                    boundary-links="true"></pagination>
+    </div>
+    <div ng-repeat="consent in ConsentCardListVm.consentList.consents">
         <consent-card consent="consent"/>
+    </div>
+    <div class="text-center">
+        <pagination total-items="ConsentCardListVm.pagination.totalItems"
+                    items-per-page="ConsentCardListVm.pagination.itemsPerPage"
+                    ng-model="ConsentCardListVm.pagination.currentPage"
+                    ng-change="ConsentCardListVm.loadPage()"
+                    max-size="ConsentCardListVm.pagination.maxSize"
+                    class="pagination-sm"
+                    boundary-links="true"></pagination>
     </div>
 </div>

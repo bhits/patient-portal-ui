@@ -89,6 +89,7 @@ describe('app.providerService ', function () {
         var statusCodeNotSet = "STATUS_NOT_SET";
         var statusCodeReturnedFromBackend = statusCodeSuccess;
         var page = 10;
+        var pageForBackendCall = page - 1;
         var plsQueryParameters = {
             usstate: "usstateValue",
             city: "cityValue",
@@ -110,7 +111,7 @@ describe('app.providerService ', function () {
         });
 
         // Assert
-        $httpBackend.expectGET('http://localhost:8080/pls/providers/pageNumber/' + page + "/usstate/usstateValue/city/cityValue/zipcode/zipcodeValue/gender/genderValue/phone/phoneValue/firstname/firstnameValue/lastname/lastnameValue/facilityname/facilitynameValue").respond(statusCodeReturnedFromBackend, {status: statusCodeReturnedFromBackend});
+        $httpBackend.expectGET('http://localhost:8080/pls/providers/pageNumber/' + pageForBackendCall + "/usstate/usstateValue/city/cityValue/zipcode/zipcodeValue/gender/genderValue/phone/phoneValue/firstname/firstnameValue/lastname/lastnameValue/facilityname/facilitynameValue").respond(statusCodeReturnedFromBackend, {status: statusCodeReturnedFromBackend});
         $httpBackend.flush();
         expect(statusWhenSuccess).toEqual(statusCodeSuccess);
         expect(statusWhenError).toEqual(statusCodeNotSet);
@@ -124,6 +125,7 @@ describe('app.providerService ', function () {
         var statusCodeNotSet = "STATUS_NOT_SET";
         var statusCodeReturnedFromBackend = statusCodeError;
         var page = 10;
+        var pageForBackendCall = page - 1;
         var plsQueryParameters = {
             usstate: "usstateValue",
             city: "cityValue",
@@ -145,7 +147,7 @@ describe('app.providerService ', function () {
         });
 
         // Assert
-        $httpBackend.expectGET('http://localhost:8080/pls/providers/pageNumber/' + page + "/usstate/usstateValue/city/cityValue/zipcode/zipcodeValue/gender/genderValue/phone/phoneValue/firstname/firstnameValue/lastname/lastnameValue/facilityname/facilitynameValue").respond(statusCodeReturnedFromBackend, {status: statusCodeReturnedFromBackend});
+        $httpBackend.expectGET('http://localhost:8080/pls/providers/pageNumber/' + pageForBackendCall + "/usstate/usstateValue/city/cityValue/zipcode/zipcodeValue/gender/genderValue/phone/phoneValue/firstname/firstnameValue/lastname/lastnameValue/facilityname/facilitynameValue").respond(statusCodeReturnedFromBackend, {status: statusCodeReturnedFromBackend});
         $httpBackend.flush();
         expect(statusWhenSuccess).toEqual(statusCodeNotSet);
         expect(statusWhenError).toEqual(statusCodeError);
@@ -218,7 +220,22 @@ describe('app.providerService ', function () {
     });
 
     it('should verify provider in list of providers ', function () {
-        var providerData = [{deletable: false, entityType: "Individual", firstLinePracticeLocationAddress: "600 N WOLFE ST", firstName: "MONICA", lastName: "VAN DONGEN", npi: "1083949036", orgName: null, practiceLocationAddressCityName: "BALTIMORE", practiceLocationAddressCountryCode: "US", practiceLocationAddressPostalCode: "212870005", practiceLocationAddressStateName: "MD", practiceLocationAddressTelephoneNumber: "4106141937", providerTaxonomyDescription: "Family", secondLinePracticeLocationAddress: "BLALOCK 412"}];
+        var providerData = [{
+            deletable: false,
+            entityType: "Individual",
+            firstLinePracticeLocationAddress: "600 N WOLFE ST",
+            firstName: "MONICA",
+            lastName: "VAN DONGEN",
+            npi: "1083949036",
+            orgName: null,
+            practiceLocationAddressCityName: "BALTIMORE",
+            practiceLocationAddressCountryCode: "US",
+            practiceLocationAddressPostalCode: "212870005",
+            practiceLocationAddressStateName: "MD",
+            practiceLocationAddressTelephoneNumber: "4106141937",
+            providerTaxonomyDescription: "Family",
+            secondLinePracticeLocationAddress: "BLALOCK 412"
+        }];
         expect(ProviderServices.hasNpi(providerData, '1083949036')).toBeTruthy();
     });
 

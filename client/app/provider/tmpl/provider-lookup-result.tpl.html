@@ -17,6 +17,7 @@
         <div class="col-md-6" ng-if="!ProviderLookupResultVm.isEmptyResult()">
             <div class="text-center">
                 <pagination total-items="ProviderLookupResultVm.pagination.totalItems"
+                            items-per-page="ProviderLookupResultVm.pagination.itemsPerPage"
                             ng-model="ProviderLookupResultVm.pagination.currentPage"
                             ng-change="ProviderLookupResultVm.loadPage()"
                             max-size="ProviderLookupResultVm.pagination.maxSize"
@@ -60,6 +61,7 @@
         <div class="col-md-6" ng-if="!ProviderLookupResultVm.isEmptyResult()">
             <div class="text-center">
                 <pagination total-items="ProviderLookupResultVm.pagination.totalItems"
+                            items-per-page="ProviderLookupResultVm.pagination.itemsPerPage"
                             ng-model="ProviderLookupResultVm.pagination.currentPage"
                             ng-change="ProviderLookupResultVm.loadPage()"
                             max-size="ProviderLookupResultVm.pagination.maxSize"
