@@ -12,7 +12,7 @@
                                 <div ng-if="isIndividualProvider(data.provider)">
                                     <div class="radio">
                                         <label>
-                                                <input type="checkbox" icheck  checklist-model="consent.selectedProviders" checklist-value="data.provider.npi"  ng-disabled="data.isDisabled">
+                                                <input type="checkbox" icheck  checklist-model="consent.selectedProviders" checklist-value="data.provider.npi"  ng-checked="data.isDisabled">
                                                 <span ng-bind=" data.provider|pcmProviderNameOrFacility"></span>
                                         </label>
 
@@ -28,7 +28,7 @@
                             <div ng-if="isOrganizationProvider(data.provider)">
                                 <div class="radio">
                                     <label>
-                                        <input type="checkbox" icheck  checklist-model="consent.selectedProviders" checklist-value="data.provider.npi" ng-disabled="data.isDisabled">
+                                        <input type="checkbox" icheck  checklist-model="consent.selectedProviders" checklist-value="data.provider.npi" ng-checked="data.isDisabled">
                                         <span ng-bind=" data.provider|pcmProviderNameOrFacility"></span>
                                     </label>
                                 </div>
