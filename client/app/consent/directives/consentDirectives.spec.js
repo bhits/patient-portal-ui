@@ -45,7 +45,11 @@ describe('app.consentDirectives', function () {
     var $compile,
         $rootScope,
         $httpBackend,
+        $modal,
+        $q,
         ConsentService;
+
+    var mockConsent = {};
 
     // Load the modules, which contains the directive or a dependency
     beforeEach(module('ui.bootstrap'));
@@ -54,23 +58,18 @@ describe('app.consentDirectives', function () {
 
     // Store references to $rootScope and $compile
     // so they are available to all tests in this describe block
-    beforeEach(inject(function (_$compile_, _$rootScope_, _$httpBackend_, _ConsentService_) {
+    beforeEach(inject(function (_$compile_, _$rootScope_, _$httpBackend_, _$modal_, _$q_, _ConsentService_) {
         // The injector unwraps the underscores (_) from around the parameter names when matching
         $compile = _$compile_;
         $rootScope = _$rootScope_;
         $httpBackend = _$httpBackend_;
+        $modal = _$modal_;
+        $q = _$q_;
         ConsentService = _ConsentService_;
     }));
 
-    afterEach(function () {
-        $httpBackend.verifyNoOutstandingExpectation();
-        $httpBackend.verifyNoOutstandingRequest();
-    });
-
-    it('replaces the element with the appropriate content for consent-card', function () {
-        // Arrange
-        var mockState = "MOCK_STATE";
-        var mockConsent = {
+    beforeEach(function () {
+        mockConsent = {
             "id": "1",
             "toDiscloseName": ["VAN DONGEN, MONICA"],
             "isMadeToName": ["GRIMES, MICHAEL"],
@@ -87,6 +86,16 @@ describe('app.consentDirectives', function () {
             "consentEndString": null,
             "medicalInformationNotDisclosed": true
         };
+    });
+
+    afterEach(function () {
+        $httpBackend.verifyNoOutstandingExpectation();
+        $httpBackend.verifyNoOutstandingRequest();
+    });
+
+    it('should replace the element with the appropriate content for consent-card', function () {
+        // Arrange
+        var mockState = "MOCK_STATE";
         $rootScope.consent = mockConsent;
         spyOn(ConsentService, 'resolveConsentState').andReturn(mockState);
 
@@ -110,4 +119,100 @@ describe('app.consentDirectives', function () {
         expect(element.html()).toContain(mockState);
         expect(ConsentService.resolveConsentState).toHaveBeenCalledWith(mockConsent);
     });
+
+    it('should open a manage modal for consent-card directive', function () {
+        // Arrange
+        var directiveController;
+        var mockState = "success";
+        $rootScope.consent = mockConsent;
+        spyOn(ConsentService, 'resolveConsentState').andReturn(mockState);
+        var modalPromise = $q.defer().promise;
+        spyOn($modal, 'open').andReturn({result: modalPromise});
+
+        // Act
+        // Compile a piece of HTML containing the directive
+        var element = $compile('<consent-card consent="consent"></consent-card>')($rootScope);
+        // fire all the watches
+        $rootScope.$digest();
+        directiveController = element.isolateScope().ConsentCardVm;
+        directiveController.openManageConsentModal(mockConsent);
+
+        // Assert
+        expect($modal.open).toHaveBeenCalled();
+    });
+
+    it('should call ConsentService.resolveConsentState in consent-card directive', function () {
+        // Arrange
+        var directiveController;
+        var mockState = "success";
+        $rootScope.consent = mockConsent;
+        spyOn(ConsentService, 'resolveConsentState').andReturn(mockState);
+
+        // Act
+        // Compile a piece of HTML containing the directive
+        var element = $compile('<consent-card consent="consent"></consent-card>')($rootScope);
+        // fire all the watches
+        $rootScope.$digest();
+        directiveController = element.isolateScope().ConsentCardVm;
+        directiveController.consentState(mockConsent);
+
+        // Assert
+        expect(ConsentService.resolveConsentState).toHaveBeenCalledWith(mockConsent);
+    });
+
+    it('should call ConsentService.isShareAll in consent-card directive', function () {
+        // Arrange
+        var directiveController;
+        var mockIsShareAll = true;
+        $rootScope.consent = mockConsent;
+        spyOn(ConsentService, 'isShareAll').andReturn(mockIsShareAll);
+
+        // Act
+        // Compile a piece of HTML containing the directive
+        var element = $compile('<consent-card consent="consent"></consent-card>')($rootScope);
+        // fire all the watches
+        $rootScope.$digest();
+        directiveController = element.isolateScope().ConsentCardVm;
+        directiveController.isShareAll(mockConsent);
+
+        // Assert
+        expect(ConsentService.isShareAll).toHaveBeenCalledWith(mockConsent);
+    });
+
+    it('should combine non disclosed items in one array and join to a string in consent-card directive', function () {
+        // Arrange
+        var directiveController;
+        var expectedNotDisclosedItems = 'Medications, Allergies, Mental health information sensitivity, HIV/AIDS information sensitivity';
+        $rootScope.consent = mockConsent;
+
+        // Act
+        // Compile a piece of HTML containing the directive
+        var element = $compile('<consent-card consent="consent"></consent-card>')($rootScope);
+        // fire all the watches
+        $rootScope.$digest();
+        directiveController = element.isolateScope().ConsentCardVm;
+        var notDisclosedItems = directiveController.notDisclosedItems(mockConsent);
+
+        // Assert
+        expect(notDisclosedItems).toEqual(expectedNotDisclosedItems);
+    });
+
+    it('should join purpose of use items into a string in consent-card directive', function () {
+        // Arrange
+        var directiveController;
+        var expectedPurposeOfUseItems = 'Payment, Emergency Treatment, Healthcare Treatment';
+        $rootScope.consent = mockConsent;
+
+        // Act
+        // Compile a piece of HTML containing the directive
+        var element = $compile('<consent-card consent="consent"></consent-card>')($rootScope);
+        // fire all the watches
+        $rootScope.$digest();
+        directiveController = element.isolateScope().ConsentCardVm;
+        var notDisclosedItems = directiveController.purposeOfUseItems(mockConsent);
+
+        // Assert
+        expect(notDisclosedItems).toEqual(expectedPurposeOfUseItems);
+    });
+
 });
