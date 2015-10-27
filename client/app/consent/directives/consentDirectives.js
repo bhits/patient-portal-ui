@@ -90,7 +90,7 @@
         };
     }
 
-    function MedicalInformation($modal) {
+    function MedicalInformation($modal, ConsentService) {
         return {
             restrict: 'E',
             replace: false,
@@ -104,7 +104,51 @@
             controller: ['$scope', 'ConsentService', '$modal', function ($scope, ConsentService, $modal) {
                 var MedicalInformationVm = this;
 
-                function MedicalInformationModalController($scope, $modalInstance) {
+
+
+                ConsentService.getMedicalSection(function (response) {
+                    MedicalInformationVm.medicatlSections = response;
+                }, function (error) {
+                    console.log("Error: in getting providers");
+                });
+
+                ConsentService.getSensitivityPolicies(function (response) {
+                    MedicalInformationVm.sensitivityPolicies = response;
+                }, function (error) {
+                    console.log("Error: in getting providers");
+                });
+
+
+                function MedicalInformationModalController($scope, $modalInstance, data) {
+                    $scope.mediactionSections = data.mediactionSections;
+
+                    $scope.sensitivityPolicies = data.sensitivityPolicies;
+
+
+                    $scope.consent = { selectedMedicalSections: [], selectedSensitivityPolicies: [] };
+
+
+                    $scope.selectAllMedicalSections = function(){
+                        for(var i=0; i < $scope.mediactionSections.length; i++){
+                            $scope.consent.selectedMedicalSections.push($scope.mediactionSections[i].code);
+                        }
+                    };
+
+                    $scope.deselectAllMedicalSections = function(){
+                        $scope.consent.selectedMedicalSections=[];
+                    };
+
+                    $scope.selectAllSensitivityPolicies = function(){
+                        for(var i=0; i < $scope.sensitivityPolicies.length; i++){
+                            $scope.consent.selectedSensitivityPolicies.push($scope.sensitivityPolicies[i].code);
+                        }
+                    };
+
+                    $scope.deselectAllSensitivityPolicies = function(){
+                        $scope.consent.selectedSensitivityPolicies=[];
+                    };
+
+
                     $scope.ok = function () {
                         $modalInstance.close();
                     };
@@ -115,12 +159,17 @@
                 }
 
                 MedicalInformationVm.openPrivacySettingsModal = function () {
+
+
                     var modalInstance = $modal.open({
                         templateUrl: 'app/consent/tmpl/consent-medical-information-modal.tpl.html',
 
                         resolve: {
                             data: function () {
-                                return MedicalInformationVm.data;
+                                return {
+                                   mediactionSections: MedicalInformationVm.medicatlSections,
+                                   sensitivityPolicies: MedicalInformationVm.sensitivityPolicies
+                                };
                             }
                         },
                         controller: MedicalInformationModalController
@@ -130,7 +179,7 @@
         };
     }
 
-    function PurposeOfUse(ConsentService) {
+    function PurposeOfUse(ConsentService, $modal) {
         return {
             restrict: 'E',
             replace: false,

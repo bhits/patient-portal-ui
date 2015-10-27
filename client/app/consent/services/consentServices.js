@@ -177,7 +177,7 @@
             getMedicalSection: function (success, error) {
                 medicationSectionResource.query(success, error);
             },
-            getSensitivityPolicys: function (success, error) {
+            getSensitivityPolicies: function (success, error) {
                 sensitvityPolicyResource.query(success, error);
             },
 

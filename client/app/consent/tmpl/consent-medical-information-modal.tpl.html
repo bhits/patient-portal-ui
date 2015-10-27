@@ -3,8 +3,53 @@
         <h4 class="modal-title">Privacy Settings</h4>
     </div>
     <div class="modal-body">
-        <h4>Settings Information Categories</h4>
-        <h4>Medical Information Categories</h4>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Sensitive Information Categories</h5>
+                        <div ibox-tools></div>
+                    </div>
+                    <div class="ibox-content">
+                        <button class="btn btn-primary btn-xs" ng-click="selectAllMedicalSections()">Select All</button> <button class="btn btn-primary btn-xs" ng-click="deselectAllMedicalSections()">Deselect All</button>
+                        <div ng-repeat="medicalSection in mediactionSections">
+                            <div >
+                                <div class="radio">
+                                    <label>
+                                        <input type="checkbox" icheck  checklist-model="consent.selectedMedicalSections" checklist-value="medicalSection.code" >
+                                        <span ng-bind="medicalSection.displayName"></span>
+                                    </label>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Medical Information Categories</h5>
+                        <div ibox-tools></div>
+                    </div>
+                    <div class="ibox-content">
+                        <button class="btn btn-primary btn-xs" ng-click="selectAllSensitivityPolicies()">Select All</button> <button class="btn btn-primary btn-xs" ng-click="deselectAllSensitivityPolicies()">Deselect All</button>
+                        <div ng-repeat="sensitivityPolicy in sensitivityPolicies">
+                            <div >
+                                <div class="radio">
+                                    <label>
+                                        <input type="checkbox" icheck  checklist-model="consent.selectedSensitivityPolicies" checklist-value="sensitivityPolicy.code" >
+                                        <span ng-bind="sensitivityPolicy.displayName"></span>
+                                    </label>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-white" ng-click="cancel()">Cancel</button>
