@@ -7,6 +7,10 @@
 
     function ConsentService($resource, ENVService) {
         var consentResource = $resource(ENVService.pcmApiBaseUrl + "/consents/pageNumber/:pageNumber", {pageNumber: '@pageNumber'});
+        var purposeOfUseResource = $resource(ENVService.pcmApiBaseUrl + "/purposeOfUse");
+        var medicationSectionResource = $resource(ENVService.pcmApiBaseUrl + "/medicalSection");
+        var sensitvityPolicyResource = $resource(ENVService.pcmApiBaseUrl + "/sensitivityPolicy");
+
         var selectedProvider = [];
 
         //To be refactore
@@ -20,6 +24,7 @@
         };
 
         return {
+
 
             createConsent: function (consent, success, error) {
 
@@ -164,7 +169,18 @@
                     state = 'revoked';
                 }
                 return state;
-            }
+            },
+
+            getPurposeOfUse: function(success, error){
+                purposeOfUseResource.query(success, error);
+            },
+            getMedicalSection: function (success, error) {
+                medicationSectionResource.query(success, error);
+            },
+            getSensitivityPolicys: function (success, error) {
+                sensitvityPolicyResource.query(success, error);
+            },
+
         };
     }
 
