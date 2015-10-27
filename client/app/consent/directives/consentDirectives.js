@@ -130,7 +130,7 @@
         };
     }
 
-    function PurposeOfUse() {
+    function PurposeOfUse(ConsentService) {
         return {
             restrict: 'E',
             replace: false,
@@ -141,8 +141,34 @@
             controller: ['$scope', 'ConsentService', '$modal', function ($scope, ConsentService, $modal) {
                 var PurposeOfUseVm = this;
 
-                function PurposeOfUseModalController($scope, $modalInstance) {
+                ConsentService.getPurposeOfUse(function (response) {
+                    PurposeOfUseVm.data = response;
+                }, function (error) {
+                    console.log("Error: in getting providers");
+                });
+
+                PurposeOfUseVm.setSelectecPurposeOfuse = function(purposeOfUse){
+                    console.log("Setting purose of use: " + purposeOfUse);
+                };
+
+                function PurposeOfUseModalController($scope, $modalInstance, data) {
+                    $scope.data = data;
+                    $scope.consent = {
+                        selectedPurposeOfUse: []
+                    };
+
+                    $scope.selectAll = function(){
+                        for(var i=0; i < $scope.data.length; i++){
+                            $scope.consent.selectedPurposeOfUse.push($scope.data[i].code);
+                        }
+                    };
+
+                    $scope.deselectAll = function(){
+                        $scope.consent.selectedPurposeOfUse=[];
+                    };
+
                     $scope.ok = function () {
+                        PurposeOfUseVm.setSelectecPurposeOfuse($scope.consent.selectedPurposeOfUse);
                         $modalInstance.close();
                     };
 

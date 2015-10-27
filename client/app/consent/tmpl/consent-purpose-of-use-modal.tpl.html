@@ -4,7 +4,22 @@
     </div>
     <div class="modal-body">
         <div>Share my information only for specified purposes of use.</div>
-        <button class="btn btn-primary btn-xs">Select All</button> <button class="btn btn-primary btn-xs">Deselect All</button>
+        <button class="btn btn-primary btn-xs" ng-click="selectAll()">Select All</button> <button class="btn btn-primary btn-xs" ng-click="deselectAll()">Deselect All</button>
+        <div class="row">
+            <div class="col-sm-6">
+                <div ng-repeat="purposeOfUse in data">
+                    <div >
+                        <div class="radio">
+                            <label>
+                                <input type="checkbox" icheck  checklist-model="consent.selectedPurposeOfUse" checklist-value="purposeOfUse.code"  >
+                                <span ng-bind="purposeOfUse.displayName"></span>
+                            </label>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
     <div class="modal-footer">
