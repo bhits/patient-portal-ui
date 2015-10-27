@@ -269,7 +269,7 @@
             var ConsentCardVm = this;
             ConsentCardVm.openManageConsentModal = openManageConsentModal;
             ConsentCardVm.consentState = ConsentService.resolveConsentState;
-            ConsentCardVm.isShareAll = isShareAll;
+            ConsentCardVm.isShareAll = ConsentService.isShareAll;
             ConsentCardVm.notDisclosedItems = notDisclosedItems;
             ConsentCardVm.purposeOfUseItems = purposeOfUseItems;
 
@@ -301,19 +301,11 @@
                 }
             }
 
-            function isShareAll(consent) {
-                return isEmptyArray(consent.doNotShareClinicalDocumentSectionTypeCodes) && isEmptyArray(consent.doNotShareSensitivityPolicyCodes);
-
-                function isEmptyArray(o) {
-                    return angular.isUndefined(o) || !angular.isArray(o) || o.length === 0;
-                }
-            }
-
             function notDisclosedItems(consent) {
                 return [].concat(consent.doNotShareClinicalDocumentSectionTypeCodes).concat(consent.doNotShareSensitivityPolicyCodes).join(', ');
             }
 
-            function purposeOfUseItems(consent){
+            function purposeOfUseItems(consent) {
                 return consent.shareForPurposeOfUseCodes.join(', ');
             }
         }

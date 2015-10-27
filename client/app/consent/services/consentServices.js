@@ -171,7 +171,15 @@
                 return state;
             },
 
-            getPurposeOfUse: function(success, error){
+            isShareAll: function (consent) {
+                return isEmptyArray(consent.doNotShareClinicalDocumentSectionTypeCodes) && isEmptyArray(consent.doNotShareSensitivityPolicyCodes);
+
+                function isEmptyArray(o) {
+                    return angular.isUndefined(o) || !angular.isArray(o) || o.length === 0;
+                }
+            },
+
+            getPurposeOfUse: function (success, error) {
                 purposeOfUseResource.query(success, error);
             },
             getMedicalSection: function (success, error) {
