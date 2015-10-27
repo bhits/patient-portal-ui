@@ -14,12 +14,18 @@
             </h3>
         </div>
         <div class="well">
-            <h3>Sharing all medical information:</h3>
-            <span ng-bind="consent.doNotShareSensitivityPolicyCodes"/>
+            <div ng-if="ConsentCardVm.isShareAll(consent)">
+                <h3>Sharing all medical information:</h3>
+                All my medical information can be shared.
+            </div>
+            <div ng-if="!ConsentCardVm.isShareAll(consent)">
+                <h3>Medical Information NOT disclosed:</h3>
+                <span ng-bind="ConsentCardVm.notDisclosedItems(consent)"/>
+            </div>
         </div>
         <div class="well">
             <h3>Share for following purposes:</h3>
-            <span ng-bind="consent.shareForPurposeOfUseCodes"/>
+            <span ng-bind="ConsentCardVm.purposeOfUseItems(consent)"/>
         </div>
         <div class="well">
             <button class="btn btn-primary" ng-click="ConsentCardVm.openManageConsentModal(consent)">Manage Consent

@@ -112,7 +112,7 @@
                         "isMadeToName": ["VAN DONGEN, MONICA", "LUQUIN, TERESA", "MASTER CARE, INC."],
                         "doNotShareClinicalDocumentTypeCodes": [],
                         "doNotShareClinicalDocumentSectionTypeCodes": [],
-                        "doNotShareSensitivityPolicyCodes": ["Mental health information sensitivity", "HIV/AIDS information sensitivity"],
+                        "doNotShareSensitivityPolicyCodes": [],
                         "shareForPurposeOfUseCodes": ["Payment", "Emergency Treatment", "Healthcare Treatment"],
                         "doNotShareClinicalConceptCodes": [],
                         "consentStage": "CONSENT_SAVED",

@@ -105,7 +105,6 @@
                 var MedicalInformationVm = this;
 
 
-
                 ConsentService.getMedicalSection(function (response) {
                     MedicalInformationVm.medicatlSections = response;
                 }, function (error) {
@@ -125,27 +124,27 @@
                     $scope.sensitivityPolicies = data.sensitivityPolicies;
 
 
-                    $scope.consent = { selectedMedicalSections: [], selectedSensitivityPolicies: [] };
+                    $scope.consent = {selectedMedicalSections: [], selectedSensitivityPolicies: []};
 
 
-                    $scope.selectAllMedicalSections = function(){
-                        for(var i=0; i < $scope.mediactionSections.length; i++){
+                    $scope.selectAllMedicalSections = function () {
+                        for (var i = 0; i < $scope.mediactionSections.length; i++) {
                             $scope.consent.selectedMedicalSections.push($scope.mediactionSections[i].code);
                         }
                     };
 
-                    $scope.deselectAllMedicalSections = function(){
-                        $scope.consent.selectedMedicalSections=[];
+                    $scope.deselectAllMedicalSections = function () {
+                        $scope.consent.selectedMedicalSections = [];
                     };
 
-                    $scope.selectAllSensitivityPolicies = function(){
-                        for(var i=0; i < $scope.sensitivityPolicies.length; i++){
+                    $scope.selectAllSensitivityPolicies = function () {
+                        for (var i = 0; i < $scope.sensitivityPolicies.length; i++) {
                             $scope.consent.selectedSensitivityPolicies.push($scope.sensitivityPolicies[i].code);
                         }
                     };
 
-                    $scope.deselectAllSensitivityPolicies = function(){
-                        $scope.consent.selectedSensitivityPolicies=[];
+                    $scope.deselectAllSensitivityPolicies = function () {
+                        $scope.consent.selectedSensitivityPolicies = [];
                     };
 
 
@@ -167,8 +166,8 @@
                         resolve: {
                             data: function () {
                                 return {
-                                   mediactionSections: MedicalInformationVm.medicatlSections,
-                                   sensitivityPolicies: MedicalInformationVm.sensitivityPolicies
+                                    mediactionSections: MedicalInformationVm.medicatlSections,
+                                    sensitivityPolicies: MedicalInformationVm.sensitivityPolicies
                                 };
                             }
                         },
@@ -196,7 +195,7 @@
                     console.log("Error: in getting providers");
                 });
 
-                PurposeOfUseVm.setSelectecPurposeOfuse = function(purposeOfUse){
+                PurposeOfUseVm.setSelectecPurposeOfuse = function (purposeOfUse) {
                     console.log("Setting purose of use: " + purposeOfUse);
                 };
 
@@ -206,14 +205,14 @@
                         selectedPurposeOfUse: []
                     };
 
-                    $scope.selectAll = function(){
-                        for(var i=0; i < $scope.data.length; i++){
+                    $scope.selectAll = function () {
+                        for (var i = 0; i < $scope.data.length; i++) {
                             $scope.consent.selectedPurposeOfUse.push($scope.data[i].code);
                         }
                     };
 
-                    $scope.deselectAll = function(){
-                        $scope.consent.selectedPurposeOfUse=[];
+                    $scope.deselectAll = function () {
+                        $scope.consent.selectedPurposeOfUse = [];
                     };
 
                     $scope.ok = function () {
@@ -270,6 +269,9 @@
             var ConsentCardVm = this;
             ConsentCardVm.openManageConsentModal = openManageConsentModal;
             ConsentCardVm.consentState = ConsentService.resolveConsentState;
+            ConsentCardVm.isShareAll = isShareAll;
+            ConsentCardVm.notDisclosedItems = notDisclosedItems;
+            ConsentCardVm.purposeOfUseItems = purposeOfUseItems;
 
             function openManageConsentModal(consent) {
                 $modal.open({
@@ -297,6 +299,22 @@
                     $state.go('consent.revoke', {consent: consent});
                     $modalInstance.close();
                 }
+            }
+
+            function isShareAll(consent) {
+                return isEmptyArray(consent.doNotShareClinicalDocumentSectionTypeCodes) && isEmptyArray(consent.doNotShareSensitivityPolicyCodes);
+
+                function isEmptyArray(o) {
+                    return angular.isUndefined(o) || !angular.isArray(o) || o.length === 0;
+                }
+            }
+
+            function notDisclosedItems(consent) {
+                return [].concat(consent.doNotShareClinicalDocumentSectionTypeCodes).concat(consent.doNotShareSensitivityPolicyCodes).join(', ');
+            }
+
+            function purposeOfUseItems(consent){
+                return consent.shareForPurposeOfUseCodes.join(', ');
             }
         }
     }
