@@ -1,8 +1,14 @@
 <div>
-    <h2> Medical Information</h2>
-    <p>Select how you would like to share your medical information.</p>
-    <div>
-        <p> <input type="radio" icheck  ng-model="consent.medicalInformation" value=""  name="medicalInformation" checked> <strong>SHARE ALL</strong> information in my medical record.</p>
-        <p> <input type="radio" icheck  ng-model="consent.medicalInformation" value=""  name="medicalInformation"><strong>SHARE</strong> my medical record <strong>WITH EXCEPTION</strong> of specific information.<button type="button" class="btn btn-primary btn-xs" ng-click="MedicalInformationVm.openPrivacySettingsModal()">Edit</button></p>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2> Medical Information</h2>
+        </div>
+        <div class="panel-body">
+            <p>Select how you would like to share your medical information.</p>
+            <div>
+                <p> <input type="radio" icheck class="m-r-xs" ng-model="consent.medicalInformation" value=""  name="medicalInformation" checked> <span class="m-l-xs"><strong>SHARE ALL</strong> information in my medical record.</span></p>
+                <p> <input type="radio" icheck  ng-model="consent.medicalInformation" value=""  name="medicalInformation"> <span class="m-l-xs m-r-sm"><strong>SHARE</strong> my medical record <strong>WITH EXCEPTION</strong> of specific information.</span><button type="button" class="btn btn-primary btn-xs" ng-click="MedicalInformationVm.openPrivacySettingsModal()">Edit</button></p>
+            </div>
+        </div>
     </div>
 </div>
