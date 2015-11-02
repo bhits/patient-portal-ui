@@ -181,21 +181,21 @@
                 sensitvityPolicyResource.query(success, error);
             },
 
-            getSelectedPurposeOfUse: function(purposeOfUseList,selectedCodes){
-                var result = [];
+            getEntitiesByCodes: function(entities,codes){
+                var selectedEntities = [];
 
-                if(selectedCodes.length === 0){
-                    return result;
+                if(codes.length === 0){
+                    return selectedEntities;
                 }else{
-                    for(var i = 0; i < purposeOfUseList.length; i++){
-                        for(var j = 0; j < selectedCodes.length; j++){
-                            if(purposeOfUseList[i].code === selectedCodes[j]){
-                                result.push(purposeOfUseList[i]);
+                    for(var i = 0; i < entities.length; i++){
+                        for(var j = 0; j < codes.length; j++){
+                            if(entities[i].code === codes[j]){
+                                selectedEntities.push(entities[i]);
                             }
                         }
                     }
                 }
-                return result;
+                return selectedEntities;
             },
 
             getDefaultPurposeOfUse: function(data){
@@ -209,27 +209,27 @@
                 return PurposeOfUse;
             },
 
-            getSelectedPurposeOfUseCodes: function(selectedPurposeOfUse){
+            getPurposeOfUseCodes: function(entities){
                 var result = {selectedPurposeOfUseCodes: ['TREATMENT']};
 
-                if(selectedPurposeOfUse.length === 0 ){
+                if(entities.length === 0 ){
                     return result;
-                }else if(selectedPurposeOfUse.length > 0 ){
-                    var purposeOfUseCodes = [];
-                    for(var i = 0; i < selectedPurposeOfUse.length; i++){
-                        purposeOfUseCodes.push(selectedPurposeOfUse[i].code);
-                    }
-                    result.selectedPurposeOfUseCodes = purposeOfUseCodes;
+                }else if(entities.length > 0 ){
+                    result.selectedPurposeOfUseCodes =  this.getCodes(entities);
                     return result;
                 }
             },
 
-            getPurposeOfUseCodes: function(PurposeOfUse){
-                var purposeOfUseCodes = [];
-                for(var i = 0; i < PurposeOfUse.length; i++){
-                    purposeOfUseCodes.push(PurposeOfUse[i].code);
+            getCodes: function(data){
+                var codes = [];
+
+                if(angular.isDefined(data)){
+                    for(var i = 0; i < data.length; i++){
+                        codes.push(data[i].code);
+                    }
                 }
-                return purposeOfUseCodes;
+
+                return codes;
             }
         };
     }

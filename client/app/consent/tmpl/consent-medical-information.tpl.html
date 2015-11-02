@@ -2,7 +2,18 @@
     <h2> Medical Information</h2>
     <p>Select how you would like to share your medical information.</p>
     <div>
-        <p> <input type="radio" icheck  ng-model="consent.medicalInformation" value=""  name="medicalInformation" checked> <strong>SHARE ALL</strong> information in my medical record.</p>
-        <p> <input type="radio" icheck  ng-model="consent.medicalInformation" value=""  name="medicalInformation"><strong>SHARE</strong> my medical record <strong>WITH EXCEPTION</strong> of specific information.<button type="button" class="btn btn-primary btn-xs" ng-click="MedicalInformationVm.openPrivacySettingsModal()">Edit</button></p>
+        <p>
+            <input type="radio" icheck  ng-model="MedicalInformationVm.medicalInformation" value="A"  name="medicalInformation" ng-checked="MedicalInformationVm.medicalInformation == 'A'" ng-change="MedicalInformationVm.clearMedicalInfoData()">
+            <strong>SHARE ALL</strong> information in my medical record.
+        </p>
+        <p> <input type="radio" icheck  ng-model="MedicalInformationVm.medicalInformation" value="B"  name="medicalInformation" ng-checked="MedicalInformationVm.medicalInformation == 'B'"><strong>SHARE</strong> my medical record <strong>WITH EXCEPTION</strong> of specific information.<button type="button" class="btn btn-primary btn-xs" ng-click="MedicalInformationVm.openPrivacySettingsModal()" ng-if="MedicalInformationVm.medicalInformation == 'B'">Edit</button></p>
     </div>
+
+    <span ng-repeat="medicalSection in MedicalInformationVm.selectedMedicalSections">
+        <span class="badge badge-primary" ng-bind="medicalSection.displayName"> </span>
+    </span>
+
+     <span ng-repeat="SensitivityPolicies in MedicalInformationVm.selectedSensitivityPolicies">
+        <span class="badge badge-primary" ng-bind="SensitivityPolicies.displayName"> </span>
+    </span>
 </div>
