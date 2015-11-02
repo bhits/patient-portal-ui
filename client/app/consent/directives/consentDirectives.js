@@ -33,7 +33,7 @@
             controllerAs: 'SelectProviderVm',
             controller: ['$scope', 'ConsentService', '$modal', 'ProviderService', function ($scope, ConsentService, $modal, ProviderService) {
                 var SelectProviderVm = this;
-                //SelectProviderVm.selectedProviders = ConsentService.getSelectedProviders();
+                SelectProviderVm.selectedProviders = ConsentService.getSelectedProviders();
 
                 SelectProviderVm.fieldplaceholder = SelectProviderVm.modaltitle === 'Authorize' ? "The following individual or organization" : "To disclose my information to";
 
@@ -103,6 +103,9 @@
             controllerAs: 'MedicalInformationVm',
             controller: ['$scope', 'ConsentService', '$modal', function ($scope, ConsentService, $modal) {
                 var MedicalInformationVm = this;
+                //Test value to be replace with real value.
+                MedicalInformationVm.medicalInformation = 'A';
+
 
 
                 ConsentService.getMedicalSection(function (response) {
@@ -117,38 +120,39 @@
                     console.log("Error: in getting providers");
                 });
 
+                MedicalInformationVm.clearMedicalInfoData = function(){
+                    MedicalInformationVm.selectedMedicalSections = [];
+                    MedicalInformationVm.selectedSensitivityPolicies = [];
+                };
 
                 function MedicalInformationModalController($scope, $modalInstance, data) {
                     $scope.mediactionSections = data.mediactionSections;
-
                     $scope.sensitivityPolicies = data.sensitivityPolicies;
 
+                    $scope.consent = [];
 
-                    $scope.consent = {selectedMedicalSections: [], selectedSensitivityPolicies: []};
+                    $scope.consent.selectedMedicalSections = !angular.isDefined(MedicalInformationVm.selectedMedicalSections)? [] : ConsentService.getCodes(MedicalInformationVm.selectedMedicalSections);
+                    $scope.consent.selectedSensitivityPolicies = !angular.isDefined(MedicalInformationVm.selectedSensitivityPolicies)? [] : ConsentService.getCodes(MedicalInformationVm.selectedSensitivityPolicies);
 
-
-                    $scope.selectAllMedicalSections = function () {
-                        for (var i = 0; i < $scope.mediactionSections.length; i++) {
-                            $scope.consent.selectedMedicalSections.push($scope.mediactionSections[i].code);
-                        }
+                    $scope.selectAllMedicalSections = function(){
+                        $scope.consent.selectedMedicalSections = ConsentService.getCodes($scope.mediactionSections);
                     };
 
-                    $scope.deselectAllMedicalSections = function () {
-                        $scope.consent.selectedMedicalSections = [];
+                    $scope.deselectAllMedicalSections = function(){
+                        $scope.consent.selectedMedicalSections=[];
                     };
 
-                    $scope.selectAllSensitivityPolicies = function () {
-                        for (var i = 0; i < $scope.sensitivityPolicies.length; i++) {
-                            $scope.consent.selectedSensitivityPolicies.push($scope.sensitivityPolicies[i].code);
-                        }
+                    $scope.selectAllSensitivityPolicies = function(){
+                        $scope.consent.selectedSensitivityPolicies = ConsentService.getCodes($scope.sensitivityPolicies);
                     };
 
-                    $scope.deselectAllSensitivityPolicies = function () {
-                        $scope.consent.selectedSensitivityPolicies = [];
+                    $scope.deselectAllSensitivityPolicies = function(){
+                        $scope.consent.selectedSensitivityPolicies=[];
                     };
-
 
                     $scope.ok = function () {
+                        MedicalInformationVm.selectedMedicalSections = ConsentService.getEntitiesByCodes( $scope.mediactionSections, $scope.consent.selectedMedicalSections);
+                        MedicalInformationVm.selectedSensitivityPolicies = ConsentService.getEntitiesByCodes( $scope.sensitivityPolicies, $scope.consent.selectedSensitivityPolicies);
                         $modalInstance.close();
                     };
 
@@ -166,8 +170,8 @@
                         resolve: {
                             data: function () {
                                 return {
-                                    mediactionSections: MedicalInformationVm.medicatlSections,
-                                    sensitivityPolicies: MedicalInformationVm.sensitivityPolicies
+                                   mediactionSections: MedicalInformationVm.medicatlSections,
+                                   sensitivityPolicies: MedicalInformationVm.sensitivityPolicies
                                 };
                             }
                         },
@@ -184,6 +188,7 @@
             replace: false,
             templateUrl: 'app/consent/tmpl/consent-purpose-of-use.tpl.html',
             require: '?ngModel',
+            scope:{},
             bindToController: true,
             controllerAs: 'PurposeOfUseVm',
             controller: ['$scope', 'ConsentService', '$modal', function ($scope, ConsentService, $modal) {
@@ -191,32 +196,27 @@
 
                 ConsentService.getPurposeOfUse(function (response) {
                     PurposeOfUseVm.data = response;
+                    PurposeOfUseVm.selectedPurposeOfUse = ConsentService.getDefaultPurposeOfUse(response);
                 }, function (error) {
                     console.log("Error: in getting providers");
                 });
 
-                PurposeOfUseVm.setSelectecPurposeOfuse = function (purposeOfUse) {
-                    console.log("Setting purose of use: " + purposeOfUse);
-                };
-
                 function PurposeOfUseModalController($scope, $modalInstance, data) {
+
                     $scope.data = data;
-                    $scope.consent = {
-                        selectedPurposeOfUse: []
+
+                    $scope.consent = ConsentService.getPurposeOfUseCodes( PurposeOfUseVm.selectedPurposeOfUse);
+
+                    $scope.selectAll = function(){
+                        $scope.consent.selectedPurposeOfUseCodes = ConsentService.getCodes($scope.data);
                     };
 
-                    $scope.selectAll = function () {
-                        for (var i = 0; i < $scope.data.length; i++) {
-                            $scope.consent.selectedPurposeOfUse.push($scope.data[i].code);
-                        }
-                    };
-
-                    $scope.deselectAll = function () {
-                        $scope.consent.selectedPurposeOfUse = [];
+                    $scope.deselectAll = function(){
+                        $scope.consent.selectedPurposeOfUseCodes=[];
                     };
 
                     $scope.ok = function () {
-                        PurposeOfUseVm.setSelectecPurposeOfuse($scope.consent.selectedPurposeOfUse);
+                        PurposeOfUseVm.selectedPurposeOfUse = ConsentService.getEntitiesByCodes(  $scope.data, $scope.consent.selectedPurposeOfUseCodes);
                         $modalInstance.close();
                     };
 
@@ -228,7 +228,6 @@
                 PurposeOfUseVm.openSelectPurposeModal = function () {
                     var modalInstance = $modal.open({
                         templateUrl: 'app/consent/tmpl/consent-purpose-of-use-modal.tpl.html',
-
                         resolve: {
                             data: function () {
                                 return PurposeOfUseVm.data;
@@ -237,7 +236,7 @@
                         controller: PurposeOfUseModalController
                     });
                 };
-            }],
+            }]
         };
     }
 

@@ -189,6 +189,56 @@
                 sensitvityPolicyResource.query(success, error);
             },
 
+            getEntitiesByCodes: function(entities,codes){
+                var selectedEntities = [];
+
+                if(codes.length === 0){
+                    return selectedEntities;
+                }else{
+                    for(var i = 0; i < entities.length; i++){
+                        for(var j = 0; j < codes.length; j++){
+                            if(entities[i].code === codes[j]){
+                                selectedEntities.push(entities[i]);
+                            }
+                        }
+                    }
+                }
+                return selectedEntities;
+            },
+
+            getDefaultPurposeOfUse: function(data){
+                var PurposeOfUse = [];
+
+                for(var i = 0; i < data.length; i++){
+                    if(data[i].code === 'TREATMENT'){
+                        PurposeOfUse.push(data[i]);
+                    }
+                }
+                return PurposeOfUse;
+            },
+
+            getPurposeOfUseCodes: function(entities){
+                var result = {selectedPurposeOfUseCodes: ['TREATMENT']};
+
+                if(entities.length === 0 ){
+                    return result;
+                }else if(entities.length > 0 ){
+                    result.selectedPurposeOfUseCodes =  this.getCodes(entities);
+                    return result;
+                }
+            },
+
+            getCodes: function(data){
+                var codes = [];
+
+                if(angular.isDefined(data)){
+                    for(var i = 0; i < data.length; i++){
+                        codes.push(data[i].code);
+                    }
+                }
+
+                return codes;
+            }
         };
     }
 
