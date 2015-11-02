@@ -5,7 +5,7 @@
     <div class="modal-body">
         <div></div>
         <div class="alert alert-warning"> Share my information <strong>only</strong> for specified purposes of use. </div>
-        <button class="btn btn-primary btn-xs" ng-click="selectAll()">Select All</button> <button class="btn btn-primary btn-xs" ng-click="deselectAll()">Deselect All</button>
+        <button class="btn btn-primary btn-xs m-r-xs" ng-click="selectAll()">Select All</button> <button class="btn btn-primary btn-xs" ng-click="deselectAll()">Deselect All</button>
         <div class="row">
             <div class="col-sm-6">
                 <div ng-repeat="purposeOfUse in data">
@@ -13,7 +13,7 @@
                         <div class="radio">
                             <label>
                                 <input type="checkbox" icheck  checklist-model="consent.selectedPurposeOfUse" checklist-value="purposeOfUse.code"  >
-                                <span ng-bind="purposeOfUse.displayName"></span>
+                                <span class="m-l-xs" ng-bind="purposeOfUse.displayName"></span>
                             </label>
 
                         </div>
@@ -24,7 +24,7 @@
 
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-white" ng-click="cancel()">Cancel</button>
+        <button type="button" class="btn btn-white m-r-xs" ng-click="cancel()">Cancel</button>
         <button type="button" class="btn btn-primary" ng-click="ok()">Save changes</button>
     </div>
 </div>
