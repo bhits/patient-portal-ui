@@ -3,42 +3,43 @@
         <h4 class="modal-title"> <span ng-bind="title"></span></h4>
     </div>
     <div class="modal-body">
-                <p ng-if="title === 'Authorize'">Please select <strong>one</strong> individual or organization authorized to share your information:</p>
-                <p ng-if="title === 'Disclosure'">Please select <strong>one</strong> individual or organization for disclosure:</p>
-                <div class="row">
-                    <div class="col-sm-12s">
-                        <h3>Individuals:</h3>
-                        <div ng-repeat="data in providerData">
-                                <div ng-if="isIndividualProvider(data.provider)">
-                                    <div class="radio">
-                                        <label>
-                                                <input type="checkbox" icheck  checklist-model="consent.selectedProviders" checklist-value="data.provider.npi"  ng-checked="data.isDisabled">
-                                                <span ng-bind=" data.provider|pcmProviderNameOrFacility"></span>
-                                        </label>
-
-                                    </div>
-                                </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <h3>Organization:</h3>
-                        <div ng-repeat="data in providerData">
-                            <div ng-if="isOrganizationProvider(data.provider)">
-                                <div class="radio">
-                                    <label>
-                                        <input type="checkbox" icheck  checklist-model="consent.selectedProviders" checklist-value="data.provider.npi" ng-checked="data.isDisabled">
+        <p ng-if="title === 'Authorize'">Please select <strong>one</strong> individual or organization authorized to share your information:</p>
+        <p ng-if="title === 'Disclosure'">Please select <strong>one</strong> individual or organization for disclosure:</p>
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>Individuals:</h3>
+                <div ng-repeat="data in providerData">
+                        <div ng-if="isIndividualProvider(data.provider)">
+                            <div class="radio">
+                                <label>
+                                        <input type="radio" ng-model="consent.selectedProviders" value="data.provider.npi" name="selectedProvider"  >
                                         <span ng-bind=" data.provider|pcmProviderNameOrFacility"></span>
-                                    </label>
-                                </div>
+                                </label>
+
                             </div>
                         </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>Organization:</h3>
+                <div ng-repeat="data in providerData">
+                    <div ng-if="isOrganizationProvider(data.provider)">
+                        <div class="radio">
+                            <label>
+                                <input type="radio"  ng-model="consent.selectedProviders" value="data.provider.npi" name="selectedProvider" >
+                                <span ng-bind=" data.provider|pcmProviderNameOrFacility"></span>
+                            </label>
+                        </div>
                     </div>
                 </div>
-        </form>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-white" ng-click="cancel()">Cancel</button>
-        <button type="button" class="btn btn-primary" ng-click="ok()">Add Selected</button>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-white" ng-click="cancel()">Cancel</button>
+            <button type="button" class="btn btn-primary" ng-click="ok()">Add Selected</button>
+        </div>
     </div>
 </div>

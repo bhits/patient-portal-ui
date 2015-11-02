@@ -33,7 +33,7 @@
             controllerAs: 'SelectProviderVm',
             controller: ['$scope', 'ConsentService', '$modal', 'ProviderService', function ($scope, ConsentService, $modal, ProviderService) {
                 var SelectProviderVm = this;
-                //SelectProviderVm.selectedProviders = ConsentService.getSelectedProviders();
+                SelectProviderVm.selectedProviders = ConsentService.getSelectedProviders();
 
                 SelectProviderVm.fieldplaceholder = SelectProviderVm.modaltitle === 'Authorize' ? "The following individual or organization" : "To disclose my information to";
 
