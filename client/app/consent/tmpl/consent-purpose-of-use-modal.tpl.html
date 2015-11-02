@@ -7,12 +7,12 @@
         <div class="alert alert-warning"> Share my information <strong>only</strong> for specified purposes of use. </div>
         <button class="btn btn-primary btn-xs" ng-click="selectAll()">Select All</button> <button class="btn btn-primary btn-xs" ng-click="deselectAll()">Deselect All</button>
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-12">
                 <div ng-repeat="purposeOfUse in data">
                     <div >
                         <div class="radio">
                             <label>
-                                <input type="checkbox" icheck  checklist-model="consent.selectedPurposeOfUse" checklist-value="purposeOfUse.code"  >
+                                <input type="checkbox" icheck  checklist-model="consent.selectedPurposeOfUseCodes" checklist-value="purposeOfUse.code"  >
                                 <span ng-bind="purposeOfUse.displayName"></span>
                             </label>
 

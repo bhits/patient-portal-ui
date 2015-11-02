@@ -185,6 +185,7 @@
             replace: false,
             templateUrl: 'app/consent/tmpl/consent-purpose-of-use.tpl.html',
             require: '?ngModel',
+            scope:{},
             bindToController: true,
             controllerAs: 'PurposeOfUseVm',
             controller: ['$scope', 'ConsentService', '$modal', function ($scope, ConsentService, $modal) {
@@ -192,32 +193,27 @@
 
                 ConsentService.getPurposeOfUse(function (response) {
                     PurposeOfUseVm.data = response;
+                    PurposeOfUseVm.selectedPurposeOfUse = ConsentService.getDefaultPurposeOfUse(response);
                 }, function (error) {
                     console.log("Error: in getting providers");
                 });
 
-                PurposeOfUseVm.setSelectecPurposeOfuse = function(purposeOfUse){
-                    console.log("Setting purose of use: " + purposeOfUse);
-                };
-
                 function PurposeOfUseModalController($scope, $modalInstance, data) {
+
                     $scope.data = data;
-                    $scope.consent = {
-                        selectedPurposeOfUse: []
-                    };
+
+                    $scope.consent = ConsentService.getSelectedPurposeOfUseCodes( PurposeOfUseVm.selectedPurposeOfUse);
 
                     $scope.selectAll = function(){
-                        for(var i=0; i < $scope.data.length; i++){
-                            $scope.consent.selectedPurposeOfUse.push($scope.data[i].code);
-                        }
+                        $scope.consent.selectedPurposeOfUseCodes = ConsentService.getPurposeOfUseCodes($scope.data);
                     };
 
                     $scope.deselectAll = function(){
-                        $scope.consent.selectedPurposeOfUse=[];
+                        $scope.consent.selectedPurposeOfUseCodes=[];
                     };
 
                     $scope.ok = function () {
-                        PurposeOfUseVm.setSelectecPurposeOfuse($scope.consent.selectedPurposeOfUse);
+                        PurposeOfUseVm.selectedPurposeOfUse = ConsentService.getSelectedPurposeOfUse(  $scope.data, $scope.consent.selectedPurposeOfUseCodes);
                         $modalInstance.close();
                     };
 
@@ -229,7 +225,6 @@
                 PurposeOfUseVm.openSelectPurposeModal = function () {
                     var modalInstance = $modal.open({
                         templateUrl: 'app/consent/tmpl/consent-purpose-of-use-modal.tpl.html',
-
                         resolve: {
                             data: function () {
                                 return PurposeOfUseVm.data;
@@ -238,7 +233,7 @@
                         controller: PurposeOfUseModalController
                     });
                 };
-            }],
+            }]
         };
     }
 

@@ -181,6 +181,56 @@
                 sensitvityPolicyResource.query(success, error);
             },
 
+            getSelectedPurposeOfUse: function(purposeOfUseList,selectedCodes){
+                var result = [];
+
+                if(selectedCodes.length === 0){
+                    return result;
+                }else{
+                    for(var i = 0; i < purposeOfUseList.length; i++){
+                        for(var j = 0; j < selectedCodes.length; j++){
+                            if(purposeOfUseList[i].code === selectedCodes[j]){
+                                result.push(purposeOfUseList[i]);
+                            }
+                        }
+                    }
+                }
+                return result;
+            },
+
+            getDefaultPurposeOfUse: function(data){
+                var PurposeOfUse = [];
+
+                for(var i = 0; i < data.length; i++){
+                    if(data[i].code === 'TREATMENT'){
+                        PurposeOfUse.push(data[i]);
+                    }
+                }
+                return PurposeOfUse;
+            },
+
+            getSelectedPurposeOfUseCodes: function(selectedPurposeOfUse){
+                var result = {selectedPurposeOfUseCodes: ['TREATMENT']};
+
+                if(selectedPurposeOfUse.length === 0 ){
+                    return result;
+                }else if(selectedPurposeOfUse.length > 0 ){
+                    var purposeOfUseCodes = [];
+                    for(var i = 0; i < selectedPurposeOfUse.length; i++){
+                        purposeOfUseCodes.push(selectedPurposeOfUse[i].code);
+                    }
+                    result.selectedPurposeOfUseCodes = purposeOfUseCodes;
+                    return result;
+                }
+            },
+
+            getPurposeOfUseCodes: function(PurposeOfUse){
+                var purposeOfUseCodes = [];
+                for(var i = 0; i < PurposeOfUse.length; i++){
+                    purposeOfUseCodes.push(PurposeOfUse[i].code);
+                }
+                return purposeOfUseCodes;
+            }
         };
     }
 

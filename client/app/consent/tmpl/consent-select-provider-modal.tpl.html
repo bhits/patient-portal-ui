@@ -6,7 +6,7 @@
                 <p ng-if="title === 'Authorize'">Please select <strong>one</strong> individual or organization authorized to share your information:</p>
                 <p ng-if="title === 'Disclosure'">Please select <strong>one</strong> individual or organization for disclosure:</p>
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-12s">
                         <h3>Individuals:</h3>
                         <div ng-repeat="data in providerData">
                                 <div ng-if="isIndividualProvider(data.provider)">
@@ -22,7 +22,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
                         <h3>Organization:</h3>
                         <div ng-repeat="data in providerData">
                             <div ng-if="isOrganizationProvider(data.provider)">

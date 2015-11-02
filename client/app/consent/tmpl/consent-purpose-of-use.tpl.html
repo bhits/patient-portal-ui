@@ -3,5 +3,10 @@
     <p>Choose for what purposes your medical information may be used.</p>
     <div>
         <span> <strong>SHARE</strong> my medical record ONLY for the selected purposes of use.</span> <button type="button" class="btn btn-primary btn-xs" ng-click="PurposeOfUseVm.openSelectPurposeModal()">Edit</button>
+       <div>
+        <span ng-repeat="purposeOfUse in PurposeOfUseVm.selectedPurposeOfUse">
+            <span class="badge badge-primary" ng-bind="purposeOfUse.displayName"> </span>
+        </span>
+       </div>
     </div>
 </div>
