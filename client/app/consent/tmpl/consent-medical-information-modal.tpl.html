@@ -8,17 +8,22 @@
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Sensitive Information Categories</h5>
+                        <h5>Medical Information Categories</h5>
                         <div ibox-tools></div>
                     </div>
                     <div class="ibox-content">
-                        <button class="btn btn-primary btn-xs" ng-click="selectAllMedicalSections()">Select All</button> <button class="btn btn-primary btn-xs" ng-click="deselectAllMedicalSections()">Deselect All</button>
+                        <div class="alert alert-warning">
+                            <strong><span>DO NOT</span></strong>&nbsp;share
+                            the following areas of potentially sensitive
+                            information.
+                        </div>
+                        <button class="btn btn-primary btn-xs m-r-xs" ng-click="selectAllMedicalSections()">Select All</button> <button class="btn btn-primary btn-xs" ng-click="deselectAllMedicalSections()">Deselect All</button>
                         <div ng-repeat="medicalSection in mediactionSections">
-                            <div >
+                            <div>
                                 <div class="radio">
                                     <label>
-                                        <input type="checkbox" icheck checklist-model="consent.selectedMedicalSections" checklist-value="medicalSection.code" >
-                                        <span ng-bind="medicalSection.displayName"></span>
+                                        <input type="checkbox" icheck  checklist-model="consent.selectedMedicalSections" checklist-value="medicalSection.code" >
+                                        <span class="m-l-xs" ng-bind="medicalSection.displayName"></span>
                                     </label>
 
                                 </div>
@@ -30,17 +35,21 @@
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Medical Information Categories</h5>
+                        <h5>Sensitive Information Categories</h5>
                         <div ibox-tools></div>
                     </div>
                     <div class="ibox-content">
-                        <button class="btn btn-primary btn-xs" ng-click="selectAllSensitivityPolicies()">Select All</button> <button class="btn btn-primary btn-xs" ng-click="deselectAllSensitivityPolicies()">Deselect All</button>
+                        <div class="alert alert-warning">
+                            Select the medical information that you <strong>DO
+                            NOT</strong> wish to share.
+                        </div>
+                        <button class="btn btn-primary btn-xs m-r-xs" ng-click="selectAllSensitivityPolicies()">Select All</button> <button class="btn btn-primary btn-xs" ng-click="deselectAllSensitivityPolicies()">Deselect All</button>
                         <div ng-repeat="sensitivityPolicy in sensitivityPolicies">
-                            <div >
+                            <div>
                                 <div class="radio">
                                     <label>
                                         <input type="checkbox" icheck  checklist-model="consent.selectedSensitivityPolicies" checklist-value="sensitivityPolicy.code" >
-                                        <span ng-bind="sensitivityPolicy.displayName"></span>
+                                        <span class="m-l-xs" ng-bind="sensitivityPolicy.displayName"></span>
                                     </label>
 
                                 </div>
@@ -52,7 +61,7 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-white" ng-click="cancel()">Cancel</button>
+        <button type="button" class="btn btn-white m-r-xs" ng-click="cancel()">Cancel</button>
         <button type="button" class="btn btn-primary" ng-click="ok()">Save changes</button>
     </div>
 </div>

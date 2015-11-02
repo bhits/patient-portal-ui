@@ -1,43 +1,52 @@
 
 <form action="">
-    <h1> I, Bob, hereby authorize... </h1>
-    <div class="hr-line-dashed"></div>
     <div class="row">
-            <div class="col-sm-6">
-                <select-provider ng-model="CreateConsentVm.consent.authorize" modaltitle="CreateConsentVm.authorize">
-                </select-provider>
+        <div class="col-md-10 col-md-offset-1">
+            <h1> I, Bob, hereby authorize... </h1>
+            <div class="hr-line-dashed"></div>
+            <div class="row">
+                    <div class="col-md-5">
+                        <!--<div class="panel panel-default">-->
+                            <select-provider ng-model="CreateConsentVm.consent.authorize" modaltitle="CreateConsentVm.authorize">
+                            </select-provider>
+                        <!--</div>-->
+                    </div>
+                <div class="col-md-1 center"><span class="fa fa-chevron-right fa-3x m-t-md visible-md-inline-block visible-lg-inline-block"></span></div>
+                <div class="col-md-5">
+                    <select-provider ng-model="CreateConsentVm.consent.disclosure" modaltitle="CreateConsentVm.disclosure" >
+                    </select-provider>
+                </div>
             </div>
-            <div class="col-sm-6">
-                <select-provider ng-model="CreateConsentVm.consent.disclosure" modaltitle="CreateConsentVm.disclosure" >
-                </select-provider>
+            <div class="hr-line-dashed"></div>
+            <div class="row">
+                <div class="col-md-11">
+                    <medical-information ng-model="CreateConsentVm.consent.medicalInformation"></medical-information>
+                </div>
+
             </div>
-    </div>
-    <div class="hr-line-dashed"></div>
-    <div class="row">
-        <div class="col-sm-12">
-            <medical-information ng-model="CreateConsentVm.consent.medicalInformation"></medical-information>
-        </div>
+            <div class="hr-line-dashed"></div>
+            <div class="row">
+                <div class="col-md-11">
+                    <purpose-of-use ng-model="CreateConsentVm.consent.purposeOfUse"></purpose-of-use>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="row">
+                <div class="col-md-11">
+                    <consent-term ng-model="CreateConsentVm.consent.consentTerm"></consent-term>
+                </div>
+            </div>
 
-    </div>
-    <div class="hr-line-dashed"></div>
-    <div class="row">
-        <div class="col-sm-12">
-            <purpose-of-use ng-model="CreateConsentVm.consent.purposeOfUse"></purpose-of-use>
-        </div>
-    </div>
-    <div class="hr-line-dashed"></div>
-    <div class="row">
-        <div class="col-sm-12">
-            <consent-term ng-model="CreateConsentVm.consent.consentTerm"></consent-term>
-        </div>
-    </div>
+            <div class="hr-line-dashed"></div>
 
-    <div class="hr-line-dashed"></div>
-
-    <div class="row">
-        <div class="col-sm-4 ">
-            <button class="btn btn-white" type="reset">Cancel</button>
-            <button class="btn btn-primary" type="submit">Save changes</button>
+            <div class="row m-b-md">
+                <div class="col-md-11">
+                    <div class="pull-right">
+                        <button class="btn btn-white m-r" type="reset">Cancel</button>
+                        <button class="btn btn-primary" type="submit">Save changes</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </form>

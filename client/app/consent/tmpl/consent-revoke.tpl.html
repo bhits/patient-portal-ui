@@ -1,12 +1,19 @@
 <content-wrapper title="Revoke Consent">
-    <div>
-        <p>Authorized to share: <strong><span ng-bind="ConsentRevokeVm.params.consent.toDiscloseName"/></strong> |
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1">
+            <p>Authorized to share: <strong><span ng-bind="ConsentRevokeVm.params.consent.toDiscloseName"/></strong> |
             Sharing with: <strong><span
                     ng-bind="ConsentRevokeVm.params.consent.isMadeToName"/></strong> | Effective Date: <strong><span
                     ng-bind="ConsentRevokeVm.params.consent.consentStart | date"/></strong></p>
-
-        <div class="alert alert-info">Withdrawal of Consent to Participate in Health Information Exchange</div>
-
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1">
+            <div class="alert alert-info">Withdrawal of Consent to Participate in Health Information Exchange</div>
+        </div>
+    </div>
+    <div class="row m-b">
+        <div class="col-sm-10 col-sm-offset-1">
         <p>I have previously signed a patient consent form allowing my providers to access my electronic health records
             through the Consent 2 Share system and now want to withdraw that consent. If I sign this form as the
             Patient's Legal Representative, I understand that all references in this form to "me" or "my" refer to the
@@ -34,9 +41,12 @@
             </li>
             <li>I understand that I will get a copy of this form after I sign it.</li>
         </ol>
+        </div>
     </div>
-    <div>
-        <button type="button" class="btn btn-white" ng-click="ConsentRevokeVm.cancel()">Cancel</button>
-        <button type="button" class="btn btn-primary" ng-click="ConsentRevokeVm.sign()">Sign</button>
+    <div class="row m-b-md">
+        <div class="col-sm-10 col-sm-offset-1">
+            <button type="button" class="btn btn-white m-r" ng-click="ConsentRevokeVm.cancel()">Cancel</button>
+            <button type="button" class="btn btn-primary" ng-click="ConsentRevokeVm.sign()">Sign</button>
+        </div>
     </div>
 </content-wrapper>

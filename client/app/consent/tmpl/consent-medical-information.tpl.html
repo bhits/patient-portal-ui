@@ -1,19 +1,25 @@
 <div>
-    <h2> Medical Information</h2>
-    <p>Select how you would like to share your medical information.</p>
-    <div>
-        <p>
-            <input type="radio" icheck  ng-model="MedicalInformationVm.medicalInformation" value="A"  name="medicalInformation" ng-checked="MedicalInformationVm.medicalInformation == 'A'" ng-change="MedicalInformationVm.clearMedicalInfoData()">
-            <strong>SHARE ALL</strong> information in my medical record.
-        </p>
-        <p> <input type="radio" icheck  ng-model="MedicalInformationVm.medicalInformation" value="B"  name="medicalInformation" ng-checked="MedicalInformationVm.medicalInformation == 'B'"><strong>SHARE</strong> my medical record <strong>WITH EXCEPTION</strong> of specific information.<button type="button" class="btn btn-primary btn-xs" ng-click="MedicalInformationVm.openPrivacySettingsModal()" ng-if="MedicalInformationVm.medicalInformation == 'B'">Edit</button></p>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2> Medical Information</h2>
+        </div>
+        <div class="panel-body">
+            <p>Select how you would like to share your medical information.</p>
+            <div>
+                <p> <input type="radio" icheck class="m-r-xs"  ng-model="MedicalInformationVm.medicalInformation" value="A" name="medicalInformation" ng-checked="MedicalInformationVm.medicalInformation == 'A'" ng-change="MedicalInformationVm.clearMedicalInfoData()"> <span class="m-l-xs"><strong>SHARE ALL</strong> information in my medical record.</span></p>
+                <p> <input type="radio" icheck  ng-model="MedicalInformationVm.medicalInformation" value="B"  name="medicalInformation" ng-checked="MedicalInformationVm.medicalInformation == 'B'"> <span class="m-l-xs m-r-sm"><strong>SHARE</strong> my medical record <strong>WITH EXCEPTION</strong> of specific information.</span><button type="button" class="btn btn-primary btn-xs" ng-click="MedicalInformationVm.openPrivacySettingsModal()">Edit</button></p>
+            </div>
+            <div>
+                <div class="label label-info inline" ng-repeat="medicalSection in MedicalInformationVm.selectedMedicalSections">
+                    <span class="fa fa-lock m-r-xs" ></span>
+                    <span ng-bind="medicalSection.displayName"> </span>
+                </div>
+
+                <div class="label label-info inline" ng-repeat="SensitivityPolicies in MedicalInformationVm.selectedSensitivityPolicies">
+                    <span class="fa fa-lock m-r-xs" ></span>
+                    <span ng-bind="SensitivityPolicies.displayName"> </span>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <span ng-repeat="medicalSection in MedicalInformationVm.selectedMedicalSections">
-        <span class="badge badge-primary" ng-bind="medicalSection.displayName"> </span>
-    </span>
-
-     <span ng-repeat="SensitivityPolicies in MedicalInformationVm.selectedSensitivityPolicies">
-        <span class="badge badge-primary" ng-bind="SensitivityPolicies.displayName"> </span>
-    </span>
 </div>

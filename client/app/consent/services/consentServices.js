@@ -112,7 +112,7 @@
                         "isMadeToName": ["VAN DONGEN, MONICA", "LUQUIN, TERESA", "MASTER CARE, INC."],
                         "doNotShareClinicalDocumentTypeCodes": [],
                         "doNotShareClinicalDocumentSectionTypeCodes": [],
-                        "doNotShareSensitivityPolicyCodes": ["Mental health information sensitivity", "HIV/AIDS information sensitivity"],
+                        "doNotShareSensitivityPolicyCodes": [],
                         "shareForPurposeOfUseCodes": ["Payment", "Emergency Treatment", "Healthcare Treatment"],
                         "doNotShareClinicalConceptCodes": [],
                         "consentStage": "CONSENT_SAVED",
@@ -171,7 +171,15 @@
                 return state;
             },
 
-            getPurposeOfUse: function(success, error){
+            isShareAll: function (consent) {
+                return isEmptyArray(consent.doNotShareClinicalDocumentSectionTypeCodes) && isEmptyArray(consent.doNotShareSensitivityPolicyCodes);
+
+                function isEmptyArray(o) {
+                    return angular.isUndefined(o) || !angular.isArray(o) || o.length === 0;
+                }
+            },
+
+            getPurposeOfUse: function (success, error) {
                 purposeOfUseResource.query(success, error);
             },
             getMedicalSection: function (success, error) {

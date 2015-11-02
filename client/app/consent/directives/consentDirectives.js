@@ -106,6 +106,8 @@
                 //Test value to be replace with real value.
                 MedicalInformationVm.medicalInformation = 'A';
 
+
+
                 ConsentService.getMedicalSection(function (response) {
                     MedicalInformationVm.medicatlSections = response;
                 }, function (error) {
@@ -266,6 +268,9 @@
             var ConsentCardVm = this;
             ConsentCardVm.openManageConsentModal = openManageConsentModal;
             ConsentCardVm.consentState = ConsentService.resolveConsentState;
+            ConsentCardVm.isShareAll = ConsentService.isShareAll;
+            ConsentCardVm.notDisclosedItems = notDisclosedItems;
+            ConsentCardVm.purposeOfUseItems = purposeOfUseItems;
 
             function openManageConsentModal(consent) {
                 $modal.open({
@@ -293,6 +298,14 @@
                     $state.go('consent.revoke', {consent: consent});
                     $modalInstance.close();
                 }
+            }
+
+            function notDisclosedItems(consent) {
+                return [].concat(consent.doNotShareClinicalDocumentSectionTypeCodes).concat(consent.doNotShareSensitivityPolicyCodes).join(', ');
+            }
+
+            function purposeOfUseItems(consent) {
+                return consent.shareForPurposeOfUseCodes.join(', ');
             }
         }
     }
