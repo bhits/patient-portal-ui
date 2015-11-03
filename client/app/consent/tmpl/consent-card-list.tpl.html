@@ -1,12 +1,23 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins margin-bottom-10">
+            <p>
+                <a class="btn btn-primary dark-green" ui-sref="consent.create">
+                    Add a Consent
+                </a>
+            </p>
+        </div>
+    </div>
+</div>
 <div id="consent_list">
     <div class="text-center">
-        <pagination total-items="ConsentCardListVm.pagination.totalItems"
-                    items-per-page="ConsentCardListVm.pagination.itemsPerPage"
-                    ng-model="ConsentCardListVm.pagination.currentPage"
-                    ng-change="ConsentCardListVm.loadPage()"
-                    max-size="ConsentCardListVm.pagination.maxSize"
-                    class="pagination-sm"
-                    boundary-links="true"></pagination>
+        <!--<pagination total-items="ConsentCardListVm.pagination.totalItems"-->
+                    <!--items-per-page="ConsentCardListVm.pagination.itemsPerPage"-->
+                    <!--ng-model="ConsentCardListVm.pagination.currentPage"-->
+                    <!--ng-change="ConsentCardListVm.loadPage()"-->
+                    <!--max-size="ConsentCardListVm.pagination.maxSize"-->
+                    <!--class="pagination-sm"-->
+                    <!--boundary-links="true"></pagination>-->
     </div>
     <div ng-repeat="consent in ConsentCardListVm.consentList.consents">
         <consent-card consent="consent"/>
