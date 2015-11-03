@@ -1,4 +1,3 @@
-
 <form action="">
     <div class="row">
         <div class="col-md-10">
@@ -6,28 +5,23 @@
             <div class="hr-line-dashed"></div>
             <div class="row">
                     <div class="col-md-5">
-                        <!--<div class="panel panel-default">-->
-                            <select-provider ng-model="CreateConsentVm.consent.authorize" modaltitle="CreateConsentVm.authorize">
-                            </select-provider>
-                        <!--</div>-->
+                        <select-provider ng-model="CreateConsentVm.consent.providersPermittedToDisclose" modaltitle="CreateConsentVm.authorize"></select-provider>
                     </div>
                 <div class="col-md-1 center"><span class="fa fa-chevron-right fa-3x m-t-md visible-md-inline-block visible-lg-inline-block"></span></div>
                 <div class="col-md-5">
-                    <select-provider ng-model="CreateConsentVm.consent.disclosure" modaltitle="CreateConsentVm.disclosure" >
-                    </select-provider>
+                    <select-provider ng-model="CreateConsentVm.consent.providersDisclosureIsMadeTo" modaltitle="CreateConsentVm.disclosure" ></select-provider>
                 </div>
             </div>
             <div class="hr-line-dashed"></div>
             <div class="row">
                 <div class="col-md-11">
-                    <medical-information ng-model="CreateConsentVm.consent.medicalInformation"></medical-information>
+                    <medical-information ng-model="CreateConsentVm.consent.doNotShareClinicalDocumentSectionTypeCodes"></medical-information>
                 </div>
-
             </div>
             <div class="hr-line-dashed"></div>
             <div class="row">
                 <div class="col-md-11">
-                    <purpose-of-use ng-model="CreateConsentVm.consent.purposeOfUse"></purpose-of-use>
+                    <purpose-of-use ng-model="CreateConsentVm.consent.shareForPurposeOfUseCodes"></purpose-of-use>
                 </div>
             </div>
             <div class="hr-line-dashed"></div>
@@ -36,17 +30,16 @@
                     <consent-term ng-model="CreateConsentVm.consent.consentTerm"></consent-term>
                 </div>
             </div>
-
             <div class="hr-line-dashed"></div>
-
             <div class="row m-b-md">
                 <div class="col-md-11">
                     <div class="pull-right">
-                        <button class="btn btn-white m-r" type="reset">Cancel</button>
-                        <button class="btn btn-primary" type="submit">Save changes</button>
+                        <button class="btn btn-white m-r" type="reset" ng-click="CreateConsentVm.cancelConsent()">Cancel</button>
+                        <button class="btn btn-primary" type="submit" ng-click="CreateConsentVm.createConsent()">Save changes</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </form>
+

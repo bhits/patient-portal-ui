@@ -16,6 +16,28 @@
                 var CreateConsentVm = this;
                 CreateConsentVm.authorize = "Authorize";
                 CreateConsentVm.disclosure = "Disclosure";
+
+                CreateConsentVm.createConsent = function(){
+                    console.log("Creating consent: consent.authorize - " + CreateConsentVm.consent.authorize + ", CreateConsentVm.consent.disclosure - " + CreateConsentVm.consent.disclosure);
+                };
+
+                CreateConsentVm.cancelConsent = function(){
+                    console.log("Cancelling consent..");
+                };
+
+                //id (edit)
+                //
+                //providersPermittedToDisclose:1083949036   ( left side  NPI)
+                //providersDisclosureIsMadeTo:1568797520   (right side NPI to disclose my information to )
+                //
+                //shareForPurposeOfUseCodes:TREATMENT    (purpose od use)
+                //shareForPurposeOfUseCodes:PAYMENT      ( purpose of use)
+                //
+                //consentStart:11/03/2015
+                //consentEnd:11/02/2016
+                //
+                //doNotShareSensitivityPolicyCodes:ETH   (sensitive information categories)
+                //doNotShareClinicalDocumentSectionTypeCodes:48765-2    (medical information categories)
             }]
         };
     }
@@ -25,7 +47,6 @@
             restrict: 'E',
             replace: false,
             templateUrl: 'app/consent/tmpl/consent-select-provider.tpl.html',
-            require: '?ngModel',
             scope: {
                 modaltitle: "=",
                 ngModel: '='
@@ -69,6 +90,8 @@
 
                     $scope.ok = function () {
                         SelectProviderVm.selectedProvider = ProviderService.getProviderByNPI(  $scope.providers ,$scope.selectedProvider.npi);
+                        SelectProviderVm.ngModel = $scope.selectedProvider.npi;
+
                         if( $scope.title === 'Authorize'){
                             ConsentService.setAuthorizeNpi($scope.selectedProvider.npi);
                         }else {
