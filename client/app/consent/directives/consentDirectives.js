@@ -289,6 +289,12 @@
                 var ManageConsentModalVm = this;
                 ManageConsentModalVm.cancel = cancel;
                 ManageConsentModalVm.revoke = revoke;
+                ManageConsentModalVm.edit = edit;
+
+                function edit(){
+                    $state.go('consent.create', {consentId: consent.id});
+                    $modalInstance.close();
+                }
 
                 function cancel() {
                     $modalInstance.dismiss('cancel');

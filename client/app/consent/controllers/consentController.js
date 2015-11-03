@@ -21,7 +21,10 @@
             .state('consent.create', {
                 url: '/create',
                 data: {pageTitle: 'Create Consent'},
-                templateUrl: 'app/consent/tmpl/consent-create.tpl.html'
+                templateUrl: 'app/consent/tmpl/consent-create.tpl.html',
+                params: {
+                    consentId: ''
+                }
             })
             .state('consent.revoke', {
                 url: '/revoke',
