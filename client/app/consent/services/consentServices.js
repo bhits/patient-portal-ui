@@ -31,7 +31,7 @@
             },
 
             deleteConsent: function (id, success, error) {
-
+                success();
             },
 
             updateConsent: function (consent, success, error) {

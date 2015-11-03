@@ -268,12 +268,12 @@
             scope: {consent: '='},
             restrict: 'E',
             templateUrl: 'app/consent/tmpl/consent-card.tpl.html',
-            controller: ['$modal', 'ConsentService', ConsentCardController],
+            controller: ['$modal', 'ConsentService', 'notificationService', ConsentCardController],
             controllerAs: 'ConsentCardVm'
         };
         return directive;
 
-        function ConsentCardController($modal, ConsentService) {
+        function ConsentCardController($modal, ConsentService, notificationService) {
             var ConsentCardVm = this;
             ConsentCardVm.openManageConsentModal = openManageConsentModal;
             ConsentCardVm.consentState = ConsentService.resolveConsentState;
@@ -299,6 +299,27 @@
                 ManageConsentModalVm.cancel = cancel;
                 ManageConsentModalVm.revoke = revoke;
                 ManageConsentModalVm.edit = edit;
+                ManageConsentModalVm.deleteConsent = deleteConsent;
+                ManageConsentModalVm.toggleDeleteConfirmation = toggleDeleteConfirmation;
+                ManageConsentModalVm.deleteInProcess = false;
+
+                function toggleDeleteConfirmation(){
+                    ManageConsentModalVm.deleteInProcess = !ManageConsentModalVm.deleteInProcess;
+                }
+
+                function deleteConsent(){
+                    ConsentService.deleteConsent(consent.id, onDeleteSuccess, onDeleteError);
+
+                    function onDeleteSuccess(){
+                        notificationService.success('Consent is successfully deleted');
+                        $modalInstance.close();
+                        $state.reload();
+                    }
+                    function onDeleteError(){
+                        notificationService.error('Failed to delete the consent! Please try again later...');
+                        cancel();
+                    }
+                }
 
                 function edit(){
                     $state.go('consent.create', {consentId: consent.id});
