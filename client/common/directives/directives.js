@@ -44,7 +44,8 @@
         return {
             restrict: 'A',
             scope: {
-                total: '@'
+                total: '@',
+                initCollapsed: '@'
             },
             templateUrl: 'common/tmpl/ibox_tools.tpl.html',
             controller: function ($scope, $element) {
@@ -52,6 +53,10 @@
                 var icon = $element.find('i:first');
                 var content = ibox.find('div.ibox-content');
 
+                $scope.initializeCollapsed = $scope.initCollapsed === 'true';
+                if($scope.initializeCollapsed){
+                    content.slideUp(0);
+                }
 
                 // Function for collapse ibox
                 $scope.showhide = function () {
