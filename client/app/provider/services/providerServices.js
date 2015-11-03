@@ -104,6 +104,16 @@
             isOrganizationProvider: function(provider){
                 return angular.isDefined(provider) && angular.equals(provider.entityType, 'Organization');
             },
+            getProviderByNPI: function(providerList, npi){
+                if(angular.isDefined(providerList)){
+                    for(var i = 0; i < providerList.length; i++){
+                        if(providerList[i].npi === npi){
+                            return providerList[i];
+                        }
+                    }
+                }
+                return {};
+            }
 
         };
     }

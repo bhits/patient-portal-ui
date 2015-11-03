@@ -11,8 +11,8 @@
         var medicationSectionResource = $resource(ENVService.pcmApiBaseUrl + "/medicalSection");
         var sensitvityPolicyResource = $resource(ENVService.pcmApiBaseUrl + "/sensitivityPolicy");
 
+        var selectedNpi = {authorizeNpi: "", discloseNpi: ""};
         var selectedProvider = [];
-
         //To be refactore
         var hasNPI = function (list, npi) {
             for (var j = 0; j < list.length; j++) {
@@ -135,15 +135,20 @@
                     }
                     (success || angular.identity)(response);
                 }
-
-                //consentResource.query({pageNumber: page-1}, adjustPageOnSuccessResponse, error);
             },
 
-            setSelectedProviders: function (provider) {
-                selectedProvider = provider;
+            setAuthorizeNpi: function (npi) {
+                selectedNpi.authorizeNpi = npi;
+            },
+            setDiscloseNpi: function (npi) {
+                selectedNpi.discloseNpi = npi;
             },
 
-            getSelectedProviders: function (provider) {
+            getSelectedNpi: function () {
+                return selectedNpi;
+            },
+
+            getSelectedProviders : function(){
                 return selectedProvider;
             },
 

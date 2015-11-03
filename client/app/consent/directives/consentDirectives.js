@@ -27,13 +27,14 @@
             templateUrl: 'app/consent/tmpl/consent-select-provider.tpl.html',
             require: '?ngModel',
             scope: {
-                modaltitle: "="
+                modaltitle: "=",
+                ngModel: '='
             },
             bindToController: true,
             controllerAs: 'SelectProviderVm',
             controller: ['$scope', 'ConsentService', '$modal', 'ProviderService', function ($scope, ConsentService, $modal, ProviderService) {
                 var SelectProviderVm = this;
-                SelectProviderVm.selectedProviders = ConsentService.getSelectedProviders();
+                SelectProviderVm.selectedProvider = ConsentService.getSelectedProviders();
 
                 SelectProviderVm.fieldplaceholder = SelectProviderVm.modaltitle === 'Authorize' ? "The following individual or organization" : "To disclose my information to";
 
@@ -45,13 +46,10 @@
 
                 function SelectProviderModalController($scope, $modalInstance, notificationService, data, ProviderService, ConsentService) {
 
-                    $scope.selectedProviders = ConsentService.getSelectedProviders();
-
                     $scope.title = data.modalTitle;
-                    $scope.consent = {
-                        selectedProviders: []
-                    };
-                    $scope.providerData = ConsentService.prepareProviderList($scope.selectedProviders, data.providers);
+                    $scope.selectedProvider = {npi:  data.selectedProvider.npi };
+                    $scope.providers = data.providers;
+                    $scope.selectedNpi = ConsentService.getSelectedNpi();
 
                     $scope.isOrganizationProvider = function (provider) {
                         return ProviderService.isOrganizationProvider(provider);
@@ -61,8 +59,21 @@
                         return ProviderService.isIndividualProvider(provider);
                     };
 
+                    $scope.isSelected = function(npi){
+                            if( $scope.title === 'Authorize' ){
+                                return  ($scope.selectedNpi.discloseNpi === npi);
+                            }else if( $scope.title === 'Disclosure' ){
+                                return  ($scope.selectedNpi.authorizeNpi === npi);
+                            }
+                    };
+
                     $scope.ok = function () {
-                        ConsentService.setSelectedProviders($scope.consent.selectedProviders);
+                        SelectProviderVm.selectedProvider = ProviderService.getProviderByNPI(  $scope.providers ,$scope.selectedProvider.npi);
+                        if( $scope.title === 'Authorize'){
+                            ConsentService.setAuthorizeNpi($scope.selectedProvider.npi);
+                        }else {
+                            ConsentService.setDiscloseNpi($scope.selectedProvider.npi);
+                        }
                         $modalInstance.close();
                     };
 
@@ -74,12 +85,12 @@
                 SelectProviderVm.openSelectProviderModal = function () {
                     var modalInstance = $modal.open({
                         templateUrl: 'app/consent/tmpl/consent-select-provider-modal.tpl.html',
-
                         resolve: {
                             data: function () {
                                 return {
                                     modalTitle: SelectProviderVm.modaltitle,
-                                    providers: SelectProviderVm.providers
+                                    providers: SelectProviderVm.providers,
+                                    selectedProvider:  SelectProviderVm.selectedProvider
                                 };
                             }
                         },
@@ -105,8 +116,6 @@
                 var MedicalInformationVm = this;
                 //Test value to be replace with real value.
                 MedicalInformationVm.medicalInformation = 'A';
-
-
 
                 ConsentService.getMedicalSection(function (response) {
                     MedicalInformationVm.medicatlSections = response;

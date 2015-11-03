@@ -18,6 +18,7 @@
                 data: {pageTitle: 'List Consents'},
                 templateUrl: 'app/consent/tmpl/consent-list.tpl.html'
             })
+
             .state('consent.create', {
                 url: '/create',
                 data: {pageTitle: 'Create Consent'},

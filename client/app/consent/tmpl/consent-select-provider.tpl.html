@@ -1,8 +1,12 @@
-<div class="panel panel-default">
+<div class="panel panel-default" ng-click="SelectProviderVm.openSelectProviderModal()">
     <div class="panel-heading">
-        <div ng-click="SelectProviderVm.openSelectProviderModal()"> {{::SelectProviderVm.fieldplaceholder}}:</div>
+        <div > {{::SelectProviderVm.fieldplaceholder}}:</div>
     </div>
     <div class="panel-body">
-        <div class="m-l"><span class="fa fa-user info-blue m-r-xs m-b-xs"></span>Van Dongen, Monica</div>
+        <div class="m-l" ng-if="SelectProviderVm.selectedProvider.npi">
+            <span class="fa fa-user info-blue m-r-xs m-b-xs"></span>
+            <span ng-bind="SelectProviderVm.selectedProvider | pcmProviderNameOrFacility"></span>
+            <!--Van Dongen, Monica-->
+        </div>
     </div>
 </div>
