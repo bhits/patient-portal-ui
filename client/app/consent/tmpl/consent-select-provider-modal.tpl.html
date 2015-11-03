@@ -8,14 +8,13 @@
                 <div class="row">
                     <div class="col-sm-6 m-b-xs">
                         <h3>Individuals:</h3>
-                        <div ng-repeat="data in providerData">
-                                <div ng-if="isIndividualProvider(data.provider)">
+                        <div ng-repeat="provider in providers">
+                                <div ng-if="isIndividualProvider(provider)">
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" ng-model="consent.selectedProviders" value="data.provider.npi" name="selectedProvider"  >
-                                                <span class="m-l-xs" ng-bind=" data.provider|pcmProviderNameOrFacility"></span>
+                                            <input type="radio" icheck ng-model="selectedProvider.npi" ng-value="provider.npi" name="npi" ng-disabled="isSelected(provider.npi)" >
+                                                <span class="m-l-xs" ng-bind="provider|pcmProviderNameOrFacility"> </span>
                                         </label>
-
                                     </div>
                                 </div>
                         </div>
@@ -24,12 +23,12 @@
                 <div class="row">
                     <div class="col-sm-6 m-b-md">
                         <h3>Organization:</h3>
-                        <div ng-repeat="data in providerData">
-                            <div ng-if="isOrganizationProvider(data.provider)">
+                        <div ng-repeat="provider in providers">
+                            <div ng-if="isOrganizationProvider(provider)">
                                 <div class="radio">
                                     <label>
-                                        <input type="radio"  ng-model="consent.selectedProviders" value="data.provider.npi" name="selectedProvider" >
-                                        <span class="m-l-xs" ng-bind=" data.provider|pcmProviderNameOrFacility"></span>
+                                        <input type="radio" icheck ng-model="selectedProvider.npi" ng-value="provider.npi" name="npi" ng-disabled="isSelected(provider.npi)" >
+                                        <span class="m-l-xs" ng-bind="provider|pcmProviderNameOrFacility"></span>
                                     </label>
                                 </div>
                             </div>
