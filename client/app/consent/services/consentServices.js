@@ -6,7 +6,7 @@
     'use strict';
 
     function ConsentService($resource, ENVService) {
-        var consentResource = $resource(ENVService.pcmApiBaseUrl + "/consents/pageNumber/:pageNumber", {pageNumber: '@pageNumber'});
+        var consentListResource = $resource(ENVService.pcmApiBaseUrl + "/consents/pageNumber/:pageNumber", {pageNumber: '@pageNumber'});
         var purposeOfUseResource = $resource(ENVService.pcmApiBaseUrl + "/purposeOfUse");
         var medicationSectionResource = $resource(ENVService.pcmApiBaseUrl + "/medicalSection");
         var sensitvityPolicyResource = $resource(ENVService.pcmApiBaseUrl + "/sensitivityPolicy");
@@ -31,7 +31,7 @@
             },
 
             deleteConsent: function (id, success, error) {
-
+                success();
             },
 
             updateConsent: function (consent, success, error) {
@@ -135,6 +135,8 @@
                     }
                     (success || angular.identity)(response);
                 }
+
+                //consentListResource.query({pageNumber: page-1}, adjustPageOnSuccessResponse, error);
             },
 
             setAuthorizeNpi: function (npi) {

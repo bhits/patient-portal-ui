@@ -4,14 +4,23 @@
         <h4 class="modal-title">Consent Options</h4>
     </div>
     <div class="modal-body">
-        <h3>I want to:</h3>
-        <div class="list-group">
-            <a href="#" class="list-group-item" ng-click="ManageConsentModalVm.edit()"><h4><i class="fa fa-edit fa-lg m-r-sm"></i>Edit This Consent</h4></a>
-            <a href="#" class="list-group-item"><h4><i class="fa fa-search fa-lg m-r-sm"></i>Preview This Consent</h4></a>
-            <a href="#" class="list-group-item"><h4><i class="fa fa-mail-forward fa-lg m-r-sm"></i>Submit My Consent for Signing</h4></a>
-            <a href="#" class="list-group-item"><h4><i class="fa fa-file-text-o fa-lg m-r-sm"></i>Export to XACML</button></h4></a>
-            <a href="#" class="list-group-item"><h4><i class="fa fa-gear fa-lg m-r-sm"></i>Try My Consent Settings against My Medical Record before Sharing</h4></a>
-            <a href="#" class="list-group-item"><h4><i class="fa fa-trash-o fa-lg m-r-sm"></i>Delete This Consent</h4></a>
+        <div ng-if="!ManageConsentModalVm.deleteInProcess">
+            <h3>I want to:</h3>
+            <div class="list-group">
+                <a href="#" class="list-group-item" ng-click="ManageConsentModalVm.edit()"><h4><i class="fa fa-edit fa-lg m-r-sm"></i>Edit This Consent</h4></a>
+                <a href="#" class="list-group-item"><h4><i class="fa fa-search fa-lg m-r-sm"></i>Preview This Consent</h4></a>
+                <a href="#" class="list-group-item"><h4><i class="fa fa-mail-forward fa-lg m-r-sm"></i>Submit My Consent for Signing</h4></a>
+                <a href="#" class="list-group-item"><h4><i class="fa fa-file-text-o fa-lg m-r-sm"></i>Export to XACML</button></h4></a>
+                <a href="#" class="list-group-item"><h4><i class="fa fa-gear fa-lg m-r-sm"></i>Try My Consent Settings against My Medical Record before Sharing</h4></a>
+                <a href="#" class="list-group-item" ng-click="ManageConsentModalVm.toggleDeleteConfirmation()"><h4><i class="fa fa-trash-o fa-lg m-r-sm"></i>Delete This Consent</h4></a>
+            </div>
         </div>
+        <div ng-if="ManageConsentModalVm.deleteInProcess">
+            <h3 class="text-center">Are you sure you want to delete this consent?</h3>
+        </div>
+    </div>
+    <div class="modal-footer" ng-if="ManageConsentModalVm.deleteInProcess">
+        <button type="button" class="btn btn-white m-r-xs" ng-click="ManageConsentModalVm.toggleDeleteConfirmation()">Cancel</button>
+        <button type="button" class="btn btn-primary" ng-click="ManageConsentModalVm.deleteConsent()">Delete</button>
     </div>
 </div>

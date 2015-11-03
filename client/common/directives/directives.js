@@ -210,12 +210,29 @@
         };
     }
 
+    function DatePickerRange() {
+        return {
+            restrict: 'A',
+            scope: {
+              tolabel: "@",
+              fromlabel: "@"
+            },
+            templateUrl: 'common/tmpl/datepicker-range.tpl.html',
+            link: function (scope, element) {
+                element.datepicker({
+                    todayBtn: "linked",
+                });
+            }
+        };
+    }
+
     angular.module('app.directivesModule', [])
         .directive('pageTitle', PageTitle)
         .directive('sideNavigation', SideNavigation)
         .directive('iboxTools', IboxTools)
         .directive('minimalizaSidebar', MinimalizaSidebar)
         .directive('icheck', Icheck)
-        .directive('contentWrapper', ContentWrapper);
+        .directive('contentWrapper', ContentWrapper)
+        .directive('datepickerRange', DatePickerRange);
 })();
 
