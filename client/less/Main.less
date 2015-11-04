@@ -1,3 +1,73 @@
+/* Sizing Variables */
+@padding-base-vertical: 6px;
+@padding-base-horizontal: 12px;
+
+@padding-large-vertical: 10px;
+@padding-large-horizontal: 16px;
+
+@padding-small-vertical: 5px;
+@padding-small-horizontal: 10px;
+
+@padding-xs-vertical: 1px;
+@padding-xs-horizontal: 5px;
+
+@line-height-base: 1.428571429; // 20/14
+@line-height-large: 1.33;
+@line-height-small: 1.5;
+
+@border-radius-base: 4px;
+@border-radius-large: 6px;
+@border-radius-small: 3px;
+
+@font-size-base: 14px;
+@font-size-large: 18px;
+@font-size-small: 12px;
+
+/* End of Sizing Variables */
+
+/* Color Variables */
+@pp-gray: #c2c2c2;
+/* End of Color Variables */
+
+/* Color Schemes */
+.pp-gray-white {
+  background-color: @pp-gray;
+  color: white;
+}
+/* End of Color Schemes */
+
+/* Components */
+.pp-block-text-bar {
+  display: block;
+  width: 100%;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  font-size: @font-size-base;
+  padding: @padding-base-vertical @padding-base-horizontal;
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: transparent;
+  border-radius: @border-radius-base;
+  line-height: @line-height-base;
+  background-image: none;
+  margin-bottom: 5px;
+}
+
+.pp-block-text-bar_sm {
+  border-radius: @border-radius-small;
+  padding: @padding-small-vertical @padding-small-horizontal;
+  font-size: @font-size-small;
+  line-height: @line-height-small;
+}
+
+.pp-block-text-bar_default {
+  .pp-gray-white();
+  border-color: @pp-gray;
+}
+
+/* End of Components */
+
 /* consent */
 .border-bottom-red {
   border-bottom: darkred 2px solid;
@@ -369,8 +439,8 @@ padding-top: 10px;
 /* end of provider-list-page*/
 
 /*provider-lookup search page*/
-.bg-color-blue{
+.bg-color-blue {
   background-color:#005b94 ;
   color: #ffffff;
 }
-/* end of provider-lookup search page*/
+/* end of provider-lookup search page */
