@@ -318,6 +318,7 @@
                     function onDeleteError(){
                         notificationService.error('Failed to delete the consent! Please try again later...');
                         cancel();
+                        $state.reload();
                     }
                 }
 

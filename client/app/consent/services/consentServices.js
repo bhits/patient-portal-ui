@@ -43,7 +43,7 @@
                  totalItems: 20,
                  itemsPerPage: 5,
                  currentPage: 0,
-                 consents: [{
+                 consentList: [{
                  "id": "1",
                  "toDiscloseName": ["VAN DONGEN, MONICA"],
                  "isMadeToName": ["GRIMES, MICHAEL"],
