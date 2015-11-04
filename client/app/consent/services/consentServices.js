@@ -10,9 +10,10 @@
         var purposeOfUseResource = $resource(ENVService.pcmApiBaseUrl + "/purposeOfUse");
         var medicationSectionResource = $resource(ENVService.pcmApiBaseUrl + "/medicalSection");
         var sensitvityPolicyResource = $resource(ENVService.pcmApiBaseUrl + "/sensitivityPolicy");
+        var consentResource = $resource(ENVService.pcmApiBaseUrl + "/consents/:id", {id: '@id'});
 
         var selectedNpi = {authorizeNpi: "", discloseNpi: ""};
-        var selectedProvider = [];
+        var selectedProvider = {};
         //To be refactore
         var hasNPI = function (list, npi) {
             for (var j = 0; j < list.length; j++) {
@@ -24,10 +25,12 @@
         };
 
         return {
-
+            getConsent: function (id, success, error) {
+                consentResource.get(idObject, success, error);
+            },
 
             createConsent: function (consent, success, error) {
-
+                consentResource.save(consent, success, error);
             },
 
             deleteConsent: function (id, success, error) {
@@ -146,11 +149,15 @@
                 selectedNpi.discloseNpi = npi;
             },
 
+            resetSelectedNpi: function(){
+                selectedNpi.authorizeNpi = "";
+                selectedNpi.discloseNpi = "";
+            },
             getSelectedNpi: function () {
                 return selectedNpi;
             },
 
-            getSelectedProviders : function(){
+            getSelectedProvider : function(){
                 return selectedProvider;
             },
 
@@ -215,7 +222,6 @@
 
             getDefaultPurposeOfUse: function(data){
                 var PurposeOfUse = [];
-
                 for(var i = 0; i < data.length; i++){
                     if(data[i].code === 'TREATMENT'){
                         PurposeOfUse.push(data[i]);
@@ -226,7 +232,6 @@
 
             getPurposeOfUseCodes: function(entities){
                 var result = {selectedPurposeOfUseCodes: ['TREATMENT']};
-
                 if(entities.length === 0 ){
                     return result;
                 }else if(entities.length > 0 ){
@@ -237,13 +242,11 @@
 
             getCodes: function(data){
                 var codes = [];
-
                 if(angular.isDefined(data)){
                     for(var i = 0; i < data.length; i++){
                         codes.push(data[i].code);
                     }
                 }
-
                 return codes;
             }
         };
