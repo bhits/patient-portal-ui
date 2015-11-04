@@ -256,9 +256,9 @@
             templateUrl: 'app/consent/tmpl/consent-term.tpl.html',
             require: '?ngModel',
             bindToController: true,
-            controllerAs: 'ConsentTermVm',
+            controllerAs: 'watchCtrl',
             controller: ['$scope', function ($scope) {
-                var ConsentTermVm = this;
+                $scope.daterange = {consentEnd: "", consentStart: ""};
             }]
         };
     }
