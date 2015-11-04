@@ -38,9 +38,14 @@
 /* End of Sizing Variables */
 
 /* Color Variables */
-@pp-gray: #c2c2c2;
+@pp-gray: #cccccc;
+@pp-medium-gray: #b3b3b3;
 @pp-dark-gray: #333333;
 @pp-dark-green: #256357;
+@pp-light-blue: #aed8ff;
+@pp-navy-blue: #005d98;
+@pp-dark-blue: #50687F;
+@pp-dark-red: #ac1d2c;
 /* End of Color Variables */
 
 /* Color Schemes */
@@ -84,7 +89,7 @@
 
 /* consent */
 .border-bottom-red {
-  border-bottom: darkred 2px solid;
+  border-bottom: @pp-dark-red 2px solid;
   padding-bottom: 5px;
 }
 .border-bottom-blue {
@@ -139,8 +144,8 @@
     border-color: @pp-dark-green;
   &[disabled]{
     color: @pp-dark-gray;
-    background-color: rgba(221,221,221,1);
-    border-color: #ddd;
+    background-color: rgba(221,221,221,1); //same color as @pp-gray
+    border-color: @pp-gray;
   }
 }
 
@@ -154,7 +159,7 @@
 //home page
 
 .nav-header .light-blue {
-  color:#aed8ff;
+  color: @pp-light-blue;
 }
 
 
@@ -193,23 +198,23 @@
 /*.darkblue-panel {
     background-color: #4D565E;
     border-color: #4D565E;
-  color: #000;
+    color: black;
 }*/
 
 .info-blue {
-  color: #005d98;
+  color: @pp-navy-blue;
 }
 
 .light-grey {
-  color: #d3d3d3;
+  color: @pp-gray;
 }
 
 .panel-darkblue {
-  border-color: #50687F;
+  border-color: @pp-dark-blue;
 
     & > .panel-heading {
-    background-color: #50687F;
-    border-color: #50687F;
+    background-color: @pp-dark-blue;
+    border-color: @pp-dark-blue;
     color: white;
   }
 }
@@ -223,7 +228,7 @@
 }
 
 .mediumgray-bg {
-  background-color: #b3b3b3;
+  background-color: @pp-medium-gray;
 }
 
 
@@ -428,24 +433,24 @@ padding-top: 10px;
 
 /*provider-list-page*/
 .btn-red{
-  background-color:#ac1d2c;
+  background-color:@pp-dark-red;
   color: white;
 }
 
 .btn-grey{
-  background-color:#cccccc;
-  color:#000000;
+  background-color: @pp-gray;
+  color: black;
 }
 
 .text-alert{
-  color: #ac1d2c;
+  color: @pp-dark-red;
   font-style: italic;
 }
 /* end of provider-list-page*/
 
 /*provider-lookup search page*/
 .bg-color-blue {
-  background-color:#005b94 ;
+  background-color: @pp-navy-blue ;
   color: white;
 }
 /* end of provider-lookup search page */
