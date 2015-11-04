@@ -27,6 +27,8 @@
 
 /* Color Variables */
 @pp-gray: #c2c2c2;
+@pp-dark-gray: #333333;
+@pp-dark-green: #256357;
 /* End of Color Variables */
 
 /* Color Schemes */
@@ -123,10 +125,10 @@
 
 // WCAG 2.0 AA Compliance Modifications
 .dark-green {
-    background-color: #256357;
-    border-color: #256357;
+    background-color: @pp-dark-green;
+    border-color: @pp-dark-green;
   &[disabled]{
-    color: #333;
+    color: @pp-dark-gray;
     background-color: rgba(221,221,221,1);
     border-color: #ddd;
   }
@@ -140,9 +142,8 @@ color:#262727;
 
 .green-white
 {
-  background-color: #ffffff;
-  color: #256357;
-
+  background-color: white;
+  color: @pp-dark-green;
 }
 
 
@@ -183,7 +184,7 @@ color:#262727;
 /*PALETTE*/
 
 .bg-white-page {
-  background-color: #fff;
+  background-color: white;
 }
 /*.darkblue-panel {
     background-color: #4D565E;
@@ -205,13 +206,13 @@ color:#262727;
     & > .panel-heading {
     background-color: #50687F;
     border-color: #50687F;
-    color: #fff;
+    color: white;
   }
 }
 
 .page-bg-white {
   position: absolute;
-  background-color: #fff;
+  background-color: white;
     width: 100%;
   height: 100%;
   bottom: 0;
@@ -305,7 +306,7 @@ color:#262727;
 //    top:55px;
 //    left:220px;
 //    min-width: 90%;
-//    background: #fff;
+//    background: white;
 //    z-index: 1000;
 //}
 
@@ -315,7 +316,7 @@ color:#262727;
   padding: 40px;
   margin-right: @footer-margin;
   margin-left: @footer-margin;
-  background-color: #fff;
+  background-color: white;
 }
 
 /* FORMS */
@@ -343,7 +344,7 @@ padding-top: 10px;
 
 
 .login-content-align {
-  background-color: #fff;
+  background-color: white;
   align: left;
   justify-content: space-around;
 }
@@ -424,7 +425,7 @@ padding-top: 10px;
 /*provider-list-page*/
 .btn-red{
   background-color:#ac1d2c;
-  color:#ffffff;
+  color: white;
 }
 
 .btn-grey{
@@ -441,6 +442,6 @@ padding-top: 10px;
 /*provider-lookup search page*/
 .bg-color-blue {
   background-color:#005b94 ;
-  color: #ffffff;
+  color: white;
 }
 /* end of provider-lookup search page */
