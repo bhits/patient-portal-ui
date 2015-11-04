@@ -83,6 +83,15 @@
             },
 
             /**
+             * Checks if the given argument is array and has at least one element
+             * @param arr
+             * @returns {*|boolean}
+             */
+            isNotEmpty: function(arr){
+                return angular.isDefined(arr) && angular.isArray(arr) && arr.length > 0;
+            },
+
+            /**
              * Formats the given zipCode integer value to 12345 or 12345-6789
              * @param zipCode
              * @returns {string} formatted zip code
