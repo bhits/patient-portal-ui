@@ -1,6 +1,12 @@
 <div>
     <span ng-bind="fromlabel"></span></span>
-    <input type="text" class="input-small" name="start"/>
+    <input type="text" class="input-small" name="start" ng-model="startDatePicker"/>
     <span ng-bind="tolabel"></span>
-    <input type="text" class="input-small" name="end"/>
+    <input type="text" class="input-small" name="end" ng-model="endDatePicker"/>
+
+    <div ng-show="showError">
+        <div class="alert">
+            <strong>Warning!</strong>{{error}}
+        </div>
+    </div>
 </div>
