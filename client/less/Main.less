@@ -1,3 +1,14 @@
+/* Bootstrap Breakpoint Sizes */
+@bs-xs-max: 767px;
+@bs-sm-min: 768px;
+
+@bs-sm-max: 991px;
+@bs-md-min: 992px;
+
+@bs-md-max: 1199px;
+@bs-lg-min: 1200px;
+/* End Bootstrap Breakpoint Sizes */
+
 /* Sizing Variables */
 @padding-base-vertical: 6px;
 @padding-base-horizontal: 12px;
@@ -105,7 +116,7 @@
  }
 
 .navbar-top-links.modified li:last-child {
-    @media (max-width: 767px) {
+    @media (max-width: @bs-xs-max) {
         margin-right: 0;
 
     }
