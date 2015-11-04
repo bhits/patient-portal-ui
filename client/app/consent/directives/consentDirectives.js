@@ -362,8 +362,13 @@
             ConsentCardListVm.consentList = {};
             ConsentCardListVm.pagination = {totalItems: 0, currentPage: oldPage, itemsPerPage: 5, maxSize: 10};
             ConsentCardListVm.loadPage = loadPage;
+            ConsentCardListVm.hasConsents = hasConsents;
 
             ConsentCardListVm.loadPage();
+
+            function hasConsents(){
+                return utilityService.isNotEmpty(ConsentCardListVm.consentList.consentList);
+            }
 
             function updatePagination(response) {
                 ConsentCardListVm.pagination.totalItems = response.totalItems;
