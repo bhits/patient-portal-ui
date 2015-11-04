@@ -258,7 +258,7 @@
             bindToController: true,
             controllerAs: 'watchCtrl',
             controller: ['$scope', function ($scope) {
-                $scope.daterange = {consentEnd: "11/20/2015", consentStart: "11/16/2015"};
+                $scope.daterange = {consentEnd: "", consentStart: ""};
             }]
         };
     }

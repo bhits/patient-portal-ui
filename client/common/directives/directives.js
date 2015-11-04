@@ -251,7 +251,7 @@
                     scope.error = "";
                     var fd = doFormatDate(new Date());
                     if (dateVal < fd) {
-                        scope.error = 'Start day can not before today';
+                        scope.error = ' Start day can not before today';
                     } else {
                         scope.ngModel = {consentStart: scope.startDatePicker, consentEnd: scope.endDatePicker};
                     }
