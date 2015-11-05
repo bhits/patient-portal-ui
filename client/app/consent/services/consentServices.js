@@ -32,18 +32,18 @@
             },
 
             deleteConsent: function (id, success, error) {
-                success();
+                consentResource.delete({id: id}, success, error);
             },
 
             updateConsent: function (consent, success, error) {
             },
 
             listConsent: function (page, success, error) {
-                var consentList = {
+                /*var consentList = {
                     totalItems: 20,
                     itemsPerPage: 5,
                     currentPage: 0,
-                    consents: [{
+                    consentList: [{
                         "id": "1",
                         "toDiscloseName": ["VAN DONGEN, MONICA"],
                         "isMadeToName": ["GRIMES, MICHAEL"],
@@ -127,8 +127,8 @@
                     ]
                 };
 
-                //consentList.currentPage = page - 1;
-                adjustPageOnSuccessResponse(consentList);
+                consentList.currentPage = page - 1;
+                adjustPageOnSuccessResponse(consentList);*/
 
                 function adjustPageOnSuccessResponse(response) {
                     if (angular.isDefined(response.currentPage) && angular.isNumber(response.currentPage)) {
@@ -137,7 +137,7 @@
                     (success || angular.identity)(response);
                 }
 
-                //consentListResource.query({pageNumber: page-1}, adjustPageOnSuccessResponse, error);
+                consentListResource.get({pageNumber: page-1}, adjustPageOnSuccessResponse, error);
             },
 
             setAuthorizeNpi: function (npi) {
