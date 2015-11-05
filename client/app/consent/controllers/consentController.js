@@ -36,7 +36,6 @@
                 }
             });
     }
-
     /**
      *  The provider controller module.
      *

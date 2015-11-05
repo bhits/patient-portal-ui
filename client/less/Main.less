@@ -92,9 +92,55 @@
   border-bottom: @pp-dark-red 2px solid;
   padding-bottom: 5px;
 }
+
 .border-bottom-blue {
   border-bottom: royalblue 2px solid;
   padding-bottom: 5px;
+}
+.ibox .fa.fa-chevron-up {
+  color: white;
+}
+.ibox .fa.fa-chevron-down {
+  color: white;
+}
+
+.chevron_absolute {
+  position: absolute;
+  right: 30px;
+  z-index: 100;
+}
+
+.statusIcon_saved {
+  &:before {
+    font-family: FontAwesome;
+    content: '\f044';
+    font-size: 37px;
+    color: white;
+    position: absolute;
+    margin: 10px;
+  }
+}
+
+.statusIcon_signed {
+  &:before {
+    font-family: FontAwesome;
+    content: '\f05d';
+    font-size: 40px;
+    color: white;
+    position: absolute;
+    margin: 10px;
+  }
+}
+
+.statusIcon_revoked {
+  &:before {
+    font-family: FontAwesome;
+    content: '\f00d';
+    font-size: 40px;
+    color: white;
+    position: absolute;
+    margin: 10px;
+  }
 }
 
 
@@ -104,6 +150,7 @@
   border-width: 0;
   padding-top: 10px;
 }
+
 
 
 .ibox-content.modified {
@@ -149,6 +196,12 @@
   }
 }
 
+
+body.ng-scope.pace-done.grey{
+color:#262727;
+}
+
+
 .green-white
 {
   background-color: white;
@@ -170,16 +223,36 @@
 //End of WCAG 2.0 AA Compliance Modifications
 
 
-/*mixins*/
-.side-padding(@paddingAmount) {
-     padding-left: @paddingAmount;
-     padding-right: @paddingAmount;
- }
+  /*mixins*/
+  .side-padding(@paddingAmount) {
+    padding-left: @paddingAmount;
+    padding-right: @paddingAmount;
+  }
+  .left-padding(@paddingAmount) {
+    padding-left: @paddingAmount;
+  }
 
-/*end mixins*/
+  .right-padding(@paddingAmount) {
+    padding-right: @paddingAmount;
+  }
+
+  /*end mixins*/
+
+/* Positioning */
+.relative {
+  position: relative;
+}
+.fixed {
+  position: fixed;
+}
+.absolute {
+  position: absolute;
+}
+.static {
+  position: static;
+}
 
 /*Text-Font Classes */
-
 .bold {
   font-weight: bold;
 }
@@ -198,7 +271,7 @@
 /*.darkblue-panel {
     background-color: #4D565E;
     border-color: #4D565E;
-    color: black;
+  color: #000;
 }*/
 
 .info-blue {
@@ -222,7 +295,7 @@
 .page-bg-white {
   position: absolute;
   background-color: white;
-    width: 100%;
+  width: 100%;
   height: 100%;
   bottom: 0;
 }
@@ -335,6 +408,14 @@
 
 .side-padding10 {
     .side-padding(10px);
+}
+
+.left-padding55 {
+  padding-left:(55px);
+}
+
+.right-padding30 {
+  padding-right:(30px);
 }
 
 .top-padding10 {

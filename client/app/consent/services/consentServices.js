@@ -7,10 +7,10 @@
 
     function ConsentService($resource, ENVService) {
         var consentListResource = $resource(ENVService.pcmApiBaseUrl + "/consents/pageNumber/:pageNumber", {pageNumber: '@pageNumber'});
-        var consentResource = $resource(ENVService.pcmApiBaseUrl + "/consents/:consentId", {consentId: '@consentId'});
         var purposeOfUseResource = $resource(ENVService.pcmApiBaseUrl + "/purposeOfUse");
         var medicationSectionResource = $resource(ENVService.pcmApiBaseUrl + "/medicalSection");
         var sensitvityPolicyResource = $resource(ENVService.pcmApiBaseUrl + "/sensitivityPolicy");
+        var consentResource = $resource(ENVService.pcmApiBaseUrl + "/consents/:id",{id: '@id'}, {'update': { method:'PUT' }});
 
         var selectedNpi = {authorizeNpi: "", discloseNpi: ""};
         var selectedProvider = [];
@@ -28,107 +28,107 @@
 
 
             createConsent: function (consent, success, error) {
-
+                consentResource.save(consent, success, error);
             },
 
             deleteConsent: function (id, success, error) {
-                consentResource.delete({consentId: id}, success, error);
+                success();
             },
 
             updateConsent: function (consent, success, error) {
             },
 
             listConsent: function (page, success, error) {
-                /*var consentList = {
-                 totalItems: 20,
-                 itemsPerPage: 5,
-                 currentPage: 0,
-                 consentList: [{
-                 "id": "1",
-                 "toDiscloseName": ["VAN DONGEN, MONICA"],
-                 "isMadeToName": ["GRIMES, MICHAEL"],
-                 "doNotShareClinicalDocumentTypeCodes": [],
-                 "doNotShareClinicalDocumentSectionTypeCodes": ["Medications", "Allergies"],
-                 "doNotShareSensitivityPolicyCodes": ["Mental health information sensitivity", "HIV/AIDS information sensitivity"],
-                 "shareForPurposeOfUseCodes": ["Payment", "Emergency Treatment", "Healthcare Treatment"],
-                 "doNotShareClinicalConceptCodes": [],
-                 "consentStage": "CONSENT_SAVED",
-                 "revokeStage": "NA",
-                 "consentStart": 1404446399000,
-                 "consentEnd": 1437537600000,
-                 "consentStartString": null,
-                 "consentEndString": null,
-                 "medicalInformationNotDisclosed": true
-                 }, {
-                 "id": "2",
-                 "toDiscloseName": ["GRIMES, MICHAEL", "NEVAEH LLC", "CARLSON, GEORGE"],
-                 "isMadeToName": ["VAN DONGEN, MONICA", "LUQUIN, TERESA", "MASTER CARE, INC."],
-                 "doNotShareClinicalDocumentTypeCodes": [],
-                 "doNotShareClinicalDocumentSectionTypeCodes": [],
-                 "doNotShareSensitivityPolicyCodes": ["Mental health information sensitivity", "HIV/AIDS information sensitivity"],
-                 "shareForPurposeOfUseCodes": ["Payment", "Emergency Treatment", "Healthcare Treatment"],
-                 "doNotShareClinicalConceptCodes": [],
-                 "consentStage": "CONSENT_SIGNED",
-                 "revokeStage": "REVOCATION_NOT_SUBMITTED",
-                 "consentStart": 1404446399000,
-                 "consentEnd": 1437537600000,
-                 "consentStartString": null,
-                 "consentEndString": null,
-                 "medicalInformationNotDisclosed": true
-                 }, {
-                 "id": "3",
-                 "toDiscloseName": ["GRIMES, MICHAEL", "NEVAEH LLC", "CARLSON, GEORGE"],
-                 "isMadeToName": ["VAN DONGEN, MONICA", "LUQUIN, TERESA", "MASTER CARE, INC."],
-                 "doNotShareClinicalDocumentTypeCodes": [],
-                 "doNotShareClinicalDocumentSectionTypeCodes": [],
-                 "doNotShareSensitivityPolicyCodes": ["Mental health information sensitivity", "HIV/AIDS information sensitivity"],
-                 "shareForPurposeOfUseCodes": ["Payment", "Emergency Treatment", "Healthcare Treatment"],
-                 "doNotShareClinicalConceptCodes": [],
-                 "consentStage": "CONSENT_SIGNED",
-                 "revokeStage": "REVOCATION_REVOKED",
-                 "consentStart": 1404446399000,
-                 "consentEnd": 1437537600000,
-                 "consentStartString": null,
-                 "consentEndString": null,
-                 "medicalInformationNotDisclosed": true
-                 }, {
-                 "id": "4",
-                 "toDiscloseName": ["GRIMES, MICHAEL", "NEVAEH LLC", "CARLSON, GEORGE"],
-                 "isMadeToName": ["VAN DONGEN, MONICA", "LUQUIN, TERESA", "MASTER CARE, INC."],
-                 "doNotShareClinicalDocumentTypeCodes": [],
-                 "doNotShareClinicalDocumentSectionTypeCodes": [],
-                 "doNotShareSensitivityPolicyCodes": ["Mental health information sensitivity", "HIV/AIDS information sensitivity"],
-                 "shareForPurposeOfUseCodes": ["Payment", "Emergency Treatment", "Healthcare Treatment"],
-                 "doNotShareClinicalConceptCodes": [],
-                 "consentStage": "CONSENT_SIGNED",
-                 "revokeStage": "NA",
-                 "consentStart": 1404446399000,
-                 "consentEnd": 1437537600000,
-                 "consentStartString": null,
-                 "consentEndString": null,
-                 "medicalInformationNotDisclosed": true
-                 }, {
-                 "id": "5",
-                 "toDiscloseName": ["GRIMES, MICHAEL", "NEVAEH LLC", "CARLSON, GEORGE"],
-                 "isMadeToName": ["VAN DONGEN, MONICA", "LUQUIN, TERESA", "MASTER CARE, INC."],
-                 "doNotShareClinicalDocumentTypeCodes": [],
-                 "doNotShareClinicalDocumentSectionTypeCodes": [],
-                 "doNotShareSensitivityPolicyCodes": [],
-                 "shareForPurposeOfUseCodes": ["Payment", "Emergency Treatment", "Healthcare Treatment"],
-                 "doNotShareClinicalConceptCodes": [],
-                 "consentStage": "CONSENT_SAVED",
-                 "revokeStage": "NA",
-                 "consentStart": 1404446399000,
-                 "consentEnd": 1437537600000,
-                 "consentStartString": null,
-                 "consentEndString": null,
-                 "medicalInformationNotDisclosed": true
-                 }
-                 ]
-                 };
+                var consentList = {
+                    totalItems: 20,
+                    itemsPerPage: 5,
+                    currentPage: 0,
+                    consents: [{
+                        "id": "1",
+                        "toDiscloseName": ["VAN DONGEN, MONICA"],
+                        "isMadeToName": ["GRIMES, MICHAEL"],
+                        "doNotShareClinicalDocumentTypeCodes": [],
+                        "doNotShareClinicalDocumentSectionTypeCodes": ["Medications", "Allergies"],
+                        "doNotShareSensitivityPolicyCodes": ["Mental health information sensitivity", "HIV/AIDS information sensitivity"],
+                        "shareForPurposeOfUseCodes": ["Payment", "Emergency Treatment", "Healthcare Treatment"],
+                        "doNotShareClinicalConceptCodes": [],
+                        "consentStage": "CONSENT_SAVED",
+                        "revokeStage": "NA",
+                        "consentStart": 1404446399000,
+                        "consentEnd": 1437537600000,
+                        "consentStartString": null,
+                        "consentEndString": null,
+                        "medicalInformationNotDisclosed": true
+                    }, {
+                        "id": "2",
+                        "toDiscloseName": ["GRIMES, MICHAEL", "NEVAEH LLC", "CARLSON, GEORGE"],
+                        "isMadeToName": ["VAN DONGEN, MONICA", "LUQUIN, TERESA", "MASTER CARE, INC."],
+                        "doNotShareClinicalDocumentTypeCodes": [],
+                        "doNotShareClinicalDocumentSectionTypeCodes": [],
+                        "doNotShareSensitivityPolicyCodes": ["Mental health information sensitivity", "HIV/AIDS information sensitivity"],
+                        "shareForPurposeOfUseCodes": ["Payment", "Emergency Treatment", "Healthcare Treatment"],
+                        "doNotShareClinicalConceptCodes": [],
+                        "consentStage": "CONSENT_SIGNED",
+                        "revokeStage": "REVOCATION_NOT_SUBMITTED",
+                        "consentStart": 1404446399000,
+                        "consentEnd": 1437537600000,
+                        "consentStartString": null,
+                        "consentEndString": null,
+                        "medicalInformationNotDisclosed": true
+                    }, {
+                        "id": "3",
+                        "toDiscloseName": ["GRIMES, MICHAEL", "NEVAEH LLC", "CARLSON, GEORGE"],
+                        "isMadeToName": ["VAN DONGEN, MONICA", "LUQUIN, TERESA", "MASTER CARE, INC."],
+                        "doNotShareClinicalDocumentTypeCodes": [],
+                        "doNotShareClinicalDocumentSectionTypeCodes": [],
+                        "doNotShareSensitivityPolicyCodes": ["Mental health information sensitivity", "HIV/AIDS information sensitivity"],
+                        "shareForPurposeOfUseCodes": ["Payment", "Emergency Treatment", "Healthcare Treatment"],
+                        "doNotShareClinicalConceptCodes": [],
+                        "consentStage": "CONSENT_SIGNED",
+                        "revokeStage": "REVOCATION_REVOKED",
+                        "consentStart": 1404446399000,
+                        "consentEnd": 1437537600000,
+                        "consentStartString": null,
+                        "consentEndString": null,
+                        "medicalInformationNotDisclosed": true
+                    }, {
+                        "id": "4",
+                        "toDiscloseName": ["GRIMES, MICHAEL", "NEVAEH LLC", "CARLSON, GEORGE"],
+                        "isMadeToName": ["VAN DONGEN, MONICA", "LUQUIN, TERESA", "MASTER CARE, INC."],
+                        "doNotShareClinicalDocumentTypeCodes": [],
+                        "doNotShareClinicalDocumentSectionTypeCodes": [],
+                        "doNotShareSensitivityPolicyCodes": ["Mental health information sensitivity", "HIV/AIDS information sensitivity"],
+                        "shareForPurposeOfUseCodes": ["Payment", "Emergency Treatment", "Healthcare Treatment"],
+                        "doNotShareClinicalConceptCodes": [],
+                        "consentStage": "CONSENT_SIGNED",
+                        "revokeStage": "NA",
+                        "consentStart": 1404446399000,
+                        "consentEnd": 1437537600000,
+                        "consentStartString": null,
+                        "consentEndString": null,
+                        "medicalInformationNotDisclosed": true
+                    }, {
+                        "id": "5",
+                        "toDiscloseName": ["GRIMES, MICHAEL", "NEVAEH LLC", "CARLSON, GEORGE"],
+                        "isMadeToName": ["VAN DONGEN, MONICA", "LUQUIN, TERESA", "MASTER CARE, INC."],
+                        "doNotShareClinicalDocumentTypeCodes": [],
+                        "doNotShareClinicalDocumentSectionTypeCodes": [],
+                        "doNotShareSensitivityPolicyCodes": [],
+                        "shareForPurposeOfUseCodes": ["Payment", "Emergency Treatment", "Healthcare Treatment"],
+                        "doNotShareClinicalConceptCodes": [],
+                        "consentStage": "CONSENT_SAVED",
+                        "revokeStage": "NA",
+                        "consentStart": 1404446399000,
+                        "consentEnd": 1437537600000,
+                        "consentStartString": null,
+                        "consentEndString": null,
+                        "medicalInformationNotDisclosed": true
+                    }
+                    ]
+                };
 
-                 consentList.currentPage = page - 1;
-                 adjustPageOnSuccessResponse(consentList);*/
+                //consentList.currentPage = page - 1;
+                adjustPageOnSuccessResponse(consentList);
 
                 function adjustPageOnSuccessResponse(response) {
                     if (angular.isDefined(response.currentPage) && angular.isNumber(response.currentPage)) {
@@ -137,7 +137,7 @@
                     (success || angular.identity)(response);
                 }
 
-                consentListResource.get({pageNumber: page - 1}, adjustPageOnSuccessResponse, error);
+                //consentListResource.query({pageNumber: page-1}, adjustPageOnSuccessResponse, error);
             },
 
             setAuthorizeNpi: function (npi) {
@@ -151,7 +151,7 @@
                 return selectedNpi;
             },
 
-            getSelectedProviders: function () {
+            getSelectedProvider : function(){
                 return selectedProvider;
             },
 
@@ -197,15 +197,15 @@
                 sensitvityPolicyResource.query(success, error);
             },
 
-            getEntitiesByCodes: function (entities, codes) {
+            getEntitiesByCodes: function(entities,codes){
                 var selectedEntities = [];
 
-                if (codes.length === 0) {
+                if(codes.length === 0){
                     return selectedEntities;
-                } else {
-                    for (var i = 0; i < entities.length; i++) {
-                        for (var j = 0; j < codes.length; j++) {
-                            if (entities[i].code === codes[j]) {
+                }else{
+                    for(var i = 0; i < entities.length; i++){
+                        for(var j = 0; j < codes.length; j++){
+                            if(entities[i].code === codes[j]){
                                 selectedEntities.push(entities[i]);
                             }
                         }
@@ -214,38 +214,39 @@
                 return selectedEntities;
             },
 
-            getDefaultPurposeOfUse: function (data) {
+            getDefaultPurposeOfUse: function(data){
                 var PurposeOfUse = [];
-
-                for (var i = 0; i < data.length; i++) {
-                    if (data[i].code === 'TREATMENT') {
+                for(var i = 0; i < data.length; i++){
+                    if(data[i].code === 'TREATMENT'){
                         PurposeOfUse.push(data[i]);
                     }
                 }
                 return PurposeOfUse;
             },
 
-            getPurposeOfUseCodes: function (entities) {
+            getPurposeOfUseCodes: function(entities){
                 var result = {selectedPurposeOfUseCodes: ['TREATMENT']};
-
-                if (entities.length === 0) {
+                if(entities.length === 0 ){
                     return result;
-                } else if (entities.length > 0) {
-                    result.selectedPurposeOfUseCodes = this.getCodes(entities);
+                }else if(entities.length > 0 ){
+                    result.selectedPurposeOfUseCodes =  this.getCodes(entities);
                     return result;
                 }
             },
 
-            getCodes: function (data) {
+            getCodes: function(data){
                 var codes = [];
-
-                if (angular.isDefined(data)) {
-                    for (var i = 0; i < data.length; i++) {
+                if(angular.isDefined(data)){
+                    for(var i = 0; i < data.length; i++){
                         codes.push(data[i].code);
                     }
                 }
 
                 return codes;
+            },
+
+            resetSelectedNpi: function(){
+                selectedNpi = {authorizeNpi: "", discloseNpi: ""};
             }
         };
     }
