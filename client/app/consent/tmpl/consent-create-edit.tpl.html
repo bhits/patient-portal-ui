@@ -1,52 +1,48 @@
-
-<form action="">
+<form action="" name="consentForm">
     <div class="row">
         <div class="col-md-10">
             <h1> I, Bob, hereby authorize... </h1>
             <div class="hr-line-dashed"></div>
             <div class="row">
                     <div class="col-md-5">
-                        <!--<div class="panel panel-default">-->
-                            <select-provider ng-model="CreateConsentVm.consent.authorize" modaltitle="CreateConsentVm.authorize">
-                            </select-provider>
-                        <!--</div>-->
+                        <select-provider ng-model="CreateConsentVm.authorizeProvider" modaltitle="CreateConsentVm.authorize" name="authorizeProvider" providers="providers"></select-provider>
                     </div>
-                <div class="col-md-1 center"><span class="fa fa-chevron-right fa-3x m-t-md visible-md-inline-block visible-lg-inline-block"></span></div>
+                <div class="col-md-1 center"><span class="fa fa-chevron-right fa-3x m-t-md visible-md-inline-block visible-lg-inline-block" ></span></div>
                 <div class="col-md-5">
-                    <select-provider ng-model="CreateConsentVm.consent.disclosure" modaltitle="CreateConsentVm.disclosure" >
-                    </select-provider>
+                    <select-provider ng-model="CreateConsentVm.disclosureProvider" modaltitle="CreateConsentVm.disclosure"  name="disclosureProvider" providers="providers"></select-provider>
                 </div>
             </div>
             <div class="hr-line-dashed"></div>
             <div class="row">
                 <div class="col-md-11">
-                    <medical-information ng-model="CreateConsentVm.consent.medicalInformation"></medical-information>
-                </div>
-
-            </div>
-            <div class="hr-line-dashed"></div>
-            <div class="row">
-                <div class="col-md-11">
-                    <purpose-of-use ng-model="CreateConsentVm.consent.purposeOfUse"></purpose-of-use>
+                    <medical-information ng-model="CreateConsentVm.medicalInformation" name="medicalInformation" ></medical-information>
                 </div>
             </div>
             <div class="hr-line-dashed"></div>
             <div class="row">
                 <div class="col-md-11">
-                    <consent-term ng-model="CreateConsentVm.consent.consentTerm"></consent-term>
+                    <purpose-of-use ng-model="CreateConsentVm.shareForPurposeOfUseCodes" name="shareForPurposeOfUseCodes" ></purpose-of-use>
                 </div>
             </div>
-
             <div class="hr-line-dashed"></div>
-
+            <div class="row">
+                <div class="col-md-11">
+                    <consent-term ng-model="CreateConsentVm.dateRange" name="dateRange" ></consent-term>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
             <div class="row m-b-md">
                 <div class="col-md-11">
                     <div class="pull-right">
-                        <button class="btn btn-white m-r" type="reset">Cancel</button>
-                        <button class="btn btn-primary dark-green" type="submit">Save changes</button>
+                        <button class="btn btn-white m-r" type="reset" ng-click="CreateConsentVm.cancelConsent()">Cancel</button>
+                        <button class="btn btn-primary dark-green" type="submit" ng-click="CreateConsentVm.createConsent()" ng-disabled="!CreateConsentVm.canSave()">Save changes</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </form>
+
+<!--<pre>-->
+    <!--{{consentForm |json}}-->
+<!--</pre>-->

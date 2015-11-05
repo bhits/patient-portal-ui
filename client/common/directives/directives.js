@@ -212,21 +212,19 @@
 
     function DatePickerRange() {
         return {
-            restrict: 'A',
+            restrict: 'EA',
             scope: {
                 tolabel: "@",
                 fromlabel: "@",
                 ngModel: "="
             },
             templateUrl: 'common/tmpl/datepicker-range.tpl.html',
-            link: function (scope, element) {
-                element.datepicker({
-                    todayBtn: "linked",
-                    autoclose: true
-                });
+            bindToController: true,
+            controllerAs: 'DatePickerVm',
+            controller:function ($scope) {
+                var DatePickerVm = this;
 
-                scope.startDatePicker = scope.ngModel.consentStart;
-                scope.endDatePicker = scope.ngModel.consentEnd;
+                DatePickerVm.consent = DatePickerVm.ngModel;
 
                 function doFormatDate(dateObj) {
                     var today = new Date(dateObj);
@@ -244,26 +242,36 @@
                     return formatDate;
                 }
 
-                var setDateRange = function (dateVal) {
-                    if (!dateVal) {
+                var setDateRange = function (startDate,endDate ) {
+                    if (!startDate || !endDate) {
                         return;
                     }
-                    scope.error = "";
+                    DatePickerVm.error = "";
                     var fd = doFormatDate(new Date());
-                    if (dateVal < fd) {
-                        scope.error = ' Start day can not before today';
-                    } else {
-                        scope.ngModel = {consentStart: scope.startDatePicker, consentEnd: scope.endDatePicker};
+                    if (startDate < fd) {
+                        DatePickerVm.error = ' Consent should start from today';
+                    } else  if (startDate > endDate) {
+                        DatePickerVm.error = ' Consent start date cannot proceed consent end date';
+                    }else {
+                        DatePickerVm.ngModel = DatePickerVm.consent;
                     }
 
-                    scope.showError = scope.error.length;
+                    DatePickerVm.showError = DatePickerVm.error.length;
                 };
-                scope.$watch('startDatePicker', function (dateVal) {
-                    setDateRange(dateVal);
+
+                var validateDate = function(){
+
+                };
+                $scope.$watch('DatePickerVm.consent.consentStart', function (startDate) {
+                    setDateRange(startDate, DatePickerVm.consent.consentEnd );
                 });
-                scope.$watch('endDatePicker', function (dateVal) {
-                    setDateRange(dateVal);
+                $scope.$watch('DatePickerVm.consent.consentEnd', function (endDate) {
+                    setDateRange(DatePickerVm.consent.consentStart, endDate);
                 });
+            },
+
+            link: function (scope, element) {
+                element.datepicker({todayBtn: "linked", autoclose: true });
             }
         };
     }
