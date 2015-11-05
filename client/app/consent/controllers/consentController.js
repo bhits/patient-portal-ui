@@ -46,7 +46,6 @@
             'app.consentServices',
             'app.consentDirectives'
         ])
-        .config(ConsentConfig)
-        .controller('ConsentRevokeVm', ConsentRevokeController);
+        .config(ConsentConfig);
 
 })();
