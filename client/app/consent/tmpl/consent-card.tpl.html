@@ -1,26 +1,45 @@
 <div class="row">
-    <div class="col-lg-12">
-        <div class="ibox panel panel-darkblue float-e-margins">
-            <div class="ibox-title modified panel-heading ">
+    <div class="col-lg-12 relative">
+        <div class="ibox panel panel-success float-e-margins statusIcon_saved">
+            <div class="ibox-title panel-heading left-padding55 right-padding30">
+                <div class="chevron_absolute">
+                    <div ibox-tools init-collapsed="true"></div>
+                </div>
+
                 <div class="row">
-                    <div class="col-sm-12">
-                        <h5>Authorized to share: <strong><span ng-bind="consent.toDiscloseName"/></strong> | Sharing with: <strong><span ng-bind="consent.isMadeToName"/></strong>
-                        </h5>
-                        <div ibox-tools init-collapsed="true"></div>
-                     </div>
-                    <div class="col-sm-12">
-                        <h5 class="pull-right">Effective Date: <strong><span ng-bind="consent.consentStart | date"/></strong>
-                        </h5>
+                    <!--<div ibox-tools init-collapsed="true"></div>-->
+                    <div class="col-sm-4 col-sm-push-8 col-xs-12">
+                        <p class="">Effective Dates: <strong><span ng-bind="(consent.consentStart | date) + ' - ' + (consent.consentEnd | date)"/></strong>
+                        </p>
+                    </div>
+
+                    <div class="col-sm-8 col-sm-pull-4 col-xs-12">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <p class="m-b-xxs">Authorized to share:
+                                </p>
+
+                                <p><strong><span ng-repeat="discloseName in consent.toDiscloseName" ng-bind="discloseName"/></strong>
+                                </p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="m-b-xxs">Sharing with:</p>
+
+                                <p><strong><span ng-repeat="madeToName in consent.isMadeToName" ng-bind="madeToName"/></strong>
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
             </div>
 
             <div class="ibox-content modified">
-
                 <div class="pp-block-text-bar pp-block-text-bar_sm pp-block-text-bar_default">
-                    <span>
-                        Consent State: <span class="bold" ng-bind="ConsentCardVm.consentState(consent) | uppercase"/>
-                    </span>
+                            <span>
+                                Consent State: <span class="bold"
+                                                     ng-bind="ConsentCardVm.consentState(consent) | uppercase"/>
+                            </span>
                 </div>
 
                 <div class="row">
@@ -31,56 +50,23 @@
                         </div>
                         <div ng-if="!ConsentCardVm.isShareAll(consent)">
                             <h3 class="border-bottom-red">Medical Information NOT disclosed:</h3>
+
                             <p><span ng-bind="ConsentCardVm.notDisclosedItems(consent)"/></p>
                         </div>
                     </div>
                     <div class="col-md-6 m-b">
                         <h3 class="border-bottom-blue">Share for following purposes:</h3>
+
                         <p><span ng-bind="ConsentCardVm.purposeOfUseItems(consent)"/></p>
                     </div>
                 </div>
 
                 <div>
-                    <button class="btn btn-primary" ng-click="ConsentCardVm.openManageConsentModal(consent)">Manage Consent
+                    <button class="btn btn-primary" ng-click="ConsentCardVm.openManageConsentModal(consent)">Manage
+                        Consent
                     </button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-<!--<div class="ibox float-e-margins">-->
-    <!--<div class="ibox-title">-->
-        <!--<h5>Authorized to share: <strong><span ng-bind="consent.toDiscloseName"/></strong> | Sharing with: <strong><span-->
-                <!--ng-bind="consent.isMadeToName"/></strong> | Effective Date: <strong><span-->
-                <!--ng-bind="consent.consentStart | date"/></strong>-->
-        <!--</h5>-->
-
-        <!--<div ibox-tools></div>-->
-    <!--</div>-->
-    <!--<div class="ibox-content">-->
-        <!--<div class="well">-->
-            <!--<h3>-->
-                <!--Consent State: <strong><span ng-bind="ConsentCardVm.consentState(consent) | uppercase"/></strong>-->
-            <!--</h3>-->
-        <!--</div>-->
-        <!--<div class="well">-->
-            <!--<div ng-if="ConsentCardVm.isShareAll(consent)">-->
-                <!--<h3>Sharing all medical information:</h3>-->
-                <!--All my medical information can be shared.-->
-            <!--</div>-->
-            <!--<div ng-if="!ConsentCardVm.isShareAll(consent)">-->
-                <!--<h3>Medical Information NOT disclosed:</h3>-->
-                <!--<span ng-bind="ConsentCardVm.notDisclosedItems(consent)"/>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div class="well">-->
-            <!--<h3>Share for following purposes:</h3>-->
-            <!--<span ng-bind="ConsentCardVm.purposeOfUseItems(consent)"/>-->
-        <!--</div>-->
-        <!--<div class="well">-->
-            <!--<button class="btn btn-primary" ng-click="ConsentCardVm.openManageConsentModal(consent)">Manage Consent-->
-            <!--</button>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</div>-->
