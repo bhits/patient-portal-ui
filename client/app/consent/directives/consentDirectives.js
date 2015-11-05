@@ -405,6 +405,31 @@
         }
     }
 
+    function RevokeConsent(){
+        var directive = {
+            restrict: 'E',
+            scope: {},
+            templateUrl: 'app/consent/tmpl/consent-revoke-confirmation.tpl.html',
+            controller: ['$stateParams', '$state', RevokeConsentController],
+            controllerAs: 'RevokeConsentVm'
+        };
+        return directive;
+
+        function RevokeConsentController($stateParams, $state){
+            var RevokeConsentVm = this;
+            RevokeConsentVm.params = $stateParams;
+            RevokeConsentVm.cancel = cancel;
+
+            if (angular.isUndefined(RevokeConsentVm.params) || angular.equals(RevokeConsentVm.params.consent, {})) {
+                cancel();
+            }
+
+            function cancel() {
+                $state.go('consent.list');
+            }
+        }
+    }
+
     angular.module("app.consentDirectives",
         [
             'app.consentServices',
@@ -415,6 +440,7 @@
         .directive('createConsent', CreateConsent)
         .directive('consentCard', ConsentCard)
         .directive('consentCardList', ConsentCardList)
+        .directive('revokeConsent', RevokeConsent)
         .directive('selectProvider', SelectProvider)
         .directive('medicalInformation', MedicalInformation)
         .directive('purposeOfUse', PurposeOfUse)
