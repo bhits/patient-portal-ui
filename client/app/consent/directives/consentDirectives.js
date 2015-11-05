@@ -12,7 +12,7 @@
             templateUrl: 'app/consent/tmpl/consent-create-edit.tpl.html',
             controllerAs: 'CreateConsentVm',
             bindToController: true,
-            controller: ['ConsentService', '$stateParams', 'ProviderService', function (ConsentService, $stateParams, ProviderService) {
+            controller: ['ConsentService', '$modal', '$stateParams', 'ProviderService', function (ConsentService, $modal, $stateParams, ProviderService) {
                 var CreateConsentVm = this;
                 CreateConsentVm.authorize = "Authorize";
                 CreateConsentVm.disclosure = "Disclosure";
@@ -89,6 +89,26 @@
 
                 CreateConsentVm.cancelConsent = function(){
                     console.log("Cancelling consent..");
+                    $modal.open({
+                        templateUrl: 'app/consent/tmpl/consent-create-edit-cancel-modal.tpl.html',
+                        controller: ['$modalInstance', '$state', CancelCreateEditConsentModalController],
+                        controllerAs: 'CancelCreateEditConsentModalVm'
+                    });
+
+                    function CancelCreateEditConsentModalController($modalInstance, $state){
+                        var CancelCreateEditConsentModalVm = this;
+                        CancelCreateEditConsentModalVm.cancel = cancel;
+                        CancelCreateEditConsentModalVm.discard = discard;
+
+                        function cancel(){
+                            $modalInstance.dismiss('cancel');
+                        }
+
+                        function discard(){
+                            cancel();
+                            $state.go('consent.list');
+                        }
+                    }
                 };
 
                 CreateConsentVm.canSave = function(){
