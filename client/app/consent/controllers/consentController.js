@@ -33,24 +33,8 @@
                 templateUrl: 'app/consent/tmpl/consent-revoke.tpl.html',
                 params: {
                     consent: {}
-                },
-                controller: ['$stateParams', '$state', ConsentRevokeController],
-                controllerAs: 'ConsentRevokeVm'
+                }
             });
-    }
-
-    function ConsentRevokeController($stateParams, $state) {
-        var ConsentRevokeVm = this;
-        ConsentRevokeVm.params = $stateParams;
-        ConsentRevokeVm.cancel = cancel;
-
-        if (angular.isUndefined(ConsentRevokeVm.params) || angular.equals(ConsentRevokeVm.params.consent, {})) {
-            cancel();
-        }
-
-        function cancel() {
-            $state.go('consent.list');
-        }
     }
 
     /**
