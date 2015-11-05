@@ -185,7 +185,7 @@ describe('app.consentDirectives', function () {
         $httpBackend.verifyNoOutstandingRequest();
     });
 
-    xit('should replace the element with the appropriate content for consent-card', function () {
+    it('should replace the element with the appropriate content for consent-card', function () {
         // Arrange
         var mockState = "MOCK_STATE";
         $rootScope.consent = mockConsent;
@@ -307,7 +307,7 @@ describe('app.consentDirectives', function () {
         expect(notDisclosedItems).toEqual(expectedPurposeOfUseItems);
     });
 
-    xit('should replace the element with the appropriate content for consent-card-list', function () {
+    it('should replace the element with the appropriate content for consent-card-list', function () {
         // Arrange
         function mockListConsentFn(page, success, error) {
             mockConsentList.currentPage += 1;
@@ -325,8 +325,8 @@ describe('app.consentDirectives', function () {
         // Assert
         // Check that the compiled element contains the templated content
         // 0
-        expect(element.html()).toContain(mockConsentList.consentList[0].toDiscloseName);
-        expect(element.html()).toContain(mockConsentList.consentList[0].isMadeToName);
+        expect(element.html()).toContain(mockConsentList.consentList[0].toDiscloseName[0]);
+        expect(element.html()).toContain(mockConsentList.consentList[0].isMadeToName[0]);
         expect(element.html()).toContain(mockConsentList.consentList[0].doNotShareClinicalDocumentSectionTypeCodes[0]);
         expect(element.html()).toContain(mockConsentList.consentList[0].doNotShareClinicalDocumentSectionTypeCodes[1]);
         expect(element.html()).toContain(mockConsentList.consentList[0].doNotShareSensitivityPolicyCodes[0]);
@@ -335,8 +335,12 @@ describe('app.consentDirectives', function () {
         expect(element.html()).toContain(mockConsentList.consentList[0].shareForPurposeOfUseCodes[1]);
         expect(element.html()).toContain(mockConsentList.consentList[0].shareForPurposeOfUseCodes[2]);
         // 1
-        expect(element.html()).toContain(mockConsentList.consentList[1].toDiscloseName);
-        expect(element.html()).toContain(mockConsentList.consentList[1].isMadeToName);
+        expect(element.html()).toContain(mockConsentList.consentList[1].toDiscloseName[0]);
+        expect(element.html()).toContain(mockConsentList.consentList[1].isMadeToName[0]);
+        expect(element.html()).toContain(mockConsentList.consentList[1].toDiscloseName[1]);
+        expect(element.html()).toContain(mockConsentList.consentList[1].isMadeToName[1]);
+        expect(element.html()).toContain(mockConsentList.consentList[1].toDiscloseName[2]);
+        expect(element.html()).toContain(mockConsentList.consentList[1].isMadeToName[2]);
         expect(element.html()).not.toContain(mockConsentList.consentList[1].doNotShareClinicalDocumentSectionTypeCodes[0]);
         expect(element.html()).not.toContain(mockConsentList.consentList[1].doNotShareClinicalDocumentSectionTypeCodes[1]);
         expect(element.html()).toContain(mockConsentList.consentList[1].doNotShareSensitivityPolicyCodes[0]);
@@ -345,8 +349,12 @@ describe('app.consentDirectives', function () {
         expect(element.html()).toContain(mockConsentList.consentList[1].shareForPurposeOfUseCodes[1]);
         expect(element.html()).toContain(mockConsentList.consentList[1].shareForPurposeOfUseCodes[2]);
         // 2
-        expect(element.html()).toContain(mockConsentList.consentList[2].toDiscloseName);
-        expect(element.html()).toContain(mockConsentList.consentList[2].isMadeToName);
+        expect(element.html()).toContain(mockConsentList.consentList[2].toDiscloseName[0]);
+        expect(element.html()).toContain(mockConsentList.consentList[2].isMadeToName[0]);
+        expect(element.html()).toContain(mockConsentList.consentList[2].toDiscloseName[1]);
+        expect(element.html()).toContain(mockConsentList.consentList[2].isMadeToName[1]);
+        expect(element.html()).toContain(mockConsentList.consentList[2].toDiscloseName[2]);
+        expect(element.html()).toContain(mockConsentList.consentList[2].isMadeToName[2]);
         expect(element.html()).not.toContain(mockConsentList.consentList[2].doNotShareClinicalDocumentSectionTypeCodes[0]);
         expect(element.html()).not.toContain(mockConsentList.consentList[2].doNotShareClinicalDocumentSectionTypeCodes[1]);
         expect(element.html()).toContain(mockConsentList.consentList[2].doNotShareSensitivityPolicyCodes[0]);
@@ -355,8 +363,12 @@ describe('app.consentDirectives', function () {
         expect(element.html()).toContain(mockConsentList.consentList[2].shareForPurposeOfUseCodes[1]);
         expect(element.html()).toContain(mockConsentList.consentList[2].shareForPurposeOfUseCodes[2]);
         // 3
-        expect(element.html()).toContain(mockConsentList.consentList[3].toDiscloseName);
-        expect(element.html()).toContain(mockConsentList.consentList[3].isMadeToName);
+        expect(element.html()).toContain(mockConsentList.consentList[3].toDiscloseName[0]);
+        expect(element.html()).toContain(mockConsentList.consentList[3].isMadeToName[0]);
+        expect(element.html()).toContain(mockConsentList.consentList[3].toDiscloseName[1]);
+        expect(element.html()).toContain(mockConsentList.consentList[3].isMadeToName[1]);
+        expect(element.html()).toContain(mockConsentList.consentList[3].toDiscloseName[2]);
+        expect(element.html()).toContain(mockConsentList.consentList[3].isMadeToName[2]);
         expect(element.html()).not.toContain(mockConsentList.consentList[3].doNotShareClinicalDocumentSectionTypeCodes[0]);
         expect(element.html()).not.toContain(mockConsentList.consentList[3].doNotShareClinicalDocumentSectionTypeCodes[1]);
         expect(element.html()).toContain(mockConsentList.consentList[3].doNotShareSensitivityPolicyCodes[0]);
@@ -365,8 +377,12 @@ describe('app.consentDirectives', function () {
         expect(element.html()).toContain(mockConsentList.consentList[3].shareForPurposeOfUseCodes[1]);
         expect(element.html()).toContain(mockConsentList.consentList[3].shareForPurposeOfUseCodes[2]);
         // 4
-        expect(element.html()).toContain(mockConsentList.consentList[4].toDiscloseName);
-        expect(element.html()).toContain(mockConsentList.consentList[4].isMadeToName);
+        expect(element.html()).toContain(mockConsentList.consentList[4].toDiscloseName[0]);
+        expect(element.html()).toContain(mockConsentList.consentList[4].isMadeToName[0]);
+        expect(element.html()).toContain(mockConsentList.consentList[4].toDiscloseName[1]);
+        expect(element.html()).toContain(mockConsentList.consentList[4].isMadeToName[1]);
+        expect(element.html()).toContain(mockConsentList.consentList[4].toDiscloseName[2]);
+        expect(element.html()).toContain(mockConsentList.consentList[4].isMadeToName[2]);
         expect(element.html()).not.toContain(mockConsentList.consentList[4].doNotShareClinicalDocumentSectionTypeCodes[0]);
         expect(element.html()).not.toContain(mockConsentList.consentList[4].doNotShareClinicalDocumentSectionTypeCodes[1]);
         expect(element.html()).not.toContain(mockConsentList.consentList[4].doNotShareSensitivityPolicyCodes[0]);
