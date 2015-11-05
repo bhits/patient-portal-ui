@@ -16,11 +16,9 @@
                 var CreateConsentVm = this;
                 CreateConsentVm.authorize = "Authorize";
                 CreateConsentVm.disclosure = "Disclosure";
+                CreateConsentVm.dateRange = {consentStart: "", consentEnd: ""};
 
-
-
-
-                if(angular.isDefined($stateParams.consentId)){
+                if(angular.isDefined($stateParams.consentId) && $stateParams.consentId.length > 0){
                     var consent = ConsentService.getConsent($stateParams.consentId);
 
                     var providers = ProviderService.getProviders(function (response) {
@@ -61,8 +59,9 @@
                 CreateConsentVm.createConsent = function(){
 
                     var consent = {
-                        providersPermittedToDisclose :CreateConsentVm.authorizeProvider.npi,
-                        providersDisclosureIsMadeTo: CreateConsentVm.disclosureProvider.npi,
+                        id:"",
+                        providersPermittedToDiscloseNpi :[CreateConsentVm.authorizeProvider.npi],
+                        providersDisclosureIsMadeToNpi: [CreateConsentVm.disclosureProvider.npi],
                         doNotShareSensitivityPolicyCodes: CreateConsentVm.medicalInformation.doNotShareSensitivityPolicyCodes,
                         doNotShareClinicalDocumentSectionTypeCodes: CreateConsentVm.medicalInformation.doNotShareClinicalDocumentSectionTypeCodes,
                         shareForPurposeOfUseCodes: CreateConsentVm.shareForPurposeOfUseCodes,
@@ -75,7 +74,6 @@
 
                     ConsentService.createConsent(consent,
                         function(response){
-
                                 console.log("Success in creating consent");
                         },
                         function(error){
@@ -123,7 +121,7 @@
 
                 function SelectProviderModalController($scope, $modalInstance, notificationService, data, ProviderService, ConsentService) {
                     $scope.title = data.modalTitle;
-                    $scope.selectedProvider = { npi : (angular.isDefined(data.selectedProvider) && angular.isDefined(data.selectedProvider.npi))? data.selectedProvider.npi : '' };
+                    $scope.selectedProvider = { npi : ((data.selectedProvider!== null) &&angular.isDefined(data.selectedProvider) && angular.isDefined(data.selectedProvider.npi))? data.selectedProvider.npi : '' };
                     $scope.providers = data.providers;
                     $scope.selectedNpi = ConsentService.getSelectedNpi();
 
@@ -351,9 +349,12 @@
              ngModel: '='
             },
             bindToController: true,
-            controllerAs: 'watchCtrl',
+            controllerAs: 'ConsentTermVm',
             controller: ['$scope', function ($scope) {
-                $scope.daterange = {consentEnd: "", consentStart: ""};
+                var ConsentTermVm = this;
+
+                ConsentTermVm.daterange = ConsentTermVm.ngModel;
+                //$scope.daterange = {consentEnd: "", consentStart: ""};
             }]
         };
     }

@@ -10,6 +10,7 @@
         var purposeOfUseResource = $resource(ENVService.pcmApiBaseUrl + "/purposeOfUse");
         var medicationSectionResource = $resource(ENVService.pcmApiBaseUrl + "/medicalSection");
         var sensitvityPolicyResource = $resource(ENVService.pcmApiBaseUrl + "/sensitivityPolicy");
+        var consentResource = $resource(ENVService.pcmApiBaseUrl + "/consents/:id",{id: '@id'}, {'update': { method:'PUT' }});
 
         var selectedNpi = {authorizeNpi: "", discloseNpi: ""};
         var selectedProvider = [];
@@ -27,7 +28,7 @@
 
 
             createConsent: function (consent, success, error) {
-
+                consentResource.save(consent, success, error);
             },
 
             deleteConsent: function (id, success, error) {
@@ -242,6 +243,10 @@
                 }
 
                 return codes;
+            },
+
+            resetSelectedNpi: function(){
+                selectedNpi = {authorizeNpi: "", discloseNpi: ""};
             }
         };
     }

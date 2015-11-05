@@ -1,15 +1,14 @@
 <div>
     <div>
         <span ng-bind="fromlabel"></span></span>
-        <input type="text" class="input-small" name="start" ng-model="startDatePicker"/>
+        <input type="text" class="input-small" name="start" ng-model="DatePickerVm.consent.consentStart"/>
         <span ng-bind="tolabel"></span>
-        <input type="text" class="input-small" name="end" ng-model="endDatePicker"/>
+        <input type="text" class="input-small" name="end" ng-model="DatePickerVm.consent.consentEnd"/>
     </div>
 
-    <div ng-show="showError">
+    <div ng-if="DatePickerVm.showError">
         <div class="alert alert-danger">
-            <strong>Warning!</strong>
-            {{error}}
+           <span ng-bind="DatePickerVm.error"></span>
         </div>
     </div>
 </div>
