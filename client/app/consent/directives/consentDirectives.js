@@ -22,7 +22,7 @@
                     var consent = ConsentService.getConsent($stateParams.consentId);
 
                     var providers = ProviderService.getProviders(function (response) {
-                        providers = response;
+                        CreateConsentVm.providers = response;
                     }, function (error) {
                         console.log("Error: in getting providers");
                     });
@@ -33,8 +33,8 @@
                         {id: $stateParams.consentId},
                         function(consent){
                             CreateConsentVm.consent = consent;
-                            CreateConsentVm.authorizeProvider = (ConsentService.getProviderByNPI(providers, consent.authorizeProvider)).npi;
-                            CreateConsentVm.disclosureProvider = (ConsentService.getProviderByNPI(providers, consent.providersPermittedToDisclose)).npi;
+                            CreateConsentVm.authorizeProvider = (ConsentService.getProviderByNPI(CreateConsentVm.providers, consent.authorizeProvider)).npi;
+                            CreateConsentVm.disclosureProvider = (ConsentService.getProviderByNPI(CreateConsentVm.providers, consent.providersPermittedToDisclose)).npi;
                             CreateConsentVm.doNotShareSensitivityPolicyCodes = consent.doNotShareSensitivityPolicyCodes;
                             CreateConsentVm.doNotShareClinicalDocumentSectionTypeCodes = consent.doNotShareClinicalDocumentSectionTypeCodes;
                             CreateConsentVm.shareForPurposeOfUseCodes = consent.shareForPurposeOfUseCodes;
@@ -57,11 +57,16 @@
                 }
 
                 CreateConsentVm.createConsent = function(){
+                    var providersPermittedToDisclose = ProviderService.getIndividualProvidersNpi([CreateConsentVm.disclosureProvider]);
+                    var providersDisclosureIsMadeTo = ProviderService.getIndividualProvidersNpi([CreateConsentVm.authorizeProvider]);
+                    var organizationalProvidersDisclosureIsMadeTo = ProviderService.getOrganizationalProvidersNpi([CreateConsentVm.authorizeProvider]);
+                    var organizationalProvidersPermittedToDisclose = ProviderService.getOrganizationalProvidersNpi([CreateConsentVm.disclosureProvider]);
 
                     var consent = {
-                        id:"",
-                        providersPermittedToDiscloseNpi :[CreateConsentVm.authorizeProvider.npi],
-                        providersDisclosureIsMadeToNpi: [CreateConsentVm.disclosureProvider.npi],
+                        providersPermittedToDisclose :providersPermittedToDisclose  ,
+                        providersDisclosureIsMadeTo: providersDisclosureIsMadeTo,
+                        organizationalProvidersDisclosureIsMadeTo: organizationalProvidersDisclosureIsMadeTo ,
+                        organizationalProvidersPermittedToDisclose: organizationalProvidersPermittedToDisclose,
                         doNotShareSensitivityPolicyCodes: CreateConsentVm.medicalInformation.doNotShareSensitivityPolicyCodes,
                         doNotShareClinicalDocumentSectionTypeCodes: CreateConsentVm.medicalInformation.doNotShareClinicalDocumentSectionTypeCodes,
                         shareForPurposeOfUseCodes: CreateConsentVm.shareForPurposeOfUseCodes,

@@ -113,6 +113,26 @@
                     }
                 }
                 return {};
+            },
+
+            getIndividualProvidersNpi: function(providers){
+                var result = [];
+                for(var i = 0; i < providers.length; i++){
+                    if(this.isIndividualProvider(providers[i])){
+                        result.push(providers[i].npi);
+                    }
+                }
+                return result;
+            },
+
+            getOrganizationalProvidersNpi: function(providers){
+                var result = [];
+                for(var i = 0; i < providers.length; i++){
+                    if(this.isOrganizationProvider(providers[i])){
+                        result.push(providers[i].npi);
+                    }
+                }
+                return result;
             }
 
         };
