@@ -351,9 +351,9 @@
              ngModel: '='
             },
             bindToController: true,
-            controllerAs: 'ConsentTermVm',
+            controllerAs: 'watchCtrl',
             controller: ['$scope', function ($scope) {
-                var ConsentTermVm = this;
+                $scope.daterange = {consentEnd: "", consentStart: ""};
             }]
         };
     }
@@ -413,6 +413,7 @@
                     function onDeleteError(){
                         notificationService.error('Failed to delete the consent! Please try again later...');
                         cancel();
+                        $state.reload();
                     }
                 }
 
@@ -457,8 +458,13 @@
             ConsentCardListVm.consentList = {};
             ConsentCardListVm.pagination = {totalItems: 0, currentPage: oldPage, itemsPerPage: 5, maxSize: 10};
             ConsentCardListVm.loadPage = loadPage;
+            ConsentCardListVm.hasConsents = hasConsents;
 
             ConsentCardListVm.loadPage();
+
+            function hasConsents(){
+                return utilityService.isNotEmpty(ConsentCardListVm.consentList.consentList);
+            }
 
             function updatePagination(response) {
                 ConsentCardListVm.pagination.totalItems = response.totalItems;

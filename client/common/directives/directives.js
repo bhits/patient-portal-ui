@@ -54,7 +54,7 @@
                 var content = ibox.find('div.ibox-content');
 
                 $scope.initializeCollapsed = $scope.initCollapsed === 'true';
-                if($scope.initializeCollapsed){
+                if ($scope.initializeCollapsed) {
                     content.slideUp(0);
                 }
 
@@ -214,13 +214,55 @@
         return {
             restrict: 'A',
             scope: {
-              tolabel: "@",
-              fromlabel: "@"
+                tolabel: "@",
+                fromlabel: "@",
+                ngModel: "="
             },
             templateUrl: 'common/tmpl/datepicker-range.tpl.html',
             link: function (scope, element) {
                 element.datepicker({
                     todayBtn: "linked",
+                    autoclose: true
+                });
+
+                scope.startDatePicker = scope.ngModel.consentStart;
+                scope.endDatePicker = scope.ngModel.consentEnd;
+
+                function doFormatDate(dateObj) {
+                    var today = new Date(dateObj);
+                    var day = today.getDate();
+                    var month = today.getMonth() + 1;
+                    var year = today.getFullYear();
+                    if (day < 10) {
+                        day = "0" + day;
+                    }
+                    if (month < 10) {
+                        month = "0" + month;
+                    }
+                    var formatDate = month + "/" + day + "/" + year;
+
+                    return formatDate;
+                }
+
+                var setDateRange = function (dateVal) {
+                    if (!dateVal) {
+                        return;
+                    }
+                    scope.error = "";
+                    var fd = doFormatDate(new Date());
+                    if (dateVal < fd) {
+                        scope.error = ' Start day can not before today';
+                    } else {
+                        scope.ngModel = {consentStart: scope.startDatePicker, consentEnd: scope.endDatePicker};
+                    }
+
+                    scope.showError = scope.error.length;
+                };
+                scope.$watch('startDatePicker', function (dateVal) {
+                    setDateRange(dateVal);
+                });
+                scope.$watch('endDatePicker', function (dateVal) {
+                    setDateRange(dateVal);
                 });
             }
         };

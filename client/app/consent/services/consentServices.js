@@ -10,10 +10,9 @@
         var purposeOfUseResource = $resource(ENVService.pcmApiBaseUrl + "/purposeOfUse");
         var medicationSectionResource = $resource(ENVService.pcmApiBaseUrl + "/medicalSection");
         var sensitvityPolicyResource = $resource(ENVService.pcmApiBaseUrl + "/sensitivityPolicy");
-        var consentResource = $resource(ENVService.pcmApiBaseUrl + "/consents/:id", {id: '@id'});
 
         var selectedNpi = {authorizeNpi: "", discloseNpi: ""};
-        var selectedProvider = {};
+        var selectedProvider = [];
         //To be refactore
         var hasNPI = function (list, npi) {
             for (var j = 0; j < list.length; j++) {
@@ -25,12 +24,10 @@
         };
 
         return {
-            getConsent: function (id, success, error) {
-                consentResource.get(idObject, success, error);
-            },
+
 
             createConsent: function (consent, success, error) {
-                consentResource.save(consent, success, error);
+
             },
 
             deleteConsent: function (id, success, error) {
@@ -149,10 +146,6 @@
                 selectedNpi.discloseNpi = npi;
             },
 
-            resetSelectedNpi: function(){
-                selectedNpi.authorizeNpi = "";
-                selectedNpi.discloseNpi = "";
-            },
             getSelectedNpi: function () {
                 return selectedNpi;
             },
@@ -247,6 +240,7 @@
                         codes.push(data[i].code);
                     }
                 }
+
                 return codes;
             }
         };
