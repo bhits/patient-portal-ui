@@ -17,7 +17,7 @@
                             the following areas of potentially sensitive
                             information.
                         </div>
-                        <button class="btn btn-primary btn-xs m-r-xs" ng-click="selectAllMedicalSections()">Select All</button> <button class="btn btn-primary btn-xs" ng-click="deselectAllMedicalSections()">Deselect All</button>
+                        <button class="btn btn-primary btn-xs m-r-xs dark-green" ng-click="selectAllMedicalSections()">Select All</button> <button class="btn btn-primary btn-xs dark-green" ng-click="deselectAllMedicalSections()">Deselect All</button>
                         <div ng-repeat="medicalSection in mediactionSections">
                             <div>
                                 <div class="radio">
@@ -43,7 +43,7 @@
                             Select the medical information that you <strong>DO
                             NOT</strong> wish to share.
                         </div>
-                        <button class="btn btn-primary btn-xs m-r-xs" ng-click="selectAllSensitivityPolicies()">Select All</button> <button class="btn btn-primary btn-xs" ng-click="deselectAllSensitivityPolicies()">Deselect All</button>
+                        <button class="btn btn-primary btn-xs m-r-xs dark-green" ng-click="selectAllSensitivityPolicies()">Select All</button> <button class="btn btn-primary btn-xs dark-green" ng-click="deselectAllSensitivityPolicies()">Deselect All</button>
                         <div ng-repeat="sensitivityPolicy in sensitivityPolicies">
                             <div>
                                 <div class="radio">
@@ -62,6 +62,6 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-white m-r-xs" ng-click="cancel()">Cancel</button>
-        <button type="button" class="btn btn-primary" ng-click="ok()">Save changes</button>
+        <button type="button" class="btn btn-primary dark-green" ng-click="ok()">Save changes</button>
     </div>
 </div>
