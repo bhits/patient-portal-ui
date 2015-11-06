@@ -5,23 +5,23 @@
             <div class="hr-line-dashed"></div>
             <div class="row">
                     <div class="col-md-5">
-                        <select-provider ng-model="CreateConsentVm.authorizeProvider" modaltitle="CreateConsentVm.authorize" name="authorizeProvider" providers="providers"></select-provider>
+                        <select-provider ng-model="CreateConsentVm.authorizeProvider" modaltitle="CreateConsentVm.authorize" name="authorizeProvider" providers="CreateConsentVm.providers"></select-provider>
                     </div>
                 <div class="col-md-1 center"><span class="fa fa-chevron-right fa-3x m-t-md visible-md-inline-block visible-lg-inline-block" ></span></div>
                 <div class="col-md-5">
-                    <select-provider ng-model="CreateConsentVm.disclosureProvider" modaltitle="CreateConsentVm.disclosure"  name="disclosureProvider" providers="providers"></select-provider>
+                    <select-provider ng-model="CreateConsentVm.disclosureProvider" modaltitle="CreateConsentVm.disclosure"  name="disclosureProvider" providers="CreateConsentVm.providers"></select-provider>
                 </div>
             </div>
             <div class="hr-line-dashed"></div>
             <div class="row">
                 <div class="col-md-11">
-                    <medical-information ng-model="CreateConsentVm.medicalInformation" name="medicalInformation" ></medical-information>
+                    <medical-information ng-model="CreateConsentVm.medicalInformation" name="medicalInformation" medicalsections="CreateConsentVm.medicalsections" sensitivitypolicies="CreateConsentVm.sensitivitypolicies"></medical-information>
                 </div>
             </div>
             <div class="hr-line-dashed"></div>
             <div class="row">
                 <div class="col-md-11">
-                    <purpose-of-use ng-model="CreateConsentVm.shareForPurposeOfUseCodes" name="shareForPurposeOfUseCodes" ></purpose-of-use>
+                    <purpose-of-use ng-model="CreateConsentVm.shareForPurposeOfUseCodes" name="shareForPurposeOfUseCodes" purposeofuse="CreateConsentVm.purposeofuse"></purpose-of-use>
                 </div>
             </div>
             <div class="hr-line-dashed"></div>
