@@ -16,9 +16,11 @@
             .state('consent.list', {
                 url: '/list',
                 data: {pageTitle: 'List Consents'},
-                templateUrl: 'app/consent/tmpl/consent-list.tpl.html'
+                templateUrl: 'app/consent/tmpl/consent-list.tpl.html',
+                controller: 'ConsentListController',
+                controllerAs: 'ConsentListVm',
+                resolve: ConsentListController.resolve
             })
-
             .state('consent.create', {
                 url: '/create',
                 data: {pageTitle: 'Create Consent'},
@@ -49,7 +51,6 @@
         CreateEditConsentVm.sensitivityPolicies = loadedData[3] ;
         CreateEditConsentVm.consent = loadedData.length === 5? loadedData[4]: null ;
     }
-
 
     CreateEditConsentController.resolve = {
         loadedData: ['ConsentService', 'ProviderService', 'notificationService', '$q','$stateParams', function (ConsentService, ProviderService, notificationService, $q, $stateParams) {
@@ -116,6 +117,32 @@
         }]
     };
 
+    function ConsentListController(consentList){
+        var ConsentListVm = this;
+        ConsentListVm.consentList = consentList;
+        console.log(consentList);
+    }
+
+    ConsentListController.resolve = {
+        consentList: ['$q', 'ConsentService', 'notificationService', function($q, ConsentService, notificationService){
+            function success(response){
+                return response;
+            }
+            function error(response){
+                notificationService.error('Failed to get the consent list, please try again later...');
+                return response;
+            }
+            var deferred = $q.defer();
+            var listConsentPromise = ConsentService.listConsent(1, success, error).$promise;
+            listConsentPromise.then(function(onFulfilled){
+                deferred.resolve(onFulfilled);
+            }, function (onRejected) {
+                deferred.reject(onRejected);
+            });
+
+            return deferred.promise;
+        }]
+    };
 
     angular.module("app.consentModule",
         [
@@ -123,6 +150,7 @@
             'app.consentDirectives'
         ])
         .config(ConsentConfig)
-        .controller("CreateEditConsentController", CreateEditConsentController);
+        .controller("CreateEditConsentController", CreateEditConsentController)
+        .controller("ConsentListController", ['consentList', ConsentListController]);
 
 })();

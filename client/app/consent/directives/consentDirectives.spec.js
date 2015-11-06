@@ -94,7 +94,7 @@ describe('app.consentDirectives', function () {
         mockConsentList = {
             totalItems: 20,
             itemsPerPage: 5,
-            currentPage: 0,
+            currentPage: 1,
             consentList: [{
                 "id": "1",
                 "toDiscloseName": ["VAN DONGEN, MONICA"],
@@ -313,12 +313,13 @@ describe('app.consentDirectives', function () {
             mockConsentList.currentPage += 1;
             success(mockConsentList);
         }
+        $rootScope.mockConsentList = mockConsentList;
 
         spyOn(ConsentService, 'listConsent').andCallFake(mockListConsentFn);
 
         // Act
         // Compile a piece of HTML containing the directive
-        var element = $compile('<consent-card-list></consent-card-list>')($rootScope);
+        var element = $compile('<consent-card-list consent-list="mockConsentList"></consent-card-list>')($rootScope);
         // fire all the watches
         $rootScope.$digest();
 
@@ -391,7 +392,7 @@ describe('app.consentDirectives', function () {
         expect(element.html()).toContain(mockConsentList.consentList[4].shareForPurposeOfUseCodes[1]);
         expect(element.html()).toContain(mockConsentList.consentList[4].shareForPurposeOfUseCodes[2]);
         // call to mock service
-        expect(ConsentService.listConsent).toHaveBeenCalledWith(1, jasmine.any(Function), jasmine.any(Function));
+        expect(ConsentService.listConsent).not.toHaveBeenCalledWith(1, jasmine.any(Function), jasmine.any(Function));
     });
 
     it('should get the consent list and keep it in controller in consent-card-list', function () {
@@ -402,12 +403,13 @@ describe('app.consentDirectives', function () {
             mockConsentList.currentPage += 1;
             success(mockConsentList);
         }
+        $rootScope.mockConsentList = mockConsentList;
 
         spyOn(ConsentService, 'listConsent').andCallFake(mockListConsentFn);
 
         // Act
         // Compile a piece of HTML containing the directive
-        var element = $compile('<consent-card-list></consent-card-list>')($rootScope);
+        var element = $compile('<consent-card-list consent-list="mockConsentList"></consent-card-list>')($rootScope);
         // fire all the watches
         $rootScope.$digest();
         directiveController = element.isolateScope().ConsentCardListVm;
@@ -415,12 +417,13 @@ describe('app.consentDirectives', function () {
         // Assert
         // call to mock service
         expect(angular.equals(mockConsentList, directiveController.consentList)).toBe(true);
-        expect(ConsentService.listConsent).toHaveBeenCalledWith(1, jasmine.any(Function), jasmine.any(Function));
+        expect(ConsentService.listConsent).not.toHaveBeenCalledWith(1, jasmine.any(Function), jasmine.any(Function));
     });
 
     it('should manage the pagination model in consent-card-list', function () {
         // Arrange
         var directiveController;
+        $rootScope.mockConsentList = mockConsentList;
 
         function mockListConsentFn(page, success, error) {
             mockConsentList.currentPage += 1;
@@ -431,7 +434,7 @@ describe('app.consentDirectives', function () {
 
         // Act
         // Compile a piece of HTML containing the directive
-        var element = $compile('<consent-card-list></consent-card-list>')($rootScope);
+        var element = $compile('<consent-card-list consent-list="mockConsentList"></consent-card-list>')($rootScope);
         // fire all the watches
         $rootScope.$digest();
         directiveController = element.isolateScope().ConsentCardListVm;
@@ -441,12 +444,13 @@ describe('app.consentDirectives', function () {
         expect(directiveController.pagination.totalItems).toEqual(mockConsentList.totalItems);
         expect(directiveController.pagination.currentPage).toEqual(mockConsentList.currentPage);
         expect(directiveController.pagination.itemsPerPage).toEqual(mockConsentList.itemsPerPage);
-        expect(ConsentService.listConsent).toHaveBeenCalledWith(1, jasmine.any(Function), jasmine.any(Function));
+        expect(ConsentService.listConsent).not.toHaveBeenCalledWith(1, jasmine.any(Function), jasmine.any(Function));
     });
 
-    it('should notify user using notificationService when ConsentService fails in consent-card-list', function () {
+    it('should notify user using notificationService when ConsentService fails while loading a new page in consent-card-list', function () {
         // Arrange
         var directiveController;
+        $rootScope.mockConsentList = mockConsentList;
 
         function mockListConsentFn(page, success, error) {
             mockConsentList.currentPage += 1;
@@ -458,13 +462,40 @@ describe('app.consentDirectives', function () {
 
         // Act
         // Compile a piece of HTML containing the directive
-        var element = $compile('<consent-card-list></consent-card-list>')($rootScope);
+        var element = $compile('<consent-card-list consent-list="mockConsentList"></consent-card-list>')($rootScope);
         // fire all the watches
         $rootScope.$digest();
         directiveController = element.isolateScope().ConsentCardListVm;
+        directiveController.loadPage();
 
         // Assert
         expect(notificationService.error).toHaveBeenCalledWith(jasmine.any(String));
+        expect(ConsentService.listConsent).toHaveBeenCalledWith(1, jasmine.any(Function), jasmine.any(Function));
+    });
+
+    it('should get the consent list and keep it in controller after successfully loading a new page in consent-card-list', function () {
+        // Arrange
+        var directiveController;
+
+        function mockListConsentFn(page, success, error) {
+            mockConsentList.currentPage += 1;
+            success(mockConsentList);
+        }
+        $rootScope.mockConsentList = mockConsentList;
+
+        spyOn(ConsentService, 'listConsent').andCallFake(mockListConsentFn);
+
+        // Act
+        // Compile a piece of HTML containing the directive
+        var element = $compile('<consent-card-list consent-list="mockConsentList"></consent-card-list>')($rootScope);
+        // fire all the watches
+        $rootScope.$digest();
+        directiveController = element.isolateScope().ConsentCardListVm;
+        directiveController.loadPage();
+
+        // Assert
+        // call to mock service
+        expect(angular.equals(mockConsentList, directiveController.consentList)).toBe(true);
         expect(ConsentService.listConsent).toHaveBeenCalledWith(1, jasmine.any(Function), jasmine.any(Function));
     });
 

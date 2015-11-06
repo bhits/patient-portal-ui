@@ -488,7 +488,10 @@
     function ConsentCardList() {
         var directive = {
             restrict: 'E',
-            scope: {},
+            scope: {
+                consentList: '='
+            },
+            bindToController: true,
             templateUrl: 'app/consent/tmpl/consent-card-list.tpl.html',
             controller: ['ConsentService', 'notificationService', 'utilityService', ConsentCardListController],
             controllerAs: 'ConsentCardListVm'
@@ -497,13 +500,10 @@
 
         function ConsentCardListController(ConsentService, notificationService, utilityService) {
             var ConsentCardListVm = this;
-            var oldPage = 1;
-            ConsentCardListVm.consentList = {};
-            ConsentCardListVm.pagination = {totalItems: 0, currentPage: oldPage, itemsPerPage: 5, maxSize: 10};
+            var oldPage = ConsentCardListVm.consentList.currentPage;
+            ConsentCardListVm.pagination = {totalItems: ConsentCardListVm.consentList.totalItems, currentPage: oldPage, itemsPerPage: ConsentCardListVm.consentList.itemsPerPage, maxSize: 10};
             ConsentCardListVm.loadPage = loadPage;
             ConsentCardListVm.hasConsents = hasConsents;
-
-            ConsentCardListVm.loadPage();
 
             function hasConsents(){
                 return utilityService.isNotEmpty(ConsentCardListVm.consentList.consentList);
