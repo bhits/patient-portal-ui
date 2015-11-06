@@ -103,7 +103,7 @@
                 };
 
                 CreateConsentVm.canSave = function(){
-                    var authorizeDisclosure = angular.isDefined(CreateConsentVm.authorizeProvider) && angular.isDefined(CreateConsentVm.disclosureProvider);
+                    var authorizeDisclosure = angular.isDefined(CreateConsentVm.authorizeProvider.npi) && angular.isDefined(CreateConsentVm.disclosureProvider.npi);
                     var medicalInformation = angular.isDefined(CreateConsentVm.medicalInformation) && (angular.isDefined(CreateConsentVm.medicalInformation.doNotShareSensitivityPolicyCodes) || angular.isDefined(CreateConsentVm.medicalInformation.doNotShareSensitivityPolicyCodes));
                   return (authorizeDisclosure && medicalInformation &&  angular.isDefined(CreateConsentVm.shareForPurposeOfUseCodes));
                 };
@@ -206,9 +206,16 @@
                 //Test value to be replace with real value.
                 MedicalInformationVm.medicalInformation = 'A';
                 //Initiallizing the medical information model
-                MedicalInformationVm.ngModel = {doNotShareSensitivityPolicyCodes : [],doNotShareClinicalDocumentSectionTypeCodes: []};
+                MedicalInformationVm.selectedMedicalSections = ConsentService.getLookupEntities(MedicalInformationVm.medicalsections, MedicalInformationVm.ngModel.doNotShareClinicalDocumentSectionTypeCodes );
+                MedicalInformationVm.selectedSensitivityPolicies = ConsentService.getLookupEntities(MedicalInformationVm.sensitivitypolicies, MedicalInformationVm.ngModel.doNotShareSensitivityPolicyCodes );
+
+                //MedicalInformationVm.ngModel = {doNotShareSensitivityPolicyCodes : [],doNotShareClinicalDocumentSectionTypeCodes: []};
+                MedicalInformationVm.hasException = function(){
+                    return ((MedicalInformationVm.selectedMedicalSections.length > 0 ) || (MedicalInformationVm.selectedSensitivityPolicies.length > 0) || (MedicalInformationVm.medicalInformation === 'B') );
+                };
 
                 MedicalInformationVm.clearMedicalInfoData = function(){
+                    MedicalInformationVm.medicalInformation = 'A';
                     MedicalInformationVm.selectedMedicalSections = [];
                     MedicalInformationVm.selectedSensitivityPolicies = [];
                 };
@@ -221,6 +228,15 @@
 
                     $scope.consent.selectedMedicalSections = !angular.isDefined(MedicalInformationVm.selectedMedicalSections)? [] : ConsentService.getCodes(MedicalInformationVm.selectedMedicalSections);
                     $scope.consent.selectedSensitivityPolicies = !angular.isDefined(MedicalInformationVm.selectedSensitivityPolicies)? [] : ConsentService.getCodes(MedicalInformationVm.selectedSensitivityPolicies);
+
+                    $scope.$watch("MedicalInformationVm.selectedMedicalSections", function(arg){
+                        $scope.consent.selectedMedicalSections = [];
+                    });
+
+                    $scope.$watch("MedicalInformationVm.selectedSensitivityPolicies", function(arg){
+                        $scope.consent.selectedSensitivityPolicies = [];
+                    });
+
 
                     $scope.selectAllMedicalSections = function(){
                         $scope.consent.selectedMedicalSections = ConsentService.getCodes($scope.mediactionSections);
