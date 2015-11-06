@@ -50,6 +50,7 @@
         CreateEditConsentVm.medicalSections= loadedData[2] ;
         CreateEditConsentVm.sensitivityPolicies = loadedData[3] ;
         CreateEditConsentVm.consent = loadedData.length === 5? loadedData[4]: null ;
+
     }
 
     CreateEditConsentController.resolve = {
