@@ -1,9 +1,9 @@
 <div class="row">
     <div class="col-lg-12 relative">
         <div class="ibox panel panel-success float-e-margins" ng-class="{'statusIcon_saved': ConsentCardVm.consentState() === 'saved','statusIcon_signed': ConsentCardVm.consentState() === 'signed','statusIcon_revoked': ConsentCardVm.consentState() === 'revoked'}">
-            <div class="ibox-title panel-heading left-padding55 right-padding30">
+            <div class="ibox-title panel-heading left-padding55 right-padding30" ng-click="ConsentCardVm.toggleCollapse()">
                 <div class="chevron_absolute">
-                    <div ibox-tools init-collapsed="true"></div>
+                    <div ibox-tools pp-collapsed="ConsentCardVm.collapsed" pp-chevron-prevent-default="true"></div>
                 </div>
 
                 <div class="row">

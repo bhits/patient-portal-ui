@@ -402,6 +402,12 @@
             ConsentCardVm.isShareAll = isShareAll;
             ConsentCardVm.notDisclosedItems = notDisclosedItems;
             ConsentCardVm.purposeOfUseItems = purposeOfUseItems;
+            ConsentCardVm.collapsed = true;
+            ConsentCardVm.toggleCollapse = toggleCollapse;
+
+            function toggleCollapse(){
+                ConsentCardVm.collapsed = !ConsentCardVm.collapsed;
+            }
 
             function isShareAll(){
                 return ConsentService.isShareAll(ConsentCardVm.consent);
