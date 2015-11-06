@@ -19,7 +19,7 @@
             },
             controllerAs: 'CreateConsentVm',
             bindToController: true,
-            controller: ['ConsentService', '$stateParams', 'ProviderService','notificationService','$state',  function (ConsentService, $stateParams, ProviderService, notificationService, $state) {
+            controller: ['ConsentService', '$stateParams', 'ProviderService','notificationService','$state', '$modal', function (ConsentService, $stateParams, ProviderService, notificationService, $state, $modal) {
                 var CreateConsentVm = this;
                 CreateConsentVm.authorize = "Authorize";
                 CreateConsentVm.disclosure = "Disclosure";
@@ -80,6 +80,26 @@
 
                 CreateConsentVm.cancelConsent = function(){
                     console.log("Cancelling consent..");
+                    $modal.open({
+                        templateUrl: 'app/consent/tmpl/consent-create-edit-cancel-modal.tpl.html',
+                        controller: ['$modalInstance', '$state', CancelCreateEditConsentModalController],
+                        controllerAs: 'CancelCreateEditConsentModalVm'
+                    });
+
+                    function CancelCreateEditConsentModalController($modalInstance, $state){
+                        var CancelCreateEditConsentModalVm = this;
+                        CancelCreateEditConsentModalVm.cancel = cancel;
+                        CancelCreateEditConsentModalVm.discard = discard;
+
+                        function cancel(){
+                            $modalInstance.dismiss('cancel');
+                        }
+
+                        function discard(){
+                            cancel();
+                            $state.go('consent.list');
+                        }
+                    }
                 };
 
                 CreateConsentVm.canSave = function(){
@@ -347,6 +367,12 @@
             ConsentCardVm.isShareAll = isShareAll;
             ConsentCardVm.notDisclosedItems = notDisclosedItems;
             ConsentCardVm.purposeOfUseItems = purposeOfUseItems;
+            ConsentCardVm.collapsed = true;
+            ConsentCardVm.toggleCollapse = toggleCollapse;
+
+            function toggleCollapse(){
+                ConsentCardVm.collapsed = !ConsentCardVm.collapsed;
+            }
 
             function isShareAll(){
                 return ConsentService.isShareAll(ConsentCardVm.consent);

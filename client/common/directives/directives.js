@@ -45,22 +45,28 @@
             restrict: 'A',
             scope: {
                 total: '@',
-                initCollapsed: '@'
+                ppCollapsed: '=?',
+                ppChevronPreventDefault: '=?'
             },
             templateUrl: 'common/tmpl/ibox_tools.tpl.html',
             controller: function ($scope, $element) {
+                $scope.ppChevronPreventDefault = !!$scope.ppChevronPreventDefault;
                 var ibox = $element.closest('div.ibox');
                 var icon = $element.find('i:first');
                 var content = ibox.find('div.ibox-content');
 
-                $scope.initializeCollapsed = $scope.initCollapsed === 'true';
-                if ($scope.initializeCollapsed) {
+                if ($scope.ppCollapsed) {
                     content.slideUp(0);
                 }
 
+                $scope.toggleCollapsed = function(){
+                    if(!$scope.ppChevronPreventDefault){
+                        $scope.ppCollapsed = !$scope.ppCollapsed;
+                    }
+                };
+
                 // Function for collapse ibox
                 $scope.showhide = function () {
-
                     content.slideToggle(200);
                     // Toggle icon from up to down
                     icon.toggleClass('fa-chevron-up').toggleClass('fa-chevron-down');
@@ -110,6 +116,12 @@
                             ibox.resize();
                             ibox.find('[id^=map-]').resize();
                         }, 50);
+                    }
+                });
+
+                $scope.$watch('ppCollapsed', function(newValue, oldValue){
+                    if(newValue !== oldValue){
+                        $scope.showhide();
                     }
                 });
             }
