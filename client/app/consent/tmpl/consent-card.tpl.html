@@ -44,17 +44,17 @@
                 <div class="row">
                     <div class="col-md-6 m-b">
                         <div ng-if="ConsentCardVm.isShareAll()">
-                            <h3 class="border-bottom-blue">Sharing all medical information:</h3>
+                            <h2 class="border-bottom-blue">Sharing all medical information:</h2>
                             All my medical information can be shared.
                         </div>
                         <div ng-if="!ConsentCardVm.isShareAll()">
-                            <h3 class="border-bottom-red">Medical Information NOT disclosed:</h3>
+                            <h2 class="border-bottom-red">Medical Information NOT disclosed:</h2>
 
                             <p><span ng-bind="ConsentCardVm.notDisclosedItems()"/></p>
                         </div>
                     </div>
                     <div class="col-md-6 m-b">
-                        <h3 class="border-bottom-blue">Share for following purposes:</h3>
+                        <h2 class="border-bottom-blue">Share for following purposes:</h2>
 
                         <p><span ng-bind="ConsentCardVm.purposeOfUseItems()"/></p>
                     </div>
