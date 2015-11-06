@@ -90,7 +90,7 @@
 
                 CreateConsentVm.updateConsent = function(){
                     var consent = prepareConsent();
-                    //consent.id = $stateParams.consentId;
+                    consent.id = $stateParams.consentId;
 
                     ConsentService.updateConsent(
                         consent,
