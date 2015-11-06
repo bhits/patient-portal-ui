@@ -35,7 +35,8 @@
                 <div class="col-md-11">
                     <div class="pull-right">
                         <button class="btn btn-white m-r" type="reset" ng-click="CreateConsentVm.cancelConsent()">Cancel</button>
-                        <button class="btn btn-primary dark-green" type="submit" ng-click="CreateConsentVm.createConsent()" ng-disabled="!CreateConsentVm.canSave()">Save changes</button>
+                        <button class="btn btn-primary dark-green" type="submit" ng-click="CreateConsentVm.createConsent()" ng-disabled="!CreateConsentVm.canSave()" ng-if="!CreateConsentVm.isEditMode">Save changes</button>
+                        <button class="btn btn-primary dark-green" type="submit" ng-click="CreateConsentVm.updateConsent()" ng-disabled="!CreateConsentVm.canSave()" ng-if="CreateConsentVm.isEditMode">Save changes</button>
                     </div>
                 </div>
             </div>

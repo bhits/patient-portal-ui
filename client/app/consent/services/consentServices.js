@@ -50,11 +50,12 @@
                 consentResource.save(consent, success, error);
             },
 
-            deleteConsent: function (id, success, error) {
-                consentResource.delete({id: id}, success, error);
+            updateConsent: function (consent, success, error) {
+                consentResource.update(consent, success, error);
             },
 
-            updateConsent: function (consent, success, error) {
+            deleteConsent: function (id, success, error) {
+                consentResource.delete({id: id}, success, error);
             },
 
             listConsent: function (page, success, error) {
@@ -222,9 +223,11 @@
                 if(codes.length === 0){
                     return selectedEntities;
                 }else{
-                    for(var i = 0; i < entities.length; i++){
-                        for(var j = 0; j < codes.length; j++){
-                            if(entities[i].code === codes[j]){
+                    for(var i = 0; i < codes.length; i++){
+                        var code = codes[i];
+                        for(var j = 0; j < entities.length; j++){
+                            var entityCode = entities[j].code;
+                            if(entityCode === code){
                                 selectedEntities.push(entities[i]);
                             }
                         }
@@ -233,14 +236,21 @@
                 return selectedEntities;
             },
 
-            getDefaultPurposeOfUse: function(data){
-                var PurposeOfUse = [];
-                for(var i = 0; i < data.length; i++){
-                    if(data[i].code === 'TREATMENT'){
-                        PurposeOfUse.push(data[i]);
+            getDefaultPurposeOfUse: function(PurposeOfUse, selectedPurposeOfUseCodes){
+                var result = [];
+                if(selectedPurposeOfUseCodes.length === 0){
+                    result = this.getEntitiesByCodes(PurposeOfUse,['TREATMENT'] );
+                }else if( selectedPurposeOfUseCodes.length > 0 ){
+                    for(var i = 0; i < selectedPurposeOfUseCodes.length; i++){
+                        for(var j = 0; j < PurposeOfUse.length; j++){
+                            if(PurposeOfUse[i].code === selectedPurposeOfUseCodes[i]){
+                                result.push(PurposeOfUse[i]);
+                                break;
+                            }
+                        }
                     }
                 }
-                return PurposeOfUse;
+                return result;
             },
 
             getPurposeOfUseCodes: function(entities){

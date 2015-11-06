@@ -28,9 +28,9 @@
                 CreateConsentVm.medicalInformation = {doNotShareSensitivityPolicyCodes: [], doNotShareClinicalDocumentSectionTypeCodes: []};
 
                 if(angular.isDefined($stateParams.consentId) && $stateParams.consentId.length > 0){
-
-                    CreateConsentVm.authorizeProvider = (ProviderService.getProviderByNpis(CreateConsentVm.providers, CreateConsentVm.consent.providersDisclosureIsMadeToNpi,  CreateConsentVm.consent.organizationalProvidersDisclosureIsMadeToNpi))[0];
-                    CreateConsentVm.disclosureProvider = (ProviderService.getProviderByNpis(CreateConsentVm.providers, CreateConsentVm.consent.providersPermittedToDiscloseNpi,  CreateConsentVm.consent.organizationalProvidersPermittedToDiscloseNpi))[0];
+                    CreateConsentVm.isEditMode = angular.isDefined($stateParams.consentId.length)? true :false;
+                    CreateConsentVm.disclosureProvider = (ProviderService.getProviderByNpis(CreateConsentVm.providers, CreateConsentVm.consent.providersDisclosureIsMadeToNpi,  CreateConsentVm.consent.organizationalProvidersDisclosureIsMadeToNpi))[0];
+                    CreateConsentVm.authorizeProvider = (ProviderService.getProviderByNpis(CreateConsentVm.providers, CreateConsentVm.consent.providersPermittedToDiscloseNpi,  CreateConsentVm.consent.organizationalProvidersPermittedToDiscloseNpi))[0];
                     CreateConsentVm.medicalInformation.doNotShareSensitivityPolicyCodes = CreateConsentVm.consent.doNotShareSensitivityPolicyCodes;
                     CreateConsentVm.medicalInformation.doNotShareClinicalDocumentSectionTypeCodes = CreateConsentVm.consent.doNotShareClinicalDocumentSectionTypeCodes;
                     CreateConsentVm.shareForPurposeOfUseCodes = CreateConsentVm.consent.shareForPurposeOfUseCodes;
@@ -43,11 +43,11 @@
                     CreateConsentVm.dateRange = {consentStart: "", consentEnd:""} ;
                 }
 
-                CreateConsentVm.createConsent = function(){
-                    var providersPermittedToDiscloseNpi = ProviderService.getIndividualProvidersNpi([CreateConsentVm.disclosureProvider]);
-                    var providersDisclosureIsMadeToNpi = ProviderService.getIndividualProvidersNpi([CreateConsentVm.authorizeProvider]);
-                    var organizationalProvidersDisclosureIsMadeToNpi = ProviderService.getOrganizationalProvidersNpi([CreateConsentVm.authorizeProvider]);
-                    var organizationalProvidersPermittedToDiscloseNpi = ProviderService.getOrganizationalProvidersNpi([CreateConsentVm.disclosureProvider]);
+                var prepareConsent = function(){
+                    var providersDisclosureIsMadeToNpi = ProviderService.getIndividualProvidersNpi([CreateConsentVm.disclosureProvider]);
+                    var providersPermittedToDiscloseNpi = ProviderService.getIndividualProvidersNpi([CreateConsentVm.authorizeProvider]);
+                    var organizationalProvidersPermittedToDiscloseNpi = ProviderService.getOrganizationalProvidersNpi([CreateConsentVm.authorizeProvider]);
+                    var organizationalProvidersDisclosureIsMadeToNpi = ProviderService.getOrganizationalProvidersNpi([CreateConsentVm.disclosureProvider]);
 
                     var consent = {
                         providersPermittedToDiscloseNpi :providersPermittedToDiscloseNpi  ,
@@ -61,10 +61,33 @@
                         consentEnd: CreateConsentVm.dateRange.consentEnd
                     };
 
+                    return consent;
+                };
+
+                CreateConsentVm.createConsent = function(){
+
+                    var consent = prepareConsent();
+
                     //On Success clear the references of the selected providers
                     ConsentService.resetSelectedNpi();
 
                     ConsentService.createConsent(consent,
+                        function(response){
+                            notificationService.success("Success in updating consent.");
+                            $state.go('consent.list');
+                        },
+                        function(error){
+                            notificationService.error("Error in updating consent.");
+                        }
+                    );
+                };
+
+                CreateConsentVm.updateConsent = function(){
+                    var consent = prepareConsent();
+                    consent.id = $stateParams.consentId;
+
+                    ConsentService.updateConsent(
+                        consent,
                         function(response){
                             notificationService.success("Success in creating consent.");
                             $state.go('consent.list');
@@ -73,9 +96,6 @@
                             notificationService.error("Error in creating consent");
                         }
                     );
-                };
-
-                CreateConsentVm.updateConsent = function(){
                 };
 
                 CreateConsentVm.cancelConsent = function(){
@@ -304,15 +324,16 @@
             controllerAs: 'PurposeOfUseVm',
             controller: ['$scope', 'ConsentService', '$modal', 'notificationService', function ($scope, ConsentService, $modal, notificationService) {
                 var PurposeOfUseVm = this;
-                var purposeOfUse = ConsentService.getDefaultPurposeOfUse(PurposeOfUseVm.purposeofuse);
-                //Getting default purpose of use code.
-                var code = purposeOfUse[0].code;
-                PurposeOfUseVm.selectedPurposeOfUse = purposeOfUse;
-                PurposeOfUseVm.ngModel = [code];
+                //var purposeOfUse = ConsentService.getDefaultPurposeOfUse(PurposeOfUseVm.purposeofuse, PurposeOfUseVm.ngModel);
+                //
+                ////Getting default purpose of use code.
+                //var code = purposeOfUse[0].code;
+                PurposeOfUseVm.selectedPurposeOfUse = ConsentService.getDefaultPurposeOfUse(PurposeOfUseVm.purposeofuse, PurposeOfUseVm.ngModel);
+                //PurposeOfUseVm.ngModel = [code];
 
                 function PurposeOfUseModalController($scope, $modalInstance, data) {
                     $scope.data = data;
-                    $scope.consent = ConsentService.getPurposeOfUseCodes( PurposeOfUseVm.selectedPurposeOfUse);
+                    $scope.consent = { selectedPurposeOfUseCodes: ConsentService.getCodes(PurposeOfUseVm.selectedPurposeOfUse)};
 
                     $scope.selectAll = function(){
                         $scope.consent.selectedPurposeOfUseCodes = ConsentService.getCodes($scope.data);
