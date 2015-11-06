@@ -28,7 +28,8 @@
                 CreateConsentVm.medicalInformation = {doNotShareSensitivityPolicyCodes: [], doNotShareClinicalDocumentSectionTypeCodes: []};
 
                 if(angular.isDefined($stateParams.consentId) && $stateParams.consentId.length > 0){
-                    CreateConsentVm.isEditMode = angular.isDefined($stateParams.consentId.length)? true :false
+
+                    CreateConsentVm.isEditMode = angular.isDefined($stateParams.consentId.length)? true :false;
 
                     CreateConsentVm.disclosureProvider = (ProviderService.getProviderByNpis(CreateConsentVm.providers, CreateConsentVm.consent.providersDisclosureIsMadeToNpi,  CreateConsentVm.consent.organizationalProvidersDisclosureIsMadeToNpi))[0];
                     CreateConsentVm.authorizeProvider = (ProviderService.getProviderByNpis(CreateConsentVm.providers, CreateConsentVm.consent.providersPermittedToDiscloseNpi,  CreateConsentVm.consent.organizationalProvidersPermittedToDiscloseNpi))[0];
