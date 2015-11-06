@@ -7,7 +7,8 @@
             <p>Select how you would like to share your medical information.</p>
             <div>
                 <p> <input type="radio" icheck class="m-r-xs"  ng-model="MedicalInformationVm.medicalInformation" value="A" name="medicalInformation" ng-checked="MedicalInformationVm.medicalInformation == 'A'" ng-change="MedicalInformationVm.clearMedicalInfoData()"> <span class="m-l-xs"><strong>SHARE ALL</strong> information in my medical record.</span></p>
-                <p> <input type="radio" icheck  ng-model="MedicalInformationVm.medicalInformation" value="B"  name="medicalInformation" ng-checked="MedicalInformationVm.medicalInformation == 'B'" ng-change="MedicalInformationVm.openPrivacySettingsModal()"> <span class="m-l-xs m-r-sm"><strong>SHARE</strong> my medical record <strong>WITH EXCEPTION</strong> of specific information.</span><button type="button" class="btn btn-primary btn-xs dark-green"  ng-if="MedicalInformationVm.medicalInformation == 'B'">Edit</button></p>
+                <p> <input type="radio" icheck  ng-model="MedicalInformationVm.medicalInformation" value="B"  name="medicalInformation" ng-checked="MedicalInformationVm.hasException()" ng-change="MedicalInformationVm.openPrivacySettingsModal()">
+                    <span class="m-l-xs m-r-sm"><strong>SHARE</strong> my medical record <strong>WITH EXCEPTION</strong> of specific information.</span><button type="button" class="btn btn-primary btn-xs dark-green"  ng-if="MedicalInformationVm.hasException()">Edit</button></p>
             </div>
             <div>
                 <div class="label label-info m-l-xs  inline" ng-repeat="medicalSection in MedicalInformationVm.selectedMedicalSections">

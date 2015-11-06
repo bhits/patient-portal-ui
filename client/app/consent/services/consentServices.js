@@ -264,6 +264,21 @@
                 return codes;
             },
 
+            getLookupEntities: function(lookuplist, codelist ){
+                var entities = [];
+                if(angular.isDefined(codelist) && codelist.length > 0 ){
+                    for(var i = 0; i < codelist.length; i++){
+                        for(var j = 0; j < lookuplist.length; j++){
+                            if(lookuplist[j].code === codelist[i]){
+                                entities.push(lookuplist[j]);
+                            }
+                        }
+                    }
+                }
+
+                return entities;
+            },
+
             resetSelectedNpi: function(){
                 selectedNpi = {authorizeNpi: "", discloseNpi: ""};
             }
