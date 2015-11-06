@@ -261,11 +261,15 @@
                     $scope.consent.selectedSensitivityPolicies = !angular.isDefined(MedicalInformationVm.selectedSensitivityPolicies)? [] : ConsentService.getCodes(MedicalInformationVm.selectedSensitivityPolicies);
 
                     $scope.$watch("MedicalInformationVm.selectedMedicalSections", function(arg){
-                        $scope.consent.selectedMedicalSections = [];
+                        if(MedicalInformationVm.medicalInformation === 'A'){
+                            $scope.consent.selectedSensitivityPolicies = [];
+                        }
                     });
 
                     $scope.$watch("MedicalInformationVm.selectedSensitivityPolicies", function(arg){
-                        $scope.consent.selectedSensitivityPolicies = [];
+                        if(MedicalInformationVm.medicalInformation === 'A'){
+                            $scope.consent.selectedSensitivityPolicies = [];
+                        }
                     });
 
 
@@ -302,8 +306,6 @@
                 }
 
                 MedicalInformationVm.openPrivacySettingsModal = function () {
-
-
                     var modalInstance = $modal.open({
                         templateUrl: 'app/consent/tmpl/consent-medical-information-modal.tpl.html',
 
