@@ -26,6 +26,25 @@
 
         return {
 
+            getConsentResource: function(){
+                return consentResource;
+            },
+
+            getPurposeOfUseResource: function(){
+                return purposeOfUseResource;
+            },
+
+            getMedicationSectionResource: function(){
+                return medicationSectionResource;
+            },
+
+            getSensitvityPolicyResource: function(){
+                return sensitvityPolicyResource;
+            },
+
+            getConsent: function (id, success, error) {
+                consentResource.get({id:id}, success, error);
+            },
 
             createConsent: function (consent, success, error) {
                 consentResource.save(consent, success, error);
