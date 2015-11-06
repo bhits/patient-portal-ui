@@ -3,7 +3,7 @@
 'use strict';
 
     function HealthInformationService($resource, ENVService){
-        var patientResource = $resource(ENVService.apiBaseUrl + "/ccda/getccdajson", {emrn:'@emrn'});
+        var patientResource = $resource(ENVService.phrApiBaseUrl + "/patientHealthData/:mrn", {mrn: '@mrn'});
 
         var isDefineAndNotNull = function(value){
             return (angular.isDefined(value) && value !== null );
@@ -23,8 +23,8 @@
              * @returns {Object} health Information - The Health Information object
              */
             getHealthInformation: function(data){
-                if(isDefineAndNotNull(data) && isDefineAndNotNull(data.CcdaDocuments[0])){
-                    return data.CcdaDocuments[0];
+                if (isDefineAndNotNull(data) && isDefineAndNotNull(data.documents[0]) && isDefineAndNotNull(data.documents[0].CcdaDocuments)) {
+                    return data.documents[0].CcdaDocuments;
                 }else{
                     console.log("health information object missing.");
                 }

@@ -578,7 +578,8 @@ module.exports = function (grunt) {
                         stsBaseUri: 'https://sts-dev.feisystems.com/identity/tokens',
                         apiBaseUrl: 'https://testbed-api-dev.feisystems.com',
                         plsApiBaseUrl: 'http://localhost:8080/pls/providers',
-                        pcmApiBaseUrl: 'https://localhost:8443/pcm/patients'
+                        pcmApiBaseUrl: 'https://localhost:8443/pcm/patients',
+                        phrApiBaseUrl: 'http://localhost:8080/phr/'
                     }
                 }
             },
@@ -594,7 +595,8 @@ module.exports = function (grunt) {
                         stsBaseUri: 'https://sts-dev.feisystems.com/identity/tokens',
                         apiBaseUrl: 'https://testbed-api-dev.feisystems.com',
                         plsApiBaseUrl: 'https://bhitsqaapp02:8443/pls/providers',
-                        pcmApiBaseUrl: 'https://bhitsqaapp02:8443/pcm/patients'
+                        pcmApiBaseUrl: 'https://bhitsqaapp02:8443/pcm/patients',
+                        phrApiBaseUrl: 'http://localhost:8080/phr/'
                     }
                 }
             }
