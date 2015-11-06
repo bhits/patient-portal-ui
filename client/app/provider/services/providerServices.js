@@ -8,6 +8,14 @@
     function ProviderService($resource, ENVService) {
         var providers = $resource(ENVService.pcmApiBaseUrl + "/providers/:npi", {npi: '@npi'});
 
+        var findProviderByNpi = function( providers, npi){
+            for(var i = 0; i < providers.length; i++){
+                if(providers[i].npi === npi){
+                    return providers[i];
+                }
+            }
+        };
+
         return {
 
             getProviders: function (success, error) {
@@ -115,6 +123,20 @@
                 return {};
             },
 
+            getProviderByNpis: function(providers, listOfNpi1,listOfNpi2 ){
+                var result = [];
+                var listOfNpi = listOfNpi1.concat(listOfNpi2);
+
+                if(angular.isDefined(providers)){
+                    for(var i = 0; i < listOfNpi.length; i++){
+                        var provider = findProviderByNpi(providers, listOfNpi[i]);
+                        if(provider.npi){
+                            result.push(provider);
+                        }
+                    }
+                }
+                return result;
+            },
             getIndividualProvidersNpi: function(providers){
                 var result = [];
                 for(var i = 0; i < providers.length; i++){
