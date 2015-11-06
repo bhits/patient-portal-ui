@@ -115,7 +115,7 @@
 
             var healthInformationResource = HealthInformationService.getHealthInformationResource();
             var healthInformationData = healthInformationResource.get(
-                {emrn: '2323'},
+                {mrn: '2323'},
                 function(response){ return response;},
                 function(response){ return response ;});
 
