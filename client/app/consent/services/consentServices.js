@@ -51,7 +51,7 @@
             },
 
             updateConsent: function (consent, success, error) {
-                consentResource.save(consent, success, error);
+                consentResource.update(consent, success, error);
             },
 
             deleteConsent: function (id, success, error) {
