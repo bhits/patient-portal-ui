@@ -156,7 +156,7 @@
                     (success || angular.identity)(response);
                 }
 
-                consentListResource.get({pageNumber: page-1}, adjustPageOnSuccessResponse, error);
+                return consentListResource.get({pageNumber: page-1}, adjustPageOnSuccessResponse, error);
             },
 
             setAuthorizeNpi: function (npi) {
