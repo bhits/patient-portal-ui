@@ -77,14 +77,18 @@
                             $state.go('consent.list');
                         },
                         function(error){
-                            notificationService.error("Error in updating consent.");
+                            if(error.status === 409){
+                                notificationService.warn("Error you cannot create duplicate consent.");
+                            }else{
+                                notificationService.error("Error in creating consent");
+                            }
                         }
                     );
                 };
 
                 CreateConsentVm.updateConsent = function(){
                     var consent = prepareConsent();
-                    consent.id = $stateParams.consentId;
+                    //consent.id = $stateParams.consentId;
 
                     ConsentService.updateConsent(
                         consent,
@@ -93,7 +97,12 @@
                             $state.go('consent.list');
                         },
                         function(error){
-                            notificationService.error("Error in creating consent");
+                            if(error.status === 409){
+                                notificationService.warn("Error you cannot create duplicate consent.");
+                            }else{
+                                notificationService.error("Error in updating consent.");
+                            }
+
                         }
                     );
                 };

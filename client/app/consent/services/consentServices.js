@@ -51,7 +51,7 @@
             },
 
             updateConsent: function (consent, success, error) {
-                consentResource.update(consent, success, error);
+                consentResource.save(consent, success, error);
             },
 
             deleteConsent: function (id, success, error) {
@@ -242,10 +242,11 @@
                     result = this.getEntitiesByCodes(PurposeOfUse,['TREATMENT'] );
                 }else if( selectedPurposeOfUseCodes.length > 0 ){
                     for(var i = 0; i < selectedPurposeOfUseCodes.length; i++){
+                        var selectedCode = selectedPurposeOfUseCodes[i];
                         for(var j = 0; j < PurposeOfUse.length; j++){
-                            if(PurposeOfUse[i].code === selectedPurposeOfUseCodes[i]){
+                            var code = PurposeOfUse[j].code;
+                            if( code === selectedCode){
                                 result.push(PurposeOfUse[i]);
-                                break;
                             }
                         }
                     }
