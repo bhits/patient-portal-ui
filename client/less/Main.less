@@ -45,8 +45,21 @@
 @pp-light-blue: #aed8ff;
 @pp-navy-blue: #005d98;
 @pp-dark-blue: #50687F;
+@pp-strong-blue: #0088CC;
 @pp-dark-red: #ac1d2c;
 /* End of Color Variables */
+
+/* Mixins */
+.highlight-component-border(){
+  border-color: @pp-strong-blue;
+  border-width: 2px;
+}
+
+.highlight-component-foreground(){
+  color: @pp-strong-blue;
+}
+
+/* End Mixins */
 
 /* Color Schemes */
 .pp-gray-white {
@@ -542,3 +555,16 @@ padding-top: 10px;
   color: white;
 }
 /* end of provider-lookup search page */
+
+
+
+/* State Modifiers */
+
+select-provider > .panel:hover {
+  .highlight-component-border();
+  & > .panel-heading {
+    .highlight-component-foreground();
+  }
+}
+
+/* End of State Modifiers */
