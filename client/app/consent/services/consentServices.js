@@ -136,7 +136,7 @@
                         for(var j = 0; j < entities.length; j++){
                             var entityCode = entities[j].code;
                             if(entityCode === code){
-                                selectedEntities.push(entities[i]);
+                                selectedEntities.push(entities[j]);
                             }
                         }
                     }
@@ -154,7 +154,7 @@
                         for(var j = 0; j < PurposeOfUse.length; j++){
                             var code = PurposeOfUse[j].code;
                             if( code === selectedCode){
-                                result.push(PurposeOfUse[i]);
+                                result.push(PurposeOfUse[j]);
                             }
                         }
                     }
