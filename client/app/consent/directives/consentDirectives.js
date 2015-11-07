@@ -41,7 +41,7 @@
                 }else{
                     CreateConsentVm.authorizeProvider = {};
                     CreateConsentVm.disclosureProvider = {};
-                    CreateConsentVm.shareForPurposeOfUseCodes = [];
+                    CreateConsentVm.shareForPurposeOfUseCodes = ConsentService.getCodes(ConsentService.getDefaultPurposeOfUse(CreateConsentVm.purposeofuse, []));
                     CreateConsentVm.dateRange = {consentStart: "", consentEnd:""} ;
                 }
 
@@ -342,7 +342,6 @@
                 ////Getting default purpose of use code.
                 //var code = purposeOfUse[0].code;
                 PurposeOfUseVm.selectedPurposeOfUse = ConsentService.getDefaultPurposeOfUse(PurposeOfUseVm.purposeofuse, PurposeOfUseVm.ngModel);
-                //PurposeOfUseVm.ngModel = [code];
 
                 function PurposeOfUseModalController($scope, $modalInstance, data) {
                     $scope.data = data;
