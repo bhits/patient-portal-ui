@@ -95,7 +95,7 @@
                     ConsentService.updateConsent(
                         consent,
                         function(response){
-                            notificationService.success("Success in creating consent.");
+                            notificationService.success("Success in updating consent.");
                             $state.go('consent.list');
                         },
                         function(error){
