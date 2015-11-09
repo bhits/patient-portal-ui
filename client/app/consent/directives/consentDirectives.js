@@ -290,10 +290,14 @@
 
                     $scope.selectAllSensitivityPolicies = function(){
                         $scope.consent.selectedSensitivityPolicies = ConsentService.getCodes($scope.sensitivityPolicies);
+                        //TODO: This should be refactored to avoid directly referencing the 'medicalInformationModalObj' name, which is declared in the HTML markup but not in this directive.
+                        $scope.medicalInfofmationModalObj.$setDirty();
                     };
 
                     $scope.deselectAllSensitivityPolicies = function(){
                         $scope.consent.selectedSensitivityPolicies=[];
+                        //TODO: This should be refactored to avoid directly referencing the 'medicalInformationModalObj' name, which is declared in the HTML markup but not in this directive.
+                        $scope.medicalInfofmationModalObj.$setDirty();
                     };
 
                     $scope.ok = function () {
