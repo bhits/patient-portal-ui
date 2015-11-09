@@ -50,15 +50,20 @@
      * @param $state - the state service
      * @param utilityService - the utility service
      * @param $modal - the modal service for showing modal
+     * @param $modalStack - the modal stack service to manage modal stack
      * @param Idle - ngOIdle service for auto logging out user if idle
      * @param idleConfigParams - the ngIdle configation parameters
      * @param $rootScope - the angularjs root scope
      *
      * @constructor
      */
-    function AppController ($scope, AuthenticationService, $state, utilityService, $modal, Idle, idleConfigParams,  $rootScope) {
+    function AppController ($scope, AuthenticationService, $state, utilityService, $modal, $modalStack, Idle, idleConfigParams,  $rootScope) {
 
         var appVm = this;
+
+        $rootScope.$on('$stateChangeSuccess', function(event, data){
+            $modalStack.dismissAll('cancel');
+        });
 
         appVm.logOut = function () {
             AuthenticationService.logOut();
