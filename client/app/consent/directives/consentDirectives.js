@@ -360,10 +360,14 @@
 
                     $scope.selectAll = function(){
                         $scope.consent.selectedPurposeOfUseCodes = ConsentService.getCodes($scope.data);
+                        //TODO: This should be refactored to avoid directly referencing the 'purposeOfUseModalObj' name, which is declared in the HTML markup but not in this directive.
+                        $scope.purposeOfUseModalObj.$setDirty();
                     };
 
                     $scope.deselectAll = function(){
                         $scope.consent.selectedPurposeOfUseCodes=[];
+                        //TODO: This should be refactored to avoid directly referencing the 'purposeOfUseModalObj' name, which is declared in the HTML markup but not in this directive.
+                        $scope.purposeOfUseModalObj.$setDirty();
                     };
 
                     $scope.ok = function () {
