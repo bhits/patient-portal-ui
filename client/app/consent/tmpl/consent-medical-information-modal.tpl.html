@@ -1,4 +1,4 @@
-<div class="inmodal">
+<div class="inmodal" ng-form name="medicalInfofmationModalObj">
     <div class="modal-header">
         <h4 class="modal-title">Privacy Settings</h4>
     </div>
@@ -61,6 +61,6 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-white m-r-xs" ng-click="cancel()">Cancel</button>
-        <button type="button" class="btn btn-primary dark-green" ng-click="ok()">Save changes</button>
+        <button type="button" class="btn btn-primary dark-green" ng-click="ok()" ng-disabled="medicalInfofmationModalObj.$pristine">Save changes</button>
     </div>
 </div>
