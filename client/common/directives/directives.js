@@ -59,8 +59,8 @@
                     content.slideUp(0);
                 }
 
-                $scope.toggleCollapsed = function(){
-                    if(!$scope.ppChevronPreventDefault){
+                $scope.toggleCollapsed = function () {
+                    if (!$scope.ppChevronPreventDefault) {
                         $scope.ppCollapsed = !$scope.ppCollapsed;
                     }
                 };
@@ -119,8 +119,8 @@
                     }
                 });
 
-                $scope.$watch('ppCollapsed', function(newValue, oldValue){
-                    if(newValue !== oldValue){
+                $scope.$watch('ppCollapsed', function (newValue, oldValue) {
+                    if (newValue !== oldValue) {
                         $scope.showhide();
                     }
                 });
@@ -233,7 +233,7 @@
             templateUrl: 'common/tmpl/datepicker-range.tpl.html',
             bindToController: true,
             controllerAs: 'DatePickerVm',
-            controller:function ($scope) {
+            controller: function ($scope) {
                 var DatePickerVm = this;
 
                 DatePickerVm.consent = DatePickerVm.ngModel;
@@ -254,7 +254,7 @@
                     return formatDate;
                 }
 
-                var setDateRange = function (startDate,endDate ) {
+                var setDateRange = function (startDate, endDate) {
                     if (!startDate || !endDate) {
                         return;
                     }
@@ -262,20 +262,26 @@
                     var fd = doFormatDate(new Date());
                     if (Date.parse(startDate) < Date.parse(fd)) {
                         DatePickerVm.error = ' Consent must start from today';
-                    } else  if (Date.parse(startDate) > Date.parse(endDate)) {
+                    } else if (Date.parse(startDate) > Date.parse(endDate)) {
                         DatePickerVm.error = ' The start date cannot occur after the end date';
-                    }else {
+                    } else {
                         DatePickerVm.ngModel = DatePickerVm.consent;
                     }
 
                     DatePickerVm.showError = DatePickerVm.error.length;
                 };
 
-                var validateDate = function(){
+                var validateDate = function () {
 
                 };
+
+                var today = new Date();
+                var initStartDate = doFormatDate(today);
+                var initEndDate = today.setDate(today.getDate() + 365);
+                $scope.DatePickerVm.consent.consentStart = initStartDate;
+                $scope.DatePickerVm.consent.consentEnd = doFormatDate(initEndDate);
                 $scope.$watch('DatePickerVm.consent.consentStart', function (startDate) {
-                    setDateRange(startDate, DatePickerVm.consent.consentEnd );
+                    setDateRange(startDate, DatePickerVm.consent.consentEnd);
                 });
                 $scope.$watch('DatePickerVm.consent.consentEnd', function (endDate) {
                     setDateRange(DatePickerVm.consent.consentStart, endDate);
@@ -283,7 +289,7 @@
             },
 
             link: function (scope, element) {
-                element.datepicker({todayBtn: "linked", autoclose: true });
+                element.datepicker({todayBtn: "linked", autoclose: true});
             }
         };
     }
@@ -297,4 +303,3 @@
         .directive('contentWrapper', ContentWrapper)
         .directive('datepickerRange', DatePickerRange);
 })();
-
