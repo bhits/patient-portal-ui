@@ -260,10 +260,10 @@
                     }
                     DatePickerVm.error = "";
                     var fd = doFormatDate(new Date());
-                    if (startDate < fd) {
+                    if (Date.parse(startDate) < Date.parse(fd)) {
                         DatePickerVm.error = ' Consent should start from today';
-                    } else  if (startDate > endDate) {
-                        DatePickerVm.error = ' Consent start date cannot proceed consent end date';
+                    } else  if (Date.parse(startDate) > Date.parse(endDate)) {
+                        DatePickerVm.error = ' The start date cannot occur after the end date';
                     }else {
                         DatePickerVm.ngModel = DatePickerVm.consent;
                     }
