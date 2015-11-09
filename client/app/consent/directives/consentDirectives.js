@@ -278,10 +278,14 @@
 
                     $scope.selectAllMedicalSections = function(){
                         $scope.consent.selectedMedicalSections = ConsentService.getCodes($scope.mediactionSections);
+                        //TODO: This should be refactored to avoid directly referencing the 'medicalInformationModalObj' name, which is declared in the HTML markup but not in this directive.
+                        $scope.medicalInfofmationModalObj.$setDirty();
                     };
 
                     $scope.deselectAllMedicalSections = function(){
                         $scope.consent.selectedMedicalSections=[];
+                        //TODO: This should be refactored to avoid directly referencing the 'medicalInformationModalObj' name, which is declared in the HTML markup but not in this directive.
+                        $scope.medicalInfofmationModalObj.$setDirty();
                     };
 
                     $scope.selectAllSensitivityPolicies = function(){
