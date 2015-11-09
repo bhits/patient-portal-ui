@@ -33,6 +33,9 @@
 
                     CreateConsentVm.disclosureProvider = (ProviderService.getProviderByNpis(CreateConsentVm.providers, CreateConsentVm.consent.providersDisclosureIsMadeToNpi,  CreateConsentVm.consent.organizationalProvidersDisclosureIsMadeToNpi))[0];
                     CreateConsentVm.authorizeProvider = (ProviderService.getProviderByNpis(CreateConsentVm.providers, CreateConsentVm.consent.providersPermittedToDiscloseNpi,  CreateConsentVm.consent.organizationalProvidersPermittedToDiscloseNpi))[0];
+                    // set providers to disable on UI that are currently selected in this consent
+                    ConsentService.setDiscloseNpi(CreateConsentVm.disclosureProvider.npi);
+                    ConsentService.setAuthorizeNpi(CreateConsentVm.authorizeProvider.npi);
                     CreateConsentVm.medicalInformation.doNotShareSensitivityPolicyCodes = CreateConsentVm.consent.doNotShareSensitivityPolicyCodes;
                     CreateConsentVm.medicalInformation.doNotShareClinicalDocumentSectionTypeCodes = CreateConsentVm.consent.doNotShareClinicalDocumentSectionTypeCodes;
                     CreateConsentVm.shareForPurposeOfUseCodes = CreateConsentVm.consent.shareForPurposeOfUseCodes;

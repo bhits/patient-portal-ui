@@ -55,6 +55,8 @@
 
     CreateEditConsentController.resolve = {
         loadedData: ['ConsentService', 'ProviderService', 'notificationService', '$q','$stateParams', function (ConsentService, ProviderService, notificationService, $q, $stateParams) {
+            // reset previous selections (if any)
+            ConsentService.resetSelectedNpi();
             var deferred = $q.defer();
             var providerResource = ProviderService.getProvidersResource();
             var providersData = providerResource.query(
