@@ -765,7 +765,7 @@ module.exports = function (grunt) {
         }
 
         if (target === targetEnum.dev || target === targetEnum.debug || target === targetEnum.dist || target === targetEnum.qa ||target === targetEnum.ci) {
-            taskList = taskList.concat(['compile', 'war']);
+            taskList = taskList.concat(['compile']);
         }
 
         grunt.task.run(taskList);
