@@ -7,6 +7,27 @@
     'use strict';
 
     function CreateConsent($stateParams) {
+
+        function doFormatDate(dateObj) {
+            var today = new Date(dateObj);
+            var day = today.getDate();
+            var month = today.getMonth() + 1;
+            var year = today.getFullYear();
+            if (day < 10) {
+                day = "0" + day;
+            }
+            if (month < 10) {
+                month = "0" + month;
+            }
+            var formatDate = month + "/" + day + "/" + year;
+
+            return formatDate;
+        }
+
+        var today = new Date();
+        var initStartDate = doFormatDate(today);
+        var initEndDate = doFormatDate(today.setDate(today.getDate() + 365));
+
         return {
             restrict: 'E',
             templateUrl: 'app/consent/tmpl/consent-create-edit.tpl.html',
@@ -15,49 +36,55 @@
                 purposeofuse: "=",
                 medicalsections: "=",
                 sensitivitypolicies: "=",
-                consent:"="
+                consent: "="
             },
             controllerAs: 'CreateConsentVm',
             bindToController: true,
-            controller: ['ConsentService', '$stateParams', 'ProviderService','notificationService','$state', '$modal','$scope',  function (ConsentService, $stateParams, ProviderService, notificationService, $state, $modal, $scope) {
+            controller: ['ConsentService', '$stateParams', 'ProviderService', 'notificationService', '$state', '$modal', '$scope', function (ConsentService, $stateParams, ProviderService, notificationService, $state, $modal, $scope) {
                 var CreateConsentVm = this;
                 CreateConsentVm.authorize = "Authorize";
                 CreateConsentVm.disclosure = "Disclosure";
                 CreateConsentVm.dateRange = {consentStart: "", consentEnd: ""};
 
-                CreateConsentVm.medicalInformation = {doNotShareSensitivityPolicyCodes: [], doNotShareClinicalDocumentSectionTypeCodes: []};
+                CreateConsentVm.medicalInformation = {
+                    doNotShareSensitivityPolicyCodes: [],
+                    doNotShareClinicalDocumentSectionTypeCodes: []
+                };
 
-                if(angular.isDefined($stateParams.consentId) && $stateParams.consentId.length > 0){
+                if (angular.isDefined($stateParams.consentId) && $stateParams.consentId.length > 0) {
 
-                    CreateConsentVm.isEditMode = angular.isDefined($stateParams.consentId.length)? true :false;
+                    CreateConsentVm.isEditMode = angular.isDefined($stateParams.consentId.length) ? true : false;
 
-                    CreateConsentVm.disclosureProvider = (ProviderService.getProviderByNpis(CreateConsentVm.providers, CreateConsentVm.consent.providersDisclosureIsMadeToNpi,  CreateConsentVm.consent.organizationalProvidersDisclosureIsMadeToNpi))[0];
-                    CreateConsentVm.authorizeProvider = (ProviderService.getProviderByNpis(CreateConsentVm.providers, CreateConsentVm.consent.providersPermittedToDiscloseNpi,  CreateConsentVm.consent.organizationalProvidersPermittedToDiscloseNpi))[0];
+                    CreateConsentVm.disclosureProvider = (ProviderService.getProviderByNpis(CreateConsentVm.providers, CreateConsentVm.consent.providersDisclosureIsMadeToNpi, CreateConsentVm.consent.organizationalProvidersDisclosureIsMadeToNpi))[0];
+                    CreateConsentVm.authorizeProvider = (ProviderService.getProviderByNpis(CreateConsentVm.providers, CreateConsentVm.consent.providersPermittedToDiscloseNpi, CreateConsentVm.consent.organizationalProvidersPermittedToDiscloseNpi))[0];
                     // set providers to disable on UI that are currently selected in this consent
                     ConsentService.setDiscloseNpi(CreateConsentVm.disclosureProvider.npi);
                     ConsentService.setAuthorizeNpi(CreateConsentVm.authorizeProvider.npi);
                     CreateConsentVm.medicalInformation.doNotShareSensitivityPolicyCodes = CreateConsentVm.consent.doNotShareSensitivityPolicyCodes;
                     CreateConsentVm.medicalInformation.doNotShareClinicalDocumentSectionTypeCodes = CreateConsentVm.consent.doNotShareClinicalDocumentSectionTypeCodes;
                     CreateConsentVm.shareForPurposeOfUseCodes = CreateConsentVm.consent.shareForPurposeOfUseCodes;
-                    CreateConsentVm.dateRange = {consentStart: CreateConsentVm.consent.consentStart, consentEnd: CreateConsentVm.consent.consentEnd} ;
+                    CreateConsentVm.dateRange = {
+                        consentStart: CreateConsentVm.consent.consentStart,
+                        consentEnd: CreateConsentVm.consent.consentEnd
+                    };
 
-                }else{
+                } else {
                     CreateConsentVm.authorizeProvider = {};
                     CreateConsentVm.disclosureProvider = {};
                     CreateConsentVm.shareForPurposeOfUseCodes = ConsentService.getCodes(ConsentService.getDefaultPurposeOfUse(CreateConsentVm.purposeofuse, []));
-                    CreateConsentVm.dateRange = {consentStart: "", consentEnd:""} ;
+                    CreateConsentVm.dateRange = {consentStart: initStartDate, consentEnd: initEndDate};
                 }
 
-                var prepareConsent = function(){
+                var prepareConsent = function () {
                     var providersDisclosureIsMadeToNpi = ProviderService.getIndividualProvidersNpi([CreateConsentVm.disclosureProvider]);
                     var providersPermittedToDiscloseNpi = ProviderService.getIndividualProvidersNpi([CreateConsentVm.authorizeProvider]);
                     var organizationalProvidersPermittedToDiscloseNpi = ProviderService.getOrganizationalProvidersNpi([CreateConsentVm.authorizeProvider]);
                     var organizationalProvidersDisclosureIsMadeToNpi = ProviderService.getOrganizationalProvidersNpi([CreateConsentVm.disclosureProvider]);
 
                     var consent = {
-                        providersPermittedToDiscloseNpi :providersPermittedToDiscloseNpi  ,
+                        providersPermittedToDiscloseNpi: providersPermittedToDiscloseNpi,
                         providersDisclosureIsMadeToNpi: providersDisclosureIsMadeToNpi,
-                        organizationalProvidersDisclosureIsMadeToNpi: organizationalProvidersDisclosureIsMadeToNpi ,
+                        organizationalProvidersDisclosureIsMadeToNpi: organizationalProvidersDisclosureIsMadeToNpi,
                         organizationalProvidersPermittedToDiscloseNpi: organizationalProvidersPermittedToDiscloseNpi,
                         doNotShareSensitivityPolicyCodes: CreateConsentVm.medicalInformation.doNotShareSensitivityPolicyCodes,
                         doNotShareClinicalDocumentSectionTypeCodes: CreateConsentVm.medicalInformation.doNotShareClinicalDocumentSectionTypeCodes,
@@ -69,7 +96,7 @@
                     return consent;
                 };
 
-                CreateConsentVm.createConsent = function(){
+                CreateConsentVm.createConsent = function () {
 
                     var consent = prepareConsent();
 
@@ -77,34 +104,34 @@
                     ConsentService.resetSelectedNpi();
 
                     ConsentService.createConsent(consent,
-                        function(response){
+                        function (response) {
                             notificationService.success("Success in creating consent.");
                             $state.go('consent.list');
                         },
-                        function(error){
-                            if(error.status === 409){
+                        function (error) {
+                            if (error.status === 409) {
                                 notificationService.warn("Error you cannot create duplicate consent.");
-                            }else{
+                            } else {
                                 notificationService.error("Error in creating consent");
                             }
                         }
                     );
                 };
 
-                CreateConsentVm.updateConsent = function(){
+                CreateConsentVm.updateConsent = function () {
                     var consent = prepareConsent();
                     consent.id = $stateParams.consentId;
 
                     ConsentService.updateConsent(
                         consent,
-                        function(response){
+                        function (response) {
                             notificationService.success("Success in updating consent.");
                             $state.go('consent.list');
                         },
-                        function(error){
-                            if(error.status === 409){
+                        function (error) {
+                            if (error.status === 409) {
                                 notificationService.warn("Error you cannot create duplicate consent.");
-                            }else{
+                            } else {
                                 notificationService.error("Error in updating consent.");
                             }
 
@@ -112,7 +139,7 @@
                     );
                 };
 
-                CreateConsentVm.cancelConsent = function(){
+                CreateConsentVm.cancelConsent = function () {
                     console.log("Cancelling consent..");
                     $modal.open({
                         templateUrl: 'app/consent/tmpl/consent-create-edit-cancel-modal.tpl.html',
@@ -120,26 +147,26 @@
                         controllerAs: 'CancelCreateEditConsentModalVm'
                     });
 
-                    function CancelCreateEditConsentModalController($modalInstance, $state){
+                    function CancelCreateEditConsentModalController($modalInstance, $state) {
                         var CancelCreateEditConsentModalVm = this;
                         CancelCreateEditConsentModalVm.cancel = cancel;
                         CancelCreateEditConsentModalVm.discard = discard;
 
-                        function cancel(){
+                        function cancel() {
                             $modalInstance.dismiss('cancel');
                         }
 
-                        function discard(){
+                        function discard() {
                             cancel();
                             $state.go('consent.list');
                         }
                     }
                 };
 
-                CreateConsentVm.canSave = function(){
+                CreateConsentVm.canSave = function () {
                     var authorizeDisclosure = angular.isDefined(CreateConsentVm.authorizeProvider.npi) && angular.isDefined(CreateConsentVm.disclosureProvider.npi);
                     var medicalInformation = angular.isDefined(CreateConsentVm.medicalInformation) && (angular.isDefined(CreateConsentVm.medicalInformation.doNotShareSensitivityPolicyCodes) || angular.isDefined(CreateConsentVm.medicalInformation.doNotShareSensitivityPolicyCodes));
-                  return (authorizeDisclosure && medicalInformation &&  angular.isDefined(CreateConsentVm.shareForPurposeOfUseCodes));
+                    return (authorizeDisclosure && medicalInformation && angular.isDefined(CreateConsentVm.shareForPurposeOfUseCodes));
                 };
             }]
         };
@@ -164,7 +191,7 @@
 
                 function SelectProviderModalController($scope, $modalInstance, notificationService, data, ProviderService, ConsentService) {
                     $scope.title = data.modalTitle;
-                    $scope.selectedProvider = { npi : ((data.selectedProvider!== null) &&angular.isDefined(data.selectedProvider) && angular.isDefined(data.selectedProvider.npi))? data.selectedProvider.npi : '' };
+                    $scope.selectedProvider = {npi: ((data.selectedProvider !== null) && angular.isDefined(data.selectedProvider) && angular.isDefined(data.selectedProvider.npi)) ? data.selectedProvider.npi : ''};
                     $scope.providers = data.providers;
                     $scope.selectedNpi = ConsentService.getSelectedNpi();
 
@@ -176,23 +203,23 @@
                         return ProviderService.isIndividualProvider(provider);
                     };
 
-                    $scope.isSelected = function(npi){
-                            if( $scope.title === 'Authorize' ){
-                                return  ($scope.selectedNpi.discloseNpi === npi);
-                            }else if( $scope.title === 'Disclosure' ){
-                                return  ($scope.selectedNpi.authorizeNpi === npi);
-                            }
+                    $scope.isSelected = function (npi) {
+                        if ($scope.title === 'Authorize') {
+                            return ($scope.selectedNpi.discloseNpi === npi);
+                        } else if ($scope.title === 'Disclosure') {
+                            return ($scope.selectedNpi.authorizeNpi === npi);
+                        }
                     };
 
                     $scope.ok = function () {
                         $modalInstance.close();
-                        var selectedProvider = ProviderService.getProviderByNPI(  $scope.providers ,$scope.selectedProvider.npi);
+                        var selectedProvider = ProviderService.getProviderByNPI($scope.providers, $scope.selectedProvider.npi);
                         SelectProviderVm.ngModel = selectedProvider;
                         SelectProviderVm.selectedProvider = selectedProvider;
 
-                        if( $scope.title === 'Authorize'){
+                        if ($scope.title === 'Authorize') {
                             ConsentService.setAuthorizeNpi(selectedProvider.npi);
-                        }else {
+                        } else {
                             ConsentService.setDiscloseNpi(selectedProvider.npi);
                         }
 
@@ -211,7 +238,7 @@
                                 return {
                                     modalTitle: SelectProviderVm.modaltitle,
                                     providers: SelectProviderVm.providers,
-                                    selectedProvider:  SelectProviderVm.selectedProvider
+                                    selectedProvider: SelectProviderVm.selectedProvider
                                 };
                             }
                         },
@@ -230,25 +257,25 @@
             scope: {
                 data: "=",
                 ngModel: '=',
-                medicalsections:"=",
-                sensitivitypolicies:"="
+                medicalsections: "=",
+                sensitivitypolicies: "="
             },
             bindToController: true,
             controllerAs: 'MedicalInformationVm',
-            controller: ['$scope', 'ConsentService', '$modal','notificationService', function ($scope, ConsentService, $modal, notificationService) {
+            controller: ['$scope', 'ConsentService', '$modal', 'notificationService', function ($scope, ConsentService, $modal, notificationService) {
                 var MedicalInformationVm = this;
                 //Test value to be replace with real value.
                 MedicalInformationVm.medicalInformation = 'A';
                 //Initiallizing the medical information model
-                MedicalInformationVm.selectedMedicalSections = ConsentService.getLookupEntities(MedicalInformationVm.medicalsections, MedicalInformationVm.ngModel.doNotShareClinicalDocumentSectionTypeCodes );
-                MedicalInformationVm.selectedSensitivityPolicies = ConsentService.getLookupEntities(MedicalInformationVm.sensitivitypolicies, MedicalInformationVm.ngModel.doNotShareSensitivityPolicyCodes );
+                MedicalInformationVm.selectedMedicalSections = ConsentService.getLookupEntities(MedicalInformationVm.medicalsections, MedicalInformationVm.ngModel.doNotShareClinicalDocumentSectionTypeCodes);
+                MedicalInformationVm.selectedSensitivityPolicies = ConsentService.getLookupEntities(MedicalInformationVm.sensitivitypolicies, MedicalInformationVm.ngModel.doNotShareSensitivityPolicyCodes);
 
                 //MedicalInformationVm.ngModel = {doNotShareSensitivityPolicyCodes : [],doNotShareClinicalDocumentSectionTypeCodes: []};
-                MedicalInformationVm.hasException = function(){
+                MedicalInformationVm.hasException = function () {
                     return ((MedicalInformationVm.selectedMedicalSections.length > 0 ) || (MedicalInformationVm.selectedSensitivityPolicies.length > 0) || (MedicalInformationVm.medicalInformation === 'B') );
                 };
 
-                MedicalInformationVm.clearMedicalInfoData = function(){
+                MedicalInformationVm.clearMedicalInfoData = function () {
                     MedicalInformationVm.medicalInformation = 'A';
                     MedicalInformationVm.selectedMedicalSections = [];
                     MedicalInformationVm.selectedSensitivityPolicies = [];
@@ -260,51 +287,51 @@
 
                     $scope.consent = [];
 
-                    $scope.consent.selectedMedicalSections = !angular.isDefined(MedicalInformationVm.selectedMedicalSections)? [] : ConsentService.getCodes(MedicalInformationVm.selectedMedicalSections);
-                    $scope.consent.selectedSensitivityPolicies = !angular.isDefined(MedicalInformationVm.selectedSensitivityPolicies)? [] : ConsentService.getCodes(MedicalInformationVm.selectedSensitivityPolicies);
+                    $scope.consent.selectedMedicalSections = !angular.isDefined(MedicalInformationVm.selectedMedicalSections) ? [] : ConsentService.getCodes(MedicalInformationVm.selectedMedicalSections);
+                    $scope.consent.selectedSensitivityPolicies = !angular.isDefined(MedicalInformationVm.selectedSensitivityPolicies) ? [] : ConsentService.getCodes(MedicalInformationVm.selectedSensitivityPolicies);
 
-                    $scope.$watch("MedicalInformationVm.selectedMedicalSections", function(arg){
-                        if(MedicalInformationVm.medicalInformation === 'A'){
+                    $scope.$watch("MedicalInformationVm.selectedMedicalSections", function (arg) {
+                        if (MedicalInformationVm.medicalInformation === 'A') {
                             $scope.consent.selectedSensitivityPolicies = [];
                         }
                     });
 
-                    $scope.$watch("MedicalInformationVm.selectedSensitivityPolicies", function(arg){
-                        if(MedicalInformationVm.medicalInformation === 'A'){
+                    $scope.$watch("MedicalInformationVm.selectedSensitivityPolicies", function (arg) {
+                        if (MedicalInformationVm.medicalInformation === 'A') {
                             $scope.consent.selectedSensitivityPolicies = [];
                         }
                     });
 
 
-                    $scope.selectAllMedicalSections = function(){
+                    $scope.selectAllMedicalSections = function () {
                         $scope.consent.selectedMedicalSections = ConsentService.getCodes($scope.mediactionSections);
                         //TODO: This should be refactored to avoid directly referencing the 'medicalInformationModalObj' name, which is declared in the HTML markup but not in this directive.
                         $scope.medicalInfofmationModalObj.$setDirty();
                     };
 
-                    $scope.deselectAllMedicalSections = function(){
-                        $scope.consent.selectedMedicalSections=[];
+                    $scope.deselectAllMedicalSections = function () {
+                        $scope.consent.selectedMedicalSections = [];
                         //TODO: This should be refactored to avoid directly referencing the 'medicalInformationModalObj' name, which is declared in the HTML markup but not in this directive.
                         $scope.medicalInfofmationModalObj.$setDirty();
                     };
 
-                    $scope.selectAllSensitivityPolicies = function(){
+                    $scope.selectAllSensitivityPolicies = function () {
                         $scope.consent.selectedSensitivityPolicies = ConsentService.getCodes($scope.sensitivityPolicies);
                         //TODO: This should be refactored to avoid directly referencing the 'medicalInformationModalObj' name, which is declared in the HTML markup but not in this directive.
                         $scope.medicalInfofmationModalObj.$setDirty();
                     };
 
-                    $scope.deselectAllSensitivityPolicies = function(){
-                        $scope.consent.selectedSensitivityPolicies=[];
+                    $scope.deselectAllSensitivityPolicies = function () {
+                        $scope.consent.selectedSensitivityPolicies = [];
                         //TODO: This should be refactored to avoid directly referencing the 'medicalInformationModalObj' name, which is declared in the HTML markup but not in this directive.
                         $scope.medicalInfofmationModalObj.$setDirty();
                     };
 
                     $scope.ok = function () {
-                        MedicalInformationVm.selectedMedicalSections = ConsentService.getEntitiesByCodes( $scope.mediactionSections, $scope.consent.selectedMedicalSections);
-                        MedicalInformationVm.selectedSensitivityPolicies = ConsentService.getEntitiesByCodes( $scope.sensitivityPolicies, $scope.consent.selectedSensitivityPolicies);
+                        MedicalInformationVm.selectedMedicalSections = ConsentService.getEntitiesByCodes($scope.mediactionSections, $scope.consent.selectedMedicalSections);
+                        MedicalInformationVm.selectedSensitivityPolicies = ConsentService.getEntitiesByCodes($scope.sensitivityPolicies, $scope.consent.selectedSensitivityPolicies);
                         MedicalInformationVm.ngModel = {
-                            doNotShareSensitivityPolicyCodes : $scope.consent.selectedSensitivityPolicies ,
+                            doNotShareSensitivityPolicyCodes: $scope.consent.selectedSensitivityPolicies,
                             doNotShareClinicalDocumentSectionTypeCodes: $scope.consent.selectedMedicalSections
                         };
 
@@ -323,8 +350,8 @@
                         resolve: {
                             data: function () {
                                 return {
-                                   mediactionSections: MedicalInformationVm.medicalsections,
-                                   sensitivityPolicies: MedicalInformationVm.sensitivitypolicies
+                                    mediactionSections: MedicalInformationVm.medicalsections,
+                                    sensitivityPolicies: MedicalInformationVm.sensitivitypolicies
                                 };
                             }
                         },
@@ -340,9 +367,9 @@
             restrict: 'E',
             replace: false,
             templateUrl: 'app/consent/tmpl/consent-purpose-of-use.tpl.html',
-            scope:{
+            scope: {
                 ngModel: "=",
-                purposeofuse:"="
+                purposeofuse: "="
             },
             bindToController: true,
             controllerAs: 'PurposeOfUseVm',
@@ -356,22 +383,22 @@
 
                 function PurposeOfUseModalController($scope, $modalInstance, data) {
                     $scope.data = data;
-                    $scope.consent = { selectedPurposeOfUseCodes: ConsentService.getCodes(PurposeOfUseVm.selectedPurposeOfUse)};
+                    $scope.consent = {selectedPurposeOfUseCodes: ConsentService.getCodes(PurposeOfUseVm.selectedPurposeOfUse)};
 
-                    $scope.selectAll = function(){
+                    $scope.selectAll = function () {
                         $scope.consent.selectedPurposeOfUseCodes = ConsentService.getCodes($scope.data);
                         //TODO: This should be refactored to avoid directly referencing the 'purposeOfUseModalObj' name, which is declared in the HTML markup but not in this directive.
                         $scope.purposeOfUseModalObj.$setDirty();
                     };
 
-                    $scope.deselectAll = function(){
-                        $scope.consent.selectedPurposeOfUseCodes=[];
+                    $scope.deselectAll = function () {
+                        $scope.consent.selectedPurposeOfUseCodes = [];
                         //TODO: This should be refactored to avoid directly referencing the 'purposeOfUseModalObj' name, which is declared in the HTML markup but not in this directive.
                         $scope.purposeOfUseModalObj.$setDirty();
                     };
 
                     $scope.ok = function () {
-                        PurposeOfUseVm.selectedPurposeOfUse = ConsentService.getEntitiesByCodes(  $scope.data, $scope.consent.selectedPurposeOfUseCodes);
+                        PurposeOfUseVm.selectedPurposeOfUse = ConsentService.getEntitiesByCodes($scope.data, $scope.consent.selectedPurposeOfUseCodes);
                         PurposeOfUseVm.ngModel = $scope.consent.selectedPurposeOfUseCodes;
                         $modalInstance.close();
                     };
@@ -402,7 +429,7 @@
             replace: false,
             templateUrl: 'app/consent/tmpl/consent-term.tpl.html',
             scope: {
-             ngModel: '='
+                ngModel: '='
             },
             bindToController: true,
             controllerAs: 'ConsentTermVm',
@@ -434,15 +461,15 @@
             ConsentCardVm.collapsed = true;
             ConsentCardVm.toggleCollapse = toggleCollapse;
 
-            function toggleCollapse(){
+            function toggleCollapse() {
                 ConsentCardVm.collapsed = !ConsentCardVm.collapsed;
             }
 
-            function isShareAll(){
+            function isShareAll() {
                 return ConsentService.isShareAll(ConsentCardVm.consent);
             }
 
-            function consentState(){
+            function consentState() {
                 return ConsentService.resolveConsentState(ConsentCardVm.consent);
             }
 
@@ -475,26 +502,27 @@
                     ManageConsentModalVm.toggleDeleteConfirmation = toggleDeleteConfirmation;
                     ManageConsentModalVm.deleteInProcess = false;
 
-                    function toggleDeleteConfirmation(){
+                    function toggleDeleteConfirmation() {
                         ManageConsentModalVm.deleteInProcess = !ManageConsentModalVm.deleteInProcess;
                     }
 
-                    function deleteConsent(){
+                    function deleteConsent() {
                         ConsentService.deleteConsent(consent.id, onDeleteSuccess, onDeleteError);
 
-                        function onDeleteSuccess(){
+                        function onDeleteSuccess() {
                             notificationService.success('Consent is successfully deleted');
                             $modalInstance.close();
                             $state.reload();
                         }
-                        function onDeleteError(){
+
+                        function onDeleteError() {
                             notificationService.error('Failed to delete the consent! Please try again later...');
                             cancel();
                             $state.reload();
                         }
                     }
 
-                    function edit(){
+                    function edit() {
                         $state.go('consent.create', {consentId: consent.id});
                         $modalInstance.close();
                     }
@@ -528,11 +556,16 @@
         function ConsentCardListController(ConsentService, notificationService, utilityService) {
             var ConsentCardListVm = this;
             var oldPage = ConsentCardListVm.consentList.currentPage;
-            ConsentCardListVm.pagination = {totalItems: ConsentCardListVm.consentList.totalItems, currentPage: oldPage, itemsPerPage: ConsentCardListVm.consentList.itemsPerPage, maxSize: 10};
+            ConsentCardListVm.pagination = {
+                totalItems: ConsentCardListVm.consentList.totalItems,
+                currentPage: oldPage,
+                itemsPerPage: ConsentCardListVm.consentList.itemsPerPage,
+                maxSize: 10
+            };
             ConsentCardListVm.loadPage = loadPage;
             ConsentCardListVm.hasConsents = hasConsents;
 
-            function hasConsents(){
+            function hasConsents() {
                 return utilityService.isNotEmpty(ConsentCardListVm.consentList.consentList);
             }
 
@@ -561,7 +594,7 @@
         }
     }
 
-    function RevokeConsent(){
+    function RevokeConsent() {
         var directive = {
             restrict: 'E',
             scope: {},
@@ -571,7 +604,7 @@
         };
         return directive;
 
-        function RevokeConsentController($stateParams, $state){
+        function RevokeConsentController($stateParams, $state) {
             var RevokeConsentVm = this;
             RevokeConsentVm.params = $stateParams;
             RevokeConsentVm.cancel = cancel;
