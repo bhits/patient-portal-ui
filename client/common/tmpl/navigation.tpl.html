@@ -25,20 +25,20 @@
             </li>
 
             <li ui-sref-active="active" >
-                <a ui-sref="index.home"><i class="fa fa-home"></i> <span class="nav-label">Home</span></a>
+                <a ui-sref="fe.index.home"><i class="fa fa-home"></i> <span class="nav-label">Home</span></a>
             </li>
 
-            <li ng-class="{active: $state.includes('consent')}" >
-                <a ui-sref="consent.list"><i class="fa fa-user-md"></i> <span class="nav-label">Consents</span></a>
+            <li ng-class="{active: $state.includes('fe.consent')}" >
+                <a ui-sref="fe.consent.list"><i class="fa fa-user-md"></i> <span class="nav-label">Consents</span></a>
             </li>
 
-            <li ng-class="{active: $state.includes('provider')}" >
-                <a ui-sref="provider.list"><i class="fa fa-user-md"></i> <span class="nav-label">Providers</span></a>
+            <li ng-class="{active: $state.includes('fe.provider')}" >
+                <a ui-sref="fe.provider.list"><i class="fa fa-user-md"></i> <span class="nav-label">Providers</span></a>
             </li>
 
-            <li ng-class="{active: $state.includes('patient')}" ng-if="AppVm.healthInformationMenu" ng-click="AppVm.routeToHealthInformation()">
+            <li ng-class="{active: $state.includes('fe.patient')}" ng-if="AppVm.healthInformationMenu" ng-click="AppVm.routeToHealthInformation()">
                 <a href=""><i class="fa fa-stethoscope"></i> <span class="nav-label"> Health Information</span> <span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level" ng-class="{'in': ($state.includes('patient') )}">
+                <ul class="nav nav-second-level" ng-class="{'in': ($state.includes('fe.patient') )}">
                     <li ui-sref-active="active" ng-hide="AppVm.hideSection && !AppVm.toggleDemographics" >
                         <a href="" ng-click="AppVm.scrollToAndExpand('demographics', false)">
                             <i class="fa" ng-class="{'fa-circle': AppVm.toggleDemographics, 'fa-circle-o':!AppVm.toggleDemographics }"></i>Demographics

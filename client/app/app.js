@@ -11,8 +11,12 @@
      * @param IdleProvider -
      * @param idleConfigParams -
      */
-    function appConfig ($urlRouterProvider, $httpProvider, KeepaliveProvider, IdleProvider, idleConfigParams) {
-        $urlRouterProvider.otherwise("/login");
+    function appConfig ($urlRouterProvider, $locationProvider, $httpProvider, KeepaliveProvider, IdleProvider, idleConfigParams) {
+
+        // enable html5 mode
+        $locationProvider.html5Mode(true).hashPrefix('!');
+
+        $urlRouterProvider.otherwise("/fe/login");
 
         $httpProvider.interceptors.push('AuthInterceptorService');
 
@@ -68,7 +72,7 @@
         appVm.logOut = function () {
             AuthenticationService.logOut();
             Idle.unwatch();
-            $state.go('login');
+            $state.go('fe.login');
 
             var toggle = false; // hide the health information menu
             utilityService.setShowHealthInformationMenu(toggle);
@@ -126,7 +130,7 @@
 
             //AuthenticationService.logOut();
             //Idle.unwatch();
-            //$state.go('login');
+            //$state.go('fe.login');
 
             appVm.logOut();
         });
@@ -186,8 +190,8 @@
         };
 
         appVm.routeToHealthInformation = function(){
-            if($state.current.name !== "patient.healthinformation"){
-                $state.go('patient.healthinformation',{scrollTo:'none',expand:'none' } );
+            if($state.current.name !== "fe.patient.healthinformation"){
+                $state.go('fe.patient.healthinformation',{scrollTo:'none',expand:'none' } );
             }
 
         };

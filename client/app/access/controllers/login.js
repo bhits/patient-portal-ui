@@ -4,7 +4,7 @@
 
     function config($stateProvider){
             $stateProvider
-                .state('login', {
+                .state('fe.login', {
                     url: "/login",
                     data: { pageTitle: 'Login' },
                     templateUrl: "app/access/tmpl/login.tpl.html",
@@ -42,7 +42,7 @@
                         loginVm.message = "Invalid username and/or password." ;
                     }else{
                         Idle.watch();
-                        $state.go('index.home');
+                        $state.go('fe.index.home');
                     }
                 },
                 function (err) {

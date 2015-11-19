@@ -34,7 +34,7 @@
                 if (authData) {
                     if (authData.token && jwtHelper.isTokenExpired(authData.token)) {
                         logout();
-                        utilityService.redirectTo("/login");
+                        utilityService.redirectTo("/fe/login");
                     } else {
                         config.headers.Authorization = 'Bearer  ' + authData.token;
                     }
@@ -42,10 +42,10 @@
                     var currentPath = $location.path();
                     var currentPathName = currentPath.substring(1, currentPath.length);
 
-                    if ((currentPath.indexOf("index") === 1)) {
-                        utilityService.redirectTo("/index");
+                    if ((currentPath.indexOf("fe/index") === 1)) {
+                        utilityService.redirectTo("/fe/index");
                     } else {
-                        utilityService.redirectTo("/login");
+                        utilityService.redirectTo("/fe/login");
                     }
                 }
                 return config;
@@ -61,14 +61,14 @@
                     if (authData) {
                         if (jwtHelper.isTokenExpired(authData.token)) {
                             logout();
-                            utilityService.redirectTo("/login");
+                            utilityService.redirectTo("/fe/login");
                         } else {
                             // Got to Error page
                         }
                         return $q.reject(rejection);
                     } else {
                         logout();
-                        utilityService.redirectTo("/login");
+                        utilityService.redirectTo("/fe/login");
                     }
                 }
                 return $q.reject(rejection);

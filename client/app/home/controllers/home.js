@@ -11,13 +11,19 @@
     function config($stateProvider){
 
         $stateProvider
-            .state('index', {
+            .state('fe', {
+                abstract: true,
+                data: { pageTitle: 'Patient Portal' },
+                url: '/fe',
+                templateUrl: ''
+            })
+            .state('fe.index', {
                 abstract: true,
                 url: '/index',
                 data: { pageTitle: 'Home' },
                 templateUrl: 'common/tmpl/content.tpl.html'
             })
-            .state('index.home', {
+            .state('fe.index.home', {
                 url: '/home',
                 templateUrl: 'app/home/tmpl/home.tpl.html',
                 data: { pageTitle: 'Home' },

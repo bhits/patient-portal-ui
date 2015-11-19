@@ -65,15 +65,15 @@ describe('app.authInterceptorModule, AuthInterceptorService ', function(){
         spyOn(jwtHelper, 'isTokenExpired').andCallThrough();
         config = {};
         config = AuthInterceptorService.request(config);
-        expect(location.path()).toEqual("/login");
+        expect(location.path()).toEqual("/fe/login");
     });
 
     it("should redirect to index ", function() {
         spyOn(jwtHelper, 'isTokenExpired').andCallThrough();
         config = {};
-        location.path("/index");
+        location.path("/");
         config = AuthInterceptorService.request(config);
-        expect(location.path()).toEqual("/index");
+        expect(location.path()).toEqual("/fe/login");
     });
 
     it("should redirect to login page if token has expired ", function() {
@@ -86,7 +86,7 @@ describe('app.authInterceptorModule, AuthInterceptorService ', function(){
 
         config = {header: "information"};
         config = AuthInterceptorService.request(config);
-        expect(location.path()).toEqual("/login");
+        expect(location.path()).toEqual("/fe/login");
     });
 
     it("should set token in header ", function() {
@@ -101,7 +101,7 @@ describe('app.authInterceptorModule, AuthInterceptorService ', function(){
         spyOn(localStorageService, 'get').andReturn("");
         var rejection = {status: 401};
         config = AuthInterceptorService.responseError(rejection);
-        expect(location.path()).toEqual("/login");
+        expect(location.path()).toEqual("/fe/login");
     });
 
     it("should route to login in case of 401 and token has expired ", function() {
@@ -111,7 +111,7 @@ describe('app.authInterceptorModule, AuthInterceptorService ', function(){
         spyOn(jwtHelper, 'isTokenExpired').andReturn(true);
         var rejection = {status: 401};
         config = AuthInterceptorService.responseError(rejection);
-        expect(location.path()).toEqual("/login");
+        expect(location.path()).toEqual("/fe/login");
     });
 
 });

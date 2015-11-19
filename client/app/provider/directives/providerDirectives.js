@@ -70,7 +70,7 @@
 
                 ProviderLookupResultVm.addProvider = function (npi) {
                     function addProviderSuccess() {
-                        $state.go('provider.list');
+                        $state.go('fe.provider.list');
                     }
 
                     function addProviderError(err) {
