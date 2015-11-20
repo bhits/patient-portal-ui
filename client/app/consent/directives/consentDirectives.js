@@ -498,6 +498,7 @@
                     ManageConsentModalVm.cancel = cancel;
                     ManageConsentModalVm.revoke = revoke;
                     ManageConsentModalVm.edit = edit;
+                    ManageConsentModalVm.signConsent = signConsent;
                     ManageConsentModalVm.deleteConsent = deleteConsent;
                     ManageConsentModalVm.toggleDeleteConfirmation = toggleDeleteConfirmation;
                     ManageConsentModalVm.deleteInProcess = false;
@@ -525,6 +526,13 @@
                     function edit() {
                         $state.go('consent.create', {consentId: consent.id});
                         $modalInstance.close();
+                    }
+
+                    function signConsent(){
+
+                        $state.go('consent.sign', {consentId: consent.id});
+                        $modalInstance.close();
+
                     }
 
                     function cancel() {
@@ -608,6 +616,12 @@
             var RevokeConsentVm = this;
             RevokeConsentVm.params = $stateParams;
             RevokeConsentVm.cancel = cancel;
+            RevokeConsentVm.sign = sign;
+            RevokeConsentVm.consentId = RevokeConsentVm.params.consent.id;
+
+           // RevokeConsentVm.consentId= $stateParams.consent.id;
+            console.log(RevokeConsentVm.params.consent);
+            console.log(RevokeConsentVm.params.consent.id);
 
             if (angular.isUndefined(RevokeConsentVm.params) || angular.equals(RevokeConsentVm.params.consent, {})) {
                 cancel();
@@ -615,6 +629,11 @@
 
             function cancel() {
                 $state.go('consent.list');
+            }
+
+            function sign() {
+                $state.go('consent.revoke.sign');
+
             }
         }
     }

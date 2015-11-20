@@ -11,10 +11,11 @@
      * @param IdleProvider -
      * @param idleConfigParams -
      */
-    function appConfig ($urlRouterProvider, $httpProvider, KeepaliveProvider, IdleProvider, idleConfigParams) {
+    function appConfig ($urlRouterProvider, $httpProvider, $sceProvider, KeepaliveProvider, IdleProvider, idleConfigParams) {
         $urlRouterProvider.otherwise("/login");
 
         $httpProvider.interceptors.push('AuthInterceptorService');
+        $sceProvider.enabled(false);
 
         // Configure Idle settingss
         IdleProvider.idle(idleConfigParams.idle); // in seconds
@@ -239,6 +240,7 @@
           'templates-app',          // Third party libraries start here
           'templates-common',
           'ui.router',
+          'ngSanitize',
           'ngIdle',
           'ui.bootstrap',
           'ngAria',

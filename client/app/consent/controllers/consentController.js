@@ -40,6 +40,28 @@
                 params: {
                     consent: {}
                 }
+            })
+            .state('consent.sign', {
+                url: '/signConsent',
+                data: {pageTitle: 'Sign Consent'},
+                templateUrl: 'app/consent/tmpl/consent-sign.tpl.html',
+                params: {
+                    consentId: ''
+                },
+                controller: 'SignConsentController',
+                controllerAs: 'SignConsentVm',
+                resolve: SignConsentController.resolve
+            })
+            .state('consent.revoke.sign', {
+                url: '/signRevokeConsent',
+                data: {pageTitle: 'Sign Revoke Consent'},
+                templateUrl: 'app/consent/tmpl/consent-sign-revoke.tpl.html',
+                params: {
+                    consent: {}
+                },
+                controller: 'SignRevokeConsentController',
+                controllerAs: 'SignRevokeConsentVm',
+                resolve: SignRevokeConsentController.resolve
             });
     }
 
@@ -147,6 +169,60 @@
         }]
     };
 
+    function SignConsentController(loadedData){
+        var SignConsentVm = this;
+        SignConsentVm.javascriptCode =loadedData;
+
+    }
+
+    SignConsentController.resolve = {
+
+        loadedData: ['ConsentService', 'notificationService', '$q','$stateParams', function (ConsentService, notificationService, $q, $stateParams) {
+            var deferred = $q.defer();
+            var consentId= $stateParams.consentId;
+            console.log(consentId);
+            var signConsentData = ConsentService.signConsent(consentId, onSignSuccess, onSignError);
+
+            function onSignSuccess(response){
+                deferred.resolve(response.javascriptCode);
+            }
+
+            function onSignError(){
+                notificationService.error('Failed to sign the consent! Please try again later...');
+                deferred.reject();
+            }
+            return deferred.promise;
+        }]
+    };
+
+    function SignRevokeConsentController(loadedData){
+        var SignRevokeConsentVm = this;
+        SignRevokeConsentVm.javascriptCode =loadedData;
+        console.log(loadedData);
+
+    }
+
+    SignRevokeConsentController.resolve = {
+
+        loadedData: ['ConsentService', 'notificationService', '$q','$stateParams', function (ConsentService, notificationService, $q, $stateParams) {
+            var deferred = $q.defer();
+            var consentId= $stateParams.consent.id;
+            console.log(consentId);
+            var signConsentData = ConsentService.revokeConsent(consentId, onSignSuccess, onSignError);
+
+            function onSignSuccess(response){
+                console.log(response.javascriptCode);
+                deferred.resolve(response.javascriptCode);
+            }
+
+            function onSignError(){
+                notificationService.error('Failed to sign the consent! Please try again later...');
+                deferred.reject();
+            }
+            return deferred.promise;
+        }]
+    };
+
     angular.module("app.consentModule",
         [
             'app.consentServices',
@@ -154,6 +230,9 @@
         ])
         .config(ConsentConfig)
         .controller("CreateEditConsentController", CreateEditConsentController)
-        .controller("ConsentListController", ['consentList', ConsentListController]);
+        .controller("ConsentListController", ['consentList', ConsentListController])
+        .controller("SignConsentController",['loadedData', SignConsentController])
+        .controller("SignRevokeConsentController",['loadedData', SignRevokeConsentController])
+    ;
 
 })();
