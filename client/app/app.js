@@ -11,11 +11,10 @@
      * @param IdleProvider -
      * @param idleConfigParams -
      */
-    function appConfig ($urlRouterProvider, $httpProvider, $sceProvider, KeepaliveProvider, IdleProvider, idleConfigParams) {
+    function appConfig ($urlRouterProvider, $httpProvider, KeepaliveProvider, IdleProvider, idleConfigParams) {
         $urlRouterProvider.otherwise("/login");
 
         $httpProvider.interceptors.push('AuthInterceptorService');
-        $sceProvider.enabled(false);
 
         // Configure Idle settingss
         IdleProvider.idle(idleConfigParams.idle); // in seconds
@@ -249,5 +248,10 @@
         .constant("idleConfigParams", ngIdleParams)
         .config(appConfig)
         .run(appRun)
-        .controller('AppController',AppController);
+        .controller('AppController',AppController)
+        .filter('trustAsHTML', ['$sce', function($sce){
+            return function(text) {
+                return $sce.trustAsHtml(text);
+            };
+        }]);
 })();
