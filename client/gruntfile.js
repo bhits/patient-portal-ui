@@ -596,7 +596,7 @@ module.exports = function (grunt) {
                         apiBaseUrl: 'https://testbed-api-dev.feisystems.com',
                         plsApiBaseUrl: 'https://bhitsqaapp02:8443/pls/providers',
                         pcmApiBaseUrl: 'https://bhitsqaapp02:8443/pcm/patients',
-                        phrApiBaseUrl: 'http://localhost:8080/phr/'
+                        phrApiBaseUrl: 'https://bhitsqaapp02:8443/phr/'
                     }
                 }
             }
