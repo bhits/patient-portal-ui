@@ -619,10 +619,6 @@
             RevokeConsentVm.sign = sign;
             RevokeConsentVm.consentId = RevokeConsentVm.params.consent.id;
 
-           // RevokeConsentVm.consentId= $stateParams.consent.id;
-            console.log(RevokeConsentVm.params.consent);
-            console.log(RevokeConsentVm.params.consent.id);
-
             if (angular.isUndefined(RevokeConsentVm.params) || angular.equals(RevokeConsentVm.params.consent, {})) {
                 cancel();
             }
@@ -632,7 +628,7 @@
             }
 
             function sign() {
-                $state.go('consent.revoke.sign');
+                $state.go('consent.revokesign',{consent: RevokeConsentVm.params.consent});
 
             }
         }

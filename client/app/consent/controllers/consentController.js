@@ -52,7 +52,7 @@
                 controllerAs: 'SignConsentVm',
                 resolve: SignConsentController.resolve
             })
-            .state('consent.revoke.sign', {
+            .state('consent.revokesign', {
                 url: '/signRevokeConsent',
                 data: {pageTitle: 'Sign Revoke Consent'},
                 templateUrl: 'app/consent/tmpl/consent-sign-revoke.tpl.html',
@@ -180,7 +180,6 @@
         loadedData: ['ConsentService', 'notificationService', '$q','$stateParams', function (ConsentService, notificationService, $q, $stateParams) {
             var deferred = $q.defer();
             var consentId= $stateParams.consentId;
-            console.log(consentId);
             var signConsentData = ConsentService.signConsent(consentId, onSignSuccess, onSignError);
 
             function onSignSuccess(response){
@@ -198,7 +197,6 @@
     function SignRevokeConsentController(loadedData){
         var SignRevokeConsentVm = this;
         SignRevokeConsentVm.javascriptCode =loadedData;
-        console.log(loadedData);
 
     }
 
@@ -207,11 +205,10 @@
         loadedData: ['ConsentService', 'notificationService', '$q','$stateParams', function (ConsentService, notificationService, $q, $stateParams) {
             var deferred = $q.defer();
             var consentId= $stateParams.consent.id;
-            console.log(consentId);
             var signConsentData = ConsentService.revokeConsent(consentId, onSignSuccess, onSignError);
 
             function onSignSuccess(response){
-                console.log(response.javascriptCode);
+
                 deferred.resolve(response.javascriptCode);
             }
 
