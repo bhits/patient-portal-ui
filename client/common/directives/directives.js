@@ -275,11 +275,6 @@
 
                 };
 
-                var today = new Date();
-                var initStartDate = doFormatDate(today);
-                var initEndDate = today.setDate(today.getDate() + 365);
-                $scope.DatePickerVm.consent.consentStart = initStartDate;
-                $scope.DatePickerVm.consent.consentEnd = doFormatDate(initEndDate);
                 $scope.$watch('DatePickerVm.consent.consentStart', function (startDate) {
                     setDateRange(startDate, DatePickerVm.consent.consentEnd);
                 });
