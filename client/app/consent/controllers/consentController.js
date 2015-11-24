@@ -41,7 +41,7 @@
                     consent: {}
                 }
             })
-            .state('consent.sign', {
+            .state('fe.consent.sign', {
                 url: '/signConsent',
                 data: {pageTitle: 'Sign Consent'},
                 templateUrl: 'app/consent/tmpl/consent-sign.tpl.html',
@@ -52,7 +52,7 @@
                 controllerAs: 'SignConsentVm',
                 resolve: SignConsentController.resolve
             })
-            .state('consent.revokesign', {
+            .state('fe.consent.revokesign', {
                 url: '/signRevokeConsent',
                 data: {pageTitle: 'Sign Revoke Consent'},
                 templateUrl: 'app/consent/tmpl/consent-sign-revoke.tpl.html',
@@ -175,7 +175,7 @@
         SignConsentVm.close = Close;
 
         function Close() {
-            $state.go('consent.list');
+            $state.go('fe.consent.list');
         }
     }
 
@@ -204,7 +204,7 @@
         SignRevokeConsentVm.close = Close;
 
         function Close() {
-            $state.go('consent.list');
+            $state.go('fe.consent.list');
         }
     }
 
