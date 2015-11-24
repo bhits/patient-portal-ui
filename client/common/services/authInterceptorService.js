@@ -1,25 +1,35 @@
 ﻿(function () {
 
     'use strict';
+
     /**
      *
      * @param $q
      * @param $location
-     * @param localStorageService
-     * @param $injector
-     * @param jwtHelper
+     * @param $rootScope
      * @param utilityService
+     * @param ENVService
+     * @param AccessToken
      * @returns {{request: Function, responseError: Function}}
      * @constructor
      */
-    function AuthInterceptorService($q, $location, localStorageService, $injector, jwtHelper, utilityService){
+    function AuthInterceptorService($q, $location, $rootScope, utilityService, ENVService, AccessToken){
         /*
          *   Log out the user
          */
         var logout = function () {
-            var authService = $injector.get('AuthenticationService');
-            authService.logOut();
+            $rootScope.$broadcast('oauth:expired');
         };
+
+        function isSecuredApi(url){
+            var isSecured = false;
+            angular.forEach(ENVService.securedApis, function(value){
+                if(utilityService.startsWith(url.toLowerCase(), value.toLowerCase())){
+                    isSecured = true;
+                }
+            });
+            return isSecured;
+        }
 
         return {
             /*
@@ -29,23 +39,25 @@
 
                 config.headers = config.headers || {};
 
-                var authData = localStorageService.get('session');
+                var authData = AccessToken.get();
 
                 if (authData) {
-                    if (authData.token && jwtHelper.isTokenExpired(authData.token)) {
+                    if (authData.access_token && AccessToken.expired()) {
                         logout();
-                        utilityService.redirectTo("/login");
+                        utilityService.redirectTo("/fe/login");
                     } else {
-                        config.headers.Authorization = 'Bearer  ' + authData.token;
+                        if(isSecuredApi(config.url)){
+                            config.headers.Authorization = 'Bearer  ' + authData.access_token;
+                        }
                     }
                 } else {
                     var currentPath = $location.path();
                     var currentPathName = currentPath.substring(1, currentPath.length);
 
-                    if ((currentPath.indexOf("index") === 1)) {
-                        utilityService.redirectTo("/index");
+                    if ((currentPath.indexOf("fe/index") === 1)) {
+                        utilityService.redirectTo("/fe/index");
                     } else {
-                        utilityService.redirectTo("/login");
+                        utilityService.redirectTo("/fe/login");
                     }
                 }
                 return config;
@@ -55,20 +67,20 @@
              */
             responseError: function (rejection) {
                 if (rejection.status === 401) {
-                    var authService = $injector.get('AuthenticationService');
-                    var authData = localStorageService.get('session');
+                    //var authService = $injector.get('AuthenticationService');
+                    var authData = AccessToken.get();
 
                     if (authData) {
-                        if (jwtHelper.isTokenExpired(authData.token)) {
+                        if (AccessToken.expired()) {
                             logout();
-                            utilityService.redirectTo("/login");
+                            utilityService.redirectTo("/fe/login");
                         } else {
                             // Got to Error page
                         }
                         return $q.reject(rejection);
                     } else {
                         logout();
-                        utilityService.redirectTo("/login");
+                        utilityService.redirectTo("/fe/login");
                     }
                 }
                 return $q.reject(rejection);
@@ -81,8 +93,6 @@
     */
     angular.module('app.authInterceptorModule',
         [
-          'LocalStorageModule',
-          'angular-jwt',
           'app.servicesModule'
         ])
 

@@ -82,12 +82,32 @@
                 return angular.isDefined(str) && angular.isString(str) && str.length > 0 ? str : undefined;
             },
 
+            startsWith: function (str, prefix) {
+                return angular.isString(str) && angular.isString(prefix) &&
+                    str.substring(0, prefix.length) === prefix;
+            },
+
+            endsWith: function (str, suffix) {
+                return angular.isString(str) && angular.isString(suffix) &&
+                    str.substring(str.length - suffix.length, str.length) === suffix;
+            },
+
+            randomAlphanumeric: function(len, charSet){
+                charSet = charSet || 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                var randomString = '';
+                for (var i = 0; i < len; i++) {
+                    var randomPoz = Math.floor(Math.random() * charSet.length);
+                    randomString += charSet.substring(randomPoz,randomPoz+1);
+                }
+                return randomString;
+            },
+
             /**
              * Checks if the given argument is array and has at least one element
              * @param arr
              * @returns {*|boolean}
              */
-            isNotEmpty: function(arr){
+            isNotEmpty: function (arr) {
                 return angular.isDefined(arr) && angular.isArray(arr) && arr.length > 0;
             },
 

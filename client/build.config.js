@@ -82,6 +82,8 @@ module.exports = {
             'vendor/angular-jwt/dist/angular-jwt.js',
             'vendor/angular-aria/angular-aria.js',
             'vendor/angular-ui-router/release/angular-ui-router.js',
+            'vendor/ngstorage/ngStorage.js',
+            'vendor/oauth-ng/dist/oauth-ng.js',
             'vendor/checklist-model/checklist-model.js'
         ],
         css: [

@@ -109,18 +109,18 @@
 
     function ProviderConfig ($stateProvider){
         $stateProvider
-            .state('provider', {
+            .state('fe.provider', {
                 abstract: true,
                 url: '/provider',
                 data: { pageTitle: 'Provider' },
                 templateUrl: 'common/tmpl/content.tpl.html'
             })
-            .state('provider.lookup', {
+            .state('fe.provider.lookup', {
                 url: '/lookup',
                 data: { pageTitle: 'Provider lookup' },
                 templateUrl: 'app/provider/tmpl/provider-lookup.tpl.html'
             })
-            .state('provider.list', {
+            .state('fe.provider.list', {
                 url: '/list',
                 data: {pageTitle: 'Provider List'},
                 templateUrl: 'app/provider/tmpl/provider-list.tpl.html',
