@@ -1,6 +1,6 @@
 <content-wrapper title="Sign Consent">
 
-    <div ng-bind-html="SignConsentVm.javascriptCode" style="height: 700px"/>
+    <div ng-bind-html="SignConsentVm.javascriptCode | trustAsHTML" style="height: 600px"/>
 
     <div class= "navbar navbar-inverse navbar-fixed-bottom">
         <div class="container">
