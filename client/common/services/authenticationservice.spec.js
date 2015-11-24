@@ -4,7 +4,7 @@
 
 'use strict';
 
-describe('app.authenticationModule ', function(){
+xdescribe('app.authenticationModule ', function(){
     var module;
 
     beforeEach(function() {
@@ -46,7 +46,7 @@ describe('app.authenticationModule ', function(){
 });
 
 
-describe('app.authenticationModule, AuthenticationService ', function() {
+xdescribe('app.authenticationModule, AuthenticationService ', function() {
     var utilityService, localStorageService, q, jwtHelper, AuthenticationService, location, base64, $httpBackend;
 
     beforeEach(module('LocalStorageModule'));

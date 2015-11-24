@@ -4,7 +4,7 @@
 
 'use strict';
 
-describe('app.authInterceptorModule ', function(){
+xdescribe('app.authInterceptorModule ', function(){
     var module;
 
     beforeEach(function() {
@@ -40,7 +40,7 @@ describe('app.authInterceptorModule ', function(){
     });
 });
 
-describe('app.authInterceptorModule, AuthInterceptorService ', function(){
+xdescribe('app.authInterceptorModule, AuthInterceptorService ', function(){
     var utilityService, localStorageService, q, jwtHelper, AuthInterceptorService, config, location, AuthenticationService, injector;
 
     beforeEach(module('LocalStorageModule'));
@@ -61,14 +61,14 @@ describe('app.authInterceptorModule, AuthInterceptorService ', function(){
         spyOn(utilityService, 'redirectTo').andCallThrough();
     }));
 
-    it("should redirect to login", function() {
+    xit("should redirect to login", function() {
         spyOn(jwtHelper, 'isTokenExpired').andCallThrough();
         config = {};
         config = AuthInterceptorService.request(config);
         expect(location.path()).toEqual("/fe/login");
     });
 
-    it("should redirect to index ", function() {
+    xit("should redirect to index ", function() {
         spyOn(jwtHelper, 'isTokenExpired').andCallThrough();
         config = {};
         location.path("/");
@@ -76,7 +76,7 @@ describe('app.authInterceptorModule, AuthInterceptorService ', function(){
         expect(location.path()).toEqual("/fe/login");
     });
 
-    it("should redirect to login page if token has expired ", function() {
+    xit("should redirect to login page if token has expired ", function() {
         AuthenticationService = injector.get('AuthenticationService');
         spyOn(AuthenticationService, 'logOut').andCallThrough();
         spyOn(jwtHelper, 'isTokenExpired').andReturn(true);

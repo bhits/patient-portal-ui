@@ -575,11 +575,21 @@ module.exports = function (grunt) {
                     ENVService: {
                         name: 'Development',
                         version:'<%= pkg.version %>',
-                        stsBaseUri: 'https://sts-dev.feisystems.com/identity/tokens',
-                        apiBaseUrl: 'https://testbed-api-dev.feisystems.com',
-                        plsApiBaseUrl: 'http://localhost:8080/pls/providers',
-                        pcmApiBaseUrl: 'https://localhost:8443/pcm/patients',
-                        phrApiBaseUrl: 'http://localhost:8080/phr/'
+                        securedApis: {
+                            pcmApiBaseUrl: 'https://localhost:8443/pcm/patients',
+                            phrApiBaseUrl: 'http://localhost:8080/phr'
+                        },
+                        unsecuredApis:{
+                            plsApiBaseUrl: 'http://localhost:8080/pls/providers'
+                        },
+                        oauth:{
+                            site: "http://localhost:8080/uaa",
+                            clientId:"patient-portal-ui",
+                            redirectUri: "http://localhost:8081/fe/login",
+                            profileUri: "http://localhost:8080/uaa/userinfo",
+                            scope: "openid,phr.hie.ReadDocument",
+                            template: "assets/oauth2_templates/button.html"
+                        }
                     }
                 }
             },
@@ -592,11 +602,21 @@ module.exports = function (grunt) {
                     ENVService: {
                         name: 'QA',
                         version:'<%= pkg.version %>',
-                        stsBaseUri: 'https://sts-dev.feisystems.com/identity/tokens',
-                        apiBaseUrl: 'https://testbed-api-dev.feisystems.com',
-                        plsApiBaseUrl: 'https://bhitsqaapp02:8443/pls/providers',
-                        pcmApiBaseUrl: 'https://bhitsqaapp02:8443/pcm/patients',
-                        phrApiBaseUrl: 'http://localhost:8080/phr/'
+                        securedApis: {
+                            pcmApiBaseUrl: 'https://bhitsqaapp02:8443/pcm/patients',
+                            phrApiBaseUrl: 'https://bhitsqaapp02:8443/phr'
+                        },
+                        unsecuredApis:{
+                            plsApiBaseUrl: 'https://bhitsqaapp02:8443/pls/providers'
+                        },
+                        oauth:{
+                            site: "http://localhost:8080/uaa",
+                            clientId:"patient-portal-ui",
+                            redirectUri: "http://localhost:8080/pp-ui/fe/login",
+                            profileUri: "http://localhost:8080/uaa/userinfo",
+                            scope: "openid,phr.hie.ReadDocument",
+                            template: "assets/oauth2_templates/button.html"
+                        }
                     }
                 }
             }

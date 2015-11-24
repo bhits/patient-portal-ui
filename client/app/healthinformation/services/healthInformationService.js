@@ -3,7 +3,7 @@
 'use strict';
 
     function HealthInformationService($resource, ENVService){
-        var patientResource = $resource(ENVService.phrApiBaseUrl + "/patientHealthData/:mrn", {mrn: '@mrn'});
+        var patientResource = $resource(ENVService.securedApis.phrApiBaseUrl + "/patientHealthData/:mrn", {mrn: '@mrn'});
 
         var isDefineAndNotNull = function(value){
             return (angular.isDefined(value) && value !== null );

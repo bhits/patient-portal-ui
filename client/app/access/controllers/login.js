@@ -2,16 +2,16 @@
 
     'use strict';
 
-    function config($stateProvider){
-            $stateProvider
-                .state('fe.login', {
-                    url: "/login",
-                    data: { pageTitle: 'Login' },
-                    templateUrl: "app/access/tmpl/login.tpl.html",
-                    controllerAs: "loginVm",
-                    controller: 'LoginController'
-                });
-        }
+    function config($stateProvider) {
+        $stateProvider
+            .state('fe.login', {
+                url: "/login",
+                data: {pageTitle: 'Login'},
+                templateUrl: "app/access/tmpl/login.tpl.html",
+                controllerAs: "loginVm",
+                controller: 'LoginController'
+            });
+    }
 
 
     /**
@@ -24,35 +24,14 @@
      */
 
 
-    function LoginController($state, AuthenticationService, Idle, ENVService, utilityService) {
+    function LoginController($scope, $state, Idle, ENVService) {
         var loginVm = this;
-
-        // The login object
-        loginVm.loginData = {userName: "", password: ""};
-
         loginVm.version = ENVService.version;
-        /**
-         * Login user using the AuthenticationService.
-         * On success starts ngIdle and redirects to home screen.
-         */
-        loginVm.login = function () {
-            AuthenticationService.login(loginVm.loginData).then(function (response) {
 
-                    if(angular.isDefined(response.Error) && response.Error !== null ){
-                        loginVm.message = "Invalid username and/or password." ;
-                    }else{
-                        Idle.watch();
-                        $state.go('fe.index.home');
-                    }
-                },
-                function (err) {
-                    loginVm.message = "Invalid username and/or password." ;
-                });
-        };
-
-        loginVm.scrollTo = function(scrollToId){
-            utilityService.scrollTo(scrollToId);
-        };
+        $scope.$on('oauth:authorized', function (event, token) {
+            Idle.watch();
+            $state.go('fe.index.home');
+        });
     }
 
     /**
@@ -60,12 +39,10 @@
      */
     angular.module("app.accessModule",
         [
-            'app.authenticationModule',
             'ngIdle',
-            'app.config',
-            'app.servicesModule'
+            'app.config'
         ])
         .config(config)
-        .controller('LoginController',LoginController);
+        .controller('LoginController', LoginController);
 
 })();

@@ -11,7 +11,7 @@
      * @param IdleProvider -
      * @param idleConfigParams -
      */
-    function appConfig ($urlRouterProvider, $locationProvider, $httpProvider, KeepaliveProvider, IdleProvider, idleConfigParams) {
+    function appConfig($urlRouterProvider, $locationProvider, $httpProvider, KeepaliveProvider, IdleProvider, idleConfigParams) {
 
         // enable html5 mode
         $locationProvider.html5Mode(true).hashPrefix('!');
@@ -35,7 +35,6 @@
      * @param $anchorScroll - the anscroll service
      */
     function appRun($rootScope, AuthenticationService, $state, $anchorScroll) {
-        AuthenticationService.fillAuthData();
         $rootScope.$state = $state;
         $anchorScroll.yOffset = 135;
     }
@@ -44,15 +43,17 @@
      *  Paramters for the ngIdle service
      * @type {{idle: number, timeout: number, keepalive: number}}
      */
-    var ngIdleParams = { "idle" : 780, "timeout": 120, "keepalive":240};
+    var ngIdleParams = {"idle": 780, "timeout": 120, "keepalive": 240};
 
     /**
      * The root controller of the application
      *
      * @param $scope - the scope object
      * @param AuthenticationService - the authenticationservice
+     * @param ENVService
      * @param $state - the state service
      * @param utilityService - the utility service
+     * @param notificationService
      * @param $modal - the modal service for showing modal
      * @param $modalStack - the modal stack service to manage modal stack
      * @param Idle - ngOIdle service for auto logging out user if idle
@@ -61,25 +62,42 @@
      *
      * @constructor
      */
-    function AppController ($scope, AuthenticationService, $state, utilityService, $modal, $modalStack, Idle, idleConfigParams,  $rootScope) {
+    function AppController($scope, AuthenticationService, ENVService, $state, utilityService, notificationService, $modal, $modalStack, Idle, idleConfigParams, $rootScope) {
 
         var appVm = this;
+        appVm.oauth = ENVService.oauth;
+        appVm.oauth.state = AuthenticationService.getState();
 
-        $rootScope.$on('$stateChangeSuccess', function(event, data){
+        $rootScope.$on('$stateChangeSuccess', function (event, data) {
             $modalStack.dismissAll('cancel');
         });
 
-        appVm.logOut = function () {
-            AuthenticationService.logOut();
+        $rootScope.$on('oauth:login', function (event, token) {
+            if (AuthenticationService.isValidState(token.state)) {
+                Idle.watch();
+                $state.go('fe.index.home');
+            } else {
+                notificationService.error('Invalid UAA token.');
+                $rootScope.$broadcast('oauth:expired');
+            }
+        });
+
+        $rootScope.$on('oauth:loggedOut', function (event) {
+            handleLoggedOutAndExpiredSession(event);
+        });
+
+        $rootScope.$on('oauth:expired', function (event) {
+            handleLoggedOutAndExpiredSession(event);
+        });
+
+        function handleLoggedOutAndExpiredSession(event) {
             Idle.unwatch();
             $state.go('fe.login');
 
             var toggle = false; // hide the health information menu
             utilityService.setShowHealthInformationMenu(toggle);
             appVm.healthInformationMenu = toggle;
-        };
-
-        appVm.authentication = AuthenticationService.authentication;
+        }
 
         appVm.currentDate = utilityService.getYear();
 
@@ -90,14 +108,13 @@
             }
         };
 
-
-        function ModalInstanceCtrl ($scope, $modalInstance) {
+        function ModalInstanceCtrl($scope, $modalInstance) {
         }
 
         /**
          * the user appears to have gone idle
          */
-        $scope.$on('IdleStart', function() {
+        $scope.$on('IdleStart', function () {
 
             console.log("Idle Start...");
 
@@ -115,30 +132,26 @@
          * you can change the title or display a warning dialog from here.
          * you can let them resume their session by calling Idle.watch()
          */
-        $scope.$on('IdleWarn', function(e, countdown) {
+        $scope.$on('IdleWarn', function (e, countdown) {
             //console.log("IdleWarn...");
         });
         /**
          * the user has timed out (meaning idleDuration + timeout has passed without any activity)
          * this is where you'd log them
          */
-        $scope.$on('IdleTimeout', function() {
+        $scope.$on('IdleTimeout', function () {
 
             console.log("IdleTimeout...");
-            console.log("-------> Session expired at: " + new Date() );
+            console.log("-------> Session expired at: " + new Date());
             appVm.closeModals();
 
-            //AuthenticationService.logOut();
-            //Idle.unwatch();
-            //$state.go('fe.login');
-
-            appVm.logOut();
+            $rootScope.$broadcast('oauth:expired');
         });
 
         /**
          * the user has come back from AFK and is doing stuff. if you are warning them, you can use this to hide the dialog
          */
-        $scope.$on('IdleEnd', function() {
+        $scope.$on('IdleEnd', function () {
             //console.log("IdleEnd...");
             appVm.closeModals();
         });
@@ -146,7 +159,7 @@
         /**
          * do something to keep the user's session alive
          */
-        $scope.$on('Keepalive', function() {
+        $scope.$on('Keepalive', function () {
 
             console.log("Keepalive...");
             var today = new Date();
@@ -157,54 +170,54 @@
 
             //console.log("Offset: " + offset + ", KeepAlive Time: " +(idleConfigParams.keepalive * 1000) );
 
-            console.log("-------> Current Time:" +  today.getHours() + " : " + today.getMinutes() + " : " + today.getSeconds());
+            console.log("-------> Current Time:" + today.getHours() + " : " + today.getMinutes() + " : " + today.getSeconds());
 
-            if( !Number.isNaN(offset) && (offset <= (idleConfigParams.keepalive * 1000))){
+            if (!Number.isNaN(offset) && (offset <= (idleConfigParams.keepalive * 1000))) {
 
                 // Get Refresh token
-                console.log("Refreshing token... " );
+                console.log("Refreshing token... ");
 
                 ////Slide session
                 Idle.slideSession();
 
-                var dialogTime = (now + (idleConfigParams.idle*1000));
+                var dialogTime = (now + (idleConfigParams.idle * 1000));
 
-                console.log("-------> Time dialog will show at: " + new Date(dialogTime) );
+                console.log("-------> Time dialog will show at: " + new Date(dialogTime));
 
-                console.log("-------> Session will Expires at: " + new Date(now + (idleConfigParams.idle*1000) + (idleConfigParams.timeout*1000)) );
-            }else{
+                console.log("-------> Session will Expires at: " + new Date(now + (idleConfigParams.idle * 1000) + (idleConfigParams.timeout * 1000)));
+            } else {
                 console.log("The was no activity.");
             }
         });
 
-        appVm.healthInformationMenu =  false;
+        appVm.healthInformationMenu = false;
 
-        appVm.showHealthInformationMenu = function(){
+        appVm.showHealthInformationMenu = function () {
             appVm.healthInformationMenu = true;
             utilityService.setShowHealthInformationMenu(true);
         };
 
-        appVm.scrollToAndExpand = function(target, expand){
-            $rootScope.$broadcast('ScrollTo', { to: target });
-            $rootScope.$broadcast('ExpandAccordion', { expand:expand });
+        appVm.scrollToAndExpand = function (target, expand) {
+            $rootScope.$broadcast('ScrollTo', {to: target});
+            $rootScope.$broadcast('ExpandAccordion', {expand: expand});
         };
 
-        appVm.routeToHealthInformation = function(){
-            if($state.current.name !== "fe.patient.healthinformation"){
-                $state.go('fe.patient.healthinformation',{scrollTo:'none',expand:'none' } );
+        appVm.routeToHealthInformation = function () {
+            if ($state.current.name !== "fe.patient.healthinformation") {
+                $state.go('fe.patient.healthinformation', {scrollTo: 'none', expand: 'none'});
             }
 
         };
 
         appVm.togglebar = true;
 
-        appVm.toggleSideBar = function(){
-            appVm.togglebar = ! appVm.togglebar;
+        appVm.toggleSideBar = function () {
+            appVm.togglebar = !appVm.togglebar;
         };
 
-        $scope.$on('ToggleMenuItemWithoutData', function(event, args) {
+        $scope.$on('ToggleMenuItemWithoutData', function (event, args) {
             //Determines which sections to be shown or hidden
-            appVm.hideSection =  args.toggleMenu;
+            appVm.hideSection = args.toggleMenu;
             appVm.toggleDemographics = args.demographics;
             appVm.toggleMedications = args.medications;
             appVm.toggleAlerts = args.alerts;
@@ -230,26 +243,27 @@
 
     angular.module('app',
         [
-          'app.homeModule',         // App modules start here
-          'app.healthInformationModule',
-          'app.accessModule',
-          'app.providerModule',
-          'app.consentModule',
-          'app.directivesModule',    // Common modules start here
-          'app.servicesModule',
-          'app.authInterceptorModule',
-          'app.authenticationModule',
-          'app.filtersModule',
-          'templates-app',          // Third party libraries start here
-          'templates-common',
-          'ui.router',
-          'ngIdle',
-          'ui.bootstrap',
-          'ngAria',
-          'angular-loading-bar'
+            'app.homeModule',         // App modules start here
+            'app.healthInformationModule',
+            'app.accessModule',
+            'app.providerModule',
+            'app.consentModule',
+            'app.directivesModule',    // Common modules start here
+            'app.servicesModule',
+            'app.authInterceptorModule',
+            'app.authenticationModule',
+            'app.filtersModule',
+            'templates-app',          // Third party libraries start here
+            'templates-common',
+            'ui.router',
+            'ngIdle',
+            'ui.bootstrap',
+            'ngAria',
+            'angular-loading-bar',
+            'oauth'
         ])
         .constant("idleConfigParams", ngIdleParams)
         .config(appConfig)
         .run(appRun)
-        .controller('AppController',AppController);
+        .controller('AppController', AppController);
 })();
