@@ -33,6 +33,45 @@
         <maven-war-plugin.version>2.6</maven-war-plugin.version>
     </properties>
 
+    <ciManagement>
+        <system>Jenkins</system>
+        <url>http://BhitsBuild03/</url>
+    </ciManagement>
+
+    <!-- Since buildnumber-maven-plugin uses git command, git command must in
+        path. i.e. need set git in the path Environment variable -->
+    <scm>
+        <url>https://github.com/FEISystems/patient-portal-ui</url>
+        <connection>scm:git:https://github.com/FEISystems/patient-portal-ui.git</connection>
+        <developerConnection>scm:git:https://github.com/FEISystems/patient-portal-ui.git</developerConnection>
+    </scm>
+
+    <developers>
+        <developer>
+            <id>Bhits.Java</id>
+            <name>Bhits Java</name>
+            <email>Bhits.Java@feisystems.com</email>
+            <organization>FEi Systems</organization>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>-5</timezone>
+        </developer>
+    </developers>
+
+    <distributionManagement>
+        <repository>
+            <id>deployment</id>
+            <name>Internal Releases</name>
+            <url>http://${maven.nexus.servername}/nexus/content/repositories/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>deployment</id>
+            <name>Internal Releases</name>
+            <url>http://${maven.nexus.servername}/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
     <profiles>
         <profile>
             <id>skipGrunt</id>
@@ -41,6 +80,21 @@
             </activation>
             <properties>
                 <skip.grunt.build>true</skip.grunt.build>
+            </properties>
+        </profile>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <grunt.build.arguments>build-dev</grunt.build.arguments>
+            </properties>
+        </profile>
+        <profile>
+            <id>qa</id>
+            <properties>
+                <grunt.build.arguments>build-qa</grunt.build.arguments>
             </properties>
         </profile>
     </profiles>
@@ -130,7 +184,7 @@
                         <configuration>
                             <!-- optional: if not specified, it will run Grunt's default task
                                 (and you can remove this whole <configuration> section.) -->
-                            <arguments>build-dev</arguments>
+                            <arguments>${grunt.build.arguments}</arguments>
                             <!-- srcdir (optional, for M2Eclipse integration) - a directory to check for changed files before executing in an incremental build -->
                             <!-- The changed file checking only occurs during an incremental build when using M2Eclipse. In any other environment those options are ignored and builds are always run. -->
                             <srcdir>${basedir}/../client</srcdir>
