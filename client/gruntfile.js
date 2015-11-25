@@ -610,10 +610,10 @@ module.exports = function (grunt) {
                             plsApiBaseUrl: 'https://bhitsqaapp02:8443/pls/providers'
                         },
                         oauth:{
-                            site: "http://localhost:8080/uaa",
+                            site: "https://bhitsqaapp02:8443/uaa",
                             clientId:"patient-portal-ui",
-                            redirectUri: "http://localhost:8080/pp-ui/fe/login",
-                            profileUri: "http://localhost:8080/uaa/userinfo",
+                            redirectUri: "https://bhitsqaapp02:8443/pp-ui/fe/login",
+                            profileUri: "https://bhitsqaapp02:8443/uaa/userinfo",
                             scope: "openid,phr.hie.ReadDocument",
                             template: "assets/oauth2_templates/button.html"
                         }
