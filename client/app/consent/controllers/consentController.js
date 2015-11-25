@@ -7,13 +7,13 @@
 
     function ConsentConfig($stateProvider) {
         $stateProvider
-            .state('consent', {
+            .state('fe.consent', {
                 abstract: true,
                 url: '/consent',
                 data: {pageTitle: 'Consent'},
                 templateUrl: 'common/tmpl/content.tpl.html'
             })
-            .state('consent.list', {
+            .state('fe.consent.list', {
                 url: '/list',
                 data: {pageTitle: 'List Consents'},
                 templateUrl: 'app/consent/tmpl/consent-list.tpl.html',
@@ -21,7 +21,7 @@
                 controllerAs: 'ConsentListVm',
                 resolve: ConsentListController.resolve
             })
-            .state('consent.create', {
+            .state('fe.consent.create', {
                 url: '/create',
                 data: {pageTitle: 'Create Consent'},
                 templateUrl: 'app/consent/tmpl/consent-create.tpl.html',
@@ -33,7 +33,7 @@
                 resolve: CreateEditConsentController.resolve
 
             })
-            .state('consent.revoke', {
+            .state('fe.consent.revoke', {
                 url: '/revoke',
                 data: {pageTitle: 'Revoke Consent'},
                 templateUrl: 'app/consent/tmpl/consent-revoke.tpl.html',
@@ -41,7 +41,7 @@
                     consent: {}
                 }
             })
-            .state('consent.sign', {
+            .state('fe.consent.sign', {
                 url: '/signConsent',
                 data: {pageTitle: 'Sign Consent'},
                 templateUrl: 'app/consent/tmpl/consent-sign.tpl.html',
@@ -52,7 +52,7 @@
                 controllerAs: 'SignConsentVm',
                 resolve: SignConsentController.resolve
             })
-            .state('consent.revokesign', {
+            .state('fe.consent.revokesign', {
                 url: '/signRevokeConsent',
                 data: {pageTitle: 'Sign Revoke Consent'},
                 templateUrl: 'app/consent/tmpl/consent-sign-revoke.tpl.html',
@@ -169,10 +169,14 @@
         }]
     };
 
-    function SignConsentController(loadedData){
+    function SignConsentController(loadedData, $state){
         var SignConsentVm = this;
         SignConsentVm.javascriptCode =loadedData;
+        SignConsentVm.close = Close;
 
+        function Close() {
+            $state.go('fe.consent.list');
+        }
     }
 
     SignConsentController.resolve = {
@@ -194,10 +198,14 @@
         }]
     };
 
-    function SignRevokeConsentController(loadedData){
+    function SignRevokeConsentController(loadedData, $state){
         var SignRevokeConsentVm = this;
         SignRevokeConsentVm.javascriptCode =loadedData;
+        SignRevokeConsentVm.close = Close;
 
+        function Close() {
+            $state.go('fe.consent.list');
+        }
     }
 
     SignRevokeConsentController.resolve = {
@@ -220,6 +228,9 @@
         }]
     };
 
+
+
+
     angular.module("app.consentModule",
         [
             'app.consentServices',
@@ -228,8 +239,8 @@
         .config(ConsentConfig)
         .controller("CreateEditConsentController", CreateEditConsentController)
         .controller("ConsentListController", ['consentList', ConsentListController])
-        .controller("SignConsentController",['loadedData', SignConsentController])
-        .controller("SignRevokeConsentController",['loadedData', SignRevokeConsentController])
+        .controller("SignConsentController",['loadedData', '$state', SignConsentController])
+        .controller("SignRevokeConsentController",['loadedData','$state', SignRevokeConsentController])
     ;
 
 })();

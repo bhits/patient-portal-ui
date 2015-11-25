@@ -58,8 +58,8 @@ describe('app.servicesModule ', function() {
     });
 
     it('should have redirectTo ', function () {
-        utilityService.redirectTo('login');
-        expect(location.url()).toEqual("/login");
+        utilityService.redirectTo('/fe/login');
+        expect(location.url()).toEqual("/fe/login");
     });
 
     it('should have isUnDefinedOrNull function', function () {

@@ -133,12 +133,12 @@
      */
     function Config($stateProvider){
         $stateProvider
-            .state('patient', {
+            .state('fe.patient', {
                 abstract: true,
                 url: '/patient',
                 templateUrl: 'common/tmpl/content.tpl.html'
             })
-            .state('patient.healthinformation', {
+            .state('fe.patient.healthinformation', {
                 url: '/healthinformation',
                 params: { scrollTo : null, expand: null},
                 data: { pageTitle: 'Health Information' },

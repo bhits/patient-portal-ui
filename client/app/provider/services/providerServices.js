@@ -6,7 +6,7 @@
     'use strict';
 
     function ProviderService($resource, ENVService) {
-        var providers = $resource(ENVService.pcmApiBaseUrl + "/providers/:npi", {npi: '@npi'});
+        var providers = $resource(ENVService.securedApis.pcmApiBaseUrl + "/providers/:npi", {npi: '@npi'});
 
         var findProviderByNpi = function( providers, npi){
             for(var i = 0; i < providers.length; i++){
@@ -62,7 +62,7 @@
                 queryParameters = plsQueryParameters.lastname ? queryParameters + "/lastname/" + plsQueryParameters.lastname : queryParameters;
                 queryParameters = plsQueryParameters.facilityname ? queryParameters + "/facilityname/" + plsQueryParameters.facilityname : queryParameters;
 
-                var providerResource = $resource(ENVService.plsApiBaseUrl + "/pageNumber/:pageNumber" + queryParameters, {pageNumber: page});
+                var providerResource = $resource(ENVService.unsecuredApis.plsApiBaseUrl + "/pageNumber/:pageNumber" + queryParameters, {pageNumber: page});
                 providerResource.get({pageNumber: page - 1}, adjustPageOnSuccessResponse, error);
 
                 function adjustPageOnSuccessResponse(response){

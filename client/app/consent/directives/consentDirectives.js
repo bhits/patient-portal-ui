@@ -106,7 +106,7 @@
                     ConsentService.createConsent(consent,
                         function (response) {
                             notificationService.success("Success in creating consent.");
-                            $state.go('consent.list');
+                            $state.go('fe.consent.list');
                         },
                         function (error) {
                             if (error.status === 409) {
@@ -126,7 +126,7 @@
                         consent,
                         function (response) {
                             notificationService.success("Success in updating consent.");
-                            $state.go('consent.list');
+                            $state.go('fe.consent.list');
                         },
                         function (error) {
                             if (error.status === 409) {
@@ -158,7 +158,7 @@
 
                         function discard() {
                             cancel();
-                            $state.go('consent.list');
+                            $state.go('fe.consent.list');
                         }
                     }
                 };
@@ -523,16 +523,14 @@
                         }
                     }
 
-                    function edit() {
-                        $state.go('consent.create', {consentId: consent.id});
+                    function edit(){
+                        $state.go('fe.consent.create', {consentId: consent.id});
                         $modalInstance.close();
                     }
 
                     function signConsent(){
-
-                        $state.go('consent.sign', {consentId: consent.id});
+                        $state.go('fe.consent.sign', {consentId: consent.id});
                         $modalInstance.close();
-
                     }
 
                     function cancel() {
@@ -540,7 +538,7 @@
                     }
 
                     function revoke() {
-                        $state.go('consent.revoke', {consent: consent});
+                        $state.go('fe.consent.revoke', {consent: consent});
                         $modalInstance.close();
                     }
                 }
@@ -624,11 +622,11 @@
             }
 
             function cancel() {
-                $state.go('consent.list');
+                $state.go('fe.consent.list');
             }
 
             function sign() {
-                $state.go('consent.revokesign',{consent: RevokeConsentVm.params.consent});
+                $state.go('fe.consent.revokesign',{consent: RevokeConsentVm.params.consent});
 
             }
         }

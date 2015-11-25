@@ -62,7 +62,8 @@
         "grunt-bump": "0.6.x",
         "grunt-contrib-cssmin": "0.12.x",
         "grunt-ng-constant": "1.1.x",
-        "grunt-war": "0.4.x"
+        "grunt-war": "0.4.x",
+        "grunt-cli": "0.1.x"
     },
     "engines": {
         "node": ">= 0.8.4"

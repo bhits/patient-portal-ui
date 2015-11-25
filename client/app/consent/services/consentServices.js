@@ -6,14 +6,13 @@
     'use strict';
 
     function ConsentService($resource, ENVService) {
-        var consentListResource = $resource(ENVService.pcmApiBaseUrl + "/consents/pageNumber/:pageNumber", {pageNumber: '@pageNumber'});
-        var purposeOfUseResource = $resource(ENVService.pcmApiBaseUrl + "/purposeOfUse");
-        var medicationSectionResource = $resource(ENVService.pcmApiBaseUrl + "/medicalSection");
-        var sensitvityPolicyResource = $resource(ENVService.pcmApiBaseUrl + "/sensitivityPolicy");
-        var consentResource = $resource(ENVService.pcmApiBaseUrl + "/consents/:id",{id: '@id'}, {'update': { method:'PUT' }});
-        var signConsentResource = $resource(ENVService.pcmApiBaseUrl + "/consents/signConsent/:id", {id: '@id'});
-        var revokeConsentResource = $resource(ENVService.pcmApiBaseUrl + "/consents/revokeConsent/:id", {id: '@id'});
-
+        var consentListResource = $resource(ENVService.securedApis.pcmApiBaseUrl + "/consents/pageNumber/:pageNumber", {pageNumber: '@pageNumber'});
+        var purposeOfUseResource = $resource(ENVService.securedApis.pcmApiBaseUrl + "/purposeOfUse");
+        var medicationSectionResource = $resource(ENVService.securedApis.pcmApiBaseUrl + "/medicalSection");
+        var sensitvityPolicyResource = $resource(ENVService.securedApis.pcmApiBaseUrl + "/sensitivityPolicy");
+        var consentResource = $resource(ENVService.securedApis.pcmApiBaseUrl + "/consents/:id",{id: '@id'}, {'update': { method:'PUT' }});
+        var signConsentResource = $resource(ENVService.securedApis.pcmApiBaseUrl + "/consents/signConsent/:id", {id: '@id'});
+        var revokeConsentResource = $resource(ENVService.securedApis.pcmApiBaseUrl + "/consents/revokeConsent/:id", {id: '@id'});
 
         var selectedNpi = {authorizeNpi: "", discloseNpi: ""};
         var selectedProvider = [];

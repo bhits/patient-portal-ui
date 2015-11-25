@@ -120,7 +120,7 @@ describe("app AppController ", function() {
 
         spyOn(rootScope, "$broadcast");
 
-        spyOn(AuthenticationService, 'logOut').andCallThrough();
+        //spyOn(AuthenticationService, 'logOut').andCallThrough();
         spyOn(Idle, 'unwatch').andCallThrough();
 
         controller = $controller('AppController', {
