@@ -585,7 +585,7 @@ module.exports = function (grunt) {
                         oauth:{
                             site: "http://localhost:8080/uaa",
                             clientId:"patient-portal-ui",
-                            redirectUri: "http://localhost:8081/fe/login",
+                            redirectUri: "http://localhost:8081/pp-ui/fe/login",
                             profileUri: "http://localhost:8080/uaa/userinfo",
                             scope: "openid,phr.hie.ReadDocument",
                             template: "assets/oauth2_templates/button.html"
