@@ -587,7 +587,7 @@ module.exports = function (grunt) {
                             clientId:"patient-portal-ui",
                             redirectUri: "http://localhost:8081/pp-ui/fe/login",
                             profileUri: "http://localhost:8080/uaa/userinfo",
-                            scope: "openid,phr.hie.ReadDocument",
+                            scope: "openid,phr.hie.readDocument",
                             template: "assets/oauth2_templates/button.html"
                         }
                     }
@@ -614,7 +614,7 @@ module.exports = function (grunt) {
                             clientId:"patient-portal-ui",
                             redirectUri: "https://bhitsqaapp02:8443/pp-ui/fe/login",
                             profileUri: "https://bhitsqaapp02:8443/uaa/userinfo",
-                            scope: "openid,phr.hie.ReadDocument",
+                            scope: "openid,phr.hie.readDocument",
                             template: "assets/oauth2_templates/button.html"
                         }
                     }
