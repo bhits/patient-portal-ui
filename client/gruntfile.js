@@ -213,23 +213,6 @@ module.exports = function (grunt) {
         },
 
         /**
-         * `ng-min` annotates the sources before minifying. That is, it allows us
-         * to code without the array syntax.
-         */
-        ngmin: {
-            compile: {
-                files: [
-                    {
-                        src: ['<%= app_files.js %>'],
-                        cwd: '<%= build_debug_dir %>',
-                        dest: '<%= build_debug_dir %>',
-                        expand: true
-                    }
-                ]
-            }
-        },
-
-        /**
          * Minify the sources!
          */
         uglify: {
@@ -641,6 +624,19 @@ module.exports = function (grunt) {
                     }
                 ]
             }
+        },
+
+        ngAnnotate: {
+            compile: {
+                files: [
+                    {
+                        src: ['<%= app_files.js %>'],
+                        cwd: '<%= build_debug_dir %>',
+                        dest: '<%= build_debug_dir %>',
+                        expand: true
+                    }
+                ]
+            }
         }
     };
 
@@ -722,7 +718,7 @@ module.exports = function (grunt) {
      * minifying your code.
      */
     grunt.registerTask('compile', [
-        'cssmin', 'copy:compile_assets', 'ngmin', 'concat:compile_js', 'uglify', 'index:compile'
+        'cssmin', 'copy:compile_assets', 'ngAnnotate', 'concat:compile_js', 'uglify', 'index:compile'
     ]);
 
     // Alias task for karma:watch. Run this task after grunt build

@@ -53,7 +53,6 @@
         "grunt-contrib-htmlmin": "0.2.x",
         "grunt-contrib-imagemin": "0.5.x",
         "grunt-bower-task": "0.4.x",
-        "grunt-ngmin": "0.0.x",
         "grunt-svgmin": "0.3.x",
         "grunt-usemin": "2.0.x",
         "jshint-stylish": "0.1.x",
@@ -63,7 +62,8 @@
         "grunt-contrib-cssmin": "0.12.x",
         "grunt-ng-constant": "1.1.x",
         "grunt-war": "0.4.x",
-        "grunt-cli": "0.1.x"
+        "grunt-cli": "0.1.x",
+        "grunt-ng-annotate": "1.0.1"
     },
     "engines": {
         "node": ">= 0.8.4"
