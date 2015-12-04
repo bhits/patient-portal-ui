@@ -62,6 +62,16 @@
                 controller: 'SignRevokeConsentController',
                 controllerAs: 'SignRevokeConsentVm',
                 resolve: SignRevokeConsentController.resolve
+            })
+            .state('fe.consent.trymypolicy', {
+                url: '/trymypolicy',
+                data: {pageTitle: 'Try My Policy'},
+                templateUrl: 'app/consent/tmpl/trymypolicy.tpl.html',
+                params: {
+                    consentId: ''
+                },
+                controller: 'TryMyPolicyChooseDocController',
+                controllerAs: 'TryMyPolicyChooseDocVm'
             });
     }
 
@@ -227,8 +237,10 @@
             return deferred.promise;
         }]
     };
-
-
+    
+    function TryMyPolicyChooseDocController(){
+        var TryMyPolicyChooseDocVm = this;
+    }
 
 
     angular.module("app.consentModule",
@@ -241,6 +253,7 @@
         .controller("ConsentListController", ['consentList', ConsentListController])
         .controller("SignConsentController",['loadedData', '$state', SignConsentController])
         .controller("SignRevokeConsentController",['loadedData','$state', SignRevokeConsentController])
+        .controller("TryMyPolicyChooseDocController", TryMyPolicyChooseDocController)
     ;
 
 })();
