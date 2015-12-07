@@ -3,14 +3,19 @@
 
 (function () {
 
+    /**
+     * @ngdoc config
+     * @name home config
+     * @description
+     *   The route configuration for the home module.
+     */
     angular
         .module('app.home')
         .config(HomeConfig);
 
     /**
-     * Home config function
-     *
-     * @param $stateProvider
+     * check if the user is authenticated.
+     * @memberof home config
      */
 
     /* @ngInject */
