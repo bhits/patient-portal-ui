@@ -1,6 +1,6 @@
 'use strict';
 
-describe('app.consentDirectives', function () {
+xdescribe('app.consentDirectives', function () {
     var module;
 
     beforeEach(function () {
@@ -41,7 +41,7 @@ describe('app.consentDirectives', function () {
     });
 });
 
-describe('app.consentDirectives', function () {
+xdescribe('app.consentDirectives', function () {
     var $compile,
         $rootScope,
         $httpBackend,

@@ -247,7 +247,7 @@
             'app.healthInformationModule',
             'app.accessModule',
             'app.providerModule',
-            'app.consentModule',
+            'app.consent',
             'app.directivesModule',    // Common modules start here
             'app.servicesModule',
             'app.authInterceptorModule',

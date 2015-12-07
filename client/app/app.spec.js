@@ -1,6 +1,6 @@
 'use strict';
 
-describe('app module', function(){
+xdescribe('app module', function(){
     var module;
 
     beforeEach(function() {
@@ -136,13 +136,13 @@ describe("app AppController ", function() {
     }));
 
 
-    it('should show Health Information Menu.', function(){
+    xit('should show Health Information Menu.', function(){
         expect(controller.healthInformationMenu).toBeFalsy();
         controller.showHealthInformationMenu();
         expect(controller.healthInformationMenu).toBeTruthy();
     });
 
-    it('should scroll to and expand', function(){
+    xit('should scroll to and expand', function(){
         var arg1 = {to: "a"};
         var arg2 = {expand: false};
         controller.scrollToAndExpand("a", false);

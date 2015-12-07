@@ -389,8 +389,6 @@ module.exports = function (grunt) {
                 dir: '<%= build_debug_dir %>',
                 src: [
                     '<%= vendor_files.js %>',
-                    '<%= build_debug_dir %>/app/**/*.js',
-                     '<%= build_debug_dir %>/common/**/*.js',
                     '<%= html2js.common.dest %>',
                     '<%= html2js.app.dest %>',
                     '<%= recess.build.dest %>'
@@ -637,6 +635,14 @@ module.exports = function (grunt) {
                     }
                 ]
             }
+        },
+        angularFileLoader: {
+            options: {
+                scripts: ['<%= app_files.js %>']
+            },
+            compile: {
+                src: ['index.html']
+            }
         }
     };
 
@@ -772,7 +778,7 @@ module.exports = function (grunt) {
         }
 
         taskList.push('html2js', 'jshint-all', 'recess:build','concat:build_css', 'copy:build_app_assets',
-                       'copy:build_vendor_assets','copy:build_appjs', 'copy:build_vendorjs', 'index:build', 'karmaconfig');
+                       'copy:build_vendor_assets','copy:build_appjs', 'copy:build_vendorjs', 'angularFileLoader', 'index:build', 'karmaconfig');
 
         if (target === targetEnum.debug || target === targetEnum.dist || target === targetEnum.dev  ) {
             taskList.push('karma:unit');

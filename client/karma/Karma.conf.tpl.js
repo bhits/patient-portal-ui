@@ -26,6 +26,7 @@ module.exports = function (karma) {
             'assets/js/angular/angular-messages.min.js',
             <% scripts.forEach( function ( file ) { %>'<%= file %>',
                 <% }); %>
+            'app/**/*module*.js','app/**/*config*.js',
             'app/**/*.js',
             'common/**/*.js'
         ],
