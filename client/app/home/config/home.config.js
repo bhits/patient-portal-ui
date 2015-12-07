@@ -1,14 +1,20 @@
-﻿
+
+'use strict';
+
 (function () {
 
-    'use strict';
+    angular
+        .module('app.home')
+        .config(HomeConfig);
 
     /**
      * Home config function
      *
      * @param $stateProvider
      */
-    function config($stateProvider){
+
+    /* @ngInject */
+    function HomeConfig($stateProvider){
 
         $stateProvider
             .state('fe', {
@@ -25,31 +31,11 @@
             })
             .state('fe.index.home', {
                 url: '/home',
-                templateUrl: 'app/home/tmpl/home.tpl.html',
+                templateUrl: 'app/home/config/home.tpl.html',
                 data: { pageTitle: 'Home' },
                 controllerAs: "HomeVm",
                 controller: 'HomeController'
-                });
+            });
     }
-
-    /**
-     * The home controller
-     *
-     * @param {Object} $scope - The Angularjs scope
-     */
-    function HomeController($scope, utilityService){
-        var homeVm = this;
-    }
-
-    /**
-     * Manages the home page
-     */
-    angular.module("app.homeModule",
-        [
-            'ui.router',
-            'app.servicesModule'
-        ])
-        .config(config)
-        .controller('HomeController',HomeController);
 
 })();

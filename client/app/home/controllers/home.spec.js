@@ -4,44 +4,10 @@
 
 'use strict';
 
-describe('app.homeModule ', function(){
-    var module;
-
-    beforeEach(function() {
-        module = angular.module("app");
-    });
-
-    it("should be registered", function() {
-        expect(module).not.toEqual(null);
-    });
-
-    describe("Dependencies:", function() {
-
-        var dependencies;
-
-        var hasModule = function(m) {
-            return dependencies.indexOf(m) >= 0;
-        };
-        beforeEach(function() {
-            dependencies = module.value('app').requires;
-        });
-
-        it("should have app.servicesModule as a dependency", function() {
-            expect(hasModule('app.servicesModule')).toEqual(true);
-        });
-
-        it("should have ui.routere as a dependency", function() {
-            expect(hasModule('ui.router')).toEqual(true);
-        });
-    });
-});
-
-
-
-describe("app.homeModule HomeController ", function() {
+describe("app.home HomeController ", function() {
 
     beforeEach(module('ui.router'));
-    beforeEach(module('app.homeModule'));
+    beforeEach(module('app.home'));
 
     var scope, rootScope;
 
@@ -56,7 +22,6 @@ describe("app.homeModule HomeController ", function() {
 
 
     it('should create home controller ', function(){
-
 
     });
 

@@ -243,7 +243,7 @@
 
     angular.module('app',
         [
-            'app.homeModule',         // App modules start here
+            'app.home',         // App modules start here
             'app.healthInformationModule',
             'app.accessModule',
             'app.providerModule',
