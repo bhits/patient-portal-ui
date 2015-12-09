@@ -20,6 +20,13 @@
                 templateUrl: 'app/clinicaldocuments/tmpl/clinical-documents-info.tpl.html',
                 controller: 'ClinicalDocumentsController',
                 controllerAs: 'ClinicalDocumentsVm'
+            })
+            .state('fe.clinicaldocuments.upload', {
+                url: '/upload',
+                data: {pageTitle: 'Uploaded Documents'},
+                templateUrl: 'app/clinicaldocuments/tmpl/clinical-documents-upload.tpl.html',
+                controller: 'ClinicalDocumentsUploadController',
+                controllerAs: 'ClinicalDocumentsUploadVm'
             });
     }
 
@@ -27,8 +34,15 @@
         var ClinicalDocumentsVm = this;
     }
 
+    function ClinicalDocumentsUploadController(){
+        var ClinicalDocumentsUploadVm = this;
+    }
+
     angular.module("app.clinicalDocumentsModule",
-        [])
+        [
+            'app.clinicalDocumentsServices'
+        ])
         .config(ClinicalDocumentsConfig)
-        .controller("ClinicalDocumentsController", ClinicalDocumentsController);
+        .controller("ClinicalDocumentsController", ClinicalDocumentsController)
+        .controller("ClinicalDocumentsUploadController",ClinicalDocumentsUploadController);
 })();
