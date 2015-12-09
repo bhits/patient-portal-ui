@@ -13,8 +13,6 @@
      * @param ProviderService - The provider service.
      * @param notificationService - The notification service for the toast message.
      * @param $state - The ui-router state service.
-     *
-     * @constructor
      */
     function ProviderListController ($scope, providers, $modal, ProviderService, notificationService, $state){
         var providerListCtrlVm = this;
@@ -29,7 +27,6 @@
          * @param $modalInstance - modal instance
          * @param provider - The passed provider instance to be deleted
          *
-         * @constructor
          */
 
         function DeleteProviderModalController ($scope, $modalInstance, provider, notificationService, $state) {
@@ -77,7 +74,6 @@
     /**
      *  The resolve ogject to resolve the list of providers
      *
-     * @type {{providers: *[]}}
      */
     ProviderListController.resolve = {
         providers: ['ProviderService', '$q', '$log', 'utilityService', function (ProviderService, $q, $log, utilityService) {

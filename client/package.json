@@ -64,8 +64,7 @@
         "grunt-war": "0.4.x",
         "grunt-cli": "0.1.x",
         "grunt-ng-annotate": "1.0.x",
-        "grunt-angular-file-loader": "1.1.x",
-        "grunt-jsdoc": "1.1.x"
+        "grunt-angular-file-loader": "1.1.x"
     },
     "engines": {
         "node": ">= 0.8.4"

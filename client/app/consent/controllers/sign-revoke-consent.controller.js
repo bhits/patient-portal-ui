@@ -7,7 +7,15 @@
         .module('app.consent')
             .controller('SignRevokeConsentController', SignRevokeConsentController);
 
-            /* @ngInject */
+            /**
+             * @memberof app.consent
+             * @ngdoc controller
+             * @name SignRevokeConsentController
+             * @param loadedData {Object} The resolved data for the controller
+             * @param $state {service} The ui-router state service
+             *
+             * @ngInject
+             */
             function SignRevokeConsentController(loadedData, $state){
                 var SignRevokeConsentVm = this;
                 SignRevokeConsentVm.javascriptCode =loadedData;

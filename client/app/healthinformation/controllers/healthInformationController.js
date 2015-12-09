@@ -14,7 +14,6 @@
      * @param HealthInformationService - The health information service.
      * @param $rootScope - The Angularjs root scope service.
      *
-     * @constructor
      */
     function HealthInformationController($scope, $stateParams, $state, utilityService, patientData, HealthInformationService, $rootScope){
         var HealthInformationVm = this;
@@ -106,7 +105,6 @@
     /**
      * Resovlve the patient health information from the PHR using the Health Information Service
      *
-     * @type {{patientData: *[]}}
      */
     HealthInformationController.resolve = {
         patientData: ['HealthInformationService', '$q', '$log','utilityService',  function(HealthInformationService, $q, $log, utilityService){

@@ -643,14 +643,6 @@ module.exports = function (grunt) {
             compile: {
                 src: ['index.html']
             }
-        },
-        jsdoc : {
-            dist: {
-                src: ['<%= app_files.js %>'],
-                options: {
-                    destination: 'target/docs'
-                }
-            }
         }
     };
 

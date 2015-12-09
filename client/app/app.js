@@ -240,7 +240,11 @@
         });
     }
 
-
+    /**
+     * @ngdoc module
+     * @description The main module for the application
+     *
+     */
     angular.module('app',
         [
             'app.home',         // App modules start here
