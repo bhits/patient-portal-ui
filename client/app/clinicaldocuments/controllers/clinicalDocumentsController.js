@@ -1,13 +1,11 @@
 (function () {
     'use strict';
 
-    angular.module("app.clinicalDocumentsModule",
-        [
-            'app.clinicalDocumentsServices'
-        ])
-        .config(ClinicalDocumentsConfig)
-        .controller("ClinicalDocumentsListController", ['clinicalDocumentsList', ClinicalDocumentsListController]);
-
+    /**
+     * Clinical Documents config function
+     * @param $stateProvider
+     * @constructor
+     */
     function ClinicalDocumentsConfig($stateProvider) {
         $stateProvider
             .state('fe.clinicaldocuments', {
@@ -16,23 +14,21 @@
                 data: {pageTitle: 'Clinical Documents'},
                 templateUrl: 'common/tmpl/content.tpl.html'
             })
-            .state('fe.clinicaldocuments.list', {
-                url: '/list',
-                data: {pageTitle: 'Clinical Documents List'},
-                templateUrl: 'app/clinicaldocuments/tmpl/clinical-documents-list.tpl.html',
-                controller: 'ClinicalDocumentsListController',
-                controllerAs: 'ClinicalDocumentsListVm',
-                resolve: ClinicalDocumentsListController.resolve
+            .state('fe.clinicaldocuments.info', {
+                url: '/info',
+                data: {pageTitle: 'Clinical Documents Information'},
+                templateUrl: 'app/clinicaldocuments/tmpl/clinical-documents-info.tpl.html',
+                controller: 'ClinicalDocumentsController',
+                controllerAs: 'ClinicalDocumentsVm'
             });
-
     }
 
-    function ClinicalDocumentsListController(clinicalDocumentsList) {
+    function ClinicalDocumentsController() {
         var ClinicalDocumentsVm = this;
-        ClinicalDocumentsVm.clinicalDocumentsList = clinicalDocumentsList;
-        console.log(clinicalDocumentsList);
     }
 
-    ClinicalDocumentsListController.resolve = {
-    };
+    angular.module("app.clinicalDocumentsModule",
+        [])
+        .config(ClinicalDocumentsConfig)
+        .controller("ClinicalDocumentsController", ClinicalDocumentsController);
 })();
