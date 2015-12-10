@@ -12,7 +12,7 @@
                 var directive = {
                     restrict: 'E',
                     replace: false,
-                    templateUrl: 'app/consent/directives/consentterm.tpl.html',
+                    templateUrl: 'app/consent/directives/consentTerm.tpl.html',
                     scope: {
                         ngModel: '='
                     },

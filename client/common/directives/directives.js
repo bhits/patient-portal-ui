@@ -1,6 +1,16 @@
-﻿(function () {
+﻿'use strict';
 
-    'use strict';
+(function () {
+
+    angular
+        .module('app.directivesModule', [])
+            .directive('pageTitle', PageTitle)
+            .directive('sideNavigation', SideNavigation)
+            .directive('iboxTools', IboxTools)
+            .directive('minimalizaSidebar', MinimalizaSidebar)
+            .directive('icheck', Icheck)
+            .directive('contentWrapper', ContentWrapper)
+            .directive('ppDatepickerRange', ppDatePickerRange);
 
     /**
      * pageTitle - Directive for set Page title - mata title
@@ -222,8 +232,8 @@
         };
     }
 
-    function DatePickerRange() {
-        return {
+    function ppDatePickerRange() {
+        var directive =  {
             restrict: 'EA',
             scope: {
                 tolabel: "@",
@@ -233,68 +243,66 @@
             templateUrl: 'common/tmpl/datepicker-range.tpl.html',
             bindToController: true,
             controllerAs: 'DatePickerVm',
-            controller: function ($scope) {
-                var DatePickerVm = this;
-
-                DatePickerVm.consent = DatePickerVm.ngModel;
-
-                function doFormatDate(dateObj) {
-                    var today = new Date(dateObj);
-                    var day = today.getDate();
-                    var month = today.getMonth() + 1;
-                    var year = today.getFullYear();
-                    if (day < 10) {
-                        day = "0" + day;
-                    }
-                    if (month < 10) {
-                        month = "0" + month;
-                    }
-                    var formatDate = month + "/" + day + "/" + year;
-
-                    return formatDate;
-                }
-
-                var setDateRange = function (startDate, endDate) {
-                    if (!startDate || !endDate) {
-                        return;
-                    }
-                    DatePickerVm.error = "";
-                    var fd = doFormatDate(new Date());
-                    if (Date.parse(startDate) < Date.parse(fd)) {
-                        DatePickerVm.error = ' Consent must start from today';
-                    } else if (Date.parse(startDate) > Date.parse(endDate)) {
-                        DatePickerVm.error = ' The start date cannot occur after the end date';
-                    } else {
-                        DatePickerVm.ngModel = DatePickerVm.consent;
-                    }
-
-                    DatePickerVm.showError = DatePickerVm.error.length;
-                };
-
-                var validateDate = function () {
-
-                };
-
-                $scope.$watch('DatePickerVm.consent.consentStart', function (startDate) {
-                    setDateRange(startDate, DatePickerVm.consent.consentEnd);
-                });
-                $scope.$watch('DatePickerVm.consent.consentEnd', function (endDate) {
-                    setDateRange(DatePickerVm.consent.consentStart, endDate);
-                });
-            },
-
-            link: function (scope, element) {
-                element.datepicker({todayBtn: "linked", autoclose: true});
-            }
+            controller: DatePickerRangeController,
+            link: link
         };
+
+        return directive;
+
+        function link(scope, element) {
+            element.datepicker({todayBtn: "linked", autoclose: true});
+        }
     }
 
-    angular.module('app.directivesModule', [])
-        .directive('pageTitle', PageTitle)
-        .directive('sideNavigation', SideNavigation)
-        .directive('iboxTools', IboxTools)
-        .directive('minimalizaSidebar', MinimalizaSidebar)
-        .directive('icheck', Icheck)
-        .directive('contentWrapper', ContentWrapper)
-        .directive('datepickerRange', DatePickerRange);
+    /* @ngInject */
+    function DatePickerRangeController($scope) {
+        var DatePickerVm = this;
+        DatePickerVm.consent = DatePickerVm.ngModel;
+        $scope.$watch('DatePickerVm.consent.consentStart', watchStartDate);
+        $scope.$watch('DatePickerVm.consent.consentEnd',watchEndDate );
+
+        function watchStartDate (startDate) {
+            setDateRange(startDate, DatePickerVm.consent.consentEnd);
+        }
+
+        function watchEndDate(endDate) {
+            setDateRange(DatePickerVm.consent.consentStart, endDate);
+        }
+
+        function setDateRange (startDate, endDate) {
+            if (!startDate || !endDate) {
+                return;
+            }
+            DatePickerVm.error = "";
+            var fd = doFormatDate(new Date());
+            if (Date.parse(startDate) < Date.parse(fd)) {
+                DatePickerVm.error = ' Consent must start from today';
+            } else if (Date.parse(startDate) > Date.parse(endDate)) {
+                DatePickerVm.error = ' The start date cannot occur after the end date';
+            } else {
+                DatePickerVm.ngModel = DatePickerVm.consent;
+            }
+
+            DatePickerVm.showError = DatePickerVm.error.length;
+        }
+
+        function doFormatDate(dateObj) {
+            var today = new Date(dateObj);
+            var day = today.getDate();
+            var month = today.getMonth() + 1;
+            var year = today.getFullYear();
+
+            if (day < 10) {
+                day = "0" + day;
+            }
+            if (month < 10) {
+                month = "0" + month;
+            }
+            var formatDate = month + "/" + day + "/" + year;
+
+            return formatDate;
+        }
+
+    }
+
 })();
