@@ -47,12 +47,12 @@
                     .state('fe.consent.create', {
                         url: '/create',
                         data: {pageTitle: 'Create Consent'},
-                        templateUrl: 'app/consent/config/consentCreate.tpl.html',
+                        templateUrl: 'app/consent/config/consentCreateEdit.tpl.html',
                         params: {
                             consentId: ''
                         },
-                        controller: 'CreateEditConsentController',
-                        controllerAs: 'CreateEditConsentVm',
+                        controller: 'ConsentCreateEditController',
+                        controllerAs: 'ConsentCreateEditVm',
                         resolve: {
                             /* @ngInject */
                             loadedData: function (ConsentService, ProviderService, notificationService, $q, $stateParams) {
