@@ -1,11 +1,11 @@
-<div class="panel panel-default" ng-click="SelectProviderVm.openSelectProviderModal()">
+<div class="panel panel-default" ng-click="ConsentSelectProviderVm.openSelectProviderModal()">
     <div class="panel-heading">
-        <div ng-bind="SelectProviderVm.fieldplaceholder"></div>
+        <div ng-bind="ConsentSelectProviderVm.fieldplaceholder"></div>
     </div>
     <div class="panel-body">
-        <div class="m-l" ng-if="SelectProviderVm.selectedProvider.npi">
+        <div class="m-l" ng-if="ConsentSelectProviderVm.selectedProvider.npi">
             <span class="fa fa-user info-blue m-r-xs m-b-xs"></span>
-            <span ng-bind="SelectProviderVm.selectedProvider | pcmProviderNameOrFacility"></span>
+            <span ng-bind="ConsentSelectProviderVm.selectedProvider | pcmProviderNameOrFacility"></span>
         </div>
     </div>
 </div>
