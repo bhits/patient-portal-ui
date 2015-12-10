@@ -24,7 +24,7 @@
                         controllerAs: 'ConsentListVm',
                         resolve: {
                             /* @ngInject */
-                            loadedData: function($q, ConsentService, notificationService){
+                            loadedData: function($q, consentService, notificationService){
                                 function success(response){
                                     return response;
                                 }
@@ -33,7 +33,7 @@
                                     return response;
                                 }
                                 var deferred = $q.defer();
-                                var listConsentPromise = ConsentService.listConsent(1, success, error).$promise;
+                                var listConsentPromise = consentService.listConsent(1, success, error).$promise;
                                 listConsentPromise.then(function(onFulfilled){
                                     deferred.resolve(onFulfilled);
                                 }, function (onRejected) {
@@ -55,9 +55,9 @@
                         controllerAs: 'ConsentCreateEditVm',
                         resolve: {
                             /* @ngInject */
-                            loadedData: function (ConsentService, ProviderService, notificationService, $q, $stateParams) {
+                            loadedData: function ($q, $stateParams,consentService, ProviderService, notificationService ) {
                                 // reset previous selections (if any)
-                                ConsentService.resetSelectedNpi();
+                                consentService.resetSelectedNpi();
                                 var deferred = $q.defer();
                                 var providerResource = ProviderService.getProvidersResource();
                                 var providersData = providerResource.query(
@@ -69,7 +69,7 @@
                                         return response;
                                     });
 
-                                var purposeOfUseResource = ConsentService.getPurposeOfUseResource();
+                                var purposeOfUseResource = consentService.getPurposeOfUseResource();
                                 var purposeOfUseData = purposeOfUseResource.query(
                                     function (response) {
                                         return response;
@@ -79,7 +79,7 @@
                                         return response;
                                     });
 
-                                var medicalSectionResource = ConsentService.getMedicationSectionResource();
+                                var medicalSectionResource = consentService.getMedicationSectionResource();
                                 var medicalSectionData = medicalSectionResource.query(
                                     function (response) {
                                         return response;
@@ -89,7 +89,7 @@
                                         return response;
                                     });
 
-                                var sensitvityPolicyResource = ConsentService.getSensitvityPolicyResource();
+                                var sensitvityPolicyResource = consentService.getSensitvityPolicyResource();
                                 var sensitvityPolicyData = sensitvityPolicyResource.query(
                                     function (response) {
                                         return response;
@@ -102,7 +102,7 @@
 
                                 var consentData = null;
                                 if(angular.isDefined($stateParams.consentId) && $stateParams.consentId.length > 0){
-                                    var consentResource = ConsentService.getConsentResource();
+                                    var consentResource = consentService.getConsentResource();
                                     consentData = consentResource.get(
                                         {id: $stateParams.consentId},
                                         function (response) {
@@ -141,10 +141,10 @@
                         controllerAs: 'ConsentSignVm',
                         resolve: {
                             /* @ngInject */
-                            loadedData: function (ConsentService, notificationService, $q, $stateParams) {
+                            loadedData: function ($q, $stateParams, consentService, notificationService) {
                                 var deferred = $q.defer();
                                 var consentId= $stateParams.consentId;
-                                var signConsentData = ConsentService.signConsent(consentId, onSignSuccess, onSignError);
+                                var signConsentData = consentService.signConsent(consentId, onSignSuccess, onSignError);
 
                                 function onSignSuccess(response){
                                     deferred.resolve(response.javascriptCode);
@@ -169,10 +169,10 @@
                         controllerAs: 'ConsentSignRevokeVm',
                         resolve: {
                             /* @ngInject */
-                            loadedData: function (ConsentService, notificationService, $q, $stateParams) {
+                            loadedData: function ( $q, $stateParams, consentService, notificationService) {
                                 var deferred = $q.defer();
                                 var consentId= $stateParams.consent.id;
-                                var signConsentData = ConsentService.revokeConsent(consentId, onSignSuccess, onSignError);
+                                var signConsentData = consentService.revokeConsent(consentId, onSignSuccess, onSignError);
 
                                 function onSignSuccess(response){
 

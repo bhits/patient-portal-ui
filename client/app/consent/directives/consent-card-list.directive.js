@@ -15,12 +15,12 @@
                     },
                     bindToController: true,
                     templateUrl: 'app/consent/directives/consent-card-list.tpl.html',
-                    controller: ['ConsentService', 'notificationService', 'utilityService', ConsentCardListController],
+                    controller: ['consentService', 'notificationService', 'utilityService', ConsentCardListController],
                     controllerAs: 'ConsentCardListVm'
                 };
                 return directive;
 
-                function ConsentCardListController(ConsentService, notificationService, utilityService) {
+                function ConsentCardListController(consentService, notificationService, utilityService) {
                     var ConsentCardListVm = this;
                     var oldPage = ConsentCardListVm.consentList.currentPage;
                     ConsentCardListVm.pagination = {
@@ -56,7 +56,7 @@
                     function loadPage() {
                         var newPage = ConsentCardListVm.pagination.currentPage;
                         ConsentCardListVm.pagination.currentPage = oldPage;
-                        ConsentService.listConsent(newPage, success, error);
+                        consentService.listConsent(newPage, success, error);
                     }
                 }
             }

@@ -8,7 +8,7 @@
             .directive('selectProvider', SelectProvider);
 
             /* @ngInject */
-            function SelectProvider($modal, ProviderService, ConsentService) {
+            function SelectProvider($modal, ProviderService, consentService) {
                 var directive =  {
                     restrict: 'E',
                     replace: false,
@@ -27,7 +27,7 @@
             }
 
             /* @ngInject */
-            function SelectProviderController ($scope, ConsentService, $modal, ProviderService, notificationService) {
+            function SelectProviderController ($scope, consentService, $modal, ProviderService, notificationService) {
                 var SelectProviderVm = this;
                 SelectProviderVm.selectedProvider = SelectProviderVm.ngModel;
                 SelectProviderVm.fieldplaceholder = SelectProviderVm.modaltitle === 'Authorize' ? "The following individual or organization" : "To disclose my information to";
@@ -45,11 +45,11 @@
                                 };
                             }
                         },
-                        controller:[ '$scope', '$modalInstance','notificationService', 'data', 'ProviderService', 'ConsentService', function SelectProviderModalController($scope, $modalInstance, notificationService, data, ProviderService, ConsentService) {
+                        controller:[ '$scope', '$modalInstance','notificationService', 'data', 'ProviderService', 'consentService', function SelectProviderModalController($scope, $modalInstance, notificationService, data, ProviderService, consentService) {
                             $scope.title = data.modalTitle;
                             $scope.selectedProvider = getSelectedProvider;
                             $scope.providers = data.providers;
-                            $scope.selectedNpi = ConsentService.getSelectedNpi();
+                            $scope.selectedNpi = consentService.getSelectedNpi();
                             $scope.isOrganizationProvider = isOrganizationProvider;
                             $scope.isIndividualProvider = isIndividualProvider;
                             $scope.isSelected = isSelected;
@@ -83,9 +83,9 @@
                                 SelectProviderVm.selectedProvider = selectedProvider;
 
                                 if ($scope.title === 'Authorize') {
-                                    ConsentService.setAuthorizeNpi(selectedProvider.npi);
+                                    consentService.setAuthorizeNpi(selectedProvider.npi);
                                 } else {
-                                    ConsentService.setDiscloseNpi(selectedProvider.npi);
+                                    consentService.setDiscloseNpi(selectedProvider.npi);
                                 }
                             }
 

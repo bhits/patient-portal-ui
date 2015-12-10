@@ -7,7 +7,7 @@
         .module('app.consent')
             .directive('medicalInformation', MedicalInformation);
 
-            function MedicalInformation($modal, ConsentService) {
+            function MedicalInformation($modal, consentService) {
                 return {
                     restrict: 'E',
                     replace: false,
@@ -20,13 +20,13 @@
                     },
                     bindToController: true,
                     controllerAs: 'MedicalInformationVm',
-                    controller: ['$scope', 'ConsentService', '$modal', 'notificationService', function ($scope, ConsentService, $modal, notificationService) {
+                    controller: ['$scope', 'consentService', '$modal', 'notificationService', function ($scope, consentService, $modal, notificationService) {
                         var MedicalInformationVm = this;
                         //Test value to be replace with real value.
                         MedicalInformationVm.medicalInformation = 'A';
                         //Initiallizing the medical information model
-                        MedicalInformationVm.selectedMedicalSections = ConsentService.getLookupEntities(MedicalInformationVm.medicalsections, MedicalInformationVm.ngModel.doNotShareClinicalDocumentSectionTypeCodes);
-                        MedicalInformationVm.selectedSensitivityPolicies = ConsentService.getLookupEntities(MedicalInformationVm.sensitivitypolicies, MedicalInformationVm.ngModel.doNotShareSensitivityPolicyCodes);
+                        MedicalInformationVm.selectedMedicalSections = consentService.getLookupEntities(MedicalInformationVm.medicalsections, MedicalInformationVm.ngModel.doNotShareClinicalDocumentSectionTypeCodes);
+                        MedicalInformationVm.selectedSensitivityPolicies = consentService.getLookupEntities(MedicalInformationVm.sensitivitypolicies, MedicalInformationVm.ngModel.doNotShareSensitivityPolicyCodes);
 
                         //MedicalInformationVm.ngModel = {doNotShareSensitivityPolicyCodes : [],doNotShareClinicalDocumentSectionTypeCodes: []};
                         MedicalInformationVm.hasException = function () {
@@ -45,8 +45,8 @@
 
                             $scope.consent = [];
 
-                            $scope.consent.selectedMedicalSections = !angular.isDefined(MedicalInformationVm.selectedMedicalSections) ? [] : ConsentService.getCodes(MedicalInformationVm.selectedMedicalSections);
-                            $scope.consent.selectedSensitivityPolicies = !angular.isDefined(MedicalInformationVm.selectedSensitivityPolicies) ? [] : ConsentService.getCodes(MedicalInformationVm.selectedSensitivityPolicies);
+                            $scope.consent.selectedMedicalSections = !angular.isDefined(MedicalInformationVm.selectedMedicalSections) ? [] : consentService.getCodes(MedicalInformationVm.selectedMedicalSections);
+                            $scope.consent.selectedSensitivityPolicies = !angular.isDefined(MedicalInformationVm.selectedSensitivityPolicies) ? [] : consentService.getCodes(MedicalInformationVm.selectedSensitivityPolicies);
 
                             $scope.$watch("MedicalInformationVm.selectedMedicalSections", function (arg) {
                                 if (MedicalInformationVm.medicalInformation === 'A') {
@@ -62,7 +62,7 @@
 
 
                             $scope.selectAllMedicalSections = function () {
-                                $scope.consent.selectedMedicalSections = ConsentService.getCodes($scope.mediactionSections);
+                                $scope.consent.selectedMedicalSections = consentService.getCodes($scope.mediactionSections);
                                 //TODO: This should be refactored to avoid directly referencing the 'medicalInformationModalObj' name, which is declared in the HTML markup but not in this directive.
                                 $scope.medicalInfofmationModalObj.$setDirty();
                             };
@@ -74,7 +74,7 @@
                             };
 
                             $scope.selectAllSensitivityPolicies = function () {
-                                $scope.consent.selectedSensitivityPolicies = ConsentService.getCodes($scope.sensitivityPolicies);
+                                $scope.consent.selectedSensitivityPolicies = consentService.getCodes($scope.sensitivityPolicies);
                                 //TODO: This should be refactored to avoid directly referencing the 'medicalInformationModalObj' name, which is declared in the HTML markup but not in this directive.
                                 $scope.medicalInfofmationModalObj.$setDirty();
                             };
@@ -86,8 +86,8 @@
                             };
 
                             $scope.ok = function () {
-                                MedicalInformationVm.selectedMedicalSections = ConsentService.getEntitiesByCodes($scope.mediactionSections, $scope.consent.selectedMedicalSections);
-                                MedicalInformationVm.selectedSensitivityPolicies = ConsentService.getEntitiesByCodes($scope.sensitivityPolicies, $scope.consent.selectedSensitivityPolicies);
+                                MedicalInformationVm.selectedMedicalSections = consentService.getEntitiesByCodes($scope.mediactionSections, $scope.consent.selectedMedicalSections);
+                                MedicalInformationVm.selectedSensitivityPolicies = consentService.getEntitiesByCodes($scope.sensitivityPolicies, $scope.consent.selectedSensitivityPolicies);
                                 MedicalInformationVm.ngModel = {
                                     doNotShareSensitivityPolicyCodes: $scope.consent.selectedSensitivityPolicies,
                                     doNotShareClinicalDocumentSectionTypeCodes: $scope.consent.selectedMedicalSections

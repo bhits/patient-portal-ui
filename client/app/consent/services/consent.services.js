@@ -7,19 +7,19 @@
 (function () {
 
     angular.module("app.consent")
-        .factory('ConsentService', ConsentService);
+        .factory('consentService', consentService);
 
     /**
      * @memberof app.consent
      * @description The consent service.
      * @ngdoc service
-     * @name ConsentService
+     * @name consentService
      * @param $resource {service} ngResource service
      * @param ENVService {service} The app api config service
      *
      *  @ngInject
      */
-    function ConsentService($resource, ENVService) {
+    function consentService($resource, ENVService) {
         var consentListResource = $resource(ENVService.securedApis.pcmApiBaseUrl + "/consents/pageNumber/:pageNumber", {pageNumber: '@pageNumber'});
         var consentResource = $resource(ENVService.securedApis.pcmApiBaseUrl + "/consents/:id",{id: '@id'}, {'update': { method:'PUT' }});
         var purposeOfUseResource = $resource(ENVService.securedApis.pcmApiBaseUrl + "/purposeOfUse");

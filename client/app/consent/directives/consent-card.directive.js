@@ -13,12 +13,12 @@
                     bindToController: true,
                     restrict: 'E',
                     templateUrl: 'app/consent/directives/consent-card.tpl.html',
-                    controller: ['$modal', 'ConsentService', 'notificationService', ConsentCardController],
+                    controller: ['$modal', 'consentService', 'notificationService', ConsentCardController],
                     controllerAs: 'ConsentCardVm'
                 };
                 return directive;
 
-                function ConsentCardController($modal, ConsentService, notificationService) {
+                function ConsentCardController($modal, consentService, notificationService) {
                     var ConsentCardVm = this;
                     ConsentCardVm.openManageConsentModal = openManageConsentModal;
                     ConsentCardVm.consentState = consentState;
@@ -33,11 +33,11 @@
                     }
 
                     function isShareAll() {
-                        return ConsentService.isShareAll(ConsentCardVm.consent);
+                        return consentService.isShareAll(ConsentCardVm.consent);
                     }
 
                     function consentState() {
-                        return ConsentService.resolveConsentState(ConsentCardVm.consent);
+                        return consentService.resolveConsentState(ConsentCardVm.consent);
                     }
 
                     function notDisclosedItems() {
@@ -50,7 +50,7 @@
 
                     function openManageConsentModal() {
                         $modal.open({
-                            templateUrl: 'app/consent/directives/consent-list-manage-options-modal-' + ConsentService.resolveConsentState(ConsentCardVm.consent) + '.tpl.html',
+                            templateUrl: 'app/consent/directives/consent-list-manage-options-modal-' + consentService.resolveConsentState(ConsentCardVm.consent) + '.tpl.html',
                             controller: ['$state', '$modalInstance', 'consent', ManageConsentModalController],
                             controllerAs: 'ManageConsentModalVm',
                             resolve: {
@@ -75,7 +75,7 @@
                             }
 
                             function deleteConsent() {
-                                ConsentService.deleteConsent(consent.id, onDeleteSuccess, onDeleteError);
+                                consentService.deleteConsent(consent.id, onDeleteSuccess, onDeleteError);
 
                                 function onDeleteSuccess() {
                                     notificationService.success('Consent is successfully deleted');

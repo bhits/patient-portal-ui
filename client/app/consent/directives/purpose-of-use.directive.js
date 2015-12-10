@@ -8,7 +8,7 @@
              .directive('purposeOfUse', PurposeOfUse);
 
             /* @ngInject */
-            function PurposeOfUse(ConsentService, $modal) {
+            function PurposeOfUse(consentService, $modal) {
                 return {
                     restrict: 'E',
                     replace: false,
@@ -19,20 +19,20 @@
                     },
                     bindToController: true,
                     controllerAs: 'PurposeOfUseVm',
-                    controller: ['$scope', 'ConsentService', '$modal', 'notificationService', function ($scope, ConsentService, $modal, notificationService) {
+                    controller: ['$scope', 'consentService', '$modal', 'notificationService', function ($scope, consentService, $modal, notificationService) {
                         var PurposeOfUseVm = this;
-                        //var purposeOfUse = ConsentService.getDefaultPurposeOfUse(PurposeOfUseVm.purposeofuse, PurposeOfUseVm.ngModel);
+                        //var purposeOfUse = consentService.getDefaultPurposeOfUse(PurposeOfUseVm.purposeofuse, PurposeOfUseVm.ngModel);
                         //
                         ////Getting default purpose of use code.
                         //var code = purposeOfUse[0].code;
-                        PurposeOfUseVm.selectedPurposeOfUse = ConsentService.getDefaultPurposeOfUse(PurposeOfUseVm.purposeofuse, PurposeOfUseVm.ngModel);
+                        PurposeOfUseVm.selectedPurposeOfUse = consentService.getDefaultPurposeOfUse(PurposeOfUseVm.purposeofuse, PurposeOfUseVm.ngModel);
 
                         function PurposeOfUseModalController($scope, $modalInstance, data) {
                             $scope.data = data;
-                            $scope.consent = {selectedPurposeOfUseCodes: ConsentService.getCodes(PurposeOfUseVm.selectedPurposeOfUse)};
+                            $scope.consent = {selectedPurposeOfUseCodes: consentService.getCodes(PurposeOfUseVm.selectedPurposeOfUse)};
 
                             $scope.selectAll = function () {
-                                $scope.consent.selectedPurposeOfUseCodes = ConsentService.getCodes($scope.data);
+                                $scope.consent.selectedPurposeOfUseCodes = consentService.getCodes($scope.data);
                                 //TODO: This should be refactored to avoid directly referencing the 'purposeOfUseModalObj' name, which is declared in the HTML markup but not in this directive.
                                 $scope.purposeOfUseModalObj.$setDirty();
                             };
@@ -44,7 +44,7 @@
                             };
 
                             $scope.ok = function () {
-                                PurposeOfUseVm.selectedPurposeOfUse = ConsentService.getEntitiesByCodes($scope.data, $scope.consent.selectedPurposeOfUseCodes);
+                                PurposeOfUseVm.selectedPurposeOfUse = consentService.getEntitiesByCodes($scope.data, $scope.consent.selectedPurposeOfUseCodes);
                                 PurposeOfUseVm.ngModel = $scope.consent.selectedPurposeOfUseCodes;
                                 $modalInstance.close();
                             };

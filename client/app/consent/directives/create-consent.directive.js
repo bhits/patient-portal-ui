@@ -42,7 +42,7 @@
                     },
                     controllerAs: 'CreateConsentVm',
                     bindToController: true,
-                    controller: ['ConsentService', '$stateParams', 'ProviderService', 'notificationService', '$state', '$modal', '$scope', function (ConsentService, $stateParams, ProviderService, notificationService, $state, $modal, $scope) {
+                    controller: ['consentService', '$stateParams', 'ProviderService', 'notificationService', '$state', '$modal', '$scope', function (consentService, $stateParams, ProviderService, notificationService, $state, $modal, $scope) {
                         var CreateConsentVm = this;
                         CreateConsentVm.authorize = "Authorize";
                         CreateConsentVm.disclosure = "Disclosure";
@@ -60,8 +60,8 @@
                             CreateConsentVm.disclosureProvider = (ProviderService.getProviderByNpis(CreateConsentVm.providers, CreateConsentVm.consent.providersDisclosureIsMadeToNpi, CreateConsentVm.consent.organizationalProvidersDisclosureIsMadeToNpi))[0];
                             CreateConsentVm.authorizeProvider = (ProviderService.getProviderByNpis(CreateConsentVm.providers, CreateConsentVm.consent.providersPermittedToDiscloseNpi, CreateConsentVm.consent.organizationalProvidersPermittedToDiscloseNpi))[0];
                             // set providers to disable on UI that are currently selected in this consent
-                            ConsentService.setDiscloseNpi(CreateConsentVm.disclosureProvider.npi);
-                            ConsentService.setAuthorizeNpi(CreateConsentVm.authorizeProvider.npi);
+                            consentService.setDiscloseNpi(CreateConsentVm.disclosureProvider.npi);
+                            consentService.setAuthorizeNpi(CreateConsentVm.authorizeProvider.npi);
                             CreateConsentVm.medicalInformation.doNotShareSensitivityPolicyCodes = CreateConsentVm.consent.doNotShareSensitivityPolicyCodes;
                             CreateConsentVm.medicalInformation.doNotShareClinicalDocumentSectionTypeCodes = CreateConsentVm.consent.doNotShareClinicalDocumentSectionTypeCodes;
                             CreateConsentVm.shareForPurposeOfUseCodes = CreateConsentVm.consent.shareForPurposeOfUseCodes;
@@ -73,7 +73,7 @@
                         } else {
                             CreateConsentVm.authorizeProvider = {};
                             CreateConsentVm.disclosureProvider = {};
-                            CreateConsentVm.shareForPurposeOfUseCodes = ConsentService.getCodes(ConsentService.getDefaultPurposeOfUse(CreateConsentVm.purposeofuse, []));
+                            CreateConsentVm.shareForPurposeOfUseCodes = consentService.getCodes(consentService.getDefaultPurposeOfUse(CreateConsentVm.purposeofuse, []));
                             CreateConsentVm.dateRange = {consentStart: initStartDate, consentEnd: initEndDate};
                         }
 
@@ -103,9 +103,9 @@
                             var consent = prepareConsent();
 
                             //On Success clear the references of the selected providers
-                            ConsentService.resetSelectedNpi();
+                            consentService.resetSelectedNpi();
 
-                            ConsentService.createConsent(consent,
+                            consentService.createConsent(consent,
                                 function (response) {
                                     notificationService.success("Success in creating consent.");
                                     $state.go('fe.consent.list');
@@ -124,7 +124,7 @@
                             var consent = prepareConsent();
                             consent.id = $stateParams.consentId;
 
-                            ConsentService.updateConsent(
+                            consentService.updateConsent(
                                 consent,
                                 function (response) {
                                     notificationService.success("Success in updating consent.");
