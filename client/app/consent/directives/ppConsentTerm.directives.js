@@ -11,7 +11,7 @@
                 return {
                     restrict: 'E',
                     replace: false,
-                    templateUrl: 'app/consent/directives/consentTerm.tpl.html',
+                    templateUrl: 'app/consent/directives/consent-term.tpl.html',
                     scope: {
                         ngModel: '='
                     },
