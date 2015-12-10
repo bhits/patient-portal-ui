@@ -12,24 +12,24 @@
                     restrict: 'E',
                     scope: {},
                     templateUrl: 'app/consent/directives/consentRevokeConfirmation.tpl.html',
-                    controller:RevokeConsentController,
-                    controllerAs: 'RevokeConsentVm'
+                    controller:ConsentRevokeController,
+                    controllerAs: 'ConsenRevokeVm'
                 };
                 return directive;
             }
 
             /* @ngInject */
-            function RevokeConsentController($stateParams, $state) {
-                var RevokeConsentVm = this;
-                RevokeConsentVm.params = $stateParams;
-                RevokeConsentVm.cancel = cancel;
-                RevokeConsentVm.sign = sign;
-                RevokeConsentVm.consentId = RevokeConsentVm.params.consent.id;
+            function ConsentRevokeController($stateParams, $state) {
+                var ConsenRevokeVm = this;
+                ConsenRevokeVm.params = $stateParams;
+                ConsenRevokeVm.cancel = cancel;
+                ConsenRevokeVm.sign = sign;
+                ConsenRevokeVm.consentId = ConsenRevokeVm.params.consent.id;
 
                 activate();
 
                 function activate (){
-                    if (angular.isUndefined(RevokeConsentVm.params) || angular.equals(RevokeConsentVm.params.consent, {})) {
+                    if (angular.isUndefined(ConsenRevokeVm.params) || angular.equals(ConsenRevokeVm.params.consent, {})) {
                         cancel();
                     }
                 }
@@ -39,7 +39,7 @@
                 }
 
                 function sign() {
-                    $state.go('fe.consent.revokesign',{consent: RevokeConsentVm.params.consent});
+                    $state.go('fe.consent.revokesign',{consent: ConsenRevokeVm.params.consent});
 
                 }
             }

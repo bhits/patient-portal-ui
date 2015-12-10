@@ -8,7 +8,8 @@
             .directive('ppConsentTerm', ppConsentTerm);
 
             function ppConsentTerm() {
-                return {
+
+                var directive = {
                     restrict: 'E',
                     replace: false,
                     templateUrl: 'app/consent/directives/consentTerm.tpl.html',
@@ -17,10 +18,14 @@
                     },
                     bindToController: true,
                     controllerAs: 'ConsentTermVm',
-                    controller: ['$scope', function ($scope) {
-                        var ConsentTermVm = this;
-                        ConsentTermVm.daterange = ConsentTermVm.ngModel;
-                    }]
+                    controller: ConsentTermController
                 };
+
+                return directive;
+
+                function ConsentTermController(){
+                    var ConsentTermVm = this;
+                    ConsentTermVm.daterange = ConsentTermVm.ngModel;
+                }
             }
 })();
