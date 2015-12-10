@@ -5,29 +5,29 @@
             <div class="hr-line-dashed"></div>
             <div class="row">
                     <div class="col-md-5">
-                        <select-provider ng-model="CreateConsentVm.authorizeProvider" modaltitle="CreateConsentVm.authorize" name="authorizeProvider" providers="CreateConsentVm.providers"></select-provider>
+                        <pp-consent-provider-select ng-model="CreateConsentVm.authorizeProvider" modaltitle="CreateConsentVm.authorize" name="authorizeProvider" providers="CreateConsentVm.providers"></pp-consent-provider-select>
                     </div>
                 <div class="col-md-1 center"><span class="fa fa-chevron-right fa-3x m-t-md visible-md-inline-block visible-lg-inline-block" ></span></div>
                 <div class="col-md-5">
-                    <select-provider ng-model="CreateConsentVm.disclosureProvider" modaltitle="CreateConsentVm.disclosure"  name="disclosureProvider" providers="CreateConsentVm.providers"></select-provider>
+                    <pp-consent-provider-select ng-model="CreateConsentVm.disclosureProvider" modaltitle="CreateConsentVm.disclosure"  name="disclosureProvider" providers="CreateConsentVm.providers"></pp-consent-provider-select>
                 </div>
             </div>
             <div class="hr-line-dashed"></div>
             <div class="row">
                 <div class="col-md-11">
-                    <medical-information ng-model="CreateConsentVm.medicalInformation" name="medicalInformation" medicalsections="CreateConsentVm.medicalsections" sensitivitypolicies="CreateConsentVm.sensitivitypolicies"></medical-information>
+                    <pp-consent-medical-information ng-model="CreateConsentVm.medicalInformation" name="medicalInformation" medicalsections="CreateConsentVm.medicalsections" sensitivitypolicies="CreateConsentVm.sensitivitypolicies"></pp-consent-medical-information>
                 </div>
             </div>
             <div class="hr-line-dashed"></div>
             <div class="row">
                 <div class="col-md-11">
-                    <purpose-of-use ng-model="CreateConsentVm.shareForPurposeOfUseCodes" name="shareForPurposeOfUseCodes" purposeofuse="CreateConsentVm.purposeofuse"></purpose-of-use>
+                    <pp-consent-purpose-of-use ng-model="CreateConsentVm.shareForPurposeOfUseCodes" name="shareForPurposeOfUseCodes" purposeofuse="CreateConsentVm.purposeofuse"></pp-consent-purpose-of-use>
                 </div>
             </div>
             <div class="hr-line-dashed"></div>
             <div class="row">
                 <div class="col-md-11">
-                    <consent-term ng-model="CreateConsentVm.dateRange" name="dateRange" ></consent-term>
+                    <pp-consent-term ng-model="CreateConsentVm.dateRange" name="dateRange" ></pp-consent-term>
                 </div>
             </div>
             <div class="hr-line-dashed"></div>
@@ -44,6 +44,3 @@
     </div>
 </form>
 
-<!--<pre>-->
-    <!--{{consentForm |json}}-->
-<!--</pre>-->

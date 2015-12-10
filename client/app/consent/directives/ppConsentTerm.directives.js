@@ -5,13 +5,13 @@
 
     angular
         .module('app.consent')
-            .directive('consentTerm', ConsentTerm);
+            .directive('ppConsentTerm', ppConsentTerm);
 
-            function ConsentTerm() {
+            function ppConsentTerm() {
                 return {
                     restrict: 'E',
                     replace: false,
-                    templateUrl: 'app/consent/directives/consent-term.tpl.html',
+                    templateUrl: 'app/consent/directives/consentTerm.tpl.html',
                     scope: {
                         ngModel: '='
                     },

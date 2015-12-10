@@ -5,16 +5,16 @@
 
     angular
         .module('app.consent')
-            .directive('consentCardList', ConsentCardList);
+            .directive('ppConsentCardList', ppConsentCardList);
 
-            function ConsentCardList() {
+            function ppConsentCardList() {
                 var directive = {
                     restrict: 'E',
                     scope: {
                         consentList: '='
                     },
                     bindToController: true,
-                    templateUrl: 'app/consent/directives/consent-card-list.tpl.html',
+                    templateUrl: 'app/consent/directives/consentCardList.tpl.html',
                     controller: ['consentService', 'notificationService', 'utilityService', ConsentCardListController],
                     controllerAs: 'ConsentCardListVm'
                 };

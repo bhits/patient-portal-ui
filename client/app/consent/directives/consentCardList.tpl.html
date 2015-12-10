@@ -12,7 +12,7 @@
 <div class="row" id="consent_list" ng-if="ConsentCardListVm.hasConsents()">
     <div class="col-sm-12">
         <div ng-repeat="consent in ConsentCardListVm.consentList.consentList">
-            <consent-card consent="consent"/>
+            <pp-consent-card consent="consent"/>
         </div>
         <div class="text-center">
             <pagination total-items="ConsentCardListVm.pagination.totalItems"

@@ -5,14 +5,14 @@
 
     angular
         .module('app.consent')
-            .directive('consentCard', ConsentCard);
+            .directive('ppConsentCard', ppConsentCard);
 
-            function ConsentCard() {
+            function ppConsentCard() {
                 var directive = {
                     scope: {consent: '='},
                     bindToController: true,
                     restrict: 'E',
-                    templateUrl: 'app/consent/directives/consent-card.tpl.html',
+                    templateUrl: 'app/consent/directives/consentCard.tpl.html',
                     controller: ['$modal', 'consentService', 'notificationService', ConsentCardController],
                     controllerAs: 'ConsentCardVm'
                 };
@@ -50,7 +50,7 @@
 
                     function openManageConsentModal() {
                         $modal.open({
-                            templateUrl: 'app/consent/directives/consent-list-manage-options-modal-' + consentService.resolveConsentState(ConsentCardVm.consent) + '.tpl.html',
+                            templateUrl: 'app/consent/directives/consentListManageOptionsModal' + consentService.resolveConsentState(ConsentCardVm.consent) + '.tpl.html',
                             controller: ['$state', '$modalInstance', 'consent', ManageConsentModalController],
                             controllerAs: 'ManageConsentModalVm',
                             resolve: {

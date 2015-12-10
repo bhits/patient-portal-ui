@@ -5,14 +5,14 @@
 
     angular
         .module('app.consent')
-             .directive('purposeOfUse', PurposeOfUse);
+             .directive('ppConsentPurposeOfUse', ppConsentPurposeOfUse);
 
             /* @ngInject */
-            function PurposeOfUse(consentService, $modal) {
+            function ppConsentPurposeOfUse(consentService, $modal) {
                 return {
                     restrict: 'E',
                     replace: false,
-                    templateUrl: 'app/consent/directives/consent-purpose-of-use.tpl.html',
+                    templateUrl: 'app/consent/directives/consentPurposeOfUse.tpl.html',
                     scope: {
                         ngModel: "=",
                         purposeofuse: "="
@@ -56,7 +56,7 @@
 
                         PurposeOfUseVm.openSelectPurposeModal = function () {
                             var modalInstance = $modal.open({
-                                templateUrl: 'app/consent/directives/consent-purpose-of-use-modal.tpl.html',
+                                templateUrl: 'app/consent/directives/consentPurposeOfUseModal.tpl.html',
                                 resolve: {
                                     data: function () {
                                         return PurposeOfUseVm.purposeofuse;

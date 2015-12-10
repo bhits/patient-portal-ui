@@ -144,11 +144,11 @@
         function resolveConsentState (consent) {
             var state = 'error';
             if (consent.consentStage === 'CONSENT_SAVED' && consent.revokeStage === 'NA') {
-                state = 'saved';
+                state = 'Saved';
             } else if (consent.consentStage === 'CONSENT_SIGNED' && consent.revokeStage === 'REVOCATION_NOT_SUBMITTED') {
-                state = 'signed';
+                state = 'Signed';
             } else if (consent.consentStage === 'CONSENT_SIGNED' && consent.revokeStage === 'REVOCATION_REVOKED') {
-                state = 'revoked';
+                state = 'Revoked';
             }
             return state;
         }

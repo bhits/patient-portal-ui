@@ -5,10 +5,10 @@
 
     angular
         .module('app.consent')
-            .directive('createConsent', CreateConsent);
+            .directive('ppCreateConsent', ppCreateConsent);
 
             /* @ngInject */
-            function CreateConsent($stateParams) {
+            function ppCreateConsent($stateParams) {
 
                 function doFormatDate(dateObj) {
                     var today = new Date(dateObj);
@@ -32,7 +32,7 @@
 
                 return {
                     restrict: 'E',
-                    templateUrl: 'app/consent/directives/consent-create-edit.tpl.html',
+                    templateUrl: 'app/consent/directives/consentCreateEdit.tpl.html',
                     scope: {
                         providers: "=",
                         purposeofuse: "=",
@@ -144,7 +144,7 @@
                         CreateConsentVm.cancelConsent = function () {
                             console.log("Cancelling consent..");
                             $modal.open({
-                                templateUrl: 'app/consent/directives/consent-create-edit-cancel-modal.tpl.html',
+                                templateUrl: 'app/consent/directives/consentCreateEditCancelModal.tpl.html',
                                 controller: ['$modalInstance', '$state', CancelCreateEditConsentModalController],
                                 controllerAs: 'CancelCreateEditConsentModalVm'
                             });

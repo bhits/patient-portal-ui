@@ -5,14 +5,14 @@
 
     angular
         .module('app.consent')
-            .directive('selectProvider', SelectProvider);
+            .directive('ppConsentProviderSelect', ppConsentProviderSelect);
 
             /* @ngInject */
-            function SelectProvider($modal, ProviderService, consentService) {
+            function ppConsentProviderSelect($modal, ProviderService, consentService) {
                 var directive =  {
                     restrict: 'E',
                     replace: false,
-                    templateUrl: 'app/consent/directives/consent-select-provider.tpl.html',
+                    templateUrl: 'app/consent/directives/consentSelectProvider.tpl.html',
                     scope: {
                         modaltitle: "=",
                         providers: "=",
@@ -35,7 +35,7 @@
 
                 function openSelectProviderModal () {
                     var modalInstance = $modal.open({
-                        templateUrl: 'app/consent/directives/consent-select-provider-modal.tpl.html',
+                        templateUrl: 'app/consent/directives/consentSelectProviderModal.tpl.html',
                         resolve: {
                             data: function () {
                                 return {

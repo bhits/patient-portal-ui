@@ -5,13 +5,13 @@
 
     angular
         .module('app.consent')
-            .directive('medicalInformation', MedicalInformation);
+            .directive('ppConsentMedicalInformation', ppConsentMedicalInformation);
 
-            function MedicalInformation($modal, consentService) {
+            function ppConsentMedicalInformation($modal, consentService) {
                 return {
                     restrict: 'E',
                     replace: false,
-                    templateUrl: 'app/consent/directives/consent-medical-information.tpl.html',
+                    templateUrl: 'app/consent/directives/consentMedicalInformation.tpl.html',
                     scope: {
                         data: "=",
                         ngModel: '=',
@@ -103,7 +103,7 @@
 
                         MedicalInformationVm.openPrivacySettingsModal = function () {
                             var modalInstance = $modal.open({
-                                templateUrl: 'app/consent/directives/consent-medical-information-modal.tpl.html',
+                                templateUrl: 'app/consent/directives/consentMedicalInformationModal.tpl.html',
 
                                 resolve: {
                                     data: function () {

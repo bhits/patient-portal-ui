@@ -5,13 +5,13 @@
 
     angular
         .module('app.consent')
-            .directive('revokeConsent', RevokeConsent);
+            .directive('ppConsentRevoke', ppConsentRevoke);
 
-            function RevokeConsent() {
+            function ppConsentRevoke() {
                 var directive = {
                     restrict: 'E',
                     scope: {},
-                    templateUrl: 'app/consent/directives/consent-revoke-confirmation.tpl.html',
+                    templateUrl: 'app/consent/directives/consentRevokeConfirmation.tpl.html',
                     controller:RevokeConsentController,
                     controllerAs: 'RevokeConsentVm'
                 };
