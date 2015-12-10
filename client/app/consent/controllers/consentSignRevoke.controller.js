@@ -5,21 +5,21 @@
 
     angular
         .module('app.consent')
-            .controller('SignRevokeConsentController', SignRevokeConsentController);
+            .controller('ConsentSignRevokeController', ConsentSignRevokeController);
 
             /**
              * @memberof app.consent
              * @ngdoc controller
-             * @name SignRevokeConsentController
+             * @name ConsentSignRevokeController
              * @param loadedData {Object} The resolved data for the controller
              * @param $state {service} The ui-router state service
              *
              * @ngInject
              */
-            function SignRevokeConsentController(loadedData, $state){
-                var SignRevokeConsentVm = this;
-                SignRevokeConsentVm.javascriptCode =loadedData;
-                SignRevokeConsentVm.close = Close;
+            function ConsentSignRevokeController(loadedData, $state){
+                var ConsentSignRevokeVm = this;
+                ConsentSignRevokeVm.javascriptCode =loadedData;
+                ConsentSignRevokeVm.close = Close;
 
                 function Close() {
                     $state.go('fe.consent.list');

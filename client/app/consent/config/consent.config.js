@@ -24,7 +24,7 @@
                         controllerAs: 'ConsentListVm',
                         resolve: {
                             /* @ngInject */
-                            consentList: function($q, ConsentService, notificationService){
+                            loadedData: function($q, ConsentService, notificationService){
                                 function success(response){
                                     return response;
                                 }
@@ -137,8 +137,8 @@
                         params: {
                             consentId: ''
                         },
-                        controller: 'SignConsentController',
-                        controllerAs: 'SignConsentVm',
+                        controller: 'ConsentSignController',
+                        controllerAs: 'ConsentSignVm',
                         resolve: {
                             /* @ngInject */
                             loadedData: function (ConsentService, notificationService, $q, $stateParams) {
@@ -165,8 +165,8 @@
                         params: {
                             consent: {}
                         },
-                        controller: 'SignRevokeConsentController',
-                        controllerAs: 'SignRevokeConsentVm',
+                        controller: 'ConsentSignRevokeController',
+                        controllerAs: 'ConsentSignRevokeVm',
                         resolve: {
                             /* @ngInject */
                             loadedData: function (ConsentService, notificationService, $q, $stateParams) {
