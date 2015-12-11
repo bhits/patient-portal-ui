@@ -24,7 +24,7 @@
 
 <div class="wrapper wrapper-content animated fadeInRight">
 
-       <div class="row" ng-show="HealthInformationVm.toggleMenu" id="noPatientDataAlertSection" >
+        <div class="row" ng-show="HealthInformationVm.toggleMenu" id="noPatientDataAlertSection" >
             <div class="col-sm-12" >
                 <div class="alert alert-warning alert-dismissible" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -33,99 +33,58 @@
             </div>
         </div>
 <!-- NEW HEALTH INFO -->
-    <div class="row">
-        <div class="col-sm-12" id="demographics">
-            <div class="ibox panel panel-darkblue float-e-margins">
-                <div class="ibox-title  modified panel-heading">
-                    <h2>Inpatient Summary</h2>
-                    <div ibox-tools   total=""></div>
-                </div>
-                <div class="ibox-content modified">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <p>
-                                <label for="patientName">Provider:</label> <span id="patientName">Dr. Henry Seven</span>
-                            </p>
-                            <p>
-                                <label for="patientSSN">Treatment: </label> <span id="patientSSN">Pneumonia</span>
-                            </p>
-                            <p>
-                                <label for="patientSex">Sex: </label> <span
-                                    ng-bind="patientdemographics.AdministrativeGender.displayName" id="patientSex"></span>
-                            </p>
-                            <p>
-                                <label for="patientDOB">Birthdate: </label> <span ng-bind="patientdemographics.BirthDate" id="patientDOB"></span>
-                            </p>
-                            <p>
-                                <label for="patientAddress">Address: </label> <span ng-bind="patientdemographics.Contacts[0].Address.StreetName1" id="patientAddress"></span> <span ng-bind="patientdemographics.Contacts[0].Address.City"></span>
-                            </p>
-                            <p>
-                                <label for="patientContactInfo">Contact Info: </label> <span ng-bind="patientdemographics.ContactInfo" id="patientContactInfo"></span>
-                            </p>
-                            <p>
-                                <label for="patientMaritalStatus">Marital Status: </label> <span ng-bind="patientdemographics.MaritalStatus.DisplayName" id="patientMaritalStatus"></span>
-                            </p>
-                            <p>
-                                <label for="patientReligion">Religion: </label> <span ng-bind="patientdemographics.Religion.DisplayName" id="patientReligion"></span>
-                            </p>
-                            <p>
-                                <label for="patientLanguage">Language: </label> <span ng-bind="ccdheader.Language.DisplayName" id="patientLanguage"></span>
-                            </p>
-                            <p>
-                                <label for="patientGuardian">Guardian: </label> <span ng-bind="ccdheader.Custodian.Name" id="patientGuardian"></span>
-                            </p>
+
+        <div class="row">
+            <div class="col-sm-12" id="demographics">
+                <div class="ibox panel panel-darkblue float-e-margins">
+                    <div class="ibox-title  modified panel-heading">
+                        <h2>Inpatient Summary</h2><div class="inline m-b-none m-l-sm">Created on August 6, 2015 at Local Hospital</div>
+                        <div ibox-tools   total=""></div>
+                    </div>
+                    <div class="ibox-content modified">
+                        <div class="row m-b">
+                            <div class="col-sm-6">
+                                <div>
+                                    <label for="patientName">Provider2:</label> <span id="patientName">Dr. Henry Seven</span>
+                                </div>
+                                <div>
+                                    <label for="patientSSN">Treatment: </label> <span id="patientSSN">Pneumonia</span>
+                                </div>
+                                <div>
+                                    <label for="patientSex">Sex: </label> <span id="patientSex">Male</span>
+                                </div>
+
+                            </div>
+
                         </div>
-                        <div class="col-sm-6">
-                            <p>
-                                <label for="author">Author of Record: </label>  <span ng-bind="ccdheader.Author.Name.GivenName" id="author"></span> <span ng-bind="ccdheader.Author.Name.FamilyName"></span>
-                            </p>
-                            <p>
-                                <label for="timerecord">Time Record Development: </label> <span ng-bind="ccdheader.DateRecordDeveloped" id="timerecord"></span>
-                            </p>
-                            <p>
-                                <label for="patientAssignment">Assignment: </label> <span ng-bind="ccdheader.Assignment" id="patientAssignment"></span>
-                            </p>
-                            <p>
-                                <label for="patientInformationReceipt">Information Recipient: </label> <span ng-bind="ccdheader.InformationRecipient.Name.GivenName" id="patientInformationReceipt"></span>  <span ng-bind="ccdheader.InformationRecipient.Name.FamilyName"></span>:
-                            </p>
-                            <p>
-                                <label for="patientLegalAuthentication">Legal Authentication: </label> <span ng-bind="ccdheader.LegalAuthenticator.Name.GivenName" id="patientLegalAuthentication"></span> <span ng-bind="ccdheader.LegalAuthenticator.Name.FamilyName"></span>
-                            </p>
-                            <p>
-                                <label for="patrientRepOrganization">Representative Organization: </label> <span ng-bind="ccdheader.DocumentationOf.Performer.RepresentedOrganization.Name" id="patrientRepOrganization"></span>
-                            </p>
-                            <p>
-                                <label for="patientPerformer">Performer: </label> <span ng-bind="ccdheader.DocumentationOf" id="patientPerformer"></span>
-                            </p>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="ibox panel panel-default float-e-margins">
+                                    <div class="ibox-title modified panel-heading">
+                                        <h5>Hospital Discharge Instructions
+                                            <small class="m-l-sm">TAdditional Infromation</small>
+                                        </h5>
+                                        <div ibox-tools></div>
+                                    </div>
+                                    <div class="ibox-content">
+                                        <h2>
+                                            This is standard IN+ Panel<br/>
+                                        </h2>
+
+                                        <p>
+                                            <strong>Lorem ipsum dolor</strong>
+                                            Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque
+                                            eu, pretium quis, sem. Nulla consequat massa quis enim.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 <!-- END NEW HEALTH INFO -->
-        <!-- PATIENT DEMOGRAPHICS-->
-        <demographics-accordion patientdemographics="HealthInformationVm.patientDemographics" ccdheader="ccdheader" ></demographics-accordion>
-
-        <!--MEDICATIONS-->
-        <medications-accordion medications="HealthInformationVm.medications" ng-hide="HealthInformationVm.toggleMenu && !AppVm.toggleMedications"  ></medications-accordion>
-
-        <!--ALERTS-->
-        <alerts-accordion alerts="HealthInformationVm.allergies" ng-hide="HealthInformationVm.toggleMenu && !AppVm.toggleAlert"  ></alerts-accordion>
-
-        <!--RESULTS-->
-        <results-accordion results="HealthInformationVm.results" ng-hide="HealthInformationVm.toggleMenu && !AppVm.toggleResults"  ></results-accordion>
-
-        <!--EENCOUNTERS-->
-        <encounters-accordion encounters="HealthInformationVm.encounters" ng-hide="HealthInformationVm.toggleMenu && !AppVm.toggleEncounters" ></encounters-accordion>
-
-        <!--PROBLEM LIST-->
-        <problems-accordion problems="HealthInformationVm.problems" ng-hide="HealthInformationVm.toggleMenu && !AppVm.toggleProblems"  ></problems-accordion>
-
-        <!--VITAL SIGNALS-->
-        <vitalsigns-accordion vitalsigns="HealthInformationVm.vitalsigns" ng-hide="HealthInformationVm.toggleMenu && !AppVm.toggleVitalSigns" ></vitalsigns-accordion>
-
-        <!--PROCEDURES-->
-        <procedures-accordion procedures="HealthInformationVm.procedures" ng-hide="HealthInformationVm.toggleMenu && !AppVm.toggleProcedure" ></procedures-accordion>
 
 </div>
