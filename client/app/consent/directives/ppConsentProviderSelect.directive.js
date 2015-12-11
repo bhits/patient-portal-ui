@@ -27,11 +27,11 @@
             }
 
             /* @ngInject */
-            function ConsentSelectProviderController ($scope, consentService, $modal, ProviderService, notificationService) {
+            function ConsentSelectProviderController ($scope,$modal, consentService, ProviderService, notificationService) {
                 var Vm = this;
-                Vm.selectedProvider = Vm.ngModel;
                 Vm.fieldplaceholder = Vm.modaltitle === 'Authorize' ? "The following individual or organization" : "To disclose my information to";
                 Vm.openSelectProviderModal = openSelectProviderModal;
+                Vm.selectedProvider = Vm.ngModel;
 
                 function openSelectProviderModal () {
 
@@ -48,15 +48,20 @@
                         },
 
                         controller:[ '$scope', '$modalInstance','notificationService', 'data', 'ProviderService', 'consentService', function SelectProviderModalController($scope, $modalInstance, notificationService, data, ProviderService, consentService) {
-                            $scope.title = data.modalTitle;
-                            $scope.selectedProvider = getSelectedProvider;
-                            $scope.providers = data.providers;
-                            $scope.selectedNpi = consentService.getSelectedNpi();
+                            $scope.cancel = cancel;
                             $scope.isOrganizationProvider = isOrganizationProvider;
                             $scope.isIndividualProvider = isIndividualProvider;
                             $scope.isSelected = isSelected;
                             $scope.ok = ok;
-                            $scope.cancel = cancel;
+                            $scope.providers = data.providers;
+                            $scope.selectedProvider = getSelectedProvider;
+                            $scope.selectedNpi = consentService.getSelectedNpi();
+                            $scope.title = data.modalTitle;
+
+
+                            function cancel () {
+                                $modalInstance.dismiss('cancel');
+                            }
 
                             function getSelectedProvider(){
                                 return {npi: ((data.selectedProvider !== null) && angular.isDefined(data.selectedProvider) && angular.isDefined(data.selectedProvider.npi)) ? data.selectedProvider.npi : ''};
@@ -91,9 +96,7 @@
                                 }
                             }
 
-                            function cancel () {
-                                $modalInstance.dismiss('cancel');
-                            }
+
                         }]
 
                     });
