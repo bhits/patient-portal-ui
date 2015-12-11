@@ -19,7 +19,7 @@
                     .state('fe.consent.list', {
                         url: '/list',
                         data: {pageTitle: 'List Consents'},
-                        templateUrl: 'app/consent/config/consentList.tpl.html',
+                        templateUrl: 'app/consent/controllers/consentList.tpl.html',
                         controller: 'ConsentListController',
                         controllerAs: 'ConsentListVm',
                         resolve: {
@@ -47,7 +47,7 @@
                     .state('fe.consent.create', {
                         url: '/create',
                         data: {pageTitle: 'Create Consent'},
-                        templateUrl: 'app/consent/config/consentCreateEdit.tpl.html',
+                        templateUrl: 'app/consent/controllers/consentCreateEdit.tpl.html',
                         params: {
                             consentId: ''
                         },
@@ -125,7 +125,7 @@
                     .state('fe.consent.revoke', {
                         url: '/revoke',
                         data: {pageTitle: 'Revoke Consent'},
-                        templateUrl: 'app/consent/config/consentRevoke.tpl.html',
+                        templateUrl: 'app/consent/controllers/consentRevoke.tpl.html',
                         params: {
                             consent: {}
                         }
@@ -133,7 +133,7 @@
                     .state('fe.consent.sign', {
                         url: '/signConsent',
                         data: {pageTitle: 'Sign Consent'},
-                        templateUrl: 'app/consent/config/consentSign.tpl.html',
+                        templateUrl: 'app/consent/controllers/consentSign.tpl.html',
                         params: {
                             consentId: ''
                         },
@@ -161,7 +161,7 @@
                     .state('fe.consent.revokesign', {
                         url: '/signRevokeConsent',
                         data: {pageTitle: 'Sign Revoke Consent'},
-                        templateUrl: 'app/consent/config/consentSignRevoke.tpl.html',
+                        templateUrl: 'app/consent/controllers/consentSignRevoke.tpl.html',
                         params: {
                             consent: {}
                         },
@@ -190,7 +190,7 @@
                     .state('fe.consent.trymypolicy', {
                         url: '/trymypolicy',
                         data: {pageTitle: 'Try My Policy'},
-                        templateUrl: 'app/consent/tmpl/consentTryMyPolicy.tpl.html',
+                        templateUrl: 'app/consent/controllers/consentTryMyPolicy.tpl.html',
                         params: {
                             consentId: ''
                         },
