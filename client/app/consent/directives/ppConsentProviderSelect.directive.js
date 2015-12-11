@@ -19,7 +19,7 @@
                         ngModel: '='
                     },
                     bindToController: true,
-                    controllerAs: 'ConsentSelectProviderVm',
+                    controllerAs: 'consentSelectProviderVm',
                     controller: ConsentSelectProviderController
                 };
 
@@ -28,10 +28,10 @@
 
             /* @ngInject */
             function ConsentSelectProviderController ($scope, consentService, $modal, ProviderService, notificationService) {
-                var ConsentSelectProviderVm = this;
-                ConsentSelectProviderVm.selectedProvider = ConsentSelectProviderVm.ngModel;
-                ConsentSelectProviderVm.fieldplaceholder = ConsentSelectProviderVm.modaltitle === 'Authorize' ? "The following individual or organization" : "To disclose my information to";
-                ConsentSelectProviderVm.openSelectProviderModal = openSelectProviderModal;
+                var Vm = this;
+                Vm.selectedProvider = Vm.ngModel;
+                Vm.fieldplaceholder = Vm.modaltitle === 'Authorize' ? "The following individual or organization" : "To disclose my information to";
+                Vm.openSelectProviderModal = openSelectProviderModal;
 
                 function openSelectProviderModal () {
 
@@ -40,9 +40,9 @@
                         resolve: {
                             data: function () {
                                 return {
-                                    modalTitle: ConsentSelectProviderVm.modaltitle,
-                                    providers: ConsentSelectProviderVm.providers,
-                                    selectedProvider: ConsentSelectProviderVm.selectedProvider
+                                    modalTitle: Vm.modaltitle,
+                                    providers: Vm.providers,
+                                    selectedProvider: Vm.selectedProvider
                                 };
                             }
                         },
@@ -81,8 +81,8 @@
                             function ok () {
                                 $modalInstance.close();
                                 var selectedProvider = ProviderService.getProviderByNPI($scope.providers, $scope.selectedProvider.npi);
-                                ConsentSelectProviderVm.ngModel = selectedProvider;
-                                ConsentSelectProviderVm.selectedProvider = selectedProvider;
+                                Vm.ngModel = selectedProvider;
+                                Vm.selectedProvider = selectedProvider;
 
                                 if ($scope.title === 'Authorize') {
                                     consentService.setAuthorizeNpi(selectedProvider.npi);
