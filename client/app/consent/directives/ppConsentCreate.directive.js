@@ -5,10 +5,10 @@
 
     angular
         .module('app.consent')
-            .directive('ppCreateConsent', ppCreateConsent);
+            .directive('ppConsentCreate', ppConsentCreate);
 
             /* @ngInject */
-            function ppCreateConsent($stateParams) {
+            function ppConsentCreate($stateParams) {
 
                 var driective =  {
                     restrict: 'E',

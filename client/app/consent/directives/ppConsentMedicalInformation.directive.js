@@ -48,6 +48,22 @@
                     Vm.selectedSensitivityPolicies = [];
                 }
 
+                function openPrivacySettingsModal () {
+                    var modalInstance = $modal.open({
+                        templateUrl: 'app/consent/directives/consentMedicalInformationModal.tpl.html',
+
+                        resolve: {
+                            data: function () {
+                                return {
+                                    mediactionSections: Vm.medicalsections,
+                                    sensitivityPolicies: Vm.sensitivitypolicies
+                                };
+                            }
+                        },
+                        controller: MedicalInformationModalController
+                    });
+                }
+
                 function MedicalInformationModalController($scope, $modalInstance, data) {
                     $scope.mediactionSections = data.mediactionSections;
                     $scope.sensitivityPolicies = data.sensitivityPolicies;
@@ -117,21 +133,7 @@
                     }
                 }
 
-                function openPrivacySettingsModal () {
-                    var modalInstance = $modal.open({
-                        templateUrl: 'app/consent/directives/consentMedicalInformationModal.tpl.html',
 
-                        resolve: {
-                            data: function () {
-                                return {
-                                    mediactionSections: Vm.medicalsections,
-                                    sensitivityPolicies: Vm.sensitivitypolicies
-                                };
-                            }
-                        },
-                        controller: MedicalInformationModalController
-                    });
-                }
             }
 
 })();

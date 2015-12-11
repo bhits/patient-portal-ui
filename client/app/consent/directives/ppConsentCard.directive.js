@@ -14,100 +14,101 @@
                     restrict: 'E',
                     templateUrl: 'app/consent/directives/consentCard.tpl.html',
                     controller: ['$modal', 'consentService', 'notificationService', ConsentCardController],
-                    controllerAs: 'ConsentCardVm'
+                    controllerAs: 'consentCardVm'
                 };
                 return directive;
+            }
 
-                function ConsentCardController($modal, consentService, notificationService) {
-                    var ConsentCardVm = this;
-                    ConsentCardVm.openManageConsentModal = openManageConsentModal;
-                    ConsentCardVm.consentState = consentState;
-                    ConsentCardVm.isShareAll = isShareAll;
-                    ConsentCardVm.notDisclosedItems = notDisclosedItems;
-                    ConsentCardVm.purposeOfUseItems = purposeOfUseItems;
-                    ConsentCardVm.collapsed = true;
-                    ConsentCardVm.toggleCollapse = toggleCollapse;
+            /* @ngInject */
+            function ConsentCardController($modal, consentService, notificationService) {
+                var Vm = this;
+                Vm.openManageConsentModal = openManageConsentModal;
+                Vm.consentState = consentState;
+                Vm.isShareAll = isShareAll;
+                Vm.notDisclosedItems = notDisclosedItems;
+                Vm.purposeOfUseItems = purposeOfUseItems;
+                Vm.collapsed = true;
+                Vm.toggleCollapse = toggleCollapse;
 
-                    function toggleCollapse() {
-                        ConsentCardVm.collapsed = !ConsentCardVm.collapsed;
-                    }
+                function toggleCollapse() {
+                    Vm.collapsed = !Vm.collapsed;
+                }
 
-                    function isShareAll() {
-                        return consentService.isShareAll(ConsentCardVm.consent);
-                    }
+                function isShareAll() {
+                    return consentService.isShareAll(Vm.consent);
+                }
 
-                    function consentState() {
-                        return consentService.resolveConsentState(ConsentCardVm.consent);
-                    }
+                function consentState() {
+                    return consentService.resolveConsentState(Vm.consent);
+                }
 
-                    function notDisclosedItems() {
-                        return [].concat(ConsentCardVm.consent.doNotShareClinicalDocumentSectionTypeCodes).concat(ConsentCardVm.consent.doNotShareSensitivityPolicyCodes).join(', ');
-                    }
+                function notDisclosedItems() {
+                    return [].concat(Vm.consent.doNotShareClinicalDocumentSectionTypeCodes).concat(Vm.consent.doNotShareSensitivityPolicyCodes).join(', ');
+                }
 
-                    function purposeOfUseItems() {
-                        return ConsentCardVm.consent.shareForPurposeOfUseCodes.join(', ');
-                    }
+                function purposeOfUseItems() {
+                    return Vm.consent.shareForPurposeOfUseCodes.join(', ');
+                }
 
-                    function openManageConsentModal() {
-                        $modal.open({
-                            templateUrl: 'app/consent/directives/consentListManageOptionsModal' + consentService.resolveConsentState(ConsentCardVm.consent) + '.tpl.html',
-                            controller: ['$state', '$modalInstance', 'consent', ManageConsentModalController],
-                            controllerAs: 'ManageConsentModalVm',
-                            resolve: {
-                                consent: function () {
-                                    return ConsentCardVm.consent;
-                                }
+                function openManageConsentModal() {
+                    $modal.open({
+                        templateUrl: 'app/consent/directives/consentListManageOptionsModal' + consentService.resolveConsentState(Vm.consent) + '.tpl.html',
+                        controller: ['$state', '$modalInstance', 'consent', ManageConsentModalController],
+                        controllerAs: 'ManageConsentModalVm',
+                        resolve: {
+                            consent: function () {
+                                return Vm.consent;
                             }
-                        });
+                        }
+                    });
 
-                        function ManageConsentModalController($state, $modalInstance, consent) {
-                            var ManageConsentModalVm = this;
-                            ManageConsentModalVm.cancel = cancel;
-                            ManageConsentModalVm.revoke = revoke;
-                            ManageConsentModalVm.edit = edit;
-                            ManageConsentModalVm.signConsent = signConsent;
-                            ManageConsentModalVm.deleteConsent = deleteConsent;
-                            ManageConsentModalVm.toggleDeleteConfirmation = toggleDeleteConfirmation;
-                            ManageConsentModalVm.deleteInProcess = false;
+                    function ManageConsentModalController($state, $modalInstance, consent) {
+                        var ManageConsentModalVm = this;
+                        ManageConsentModalVm.cancel = cancel;
+                        ManageConsentModalVm.revoke = revoke;
+                        ManageConsentModalVm.edit = edit;
+                        ManageConsentModalVm.signConsent = signConsent;
+                        ManageConsentModalVm.deleteConsent = deleteConsent;
+                        ManageConsentModalVm.toggleDeleteConfirmation = toggleDeleteConfirmation;
+                        ManageConsentModalVm.deleteInProcess = false;
 
-                            function toggleDeleteConfirmation() {
-                                ManageConsentModalVm.deleteInProcess = !ManageConsentModalVm.deleteInProcess;
-                            }
+                        function toggleDeleteConfirmation() {
+                            ManageConsentModalVm.deleteInProcess = !ManageConsentModalVm.deleteInProcess;
+                        }
 
-                            function deleteConsent() {
-                                consentService.deleteConsent(consent.id, onDeleteSuccess, onDeleteError);
+                        function deleteConsent() {
+                            consentService.deleteConsent(consent.id, onDeleteSuccess, onDeleteError);
 
-                                function onDeleteSuccess() {
-                                    notificationService.success('Consent is successfully deleted');
-                                    $modalInstance.close();
-                                    $state.reload();
-                                }
-
-                                function onDeleteError() {
-                                    notificationService.error('Failed to delete the consent! Please try again later...');
-                                    cancel();
-                                    $state.reload();
-                                }
-                            }
-
-                            function edit(){
-                                $state.go('fe.consent.create', {consentId: consent.id});
+                            function onDeleteSuccess() {
+                                notificationService.success('Consent is successfully deleted');
                                 $modalInstance.close();
+                                $state.reload();
                             }
 
-                            function signConsent(){
-                                $state.go('fe.consent.sign', {consentId: consent.id});
-                                $modalInstance.close();
+                            function onDeleteError() {
+                                notificationService.error('Failed to delete the consent! Please try again later...');
+                                cancel();
+                                $state.reload();
                             }
+                        }
 
-                            function cancel() {
-                                $modalInstance.dismiss('cancel');
-                            }
+                        function edit(){
+                            $state.go('fe.consent.create', {consentId: consent.id});
+                            $modalInstance.close();
+                        }
 
-                            function revoke() {
-                                $state.go('fe.consent.revoke', {consent: consent});
-                                $modalInstance.close();
-                            }
+                        function signConsent(){
+                            $state.go('fe.consent.sign', {consentId: consent.id});
+                            $modalInstance.close();
+                        }
+
+                        function cancel() {
+                            $modalInstance.dismiss('cancel');
+                        }
+
+                        function revoke() {
+                            $state.go('fe.consent.revoke', {consent: consent});
+                            $modalInstance.close();
                         }
                     }
                 }

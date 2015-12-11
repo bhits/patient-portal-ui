@@ -15,49 +15,51 @@
                     },
                     bindToController: true,
                     templateUrl: 'app/consent/directives/consentCardList.tpl.html',
-                    controller: ['consentService', 'notificationService', 'utilityService', ConsentCardListController],
-                    controllerAs: 'ConsentCardListVm'
+                    controller: ConsentCardListController,
+                    controllerAs: 'consentCardListVm'
                 };
+
                 return directive;
+            }
 
-                function ConsentCardListController(consentService, notificationService, utilityService) {
-                    var ConsentCardListVm = this;
-                    var oldPage = ConsentCardListVm.consentList.currentPage;
-                    ConsentCardListVm.pagination = {
-                        totalItems: ConsentCardListVm.consentList.totalItems,
-                        currentPage: oldPage,
-                        itemsPerPage: ConsentCardListVm.consentList.itemsPerPage,
-                        maxSize: 10
-                    };
-                    ConsentCardListVm.loadPage = loadPage;
-                    ConsentCardListVm.hasConsents = hasConsents;
+            /* @ngInject */
+            function ConsentCardListController(consentService, notificationService, utilityService) {
+                var Vm = this;
+                var oldPage = Vm.consentList.currentPage;
+                Vm.pagination = {
+                    totalItems: Vm.consentList.totalItems,
+                    currentPage: oldPage,
+                    itemsPerPage: Vm.consentList.itemsPerPage,
+                    maxSize: 10
+                };
+                Vm.loadPage = loadPage;
+                Vm.hasConsents = hasConsents;
 
-                    function hasConsents() {
-                        return utilityService.isNotEmpty(ConsentCardListVm.consentList.consentList);
-                    }
+                function hasConsents() {
+                    return utilityService.isNotEmpty(Vm.consentList.consentList);
+                }
 
-                    function updatePagination(response) {
-                        ConsentCardListVm.pagination.totalItems = response.totalItems;
-                        ConsentCardListVm.pagination.currentPage = response.currentPage;
-                        ConsentCardListVm.pagination.itemsPerPage = response.itemsPerPage;
-                    }
+                function updatePagination(response) {
+                    Vm.pagination.totalItems = response.totalItems;
+                    Vm.pagination.currentPage = response.currentPage;
+                    Vm.pagination.itemsPerPage = response.itemsPerPage;
+                }
 
-                    function success(response) {
-                        oldPage = response.currentPage;
-                        updatePagination(response);
-                        ConsentCardListVm.consentList = response;
-                        utilityService.scrollTo('content_wrapper');
-                    }
+                function success(response) {
+                    oldPage = response.currentPage;
+                    updatePagination(response);
+                    Vm.consentList = response;
+                    utilityService.scrollTo('content_wrapper');
+                }
 
-                    function error(response) {
-                        notificationService.error('Failed to get the consent list, please try again later...');
-                    }
+                function error(response) {
+                    notificationService.error('Failed to get the consent list, please try again later...');
+                }
 
-                    function loadPage() {
-                        var newPage = ConsentCardListVm.pagination.currentPage;
-                        ConsentCardListVm.pagination.currentPage = oldPage;
-                        consentService.listConsent(newPage, success, error);
-                    }
+                function loadPage() {
+                    var newPage = Vm.pagination.currentPage;
+                    Vm.pagination.currentPage = oldPage;
+                    consentService.listConsent(newPage, success, error);
                 }
             }
 })();

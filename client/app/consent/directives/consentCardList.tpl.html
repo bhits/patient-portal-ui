@@ -9,23 +9,23 @@
         </div>
     </div>
 </div>
-<div class="row" id="consent_list" ng-if="ConsentCardListVm.hasConsents()">
+<div class="row" id="consent_list" ng-if="consentCardListVm.hasConsents()">
     <div class="col-sm-12">
-        <div ng-repeat="consent in ConsentCardListVm.consentList.consentList">
+        <div ng-repeat="consent in consentCardListVm.consentList.consentList">
             <pp-consent-card consent="consent"/>
         </div>
         <div class="text-center">
-            <pagination total-items="ConsentCardListVm.pagination.totalItems"
-                        items-per-page="ConsentCardListVm.pagination.itemsPerPage"
-                        ng-model="ConsentCardListVm.pagination.currentPage"
-                        ng-change="ConsentCardListVm.loadPage()"
-                        max-size="ConsentCardListVm.pagination.maxSize"
+            <pagination total-items="consentCardListVm.pagination.totalItems"
+                        items-per-page="consentCardListVm.pagination.itemsPerPage"
+                        ng-model="consentCardListVm.pagination.currentPage"
+                        ng-change="consentCardListVm.loadPage()"
+                        max-size="consentCardListVm.pagination.maxSize"
                         class="pagination-sm"
                         boundary-links="true"></pagination>
         </div>
     </div>
 </div>
-<div class="row" ng-if="!ConsentCardListVm.hasConsents()">
+<div class="row" ng-if="!consentCardListVm.hasConsents()">
     <div class="col-sm-12">
         <div class="alert alert-danger">
             There are currently no Consents available. Please click the <a class="alert-link" ui-sref="fe.consent.create">Add a Consent</a> button to create a new consent.
