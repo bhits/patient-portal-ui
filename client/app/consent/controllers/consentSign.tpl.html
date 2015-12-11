@@ -1,11 +1,11 @@
 <content-wrapper title="Sign Consent">
 
-    <div ng-bind-html="ConsentSignVm.javascriptCode | trustAsHTML" style="height: 600px"/>
+    <div ng-bind-html="consentSignVm.javascriptCode | trustAsHTML" style="height: 600px"/>
 
     <div class= "navbar navbar-inverse navbar-fixed-bottom">
         <div class="container">
             <p class="navbar-text pull-left">If you have finished signing this Consent or wish to cancel, please click the Close button to exit this window.</p>
-        <button type="button" class= "navbar-btn btn btn-primary pull-right" ng-click="ConsentSignVm.close()">Close</button>
+        <button type="button" class= "navbar-btn btn btn-primary pull-right" ng-click="consentSignVm.close()">Close</button>
         </div>
     </div>
 

@@ -18,12 +18,11 @@
              * @ngInject
              */
             function ConsentCreateEditController(consentService, ProviderService, loadedData ){
-                var ConsentCreateEditVm = this;
-                ConsentCreateEditVm.providers = loadedData[0] ;
-                ConsentCreateEditVm.purposeOfUse = loadedData[1] ;
-                ConsentCreateEditVm.medicalSections= loadedData[2] ;
-                ConsentCreateEditVm.sensitivityPolicies = loadedData[3] ;
-                ConsentCreateEditVm.consent = loadedData.length === 5? loadedData[4]: null ;
-
+                var Vm = this;
+                Vm.providers = loadedData[0] ;
+                Vm.purposeOfUse = loadedData[1] ;
+                Vm.medicalSections= loadedData[2] ;
+                Vm.sensitivityPolicies = loadedData[3] ;
+                Vm.consent = loadedData.length === 5? loadedData[4]: null ;
             }
 })();

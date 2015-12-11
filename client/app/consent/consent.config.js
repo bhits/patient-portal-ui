@@ -21,7 +21,7 @@
                         data: {pageTitle: 'List Consents'},
                         templateUrl: 'app/consent/controllers/consentList.tpl.html',
                         controller: 'ConsentListController',
-                        controllerAs: 'ConsentListVm',
+                        controllerAs: 'consentListVm',
                         resolve: {
                             /* @ngInject */
                             loadedData: function($q, consentService, notificationService){
@@ -52,7 +52,7 @@
                             consentId: ''
                         },
                         controller: 'ConsentCreateEditController',
-                        controllerAs: 'ConsentCreateEditVm',
+                        controllerAs: 'consentCreateEditVm',
                         resolve: {
                             /* @ngInject */
                             loadedData: function ($q, $stateParams,consentService, ProviderService, notificationService ) {
@@ -138,7 +138,7 @@
                             consentId: ''
                         },
                         controller: 'ConsentSignController',
-                        controllerAs: 'ConsentSignVm',
+                        controllerAs: 'consentSignVm',
                         resolve: {
                             /* @ngInject */
                             loadedData: function ($q, $stateParams, consentService, notificationService) {
@@ -166,7 +166,7 @@
                             consent: {}
                         },
                         controller: 'ConsentSignRevokeController',
-                        controllerAs: 'ConsentSignRevokeVm',
+                        controllerAs: 'consentSignRevokeVm',
                         resolve: {
                             /* @ngInject */
                             loadedData: function ( $q, $stateParams, consentService, notificationService) {
@@ -193,9 +193,7 @@
                         templateUrl: 'app/consent/controllers/consentTryMyPolicy.tpl.html',
                         params: {
                             consentId: ''
-                        },
-                        controller: 'TryMyPolicyChooseDocController',
-                        controllerAs: 'TryMyPolicyChooseDocVm'
+                        }
                     });
             }
 })();

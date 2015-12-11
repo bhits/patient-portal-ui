@@ -17,9 +17,9 @@
              * @ngInject
              */
             function ConsentSignController(loadedData, $state){
-                var ConsentSignVm = this;
-                ConsentSignVm.javascriptCode =loadedData;
-                ConsentSignVm.close = Close;
+                var Vm = this;
+                Vm.javascriptCode =loadedData;
+                Vm.close = Close;
 
                 function Close() {
                     $state.go('fe.consent.list');
