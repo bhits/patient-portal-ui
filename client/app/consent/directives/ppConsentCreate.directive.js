@@ -20,7 +20,7 @@
                         sensitivitypolicies: "=",
                         consent: "="
                     },
-                    controllerAs: 'CreateConsentVm',
+                    controllerAs: 'consentCreateVm',
                     bindToController: true,
                     controller: ConsentCreateController
                 };

@@ -5,38 +5,38 @@
             <div class="hr-line-dashed"></div>
             <div class="row">
                     <div class="col-md-5">
-                        <pp-consent-provider-select ng-model="CreateConsentVm.authorizeProvider" modaltitle="CreateConsentVm.authorize" name="authorizeProvider" providers="CreateConsentVm.providers"></pp-consent-provider-select>
+                        <pp-consent-provider-select ng-model="consentCreateVm.authorizeProvider" modaltitle="consentCreateVm.authorize" name="authorizeProvider" providers="consentCreateVm.providers"></pp-consent-provider-select>
                     </div>
                 <div class="col-md-1 center"><span class="fa fa-chevron-right fa-3x m-t-md visible-md-inline-block visible-lg-inline-block" ></span></div>
                 <div class="col-md-5">
-                    <pp-consent-provider-select ng-model="CreateConsentVm.disclosureProvider" modaltitle="CreateConsentVm.disclosure"  name="disclosureProvider" providers="CreateConsentVm.providers"></pp-consent-provider-select>
+                    <pp-consent-provider-select ng-model="consentCreateVm.disclosureProvider" modaltitle="consentCreateVm.disclosure"  name="disclosureProvider" providers="consentCreateVm.providers"></pp-consent-provider-select>
                 </div>
             </div>
             <div class="hr-line-dashed"></div>
             <div class="row">
                 <div class="col-md-11">
-                    <pp-consent-medical-information ng-model="CreateConsentVm.medicalInformation" name="medicalInformation" medicalsections="CreateConsentVm.medicalsections" sensitivitypolicies="CreateConsentVm.sensitivitypolicies"></pp-consent-medical-information>
+                    <pp-consent-medical-information ng-model="consentCreateVm.medicalInformation" name="medicalInformation" medicalsections="consentCreateVm.medicalsections" sensitivitypolicies="consentCreateVm.sensitivitypolicies"></pp-consent-medical-information>
                 </div>
             </div>
             <div class="hr-line-dashed"></div>
             <div class="row">
                 <div class="col-md-11">
-                    <pp-consent-purpose-of-use ng-model="CreateConsentVm.shareForPurposeOfUseCodes" name="shareForPurposeOfUseCodes" purposeofuse="CreateConsentVm.purposeofuse"></pp-consent-purpose-of-use>
+                    <pp-consent-purpose-of-use ng-model="consentCreateVm.shareForPurposeOfUseCodes" name="shareForPurposeOfUseCodes" purposeofuse="consentCreateVm.purposeofuse"></pp-consent-purpose-of-use>
                 </div>
             </div>
             <div class="hr-line-dashed"></div>
             <div class="row">
                 <div class="col-md-11">
-                    <pp-consent-term ng-model="CreateConsentVm.dateRange" name="dateRange" ></pp-consent-term>
+                    <pp-consent-term ng-model="consentCreateVm.dateRange" name="dateRange" ></pp-consent-term>
                 </div>
             </div>
             <div class="hr-line-dashed"></div>
             <div class="row m-b-md">
                 <div class="col-md-11">
                     <div class="pull-right">
-                        <button class="btn btn-white m-r" type="reset" ng-click="CreateConsentVm.cancelConsent()">Cancel</button>
-                        <button class="btn btn-primary dark-green" type="submit" ng-click="CreateConsentVm.createConsent()" ng-disabled="!CreateConsentVm.canSave()" ng-if="!CreateConsentVm.isEditMode">Save</button>
-                        <button class="btn btn-primary dark-green" type="submit" ng-click="CreateConsentVm.updateConsent()" ng-disabled="!CreateConsentVm.canSave()" ng-if="CreateConsentVm.isEditMode">Save</button>
+                        <button class="btn btn-white m-r" type="reset" ng-click="consentCreateVm.cancelConsent()">Cancel</button>
+                        <button class="btn btn-primary dark-green" type="submit" ng-click="consentCreateVm.createConsent()" ng-disabled="!consentCreateVm.canSave()" ng-if="!consentCreateVm.isEditMode">Save</button>
+                        <button class="btn btn-primary dark-green" type="submit" ng-click="consentCreateVm.updateConsent()" ng-disabled="!consentCreateVm.canSave()" ng-if="consentCreateVm.isEditMode">Save</button>
                     </div>
                 </div>
             </div>
