@@ -28,22 +28,22 @@
 
             /* @ngInject */
             function MedicalInformationController ($scope, $modal, consentService,  notificationService) {
-                var MedicalInformationVm = this;
+                var Vm = this;
                 //Test value to be replace with real value.
-                MedicalInformationVm.medicalInformation = 'A';
+                Vm.medicalInformation = 'A';
                 //Initiallizing the medical information model
-                MedicalInformationVm.selectedMedicalSections = consentService.getLookupEntities(MedicalInformationVm.medicalsections, MedicalInformationVm.ngModel.doNotShareClinicalDocumentSectionTypeCodes);
-                MedicalInformationVm.selectedSensitivityPolicies = consentService.getLookupEntities(MedicalInformationVm.sensitivitypolicies, MedicalInformationVm.ngModel.doNotShareSensitivityPolicyCodes);
+                Vm.selectedMedicalSections = consentService.getLookupEntities(Vm.medicalsections, Vm.ngModel.doNotShareClinicalDocumentSectionTypeCodes);
+                Vm.selectedSensitivityPolicies = consentService.getLookupEntities(Vm.sensitivitypolicies, Vm.ngModel.doNotShareSensitivityPolicyCodes);
 
-                //MedicalInformationVm.ngModel = {doNotShareSensitivityPolicyCodes : [],doNotShareClinicalDocumentSectionTypeCodes: []};
-                MedicalInformationVm.hasException = function () {
-                    return ((MedicalInformationVm.selectedMedicalSections.length > 0 ) || (MedicalInformationVm.selectedSensitivityPolicies.length > 0) || (MedicalInformationVm.medicalInformation === 'B') );
+                //Vm.ngModel = {doNotShareSensitivityPolicyCodes : [],doNotShareClinicalDocumentSectionTypeCodes: []};
+                Vm.hasException = function () {
+                    return ((Vm.selectedMedicalSections.length > 0 ) || (Vm.selectedSensitivityPolicies.length > 0) || (Vm.medicalInformation === 'B') );
                 };
 
-                MedicalInformationVm.clearMedicalInfoData = function () {
-                    MedicalInformationVm.medicalInformation = 'A';
-                    MedicalInformationVm.selectedMedicalSections = [];
-                    MedicalInformationVm.selectedSensitivityPolicies = [];
+                Vm.clearMedicalInfoData = function () {
+                    Vm.medicalInformation = 'A';
+                    Vm.selectedMedicalSections = [];
+                    Vm.selectedSensitivityPolicies = [];
                 };
 
                 function MedicalInformationModalController($scope, $modalInstance, data) {
@@ -52,17 +52,17 @@
 
                     $scope.consent = [];
 
-                    $scope.consent.selectedMedicalSections = !angular.isDefined(MedicalInformationVm.selectedMedicalSections) ? [] : consentService.getCodes(MedicalInformationVm.selectedMedicalSections);
-                    $scope.consent.selectedSensitivityPolicies = !angular.isDefined(MedicalInformationVm.selectedSensitivityPolicies) ? [] : consentService.getCodes(MedicalInformationVm.selectedSensitivityPolicies);
+                    $scope.consent.selectedMedicalSections = !angular.isDefined(Vm.selectedMedicalSections) ? [] : consentService.getCodes(Vm.selectedMedicalSections);
+                    $scope.consent.selectedSensitivityPolicies = !angular.isDefined(Vm.selectedSensitivityPolicies) ? [] : consentService.getCodes(Vm.selectedSensitivityPolicies);
 
-                    $scope.$watch("MedicalInformationVm.selectedMedicalSections", function (arg) {
-                        if (MedicalInformationVm.medicalInformation === 'A') {
+                    $scope.$watch("Vm.selectedMedicalSections", function (arg) {
+                        if (Vm.medicalInformation === 'A') {
                             $scope.consent.selectedSensitivityPolicies = [];
                         }
                     });
 
-                    $scope.$watch("MedicalInformationVm.selectedSensitivityPolicies", function (arg) {
-                        if (MedicalInformationVm.medicalInformation === 'A') {
+                    $scope.$watch("Vm.selectedSensitivityPolicies", function (arg) {
+                        if (Vm.medicalInformation === 'A') {
                             $scope.consent.selectedSensitivityPolicies = [];
                         }
                     });
@@ -93,9 +93,9 @@
                     };
 
                     $scope.ok = function () {
-                        MedicalInformationVm.selectedMedicalSections = consentService.getEntitiesByCodes($scope.mediactionSections, $scope.consent.selectedMedicalSections);
-                        MedicalInformationVm.selectedSensitivityPolicies = consentService.getEntitiesByCodes($scope.sensitivityPolicies, $scope.consent.selectedSensitivityPolicies);
-                        MedicalInformationVm.ngModel = {
+                        Vm.selectedMedicalSections = consentService.getEntitiesByCodes($scope.mediactionSections, $scope.consent.selectedMedicalSections);
+                        Vm.selectedSensitivityPolicies = consentService.getEntitiesByCodes($scope.sensitivityPolicies, $scope.consent.selectedSensitivityPolicies);
+                        Vm.ngModel = {
                             doNotShareSensitivityPolicyCodes: $scope.consent.selectedSensitivityPolicies,
                             doNotShareClinicalDocumentSectionTypeCodes: $scope.consent.selectedMedicalSections
                         };
@@ -108,15 +108,15 @@
                     };
                 }
 
-                MedicalInformationVm.openPrivacySettingsModal = function () {
+                Vm.openPrivacySettingsModal = function () {
                     var modalInstance = $modal.open({
                         templateUrl: 'app/consent/directives/consentMedicalInformationModal.tpl.html',
 
                         resolve: {
                             data: function () {
                                 return {
-                                    mediactionSections: MedicalInformationVm.medicalsections,
-                                    sensitivityPolicies: MedicalInformationVm.sensitivitypolicies
+                                    mediactionSections: Vm.medicalsections,
+                                    sensitivityPolicies: Vm.sensitivitypolicies
                                 };
                             }
                         },
