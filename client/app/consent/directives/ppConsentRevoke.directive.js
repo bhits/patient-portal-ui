@@ -21,10 +21,10 @@
             /* @ngInject */
             function ConsentRevokeController($stateParams, $state) {
                 var Vm = this;
-                Vm.params = $stateParams;
                 Vm.cancel = cancel;
-                Vm.sign = sign;
                 Vm.consentId = Vm.params.consent.id;
+                Vm.params = $stateParams;
+                Vm.sign = sign;
 
                 activate();
 

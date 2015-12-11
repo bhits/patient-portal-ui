@@ -18,7 +18,7 @@
                         purposeofuse: "="
                     },
                     bindToController: true,
-                    controllerAs: 'ConsentPurposeOfUseVm',
+                    controllerAs: 'consentPurposeOfUseVm',
                     controller: ConsentPurposeOfUseController
                 };
 
@@ -27,16 +27,16 @@
 
             /* @ngInject */
             function ConsentPurposeOfUseController($scope, $modal, consentService, notificationService) {
-                var ConsentPurposeOfUseVm = this;
+                var Vm = this;
                 //Getting default purpose of use code.
-                ConsentPurposeOfUseVm.selectedPurposeOfUse = consentService.getDefaultPurposeOfUse(ConsentPurposeOfUseVm.purposeofuse, ConsentPurposeOfUseVm.ngModel);
+                Vm.selectedPurposeOfUse = consentService.getDefaultPurposeOfUse(Vm.purposeofuse, Vm.ngModel);
 
-                ConsentPurposeOfUseVm.openSelectPurposeModal = function () {
+                Vm.openSelectPurposeModal = function () {
                     var modalInstance = $modal.open({
                         templateUrl: 'app/consent/directives/consentPurposeOfUseModal.tpl.html',
                         resolve: {
                             data: function () {
-                                return ConsentPurposeOfUseVm.purposeofuse;
+                                return Vm.purposeofuse;
                             }
                         },
                         controller: PurposeOfUseModalController
@@ -45,11 +45,15 @@
 
                 function PurposeOfUseModalController($scope, $modalInstance, data) {
                     $scope.cancel = cancel;
-                    $scope.consent = {selectedPurposeOfUseCodes: consentService.getCodes(ConsentPurposeOfUseVm.selectedPurposeOfUse)};
+                    $scope.consent = {selectedPurposeOfUseCodes: consentService.getCodes(Vm.selectedPurposeOfUse)};
                     $scope.data = data;
                     $scope.deselectAll = deselectAll;
                     $scope.ok = ok;
                     $scope.selectAll = selectAll;
+
+                    function cancel() {
+                        $modalInstance.dismiss('cancel');
+                    }
 
                     function selectAll() {
                         $scope.consent.selectedPurposeOfUseCodes = consentService.getCodes($scope.data);
@@ -64,16 +68,10 @@
                     }
 
                     function ok() {
-                        ConsentPurposeOfUseVm.selectedPurposeOfUse = consentService.getEntitiesByCodes($scope.data, $scope.consent.selectedPurposeOfUseCodes);
-                        ConsentPurposeOfUseVm.ngModel = $scope.consent.selectedPurposeOfUseCodes;
+                        Vm.selectedPurposeOfUse = consentService.getEntitiesByCodes($scope.data, $scope.consent.selectedPurposeOfUseCodes);
+                        Vm.ngModel = $scope.consent.selectedPurposeOfUseCodes;
                         $modalInstance.close();
                     }
-
-                    function cancel() {
-                        $modalInstance.dismiss('cancel');
-                    }
                 }
-
-
             }
 })();
