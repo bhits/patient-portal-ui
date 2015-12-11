@@ -19,7 +19,7 @@
                         sensitivitypolicies: "="
                     },
                     bindToController: true,
-                    controllerAs: 'medicalInformationVm',
+                    controllerAs: 'consentMedicalInformationVm',
                     controller: MedicalInformationController,
                 };
 
