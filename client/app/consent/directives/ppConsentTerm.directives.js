@@ -17,15 +17,15 @@
                         ngModel: '='
                     },
                     bindToController: true,
-                    controllerAs: 'ConsentTermVm',
+                    controllerAs: 'consentTermVm',
                     controller: ConsentTermController
                 };
 
                 return directive;
 
                 function ConsentTermController(){
-                    var ConsentTermVm = this;
-                    ConsentTermVm.daterange = ConsentTermVm.ngModel;
+                    var Vm = this;
+                    Vm.daterange = Vm.ngModel;
                 }
             }
 })();
