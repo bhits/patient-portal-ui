@@ -1,4 +1,49 @@
-<content-wrapper title="Uploaded Documents">
-    <pp-clinical-documents-upload ></pp-clinical-documents-upload>
-    <pp-clinical-documents-uploaded-documents></pp-clinical-documents-uploaded-documents>
-</content-wrapper>
+<div class="col-sm-6">
+    <div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="custom-no-margin-top"><i class="fa fa-files-o"></i> Uploaded Documents</h2>
+            </div>
+            <div class="panel-body">
+                <table class="table table-bordered table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Document Type</th>
+                        <th>Description</th>
+                        <th>Operation</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr>
+                        <td>
+                            <span>Name</span>
+                        </td>
+                        <td>
+                            <span>Type</span>
+                        </td>
+                        <td>
+                            <span>Description</span>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-success btn-xs">
+                                <span class="fa fa-download"></span> Download
+                            </button>
+                            <button type="button" class="btn btn-danger btn-xs">
+                                <span class="fa fa-times"></span> Remove
+                            </button>
+                            <!--<a>
+                                <i class="fa fa-download"></i>
+                            </a>
+                            <a>
+                                <i class="fa fa-times"></i>
+                            </a>-->
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

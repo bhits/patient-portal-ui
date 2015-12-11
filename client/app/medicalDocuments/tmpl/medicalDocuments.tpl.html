@@ -27,8 +27,7 @@
 
                         <div class="form-group">
                             <label for="file">Clinical Document</label>
-                            <input type="file" name="file" id="file" required="required"
-                                   class="form-control"/>
+                            <input type="file" name="file" id="file" nv-file-select uploader="uploader"/>
                         </div>
 
                         <button class="btn btn-primary dark-green" tabindex="0">Upload</button>
@@ -36,49 +35,6 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-6">
-            <div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h2 class="custom-no-margin-top"><i class="fa fa-files-o"></i> Uploaded Documents</h2>
-                    </div>
-                    <div class="panel-body">
-                        <table class="table table-bordered table-striped table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Document Type</th>
-                                    <th>Description</th>
-                                    <th>Operation</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <span>Name</span>
-                                    </td>
-                                    <td>
-                                        <span>Type</span>
-                                    </td>
-                                    <td>
-                                        <span>Description</span>
-                                    </td>
-                                    <td>
-                                        <a ui-sref="">
-                                            <i class="fa fa-download"></i>
-                                        </a>
-                                        <a ui-sref="">
-                                            <i class="fa fa-times"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <pp-clinical-documents-uploaded-documents></pp-clinical-documents-uploaded-documents>
+        <pp-medical-documents-uploaded-documents></pp-medical-documents-uploaded-documents>
     </div>
 </content-wrapper>

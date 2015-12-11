@@ -3,11 +3,11 @@
 
     angular.module("app.medicalDocumentsModule",
         [
-            'app.medicalDocumentsServices'
+            'app.medicalDocumentsServices',
+            'app.medicalDocumentsDirectives'
         ])
         .config(MedicalDocumentsConfig)
-        .controller("MedicalDocumentsController", MedicalDocumentsController)
-        .controller("MedicalDocumentsUploadController",MedicalDocumentsUploadController);
+        .controller("MedicalDocumentsListController",MedicalDocumentsListController);
 
     /**
      * Medical Documents config function
@@ -25,24 +25,18 @@
             .state('fe.medicaldocuments.info', {
                 url: '/info',
                 data: {pageTitle: 'Medical Documents Information'},
-                templateUrl: 'app/medicalDocuments/tmpl/medicalDocumentsInfo.tpl.html',
-                controller: 'MedicalDocumentsController',
-                controllerAs: 'MedicalDocumentsVm'
+                templateUrl: 'app/medicalDocuments/tmpl/medicalDocumentsInfo.tpl.html'
             })
             .state('fe.medicaldocuments.upload', {
                 url: '/upload',
                 data: {pageTitle: 'Upload Medical Documents'},
                 templateUrl: 'app/medicalDocuments/tmpl/medicalDocuments.tpl.html',
-                controller: 'MedicalDocumentsUploadController',
-                controllerAs: 'MedicalDocumentsUploadVm'
+                controller: 'MedicalDocumentsListController',
+                controllerAs: 'MedicalDocumentsListVm'
             });
     }
 
-    function MedicalDocumentsController() {
-        var MedicalDocumentsVm = this;
-    }
-
-    function MedicalDocumentsUploadController(){
-        var MedicalDocumentsUploadVm = this;
+    function MedicalDocumentsListController(){
+        var MedicalDocumentsListVm = this;
     }
 })();
