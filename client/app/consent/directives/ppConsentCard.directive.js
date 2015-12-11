@@ -12,7 +12,7 @@
                     scope: {consent: '='},
                     bindToController: true,
                     restrict: 'E',
-                    templateUrl: 'app/consent/directives/consentCard.tpl.html',
+                    templateUrl: 'app/consent/directives/consentCard.html',
                     controller: ['$modal', 'consentService', 'notificationService', ConsentCardController],
                     controllerAs: 'consentCardVm'
                 };
@@ -52,8 +52,8 @@
 
                 function openManageConsentModal() {
                     $modal.open({
-                        templateUrl: 'app/consent/directives/consentListManageOptionsModal' + consentService.resolveConsentState(Vm.consent) + '.tpl.html',
-                        controller: ['$state', '$modalInstance', 'consent', ManageConsentModalController],
+                        templateUrl: 'app/consent/directives/consentListManageOptionsModal' + consentService.resolveConsentState(Vm.consent) + '.html',
+                        controller: ManageConsentModalController,
                         controllerAs: 'ManageConsentModalVm',
                         resolve: {
                             consent: function () {
@@ -62,6 +62,7 @@
                         }
                     });
 
+                    /* @ngInject */
                     function ManageConsentModalController($state, $modalInstance, consent) {
                         var ManageConsentModalVm = this;
                         ManageConsentModalVm.cancel = cancel;

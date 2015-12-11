@@ -14,7 +14,7 @@
                         consentList: '='
                     },
                     bindToController: true,
-                    templateUrl: 'app/consent/directives/consentCardList.tpl.html',
+                    templateUrl: 'app/consent/directives/consentCardList.html',
                     controller: ConsentCardListController,
                     controllerAs: 'consentCardListVm'
                 };

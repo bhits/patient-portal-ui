@@ -11,7 +11,7 @@
                 var directive =  {
                     restrict: 'E',
                     replace: false,
-                    templateUrl: 'app/consent/directives/consentMedicalInformation.tpl.html',
+                    templateUrl: 'app/consent/directives/consentMedicalInformation.html',
                     scope: {
                         data: "=",
                         ngModel: '=',
@@ -20,7 +20,7 @@
                     },
                     bindToController: true,
                     controllerAs: 'consentMedicalInformationVm',
-                    controller: MedicalInformationController
+                    controller:MedicalInformationController
                 };
 
                 return directive;
@@ -50,7 +50,7 @@
 
                 function openPrivacySettingsModal () {
                     var modalInstance = $modal.open({
-                        templateUrl: 'app/consent/directives/consentMedicalInformationModal.tpl.html',
+                        templateUrl: 'app/consent/directives/consentMedicalInformationModal.html',
 
                         resolve: {
                             data: function () {

@@ -12,7 +12,7 @@
                 var directive =  {
                     restrict: 'E',
                     replace: false,
-                    templateUrl: 'app/consent/directives/consentPurposeOfUse.tpl.html',
+                    templateUrl: 'app/consent/directives/consentPurposeOfUse.html',
                     scope: {
                         ngModel: "=",
                         purposeofuse: "="
@@ -33,7 +33,7 @@
 
                 Vm.openSelectPurposeModal = function () {
                     var modalInstance = $modal.open({
-                        templateUrl: 'app/consent/directives/consentPurposeOfUseModal.tpl.html',
+                        templateUrl: 'app/consent/directives/consentPurposeOfUseModal.html',
                         resolve: {
                             data: function () {
                                 return Vm.purposeofuse;
@@ -43,6 +43,7 @@
                     });
                 };
 
+                /* @ngInject */
                 function PurposeOfUseModalController($scope, $modalInstance, data) {
                     $scope.cancel = cancel;
                     $scope.consent = {selectedPurposeOfUseCodes: consentService.getCodes(Vm.selectedPurposeOfUse)};

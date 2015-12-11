@@ -11,7 +11,7 @@
                 var directive = {
                     restrict: 'E',
                     scope: {},
-                    templateUrl: 'app/consent/directives/consentRevokeConfirmation.tpl.html',
+                    templateUrl: 'app/consent/directives/consentRevokeConfirmation.html',
                     controller:ConsentRevokeController,
                     controllerAs: 'Vm'
                 };

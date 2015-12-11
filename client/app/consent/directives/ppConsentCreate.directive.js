@@ -12,7 +12,7 @@
 
                 var driective =  {
                     restrict: 'E',
-                    templateUrl: 'app/consent/directives/consentCreateEdit.tpl.html',
+                    templateUrl: 'app/consent/directives/consentCreateEdit.html',
                     scope: {
                         providers: "=",
                         purposeofuse: "=",
@@ -137,7 +137,7 @@
                 function cancelConsent () {
 
                     $modal.open({
-                        templateUrl: 'app/consent/directives/consentCreateEditCancelModal.tpl.html',
+                        templateUrl: 'app/consent/directives/consentCreateEditCancelModal.html',
                         controller: ['$modalInstance', '$state', CancelCreateEditConsentModalController],
                         controllerAs: 'CancelCreateEditConsentModalVm'
                     });

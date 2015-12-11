@@ -34,8 +34,8 @@ module.exports = {
         jsunit: ['app/**/*.spec.js', 'common/**/*.spec.js'],
         e2e: ['app/**/*.e2e.js', 'common/**/*.e2e.js'],
 
-        atpl: ['app/**/*.tpl.html'],
-        ctpl: ['common/**/*.tpl.html'],
+        atpl: ['app/**/*.html'],
+        ctpl: ['common/**/*.html'],
 
         html: ['index.html'],
         less: 'less/main.less'
