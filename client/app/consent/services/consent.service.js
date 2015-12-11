@@ -10,13 +10,6 @@
         .factory('consentService', consentService);
 
     /**
-     * @memberof app.consent
-     * @description The consent service.
-     * @ngdoc service
-     * @name consentService
-     * @param $resource {service} ngResource service
-     * @param ENVService {service} The app api config service
-     *
      *  @ngInject
      */
     function consentService($resource, ENVService) {
@@ -31,35 +24,34 @@
         var selectedNpi = {authorizeNpi: "", discloseNpi: ""};
         var selectedProvider = [];
 
-        var service =  {
-            getConsentResource: getConsentResource,
-            getPurposeOfUseResource: getPurposeOfUseResource,
-            getMedicationSectionResource: getMedicationSectionResource,
-            getSensitvityPolicyResource: getSensitvityPolicyResource,
-            getConsent: getConsent,
-            signConsent: signConsent,
-            revokeConsent: revokeConsent,
-            createConsent: createConsent,
-            updateConsent: updateConsent,
-            deleteConsent: deleteConsent,
-            listConsent: listConsent,
-            setAuthorizeNpi: setAuthorizeNpi,
-            setDiscloseNpi: setDiscloseNpi,
-            getSelectedNpi: getSelectedNpi,
-            getSelectedProvider: getSelectedProvider,
-            prepareProviderList: prepareProviderList,
-            resolveConsentState: resolveConsentState,
-            isShareAll: isShareAll,
-            getPurposeOfUse: getPurposeOfUse,
-            getMedicalSection: getMedicalSection,
-            getSensitivityPolicies: getSensitivityPolicies,
-            getEntitiesByCodes: getEntitiesByCodes,
-            getDefaultPurposeOfUse: getDefaultPurposeOfUse,
-            getPurposeOfUseCodes: getPurposeOfUseCodes,
-            getCodes: getCodes,
-            getLookupEntities: getLookupEntities,
-            resetSelectedNpi: resetSelectedNpi
-        };
+        var service = {};
+        service.getConsentResource = getConsentResource;
+        service.getPurposeOfUseResource = getPurposeOfUseResource;
+        service.getMedicationSectionResource = getMedicationSectionResource;
+        service.getSensitvityPolicyResource = getSensitvityPolicyResource;
+        service.getConsent = getConsent;
+        service.signConsent = signConsent;
+        service.revokeConsent = revokeConsent;
+        service.createConsent = createConsent;
+        service.updateConsent = updateConsent;
+        service.deleteConsent = deleteConsent;
+        service.listConsent = listConsent;
+        service.setAuthorizeNpi = setAuthorizeNpi;
+        service.setDiscloseNpi = setDiscloseNpi;
+        service.getSelectedNpi = getSelectedNpi;
+        service.getSelectedProvider = getSelectedProvider;
+        service.prepareProviderList = prepareProviderList;
+        service.resolveConsentState = resolveConsentState;
+        service.isShareAll = isShareAll;
+        service.getPurposeOfUse = getPurposeOfUse;
+        service.getMedicalSection = getMedicalSection;
+        service.getSensitivityPolicies = getSensitivityPolicies;
+        service.getEntitiesByCodes = getEntitiesByCodes;
+        service.getDefaultPurposeOfUse = getDefaultPurposeOfUse;
+        service.getPurposeOfUseCodes = getPurposeOfUseCodes;
+        service.getCodes = getCodes;
+        service.getLookupEntities = getLookupEntities;
+        service.resetSelectedNpi = resetSelectedNpi;
 
         return service;
 
@@ -241,14 +233,13 @@
                     }
                 }
             }
-
             return entities;
         }
 
         function resetSelectedNpi(){
             selectedNpi = {authorizeNpi: "", discloseNpi: ""};
         }
-        //To be refactore
+
         function hasNPI (list, npi) {
             for (var j = 0; j < list.length; j++) {
                 if (npi === list[j]) {
