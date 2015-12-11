@@ -32,11 +32,35 @@
                 data: {pageTitle: 'Upload Medical Documents'},
                 templateUrl: 'app/medicalDocuments/tmpl/medicalDocuments.tpl.html',
                 controller: 'MedicalDocumentsListController',
-                controllerAs: 'MedicalDocumentsListVm'
+                controllerAs: 'MedicalDocumentsListVm',
+                resolve: MedicalDocumentsListController.resolve
             });
     }
 
-    function MedicalDocumentsListController(){
-        var MedicalDocumentsListVm = this;
+    function MedicalDocumentsListController(medicalDocumentsList){
+        var Vm = this;
+        Vm.medicalDocumentsList = medicalDocumentsList;
+        console.log(medicalDocumentsList);
     }
+
+    MedicalDocumentsListController.resolve = {
+        medicalDocumentsList: ['$q', 'MedicalDocumentsService', 'notificationService', function($q, MedicalDocumentsService, notificationService){
+            function success(response){
+                return response;
+            }
+            function error(response){
+                notificationService.error('Failed to get the consent list, please try again later...');
+                return response;
+            }
+            var deferred = $q.defer();
+            var listMedicalDocumentsPromise = MedicalDocumentsService.listMedicalDocuments().$promise;
+            listMedicalDocumentsPromise.then(function(onFulfilled){
+                deferred.resolve(onFulfilled);
+            }, function (onRejected) {
+                deferred.reject(onRejected);
+            });
+
+            return deferred.promise;
+        }]
+    };
 })();

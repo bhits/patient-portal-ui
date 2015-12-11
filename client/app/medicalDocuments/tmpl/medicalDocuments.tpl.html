@@ -35,6 +35,44 @@
                 </div>
             </div>
         </div>
-        <pp-medical-documents-uploaded-documents></pp-medical-documents-uploaded-documents>
+        <div class="col-sm-6">
+            <div>
+              <!--  <div ng-repeat="medicalDocument in MedicalDocumentsListVm.medicalDocumentsList.medicalDocumentsList">-->
+                    <table class="table table-bordered table-striped table-hover">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Document Type</th>
+                            <th>Description</th>
+                            <th>Operation</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr ng-repeat="medicalDocument in MedicalDocumentsListVm.medicalDocumentsList">
+                            <td>
+                                <span>{{medicalDocument.name}}</span>
+                            </td>
+                            <td>
+                                <span>Episode Summary Note</span>
+                            </td>
+                            <td>
+                                <span>{{medicalDocument.description}}</span>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-success btn-xs">
+                                    <span class="fa fa-download"></span> Download
+                                </button>
+                                <button type="button" class="btn btn-danger btn-xs">
+                                    <span class="fa fa-times"></span> Remove
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                <!--</div>-->
+                </div>
+            </div>
+       <!-- <pp-medical-documents-uploaded-documents></pp-medical-documents-uploaded-documents>-->
     </div>
 </content-wrapper>

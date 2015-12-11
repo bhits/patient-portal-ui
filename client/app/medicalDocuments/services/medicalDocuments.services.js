@@ -4,7 +4,7 @@
     function MedicalDocumentsService($resource, ENVService) {
         var MedicalDocumentsListResource = $resource(ENVService.securedApis.pcmApiBaseUrl + "/clinicaldocuments");
         return {
-            listClinicalDocuments: function () {
+            listMedicalDocuments: function (success, error) {
 
                 return MedicalDocumentsListResource.query();
             }
@@ -12,7 +12,7 @@
     }
 
     /**
-     * The Clinical Documents Service
+     * The Medical Documents Service
      *
      */
     angular.module("app.medicalDocumentsServices", ['ngResource', 'app.config'])
