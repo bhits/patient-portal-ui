@@ -3,7 +3,7 @@
 (function () {
 
     angular
-        .module('app.directivesModule', [])
+        .module('app.directivesModule', ['app.servicesModule'])
             .directive('pageTitle', PageTitle)
             .directive('sideNavigation', SideNavigation)
             .directive('iboxTools', IboxTools)
@@ -255,7 +255,7 @@
     }
 
     /* @ngInject */
-    function DatePickerRangeController($scope) {
+    function DatePickerRangeController($scope, utilityService) {
         var DatePickerVm = this;
         DatePickerVm.consent = DatePickerVm.ngModel;
         $scope.$watch('DatePickerVm.consent.consentStart', watchStartDate);
@@ -274,7 +274,7 @@
                 return;
             }
             DatePickerVm.error = "";
-            var fd = doFormatDate(new Date());
+            var fd = utilityService.formatDate(new Date());
             if (Date.parse(startDate) < Date.parse(fd)) {
                 DatePickerVm.error = ' Consent must start from today';
             } else if (Date.parse(startDate) > Date.parse(endDate)) {
@@ -285,24 +285,6 @@
 
             DatePickerVm.showError = DatePickerVm.error.length;
         }
-
-        function doFormatDate(dateObj) {
-            var today = new Date(dateObj);
-            var day = today.getDate();
-            var month = today.getMonth() + 1;
-            var year = today.getFullYear();
-
-            if (day < 10) {
-                day = "0" + day;
-            }
-            if (month < 10) {
-                month = "0" + month;
-            }
-            var formatDate = month + "/" + day + "/" + year;
-
-            return formatDate;
-        }
-
     }
 
 })();

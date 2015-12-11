@@ -122,7 +122,24 @@
                     formattedZipCode = formattedZipCode.slice(0, 5) + "-" + formattedZipCode.slice(5);
                 }
                 return formattedZipCode;
+            },
+
+            formatDate : function(dateObj){
+                var today = new Date(dateObj);
+                var day = today.getDate();
+                var month = today.getMonth() + 1;
+                var year = today.getFullYear();
+                if (day < 10) {
+                    day = "0" + day;
+                }
+                if (month < 10) {
+                    month = "0" + month;
+                }
+                var formatDate = month + "/" + day + "/" + year;
+
+                return formatDate;
             }
+
         };
     }
 

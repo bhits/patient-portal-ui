@@ -14,5 +14,7 @@
                 'app.config',
                 'checklist-model',
                 'app.providerService',
-                'app.providerFiltersModule']);
+                'app.providerFiltersModule',
+                'app.servicesModule'
+               ]);
 })();
