@@ -82,6 +82,16 @@
                 controller: MedicalDocumentsModalDeleteController
             });
         };
+
+        Vm.downloadFile = function (medicalDocument) {
+            MedicalDocumentsService.downloadMedicalDocument(medicalDocument.id)
+                .then(function(sucess){
+                    console.log('sucess:' + sucess);
+                }, function(error) {
+                    console.log('error:' + error);
+                });
+        };
+
     }
 
     MedicalDocumentsListController.resolve = {

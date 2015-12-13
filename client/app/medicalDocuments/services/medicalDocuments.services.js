@@ -1,13 +1,28 @@
 (function () {
     'use strict';
 
-    function MedicalDocumentsService($resource, ENVService) {
+    function MedicalDocumentsService($resource, ENVService, $window, $q, $timeout) {
         var medicalDocumentsListResource = $resource(ENVService.securedApis.pcmApiBaseUrl + "/clinicaldocuments");
-        var medicalDocumentsResource = $resource(ENVService.securedApis.pcmApiBaseUrl + "/clinicaldocuments/:id",{id: '@id'});
+        var medicalDocumentsResource = $resource(ENVService.securedApis.pcmApiBaseUrl + "/clinicaldocuments/:id", {id: '@id'});
         return {
             listMedicalDocuments: function (success, error) {
 
                 return medicalDocumentsListResource.query(success, error);
+            },
+
+            downloadMedicalDocument: function (id) {
+                var deferred = $q.defer();
+
+                $timeout(function () {
+                    $window.location = ENVService.securedApis.pcmApiBaseUrl + "/clinicaldocuments/" + id;
+                })
+                    .then(function () {
+                        deferred.resolve('success');
+                    }, function () {
+                        deferred.reject('error');
+                    });
+                return deferred.promise;
+
             },
 
             deleteMedicalDocument: function (id, success, error) {

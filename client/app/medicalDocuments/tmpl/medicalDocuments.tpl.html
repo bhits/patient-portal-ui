@@ -67,7 +67,8 @@
                                     <span ng-bind="medicalDocument.description"></span>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-success btn-xs">
+                                    <button type="button" class="btn btn-success btn-xs"
+                                            ng-click="MedicalDocumentsListVm.downloadFile(medicalDocument)">
                                         <span class="fa fa-download"></span> Download
                                     </button>
                                     <button type="button" class="btn btn-danger btn-xs"
