@@ -12,7 +12,7 @@
                 var directive =  {
                     restrict: 'E',
                     replace: false,
-                    templateUrl: 'app/consent/directives/consentSelectProvider.html',
+                    templateUrl: 'app/consent/directives/consentProviderSelect.html',
                     scope: {
                         modaltitle: "=",
                         providers: "=",
@@ -36,7 +36,7 @@
                 function openSelectProviderModal () {
 
                     var modalInstance = $modal.open({
-                        templateUrl: 'app/consent/directives/consentSelectProviderModal.html',
+                        templateUrl: 'app/consent/directives/consentProviderSelectModal.html',
                         resolve: {
                             data: function () {
                                 return {

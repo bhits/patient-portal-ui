@@ -72,7 +72,7 @@
         }
 
         function getConsent (id, success, error) {
-            consentResource.get({id:id}, success, error);
+            return consentResource.get({id:id}, success, error);
         }
 
         function signConsent (id, success, error) {
@@ -84,15 +84,15 @@
         }
 
         function createConsent (consent, success, error) {
-            consentResource.save(consent, success, error);
+            return consentResource.save(consent, success, error);
         }
 
         function updateConsent (consent, success, error) {
-            consentResource.update(consent, success, error);
+            return consentResource.update(consent, success, error);
         }
 
         function deleteConsent (id, success, error) {
-            consentResource.delete({id: id}, success, error);
+            return consentResource.delete({id: id}, success, error);
         }
 
         function listConsent (page, success, error) {
