@@ -4,10 +4,7 @@
 (function () {
 
     /**
-     * @ngdoc config
      * @name home config
-     * @description
-     *   The route configuration for the home module.
      */
     angular
         .module('app.home')
@@ -36,10 +33,8 @@
             })
             .state('fe.index.home', {
                 url: '/home',
-                templateUrl: 'app/home/config/home.tpl.html',
-                data: { pageTitle: 'Home' },
-                controllerAs: "HomeVm",
-                controller: 'HomeController'
+                templateUrl: 'app/home/home.tpl.html',
+                data: { pageTitle: 'Home' }
             });
     }
 

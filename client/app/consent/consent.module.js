@@ -2,9 +2,7 @@
 
 (function () {
     /**
-     * @memberOf app
-     * @ngdoc module
-     * @description The app.consent module
+     * @name The app.consent module
      *
      */
     angular
