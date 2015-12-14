@@ -4,7 +4,7 @@
 
 'use strict';
 
-describe('app.accessModule ', function(){
+xdescribe('app.accessModule ', function(){
     var module;
 
     beforeEach(function() {
