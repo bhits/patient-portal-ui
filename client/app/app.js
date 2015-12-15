@@ -239,11 +239,6 @@
         });
     }
 
-    /**
-     * @ngdoc module
-     * @description The main module for the application
-     *
-     */
     angular.module('app',
         [
             /* Shared modules*/
