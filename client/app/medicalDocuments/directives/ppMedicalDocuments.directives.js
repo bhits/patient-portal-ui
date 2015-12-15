@@ -5,14 +5,72 @@
     'use strict';
 
     angular.module('app.medicalDocumentsDirectives',[])
-        .directive('ppMedicalDocumentsUploadedDocuments', ppMedicalDocumentsUploadedDocuments);
+        .directive('ppMedicalDocumentsUpload', ppMedicalDocumentsUpload)
+        .directive("fileModel", ['$parse', function ($parse) {
+            return {
+                restrict: 'A',
+                link: function(scope, element, attrs) {
+                    var model = $parse(attrs.fileModel);
+                    var modelSetter = model.assign;
 
-    function ppMedicalDocumentsUploadedDocuments() {
+                    element.bind('change', function(){
+                        scope.$apply(function(){
+                            modelSetter(scope, element[0].files[0]);
+                        });
+                    });
+                }
+            };
+        }]);
+
+    function ppMedicalDocumentsUpload() {
         return {
             restrict: 'E',
             replace:true,
-            templateUrl: 'app/medicalDocuments/tmpl/medicalDocumentsUploadedDocuments.tpl.html',
-            scope: {}
+            templateUrl: 'app/medicalDocuments/tmpl/medicalDocumentsUpload.tpl.html',
+            scope: {},
+            controllerAs: 'MedicalDocumentsUploadVm',
+            bindToController: true,
+            controller: ['$scope', '$location', '$element', '$timeout', '$state', 'utilityService', 'MedicalDocumentsService', 'notificationService',
+                function ($scope, $location, $element, $timeout, $state, utilityService, MedicalDocumentsService, notificationService) {
+                    var MedicalDocumentsUploadVm = this;
+
+                    //MedicalDocumentsUploadVm.file = "";
+                    MedicalDocumentsUploadVm.name = "";
+                    MedicalDocumentsUploadVm.description = "";
+                    MedicalDocumentsUploadVm.documentType = "";
+
+                    var prepareMedicalDocument = function () {
+
+                        var medicalDocument = {
+                            file:$scope.myFile,
+                            name: MedicalDocumentsUploadVm.name,
+                            description: MedicalDocumentsUploadVm.description,
+                            documentType: MedicalDocumentsUploadVm.documentType
+                        };
+
+                        return medicalDocument;
+                    };
+
+                    MedicalDocumentsUploadVm.uploadDocument = function () {
+                        var medicalDocument = prepareMedicalDocument();
+
+                        MedicalDocumentsService.uploadMedicalDocument(medicalDocument,
+                            function (response) {
+                                notificationService.success("Success in uploading medical document.");
+                                $state.go('fe/medicaldocuments/upload');
+                            },
+                            function (error) {
+                                if (error.status === 409) {
+                                    notificationService.warn("Error you cannot create duplicate document.");
+                                } else {
+                                    notificationService.error("Error in uploading medical document");
+                                }
+                            }
+                        );
+
+                        console.log(medicalDocument);
+                    };
+                }]
         };
     }
 

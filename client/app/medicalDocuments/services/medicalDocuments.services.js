@@ -15,18 +15,21 @@
 
                 $timeout(function () {
                     $window.location = ENVService.securedApis.pcmApiBaseUrl + "/clinicaldocuments/" + id;
-                })
+                }, 1000)
                     .then(function () {
                         deferred.resolve('success');
                     }, function () {
                         deferred.reject('error');
                     });
                 return deferred.promise;
-
             },
 
             deleteMedicalDocument: function (id, success, error) {
                 medicalDocumentsResource.delete({id: id}, success, error);
+            },
+
+            uploadMedicalDocument: function (medicalDocument,success, error) {
+                medicalDocumentsListResource.save(medicalDocument,success, error);
             }
         };
     }

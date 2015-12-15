@@ -1,40 +1,6 @@
 <content-wrapper title="Upload Medical Documents">
     <div class="row">
-        <div class="col-sm-6">
-            <div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h2 class="custom-no-margin-top"><i class="fa fa-upload"></i> Upload</h2>
-                    </div>
-                    <div class="panel-body">
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input id="name" name="name" type="text" class="form-control" placeholder="Document Name"/>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="description">Description</label>
-                            <textarea name="description" id="description" rows="4" class="form-control"
-                                      placeholder="Description"></textarea>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="documentType">Clinical Document Type: </label>
-                            <span>Episode Summary Note</span>
-                            <input type="hidden" id="documentType" name="documentType"
-                                   value="Episode Summary Note"/>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="file">Clinical Document</label>
-                            <input type="file" name="file" id="file" nv-file-select uploader="uploader"/>
-                        </div>
-
-                        <button class="btn btn-primary dark-green" tabindex="0">Upload</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <pp-medical-documents-upload></pp-medical-documents-upload>
         <div class="col-sm-6">
             <div>
                 <div class="panel panel-default">
@@ -62,6 +28,7 @@
                                 </td>
                                 <td>
                                     <span>Episode Summary Note</span>
+                                    <!--<span ng-bind="medicalDocument.clinicalDocumentTypeCode.displayName">Episode Summary Note</span>-->
                                 </td>
                                 <td>
                                     <span ng-bind="medicalDocument.description"></span>

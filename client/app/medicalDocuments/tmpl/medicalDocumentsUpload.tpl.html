@@ -1,2 +1,43 @@
-<content-wrapper title="Upload Medical Documents">
-</content-wrapper>
+<form role="form" name="medicalDocumentUploadForm" enctype="multipart/form-data">
+    <div class="col-sm-6">
+        <div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="custom-no-margin-top"><i class="fa fa-upload"></i> Upload</h2>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input id="name" name="name" type="text" class="form-control" placeholder="Document Name"
+                               ng-model="MedicalDocumentsUploadVm.name"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea name="description" id="description" rows="4" class="form-control"
+                                  ng-model="MedicalDocumentsUploadVm.description"
+                                  placeholder="Description"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="documentType">Clinical Document Type: </label>
+                        <span class="info-blue italic">Episode Summary Note (Only)</span>
+                        <input type="hidden" id="documentType" name="documentType"
+                               ng-model="MedicalDocumentsUploadVm.documentType"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="file">Clinical Document</label>
+                        <input type="file" name="file" id="file"
+                               file-model="myFile"/>
+                    </div>
+
+                    <button class="btn btn-primary dark-green" type="button"
+                            ng-click="MedicalDocumentsUploadVm.uploadDocument()">
+                        <strong>Upload</strong>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
