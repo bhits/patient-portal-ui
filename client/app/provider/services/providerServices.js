@@ -164,8 +164,13 @@
      * The provider service
      *
      */
-    angular.module("app.providerService", ['ngResource', 'app.config'])
-        .factory('ProviderService', ProviderService);
+    angular
+        .module("app.providerService",
+            [
+                'app.core',
+                'app.config'
+            ])
+            .factory('ProviderService', ProviderService);
 })();
 
 

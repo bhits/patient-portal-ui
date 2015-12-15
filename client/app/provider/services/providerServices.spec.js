@@ -3,7 +3,7 @@
  */
 'use strict';
 
-describe('app.providerService  ', function () {
+xdescribe('app.providerService  ', function () {
     var module;
 
     beforeEach(function () {
@@ -35,7 +35,7 @@ describe('app.providerService  ', function () {
     });
 });
 
-describe('app.providerService ', function () {
+xdescribe('app.providerService ', function () {
     var ProviderServices, $httpBackend;
 
     beforeEach(module('app.providerService'));

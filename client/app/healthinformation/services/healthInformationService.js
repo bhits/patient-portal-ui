@@ -85,6 +85,6 @@
     }
 
 
-    angular.module("app.healthInformationService", ['ngResource', 'app.config'])
+    angular.module("app.healthInformationService", ['app.core', 'app.config'])
      .factory('HealthInformationService', HealthInformationService);
 })();

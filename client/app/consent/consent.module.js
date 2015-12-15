@@ -7,12 +7,10 @@
      */
     angular
         .module('app.consent',
-               ['ui.router',
-                'ngResource',
+               [
+                'app.core',
                 'app.config',
-                'checklist-model',
                 'app.providerService',
-                'app.providerFiltersModule',
-                'app.core'
+                'app.providerFiltersModule'
                ]);
 })();

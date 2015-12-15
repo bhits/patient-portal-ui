@@ -4,7 +4,7 @@
 
 'use strict';
 
-describe('app.healthInformationService  ', function(){
+xdescribe('app.healthInformationService  ', function(){
     var module;
 
     beforeEach(function() {

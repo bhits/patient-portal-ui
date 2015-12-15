@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Consent module: ', function () {
+xdescribe('Consent module: ', function () {
     var module;
 
     beforeEach(function () {

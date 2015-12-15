@@ -7,7 +7,8 @@
         .module('app.core', [
             /*Angular modules*/
             'ngSanitize',
-
+            'ngResource',
+            'ngMessages',
             /*Cross-app modules*/
 
             /*3rd-party modules*/
@@ -16,6 +17,8 @@
             'ui.bootstrap',
             'ngAria',
             'angular-loading-bar',
-            'oauth'
+            'oauth',
+            'checklist-model',
+            'ngStorage'
         ]);
 })();

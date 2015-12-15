@@ -135,7 +135,6 @@
         [
             'app.providerService',
             'app.providerDirectives',
-            'ngMessages',
             'app.notificationModule',
             'app.providerFiltersModule',
             'app.filtersModule',

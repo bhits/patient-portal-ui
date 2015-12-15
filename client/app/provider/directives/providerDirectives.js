@@ -188,9 +188,12 @@
         };
     }
 
-    angular.module("app.providerDirectives", [
-        'app.core',
-        'app.providerFiltersModule'])
-        .directive('providerLookupResult', ProviderLookupResult)
-        .directive('providerLookupSearch', ProviderLookupSearch);
+    angular
+        .module("app.providerDirectives",
+            [
+            'app.core',
+            'app.providerFiltersModule'
+            ])
+            .directive('providerLookupResult', ProviderLookupResult)
+            .directive('providerLookupSearch', ProviderLookupSearch);
 })();

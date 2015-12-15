@@ -9,5 +9,5 @@
      */
     angular
         .module('app.home',
-            ['ui.router']);
+            ['app.core']);
 })();

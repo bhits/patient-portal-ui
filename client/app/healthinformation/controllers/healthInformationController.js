@@ -153,7 +153,6 @@
      */
     angular.module("app.healthInformationModule",
         [
-            'ui.router',
             'app.core',
             'app.healthInformationService',
             'app.healthInformationDirectivesModule'
