@@ -54,7 +54,8 @@
                     MedicalDocumentsUploadVm.uploadDocument = function () {
                         var medicalDocument = prepareMedicalDocument();
 
-                        MedicalDocumentsService.uploadMedicalDocument(medicalDocument,
+                        MedicalDocumentsService.uploadMedicalDocument($scope.myFile, MedicalDocumentsUploadVm.name,
+                            MedicalDocumentsUploadVm.description,MedicalDocumentsUploadVm.documentType,
                             function (response) {
                                 notificationService.success("Success in uploading medical document.");
                                 $state.go('fe/medicaldocuments/upload');

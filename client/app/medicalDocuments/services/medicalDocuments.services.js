@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    function MedicalDocumentsService($resource, ENVService, $window, $q, $timeout) {
+    function MedicalDocumentsService($resource, ENVService, $window, $q, $timeout, $http) {
         var medicalDocumentsListResource = $resource(ENVService.securedApis.pcmApiBaseUrl + "/clinicaldocuments");
         var medicalDocumentsResource = $resource(ENVService.securedApis.pcmApiBaseUrl + "/clinicaldocuments/:id", {id: '@id'});
         return {
@@ -28,8 +28,21 @@
                 medicalDocumentsResource.delete({id: id}, success, error);
             },
 
-            uploadMedicalDocument: function (medicalDocument,success, error) {
-                medicalDocumentsListResource.save(medicalDocument,success, error);
+            uploadMedicalDocument: function (file,name,description,documentType,success, error) {
+                var uploadUrl =ENVService.securedApis.pcmApiBaseUrl + "/clinicaldocuments";
+                var fd = new FormData();
+                fd.append('file', file);
+                fd.append('name', name);
+                fd.append('description', description);
+                fd.append('documentType', documentType);
+                $http.post(uploadUrl, fd, {
+                    transformRequest: angular.identity,
+                    headers: {'Content-Type': undefined}
+                })
+                    .success(function(){
+                    })
+                    .error(function(){
+                    });
             }
         };
     }
