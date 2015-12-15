@@ -39,7 +39,9 @@
      * The generalize filter for the application
      *
      */
-    angular.module('app.filtersModule', ['app.servicesModule'])
+    angular.module('app.filtersModule', [
+        'app.core'
+        ])
         .filter('phone', PhoneNumberFilter)
         .filter('zip', ['utilityService', ZipFilter])
         .filter('hasString', ['utilityService', HasString]);

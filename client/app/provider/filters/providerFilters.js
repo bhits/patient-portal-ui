@@ -84,7 +84,9 @@
         };
     }
 
-    angular.module('app.providerFiltersModule', ['app.servicesModule'])
+    angular.module('app.providerFiltersModule', [
+        'app.core'
+        ])
         .filter('plsName', PLSProviderNameFilter)
         .filter('plsAddress', ['utilityService', PLSProviderAddressFilter])
         .filter('pcmProviderAddress', pcmProviderAddress)

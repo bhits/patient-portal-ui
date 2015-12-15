@@ -10,5 +10,6 @@
                  'ngIdle',
                  'app.config',
                  'ngStorage',
-                 'app.servicesModule']);
+                 'app.core'
+               ]);
 })();

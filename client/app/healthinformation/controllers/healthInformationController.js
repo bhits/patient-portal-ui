@@ -154,7 +154,7 @@
     angular.module("app.healthInformationModule",
         [
             'ui.router',
-            'app.servicesModule',
+            'app.core',
             'app.healthInformationService',
             'app.healthInformationDirectivesModule'
         ])

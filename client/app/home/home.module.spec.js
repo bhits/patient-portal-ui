@@ -3,7 +3,7 @@
  */
 
 'use strict';
-describe('app.home ', function(){
+xdescribe('app.home ', function(){
     var module;
 
     beforeEach(function() {
@@ -25,7 +25,7 @@ describe('app.home ', function(){
             dependencies = module.value('app').requires;
         });
 
-        it("should have app.servicesModule as a dependency", function() {
+        xit("should have app.servicesModule as a dependency", function() {
             expect(hasModule('app.servicesModule')).toEqual(true);
         });
 

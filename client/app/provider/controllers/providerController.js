@@ -138,7 +138,8 @@
             'ngMessages',
             'app.notificationModule',
             'app.providerFiltersModule',
-            'app.filtersModule'
+            'app.filtersModule',
+            'app.core'
         ])
         .config(ProviderConfig)
         .controller('ProviderListController',ProviderListController);

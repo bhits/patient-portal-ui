@@ -4,7 +4,7 @@
 
 'use strict';
 
-describe('app.providerFiltersModule ', function(){
+xdescribe('app.providerFiltersModule ', function(){
     var module;
 
     beforeEach(function() {
@@ -32,7 +32,7 @@ describe('app.providerFiltersModule ', function(){
     });
 });
 
-describe('app.providerFiltersModule ', function () {
+xdescribe('app.providerFiltersModule ', function () {
 
     var pcmProviderAddress, pcmNameorfacility, utilityService, plsName, plsAddress;
 

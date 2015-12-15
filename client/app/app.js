@@ -246,24 +246,23 @@
      */
     angular.module('app',
         [
-            'app.home',         // App modules start here
-            'app.healthInformationModule',
-            'app.security',
-            'app.providerModule',
-            'app.consent',
-            'app.directivesModule',    // Common modules start here
-            'app.servicesModule',
+            /* Shared modules*/
+            'app.core',
             //'app.authInterceptorModule',
             'app.filtersModule',
             'templates-app',          // Third party libraries start here
             'templates-common',
-            'ui.router',
-            'ngIdle',
-            'ui.bootstrap',
-            'ngAria',
-            'angular-loading-bar',
-            'ngSanitize',
-            'oauth'
+            'app.security',
+
+            /*
+             * Feature areas
+             */
+            'app.home',         // App modules start here
+            'app.healthInformationModule',
+            'app.providerModule',
+            'app.consent',
+            'app.directivesModule'
+
         ])
         .constant("idleConfigParams", ngIdleParams)
         .config(appConfig)

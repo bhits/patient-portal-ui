@@ -9,6 +9,5 @@
      */
     angular
         .module('app.home',
-            ['ui.router',
-             'app.servicesModule']);
+            ['ui.router']);
 })();

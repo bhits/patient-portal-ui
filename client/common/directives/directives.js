@@ -3,7 +3,9 @@
 (function () {
 
     angular
-        .module('app.directivesModule', ['app.servicesModule'])
+        .module('app.directivesModule', [
+            'app.core'
+            ])
             .directive('pageTitle', PageTitle)
             .directive('sideNavigation', SideNavigation)
             .directive('iboxTools', IboxTools)

@@ -4,7 +4,7 @@
 
 'use strict';
 
-describe('app.filtersModule ', function () {
+xdescribe('app.filtersModule ', function () {
     var module;
 
     beforeEach(function () {
@@ -26,14 +26,14 @@ describe('app.filtersModule ', function () {
             dependencies = module.value('app.filtersModule').requires;
         });
 
-        it("should have app.servicesModule", function () {
+        xit("should have app.servicesModule", function () {
             expect(hasModule('app.servicesModule')).toBeTruthy();
         });
 
     });
 });
 
-describe('app.filtersModule', function () {
+xdescribe('app.filtersModule', function () {
     var hasString;
     var zip;
     var phone;

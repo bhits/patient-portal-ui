@@ -1,6 +1,14 @@
-﻿(function () {
+﻿
+'use strict';
 
-    'use strict';
+(function () {
+
+
+    /*
+     * General utility module for the application
+     */
+    angular.module('app.core')
+        .factory('utilityService', UtilityService);
 
     /*
      * The utility service
@@ -142,10 +150,5 @@
 
         };
     }
-
-    /*
-     * General utility module for the application
-     */
-    angular.module('app.servicesModule', [])
-        .factory('utilityService', UtilityService);
+    
 })();

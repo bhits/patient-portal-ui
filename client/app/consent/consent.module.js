@@ -13,6 +13,6 @@
                 'checklist-model',
                 'app.providerService',
                 'app.providerFiltersModule',
-                'app.servicesModule'
+                'app.core'
                ]);
 })();

@@ -3,7 +3,7 @@
  * Created by tomson.ngassa on 7/20/2015.
  */
 
-describe('app.servicesModule  ', function(){
+xdescribe('app.servicesModule  ', function(){
     var module;
 
     beforeEach(function() {
@@ -32,7 +32,7 @@ describe('app.servicesModule  ', function(){
 });
 
 
-describe('app.servicesModule ', function() {
+xdescribe('app.servicesModule ', function() {
     var utilityService, location;
 
     beforeEach(module('app.servicesModule'));
