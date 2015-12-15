@@ -14,7 +14,7 @@
                         abstract: true,
                         url: '/consent',
                         data: {pageTitle: 'Consent'},
-                        templateUrl: 'common/tmpl/content.tpl.html'
+                        templateUrl: 'app/layout/content.tpl.html'
                     })
                     .state('fe.consent.list', {
                         url: '/list',

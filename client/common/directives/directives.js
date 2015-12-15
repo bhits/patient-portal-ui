@@ -60,7 +60,7 @@
                 ppCollapsed: '=?',
                 ppChevronPreventDefault: '=?'
             },
-            templateUrl: 'common/tmpl/ibox_tools.tpl.html',
+            templateUrl: 'common/directives/ibox_tools.tpl.html',
             controller: function ($scope, $element) {
                 $scope.ppChevronPreventDefault = !!$scope.ppChevronPreventDefault;
                 var ibox = $element.closest('div.ibox');
@@ -230,7 +230,7 @@
             restrict: 'E',
             transclude: true,
             scope: {title: '@'},
-            templateUrl: 'common/tmpl/content-wrapper.tpl.html'
+            templateUrl: 'common/directives/content-wrapper.tpl.html'
         };
     }
 
@@ -242,7 +242,7 @@
                 fromlabel: "@",
                 ngModel: "="
             },
-            templateUrl: 'common/tmpl/datepicker-range.tpl.html',
+            templateUrl: 'common/directives/datepicker-range.tpl.html',
             bindToController: true,
             controllerAs: 'DatePickerVm',
             controller: DatePickerRangeController,

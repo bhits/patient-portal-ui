@@ -53,7 +53,6 @@ xdescribe("app.providerModule ProviderListController ", function() {
     beforeEach(module('app.providerService'));
     beforeEach(module('app.notificationModule'));
     beforeEach(module('app.providerFiltersModule'));
-    beforeEach(module('app.filtersModule'));
     beforeEach(module('app.providerDirectives'));
     beforeEach(module('app.providerModule'));
 

@@ -134,7 +134,7 @@
             .state('fe.patient', {
                 abstract: true,
                 url: '/patient',
-                templateUrl: 'common/tmpl/content.tpl.html'
+                templateUrl: 'app/layout/content.tpl.html'
             })
             .state('fe.patient.healthinformation', {
                 url: '/healthinformation',

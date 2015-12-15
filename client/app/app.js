@@ -248,21 +248,19 @@
         [
             /* Shared modules*/
             'app.core',
-            //'app.authInterceptorModule',
-            'app.filtersModule',
-            'templates-app',          // Third party libraries start here
+            'templates-app',
             'templates-common',
             'app.security',
 
             /*
              * Feature areas
              */
-            'app.home',         // App modules start here
+            'app.home',
+            'app.consent',
             'app.healthInformationModule',
             'app.providerModule',
-            'app.consent',
-            'app.directivesModule'
-
+            'app.directivesModule',
+            'app.layout'
         ])
         .constant("idleConfigParams", ngIdleParams)
         .config(appConfig)

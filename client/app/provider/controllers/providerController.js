@@ -109,7 +109,7 @@
                 abstract: true,
                 url: '/provider',
                 data: { pageTitle: 'Provider' },
-                templateUrl: 'common/tmpl/content.tpl.html'
+                templateUrl: 'app/layout/content.tpl.html'
             })
             .state('fe.provider.lookup', {
                 url: '/lookup',
@@ -136,7 +136,6 @@
             'app.providerService',
             'app.providerDirectives',
             'app.providerFiltersModule',
-            'app.filtersModule',
             'app.core'
         ])
         .config(ProviderConfig)
