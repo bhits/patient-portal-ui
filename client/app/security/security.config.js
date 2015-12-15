@@ -11,19 +11,19 @@
      */
     angular
         .module('app.security')
-        .config(SecurityConfig);
+            .config(SecurityConfig);
 
-    /* @ngInject */
-    function SecurityConfig($stateProvider){
+            /* @ngInject */
+            function SecurityConfig($stateProvider){
 
-        $stateProvider
-            .state('fe.login', {
-                url: "/login",
-                data: {pageTitle: 'Login'},
-                templateUrl: "app/security/securityLogin.html",
-                controllerAs: "loginVm",
-                controller: 'LoginController'
-            });
-    }
+                $stateProvider
+                    .state('fe.login', {
+                        url: "/login",
+                        data: {pageTitle: 'Login'},
+                        templateUrl: "app/security/securityLogin.html",
+                        controllerAs: "loginVm",
+                        controller: 'LoginController'
+                    });
+            }
 
 })();

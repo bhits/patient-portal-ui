@@ -254,8 +254,7 @@
             'app.consent',
             'app.directivesModule',    // Common modules start here
             'app.servicesModule',
-            'app.authInterceptorModule',
-            'app.authenticationModule',
+            //'app.authInterceptorModule',
             'app.filtersModule',
             'templates-app',          // Third party libraries start here
             'templates-common',

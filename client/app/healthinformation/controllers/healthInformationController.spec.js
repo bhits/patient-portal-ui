@@ -4,7 +4,7 @@
 
 'use strict';
 
-describe('app.healthInformationModule ', function(){
+xdescribe('app.healthInformationModule ', function(){
     var module;
 
     beforeEach(function() {
@@ -36,7 +36,7 @@ describe('app.healthInformationModule ', function(){
     });
 });
 
-describe("app.accessModule LoginController ", function() {
+xdescribe("app.accessModule LoginController ", function() {
 
     beforeEach(module('app.authenticationModule'));
     beforeEach(module('ngIdle'));
