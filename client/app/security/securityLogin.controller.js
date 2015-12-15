@@ -6,7 +6,7 @@
     /**
      * Responsible for user login using the AuthenticationService
      */
-    angular.module("app.session")
+    angular.module("app.security")
         .controller('LoginController', LoginController);
         /**
          * The Login Controller.

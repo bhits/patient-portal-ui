@@ -10,7 +10,7 @@
      * @name Security config
      */
     angular
-        .module('app.session')
+        .module('app.security')
         .config(SecurityConfig);
 
     /* @ngInject */
@@ -20,7 +20,7 @@
             .state('fe.login', {
                 url: "/login",
                 data: {pageTitle: 'Login'},
-                templateUrl: "app/session/sessionLogin.html",
+                templateUrl: "app/security/securityLogin.html",
                 controllerAs: "loginVm",
                 controller: 'LoginController'
             });

@@ -89,13 +89,13 @@
     }
 
     /*
-    *   Intercepts all the http calls
-    */
+     *   Intercepts all the http calls
+     */
     angular.module('app.authInterceptorModule',
         [
-          'app.servicesModule'
+            'app.servicesModule'
         ])
 
-    .factory('AuthInterceptorService', AuthInterceptorService);
+        .factory('AuthInterceptorService', AuthInterceptorService);
 
 })();

@@ -249,7 +249,7 @@
         [
             'app.home',         // App modules start here
             'app.healthInformationModule',
-            'app.session',
+            'app.security',
             'app.providerModule',
             'app.consent',
             'app.directivesModule',    // Common modules start here
