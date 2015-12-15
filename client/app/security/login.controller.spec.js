@@ -31,27 +31,26 @@ xdescribe('app.accessModule ', function(){
 xdescribe("app.accessModule LoginController ", function() {
 
     beforeEach(module('ui.router'));
-    beforeEach(module('app.authenticationModule'));
     beforeEach(module('ngIdle'));
-    beforeEach(module('app.accessModule'));
+    beforeEach(module('app.security'));
 
-    var state, ENVService, Idle, AuthenticationService, controller, utilityService;
+    var state, ENVService, Idle, authenticationService, controller, utilityService;
 
-    beforeEach(inject(function( $controller, $state, _Idle_, _AuthenticationService_, _ENVService_, _utilityService_) {
+    beforeEach(inject(function( $controller, $state, _Idle_, _authenticationService_, _ENVService_, _utilityService_) {
         state = $state;
         Idle = _Idle_;
         ENVService = _ENVService_;
-        AuthenticationService = _AuthenticationService_;
+        authenticationService = _authenticationService_;
         utilityService = _utilityService_;
 
         spyOn(utilityService,'scrollTo').andCallThrough();
-        spyOn(AuthenticationService,'login').andCallThrough();
+        spyOn(authenticationService,'login').andCallThrough();
         spyOn(Idle,'watch').andCallThrough();
         spyOn(state,'go').andCallThrough();
 
         controller = $controller('LoginController', {
             $state: state,
-            AuthenticationService: AuthenticationService,
+            authenticationService: authenticationService,
             Idle: Idle,
             ENVService: ENVService,
             utilityService: utilityService
@@ -71,7 +70,7 @@ xdescribe("app.accessModule LoginController ", function() {
     it('should login user', function(){
         controller.loginData = {userName: "test", password: "test"};
         controller.login();
-        expect(AuthenticationService.login).toHaveBeenCalledWith({userName: "test", password: "test"});
+        expect(authenticationService.login).toHaveBeenCalledWith({userName: "test", password: "test"});
     });
 
 });

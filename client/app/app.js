@@ -30,11 +30,10 @@
      *  The app run function
      *
      * @param $rootScope - the root scope
-     * @param AuthenticationService - the authentication service
      * @param $state - the state service
      * @param $anchorScroll - the anscroll service
      */
-    function appRun($rootScope, AuthenticationService, $state, $anchorScroll) {
+    function appRun($rootScope, $state, $anchorScroll) {
         $rootScope.$state = $state;
         $anchorScroll.yOffset = 135;
     }
@@ -49,7 +48,7 @@
      * The root controller of the application
      *
      * @param $scope - the scope object
-     * @param AuthenticationService - the authenticationservice
+     * @param authenticationService - the authenticationService
      * @param ENVService
      * @param $state - the state service
      * @param utilityService - the utility service
@@ -62,18 +61,18 @@
      *
      * @constructor
      */
-    function AppController($scope, AuthenticationService, ENVService, $state, utilityService, notificationService, $modal, $modalStack, Idle, idleConfigParams, $rootScope) {
+    function AppController($scope, authenticationService, ENVService, $state, utilityService, notificationService, $modal, $modalStack, Idle, idleConfigParams, $rootScope) {
 
         var appVm = this;
         appVm.oauth = ENVService.oauth;
-        appVm.oauth.state = AuthenticationService.getState();
+        appVm.oauth.state = authenticationService.getState();
 
         $rootScope.$on('$stateChangeSuccess', function (event, data) {
             $modalStack.dismissAll('cancel');
         });
 
         $rootScope.$on('oauth:login', function (event, token) {
-            if (AuthenticationService.isValidState(token.state)) {
+            if (authenticationService.isValidState(token.state)) {
                 Idle.watch();
                 $state.go('fe.index.home');
             } else {

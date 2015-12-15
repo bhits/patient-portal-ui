@@ -89,8 +89,7 @@ describe("app AppController ", function() {
     beforeEach(module('ui.router'));
     beforeEach(module('ngIdle'));
     beforeEach(module('angular-loading-bar'));
-    beforeEach(module('app.authenticationModule'));
-    beforeEach(module('app.authenticationModule'));
+    beforeEach(module('app.security'));
     beforeEach(module('ui.bootstrap'));
     beforeEach(module('templates-app'));
     beforeEach(module('ui.bootstrap'));
@@ -105,27 +104,27 @@ describe("app AppController ", function() {
     beforeEach(module('app'));
 
 
-    var controller, scope, rootScope, state,anchorScroll,utilityService, AuthenticationService, Idle;
+    var controller, scope, rootScope, state,anchorScroll,utilityService, authenticationService, Idle;
 
-    beforeEach(inject(function($rootScope, $controller, $state, $anchorScroll, _utilityService_, _AuthenticationService_, _Idle_, _$modal_, _idleConfigParams_) {
+    beforeEach(inject(function($rootScope, $controller, $state, $anchorScroll, _utilityService_, _authenticationService_, _Idle_, _$modal_, _idleConfigParams_) {
         rootScope = $rootScope;
         scope = $rootScope.$new();
         state = $state;
         anchorScroll = $anchorScroll;
         utilityService = _utilityService_;
-        AuthenticationService = _AuthenticationService_;
+        authenticationService = _authenticationService_;
         Idle = _Idle_;
 
         spyOn(utilityService, 'setShowHealthInformationMenu').andCallThrough();
 
         spyOn(rootScope, "$broadcast");
 
-        //spyOn(AuthenticationService, 'logOut').andCallThrough();
+        //spyOn(authenticationService, 'logOut').andCallThrough();
         spyOn(Idle, 'unwatch').andCallThrough();
 
         controller = $controller('AppController', {
             $scope: scope,
-            AuthenticationService: _AuthenticationService_,
+            authenticationService: _authenticationService_,
             $state: $state,
             utilityService: _utilityService_,
             $modal:_$modal_,

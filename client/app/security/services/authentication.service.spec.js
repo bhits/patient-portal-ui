@@ -4,11 +4,11 @@
 
 'use strict';
 
-xdescribe('app.authenticationModule ', function(){
+xdescribe('app.security ', function(){
     var module;
 
     beforeEach(function() {
-        module = angular.module("app.authenticationModule");
+        module = angular.module("app.security");
     });
 
     it("should be registered", function() {
@@ -46,23 +46,23 @@ xdescribe('app.authenticationModule ', function(){
 });
 
 
-xdescribe('app.authenticationModule, AuthenticationService ', function() {
-    var utilityService, localStorageService, q, jwtHelper, AuthenticationService, location, base64, $httpBackend;
+xdescribe('app.authenticationModule, authenticationService ', function() {
+    var utilityService, localStorageService, q, jwtHelper, authenticationService, location, base64, $httpBackend;
 
     beforeEach(module('LocalStorageModule'));
     beforeEach(module('angular-jwt'));
     beforeEach(module('app.servicesModule'));
     beforeEach(module('ab-base64'));
     beforeEach(module('ngResource'));
-    beforeEach(module('app.authenticationModule'));
+    beforeEach(module('app.security'));
 
-    beforeEach(inject(function ( _localStorageService_, _$q_, _jwtHelper_, _AuthenticationService_, _$location_, _base64_, _utilityService_, _$httpBackend_) {
+    beforeEach(inject(function ( _localStorageService_, _$q_, _jwtHelper_, _authenticationService_, _$location_, _base64_, _utilityService_, _$httpBackend_) {
 
         utilityService = utilityService;
         localStorageService = _localStorageService_;
         q = _$q_;
         jwtHelper = _jwtHelper_;
-        AuthenticationService = _AuthenticationService_;
+        authenticationService = _authenticationService_;
         location = _$location_;
         base64 = _base64_;
         $httpBackend = _$httpBackend_;
@@ -79,7 +79,7 @@ xdescribe('app.authenticationModule, AuthenticationService ', function() {
         spyOn(localStorageService, 'get').andReturn({
             token: { AccessToken: "", ExpiresIn: 3600, RefreshToken: "d387461fdbb0ee8d9a4dfbc39003ac85", TokenType: "Bearer"}
         });
-        var status = AuthenticationService.clearCache(
+        var status = authenticationService.clearCache(
             function(data ){ status = data.status;},
             function(error){}
         );
@@ -94,7 +94,7 @@ xdescribe('app.authenticationModule, AuthenticationService ', function() {
         spyOn(localStorageService, 'get').andReturn({
             token: { AccessToken: "", ExpiresIn: 3600, RefreshToken: "d387461fdbb0ee8d9a4dfbc39003ac85", TokenType: "Bearer"}
         });
-        var status = AuthenticationService.revokeToken(
+        var status = authenticationService.revokeToken(
             function(data ){ status = data.status;},
             function(error){}
         );
@@ -109,31 +109,31 @@ xdescribe('app.authenticationModule, AuthenticationService ', function() {
             userName: "test"
         });
 
-        expect(AuthenticationService.authentication.isAuth).toBeFalsy();
-        expect(AuthenticationService.authentication.userName).toEqual("");
-        AuthenticationService.fillAuthData();
+        expect(authenticationService.authentication.isAuth).toBeFalsy();
+        expect(authenticationService.authentication.userName).toEqual("");
+        authenticationService.fillAuthData();
 
-        expect(AuthenticationService.authentication.isAuth).toBeTruthy();
-        expect(AuthenticationService.authentication.userName).toEqual("test");
+        expect(authenticationService.authentication.isAuth).toBeTruthy();
+        expect(authenticationService.authentication.userName).toEqual("test");
     });
 
     it("should logout", function() {
         $httpBackend.expectPOST("https://sts-dev.feisystems.com/identity/tokens/revoke").respond({status: 201});
         $httpBackend.expectPOST("https://testbed-api-dev.feisystems.com/user/clearcacheforuser").respond({status: 201});
 
-        spyOn(AuthenticationService, 'revokeToken').andCallThrough();
-        spyOn(AuthenticationService, 'clearCache').andCallThrough();
+        spyOn(authenticationService, 'revokeToken').andCallThrough();
+        spyOn(authenticationService, 'clearCache').andCallThrough();
 
         spyOn(localStorageService, 'get').andReturn({
             session: { AccessToken: "", ExpiresIn: 3600, RefreshToken: "d387461fdbb0ee8d9a4dfbc39003ac85", TokenType: "Bearer"},
             userName: "test"
         });
 
-        AuthenticationService.logOut();
+        authenticationService.logOut();
         $httpBackend.flush();
 
-        expect(AuthenticationService.authentication.isAuth).toBeFalsy();
-        expect(AuthenticationService.authentication.userName).toEqual("");
+        expect(authenticationService.authentication.isAuth).toBeFalsy();
+        expect(authenticationService.authentication.userName).toEqual("");
     });
 
     xit("should login", function() {
@@ -148,11 +148,11 @@ xdescribe('app.authenticationModule, AuthenticationService ', function() {
             userName: "test"
         });
 
-        AuthenticationService.login();
+        authenticationService.login();
         $httpBackend.flush();
 
-        expect(AuthenticationService.authentication.isAuth).toBeFalsy();
-        expect(AuthenticationService.authentication.userName).toEqual("");
+        expect(authenticationService.authentication.isAuth).toBeFalsy();
+        expect(authenticationService.authentication.userName).toEqual("");
     });
 
 });

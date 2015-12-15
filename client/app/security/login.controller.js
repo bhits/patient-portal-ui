@@ -3,9 +3,6 @@
 
 (function () {
 
-    /**
-     * Responsible for user login using the AuthenticationService
-     */
     angular
         .module("app.security")
             .controller('LoginController', LoginController);

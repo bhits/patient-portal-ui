@@ -57,25 +57,25 @@ xdescribe("app.providerModule ProviderListController ", function() {
     beforeEach(module('app.providerDirectives'));
     beforeEach(module('app.providerModule'));
 
-    var scope, state, rootScope, Idle, AuthenticationService, deferred, controller;
+    var scope, state, rootScope, Idle, authenticationService, deferred, controller;
 
-    beforeEach(inject(function($rootScope, $controller, $state, _Idle_, _$q_, _AuthenticationService_) {
+    beforeEach(inject(function($rootScope, $controller, $state, _Idle_, _$q_, _authenticationService_) {
         rootScope = $rootScope;
         scope = $rootScope.$new();
         state = $state;
         deferred = _$q_.defer();
 
         Idle = _Idle_;
-        AuthenticationService = _AuthenticationService_;
+        authenticationService = _authenticationService_;
 
         deferred.resolve({Error: { message:"Invalid username and/or password."}});
-        spyOn(AuthenticationService, 'login').andReturn(deferred.promise);
+        spyOn(authenticationService, 'login').andReturn(deferred.promise);
 
         controller = $controller('ProviderListController', {
             $scope: scope,
             $state: state,
             Idle: Idle,
-            AuthenticationService: AuthenticationService
+            authenticationService: authenticationService
         });
     }));
 

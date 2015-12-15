@@ -4,11 +4,11 @@
 
 'use strict';
 
-xdescribe('app.authInterceptorModule ', function(){
+xdescribe('app.security ', function(){
     var module;
 
     beforeEach(function() {
-        module = angular.module("app.authInterceptorModule");
+        module = angular.module("app.security");
     });
 
     it("should be registered", function() {
@@ -40,23 +40,22 @@ xdescribe('app.authInterceptorModule ', function(){
     });
 });
 
-xdescribe('app.authInterceptorModule, AuthInterceptorService ', function(){
-    var utilityService, localStorageService, q, jwtHelper, AuthInterceptorService, config, location, AuthenticationService, injector;
+xdescribe('app.authInterceptorModule, authInterceptorService ', function(){
+    var utilityService, localStorageService, q, jwtHelper, authInterceptorService, config, location, AuthenticationService, injector;
 
     beforeEach(module('LocalStorageModule'));
     beforeEach(module('angular-jwt'));
     beforeEach(module('app.servicesModule'));
-    beforeEach(module('app.authInterceptorModule'));
-    beforeEach(module('app.authenticationModule'));
+    beforeEach(module('app.security'));
 
-    beforeEach(inject(function($injector, _localStorageService_, _$q_, _jwtHelper_, _AuthInterceptorService_, _$location_){
+    beforeEach(inject(function($injector, _localStorageService_, _$q_, _jwtHelper_, _authInterceptorService_, _$location_){
         injector = $injector;
         utilityService = $injector.get('utilityService');
 
         localStorageService = _localStorageService_;
         q = _$q_;
         jwtHelper = _jwtHelper_;
-        AuthInterceptorService = _AuthInterceptorService_;
+        authInterceptorService = _authInterceptorService_;
         location = _$location_;
         spyOn(utilityService, 'redirectTo').andCallThrough();
     }));
@@ -64,7 +63,7 @@ xdescribe('app.authInterceptorModule, AuthInterceptorService ', function(){
     xit("should redirect to login", function() {
         spyOn(jwtHelper, 'isTokenExpired').andCallThrough();
         config = {};
-        config = AuthInterceptorService.request(config);
+        config = authInterceptorService.request(config);
         expect(location.path()).toEqual("/fe/login");
     });
 
@@ -72,7 +71,7 @@ xdescribe('app.authInterceptorModule, AuthInterceptorService ', function(){
         spyOn(jwtHelper, 'isTokenExpired').andCallThrough();
         config = {};
         location.path("/");
-        config = AuthInterceptorService.request(config);
+        config = authInterceptorService.request(config);
         expect(location.path()).toEqual("/fe/login");
     });
 
@@ -85,7 +84,7 @@ xdescribe('app.authInterceptorModule, AuthInterceptorService ', function(){
         });
 
         config = {header: "information"};
-        config = AuthInterceptorService.request(config);
+        config = authInterceptorService.request(config);
         expect(location.path()).toEqual("/fe/login");
     });
 
@@ -93,14 +92,14 @@ xdescribe('app.authInterceptorModule, AuthInterceptorService ', function(){
         spyOn(jwtHelper, 'isTokenExpired').andReturn(false);
         spyOn(localStorageService, 'get').andReturn({ token: "my token"});
         config = {header: "information"};
-        config = AuthInterceptorService.request(config);
+        config = authInterceptorService.request(config);
         expect(config.headers.Authorization).toEqual("Bearer  my token");
     });
 
     it("should route to login in case of 401 ", function() {
         spyOn(localStorageService, 'get').andReturn("");
         var rejection = {status: 401};
-        config = AuthInterceptorService.responseError(rejection);
+        config = authInterceptorService.responseError(rejection);
         expect(location.path()).toEqual("/fe/login");
     });
 
@@ -110,7 +109,7 @@ xdescribe('app.authInterceptorModule, AuthInterceptorService ', function(){
         });
         spyOn(jwtHelper, 'isTokenExpired').andReturn(true);
         var rejection = {status: 401};
-        config = AuthInterceptorService.responseError(rejection);
+        config = authInterceptorService.responseError(rejection);
         expect(location.path()).toEqual("/fe/login");
     });
 

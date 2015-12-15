@@ -5,7 +5,7 @@
 
     angular
         .module("app.security")
-            .factory('AuthenticationService', AuthenticationService);
+            .factory('authenticationService', AuthenticationService);
 
             /**
              * @ngInject
