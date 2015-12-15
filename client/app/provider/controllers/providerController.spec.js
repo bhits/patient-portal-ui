@@ -7,7 +7,7 @@
 
 'use strict';
 
-describe('app.providerModule ', function(){
+xdescribe('app.providerModule ', function(){
     var module;
 
     beforeEach(function() {

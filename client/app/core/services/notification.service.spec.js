@@ -4,7 +4,7 @@
 
 'use strict';
 
-describe('app.notificationModule  ', function(){
+xdescribe('app.notificationModule  ', function(){
     var module;
 
     beforeEach(function() {

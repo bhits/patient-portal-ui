@@ -19,6 +19,7 @@
             'angular-loading-bar',
             'oauth',
             'checklist-model',
-            'ngStorage'
+            'ngStorage',
+            'cgNotify'
         ]);
 })();

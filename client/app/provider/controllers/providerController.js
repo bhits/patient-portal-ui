@@ -135,7 +135,6 @@
         [
             'app.providerService',
             'app.providerDirectives',
-            'app.notificationModule',
             'app.providerFiltersModule',
             'app.filtersModule',
             'app.core'
