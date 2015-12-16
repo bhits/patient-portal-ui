@@ -36,50 +36,8 @@
                 <a ui-sref="fe.provider.list"><i class="fa fa-user-md"></i> <span class="nav-label">Providers</span></a>
             </li>
 
-            <li ng-class="{active: $state.includes('fe.patient')}" ng-if="AppVm.healthInformationMenu" ng-click="AppVm.routeToHealthInformation()">
-                <a href=""><i class="fa fa-stethoscope"></i> <span class="nav-label"> Health Information</span> <span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level" ng-class="{'in': ($state.includes('fe.patient') )}">
-                    <li ui-sref-active="active" ng-hide="AppVm.hideSection && !AppVm.toggleDemographics" >
-                        <a href="" ng-click="AppVm.scrollToAndExpand('demographics', false)">
-                            <i class="fa" ng-class="{'fa-circle': AppVm.toggleDemographics, 'fa-circle-o':!AppVm.toggleDemographics }"></i>Demographics
-                        </a>
-                    </li>
-                    <li ui-sref-active="active" ng-hide="AppVm.hideSection && !AppVm.toggleMedications" >
-                        <a  href="" ng-click="AppVm.scrollToAndExpand('medications', false)">
-                            <i class="fa " ng-class="{'fa-circle': AppVm.toggleMedications, 'fa-circle-o': !AppVm.toggleMedications }"></i>Medications
-                        </a>
-                    </li>
-                    <li ui-sref-active="active" ng-hide="AppVm.hideSection && !AppVm.toggleAlerts" >
-                        <a  href="" ng-click="AppVm.scrollToAndExpand('alerts', false)">
-                            <i class="fa " ng-class="{'fa-circle': AppVm.toggleAlerts, 'fa-circle-o': !AppVm.toggleAlerts }"></i>Alerts
-                        </a>
-                    </li>
-                    <li ui-sref-active="active" ng-hide="AppVm.hideSection && !AppVm.toggleResults" >
-                        <a  href="" ng-click="AppVm.scrollToAndExpand('results', true)">
-                            <i class="fa " ng-class="{'fa-circle': AppVm.toggleResults, 'fa-circle-o': !AppVm.toggleResults }" ></i>Results
-                        </a>
-                    </li>
-                    <li ui-sref-active="active" ng-hide="AppVm.hideSection && !AppVm.toggleEncounters" >
-                        <a  href="" ng-click="AppVm.scrollToAndExpand('encounters', true)">
-                            <i class="fa " ng-class="{'fa-circle': AppVm.toggleEncounters, 'fa-circle-o': !AppVm.toggleEncounters }" ></i>Encounters
-                        </a>
-                    </li>
-                    <li ui-sref-active="active" ng-hide="AppVm.hideSection && !AppVm.toggleProblems" >
-                        <a  href="" ng-click="AppVm.scrollToAndExpand('problems', false)">
-                            <i class="fa " ng-class="{'fa-circle': AppVm.toggleProblems, 'fa-circle-o': !AppVm.toggleProblems }" ></i>Problems
-                        </a>
-                    </li>
-                    <li ui-sref-active="active" ng-hide="AppVm.hideSection && !AppVm.toggleVitalSigns" >
-                        <a  href="" ng-click="AppVm.scrollToAndExpand('vitalSigns', true)">
-                            <i class="fa " ng-class="{'fa-circle': AppVm.toggleVitalSigns, 'fa-circle-o': !AppVm.toggleVitalSigns }" ></i>Vital Signs
-                        </a>
-                    </li>
-                    <li ui-sref-active="active" ng-hide="AppVm.hideSection && !AppVm.toggleProcedure" >
-                        <a  href="" ng-click="AppVm.scrollToAndExpand('procedures', false)">
-                            <i class="fa "  ng-class="{'fa-circle': AppVm.toggleProcedure, 'fa-circle-o': !AppVm.toggleProcedure }"  ></i>Procedures
-                        </a>
-                    </li>
-                </ul>
+             <li ng-class="{active: $state.includes('fe.patient')}" ng-if="AppVm.healthInformationMenu" ng-click="AppVm.routeToHealthInformation()"  >
+                <a ui-sref="fe.patient.healthinformation"><i class="fa fa-user-md"></i> <span class="nav-label">Health Information</span></a>
             </li>
         </ul>
     </div>

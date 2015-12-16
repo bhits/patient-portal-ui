@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<div class="row">
+    <div class="col-sm-12 relative" id="demographics">
+        <div class="ibox panel panel-darkblue float-e-margins">
+            <div class="ibox-title  modified panel-heading right-padding30">
+                <div class="row">
+                    <div class="col-sm-12 m-t-xs">
+                        <h3>
+                            <span ng-bind="ccdaDocumentVm.document.type"></span>
+                            <span class="m-b-none m-l-sm">
+                                Created on <span ng-bind="ccdaDocumentVm.document.date"></span> at
+                                <span ng-bind="ccdaDocumentVm.document.title"></span>
+                            </span>
+                        </h3>
+                    </div>
+
+                    <div class="chevron_absolute">
+                        <div ibox-tools class="white"  total=""></div>
+                    </div>
+                </div>
+            </div>
+            <div class="ibox-content modified">
+                <div class="row m-b">
+                    <div class="col-sm-6">
+                        <div>
+                            <label for="patientName">Patient Name:</label>
+                            <span ng-bind="ccdaDocumentVm.patient.name" id="patientName"></span>
+                        </div>
+                        <div>
+                            <label for="patientGender">Gender: </label>
+                            <span ng-bind="ccdaDocumentVm.patient.gender" id="patientGender"></span>
+                        </div>
+                        <div>
+                            <label for="patientDOB">Birthdate: </label>
+                            <span ng-bind="ccdaDocumentVm.patient.dob" id="patientDOB"></span>
+                        </div>
+                        <div>
+                            <label for="patientAddress">Address: </label>
+                            <span ng-bind="ccdaDocumentVm.patient.contactInfo.address.addressLine" id="patientAddress"></span>
+                            <span ng-bind="ccdaDocumentVm.patient.contactInfo.address.city"></span>
+                        </div>
+
+                    </div>
+                    <div class="col-sm-6">
+                        <div>
+                            <label for="author">Provider: </label>
+                            <span ng-bind="ccdaDocumentVm.author.providerName" id="author"></span>
+                        </div>
+                        <div>
+                            <label for="service">Treatment: </label>
+                            <span ng-bind="ccdaDocumentVm.treatment.service" id="service"></span>
+                        </div>
+                        <div>
+                            <label for="serviceStartDate">Treatement Start Date: </label>
+                            <span ng-bind="ccdaDocumentVm.treatment.serviceStartDate" id="serviceStartDate"></span>
+                        </div>
+                        <div>
+                            <label for="serviceEndDate">Treatment End Date: </label>
+                            <span ng-bind="ccdaDocumentVm.treatment.serviceEndDate" id="serviceEndDate"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div ng-repeat="section in ccdaDocumentVm.sections">
+                    <pp-ccda-document-section section="section" ></pp-ccda-document-section>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>

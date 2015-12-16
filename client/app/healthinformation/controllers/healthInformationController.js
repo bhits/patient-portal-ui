@@ -29,7 +29,7 @@
         HealthInformationVm.document =  HealthInformationService.getSectionByName(HealthInformationVm.healthinfotmation, 'Document');
         HealthInformationVm.provider =  HealthInformationService.getSectionByName(HealthInformationVm.document, 'author');
         HealthInformationVm.patient =  HealthInformationService.getSectionByName(HealthInformationVm.document, 'patient');
-        HealthInformationVm.section =  HealthInformationService.getSectionByName(HealthInformationVm.document, 'section');
+        HealthInformationVm.sections =  HealthInformationService.getSectionByName(HealthInformationVm.document, 'section');
 
 
 
