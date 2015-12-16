@@ -52,7 +52,7 @@ $(document).ready(function () {
     })
 
     $(window).bind("beforeunload", function() {
-       alert("About to close window or tab");
+       //alert("About to close window or tab");
     })
     //Will be revisit for stickyheader
     //$(window).scroll(function(){
