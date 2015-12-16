@@ -7,9 +7,15 @@
                 </div>
                 <div class="panel-body">
                     <div class="form-group">
-                        <label for="name">Name</label>
+                        <label for="name">Name
+                            <span ng-messages="medicalDocumentUploadForm.name.$error"
+                                  class="text-alert" role="alert">
+                                <span ng-message="required">Required</span>
+                            </span>
+                        </label>
                         <input id="name" name="name" type="text" class="form-control" placeholder="Document Name"
-                               ng-model="MedicalDocumentsUploadVm.name"/>
+                               ng-model="MedicalDocumentsUploadVm.name"
+                               required/>
                     </div>
 
                     <div class="form-group">
@@ -20,23 +26,28 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="documentType">Clinical Document Type: </label>
+                        <label for="documentType">Medical Document Type: </label>
                         <span class="info-blue italic">Episode Summary Note (Only)</span>
                         <input type="hidden" id="documentType" name="documentType"
                                ng-model="MedicalDocumentsUploadVm.documentType"/>
                     </div>
 
                     <div class="form-group">
-                        <label for="file">Clinical Document</label>
+                        <label for="file">Medical Document</label>
                         <input type="file" name="file" id="file"
-                               ng-model="MedicalDocumentsUploadVm.myFile"
-                               file-model="myFile"/>
+                               file-model="medicalFile" required/>
                     </div>
 
                     <button class="btn btn-primary dark-green" type="button"
-                            ng-click="MedicalDocumentsUploadVm.uploadDocument()">
+                            ng-click="MedicalDocumentsUploadVm.uploadDocument()"
+                            ng-disabled="medicalDocumentUploadForm.$invalid">
                         <strong>Upload</strong>
                     </button>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-lg-8" ng-show="medicalDocumentUploadForm.$invalid">
+                    <div class="text-alert italic m-b">
+                        Please complete required field to upload.
+                    </div>
                 </div>
             </div>
         </div>

@@ -32,26 +32,19 @@
             bindToController: true,
             controller: ['$scope', '$state', 'MedicalDocumentsService', 'notificationService',
                 function ($scope, $state, MedicalDocumentsService, notificationService) {
-                    var MedicalDocumentsUploadVm = this;
-
-                    //MedicalDocumentsUploadVm.file = "";
-                    MedicalDocumentsUploadVm.name = "";
-                    MedicalDocumentsUploadVm.description = "";
-                    MedicalDocumentsUploadVm.documentType = "";
+                    var Vm = this;
 
                     var prepareMedicalDocument = function () {
-
                         var medicalDocument = {
-                            file: $scope.myFile,
-                            name: MedicalDocumentsUploadVm.name,
-                            description: MedicalDocumentsUploadVm.description,
-                            documentType: MedicalDocumentsUploadVm.documentType
+                            file: $scope.medicalFile,
+                            name: Vm.name,
+                            description: Vm.description,
+                            documentType: Vm.documentType
                         };
-
                         return medicalDocument;
                     };
 
-                    MedicalDocumentsUploadVm.uploadDocument = function () {
+                    Vm.uploadDocument = function () {
                         var medicalDocument = prepareMedicalDocument();
 
                         MedicalDocumentsService.uploadMedicalDocument(medicalDocument)
