@@ -37,7 +37,7 @@
             });
     }
 
-    function MedicalDocumentsListController(medicalDocumentsList, $modal, MedicalDocumentsService){
+    function MedicalDocumentsListController(medicalDocumentsList, $modal, MedicalDocumentsService, notificationService){
         var Vm = this;
         Vm.medicalDocumentsList = medicalDocumentsList;
         console.log(medicalDocumentsList);
@@ -85,10 +85,10 @@
 
         Vm.downloadFile = function (medicalDocument) {
             MedicalDocumentsService.downloadMedicalDocument(medicalDocument.id)
-                .then(function(sucess){
-                    console.log('sucess:' + sucess);
-                }, function(error) {
-                    console.log('error:' + error);
+                .then(function(){
+                    notificationService.success('Success in downloading medical document');
+                }, function() {
+                    notificationService.error('Error in downloading medical document');
                 });
         };
 

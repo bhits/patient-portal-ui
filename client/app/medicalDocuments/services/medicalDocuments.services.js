@@ -28,21 +28,27 @@
                 medicalDocumentsResource.delete({id: id}, success, error);
             },
 
-            uploadMedicalDocument: function (file,name,description,documentType,success, error) {
-                var uploadUrl =ENVService.securedApis.pcmApiBaseUrl + "/clinicaldocuments";
-                var fd = new FormData();
-                fd.append('file', file);
-                fd.append('name', name);
-                fd.append('description', description);
-                fd.append('documentType', documentType);
-                $http.post(uploadUrl, fd, {
+            uploadMedicalDocument: function (medicalDocument) {
+                var deferred = $q.defer();
+
+                var uploadUrl = ENVService.securedApis.pcmApiBaseUrl + "/clinicaldocuments";
+                var formData = new FormData();
+
+                formData.append('file', medicalDocument.file);
+                formData.append('name', medicalDocument.name);
+                formData.append('description', medicalDocument.description);
+                formData.append('documentType', medicalDocument.documentType);
+
+                $http.post(uploadUrl, formData, {
                     transformRequest: angular.identity,
                     headers: {'Content-Type': undefined}
                 })
-                    .success(function(){
-                    })
-                    .error(function(){
+                    .then(function () {
+                        deferred.resolve('success');
+                    }, function () {
+                        deferred.reject('error');
                     });
+                return deferred.promise;
             }
         };
     }

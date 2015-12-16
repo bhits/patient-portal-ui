@@ -4,17 +4,17 @@
 (function () {
     'use strict';
 
-    angular.module('app.medicalDocumentsDirectives',[])
+    angular.module('app.medicalDocumentsDirectives', [])
         .directive('ppMedicalDocumentsUpload', ppMedicalDocumentsUpload)
         .directive("fileModel", ['$parse', function ($parse) {
             return {
                 restrict: 'A',
-                link: function(scope, element, attrs) {
+                link: function (scope, element, attrs) {
                     var model = $parse(attrs.fileModel);
                     var modelSetter = model.assign;
 
-                    element.bind('change', function(){
-                        scope.$apply(function(){
+                    element.bind('change', function () {
+                        scope.$apply(function () {
                             modelSetter(scope, element[0].files[0]);
                         });
                     });
@@ -25,13 +25,13 @@
     function ppMedicalDocumentsUpload() {
         return {
             restrict: 'E',
-            replace:true,
+            replace: true,
             templateUrl: 'app/medicalDocuments/tmpl/medicalDocumentsUpload.tpl.html',
             scope: {},
             controllerAs: 'MedicalDocumentsUploadVm',
             bindToController: true,
-            controller: ['$scope', '$location', '$element', '$timeout', '$state', 'utilityService', 'MedicalDocumentsService', 'notificationService',
-                function ($scope, $location, $element, $timeout, $state, utilityService, MedicalDocumentsService, notificationService) {
+            controller: ['$scope', '$state', 'MedicalDocumentsService', 'notificationService',
+                function ($scope, $state, MedicalDocumentsService, notificationService) {
                     var MedicalDocumentsUploadVm = this;
 
                     //MedicalDocumentsUploadVm.file = "";
@@ -42,7 +42,7 @@
                     var prepareMedicalDocument = function () {
 
                         var medicalDocument = {
-                            file:$scope.myFile,
+                            file: $scope.myFile,
                             name: MedicalDocumentsUploadVm.name,
                             description: MedicalDocumentsUploadVm.description,
                             documentType: MedicalDocumentsUploadVm.documentType
@@ -54,21 +54,14 @@
                     MedicalDocumentsUploadVm.uploadDocument = function () {
                         var medicalDocument = prepareMedicalDocument();
 
-                        MedicalDocumentsService.uploadMedicalDocument($scope.myFile, MedicalDocumentsUploadVm.name,
-                            MedicalDocumentsUploadVm.description,MedicalDocumentsUploadVm.documentType,
-                            function (response) {
-                                notificationService.success("Success in uploading medical document.");
-                                $state.go('fe/medicaldocuments/upload');
-                            },
-                            function (error) {
-                                if (error.status === 409) {
-                                    notificationService.warn("Error you cannot create duplicate document.");
-                                } else {
-                                    notificationService.error("Error in uploading medical document");
-                                }
+                        MedicalDocumentsService.uploadMedicalDocument(medicalDocument)
+                            .then(function () {
+                                $state.go($state.current, {}, {reload: true});
+                                notificationService.success('Success in uploading medical document');
+                            }, function () {
+                                notificationService.error('Error in uploading medical document');
                             }
                         );
-
                         console.log(medicalDocument);
                     };
                 }]
