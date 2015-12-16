@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    function MedicalDocumentsService($resource, ENVService, $window, $q, $timeout, $http) {
+    function MedicalDocumentsService($resource, $window, $q, $timeout, $http, ENVService) {
         var medicalDocumentsListResource = $resource(ENVService.securedApis.pcmApiBaseUrl + "/clinicaldocuments");
         var medicalDocumentsResource = $resource(ENVService.securedApis.pcmApiBaseUrl + "/clinicaldocuments/:id", {id: '@id'});
         return {

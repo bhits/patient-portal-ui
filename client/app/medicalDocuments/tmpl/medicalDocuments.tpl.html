@@ -1,54 +1,6 @@
 <content-wrapper title="Upload Medical Documents">
     <div class="row">
         <pp-medical-documents-upload></pp-medical-documents-upload>
-        <div class="col-sm-6">
-            <div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h2 class="custom-no-margin-top"><i class="fa fa-files-o"></i> Uploaded Documents</h2>
-                    </div>
-                    <div class="panel-body">
-                        <table class="table table-striped table-hover">
-                            <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Document Type</th>
-                                <th>Description</th>
-                                <th>Operation</th>
-                            </tr>
-                            </thead>
-
-                            <tbody>
-                            <tr ng-if="MedicalDocumentsListVm.medicalDocumentsList.length === 0">
-                                <td colspan="5" class="text-center"> No Medical Documents has been added.</td>
-                            </tr>
-                            <tr ng-repeat="medicalDocument in MedicalDocumentsListVm.medicalDocumentsList">
-                                <td>
-                                    <span ng-bind="medicalDocument.name"></span>
-                                </td>
-                                <td>
-                                    <span>Episode Summary Note</span>
-                                </td>
-                                <td>
-                                    <span ng-bind="medicalDocument.description"></span>
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-success btn-xs"
-                                            ng-click="MedicalDocumentsListVm.downloadFile(medicalDocument)">
-                                        <span class="fa fa-download"></span> Download
-                                    </button>
-                                    <button type="button" class="btn btn-danger btn-xs"
-                                            ng-click="MedicalDocumentsListVm.openDeleteMedicalDocumentModal(medicalDocument, 'sm')">
-                                        <span class="fa fa-times"></span> Remove
-                                    </button>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-         <!--<pp-medical-documents-uploaded-documents></pp-medical-documents-uploaded-documents>-->
+        <pp-uploaded-documents medicaldocumentslist="MedicalDocumentsListVm.medicalDocumentsList"></pp-uploaded-documents>
     </div>
 </content-wrapper>
