@@ -6,11 +6,12 @@
             .directive('ppContentWrapper', ppContentWrapper);
 
             function ppContentWrapper() {
-                return {
+                var directive  =  {
                     restrict: 'E',
                     transclude: true,
                     scope: {title: '@'},
                     templateUrl: 'app/core/directives/content-wrapper.html'
                 };
+                return directive;
             }
 })();

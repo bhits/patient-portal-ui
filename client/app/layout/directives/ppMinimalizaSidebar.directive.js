@@ -9,42 +9,50 @@
              * @ngInject
              */
             function ppMinimalizaSidebar($timeout) {
-                return {
+                var directive =  {
                     restrict: 'A',
                     scope: {
                         togglesidebar: "&"
                     },
-                    template: '<a class="navbar-minimalize minimalize-styl-2 btn btn-primary dark-green"  ng-click="minimalize()"><i class="fa fa-bars"></i></a>',
-                    controller: function ($scope, $element) {
+                    templateUrl: 'app/layout/directives/minimalizaSidebar.html',
+                    controllerAs: 'minimalizaSidebarVm',
+                    bindToController: true,
+                    controller: MinimalizaSidebarController
 
-                        $scope.minimalize = function () {
-
-                            $scope.togglesidebar();
-
-                            // Side Navbar
-                            $("body").toggleClass("mini-navbar");
-
-                            if (!$('body').hasClass('mini-navbar') || $('body').hasClass('body-small')) {
-                                // Hide menu in order to smoothly turn on when maximize menu
-                                $('#side-menu').hide();
-                                // For smoothly turn on menu
-                                setTimeout(
-                                    function () {
-                                        $('#side-menu').fadeIn(500);
-                                    }, 100);
-                            } else if ($('body').hasClass('fixed-sidebar')) {
-                                $('#side-menu').hide();
-                                setTimeout(
-                                    function () {
-                                        $('#side-menu').fadeIn(500);
-                                    }, 300);
-                            } else {
-                                // Remove all inline style from jquery fadeIn function to reset menu state
-                                $('#side-menu').removeAttr('style');
-                            }
-                        };
-                    }
                 };
+
+                return directive;
+
+                function MinimalizaSidebarController ($scope, $element) {
+                    var Vm = this;
+
+                    Vm.minimalize = function () {
+
+                        Vm.togglesidebar();
+
+                        // Side Navbar
+                        $("body").toggleClass("mini-navbar");
+
+                        if (!$('body').hasClass('mini-navbar') || $('body').hasClass('body-small')) {
+                            // Hide menu in order to smoothly turn on when maximize menu
+                            $('#side-menu').hide();
+                            // For smoothly turn on menu
+                            setTimeout(
+                                function () {
+                                    $('#side-menu').fadeIn(500);
+                                }, 100);
+                        } else if ($('body').hasClass('fixed-sidebar')) {
+                            $('#side-menu').hide();
+                            setTimeout(
+                                function () {
+                                    $('#side-menu').fadeIn(500);
+                                }, 300);
+                        } else {
+                            // Remove all inline style from jquery fadeIn function to reset menu state
+                            $('#side-menu').removeAttr('style');
+                        }
+                    };
+                }
             }
 
 })();

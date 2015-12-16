@@ -7,15 +7,20 @@
 
             /* @ngInject */
             function ppSideNavigation($timeout) {
-                return {
-                    restrict: 'A',
-                    link: function (scope, element) {
-                        // Call the metsiMenu plugin and plug it to sidebar navigation
-                        $timeout(function () {
-                            element.metisMenu();
 
-                        });
-                    }
+                var directive = {
+                    restrict: 'A',
+                    link: linkFunc
                 };
+
+                return directive;
+
+                /* @ngInject */
+                function linkFunc (scope, element) {
+                    $timeout(function () {
+                        element.metisMenu();
+
+                    });
+                }
             }
 })();

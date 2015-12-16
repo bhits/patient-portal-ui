@@ -18,12 +18,12 @@
                     bindToController: true,
                     controllerAs: 'DatePickerVm',
                     controller: DatePickerRangeController,
-                    link: link
+                    link: linkFunc
                 };
 
                 return directive;
 
-                function link(scope, element) {
+                function linkFunc(scope, element) {
                     element.datepicker({todayBtn: "linked", autoclose: true});
                 }
             }
