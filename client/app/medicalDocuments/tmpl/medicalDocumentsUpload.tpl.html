@@ -1,55 +1,53 @@
-<form role="form" name="medicalDocumentUploadForm" enctype="multipart/form-data">
-    <div class="col-sm-6">
-        <div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h2 class="custom-no-margin-top"><i class="fa fa-upload"></i> Upload</h2>
+<div class="col-sm-6">
+    <form role="form" name="medicalDocumentUploadForm" enctype="multipart/form-data">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="custom-no-margin-top"><i class="fa fa-upload"></i> Upload</h2>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label for="name">Name
+                        <span ng-messages="medicalDocumentUploadForm.name.$error"
+                              class="text-alert" role="alert">
+                            <span ng-message="required">Required</span>
+                        </span>
+                    </label>
+                    <input id="name" name="name" type="text" class="form-control" placeholder="Document Name"
+                           ng-model="MedicalDocumentsUploadVm.name"
+                           required/>
                 </div>
-                <div class="panel-body">
-                    <div class="form-group">
-                        <label for="name">Name
-                            <span ng-messages="medicalDocumentUploadForm.name.$error"
-                                  class="text-alert" role="alert">
-                                <span ng-message="required">Required</span>
-                            </span>
-                        </label>
-                        <input id="name" name="name" type="text" class="form-control" placeholder="Document Name"
-                               ng-model="MedicalDocumentsUploadVm.name"
-                               required/>
-                    </div>
 
-                    <div class="form-group">
-                        <label for="description">Description</label>
-                        <textarea name="description" id="description" rows="4" class="form-control"
-                                  ng-model="MedicalDocumentsUploadVm.description"
-                                  placeholder="Description"></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="documentType">Medical Document Type: </label>
-                        <span class="info-blue italic">Episode Summary Note (Only)</span>
-                        <input type="hidden" id="documentType" name="documentType"
-                               ng-model="MedicalDocumentsUploadVm.documentType"/>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="file">Medical Document</label>
-                        <input type="file" name="file" id="file"
-                               file-model="MedicalDocumentsUploadVm.medicalFile"/>
-                    </div>
-
-                    <button class="btn btn-primary dark-green" type="button"
-                            ng-click="MedicalDocumentsUploadVm.uploadDocument()"
-                            ng-disabled="medicalDocumentUploadForm.$invalid">
-                        <strong>Upload</strong>
-                    </button>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea name="description" id="description" rows="4" class="form-control"
+                              ng-model="MedicalDocumentsUploadVm.description"
+                              placeholder="Description"></textarea>
                 </div>
-                <div class="col-xs-12 col-sm-6 col-lg-8" ng-show="medicalDocumentUploadForm.$invalid">
-                    <div class="text-alert italic m-b">
-                        Please complete required field to upload.
-                    </div>
+
+                <div class="form-group">
+                    <label for="documentType">Medical Document Type: </label>
+                    <span class="info-blue italic">Episode Summary Note (Only)</span>
+                    <input type="hidden" id="documentType" name="documentType"
+                           ng-model="MedicalDocumentsUploadVm.documentType"/>
                 </div>
+
+                <div class="form-group">
+                    <label for="file">Medical Document</label>
+                    <input type="file" name="file" id="file"
+                           file-model="MedicalDocumentsUploadVm.medicalFile"/>
+                </div>
+
+                <button class="btn btn-primary dark-green" type="button"
+                        ng-click="MedicalDocumentsUploadVm.uploadDocument()"
+                        ng-disabled="medicalDocumentUploadForm.$invalid">
+                    <strong>Upload</strong>
+                </button>
             </div>
         </div>
-    </div>
-</form>
+        <div class="m-t-n-xs" ng-show="medicalDocumentUploadForm.$invalid">
+            <div class="text-alert italic m-b">
+                Please complete required field to upload.
+            </div>
+        </div>
+    </form>
+</div>
