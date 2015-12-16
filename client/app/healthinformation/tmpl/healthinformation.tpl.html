@@ -24,7 +24,7 @@
 
 <div class="wrapper wrapper-content animated fadeInRight">
 
-       <div class="row" ng-show="HealthInformationVm.toggleMenu" id="noPatientDataAlertSection" >
+        <div class="row" ng-show="HealthInformationVm.toggleMenu" id="noPatientDataAlertSection" >
             <div class="col-sm-12" >
                 <div class="alert alert-warning alert-dismissible" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -32,26 +32,67 @@
                 </div>
             </div>
         </div>
+<!-- NEW HEALTH INFO -->
 
         <!-- PATIENT DEMOGRAPHICS-->
         <document-accordion document="HealthInformationVm.document" ></document-accordion>
+        <div class="row">
+            <div class="col-sm-12 relative" id="demographics">
+                <div class="ibox panel panel-darkblue float-e-margins">
+                    <div class="ibox-title  modified panel-heading right-padding30">
+                        <div class="row">
+                            <div class="col-sm-12 m-t-xs">
+                                <h3>Inpatient Summary<span class="m-b-none m-l-sm">Created on August 6, 2015 at Local Hospital</span></h3>
+                            </div>
 
-        <!--ALERTS-->
-        <alerts-accordion alerts="HealthInformationVm.allergies" ng-hide="HealthInformationVm.toggleMenu && !AppVm.toggleAlert"  ></alerts-accordion>
+                        <div class="chevron_absolute">
+                            <div ibox-tools class="white"  total=""></div>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="ibox-content modified">
+                        <div class="row m-b">
+                            <div class="col-sm-6">
+                                <div>
+                                    <label for="patientName">Provider:</label> <span id="patientName">Dr. Henry Seven</span>
+                                </div>
+                                <div>
+                                    <label for="patientSSN">Treatment: </label> <span id="patientSSN">Pneumonia</span>
+                                </div>
+                                <div>
+                                    <label for="startDate">Treatment Start Date: </label> <span id="startDate">2015-10-15</span>
+                                </div>
+                                <div>
+                                    <label for="endDate">Treatment Start Date: </label> <span id="endDate">2015-10-20</span>
+                                </div>
 
-        <!--RESULTS-->
-        <results-accordion results="HealthInformationVm.results" ng-hide="HealthInformationVm.toggleMenu && !AppVm.toggleResults"  ></results-accordion>
+                            </div>
 
-        <!--EENCOUNTERS-->
-        <encounters-accordion encounters="HealthInformationVm.encounters" ng-hide="HealthInformationVm.toggleMenu && !AppVm.toggleEncounters" ></encounters-accordion>
-
-        <!--PROBLEM LIST-->
-        <problems-accordion problems="HealthInformationVm.problems" ng-hide="HealthInformationVm.toggleMenu && !AppVm.toggleProblems"  ></problems-accordion>
-
-        <!--VITAL SIGNALS-->
-        <vitalsigns-accordion vitalsigns="HealthInformationVm.vitalsigns" ng-hide="HealthInformationVm.toggleMenu && !AppVm.toggleVitalSigns" ></vitalsigns-accordion>
-
-        <!--PROCEDURES-->
-        <procedures-accordion procedures="HealthInformationVm.procedures" ng-hide="HealthInformationVm.toggleMenu && !AppVm.toggleProcedure" ></procedures-accordion>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="ibox panel panel-default float-e-margins">
+                                    <div class="ibox-title modified panel-heading">
+                                        <h5>Hospital Discharge Instructions
+                                            <small class="m-l-sm">Additional Information</small>
+                                        </h5>
+                                        <div ibox-tools></div>
+                                    </div>
+                                    <div class="ibox-content">
+                                        <p>
+                                            <strong>Lorem ipsum dolor</strong>
+                                            Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque
+                                            eu, pretium quis, sem. Nulla consequat massa quis enim.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+<!-- END NEW HEALTH INFO -->
 
 </div>
