@@ -4,7 +4,22 @@
 'use strict';
 
     /**
-     * Creates the patient demographics accordion
+     * Creates the patient document accordion
+     */
+    function DocumentAccordion (){
+        return {
+            restrict: 'E',
+            scope: {
+                document : "="
+            },
+            templateUrl: 'app/healthinformation/tmpl/document.tpl.html'
+        };
+    }
+
+
+
+    /**
+     * Creates the patient Demographics accordion
      */
     function DemographicsAccordion (){
         return {
@@ -254,9 +269,9 @@
      *
      */
     angular.module('app.healthInformationDirectivesModule', [])
+        .directive('documentAccordion', DocumentAccordion)
         .directive('demographicsAccordion', DemographicsAccordion)
         .directive('alertsAccordion', AlertsAccordion)
-        .directive('medicationsAccordion', MedicationsAccordion)
         .directive('encountersAccordion', EncountersAccordion)
         .directive('problemsAccordion',ProblemsAccordion)
         .directive('proceduresAccordion',ProceduresAccordion)

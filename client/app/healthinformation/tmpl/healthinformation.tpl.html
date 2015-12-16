@@ -34,10 +34,7 @@
         </div>
 
         <!-- PATIENT DEMOGRAPHICS-->
-        <demographics-accordion patientdemographics="HealthInformationVm.patientDemographics" ccdheader="ccdheader" ></demographics-accordion>
-
-        <!--MEDICATIONS-->
-        <medications-accordion medications="HealthInformationVm.medications" ng-hide="HealthInformationVm.toggleMenu && !AppVm.toggleMedications"  ></medications-accordion>
+        <document-accordion document="HealthInformationVm.document" ></document-accordion>
 
         <!--ALERTS-->
         <alerts-accordion alerts="HealthInformationVm.allergies" ng-hide="HealthInformationVm.toggleMenu && !AppVm.toggleAlert"  ></alerts-accordion>

@@ -24,7 +24,15 @@
         HealthInformationVm.toggleMenu = false;
 
         // Process the resolved patient CCDA data coming from the backend
+
         HealthInformationVm.healthinfotmation = HealthInformationService.getHealthInformation(patientData[0]);
+        HealthInformationVm.document =  HealthInformationService.getSectionByName(HealthInformationVm.healthinfotmation, 'Document');
+        HealthInformationVm.provider =  HealthInformationService.getSectionByName(HealthInformationVm.document, 'author');
+        HealthInformationVm.patient =  HealthInformationService.getSectionByName(HealthInformationVm.document, 'patient');
+        HealthInformationVm.section =  HealthInformationService.getSectionByName(HealthInformationVm.document, 'section');
+
+
+
         HealthInformationVm.ccdheader =  HealthInformationService.getSectionByName(HealthInformationVm.healthinfotmation, 'CCDAHeader');
         HealthInformationVm.patientDemographics =  HealthInformationService.getSectionByName(HealthInformationVm.ccdheader, 'DemographicInformation');
         HealthInformationVm.allergies = HealthInformationService.getSectionCollectionByName(HealthInformationVm.healthinfotmation, 'AllergySection', 'Allergies');
