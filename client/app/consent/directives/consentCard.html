@@ -3,11 +3,11 @@
         <div class="ibox panel panel-success float-e-margins" ng-class="{'statusIcon_saved': consentCardVm.consentState() === 'saved','statusIcon_signed': consentCardVm.consentState() === 'signed','statusIcon_revoked': consentCardVm.consentState() === 'revoked'}">
             <div class="ibox-title navy-blue left-padding55 right-padding30" ng-click="consentCardVm.toggleCollapse()">
                 <div class="chevron_absolute">
-                    <div ibox-tools pp-collapsed="consentCardVm.collapsed" pp-chevron-prevent-default="true"></div>
+                    <div pp-ibox-tools pp-collapsed="consentCardVm.collapsed" pp-chevron-prevent-default="true"></div>
                 </div>
 
                 <div class="row">
-                    <!--<div ibox-tools init-collapsed="true"></div>-->
+                    <!--<div pp-ibox-tools init-collapsed="true"></div>-->
                     <div class="col-sm-4 col-sm-push-8 col-xs-12">
                         <p class="">Effective Dates: <strong><span ng-bind="(consentCardVm.consent.consentStart | date) + ' - ' + (consentCardVm.consent.consentEnd | date)"/></strong>
                         </p>

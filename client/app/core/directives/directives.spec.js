@@ -4,7 +4,7 @@
 
 'use strict';
 
-describe('app.directivesModule ', function(){
+xdescribe('app.directivesModule ', function(){
     var module;
 
     beforeEach(function() {
@@ -30,7 +30,7 @@ describe('app.directivesModule ', function(){
 });
 
 
-describe('app.directivesModule ', function(){
+xdescribe('app.directivesModule ', function(){
     var module;
 
     beforeEach(function() {

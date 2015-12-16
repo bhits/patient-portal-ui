@@ -24,7 +24,7 @@
                         abstract: true,
                         url: '/index',
                         data: { pageTitle: 'Home' },
-                        templateUrl: 'app/layout/content.tpl.html'
+                        templateUrl: 'app/layout/content.html'
                     })
                     .state('fe.index.home', {
                         url: '/home',

@@ -254,7 +254,6 @@
             'app.consent',
             'app.healthInformationModule',
             'app.providerModule',
-            'app.directivesModule',
             'app.layout'
         ])
         .constant("idleConfigParams", ngIdleParams)

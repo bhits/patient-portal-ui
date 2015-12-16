@@ -109,7 +109,7 @@
                 abstract: true,
                 url: '/provider',
                 data: { pageTitle: 'Provider' },
-                templateUrl: 'app/layout/content.tpl.html'
+                templateUrl: 'app/layout/content.html'
             })
             .state('fe.provider.lookup', {
                 url: '/lookup',

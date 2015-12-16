@@ -12,7 +12,7 @@
                                 <div ng-if="isIndividualProvider(provider)">
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" icheck ng-model="selectedProvider.npi" ng-value="provider.npi" name="npi" ng-disabled="isSelected(provider.npi)" >
+                                            <input type="radio" pp-icheck ng-model="selectedProvider.npi" ng-value="provider.npi" name="npi" ng-disabled="isSelected(provider.npi)" >
                                                 <span class="m-l-xs" ng-bind="provider|pcmProviderNameOrFacility"> </span>
                                         </label>
                                     </div>
@@ -27,7 +27,7 @@
                             <div ng-if="isOrganizationProvider(provider)">
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" icheck ng-model="selectedProvider.npi" ng-value="provider.npi" name="npi" ng-disabled="isSelected(provider.npi)" >
+                                        <input type="radio" pp-icheck ng-model="selectedProvider.npi" ng-value="provider.npi" name="npi" ng-disabled="isSelected(provider.npi)" >
                                         <span class="m-l-xs" ng-bind="provider|pcmProviderNameOrFacility"></span>
                                     </label>
                                 </div>

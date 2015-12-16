@@ -9,7 +9,7 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>Medical Information Categories</h5>
-                        <div ibox-tools></div>
+                        <div pp-ibox-tools></div>
                     </div>
                     <div class="ibox-content">
                         <div class="alert alert-warning">
@@ -22,7 +22,7 @@
                             <div>
                                 <div class="radio">
                                     <label>
-                                        <input type="checkbox" icheck  checklist-model="consent.selectedMedicalSections" checklist-value="medicalSection.code" >
+                                        <input type="checkbox" pp-icheck  checklist-model="consent.selectedMedicalSections" checklist-value="medicalSection.code" >
                                         <span class="m-l-xs" ng-bind="medicalSection.displayName"></span>
                                     </label>
 
@@ -36,7 +36,7 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>Sensitive Information Categories</h5>
-                        <div ibox-tools></div>
+                        <div pp-ibox-tools></div>
                     </div>
                     <div class="ibox-content">
                         <div class="alert alert-warning">
@@ -48,7 +48,7 @@
                             <div>
                                 <div class="radio">
                                     <label>
-                                        <input type="checkbox" icheck  checklist-model="consent.selectedSensitivityPolicies" checklist-value="sensitivityPolicy.code" >
+                                        <input type="checkbox" pp-icheck  checklist-model="consent.selectedSensitivityPolicies" checklist-value="sensitivityPolicy.code" >
                                         <span class="m-l-xs" ng-bind="sensitivityPolicy.displayName"></span>
                                     </label>
                                 </div>

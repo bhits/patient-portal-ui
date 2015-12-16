@@ -2,21 +2,21 @@
 <div id="wrapper" >
     <div class="container-fluid left-right-padding-0">
         <!-- Navigation -->
-        <div ng-include="'app/layout/navigation.tpl.html'"></div>
+        <div ng-include="'app/layout/navigation.html'"></div>
 
         <!-- Page wraper -->
         <!-- ng-class with current state name give you the ability to extended customization your view -->
         <div id="page-wrapper" class="bg-white-page {{$state.current.name}}">
 
             <!-- Page wrapper -->
-            <div ng-include="'app/layout/topnavbar.tpl.html'"></div>
+            <div ng-include="'app/layout/topNavbar.html'"></div>
 
             <!-- Main view  -->
             <!-- padding-top-60 ensure the content don't scroll under the top-navbar-->
             <div ui-view class="padding-top-60"></div>
 
             <!-- Footer -->
-            <div ng-include="'app/layout/footer.tpl.html'"></div>
+            <div ng-include="'app/layout/footer.html'"></div>
 
         </div>
         <!-- End page wrapper-->
