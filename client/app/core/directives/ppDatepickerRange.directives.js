@@ -16,7 +16,7 @@
                     },
                     templateUrl: 'app/core/directives/datepicker-range.tpl.html',
                     bindToController: true,
-                    controllerAs: 'DatePickerVm',
+                    controllerAs: 'datePickerVm',
                     controller: DatePickerRangeController,
                     link: linkFunc
                 };
@@ -30,34 +30,34 @@
 
             /* @ngInject */
             function DatePickerRangeController($scope, utilityService) {
-                var DatePickerVm = this;
-                DatePickerVm.consent = DatePickerVm.ngModel;
-                $scope.$watch('DatePickerVm.consent.consentStart', watchStartDate);
-                $scope.$watch('DatePickerVm.consent.consentEnd',watchEndDate );
+                var vm = this;
+                vm.consent = vm.ngModel;
+                $scope.$watch('vm.consent.consentStart', watchStartDate);
+                $scope.$watch('vm.consent.consentEnd',watchEndDate );
 
                 function watchStartDate (startDate) {
-                    setDateRange(startDate, DatePickerVm.consent.consentEnd);
+                    setDateRange(startDate, vm.consent.consentEnd);
                 }
 
                 function watchEndDate(endDate) {
-                    setDateRange(DatePickerVm.consent.consentStart, endDate);
+                    setDateRange(vm.consent.consentStart, endDate);
                 }
 
                 function setDateRange (startDate, endDate) {
                     if (!startDate || !endDate) {
                         return;
                     }
-                    DatePickerVm.error = "";
+                    vm.error = "";
                     var fd = utilityService.formatDate(new Date());
                     if (Date.parse(startDate) < Date.parse(fd)) {
-                        DatePickerVm.error = ' Consent must start from today';
+                        vm.error = ' Consent must start from today';
                     } else if (Date.parse(startDate) > Date.parse(endDate)) {
-                        DatePickerVm.error = ' The start date cannot occur after the end date';
+                        vm.error = ' The start date cannot occur after the end date';
                     } else {
-                        DatePickerVm.ngModel = DatePickerVm.consent;
+                        vm.ngModel = vm.consent;
                     }
 
-                    DatePickerVm.showError = DatePickerVm.error.length;
+                    vm.showError = vm.error.length;
                 }
             }
 

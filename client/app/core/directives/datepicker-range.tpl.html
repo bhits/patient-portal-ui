@@ -1,16 +1,16 @@
 <div>
     <div>
-       <!-- <span ng-bind="DatePickerVm.fromlabel"></span> -->
+       <!-- <span ng-bind="datePickerVm.fromlabel"></span> -->
         <label for="consent_start">Consent Start</label>
-        <input type="text" class="input-small" id="consent_start" name="start" ng-model="DatePickerVm.consent.consentStart"/>
-       <!-- <span ng-bind="DatePickerVm.tolabel"></span> -->
+        <input type="text" class="input-small" id="consent_start" name="start" ng-model="datePickerVm.consent.consentStart"/>
+       <!-- <span ng-bind="datePickerVm.tolabel"></span> -->
         <label for="consent_end">Consent End</label>
-        <input type="text" class="input-small" id="consent_end" name="end" ng-model="DatePickerVm.consent.consentEnd"/>
+        <input type="text" class="input-small" id="consent_end" name="end" ng-model="datePickerVm.consent.consentEnd"/>
     </div>
 
-    <div ng-if="DatePickerVm.showError">
+    <div ng-if="datePickerVm.showError">
         <div class="alert alert-danger">
-           <span ng-bind="DatePickerVm.error"></span>
+           <span ng-bind="datePickerVm.error"></span>
         </div>
     </div>
 </div>
