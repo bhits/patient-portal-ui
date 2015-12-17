@@ -6,7 +6,7 @@
             </div>
             <div class="panel-body">
                 <div class="alert alert-info">
-                    Please enter the Document <b>Name</b> and <b>File</b>.
+                    Please enter the Document <b>Name</b> and select a <b>File</b> to upload.
                 </div>
                 <div class="form-group">
                     <label for="name">Name</label>
@@ -27,7 +27,10 @@
 
                 <div class="form-group">
                     <label for="documentType">Medical Document Type: </label>
-                    <span class="info-blue italic">Episode Summary Note (Only)</span>
+                    <select id="documentType" class="form-control m-b" name="account">
+                        <option>-- Please Select --</option>
+                        <option>Episode Summary Note</option>
+                    </select>
                     <input type="hidden" id="documentType" name="documentType"
                            ng-model="MedicalDocumentsUploadVm.documentType"/>
                 </div>
@@ -38,7 +41,7 @@
                            ng-model="MedicalDocumentsUploadVm.file" file-model="MedicalDocumentsUploadVm.medicalFile"  ng-pattern="/\.xml$/" required/>
                     <div ng-messages="medicalDocumentUploadForm.file.$error"
                          class="text-alert" role="alert">
-                        <div ng-message="pattern" >File extension should be XML.</div>
+                        <div ng-message="pattern" >File extension must be XML.</div>
                     </div>
                 </div>
 
