@@ -19,9 +19,28 @@
                 'app.providerModule',
                 'app.layout'
             ])
-
+            .constant("idleConfigParams", {"idle": 780, "timeout": 120, "keepalive": 240})
+            .config(appConfig)
             .run(appRun)
             .controller('AppController', AppController);
+
+            //var ngIdleParams = {"idle": 780, "timeout": 120, "keepalive": 240};
+
+            /* @ngInject */
+            function appConfig($urlRouterProvider, $locationProvider, $httpProvider, KeepaliveProvider, IdleProvider, idleConfigParams) {
+
+                // enable html5 mode
+                $locationProvider.html5Mode(true).hashPrefix('!');
+
+                $urlRouterProvider.otherwise("/fe/login");
+
+                $httpProvider.interceptors.push('AuthInterceptorService');
+
+                // Configure Idle settingss
+                IdleProvider.idle(idleConfigParams.idle); // in seconds
+                IdleProvider.timeout(idleConfigParams.timeout); // in seconds
+                KeepaliveProvider.interval(idleConfigParams.keepalive); // in seconds
+            }
 
              /* @ngInject */
             function appRun($rootScope, $state, $anchorScroll) {
@@ -89,7 +108,7 @@
                     appVm.closeModals();
 
                     appVm.warning = $modal.open({
-                        templateUrl: 'app/warning-dialog.tpl.html',
+                        templateUrl: 'app/warning-dialog.html',
                         controller: ModalInstanceCtrl
                     });
                 });
