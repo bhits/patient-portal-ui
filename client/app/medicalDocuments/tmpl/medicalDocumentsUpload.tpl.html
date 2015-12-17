@@ -5,8 +5,11 @@
                 <h2 class="custom-no-margin-top"><i class="fa fa-upload"></i> Upload</h2>
             </div>
             <div class="panel-body">
+                <div class="alert alert-info">
+                    Please enter the Document <b>Name</b> and <b>File</b>.
+                </div>
                 <div class="form-group">
-                    <label for="name">Name (Required)</label>
+                    <label for="name">Name</label>
                     <input id="name" name="name" type="text" class="form-control" placeholder="Document Name"
                            ng-model="MedicalDocumentsUploadVm.name" required/>
                     <div ng-messages="medicalDocumentUploadForm.name.$error"
@@ -16,7 +19,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="description">Description (Optional)</label>
+                    <label for="description">Description</label>
                     <textarea name="description" id="description" rows="4" class="form-control"
                               ng-model="MedicalDocumentsUploadVm.description"
                               placeholder="Description"></textarea>
@@ -30,9 +33,13 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="file">Medical Document (Required)</label>
+                    <label for="file">Medical Document</label>
                     <input type="file" name="file" id="file" accept=".xml" file-validate
-                           ng-model="file" file-model="MedicalDocumentsUploadVm.medicalFile" required/>
+                           ng-model="MedicalDocumentsUploadVm.file" file-model="MedicalDocumentsUploadVm.medicalFile"  ng-pattern="/\.xml$/" required/>
+                    <div ng-messages="medicalDocumentUploadForm.file.$error"
+                         class="text-alert" role="alert">
+                        <div ng-message="pattern" >File extension should be XML.</div>
+                    </div>
                 </div>
 
                 <button class="btn btn-primary dark-green" type="button"
