@@ -27,16 +27,16 @@
 
             /* @ngInject */
             function ConsentPurposeOfUseController($scope, $modal, consentService, notificationService) {
-                var Vm = this;
+                var vm = this;
                 //Getting default purpose of use code.
-                Vm.selectedPurposeOfUse = consentService.getDefaultPurposeOfUse(Vm.purposeofuse, Vm.ngModel);
+                vm.selectedPurposeOfUse = consentService.getDefaultPurposeOfUse(vm.purposeofuse, vm.ngModel);
 
-                Vm.openSelectPurposeModal = function () {
+                vm.openSelectPurposeModal = function () {
                     var modalInstance = $modal.open({
                         templateUrl: 'app/consent/directives/consentPurposeOfUseModal.html',
                         resolve: {
                             data: function () {
-                                return Vm.purposeofuse;
+                                return vm.purposeofuse;
                             }
                         },
                         controller: PurposeOfUseModalController
@@ -46,7 +46,7 @@
                 /* @ngInject */
                 function PurposeOfUseModalController($scope, $modalInstance, data) {
                     $scope.cancel = cancel;
-                    $scope.consent = {selectedPurposeOfUseCodes: consentService.getCodes(Vm.selectedPurposeOfUse)};
+                    $scope.consent = {selectedPurposeOfUseCodes: consentService.getCodes(vm.selectedPurposeOfUse)};
                     $scope.data = data;
                     $scope.deselectAll = deselectAll;
                     $scope.ok = ok;
@@ -69,8 +69,8 @@
                     }
 
                     function ok() {
-                        Vm.selectedPurposeOfUse = consentService.getEntitiesByCodes($scope.data, $scope.consent.selectedPurposeOfUseCodes);
-                        Vm.ngModel = $scope.consent.selectedPurposeOfUseCodes;
+                        vm.selectedPurposeOfUse = consentService.getEntitiesByCodes($scope.data, $scope.consent.selectedPurposeOfUseCodes);
+                        vm.ngModel = $scope.consent.selectedPurposeOfUseCodes;
                         $modalInstance.close();
                     }
                 }

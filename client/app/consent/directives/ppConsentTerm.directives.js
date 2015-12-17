@@ -24,8 +24,8 @@
                 return directive;
 
                 function ConsentTermController(){
-                    var Vm = this;
-                    Vm.daterange = Vm.ngModel;
+                    var vm = this;
+                    vm.daterange = vm.ngModel;
                 }
             }
 })();

@@ -17,9 +17,9 @@
              * @ngInject
              */
             function ConsentSignRevokeController(loadedData, $state){
-                var Vm = this;
-                Vm.javascriptCode =loadedData;
-                Vm.close = Close;
+                var vm = this;
+                vm.javascriptCode =loadedData;
+                vm.close = Close;
 
                 function Close() {
                     $state.go('fe.consent.list');

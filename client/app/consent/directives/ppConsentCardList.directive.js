@@ -24,31 +24,31 @@
 
             /* @ngInject */
             function ConsentCardListController(consentService, notificationService, utilityService) {
-                var Vm = this;
-                var oldPage = Vm.consentList.currentPage;
-                Vm.pagination = {
-                    totalItems: Vm.consentList.totalItems,
+                var vm = this;
+                var oldPage = vm.consentList.currentPage;
+                vm.pagination = {
+                    totalItems: vm.consentList.totalItems,
                     currentPage: oldPage,
-                    itemsPerPage: Vm.consentList.itemsPerPage,
+                    itemsPerPage: vm.consentList.itemsPerPage,
                     maxSize: 10
                 };
-                Vm.loadPage = loadPage;
-                Vm.hasConsents = hasConsents;
+                vm.loadPage = loadPage;
+                vm.hasConsents = hasConsents;
 
                 function hasConsents() {
-                    return utilityService.isNotEmpty(Vm.consentList.consentList);
+                    return utilityService.isNotEmpty(vm.consentList.consentList);
                 }
 
                 function updatePagination(response) {
-                    Vm.pagination.totalItems = response.totalItems;
-                    Vm.pagination.currentPage = response.currentPage;
-                    Vm.pagination.itemsPerPage = response.itemsPerPage;
+                    vm.pagination.totalItems = response.totalItems;
+                    vm.pagination.currentPage = response.currentPage;
+                    vm.pagination.itemsPerPage = response.itemsPerPage;
                 }
 
                 function success(response) {
                     oldPage = response.currentPage;
                     updatePagination(response);
-                    Vm.consentList = response;
+                    vm.consentList = response;
                     utilityService.scrollTo('content_wrapper');
                 }
 
@@ -57,8 +57,8 @@
                 }
 
                 function loadPage() {
-                    var newPage = Vm.pagination.currentPage;
-                    Vm.pagination.currentPage = oldPage;
+                    var newPage = vm.pagination.currentPage;
+                    vm.pagination.currentPage = oldPage;
                     consentService.listConsent(newPage, success, error);
                 }
             }

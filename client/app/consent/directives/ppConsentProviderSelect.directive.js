@@ -28,10 +28,10 @@
 
             /* @ngInject */
             function ConsentSelectProviderController ($scope,$modal, consentService, ProviderService, notificationService) {
-                var Vm = this;
-                Vm.fieldplaceholder = Vm.modaltitle === 'Authorize' ? "The following individual or organization" : "To disclose my information to";
-                Vm.openSelectProviderModal = openSelectProviderModal;
-                Vm.selectedProvider = Vm.ngModel;
+                var vm = this;
+                vm.fieldplaceholder = vm.modaltitle === 'Authorize' ? "The following individual or organization" : "To disclose my information to";
+                vm.openSelectProviderModal = openSelectProviderModal;
+                vm.selectedProvider = vm.ngModel;
 
                 function openSelectProviderModal () {
 
@@ -40,9 +40,9 @@
                         resolve: {
                             data: function () {
                                 return {
-                                    modalTitle: Vm.modaltitle,
-                                    providers: Vm.providers,
-                                    selectedProvider: Vm.selectedProvider
+                                    modalTitle: vm.modaltitle,
+                                    providers: vm.providers,
+                                    selectedProvider: vm.selectedProvider
                                 };
                             }
                         },
@@ -92,8 +92,8 @@
                     function ok () {
                         $modalInstance.close();
                         var selectedProvider = ProviderService.getProviderByNPI($scope.providers, $scope.selectedProvider.npi);
-                        Vm.ngModel = selectedProvider;
-                        Vm.selectedProvider = selectedProvider;
+                        vm.ngModel = selectedProvider;
+                        vm.selectedProvider = selectedProvider;
 
                         if ($scope.title === 'Authorize') {
                             consentService.setAuthorizeNpi(selectedProvider.npi);

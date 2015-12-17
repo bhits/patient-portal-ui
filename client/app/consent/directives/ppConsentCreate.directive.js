@@ -30,64 +30,64 @@
 
              /* @ngInject */
             function ConsentCreateController ($state, $modal, $stateParams, ProviderService, notificationService,consentService, utilityService ) {
-                var Vm = this;
-                Vm.authorize = "Authorize";
-                Vm.disclosure = "Disclosure";
-                Vm.dateRange = {consentStart: "", consentEnd: ""};
-                Vm.medicalInformation = { doNotShareSensitivityPolicyCodes: [], doNotShareClinicalDocumentSectionTypeCodes: []};
-                Vm.createConsent = createConsent;
-                Vm.updateConsent = updateConsent;
-                Vm.cancelConsent = cancelConsent;
-                Vm.canSave = canSave;
+                var vm = this;
+                vm.authorize = "Authorize";
+                vm.disclosure = "Disclosure";
+                vm.dateRange = {consentStart: "", consentEnd: ""};
+                vm.medicalInformation = { doNotShareSensitivityPolicyCodes: [], doNotShareClinicalDocumentSectionTypeCodes: []};
+                vm.createConsent = createConsent;
+                vm.updateConsent = updateConsent;
+                vm.cancelConsent = cancelConsent;
+                vm.canSave = canSave;
 
                 activate ();
 
                 function activate (){
                     if (angular.isDefined($stateParams.consentId) && $stateParams.consentId.length > 0) {
 
-                        Vm.isEditMode = angular.isDefined($stateParams.consentId.length) ? true : false;
+                        vm.isEditMode = angular.isDefined($stateParams.consentId.length) ? true : false;
 
-                        Vm.disclosureProvider = (ProviderService.getProviderByNpis(Vm.providers, Vm.consent.providersDisclosureIsMadeToNpi, Vm.consent.organizationalProvidersDisclosureIsMadeToNpi))[0];
-                        Vm.authorizeProvider = (ProviderService.getProviderByNpis(Vm.providers, Vm.consent.providersPermittedToDiscloseNpi, Vm.consent.organizationalProvidersPermittedToDiscloseNpi))[0];
+                        vm.disclosureProvider = (ProviderService.getProviderByNpis(vm.providers, vm.consent.providersDisclosureIsMadeToNpi, vm.consent.organizationalProvidersDisclosureIsMadeToNpi))[0];
+                        vm.authorizeProvider = (ProviderService.getProviderByNpis(vm.providers, vm.consent.providersPermittedToDiscloseNpi, vm.consent.organizationalProvidersPermittedToDiscloseNpi))[0];
                         // set providers to disable on UI that are currently selected in this consent
-                        consentService.setDiscloseNpi(Vm.disclosureProvider.npi);
-                        consentService.setAuthorizeNpi(Vm.authorizeProvider.npi);
-                        Vm.medicalInformation.doNotShareSensitivityPolicyCodes = Vm.consent.doNotShareSensitivityPolicyCodes;
-                        Vm.medicalInformation.doNotShareClinicalDocumentSectionTypeCodes = Vm.consent.doNotShareClinicalDocumentSectionTypeCodes;
-                        Vm.shareForPurposeOfUseCodes = Vm.consent.shareForPurposeOfUseCodes;
-                        Vm.dateRange = {
-                            consentStart: Vm.consent.consentStart,
-                            consentEnd: Vm.consent.consentEnd
+                        consentService.setDiscloseNpi(vm.disclosureProvider.npi);
+                        consentService.setAuthorizeNpi(vm.authorizeProvider.npi);
+                        vm.medicalInformation.doNotShareSensitivityPolicyCodes = vm.consent.doNotShareSensitivityPolicyCodes;
+                        vm.medicalInformation.doNotShareClinicalDocumentSectionTypeCodes = vm.consent.doNotShareClinicalDocumentSectionTypeCodes;
+                        vm.shareForPurposeOfUseCodes = vm.consent.shareForPurposeOfUseCodes;
+                        vm.dateRange = {
+                            consentStart: vm.consent.consentStart,
+                            consentEnd: vm.consent.consentEnd
                         };
 
                     } else {
-                        Vm.authorizeProvider = {};
-                        Vm.disclosureProvider = {};
-                        Vm.shareForPurposeOfUseCodes = consentService.getCodes(consentService.getDefaultPurposeOfUse(Vm.purposeofuse, []));
+                        vm.authorizeProvider = {};
+                        vm.disclosureProvider = {};
+                        vm.shareForPurposeOfUseCodes = consentService.getCodes(consentService.getDefaultPurposeOfUse(vm.purposeofuse, []));
 
                         var today = new Date();
                         var initStartDate = utilityService.formatDate(today);
                         var initEndDate = utilityService.formatDate(today.setDate(today.getDate() + 365));
-                        Vm.dateRange = {consentStart: initStartDate, consentEnd: initEndDate};
+                        vm.dateRange = {consentStart: initStartDate, consentEnd: initEndDate};
                     }
                 }
 
                 function prepareConsent() {
-                    var providersDisclosureIsMadeToNpi = ProviderService.getIndividualProvidersNpi([Vm.disclosureProvider]);
-                    var providersPermittedToDiscloseNpi = ProviderService.getIndividualProvidersNpi([Vm.authorizeProvider]);
-                    var organizationalProvidersPermittedToDiscloseNpi = ProviderService.getOrganizationalProvidersNpi([Vm.authorizeProvider]);
-                    var organizationalProvidersDisclosureIsMadeToNpi = ProviderService.getOrganizationalProvidersNpi([Vm.disclosureProvider]);
+                    var providersDisclosureIsMadeToNpi = ProviderService.getIndividualProvidersNpi([vm.disclosureProvider]);
+                    var providersPermittedToDiscloseNpi = ProviderService.getIndividualProvidersNpi([vm.authorizeProvider]);
+                    var organizationalProvidersPermittedToDiscloseNpi = ProviderService.getOrganizationalProvidersNpi([vm.authorizeProvider]);
+                    var organizationalProvidersDisclosureIsMadeToNpi = ProviderService.getOrganizationalProvidersNpi([vm.disclosureProvider]);
 
                     var consent = {
                         providersPermittedToDiscloseNpi: providersPermittedToDiscloseNpi,
                         providersDisclosureIsMadeToNpi: providersDisclosureIsMadeToNpi,
                         organizationalProvidersDisclosureIsMadeToNpi: organizationalProvidersDisclosureIsMadeToNpi,
                         organizationalProvidersPermittedToDiscloseNpi: organizationalProvidersPermittedToDiscloseNpi,
-                        doNotShareSensitivityPolicyCodes: Vm.medicalInformation.doNotShareSensitivityPolicyCodes,
-                        doNotShareClinicalDocumentSectionTypeCodes: Vm.medicalInformation.doNotShareClinicalDocumentSectionTypeCodes,
-                        shareForPurposeOfUseCodes: Vm.shareForPurposeOfUseCodes,
-                        consentStart: Vm.dateRange.consentStart,
-                        consentEnd: Vm.dateRange.consentEnd
+                        doNotShareSensitivityPolicyCodes: vm.medicalInformation.doNotShareSensitivityPolicyCodes,
+                        doNotShareClinicalDocumentSectionTypeCodes: vm.medicalInformation.doNotShareClinicalDocumentSectionTypeCodes,
+                        shareForPurposeOfUseCodes: vm.shareForPurposeOfUseCodes,
+                        consentStart: vm.dateRange.consentStart,
+                        consentEnd: vm.dateRange.consentEnd
                     };
 
                     return consent;
@@ -159,9 +159,9 @@
                 }
 
                 function canSave () {
-                    var authorizeDisclosure = angular.isDefined(Vm.authorizeProvider.npi) && angular.isDefined(Vm.disclosureProvider.npi);
-                    var medicalInformation = angular.isDefined(Vm.medicalInformation) && (angular.isDefined(Vm.medicalInformation.doNotShareSensitivityPolicyCodes) || angular.isDefined(Vm.medicalInformation.doNotShareSensitivityPolicyCodes));
-                    return (authorizeDisclosure && medicalInformation && angular.isDefined(Vm.shareForPurposeOfUseCodes));
+                    var authorizeDisclosure = angular.isDefined(vm.authorizeProvider.npi) && angular.isDefined(vm.disclosureProvider.npi);
+                    var medicalInformation = angular.isDefined(vm.medicalInformation) && (angular.isDefined(vm.medicalInformation.doNotShareSensitivityPolicyCodes) || angular.isDefined(vm.medicalInformation.doNotShareSensitivityPolicyCodes));
+                    return (authorizeDisclosure && medicalInformation && angular.isDefined(vm.shareForPurposeOfUseCodes));
                 }
             }
 })();

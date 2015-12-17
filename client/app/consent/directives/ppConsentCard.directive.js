@@ -21,43 +21,43 @@
 
             /* @ngInject */
             function ConsentCardController($modal, consentService, notificationService) {
-                var Vm = this;
-                Vm.openManageConsentModal = openManageConsentModal;
-                Vm.consentState = consentState;
-                Vm.isShareAll = isShareAll;
-                Vm.notDisclosedItems = notDisclosedItems;
-                Vm.purposeOfUseItems = purposeOfUseItems;
-                Vm.collapsed = true;
-                Vm.toggleCollapse = toggleCollapse;
+                var vm = this;
+                vm.openManageConsentModal = openManageConsentModal;
+                vm.consentState = consentState;
+                vm.isShareAll = isShareAll;
+                vm.notDisclosedItems = notDisclosedItems;
+                vm.purposeOfUseItems = purposeOfUseItems;
+                vm.collapsed = true;
+                vm.toggleCollapse = toggleCollapse;
 
                 function toggleCollapse() {
-                    Vm.collapsed = !Vm.collapsed;
+                    vm.collapsed = !vm.collapsed;
                 }
 
                 function isShareAll() {
-                    return consentService.isShareAll(Vm.consent);
+                    return consentService.isShareAll(vm.consent);
                 }
 
                 function consentState() {
-                    return consentService.resolveConsentState(Vm.consent);
+                    return consentService.resolveConsentState(vm.consent);
                 }
 
                 function notDisclosedItems() {
-                    return [].concat(Vm.consent.doNotShareClinicalDocumentSectionTypeCodes).concat(Vm.consent.doNotShareSensitivityPolicyCodes).join(', ');
+                    return [].concat(vm.consent.doNotShareClinicalDocumentSectionTypeCodes).concat(vm.consent.doNotShareSensitivityPolicyCodes).join(', ');
                 }
 
                 function purposeOfUseItems() {
-                    return Vm.consent.shareForPurposeOfUseCodes.join(', ');
+                    return vm.consent.shareForPurposeOfUseCodes.join(', ');
                 }
 
                 function openManageConsentModal() {
                     $modal.open({
-                        templateUrl: 'app/consent/directives/consentListManageOptionsModal' + consentService.resolveConsentState(Vm.consent) + '.html',
+                        templateUrl: 'app/consent/directives/consentListManageOptionsModal' + consentService.resolveConsentState(vm.consent) + '.html',
                         controller: ManageConsentModalController,
                         controllerAs: 'ManageConsentModalVm',
                         resolve: {
                             consent: function () {
-                                return Vm.consent;
+                                return vm.consent;
                             }
                         }
                     });

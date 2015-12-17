@@ -11,7 +11,7 @@
      * @ngInject
      */
     function ConsentListController(loadedData){
-        var Vm = this;
-        Vm.consentList = loadedData;
+        var vm = this;
+        vm.consentList = loadedData;
     }
 })();
