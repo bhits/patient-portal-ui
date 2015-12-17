@@ -24,7 +24,7 @@
 
 <div class="wrapper wrapper-content animated fadeInRight">
 
-       <div class="row" ng-show="HealthInformationVm.toggleMenu" id="noPatientDataAlertSection" >
+        <div class="row" ng-show="HealthInformationVm.toggleMenu" id="noPatientDataAlertSection" >
             <div class="col-sm-12" >
                 <div class="alert alert-warning alert-dismissible" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -32,29 +32,10 @@
                 </div>
             </div>
         </div>
+<!-- NEW HEALTH INFO -->
 
         <!-- PATIENT DEMOGRAPHICS-->
-        <demographics-accordion patientdemographics="HealthInformationVm.patientDemographics" ccdheader="ccdheader" ></demographics-accordion>
+        <!--<document-accordion document="HealthInformationVm.document" ></document-accordion>-->
 
-        <!--MEDICATIONS-->
-        <medications-accordion medications="HealthInformationVm.medications" ng-hide="HealthInformationVm.toggleMenu && !AppVm.toggleMedications"  ></medications-accordion>
-
-        <!--ALERTS-->
-        <alerts-accordion alerts="HealthInformationVm.allergies" ng-hide="HealthInformationVm.toggleMenu && !AppVm.toggleAlert"  ></alerts-accordion>
-
-        <!--RESULTS-->
-        <results-accordion results="HealthInformationVm.results" ng-hide="HealthInformationVm.toggleMenu && !AppVm.toggleResults"  ></results-accordion>
-
-        <!--EENCOUNTERS-->
-        <encounters-accordion encounters="HealthInformationVm.encounters" ng-hide="HealthInformationVm.toggleMenu && !AppVm.toggleEncounters" ></encounters-accordion>
-
-        <!--PROBLEM LIST-->
-        <problems-accordion problems="HealthInformationVm.problems" ng-hide="HealthInformationVm.toggleMenu && !AppVm.toggleProblems"  ></problems-accordion>
-
-        <!--VITAL SIGNALS-->
-        <vitalsigns-accordion vitalsigns="HealthInformationVm.vitalsigns" ng-hide="HealthInformationVm.toggleMenu && !AppVm.toggleVitalSigns" ></vitalsigns-accordion>
-
-        <!--PROCEDURES-->
-        <procedures-accordion procedures="HealthInformationVm.procedures" ng-hide="HealthInformationVm.toggleMenu && !AppVm.toggleProcedure" ></procedures-accordion>
-
+        <pp-ccda-document document="HealthInformationVm.document" ></pp-ccda-document>
 </div>

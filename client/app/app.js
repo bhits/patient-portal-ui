@@ -17,7 +17,8 @@
                 'app.consent',
                 'app.healthInformationModule',
                 'app.providerModule',
-                'app.layout'
+                'app.layout',
+                'app.medicalDocumentsModule'
             ])
             .constant("idleConfigParams", {"idle": 780, "timeout": 120, "keepalive": 240})
             .config(appConfig)

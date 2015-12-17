@@ -23,8 +23,8 @@
              * @returns {Object} health Information - The Health Information object
              */
             getHealthInformation: function(data){
-                if (isDefineAndNotNull(data) && isDefineAndNotNull(data.documents[0]) && isDefineAndNotNull(data.documents[0].CcdaDocuments)) {
-                    return data.documents[0].CcdaDocuments;
+                if (isDefineAndNotNull(data) && isDefineAndNotNull(data.ccdaDocuments[0]) && isDefineAndNotNull(data.ccdaDocuments[0].Document)) {
+                    return data.ccdaDocuments[0];
                 }else{
                     console.log("health information object missing.");
                 }

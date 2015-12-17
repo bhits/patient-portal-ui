@@ -4,7 +4,22 @@
 'use strict';
 
     /**
-     * Creates the patient demographics accordion
+     * Creates the patient document accordion
+     */
+    function DocumentAccordion (){
+        return {
+            restrict: 'E',
+            scope: {
+                document : "="
+            },
+            templateUrl: 'app/healthinformation/tmpl/document.tpl.html'
+        };
+    }
+
+
+
+    /**
+     * Creates the patient Demographics accordion
      */
     function DemographicsAccordion (){
         return {
@@ -249,14 +264,58 @@
         };
     }
 
+    function ppCcdaDocument() {
+
+        var directive = {
+            restrict: 'E',
+            scope: {
+                document: '='
+            },
+            bindToController: true,
+            templateUrl: "app/healthinformation/tmpl/ccdaDocument.tpl.html",
+            controllerAs: 'ccdaDocumentVm',
+            controller: CCDADocumentController
+        };
+
+        return directive;
+
+        function CCDADocumentController(HealthInformationService){
+            var Vm = this;
+            Vm.patient = HealthInformationService.getSectionByName(Vm.document, 'patient');
+            Vm.author = HealthInformationService.getSectionByName(Vm.document, 'author');
+            Vm.sections = HealthInformationService.getSectionByName(Vm.document, 'section');
+            Vm.treatment = HealthInformationService.getSectionByName(Vm.document, 'treatment');
+        }
+    }
+
+    function ppCcdaDocumentSection() {
+
+        var directive = {
+            restrict: 'E',
+            scope: {
+                section: '='
+            },
+            bindToController: true,
+            templateUrl: "app/healthinformation/tmpl/ccdaDocumentSection.tpl.html",
+            controllerAs: 'ccdaDocumentSectionVm',
+            controller: CCDADocumentSectionController
+        };
+
+        return directive;
+
+        function CCDADocumentSectionController(){
+            var Vm = this;
+        }
+    }
+
     /**
      *  The patient health information directives
      *
      */
     angular.module('app.healthInformationDirectivesModule', [])
+        .directive('documentAccordion', DocumentAccordion)
         .directive('demographicsAccordion', DemographicsAccordion)
         .directive('alertsAccordion', AlertsAccordion)
-        .directive('medicationsAccordion', MedicationsAccordion)
         .directive('encountersAccordion', EncountersAccordion)
         .directive('problemsAccordion',ProblemsAccordion)
         .directive('proceduresAccordion',ProceduresAccordion)
@@ -272,6 +331,8 @@
         .directive('medicalequipmentsAccordion',MedicalequipmentsAccordion)
         .directive('immunizationsAccordion',ImmunizationsAccordion)
         .directive('resultsAccordion',ResultsAccordion)
-        .directive('noDataAlert',NoDataAlert);
+        .directive('noDataAlert',NoDataAlert)
+        .directive('ppCcdaDocument',ppCcdaDocument)
+        .directive('ppCcdaDocumentSection',ppCcdaDocumentSection);
 
 })();
