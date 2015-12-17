@@ -14,25 +14,24 @@
                            ng-model="MedicalDocumentsUploadVm.name" required/>
                     <div ng-messages="medicalDocumentUploadForm.name.$error"
                          class="text-alert" role="alert">
-                        <div ng-message="required" ng-if="medicalDocumentUploadForm.name.$dirty" >Required</div>
+                        <div class="m-t-xs" ng-message="required" ng-if="medicalDocumentUploadForm.name.$dirty" >Required</div>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <textarea name="description" id="description" rows="4" class="form-control"
+                    <textarea name="description" id="description" class="form-control"
                               ng-model="MedicalDocumentsUploadVm.description"
-                              placeholder="Description"></textarea>
+                              placeholder="Description" rows="3"></textarea>
                 </div>
 
                 <div class="form-group">
                     <label for="documentType">Medical Document Type: </label>
-                    <select id="documentType" class="form-control m-b" name="account">
-                        <option>-- Please Select --</option>
-                        <option>Episode Summary Note</option>
+                    <select id="documentType" class="form-control m-b"
+                            ng-options="type for type in ['-- Please Select --', 'Episode Summary Note']"
+                            ng-model="MedicalDocumentsUploadVm.documentType"
+                            ng-init="MedicalDocumentsUploadVm.documentType='Episode Summary Note'">
                     </select>
-                    <input type="hidden" id="documentType" name="documentType"
-                           ng-model="MedicalDocumentsUploadVm.documentType"/>
                 </div>
 
                 <div class="form-group">
@@ -41,7 +40,7 @@
                            ng-model="MedicalDocumentsUploadVm.file" file-model="MedicalDocumentsUploadVm.medicalFile"  ng-pattern="/\.xml$/" required/>
                     <div ng-messages="medicalDocumentUploadForm.file.$error"
                          class="text-alert" role="alert">
-                        <div ng-message="pattern" >File extension must be XML.</div>
+                        <div class="m-t-xs" ng-message="pattern" >File extension must be XML.</div>
                     </div>
                 </div>
 
@@ -53,7 +52,7 @@
             </div>
         </div>
         <div class="m-t-n-xs" ng-show="medicalDocumentUploadForm.$invalid && medicalDocumentUploadForm.name.$dirty">
-            <div class="text-alert italic m-b">
+            <div class="text-alert italic m-b m-l">
                 Please complete ALL required fields to upload document.
             </div>
         </div>
