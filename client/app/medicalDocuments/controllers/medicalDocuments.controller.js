@@ -20,7 +20,7 @@
                 abstract: true,
                 url: '/medicaldocuments',
                 data: {pageTitle: 'Medical Documents'},
-                templateUrl: 'common/tmpl/content.tpl.html'
+                templateUrl: 'app/layout/content.html'
             })
             .state('fe.medicaldocuments.info', {
                 url: '/info',
