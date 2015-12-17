@@ -24,11 +24,11 @@
                 return directive;
 
                 function MinimalizaSidebarController ($scope, $element) {
-                    var Vm = this;
+                    var vm = this;
 
-                    Vm.minimalize = function () {
+                    vm.minimalize = function () {
 
-                        Vm.togglesidebar();
+                        vm.togglesidebar();
 
                         // Side Navbar
                         $("body").toggleClass("mini-navbar");

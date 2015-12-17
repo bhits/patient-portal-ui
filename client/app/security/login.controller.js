@@ -11,8 +11,8 @@
              * @ngInject
              */
             function LoginController($scope, $state, Idle, ENVService) {
-                var loginVm = this;
-                loginVm.version = ENVService.version;
+                var vm = this;
+                vm.version = ENVService.version;
 
                 $scope.$on('oauth:authorized', function (event, token) {
                     Idle.watch();
