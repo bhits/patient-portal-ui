@@ -38,8 +38,8 @@
     }
 
     function MedicalDocumentsListController(medicalDocumentsList){
-        var Vm = this;
-        Vm.medicalDocumentsList = medicalDocumentsList;
+        var vm = this;
+        vm.medicalDocumentsList = medicalDocumentsList;
     }
 
     MedicalDocumentsListController.resolve = {

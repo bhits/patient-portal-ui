@@ -21,19 +21,20 @@
             bindToController: true,
             controller: ['$state', 'MedicalDocumentsService', 'notificationService',
                 function ($state, MedicalDocumentsService, notificationService) {
-                    var Vm = this;
+                    var vm = this;
+                    vm.extension = /\.xml$/;
 
                     var prepareMedicalDocument = function () {
                         var medicalDocument = {
-                            file: Vm.medicalFile,
-                            name: Vm.name,
-                            description: Vm.description,
-                            documentType: Vm.documentType
+                            file: vm.medicalFile,
+                            name: vm.name,
+                            description: vm.description,
+                            documentType: vm.documentType
                         };
                         return medicalDocument;
                     };
 
-                    Vm.uploadDocument = function () {
+                    vm.uploadDocument = function () {
                         var medicalDocument = prepareMedicalDocument();
 
                         MedicalDocumentsService.uploadMedicalDocument(medicalDocument)
@@ -95,7 +96,7 @@
             bindToController: true,
             controller: ['$state', '$modal', 'MedicalDocumentsService', 'notificationService',
                 function ($state, $modal, MedicalDocumentsService, notificationService) {
-                    var Vm = this;
+                    var vm = this;
 
                     function MedicalDocumentsModalDeleteController ($scope, $modalInstance, medicalDocument) {
                         $scope.id = medicalDocument.id;
@@ -123,7 +124,7 @@
                      *
                      * @param size - The size of the modal
                      */
-                    Vm.openDeleteMedicalDocumentModal = function (medicalDocument, size) {
+                    vm.openDeleteMedicalDocumentModal = function (medicalDocument, size) {
                         var modalInstance = $modal.open({
                             templateUrl: 'app/medicalDocuments/tmpl/medicalDocumentDeleteModal.tpl.html',
                             size: size,
@@ -136,7 +137,7 @@
                         });
                     };
 
-                    Vm.downloadFile = function (medicalDocument) {
+                    vm.downloadFile = function (medicalDocument) {
                         MedicalDocumentsService.downloadMedicalDocument(medicalDocument.id)
                             .then(function(){
                                 notificationService.success('Success in downloading medical document');

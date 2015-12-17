@@ -37,7 +37,7 @@
                 <div class="form-group">
                     <label for="file">Medical Document</label>
                     <input type="file" name="file" id="file" accept=".xml" file-validate
-                           ng-model="MedicalDocumentsUploadVm.file" file-model="MedicalDocumentsUploadVm.medicalFile"  ng-pattern="/\.xml$/" required/>
+                           ng-model="MedicalDocumentsUploadVm.file" file-model="MedicalDocumentsUploadVm.medicalFile"  ng-pattern="MedicalDocumentsUploadVm.extension" required/>
                     <div ng-messages="medicalDocumentUploadForm.file.$error"
                          class="text-alert" role="alert">
                         <div class="m-t-xs" ng-message="pattern" >File extension must be XML.</div>
