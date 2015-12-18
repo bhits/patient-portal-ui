@@ -84,6 +84,17 @@
                         ngModel.$render();
                     });
                 });
+
+                el.bind('change', function () {
+                    var LIMITEDSIZE = 10485760;
+                    var fileSize = this.files[0].size;
+
+                    if( fileSize > LIMITEDSIZE) {
+                        ngModel.$setValidity("sizeLimit",false);
+                    } else {
+                        ngModel.$setValidity("sizeLimit",true);
+                    }
+                });
             }
         };
     }
