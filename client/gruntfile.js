@@ -638,10 +638,10 @@ module.exports = function (grunt) {
         },
         angularFileLoader: {
             options: {
-                scripts: ['<%= app_files.js %>']
+                scripts: ['<%= app_files.debug_js %>']
             },
             compile: {
-                src: ['index.html']
+                src: ['<%= build_debug_dir %>/index.html']
             }
         }
     };
@@ -778,7 +778,7 @@ module.exports = function (grunt) {
         }
 
         taskList.push('html2js', 'jshint-all', 'recess:build','concat:build_css', 'copy:build_app_assets',
-                       'copy:build_vendor_assets','copy:build_appjs', 'copy:build_vendorjs', 'angularFileLoader', 'index:build', 'karmaconfig');
+                       'copy:build_vendor_assets','copy:build_appjs', 'copy:build_vendorjs', 'index:build','angularFileLoader',  'karmaconfig');
 
         if (target === targetEnum.debug || target === targetEnum.dist || target === targetEnum.dev  ) {
             taskList.push('karma:unit');

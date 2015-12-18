@@ -30,15 +30,16 @@ module.exports = {
      * app's unit tests.
      */
     app_files: {
-        js: ['app/**/*.js', 'common/**/*.js', '!app/**/*.spec.js', '!common/**/*.spec.js', '!app/**/*.e2e.js', '!common/**/*.e2e.js'],
-        jsunit: ['app/**/*.spec.js', 'common/**/*.spec.js'],
-        e2e: ['app/**/*.e2e.js', 'common/**/*.e2e.js'],
+        js: ['app/**/*.js', 'common/**/*.js', '!app/**/*.spec.js', '!app/**/*.e2e.js'],
+        jsunit: ['app/**/*.spec.js'],
+        e2e: ['app/**/*.e2e.js'],
 
         atpl: ['app/**/*.html'],
-        ctpl: ['common/**/*.html'],
+        ctpl: [],
 
         html: ['index.html'],
-        less: 'less/main.less'
+        less: 'less/main.less',
+        debug_js:['target/debug/**/*.js', '!target/debug/**/karma.conf.js', '!target/debug/vendor/**/*.js', '!target/debug/assets/**/*.js'],
     },
 
     /**
