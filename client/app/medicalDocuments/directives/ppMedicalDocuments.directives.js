@@ -37,6 +37,10 @@
                     vm.uploadDocument = function () {
                         var medicalDocument = prepareMedicalDocument();
 
+                        if(angular.isUndefined(medicalDocument.description)) {
+                            medicalDocument.description = '';
+                        }
+
                         MedicalDocumentsService.uploadMedicalDocument(medicalDocument)
                             .then(function () {
                                 $state.go($state.current, {}, {reload: true});
