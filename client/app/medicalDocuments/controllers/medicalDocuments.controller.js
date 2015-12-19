@@ -44,21 +44,14 @@
 
     MedicalDocumentsListController.resolve = {
         medicalDocumentsList: ['$q', 'MedicalDocumentsService', 'notificationService', function($q, MedicalDocumentsService, notificationService){
-            function success(response){
-                return response;
-            }
-            function error(response){
-                notificationService.error('Failed to get the consent list, please try again later...');
-                return response;
-            }
             var deferred = $q.defer();
             var listMedicalDocumentsPromise = MedicalDocumentsService.listMedicalDocuments().$promise;
             listMedicalDocumentsPromise.then(function(onFulfilled){
                 deferred.resolve(onFulfilled);
             }, function (onRejected) {
                 deferred.reject(onRejected);
+                notificationService.error('Oops! The upload service is currently unavailable. Please try again later.');
             });
-
             return deferred.promise;
         }]
     };
