@@ -25,12 +25,12 @@
             .state('fe.medicaldocuments.info', {
                 url: '/info',
                 data: {pageTitle: 'Medical Documents Information'},
-                templateUrl: 'app/medicalDocuments/tmpl/medicalDocumentsInfo.tpl.html'
+                templateUrl: 'app/medicalDocuments/controllers/medicalDocumentsInfo.html'
             })
             .state('fe.medicaldocuments.upload', {
                 url: '/upload',
                 data: {pageTitle: 'Upload Medical Documents'},
-                templateUrl: 'app/medicalDocuments/tmpl/medicalDocuments.tpl.html',
+                templateUrl: 'app/medicalDocuments/controllers/medicalDocuments.html',
                 controller: 'MedicalDocumentsListController',
                 controllerAs: 'MedicalDocumentsListVm',
                 resolve: MedicalDocumentsListController.resolve

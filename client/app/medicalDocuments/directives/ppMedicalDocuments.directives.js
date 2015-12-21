@@ -15,7 +15,7 @@
         return {
             restrict: 'E',
             replace: true,
-            templateUrl: 'app/medicalDocuments/tmpl/medicalDocumentsUpload.tpl.html',
+            templateUrl: 'app/medicalDocuments/directives/medicalDocumentsUpload.html',
             scope: {},
             controllerAs: 'MedicalDocumentsUploadVm',
             bindToController: true,
@@ -103,7 +103,7 @@
         return {
             restrict: 'E',
             replace: true,
-            templateUrl: 'app/medicalDocuments/tmpl/medicalDocumentsUploadedDocuments.tpl.html',
+            templateUrl: 'app/medicalDocuments/directives/medicalDocumentsUploadedDocuments.html',
             scope: {
                 medicaldocumentslist:'='
             },
@@ -141,7 +141,7 @@
                      */
                     vm.openDeleteMedicalDocumentModal = function (medicalDocument, size) {
                         var modalInstance = $modal.open({
-                            templateUrl: 'app/medicalDocuments/tmpl/medicalDocumentDeleteModal.tpl.html',
+                            templateUrl: 'app/medicalDocuments/directives/medicalDocumentDeleteModal.html',
                             size: size,
                             resolve: {
                                 medicalDocument: function () {
