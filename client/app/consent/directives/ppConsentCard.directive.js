@@ -38,8 +38,9 @@
                     return consentService.isShareAll(vm.consent);
                 }
 
-                function consentState() {
-                    return consentService.resolveConsentState(vm.consent);
+                function consentState(state) {
+                    var result = (consentService.resolveConsentState(vm.consent) === state);
+                    return result;
                 }
 
                 function notDisclosedItems() {
