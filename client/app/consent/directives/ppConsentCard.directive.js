@@ -39,8 +39,13 @@
                 }
 
                 function consentState(state) {
-                    var result = (consentService.resolveConsentState(vm.consent) === state);
-                    return result;
+
+                    if(state.length !== 0){
+                        var result = (consentService.resolveConsentState(vm.consent) === state);
+                        return result;
+                    }else{
+                        return consentService.resolveConsentState(vm.consent);
+                    }
                 }
 
                 function notDisclosedItems() {
