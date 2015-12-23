@@ -42,21 +42,23 @@
             $modal.open({
                 templateUrl: 'app/medicalDocuments/directives/medicalDocumentDeleteModal.html',
                 size: size,
+                controllerAs: 'medicalDocumentModalDeleteVm',
                 resolve: {
                     medicalDocument: function () {
                         return medicalDocument;
                     }
                 },
-                controller: MedicalDocumentsModalDeleteController
+                controller: MedicalDocumentModalDeleteController
             });
 
             /* @ngInject */
-            function MedicalDocumentsModalDeleteController ($scope, $modalInstance, medicalDocument) {
-                $scope.id = medicalDocument.id;
-                $scope.medicalDocument = medicalDocument;
+            function MedicalDocumentModalDeleteController ($modalInstance, medicalDocument) {
+                var vm = this;
+                vm.id = medicalDocument.id;
+                vm.medicalDocument = medicalDocument;
 
-                $scope.ok = function () {
-                    medicalDocumentsService.deleteMedicalDocument($scope.id,
+                vm.delete = function () {
+                    medicalDocumentsService.deleteMedicalDocument(vm.id,
                         function(data){
                             $state.go($state.current, {}, {reload: true});
                             notificationService.success('Success in deleting medical document');
@@ -67,7 +69,7 @@
                     );
                     $modalInstance.close();
                 };
-                $scope.cancel = function () {
+                vm.cancel = function () {
                     $modalInstance.dismiss('cancel');
                 };
             }
