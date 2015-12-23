@@ -9,6 +9,7 @@
                 'templates-app',
                 'templates-common',
                 'app.security',
+                'app.config',
 
                 /*
                  * Feature areas
@@ -18,7 +19,7 @@
                 'app.healthInformationModule',
                 'app.providerModule',
                 'app.layout',
-                'app.medicalDocumentsModule'
+                'app.medicalDocument'
             ])
             .constant("idleConfigParams", {"idle": 780, "timeout": 120, "keepalive": 240})
             .config(appConfig)
