@@ -22,8 +22,8 @@
             function ConsentRevokeController($stateParams, $state) {
                 var vm = this;
                 vm.cancel = cancel;
-                vm.consentId = vm.params.consent.id;
                 vm.params = $stateParams;
+                vm.consentId = vm.params.consent.id;
                 vm.sign = sign;
 
                 activate();
