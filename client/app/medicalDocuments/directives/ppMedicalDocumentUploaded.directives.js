@@ -22,6 +22,7 @@
         };
         return directive;
     }
+    /* @ngInject */
     function UploadedDocumentController($state, $modal, medicalDocumentsService, notificationService) {
         var vm = this;
         vm.downloadFile = downloadFile;
@@ -36,12 +37,7 @@
                 });
         }
 
-        /**
-         * Opens the confirm delete modal
-         *
-         * @param medicalDocument
-         * @param size - The size of the modal
-         */
+        /* @ngInject */
         function openDeleteMedicalDocumentModal(medicalDocument, size) {
             $modal.open({
                 templateUrl: 'app/medicalDocuments/directives/medicalDocumentDeleteModal.html',
@@ -54,6 +50,7 @@
                 controller: MedicalDocumentsModalDeleteController
             });
 
+            /* @ngInject */
             function MedicalDocumentsModalDeleteController ($scope, $modalInstance, medicalDocument) {
                 $scope.id = medicalDocument.id;
                 $scope.medicalDocument = medicalDocument;

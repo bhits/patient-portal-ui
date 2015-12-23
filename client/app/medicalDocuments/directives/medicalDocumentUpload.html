@@ -11,7 +11,7 @@
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input id="name" name="name" type="text" class="form-control" placeholder="Document Name"
-                           ng-model="MedicalDocumentsUploadVm.name" required/>
+                           ng-model="medicalDocumentsUploadVm.name" required/>
                     <div ng-messages="medicalDocumentUploadForm.name.$error"
                          class="text-alert" role="alert">
                         <div class="m-t-xs" ng-message="required" ng-if="medicalDocumentUploadForm.name.$dirty" >Required</div>
@@ -21,7 +21,7 @@
                 <div class="form-group">
                     <label for="description">Description</label>
                     <textarea name="description" id="description" class="form-control"
-                              ng-model="MedicalDocumentsUploadVm.description"
+                              ng-model="medicalDocumentsUploadVm.description"
                               placeholder="Description" rows="3"></textarea>
                 </div>
 
@@ -29,15 +29,15 @@
                     <label for="documentType">Medical Document Type: </label>
                     <select id="documentType" class="form-control m-b"
                             ng-options="type for type in ['-- Please Select --', 'Episode Summary Note']"
-                            ng-model="MedicalDocumentsUploadVm.documentType"
-                            ng-init="MedicalDocumentsUploadVm.documentType='Episode Summary Note'">
+                            ng-model="medicalDocumentsUploadVm.documentType"
+                            ng-init="medicalDocumentsUploadVm.documentType='Episode Summary Note'">
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label for="file">Medical Document</label>
                     <input type="file" name="file" id="file" accept=".xml" file-validate
-                           ng-model="MedicalDocumentsUploadVm.file" file-model="MedicalDocumentsUploadVm.medicalFile"  ng-pattern="MedicalDocumentsUploadVm.extension" required/>
+                           ng-model="medicalDocumentsUploadVm.file" file-model="medicalDocumentsUploadVm.medicalFile"  ng-pattern="medicalDocumentsUploadVm.extension" required/>
                     <div ng-messages="medicalDocumentUploadForm.file.$error"
                          class="text-alert" role="alert">
                         <div class="m-t-xs" ng-message="pattern" >Only .xml files are permitted.</div>
@@ -46,7 +46,7 @@
                 </div>
 
                 <button class="btn btn-primary dark-green" type="button"
-                        ng-click="MedicalDocumentsUploadVm.uploadDocument()"
+                        ng-click="medicalDocumentsUploadVm.uploadDocument()"
                         ng-disabled="medicalDocumentUploadForm.$invalid">
                     <strong>Upload</strong>
                 </button>

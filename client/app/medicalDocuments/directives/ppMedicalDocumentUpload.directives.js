@@ -9,46 +9,48 @@
         .directive('ppMedicalDocumentsUpload', ppMedicalDocumentsUpload);
 
     function ppMedicalDocumentsUpload() {
-        return {
+        var directive = {
             restrict: 'E',
             replace: true,
             templateUrl: 'app/medicalDocuments/directives/medicalDocumentUpload.html',
             scope: {},
-            controllerAs: 'MedicalDocumentsUploadVm',
             bindToController: true,
-            controller: ['$state', 'medicalDocumentsService', 'notificationService',
-                function ($state, medicalDocumentsService, notificationService) {
-                    var vm = this;
-                    vm.extension = /\.xml$/;
+            controller: ['$state', 'medicalDocumentsService', 'notificationService', MedicalDocumentUploadController],
+            controllerAs: 'medicalDocumentsUploadVm'
+        };
+        return directive;
+    }
 
-                    var prepareMedicalDocument = function () {
-                        var medicalDocument = {
-                            file: vm.medicalFile,
-                            name: vm.name,
-                            description: vm.description,
-                            documentType: vm.documentType
-                        };
-                        return medicalDocument;
-                    };
+    /* @ngInject */
+    function MedicalDocumentUploadController($state, medicalDocumentsService, notificationService) {
+        var vm = this;
+        vm.extension = /\.xml$/;
 
-                    vm.uploadDocument = function () {
-                        var medicalDocument = prepareMedicalDocument();
+        var prepareMedicalDocument = function () {
+            var medicalDocument = {
+                file: vm.medicalFile,
+                name: vm.name,
+                description: vm.description,
+                documentType: vm.documentType
+            };
+            return medicalDocument;
+        };
 
-                        if(angular.isUndefined(medicalDocument.description)) {
-                            medicalDocument.description = '';
-                        }
+        vm.uploadDocument = function () {
+            var medicalDocument = prepareMedicalDocument();
 
-                        medicalDocumentsService.uploadMedicalDocument(medicalDocument)
-                            .then(function () {
-                                $state.go($state.current, {}, {reload: true});
-                                notificationService.success('Success in uploading medical document');
-                            }, function () {
-                                notificationService.error('Error in uploading medical document');
-                            }
-                        );
-                        console.log(medicalDocument);
-                    };
-                }]
+            if(angular.isUndefined(medicalDocument.description)) {
+                medicalDocument.description = '';
+            }
+
+            medicalDocumentsService.uploadMedicalDocument(medicalDocument)
+                .then(function () {
+                    $state.go($state.current, {}, {reload: true});
+                    notificationService.success('Success in uploading medical document');
+                }, function () {
+                    notificationService.error('Error in uploading medical document');
+                }
+            );
         };
     }
 })();

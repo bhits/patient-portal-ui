@@ -3,7 +3,7 @@
     'use strict';
 
     angular
-        .module('app.medicalDocument')
+        .module('app.core')
         .directive("fileModel", fileModel);
 
     function fileModel($parse) {
