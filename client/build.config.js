@@ -75,6 +75,7 @@ module.exports = {
      */
     vendor_files: {
         js: [
+            'vendor/angular/angular.js',
             'vendor/angular-resource/angular-resource.js',
             'vendor/angular-sanitize/angular-sanitize.js',
             'vendor/angular-local-storage/dist/angular-local-storage.js',
