@@ -24,7 +24,6 @@
             .run(appRun)
             .controller('AppController', AppController);
 
-            //var ngIdleParams = {"idle": 780, "timeout": 120, "keepalive": 240};
 
             /* @ngInject */
             function appConfig($urlRouterProvider, $locationProvider, $httpProvider, KeepaliveProvider, IdleProvider, idleConfigParams) {
