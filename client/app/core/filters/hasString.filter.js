@@ -9,9 +9,7 @@
     angular
         .module('app.core')
             .filter('hasString', HasString);
-            /**
-             * @ngInject
-             */
+            /* @ngInject */
             function HasString(utilityService) {
                 return hasStr;
 

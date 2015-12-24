@@ -7,9 +7,7 @@
         .module("app.security")
             .factory('authenticationService', AuthenticationService);
 
-            /**
-             * @ngInject
-             */
+            /* @ngInject */
             function AuthenticationService($sessionStorage, utilityService) {
 
                 var service = {};

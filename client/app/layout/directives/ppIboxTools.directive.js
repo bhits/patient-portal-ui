@@ -5,9 +5,7 @@
         .module('app.layout')
             .directive('ppIboxTools', ppIboxTools);
 
-            /**
-            *  @ngInject
-            */
+            /* @ngInject */
             function ppIboxTools($timeout) {
                 return {
                     restrict: 'A',

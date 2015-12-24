@@ -12,9 +12,7 @@
         .module('app.core')
             .factory('notificationService',notificationService);
 
-            /**
-             * @ngInject
-             */
+            /* @ngInject */
             function notificationService(notify){
 
                 var templateUrl = "app/core/services/notify.html";

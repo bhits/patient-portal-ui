@@ -628,7 +628,7 @@ module.exports = function (grunt) {
             compile: {
                 files: [
                     {
-                        src: ['<%= app_files.js %>'],
+                        src: ['<%= app_files.debug_js %>'],
                         cwd: '<%= build_debug_dir %>',
                         dest: '<%= build_debug_dir %>',
                         expand: true

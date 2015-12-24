@@ -5,9 +5,7 @@
         .module('app.layout')
             .directive('ppPageTitle', ppPageTitle);
 
-            /**
-             *  @ngInject
-             */
+            /* @ngInject */
             function ppPageTitle($rootScope, $timeout) {
                 var directive =  {
                     link:linkFunc

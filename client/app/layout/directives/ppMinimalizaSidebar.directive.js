@@ -5,9 +5,7 @@
         .module('app.layout')
             .directive('ppMinimalizaSidebar', ppMinimalizaSidebar);
 
-            /**
-             * @ngInject
-             */
+            /* @ngInject */
             function ppMinimalizaSidebar($timeout) {
                 var directive =  {
                     restrict: 'A',

@@ -7,9 +7,7 @@
         .module('app.core')
             .directive('ppIcheck', ppIcheck);
 
-            /**
-             *  @ngInject
-             */
+            /* @ngInject */
             function ppIcheck($timeout) {
 
                 var directive = {
@@ -20,9 +18,7 @@
 
                 return directive;
 
-                /**
-                 *  @ngInject
-                 */
+                /* @ngInject */
                 function linkFunc($scope, element, $attrs, ngModel) {
 
                     return $timeout(timeoutHandler);

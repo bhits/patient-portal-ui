@@ -11,9 +11,8 @@
         .module('app.security')
 
             .factory('AuthInterceptorService', AuthInterceptorService);
-            /**
-             *  @ngInject
-             */
+
+            /* @ngInject */
             function AuthInterceptorService($q, $location, $rootScope, utilityService, ENVService, AccessToken){
                var service = {};
                 service.request = request;

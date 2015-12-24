@@ -7,16 +7,7 @@
         .module('app.consent')
             .controller("ConsentCreateEditController", ConsentCreateEditController);
 
-            /**
-             * @memberof app.consent
-             * @ngdoc controller
-             * @name ConsentCreateEditController
-             * @param consentService {service} The consent service
-             * @param ProviderService {service} The provider service
-             * @param loadedData {Array} The resolved data (lookup data and consent data when editing consent) for the controller
-             *
-             * @ngInject
-             */
+            /* @ngInject */
             function ConsentCreateEditController(consentService, ProviderService, loadedData ){
                 var vm = this;
                 vm.providers = loadedData[0] ;
