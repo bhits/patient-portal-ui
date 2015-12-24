@@ -23,19 +23,16 @@ module.exports = {
     /**
      * This is a collection of file patterns that refer to our app code (thez
      * stuff in `src/`). These file paths are used in the configuration of
-     * build tasks. `js` is all project javascript, less tests. `ctpl` contains
-     * our reusable components' (`src/common`) template HTML files, while
-     * `atpl` contains the same, but for our app's code. `html` is just our
+     * build tasks. `js` is all project javascript, less tests. `html` is just our
      * main HTML file, `less` is our main stylesheet, and `unit` contains our
      * app's unit tests.
      */
     app_files: {
-        js: ['app/**/*.js', 'common/**/*.js', '!app/**/*.spec.js', '!app/**/*.e2e.js'],
+        js: ['app/**/*.js', '!app/**/*.spec.js', '!app/**/*.e2e.js'],
         jsunit: ['app/**/*.spec.js'],
         e2e: ['app/**/*.e2e.js'],
 
         atpl: ['app/**/*.html'],
-        ctpl: [],
 
         html: ['index.html'],
         less: 'less/main.less',

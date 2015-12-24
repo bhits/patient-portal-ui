@@ -137,7 +137,7 @@ module.exports = function (grunt) {
             build_tpl: {
                 files: [
                     {
-                        src: ['<%= app_files.atpl %>', '<%= app_files.ctpl %>'],
+                        src: ['<%= app_files.atpl %>'],
                         dest: '<%= build_debug_dir %>/',
                         cwd: '.',
                         expand: true
@@ -312,18 +312,7 @@ module.exports = function (grunt) {
                 },
                 src: ['<%= app_files.atpl %>'],
                 dest: '<%= build_debug_dir %>/templates-app.js'
-            },
-
-            /**
-             * These are the templates from `Common`.
-             */
-            //common: {
-            //    options: {
-            //        base: '.'
-            //    },
-            //    src: ['<%= app_files.ctpl %>'],
-            //    dest: '<%= build_debug_dir %>/templates-common.js'
-            //}
+            }
         },
 
         /**
@@ -488,10 +477,7 @@ module.exports = function (grunt) {
              * When our templates change, we only rewrite the template cache.
              */
             tpls: {
-                files: [
-                    '<%= app_files.atpl %>',
-                    '<%= app_files.ctpl %>'
-                ],
+                files: ['<%= app_files.atpl %>'],
                 tasks: ['html2js']
             },
 
