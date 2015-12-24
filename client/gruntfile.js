@@ -389,8 +389,6 @@ module.exports = function (grunt) {
                 dir: '<%= build_debug_dir %>',
                 src: [
                     '<%= vendor_files.js %>',
-                    '<%= html2js.common.dest %>',
-                    '<%= html2js.app.dest %>',
                     '<%= recess.build.dest %>'
                 ]
             },
