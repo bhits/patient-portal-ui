@@ -80,8 +80,6 @@ module.exports = {
             'vendor/angular-sanitize/angular-sanitize.js',
             'vendor/angular-aria/angular-aria.js',
             'vendor/angular-loading-bar/build/loading-bar.js',
-            'vendor/angular-utf8-base64/angular-utf8-base64.js',
-            'vendor/angular-jwt/dist/angular-jwt.js',
             'vendor/angular-ui-router/release/angular-ui-router.js',
             'vendor/ngstorage/ngStorage.js',
             'vendor/oauth-ng/dist/oauth-ng.js',

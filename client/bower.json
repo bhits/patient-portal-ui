@@ -17,8 +17,6 @@
     "angular-sanitize": "1.4.8",
     "angular-aria": "1.4.8",
     "angular-loading-bar": "0.8.x",
-    "angular-utf8-base64": "0.0.5",
-    "angular-jwt": "0.0.7",
     "angular-bootstrap": "0.14.x",
     "angular-ui-router": "0.2.x",
     "checklist-model": "0.6.x",
