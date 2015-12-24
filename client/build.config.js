@@ -79,7 +79,6 @@ module.exports = {
             'vendor/angular-resource/angular-resource.js',
             'vendor/angular-sanitize/angular-sanitize.js',
             'vendor/angular-aria/angular-aria.js',
-            'vendor/angular-local-storage/dist/angular-local-storage.js',
             'vendor/angular-loading-bar/build/loading-bar.js',
             'vendor/angular-utf8-base64/angular-utf8-base64.js',
             'vendor/angular-jwt/dist/angular-jwt.js',
