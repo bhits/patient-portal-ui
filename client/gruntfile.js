@@ -204,9 +204,7 @@ module.exports = function (grunt) {
                 src: [
                     '<%= vendor_files.js %>',
                     '<%= build_debug_dir %>/App/**/*.js',
-                     '<%= build_debug_dir %>/Common/**/*.js',
-                    '<%= html2js.app.dest %>',
-                    '<%= html2js.common.dest %>',
+                    '<%= html2js.app.dest %>'
                 ],
                 dest: '<%= build_dist_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.js'
             }
@@ -319,13 +317,13 @@ module.exports = function (grunt) {
             /**
              * These are the templates from `Common`.
              */
-            common: {
-                options: {
-                    base: '.'
-                },
-                src: ['<%= app_files.ctpl %>'],
-                dest: '<%= build_debug_dir %>/templates-common.js'
-            }
+            //common: {
+            //    options: {
+            //        base: '.'
+            //    },
+            //    src: ['<%= app_files.ctpl %>'],
+            //    dest: '<%= build_debug_dir %>/templates-common.js'
+            //}
         },
 
         /**
@@ -417,7 +415,6 @@ module.exports = function (grunt) {
                 src: [
                     '<%= vendor_files.js %>',
                     '<%= html2js.app.dest %>',
-                    '<%= html2js.common.dest %>',
                     '<%= test_files.js %>'
                 ]
             }

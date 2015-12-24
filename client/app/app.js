@@ -7,7 +7,6 @@
                 /* Shared modules*/
                 'app.core',
                 'templates-app',
-                'templates-common',
                 'app.security',
 
                 /*
