@@ -10,7 +10,6 @@
             function ppConsentRevoke() {
                 var directive = {
                     restrict: 'E',
-                    scope: {},
                     templateUrl: 'app/consent/directives/consentRevokeConfirmation.html',
                     controller:ConsentRevokeController,
                     controllerAs: 'consentRevokeVm'

@@ -13,10 +13,9 @@
                     restrict: 'E',
                     replace: false,
                     templateUrl: 'app/consent/directives/consentTerm.html',
-                    scope: {
+                    bindToController: {
                         ngModel: '='
                     },
-                    bindToController: true,
                     controllerAs: 'consentTermVm',
                     controller: ConsentTermController
                 };

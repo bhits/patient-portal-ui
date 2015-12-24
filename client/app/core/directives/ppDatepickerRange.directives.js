@@ -9,13 +9,12 @@
             function ppDatePickerRange() {
                 var directive =  {
                     restrict: 'EA',
-                    scope: {
+                    templateUrl: 'app/core/directives/datepicker-range.tpl.html',
+                    bindToController:  {
                         tolabel: "@",
                         fromlabel: "@",
                         ngModel: "="
                     },
-                    templateUrl: 'app/core/directives/datepicker-range.tpl.html',
-                    bindToController: true,
                     controllerAs: 'datePickerVm',
                     controller: DatePickerRangeController,
                     link: linkFunc
