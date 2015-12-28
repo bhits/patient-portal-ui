@@ -4,9 +4,6 @@
 (function () {
     'use strict';
 
-    /**
-     * Filter to format provider name from PLS
-     */
     function PLSProviderNameFilter() {
         return function (provider) {
             var providerName = '';
@@ -24,9 +21,6 @@
         };
     }
 
-    /**
-     * Filter to format provider address from PLS
-     */
     function PLSProviderAddressFilter(utilityService) {
         return function (provider) {
             var providerAddressArray = [provider.providerFirstLineBusinessPracticeLocationAddress,
@@ -40,13 +34,6 @@
         };
     }
 
-    /**
-     * The address filter
-     *
-     * @returns {String} - The filter address strign
-     *
-     * @constructor
-     */
     function pcmProviderAddress(utilityService) {
 
         return function (provider) {
@@ -68,12 +55,6 @@
         };
     }
 
-    /**
-     * Formats the individual provider first and last name or the organization name
-     *
-     * @returns {String} - The individual provider first and last name or the organization name
-     *
-     */
     function PCMProviderNameOrFacilityFilter() {
         return function (provider) {
             if (angular.equals(provider.entityType, 'Individual')) {

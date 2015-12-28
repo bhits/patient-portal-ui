@@ -10,7 +10,6 @@
                [
                 'app.core',
                 'app.config',
-                'app.providerService',
-                'app.providerFiltersModule'
+                'app.data'
                ]);
 })();

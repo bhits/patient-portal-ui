@@ -28,7 +28,7 @@
             }
 
              /* @ngInject */
-            function ConsentCreateController ($state, $modal, $stateParams, ProviderService, notificationService,consentService, utilityService ) {
+            function ConsentCreateController ($state, $modal, $stateParams, providerSharedService, notificationService,consentService, utilityService ) {
                 var vm = this;
                 vm.authorize = "Authorize";
                 vm.disclosure = "Disclosure";
@@ -46,8 +46,8 @@
 
                         vm.isEditMode = angular.isDefined($stateParams.consentId.length) ? true : false;
 
-                        vm.disclosureProvider = (ProviderService.getProviderByNpis(vm.providers, vm.consent.providersDisclosureIsMadeToNpi, vm.consent.organizationalProvidersDisclosureIsMadeToNpi))[0];
-                        vm.authorizeProvider = (ProviderService.getProviderByNpis(vm.providers, vm.consent.providersPermittedToDiscloseNpi, vm.consent.organizationalProvidersPermittedToDiscloseNpi))[0];
+                        vm.disclosureProvider = (providerSharedService.getProviderByNpis(vm.providers, vm.consent.providersDisclosureIsMadeToNpi, vm.consent.organizationalProvidersDisclosureIsMadeToNpi))[0];
+                        vm.authorizeProvider = (providerSharedService.getProviderByNpis(vm.providers, vm.consent.providersPermittedToDiscloseNpi, vm.consent.organizationalProvidersPermittedToDiscloseNpi))[0];
                         // set providers to disable on UI that are currently selected in this consent
                         consentService.setDiscloseNpi(vm.disclosureProvider.npi);
                         consentService.setAuthorizeNpi(vm.authorizeProvider.npi);
@@ -72,10 +72,10 @@
                 }
 
                 function prepareConsent() {
-                    var providersDisclosureIsMadeToNpi = ProviderService.getIndividualProvidersNpi([vm.disclosureProvider]);
-                    var providersPermittedToDiscloseNpi = ProviderService.getIndividualProvidersNpi([vm.authorizeProvider]);
-                    var organizationalProvidersPermittedToDiscloseNpi = ProviderService.getOrganizationalProvidersNpi([vm.authorizeProvider]);
-                    var organizationalProvidersDisclosureIsMadeToNpi = ProviderService.getOrganizationalProvidersNpi([vm.disclosureProvider]);
+                    var providersDisclosureIsMadeToNpi = providerSharedService.getIndividualProvidersNpi([vm.disclosureProvider]);
+                    var providersPermittedToDiscloseNpi = providerSharedService.getIndividualProvidersNpi([vm.authorizeProvider]);
+                    var organizationalProvidersPermittedToDiscloseNpi = providerSharedService.getOrganizationalProvidersNpi([vm.authorizeProvider]);
+                    var organizationalProvidersDisclosureIsMadeToNpi = providerSharedService.getOrganizationalProvidersNpi([vm.disclosureProvider]);
 
                     var consent = {
                         providersPermittedToDiscloseNpi: providersPermittedToDiscloseNpi,

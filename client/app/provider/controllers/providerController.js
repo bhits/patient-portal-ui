@@ -136,7 +136,8 @@
             'app.providerService',
             'app.providerDirectives',
             'app.providerFiltersModule',
-            'app.core'
+            'app.core',
+            'app.data'
         ])
         .config(ProviderConfig)
         .controller('ProviderListController',ProviderListController);

@@ -8,20 +8,20 @@
     function ProviderService($resource, ENVService) {
         var providers = $resource(ENVService.securedApis.pcmApiBaseUrl + "/providers/:npi", {npi: '@npi'});
 
-        var findProviderByNpi = function( providers, npi){
-            for(var i = 0; i < providers.length; i++){
-                if(providers[i].npi === npi){
-                    return providers[i];
-                }
-            }
-        };
+        //var findProviderByNpi = function( providers, npi){
+        //    for(var i = 0; i < providers.length; i++){
+        //        if(providers[i].npi === npi){
+        //            return providers[i];
+        //        }
+        //    }
+        //};
 
         return {
 
             getProviders: function (success, error) {
                 providers.query(success, error);
             },
-
+            //Shared
             getProvidersResource: function () {
                 return providers;
             },
@@ -104,58 +104,60 @@
                 }
                 return isAlreadyAdded;
             },
-
-            isIndividualProvider: function(provider){
-                return angular.isDefined(provider) && angular.equals(provider.entityType, 'Individual');
-            },
-
-            isOrganizationProvider: function(provider){
-                return angular.isDefined(provider) && angular.equals(provider.entityType, 'Organization');
-            },
-            getProviderByNPI: function(providerList, npi){
-                if(angular.isDefined(providerList)){
-                    for(var i = 0; i < providerList.length; i++){
-                        if(providerList[i].npi === npi){
-                            return providerList[i];
-                        }
-                    }
-                }
-                return {};
-            },
-
-            getProviderByNpis: function(providers, listOfNpi1,listOfNpi2 ){
-                var result = [];
-                var listOfNpi = listOfNpi1.concat(listOfNpi2);
-
-                if(angular.isDefined(providers)){
-                    for(var i = 0; i < listOfNpi.length; i++){
-                        var provider = findProviderByNpi(providers, listOfNpi[i]);
-                        if(provider.npi){
-                            result.push(provider);
-                        }
-                    }
-                }
-                return result;
-            },
-            getIndividualProvidersNpi: function(providers){
-                var result = [];
-                for(var i = 0; i < providers.length; i++){
-                    if(this.isIndividualProvider(providers[i])){
-                        result.push(providers[i].npi);
-                    }
-                }
-                return result;
-            },
-
-            getOrganizationalProvidersNpi: function(providers){
-                var result = [];
-                for(var i = 0; i < providers.length; i++){
-                    if(this.isOrganizationProvider(providers[i])){
-                        result.push(providers[i].npi);
-                    }
-                }
-                return result;
-            }
+            ////Shared with consent module
+            //isIndividualProvider: function(provider){
+            //    return angular.isDefined(provider) && angular.equals(provider.entityType, 'Individual');
+            //},
+            ////Shared with consent module
+            //isOrganizationProvider: function(provider){
+            //    return angular.isDefined(provider) && angular.equals(provider.entityType, 'Organization');
+            //},
+            ////Shared with consent module
+            //getProviderByNPI: function(providerList, npi){
+            //    if(angular.isDefined(providerList)){
+            //        for(var i = 0; i < providerList.length; i++){
+            //            if(providerList[i].npi === npi){
+            //                return providerList[i];
+            //            }
+            //        }
+            //    }
+            //    return {};
+            //},
+            ////Shared with consent module
+            //getProviderByNpis: function(providers, listOfNpi1,listOfNpi2 ){
+            //    var result = [];
+            //    var listOfNpi = listOfNpi1.concat(listOfNpi2);
+            //
+            //    if(angular.isDefined(providers)){
+            //        for(var i = 0; i < listOfNpi.length; i++){
+            //            var provider = findProviderByNpi(providers, listOfNpi[i]);
+            //            if(provider.npi){
+            //                result.push(provider);
+            //            }
+            //        }
+            //    }
+            //    return result;
+            //},
+            ////Shared with consent module
+            //getIndividualProvidersNpi: function(providers){
+            //    var result = [];
+            //    for(var i = 0; i < providers.length; i++){
+            //        if(this.isIndividualProvider(providers[i])){
+            //            result.push(providers[i].npi);
+            //        }
+            //    }
+            //    return result;
+            //},
+            ////Shared with consent module
+            //getOrganizationalProvidersNpi: function(providers){
+            //    var result = [];
+            //    for(var i = 0; i < providers.length; i++){
+            //        if(this.isOrganizationProvider(providers[i])){
+            //            result.push(providers[i].npi);
+            //        }
+            //    }
+            //    return result;
+            //}
 
         };
     }

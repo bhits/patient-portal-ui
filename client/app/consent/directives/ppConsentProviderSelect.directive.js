@@ -8,7 +8,7 @@
             .directive('ppConsentProviderSelect', ppConsentProviderSelect);
 
             /* @ngInject */
-            function ppConsentProviderSelect($modal, ProviderService, consentService) {
+            function ppConsentProviderSelect($modal, consentService) {
                 var directive =  {
                     restrict: 'E',
                     replace: false,
@@ -27,7 +27,7 @@
             }
 
             /* @ngInject */
-            function ConsentSelectProviderController ($modal, consentService, ProviderService, notificationService) {
+            function ConsentSelectProviderController ($modal, consentService,notificationService) {
                 var vm = this;
                 vm.fieldplaceholder = vm.modaltitle === 'Authorize' ? "The following individual or organization" : "To disclose my information to";
                 vm.openSelectProviderModal = openSelectProviderModal;
@@ -53,7 +53,7 @@
                 }
 
                 /* @ngInject */
-                function SelectProviderModalController($modalInstance, notificationService, data, ProviderService, consentService) {
+                function SelectProviderModalController($modalInstance, notificationService, data, providerSharedService, consentService) {
                     var selectProviderModalVm = this;
                     selectProviderModalVm.cancel = cancel;
                     selectProviderModalVm.isOrganizationProvider = isOrganizationProvider;
@@ -70,11 +70,11 @@
                     }
 
                     function isOrganizationProvider (provider) {
-                        return ProviderService.isOrganizationProvider(provider);
+                        return providerSharedService.isOrganizationProvider(provider);
                     }
 
                     function isIndividualProvider(provider) {
-                        return ProviderService.isIndividualProvider(provider);
+                        return providerSharedService.isIndividualProvider(provider);
                     }
 
                     function isSelected (npi) {
@@ -87,7 +87,7 @@
 
                     function ok () {
                         $modalInstance.close();
-                        var selectedProvider = ProviderService.getProviderByNPI(selectProviderModalVm.providers, selectProviderModalVm.selectedProvider.npi);
+                        var selectedProvider = providerSharedService.getProviderByNPI(selectProviderModalVm.providers, selectProviderModalVm.selectedProvider.npi);
                         vm.ngModel = selectedProvider;
                         vm.selectedProvider = selectedProvider;
 
