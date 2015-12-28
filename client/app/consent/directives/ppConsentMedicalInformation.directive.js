@@ -12,12 +12,6 @@
                     restrict: 'E',
                     replace: false,
                     templateUrl: 'app/consent/directives/consentMedicalInformation.html',
-                    //scope: {
-                    //    data: "=",
-                    //    ngModel: '=',
-                    //    medicalsections: "=",
-                    //    sensitivitypolicies: "="
-                    //},
                     bindToController: {
                         data: "=",
                         ngModel: '=',
@@ -56,7 +50,6 @@
                     if(vm.medicalInformation === 'B'){
                         var modalInstance = $modal.open({
                             templateUrl: 'app/consent/directives/consentMedicalInformationModal.html',
-
                             resolve: {
                                 data: function () {
                                     return {
@@ -65,70 +58,72 @@
                                     };
                                 }
                             },
+                            controllerAs: 'medicalInfoModalVm',
                             controller: MedicalInformationModalController
                         });
                     }
                 }
 
                 function MedicalInformationModalController($scope, $modalInstance, data) {
-                    $scope.mediactionSections = data.mediactionSections;
-                    $scope.sensitivityPolicies = data.sensitivityPolicies;
-                    $scope.consent = [];
-                    $scope.consent.selectedMedicalSections = !angular.isDefined(vm.selectedMedicalSections) ? [] : consentService.getCodes(vm.selectedMedicalSections);
-                    $scope.consent.selectedSensitivityPolicies = !angular.isDefined(vm.selectedSensitivityPolicies) ? [] : consentService.getCodes(vm.selectedSensitivityPolicies);
+                    var medicalInfoModalVm = this;
+                    medicalInfoModalVm.mediactionSections = data.mediactionSections;
+                    medicalInfoModalVm.sensitivityPolicies = data.sensitivityPolicies;
+                    medicalInfoModalVm.consent = [];
+                    medicalInfoModalVm.consent.selectedMedicalSections = !angular.isDefined(vm.selectedMedicalSections) ? [] : consentService.getCodes(vm.selectedMedicalSections);
+                    medicalInfoModalVm.consent.selectedSensitivityPolicies = !angular.isDefined(vm.selectedSensitivityPolicies) ? [] : consentService.getCodes(vm.selectedSensitivityPolicies);
 
                     $scope.$watch("vm.selectedMedicalSections", watchMedicalSection);
                     $scope.$watch("vm.selectedSensitivityPolicies",watchSensitivityPolicies );
 
-                    $scope.selectAllMedicalSections = selectAllMedicalSections;
-                    $scope.deselectAllMedicalSections = deselectAllMedicalSections;
-                    $scope.selectAllSensitivityPolicies = selectAllSensitivityPolicies;
-                    $scope.deselectAllSensitivityPolicies = deselectAllSensitivityPolicies;
-                    $scope.ok = ok;
-                    $scope.cancel = cancel;
+                    medicalInfoModalVm.selectAllMedicalSections = selectAllMedicalSections;
+                    medicalInfoModalVm.deselectAllMedicalSections = deselectAllMedicalSections;
+                    medicalInfoModalVm.selectAllSensitivityPolicies = selectAllSensitivityPolicies;
+                    medicalInfoModalVm.deselectAllSensitivityPolicies = deselectAllSensitivityPolicies;
+                    medicalInfoModalVm.ok = ok;
+                    medicalInfoModalVm.cancel = cancel;
 
                     function watchMedicalSection (arg) {
                         if (vm.medicalInformation === 'A') {
-                            $scope.consent.selectedSensitivityPolicies = [];
+                            medicalInfoModalVm.consent.selectedSensitivityPolicies = [];
                         }
                     }
 
                     function watchSensitivityPolicies(arg) {
                         if (vm.medicalInformation === 'A') {
-                            $scope.consent.selectedSensitivityPolicies = [];
+                            medicalInfoModalVm.consent.selectedSensitivityPolicies = [];
                         }
                     }
 
                     function selectAllMedicalSections () {
-                        $scope.consent.selectedMedicalSections = consentService.getCodes($scope.mediactionSections);
+                        medicalInfoModalVm.consent.selectedMedicalSections = consentService.getCodes(medicalInfoModalVm.mediactionSections);
                         //TODO: This should be refactored to avoid directly referencing the 'medicalInformationModalObj' name, which is declared in the HTML markup but not in this directive.
-                        $scope.medicalInfofmationModalObj.$setDirty();
+                        medicalInfoModalVm.medicalInfofmationModalObj.$setDirty();
                     }
 
                     function deselectAllMedicalSections () {
-                        $scope.consent.selectedMedicalSections = [];
+                        medicalInfoModalVm.consent.selectedMedicalSections = [];
                         //TODO: This should be refactored to avoid directly referencing the 'medicalInformationModalObj' name, which is declared in the HTML markup but not in this directive.
-                        $scope.medicalInfofmationModalObj.$setDirty();
+                        medicalInfoModalVm.medicalInfofmationModalObj.$setDirty();
                     }
 
                     function selectAllSensitivityPolicies () {
-                        $scope.consent.selectedSensitivityPolicies = consentService.getCodes($scope.sensitivityPolicies);
+                        medicalInfoModalVm.consent.selectedSensitivityPolicies = consentService.getCodes(medicalInfoModalVm.sensitivityPolicies);
                         //TODO: This should be refactored to avoid directly referencing the 'medicalInformationModalObj' name, which is declared in the HTML markup but not in this directive.
-                        $scope.medicalInfofmationModalObj.$setDirty();
+                        medicalInfoModalVm.medicalInfofmationModalObj.$setDirty();
                     }
 
                     function deselectAllSensitivityPolicies () {
-                        $scope.consent.selectedSensitivityPolicies = [];
+                        medicalInfoModalVm.consent.selectedSensitivityPolicies = [];
                         //TODO: This should be refactored to avoid directly referencing the 'medicalInformationModalObj' name, which is declared in the HTML markup but not in this directive.
-                        $scope.medicalInfofmationModalObj.$setDirty();
+                        medicalInfoModalVm.medicalInfofmationModalObj.$setDirty();
                     }
 
                     function ok() {
-                        vm.selectedMedicalSections = consentService.getEntitiesByCodes($scope.mediactionSections, $scope.consent.selectedMedicalSections);
-                        vm.selectedSensitivityPolicies = consentService.getEntitiesByCodes($scope.sensitivityPolicies, $scope.consent.selectedSensitivityPolicies);
+                        vm.selectedMedicalSections = consentService.getEntitiesByCodes(medicalInfoModalVm.mediactionSections, medicalInfoModalVm.consent.selectedMedicalSections);
+                        vm.selectedSensitivityPolicies = consentService.getEntitiesByCodes(medicalInfoModalVm.sensitivityPolicies, medicalInfoModalVm.consent.selectedSensitivityPolicies);
                         vm.ngModel = {
-                            doNotShareSensitivityPolicyCodes: $scope.consent.selectedSensitivityPolicies,
-                            doNotShareClinicalDocumentSectionTypeCodes: $scope.consent.selectedMedicalSections
+                            doNotShareSensitivityPolicyCodes: medicalInfoModalVm.consent.selectedSensitivityPolicies,
+                            doNotShareClinicalDocumentSectionTypeCodes: medicalInfoModalVm.consent.selectedMedicalSections
                         };
                         $modalInstance.close();
                     }
