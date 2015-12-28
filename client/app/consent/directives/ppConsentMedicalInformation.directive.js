@@ -12,13 +12,18 @@
                     restrict: 'E',
                     replace: false,
                     templateUrl: 'app/consent/directives/consentMedicalInformation.html',
-                    scope: {
+                    //scope: {
+                    //    data: "=",
+                    //    ngModel: '=',
+                    //    medicalsections: "=",
+                    //    sensitivitypolicies: "="
+                    //},
+                    bindToController: {
                         data: "=",
                         ngModel: '=',
                         medicalsections: "=",
                         sensitivitypolicies: "="
                     },
-                    bindToController: true,
                     controllerAs: 'consentMedicalInformationVm',
                     controller:MedicalInformationController
                 };
@@ -29,11 +34,9 @@
             /* @ngInject */
             function MedicalInformationController ($scope, $modal, consentService,  notificationService) {
                 var vm = this;
-                //Test value to be replace with real value.
-                vm.medicalInformation = 'A';
-                //Initiallizing the medical information model
                 vm.selectedMedicalSections = consentService.getLookupEntities(vm.medicalsections, vm.ngModel.doNotShareClinicalDocumentSectionTypeCodes);
                 vm.selectedSensitivityPolicies = consentService.getLookupEntities(vm.sensitivitypolicies, vm.ngModel.doNotShareSensitivityPolicyCodes);
+                vm.medicalInformation = (vm.selectedMedicalSections.length > 0 ) || (vm.selectedSensitivityPolicies.length > 0) ? 'B': 'A';
                 vm.hasException = hasException;
                 vm.clearMedicalInfoData = clearMedicalInfoData;
                 vm.openPrivacySettingsModal = openPrivacySettingsModal;
@@ -49,19 +52,22 @@
                 }
 
                 function openPrivacySettingsModal () {
-                    var modalInstance = $modal.open({
-                        templateUrl: 'app/consent/directives/consentMedicalInformationModal.html',
+                    //In case of sharing medical record with exception.
+                    if(vm.medicalInformation === 'B'){
+                        var modalInstance = $modal.open({
+                            templateUrl: 'app/consent/directives/consentMedicalInformationModal.html',
 
-                        resolve: {
-                            data: function () {
-                                return {
-                                    mediactionSections: vm.medicalsections,
-                                    sensitivityPolicies: vm.sensitivitypolicies
-                                };
-                            }
-                        },
-                        controller: MedicalInformationModalController
-                    });
+                            resolve: {
+                                data: function () {
+                                    return {
+                                        mediactionSections: vm.medicalsections,
+                                        sensitivityPolicies: vm.sensitivitypolicies
+                                    };
+                                }
+                            },
+                            controller: MedicalInformationModalController
+                        });
+                    }
                 }
 
                 function MedicalInformationModalController($scope, $modalInstance, data) {
@@ -124,7 +130,6 @@
                             doNotShareSensitivityPolicyCodes: $scope.consent.selectedSensitivityPolicies,
                             doNotShareClinicalDocumentSectionTypeCodes: $scope.consent.selectedMedicalSections
                         };
-
                         $modalInstance.close();
                     }
 
@@ -132,8 +137,5 @@
                         $modalInstance.dismiss('cancel');
                     }
                 }
-
-
             }
-
 })();
