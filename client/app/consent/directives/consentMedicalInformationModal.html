@@ -17,8 +17,8 @@
                             the following areas of potentially sensitive
                             information.
                         </div>
-                        <button class="btn btn-primary btn-xs m-r-xs dark-green" ng-click="medicalInfoModalVm.selectAllMedicalSections()">Select All</button>
-                        <button class="btn btn-primary btn-xs dark-green" ng-click="medicalInfoModalVm.deselectAllMedicalSections()">Deselect All</button>
+                        <button class="btn btn-primary btn-xs m-r-xs dark-green" ng-click="medicalInfoModalVm.selectAllMedicalSections(medicalInfofmationModalObj)">Select All</button>
+                        <button class="btn btn-primary btn-xs dark-green" ng-click="medicalInfoModalVm.deselectAllMedicalSections(medicalInfofmationModalObj)">Deselect All</button>
                         <div ng-repeat="medicalSection in medicalInfoModalVm.mediactionSections">
                             <div>
                                 <div class="radio">
@@ -44,8 +44,8 @@
                             Select the medical information that you <strong>DO
                             NOT</strong> wish to share.
                         </div>
-                        <button class="btn btn-primary btn-xs m-r-xs dark-green" ng-click="medicalInfoModalVm.selectAllSensitivityPolicies()">Select All</button>
-                        <button class="btn btn-primary btn-xs dark-green" ng-click="medicalInfoModalVm.deselectAllSensitivityPolicies()">Deselect All</button>
+                        <button class="btn btn-primary btn-xs m-r-xs dark-green" ng-click="medicalInfoModalVm.selectAllSensitivityPolicies(medicalInfofmationModalObj)">Select All</button>
+                        <button class="btn btn-primary btn-xs dark-green" ng-click="medicalInfoModalVm.deselectAllSensitivityPolicies(medicalInfofmationModalObj)">Deselect All</button>
                         <div ng-repeat="sensitivityPolicy in medicalInfoModalVm.sensitivityPolicies">
                             <div>
                                 <div class="radio">

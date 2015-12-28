@@ -94,28 +94,28 @@
                         }
                     }
 
-                    function selectAllMedicalSections () {
+                    function selectAllMedicalSections (medicalInfofmationModalObj) {
                         medicalInfoModalVm.consent.selectedMedicalSections = consentService.getCodes(medicalInfoModalVm.mediactionSections);
                         //TODO: This should be refactored to avoid directly referencing the 'medicalInformationModalObj' name, which is declared in the HTML markup but not in this directive.
-                        medicalInfoModalVm.medicalInfofmationModalObj.$setDirty();
+                       medicalInfofmationModalObj.$setDirty();
                     }
 
-                    function deselectAllMedicalSections () {
+                    function deselectAllMedicalSections (medicalInfofmationModalObj) {
                         medicalInfoModalVm.consent.selectedMedicalSections = [];
                         //TODO: This should be refactored to avoid directly referencing the 'medicalInformationModalObj' name, which is declared in the HTML markup but not in this directive.
-                        medicalInfoModalVm.medicalInfofmationModalObj.$setDirty();
+                        medicalInfofmationModalObj.$setDirty();
                     }
 
-                    function selectAllSensitivityPolicies () {
+                    function selectAllSensitivityPolicies (medicalInfofmationModalObj) {
                         medicalInfoModalVm.consent.selectedSensitivityPolicies = consentService.getCodes(medicalInfoModalVm.sensitivityPolicies);
                         //TODO: This should be refactored to avoid directly referencing the 'medicalInformationModalObj' name, which is declared in the HTML markup but not in this directive.
-                        medicalInfoModalVm.medicalInfofmationModalObj.$setDirty();
+                        medicalInfofmationModalObj.$setDirty();
                     }
 
-                    function deselectAllSensitivityPolicies () {
+                    function deselectAllSensitivityPolicies (medicalInfofmationModalObj) {
                         medicalInfoModalVm.consent.selectedSensitivityPolicies = [];
                         //TODO: This should be refactored to avoid directly referencing the 'medicalInformationModalObj' name, which is declared in the HTML markup but not in this directive.
-                        medicalInfoModalVm.medicalInfofmationModalObj.$setDirty();
+                        medicalInfofmationModalObj.$setDirty();
                     }
 
                     function ok() {

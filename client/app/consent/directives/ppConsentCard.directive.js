@@ -9,8 +9,7 @@
 
             function ppConsentCard() {
                 var directive = {
-                    scope: {consent: '='},
-                    bindToController: true,
+                    bindToController: {consent: '='},
                     restrict: 'E',
                     templateUrl: 'app/consent/directives/consentCard.html',
                     controller: ['$modal', 'consentService', 'notificationService', ConsentCardController],
