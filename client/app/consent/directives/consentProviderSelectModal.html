@@ -3,16 +3,16 @@
         <h1 class="modal-title"><strong> <span ng-bind="title"></span></strong></h1>
     </div>
     <div class="modal-body">
-                <p ng-if="title === 'Authorize'">Please select <strong>one</strong> individual or organization authorized to share your information:</p>
-                <p ng-if="title === 'Disclosure'">Please select <strong>one</strong> individual or organization for disclosure:</p>
+                <p ng-if="selectProviderModalVm.title === 'Authorize'">Please select <strong>one</strong> individual or organization authorized to share your information:</p>
+                <p ng-if="selectProviderModalVm.title === 'Disclosure'">Please select <strong>one</strong> individual or organization for disclosure:</p>
                 <div class="row">
                     <div class="col-sm-12 m-b-xs">
                         <h2><strong>Individuals:</strong></h2>
-                        <div ng-repeat="provider in providers">
-                                <div ng-if="isIndividualProvider(provider)">
+                        <div ng-repeat="provider in selectProviderModalVm.providers">
+                                <div ng-if="selectProviderModalVm.isIndividualProvider(provider)">
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" pp-icheck ng-model="selectedProvider.npi" ng-value="provider.npi" name="npi" ng-disabled="isSelected(provider.npi)" >
+                                            <input type="radio" pp-icheck ng-model="selectProviderModalVm.selectedProvider.npi"  ng-value="provider.npi" name="npi" ng-disabled="selectProviderModalVm.isSelected(provider.npi)" >
                                                 <span class="m-l-xs" ng-bind="provider|pcmProviderNameOrFacility"> </span>
                                         </label>
                                     </div>
@@ -23,11 +23,11 @@
                 <div class="row">
                     <div class="col-sm-12 m-b-md">
                         <h2><strong>Organization:</strong></h2>
-                        <div ng-repeat="provider in providers">
-                            <div ng-if="isOrganizationProvider(provider)">
+                        <div ng-repeat="provider in selectProviderModalVm.providers">
+                            <div ng-if="selectProviderModalVm.isOrganizationProvider(provider)">
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" pp-icheck ng-model="selectedProvider.npi" ng-value="provider.npi" name="npi" ng-disabled="isSelected(provider.npi)" >
+                                        <input type="radio" pp-icheck ng-model="selectProviderModalVm.selectedProvider.npi"  ng-value="provider.npi" name="npi" ng-disabled="isSelected(provider.npi)" >
                                         <span class="m-l-xs" ng-bind="provider|pcmProviderNameOrFacility"></span>
                                     </label>
                                 </div>
@@ -37,7 +37,7 @@
                 </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-white" ng-click="cancel()">Cancel</button>
-        <button type="button" class="btn btn-primary dark-green" ng-click="ok()">Add Selected</button>
+        <button type="button" class="btn btn-white" ng-click="selectProviderModalVm.cancel()">Cancel</button>
+        <button type="button" class="btn btn-primary dark-green" ng-click="selectProviderModalVm.ok()">Add Selected</button>
     </div>
 </div>
