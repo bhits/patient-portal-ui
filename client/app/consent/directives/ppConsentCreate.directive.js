@@ -13,16 +13,15 @@
                 var driective =  {
                     restrict: 'E',
                     templateUrl: 'app/consent/directives/consentCreateEdit.html',
-                    scope: {
+                    bindToController: {
                         providers: "=",
                         purposeofuse: "=",
                         medicalsections: "=",
                         sensitivitypolicies: "=",
                         consent: "="
                     },
-                    controllerAs: 'consentCreateVm',
-                    bindToController: true,
-                    controller: ConsentCreateController
+                    controller: ConsentCreateController,
+                    controllerAs: 'consentCreateVm'
                 };
 
                 return driective;
