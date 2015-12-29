@@ -1,10 +1,7 @@
-'use strict';
-
 (function () {
-    /**
-     * @name The app.consent module
-     *
-     */
+
+    'use strict';
+
     angular
         .module('app.consent',
                [

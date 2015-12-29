@@ -1,12 +1,8 @@
 
-'use strict';
-
 (function () {
 
-    /**
-     * @name app.home
-     *
-     */
+    'use strict';
+
     angular
         .module('app.home',
             ['app.core']);

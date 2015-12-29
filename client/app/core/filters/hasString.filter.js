@@ -2,9 +2,9 @@
  * Created by tomson.ngassa on 12/15/2015.
  */
 
-'use strict';
-
 (function () {
+
+    'use strict';
 
     angular
         .module('app.core')

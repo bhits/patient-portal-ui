@@ -1,11 +1,9 @@
 
-'use strict';
 
 (function () {
 
-    /**
-     * @name home config
-     */
+    'use strict';
+
     angular
         .module('app.home')
             .config(homeConfig);

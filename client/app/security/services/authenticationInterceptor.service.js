@@ -1,12 +1,10 @@
 ﻿
-'use strict';
-
 (function () {
 
 
-    /*
-     *   Intercepts all the http calls
-     */
+
+    'use strict';
+
     angular
         .module('app.security')
 
