@@ -22,10 +22,6 @@
                 };
 
                 return directive;
-
-                function linkFunc(scope, element) {
-                    element.datepicker({todayBtn: "linked", autoclose: true});
-                }
             }
 
             /* @ngInject */
@@ -56,6 +52,11 @@
 
                     datePickerVm.showError = datePickerVm.error.length;
                 }
+            }
+
+            /* @ngInject */
+            function linkFunc(scope, element) {
+                element.datepicker({todayBtn: "linked", autoclose: true});
             }
 
 })();

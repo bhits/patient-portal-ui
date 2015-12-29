@@ -65,57 +65,57 @@
                             }
                         }
                     });
+                }
+            }
 
-                    /* @ngInject */
-                    function ManageConsentModalController($state, $modalInstance, consent) {
-                        var ManageConsentModalVm = this;
-                        ManageConsentModalVm.cancel = cancel;
-                        ManageConsentModalVm.revoke = revoke;
-                        ManageConsentModalVm.edit = edit;
-                        ManageConsentModalVm.signConsent = signConsent;
-                        ManageConsentModalVm.deleteConsent = deleteConsent;
-                        ManageConsentModalVm.toggleDeleteConfirmation = toggleDeleteConfirmation;
-                        ManageConsentModalVm.deleteInProcess = false;
+            /* @ngInject */
+            function ManageConsentModalController($state, $modalInstance, consent, consentService, notificationService) {
+                var ManageConsentModalVm = this;
+                ManageConsentModalVm.cancel = cancel;
+                ManageConsentModalVm.revoke = revoke;
+                ManageConsentModalVm.edit = edit;
+                ManageConsentModalVm.signConsent = signConsent;
+                ManageConsentModalVm.deleteConsent = deleteConsent;
+                ManageConsentModalVm.toggleDeleteConfirmation = toggleDeleteConfirmation;
+                ManageConsentModalVm.deleteInProcess = false;
 
-                        function toggleDeleteConfirmation() {
-                            ManageConsentModalVm.deleteInProcess = !ManageConsentModalVm.deleteInProcess;
-                        }
+                function toggleDeleteConfirmation() {
+                    ManageConsentModalVm.deleteInProcess = !ManageConsentModalVm.deleteInProcess;
+                }
 
-                        function deleteConsent() {
-                            consentService.deleteConsent(consent.id, onDeleteSuccess, onDeleteError);
+                function deleteConsent() {
+                    consentService.deleteConsent(consent.id, onDeleteSuccess, onDeleteError);
 
-                            function onDeleteSuccess() {
-                                notificationService.success('Consent is successfully deleted');
-                                $modalInstance.close();
-                                $state.reload();
-                            }
-
-                            function onDeleteError() {
-                                notificationService.error('Failed to delete the consent! Please try again later...');
-                                cancel();
-                                $state.reload();
-                            }
-                        }
-
-                        function edit(){
-                            $state.go('fe.consent.create', {consentId: consent.id});
-                            $modalInstance.close();
-                        }
-
-                        function signConsent(){
-                            $state.go('fe.consent.sign', {consentId: consent.id});
-                            $modalInstance.close();
-                        }
-
-                        function cancel() {
-                            $modalInstance.dismiss('cancel');
-                        }
-
-                        function revoke() {
-                            $state.go('fe.consent.revoke', {consent: consent});
-                            $modalInstance.close();
-                        }
+                    function onDeleteSuccess() {
+                        notificationService.success('Consent is successfully deleted');
+                        $modalInstance.close();
+                        $state.reload();
                     }
+
+                    function onDeleteError() {
+                        notificationService.error('Failed to delete the consent! Please try again later...');
+                        cancel();
+                        $state.reload();
+                    }
+                }
+
+                function edit(){
+                    $state.go('fe.consent.create', {consentId: consent.id});
+                    $modalInstance.close();
+                }
+
+                function signConsent(){
+                    $state.go('fe.consent.sign', {consentId: consent.id});
+                    $modalInstance.close();
+                }
+
+                function cancel() {
+                    $modalInstance.dismiss('cancel');
+                }
+
+                function revoke() {
+                    $state.go('fe.consent.revoke', {consent: consent});
+                    $modalInstance.close();
                 }
             }
 })();

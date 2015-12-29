@@ -31,4 +31,5 @@
                     $rootScope.$on('$stateChangeStart', listener);
                 }
             }
+
 })();

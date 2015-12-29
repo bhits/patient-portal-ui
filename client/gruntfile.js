@@ -606,13 +606,16 @@ module.exports = function (grunt) {
         },
 
         ngAnnotate: {
+            options: {
+              remove:true,
+              add: true,
+              singleQuotes: true
+            },
             compile: {
                 files: [
                     {
-                        src: ['<%= app_files.debug_js %>'],
-                        cwd: '<%= build_debug_dir %>',
-                        dest: '<%= build_debug_dir %>',
-                        expand: true
+                        expand: true,
+                        src: ['<%= app_files.debug_js %>']
                     }
                 ]
             }
