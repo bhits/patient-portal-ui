@@ -32,15 +32,15 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-if="ProviderListVm.providers.length === 0">
+                        <tr ng-if="providerListVm.providers.length === 0">
                             <td colspan="5" class="text-center"> No provider has been added.</td>
                         </tr>
-                        <tr ng-repeat="provider in ProviderListVm.providers">
+                        <tr ng-repeat="provider in providerListVm.providers">
                             <td>
                                 <button type="button" class="btn btn-xs"
                                         ng-class="{ 'btn-red' : provider.deletable, 'btn-grey': !provider.deletable} "
                                         ng-disabled="!provider.deletable"
-                                        ng-click="ProviderListVm.openDeleteProviderModal(provider, 'sm')">
+                                        ng-click="providerListVm.openDeleteProviderModal(provider, 'sm')">
                                     <div class="fa fa-minus">
                                         <span class="sr-only">delete provider</span>
                                         <span class="sr-only" ng-bind="provider.lastName"></span>

@@ -15,7 +15,7 @@
                 'app.home',
                 'app.consent',
                 'app.healthInformationModule',
-                'app.providerModule',
+                'app.provider',
                 'app.layout',
                 'app.medicalDocumentsModule'
             ])

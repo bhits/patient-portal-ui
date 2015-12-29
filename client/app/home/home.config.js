@@ -8,10 +8,10 @@
      */
     angular
         .module('app.home')
-            .config(HomeConfig);
+            .config(homeConfig);
 
             /* @ngInject */
-            function HomeConfig($stateProvider){
+            function homeConfig($stateProvider){
 
                 $stateProvider
                     .state('fe', {
