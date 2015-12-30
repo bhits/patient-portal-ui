@@ -8,9 +8,10 @@
 
     angular
         .module('app.core')
-            .filter('hasString', HasString);
+            .filter('hasString', hasString);
+
             /* @ngInject */
-            function HasString(utilityService) {
+            function hasString(utilityService) {
                 return hasStr;
 
                 function hasStr(str) {
