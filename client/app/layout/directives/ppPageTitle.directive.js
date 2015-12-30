@@ -13,9 +13,7 @@
 
                 return directive;
 
-                /**
-                 *  @ngInject
-                 */
+                /* @ngInject */
                 function linkFunc(scope, element) {
                     var listener = function (event, toState, toParams, fromState, fromParams) {
                         // Default title - load on Dashboard 1
