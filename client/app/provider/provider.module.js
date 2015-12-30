@@ -4,7 +4,6 @@
     angular
         .module('app.provider',
             [
-                'app.core',
-                'app.data'
+                'app.core'
             ]);
 })();

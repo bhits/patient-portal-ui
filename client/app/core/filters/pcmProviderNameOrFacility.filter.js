@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('app.data')
+        .module('app.core')
             .filter('pcmProviderNameOrFacility', pcmProviderNameOrFacilityFilter);
 
             function pcmProviderNameOrFacilityFilter() {

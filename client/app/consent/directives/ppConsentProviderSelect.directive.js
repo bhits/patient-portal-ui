@@ -53,7 +53,7 @@
                 }
 
                 /* @ngInject */
-                function SelectProviderModalController($modalInstance, notificationService, data, providerSharedService, consentService) {
+                function SelectProviderModalController($modalInstance, notificationService, data, utilityService, consentService) {
                     var selectProviderModalVm = this;
                     selectProviderModalVm.cancel = cancel;
                     selectProviderModalVm.isOrganizationProvider = isOrganizationProvider;
@@ -70,11 +70,11 @@
                     }
 
                     function isOrganizationProvider (provider) {
-                        return providerSharedService.isOrganizationProvider(provider);
+                        return utilityService.isOrganizationProvider(provider);
                     }
 
                     function isIndividualProvider(provider) {
-                        return providerSharedService.isIndividualProvider(provider);
+                        return utilityService.isIndividualProvider(provider);
                     }
 
                     function isSelected (npi) {
@@ -87,7 +87,7 @@
 
                     function ok () {
                         $modalInstance.close();
-                        var selectedProvider = providerSharedService.getProviderByNPI(selectProviderModalVm.providers, selectProviderModalVm.selectedProvider.npi);
+                        var selectedProvider = utilityService.getProviderByNPI(selectProviderModalVm.providers, selectProviderModalVm.selectedProvider.npi);
                         vm.ngModel = selectedProvider;
                         vm.selectedProvider = selectedProvider;
 
