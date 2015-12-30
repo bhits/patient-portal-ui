@@ -137,7 +137,7 @@ module.exports = function (grunt) {
             build_tpl: {
                 files: [
                     {
-                        src: ['<%= app_files.atpl %>', '<%= app_files.ctpl %>'],
+                        src: ['<%= app_files.atpl %>'],
                         dest: '<%= build_debug_dir %>/',
                         cwd: '.',
                         expand: true
@@ -203,10 +203,8 @@ module.exports = function (grunt) {
                 },
                 src: [
                     '<%= vendor_files.js %>',
-                    '<%= build_debug_dir %>/App/**/*.js',
-                     '<%= build_debug_dir %>/Common/**/*.js',
-                    '<%= html2js.app.dest %>',
-                    '<%= html2js.common.dest %>',
+                    '<%= build_debug_dir %>/app/**/*.js',
+                    '<%= html2js.app.dest %>'
                 ],
                 dest: '<%= build_dist_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.js'
             }
@@ -314,17 +312,6 @@ module.exports = function (grunt) {
                 },
                 src: ['<%= app_files.atpl %>'],
                 dest: '<%= build_debug_dir %>/templates-app.js'
-            },
-
-            /**
-             * These are the templates from `Common`.
-             */
-            common: {
-                options: {
-                    base: '.'
-                },
-                src: ['<%= app_files.ctpl %>'],
-                dest: '<%= build_debug_dir %>/templates-common.js'
             }
         },
 
@@ -389,8 +376,6 @@ module.exports = function (grunt) {
                 dir: '<%= build_debug_dir %>',
                 src: [
                     '<%= vendor_files.js %>',
-                    '<%= html2js.common.dest %>',
-                    '<%= html2js.app.dest %>',
                     '<%= recess.build.dest %>'
                 ]
             },
@@ -419,7 +404,6 @@ module.exports = function (grunt) {
                 src: [
                     '<%= vendor_files.js %>',
                     '<%= html2js.app.dest %>',
-                    '<%= html2js.common.dest %>',
                     '<%= test_files.js %>'
                 ]
             }
@@ -493,10 +477,7 @@ module.exports = function (grunt) {
              * When our templates change, we only rewrite the template cache.
              */
             tpls: {
-                files: [
-                    '<%= app_files.atpl %>',
-                    '<%= app_files.ctpl %>'
-                ],
+                files: ['<%= app_files.atpl %>'],
                 tasks: ['html2js']
             },
 
@@ -625,13 +606,16 @@ module.exports = function (grunt) {
         },
 
         ngAnnotate: {
+            options: {
+              remove:true,
+              add: true,
+              singleQuotes: true
+            },
             compile: {
                 files: [
                     {
-                        src: ['<%= app_files.js %>'],
-                        cwd: '<%= build_debug_dir %>',
-                        dest: '<%= build_debug_dir %>',
-                        expand: true
+                        expand: true,
+                        src: ['<%= app_files.debug_js %>']
                     }
                 ]
             }
@@ -740,6 +724,10 @@ module.exports = function (grunt) {
      */
     grunt.registerTask('build-dev', 'build:dev');
 
+    /**
+     * Snake case build:dist
+     */
+    grunt.registerTask('build-dist', 'build:dist');
     /**
      * Snake case build:dev
      */

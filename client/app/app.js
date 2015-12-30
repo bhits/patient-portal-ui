@@ -7,7 +7,6 @@
                 /* Shared modules*/
                 'app.core',
                 'templates-app',
-                'templates-common',
                 'app.security',
                 'app.config',
 
@@ -17,7 +16,7 @@
                 'app.home',
                 'app.consent',
                 'app.healthInformationModule',
-                'app.providerModule',
+                'app.provider',
                 'app.layout',
                 'app.medicalDocument'
             ])
@@ -26,7 +25,6 @@
             .run(appRun)
             .controller('AppController', AppController);
 
-            //var ngIdleParams = {"idle": 780, "timeout": 120, "keepalive": 240};
 
             /* @ngInject */
             function appConfig($urlRouterProvider, $locationProvider, $httpProvider, KeepaliveProvider, IdleProvider, idleConfigParams) {
@@ -57,11 +55,53 @@
                 appVm.oauth = ENVService.oauth;
                 appVm.oauth.state = authenticationService.getState();
 
-                $rootScope.$on('$stateChangeSuccess', function (event, data) {
-                    $modalStack.dismissAll('cancel');
-                });
+                $rootScope.$on('$stateChangeSuccess',stateChangeSuccess);
+                $rootScope.$on('oauth:login',oauthLogin);
+                $rootScope.$on('oauth:loggedOut',oauthLoggedOut );
+                $rootScope.$on('oauth:expired',oauthExpired);
 
-                $rootScope.$on('oauth:login', function (event, token) {
+                appVm.currentDate = utilityService.getYear();
+                appVm.closeModals = closeModals;
+
+                /**
+                 * the user appears to have gone idle
+                 */
+                $scope.$on('IdleStart',idleStart);
+
+                /**
+                 * follows after the IdleStart event, but includes a countdown until the user is considered timed out
+                 * the countdown arg is the number of seconds remaining until then.
+                 * you can change the title or display a warning dialog from here.
+                 * you can let them resume their session by calling Idle.watch()
+                 */
+                $scope.$on('IdleWarn', idleWarn );
+                /**
+                 * the user has timed out (meaning idleDuration + timeout has passed without any activity)
+                 * this is where you'd log them
+                 */
+                $scope.$on('IdleTimeout', idleTimeout);
+                /**
+                 * the user has come back from AFK and is doing stuff. if you are warning them, you can use this to hide the dialog
+                 */
+                $scope.$on('IdleEnd', idleEnd);
+                /**
+                 * do something to keep the user's session alive
+                 */
+                $scope.$on('Keepalive', keepalive);
+
+                appVm.healthInformationMenu = false;
+                appVm.showHealthInformationMenu = showHealthInformationMenu;
+                appVm.scrollToAndExpand = scrollToAndExpand;
+                appVm.routeToHealthInformation = routeToHealthInformation;
+                appVm.togglebar = true;
+                appVm.toggleSideBar = toggleSideBar;
+
+
+                function stateChangeSuccess (event, data) {
+                    $modalStack.dismissAll('cancel');
+                }
+
+                function oauthLogin(event, token) {
                     if (authenticationService.isValidState(token.state)) {
                         Idle.watch();
                         $state.go('fe.index.home');
@@ -69,15 +109,15 @@
                         notificationService.error('Invalid UAA token.');
                         $rootScope.$broadcast('oauth:expired');
                     }
-                });
+                }
 
-                $rootScope.$on('oauth:loggedOut', function (event) {
+                function oauthLoggedOut(event) {
                     handleLoggedOutAndExpiredSession(event);
-                });
+                }
 
-                $rootScope.$on('oauth:expired', function (event) {
+                function oauthExpired (event) {
                     handleLoggedOutAndExpiredSession(event);
-                });
+                }
 
                 function handleLoggedOutAndExpiredSession(event) {
                     Idle.unwatch();
@@ -88,67 +128,37 @@
                     appVm.healthInformationMenu = toggle;
                 }
 
-                appVm.currentDate = utilityService.getYear();
-
-                appVm.closeModals = function closeModals() {
+                function closeModals() {
                     if (appVm.warning) {
                         appVm.warning.close();
                         appVm.warning = null;
                     }
-                };
-
-                function ModalInstanceCtrl($scope, $modalInstance) {
                 }
 
-                /**
-                 * the user appears to have gone idle
-                 */
-                $scope.$on('IdleStart', function () {
-
-                    console.log("Idle Start...");
-
+                function idleStart() {
                     appVm.closeModals();
-
                     appVm.warning = $modal.open({
-                        templateUrl: 'app/warning-dialog.html',
-                        controller: ModalInstanceCtrl
+                        templateUrl: 'app/warning-dialog.html'
                     });
-                });
+                }
 
-                /**
-                 * follows after the IdleStart event, but includes a countdown until the user is considered timed out
-                 * the countdown arg is the number of seconds remaining until then.
-                 * you can change the title or display a warning dialog from here.
-                 * you can let them resume their session by calling Idle.watch()
-                 */
-                $scope.$on('IdleWarn', function (e, countdown) {
-                    //console.log("IdleWarn...");
-                });
-                /**
-                 * the user has timed out (meaning idleDuration + timeout has passed without any activity)
-                 * this is where you'd log them
-                 */
-                $scope.$on('IdleTimeout', function () {
+                function idleWarn (e, countdown) {
+                    console.log("IdleWarn...");
+                }
 
+                function idleTimeout() {
                     console.log("IdleTimeout...");
                     console.log("-------> Session expired at: " + new Date());
                     appVm.closeModals();
-
                     $rootScope.$broadcast('oauth:expired');
-                });
+                }
 
-                /**
-                 * the user has come back from AFK and is doing stuff. if you are warning them, you can use this to hide the dialog
-                 */
-                $scope.$on('IdleEnd', function () {
+                function idleEnd() {
                     //console.log("IdleEnd...");
                     appVm.closeModals();
-                });
+                }
 
-                /**
-                 * do something to keep the user's session alive
-                 */
-                $scope.$on('Keepalive', function () {
+                function keepalive() {
 
                     console.log("Keepalive...");
                     var today = new Date();
@@ -177,57 +187,26 @@
                     } else {
                         console.log("The was no activity.");
                     }
-                });
+                }
 
-                appVm.healthInformationMenu = false;
-
-                appVm.showHealthInformationMenu = function () {
+                function showHealthInformationMenu() {
                     appVm.healthInformationMenu = true;
                     utilityService.setShowHealthInformationMenu(true);
-                };
+                }
 
-                appVm.scrollToAndExpand = function (target, expand) {
+                function scrollToAndExpand(target, expand) {
                     $rootScope.$broadcast('ScrollTo', {to: target});
                     $rootScope.$broadcast('ExpandAccordion', {expand: expand});
-                };
+                }
 
-                appVm.routeToHealthInformation = function () {
+                function routeToHealthInformation () {
                     if ($state.current.name !== "fe.patient.healthinformation") {
                         $state.go('fe.patient.healthinformation', {scrollTo: 'none', expand: 'none'});
                     }
+                }
 
-                };
-
-                appVm.togglebar = true;
-
-                appVm.toggleSideBar = function () {
+                function toggleSideBar() {
                     appVm.togglebar = !appVm.togglebar;
-                };
-
-                $scope.$on('ToggleMenuItemWithoutData', function (event, args) {
-                    //Determines which sections to be shown or hidden
-                    appVm.hideSection = args.toggleMenu;
-                    appVm.toggleDemographics = args.demographics;
-                    appVm.toggleMedications = args.medications;
-                    appVm.toggleAlerts = args.alerts;
-                    appVm.toggleResults = args.results;
-                    appVm.toggleEncounters = args.encounters;
-                    appVm.toggleProblems = args.problems;
-                    appVm.toggleVitalSigns = args.vitalSigns;
-                    appVm.toggleProcedure = args.procedures;
-                    appVm.togglePlanOfCare = args.planofcare;
-                    appVm.toggleFamilyHistory = args.familyHistory;
-                    appVm.toggleHealthcareProviders = args.healthcareProviders;
-                    appVm.toggleSocialHistory = args.socialhistory;
-                    appVm.toggleAdvancedDirectives = args.advancedDirectives;
-                    appVm.toggleFunctionalStatus = args.functionalStatus;
-                    appVm.toggleSupport = args.support;
-                    appVm.togglePayers = args.payers;
-                    appVm.toggleImmunization = args.immunization;
-                    appVm.toggleMedicalEquipment = args.medicalEquipment;
-                    appVm.toggleHealthcareProviders = args.healthcareProviders;
-                });
+                }
             }
-
-
 })();

@@ -9,9 +9,7 @@
     angular.module("app.consent")
         .factory('consentService', consentService);
 
-        /**
-         *  @ngInject
-         */
+        /* @ngInject */
         function consentService($resource, ENVService) {
             var consentListResource = $resource(ENVService.securedApis.pcmApiBaseUrl + "/consents/pageNumber/:pageNumber", {pageNumber: '@pageNumber'});
             var consentResource = $resource(ENVService.securedApis.pcmApiBaseUrl + "/consents/:id",{id: '@id'}, {'update': { method:'PUT' }});

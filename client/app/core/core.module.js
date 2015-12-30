@@ -9,6 +9,7 @@
             'ngSanitize',
             'ngResource',
             'ngMessages',
+
             /*Cross-app modules*/
 
             /*3rd-party modules*/
@@ -19,7 +20,7 @@
             'angular-loading-bar',
             'oauth',
             'checklist-model',
-            'ngStorage',
+            'ngStorage',    //oauth module dependency
             'cgNotify'
         ]);
 })();

@@ -1,7 +1,7 @@
 
-'use strict';
-
 (function () {
+
+    'use strict';
 
     angular
         .module('app.consent')
@@ -55,11 +55,11 @@
                         controllerAs: 'consentCreateEditVm',
                         resolve: {
                             /* @ngInject */
-                            loadedData: function ($q, $stateParams,consentService, ProviderService, notificationService ) {
+                            loadedData: function ($q, $stateParams,consentService, providerService, notificationService ) {
                                 // reset previous selections (if any)
                                 consentService.resetSelectedNpi();
                                 var deferred = $q.defer();
-                                var providerResource = ProviderService.getProvidersResource();
+                                var providerResource = providerService.getProvidersResource();
                                 var providersData = providerResource.query(
                                     function (response) {
                                         return response;

@@ -1,7 +1,7 @@
 
-'use strict';
-
 (function () {
+
+    'use strict';
 
     angular
         .module('app.consent')
@@ -10,10 +10,9 @@
             function ppConsentCardList() {
                 var directive = {
                     restrict: 'E',
-                    scope: {
+                    bindToController: {
                         consentList: '='
                     },
-                    bindToController: true,
                     templateUrl: 'app/consent/directives/consentCardList.html',
                     controller: ConsentCardListController,
                     controllerAs: 'consentCardListVm'

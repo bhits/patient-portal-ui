@@ -6,10 +6,7 @@
     angular
         .module("app.security")
             .controller('LoginController', LoginController);
-            /**
-             * The Login Controller.
-             * @ngInject
-             */
+            /* @ngInject */
             function LoginController($scope, $state, Idle, ENVService) {
                 var vm = this;
                 vm.version = ENVService.version;

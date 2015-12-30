@@ -1,6 +1,7 @@
-﻿'use strict';
-
+﻿
 (function () {
+
+    'use strict';
 
     angular
         .module('app.core')
@@ -9,23 +10,18 @@
             function ppDatePickerRange() {
                 var directive =  {
                     restrict: 'EA',
-                    scope: {
+                    templateUrl: 'app/core/directives/datepicker-range.tpl.html',
+                    bindToController:  {
                         tolabel: "@",
                         fromlabel: "@",
                         ngModel: "="
                     },
-                    templateUrl: 'app/core/directives/datepicker-range.tpl.html',
-                    bindToController: true,
                     controllerAs: 'datePickerVm',
                     controller: DatePickerRangeController,
                     link: linkFunc
                 };
 
                 return directive;
-
-                function linkFunc(scope, element) {
-                    element.datepicker({todayBtn: "linked", autoclose: true});
-                }
             }
 
             /* @ngInject */
@@ -56,6 +52,11 @@
 
                     datePickerVm.showError = datePickerVm.error.length;
                 }
+            }
+
+            /* @ngInject */
+            function linkFunc(scope, element) {
+                element.datepicker({todayBtn: "linked", autoclose: true});
             }
 
 })();

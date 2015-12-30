@@ -1,20 +1,16 @@
 /**
  * Created by tomson.ngassa on 10/8/2015.
  */
-'use strict';
 
 (function () {
 
-    /*
-     * The notfication service
-     */
+    'use strict';
+
     angular
         .module('app.core')
             .factory('notificationService',notificationService);
 
-            /**
-             * @ngInject
-             */
+            /* @ngInject */
             function notificationService(notify){
 
                 var templateUrl = "app/core/services/notify.html";

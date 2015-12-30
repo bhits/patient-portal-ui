@@ -1,14 +1,14 @@
 
-'use strict';
-
 (function () {
+
+    'use strict';
 
     angular
         .module('app.consent')
             .directive('ppConsentProviderSelect', ppConsentProviderSelect);
 
             /* @ngInject */
-            function ppConsentProviderSelect($modal, ProviderService, consentService) {
+            function ppConsentProviderSelect() {
                 var directive =  {
                     restrict: 'E',
                     replace: false,
@@ -27,7 +27,7 @@
             }
 
             /* @ngInject */
-            function ConsentSelectProviderController ($scope,$modal, consentService, ProviderService, notificationService) {
+            function ConsentSelectProviderController ($modal, consentService,notificationService) {
                 var vm = this;
                 vm.fieldplaceholder = vm.modaltitle === 'Authorize' ? "The following individual or organization" : "To disclose my information to";
                 vm.openSelectProviderModal = openSelectProviderModal;
@@ -46,63 +46,57 @@
                                 };
                             }
                         },
-
+                        controllerAs: 'selectProviderModalVm',
                         controller:SelectProviderModalController
 
                     });
                 }
 
                 /* @ngInject */
-                function SelectProviderModalController($scope, $modalInstance, notificationService, data, ProviderService, consentService) {
-                    $scope.cancel = cancel;
-                    $scope.isOrganizationProvider = isOrganizationProvider;
-                    $scope.isIndividualProvider = isIndividualProvider;
-                    $scope.isSelected = isSelected;
-                    $scope.ok = ok;
-                    $scope.providers = data.providers;
-                    $scope.selectedProvider = getSelectedProvider;
-                    $scope.selectedNpi = consentService.getSelectedNpi();
-                    $scope.title = data.modalTitle;
-
+                function SelectProviderModalController($modalInstance, notificationService, data, utilityService, consentService) {
+                    var selectProviderModalVm = this;
+                    selectProviderModalVm.cancel = cancel;
+                    selectProviderModalVm.isOrganizationProvider = isOrganizationProvider;
+                    selectProviderModalVm.isIndividualProvider = isIndividualProvider;
+                    selectProviderModalVm.isSelected = isSelected;
+                    selectProviderModalVm.ok = ok;
+                    selectProviderModalVm.providers = data.providers;
+                    selectProviderModalVm.selectedProvider = {npi: ((data.selectedProvider !== null) && angular.isDefined(data.selectedProvider) && angular.isDefined(data.selectedProvider.npi)) ? data.selectedProvider.npi : ''};
+                    selectProviderModalVm.selectedNpi = consentService.getSelectedNpi();
+                    selectProviderModalVm.title = data.modalTitle;
 
                     function cancel () {
                         $modalInstance.dismiss('cancel');
                     }
 
-                    function getSelectedProvider(){
-                        return {npi: ((data.selectedProvider !== null) && angular.isDefined(data.selectedProvider) && angular.isDefined(data.selectedProvider.npi)) ? data.selectedProvider.npi : ''};
-                    }
-
                     function isOrganizationProvider (provider) {
-                        return ProviderService.isOrganizationProvider(provider);
+                        return utilityService.isOrganizationProvider(provider);
                     }
 
                     function isIndividualProvider(provider) {
-                        return ProviderService.isIndividualProvider(provider);
+                        return utilityService.isIndividualProvider(provider);
                     }
 
                     function isSelected (npi) {
-                        if ($scope.title === 'Authorize') {
-                            return ($scope.selectedNpi.discloseNpi === npi);
-                        } else if ($scope.title === 'Disclosure') {
-                            return ($scope.selectedNpi.authorizeNpi === npi);
+                        if (selectProviderModalVm.title === 'Authorize') {
+                            return (selectProviderModalVm.selectedNpi.discloseNpi === npi);
+                        } else if (selectProviderModalVm.title === 'Disclosure') {
+                            return (selectProviderModalVm.selectedNpi.authorizeNpi === npi);
                         }
                     }
 
                     function ok () {
                         $modalInstance.close();
-                        var selectedProvider = ProviderService.getProviderByNPI($scope.providers, $scope.selectedProvider.npi);
+                        var selectedProvider = utilityService.getProviderByNPI(selectProviderModalVm.providers, selectProviderModalVm.selectedProvider.npi);
                         vm.ngModel = selectedProvider;
                         vm.selectedProvider = selectedProvider;
 
-                        if ($scope.title === 'Authorize') {
+                        if (selectProviderModalVm.title === 'Authorize') {
                             consentService.setAuthorizeNpi(selectedProvider.npi);
                         } else {
                             consentService.setDiscloseNpi(selectedProvider.npi);
                         }
                     }
-
-
                 }
             }
 })();

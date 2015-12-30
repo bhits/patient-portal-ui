@@ -2,13 +2,11 @@
  * Created by tomson.ngassa on 12/14/2015.
  */
 
-'use strict';
 
 (function () {
 
-    /**
-     * @name Security config
-     */
+    'use strict';
+
     angular
         .module('app.security')
             .config(SecurityConfig);
