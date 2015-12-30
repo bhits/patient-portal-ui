@@ -6,14 +6,15 @@
             .directive('ppIboxTools', ppIboxTools);
 
             /* @ngInject */
-            function ppIboxTools($timeout) {
+            function ppIboxTools() {
                 var directive = {
                     restrict: 'A',
-                    bindToController: {
+                    scope: {
                         total: '@',
                         ppCollapsed: '=?',
                         ppChevronPreventDefault: '=?'
                     },
+                    bindToController: true,
                     templateUrl: 'app/layout/directives/iBoxTools.html',
                     controller: IboxToolController,
                     controllerAs: 'iboxToolVm'
@@ -21,83 +22,82 @@
                 };
 
                 return directive;
+            }
 
-                function IboxToolController($scope, $element) {
-                    var iboxToolVm = this;
+            /* @ngInject */
+            function IboxToolController($scope, $element, $timeout) {
+                var iboxToolVm = this;
+                iboxToolVm.ppChevronPreventDefault = !!iboxToolVm.ppChevronPreventDefault;
+                var ibox = $element.closest('div.ibox');
+                var icon = $element.find('i:first');
+                var content = ibox.find('div.ibox-content');
+                iboxToolVm.toggleCollapsed = toggleCollapsed;
 
-                    iboxToolVm.ppChevronPreventDefault = !!iboxToolVm.ppChevronPreventDefault;
-                    var ibox = $element.closest('div.ibox');
-                    var icon = $element.find('i:first');
-                    var content = ibox.find('div.ibox-content');
+                $scope.$on('ExpandAccordions', ExpandAccordionsEventHandler);
+                $scope.$on('CollapseAccordions', CollapseAccordionsEventHandler);
 
+                $scope.$watch('iboxToolVm.ppCollapsed',collapseWatchHandler);
+
+                activate();
+
+                function activate(){
                     if (iboxToolVm.ppCollapsed) {
                         content.slideUp(0);
                     }
+                }
 
-                    iboxToolVm.toggleCollapsed = function () {
-                        if (!iboxToolVm.ppChevronPreventDefault) {
-                            iboxToolVm.ppCollapsed = !iboxToolVm.ppCollapsed;
+                function toggleCollapsed() {
+                    if (!iboxToolVm.ppChevronPreventDefault) {
+                        iboxToolVm.ppCollapsed = !iboxToolVm.ppCollapsed;
+                    }
+                }
+
+                function ExpandAccordionsEventHandler(event, args) {
+
+                    if (args.expand) {
+                        //Accordion down
+                        content.slideDown(200);
+
+                        if (icon.hasClass('fa-chevron-down')) {
+                            icon.toggleClass('fa-chevron-up').toggleClass('fa-chevron-down');
                         }
-                    };
+                        ibox.toggleClass('');
+                        resize();
+                    }
+                }
 
-                    // Function for collapse ibox
-                    iboxToolVm.showhide = function () {
-                        content.slideToggle(200);
-                        // Toggle icon from up to down
-                        icon.toggleClass('fa-chevron-up').toggleClass('fa-chevron-down');
-                        $timeout(function () {
-                            ibox.resize();
-                            ibox.find('[id^=map-]').resize();
-                        }, 50);
-                    };
-                    // Function for close ibox
-                    iboxToolVm.closebox = function () {
-                        var ibox = $element.closest('div.ibox');
-                        ibox.remove();
-                    };
+                function CollapseAccordionsEventHandler(event, args) {
 
-                    //handle expand event
-                    $scope.$on('ExpandAccordions', function (event, args) {
+                    if (args.collapse) {
+                        //Accordion down
+                        content.slideUp(200);
 
-                        if (args.expand) {
-                            //Accordion down
-                            content.slideDown(200);
-
-                            if (icon.hasClass('fa-chevron-down')) {
-                                icon.toggleClass('fa-chevron-up').toggleClass('fa-chevron-down');
-                            }
-
-                            ibox.toggleClass('');
-                            $timeout(function () {
-                                ibox.resize();
-                                ibox.find('[id^=map-]').resize();
-                            }, 50);
+                        if (icon.hasClass('fa-chevron-up')) {
+                            icon.toggleClass('fa-chevron-down').toggleClass('fa-chevron-up');
                         }
-                    });
+                        ibox.toggleClass('');
+                        resize();
+                    }
+                }
 
-                    $scope.$on('CollapseAccordions', function (event, args) {
+                function collapseWatchHandler (newValue, oldValue) {
+                    if (newValue !== oldValue) {
+                        showhide();
+                    }
+                }
 
-                        if (args.collapse) {
-                            //Accordion down
-                            content.slideUp(200);
+                function showhide() {
+                    content.slideToggle(200);
+                    // Toggle icon from up to down
+                    icon.toggleClass('fa-chevron-up').toggleClass('fa-chevron-down');
+                    resize();
+                }
 
-                            if (icon.hasClass('fa-chevron-up')) {
-                                icon.toggleClass('fa-chevron-down').toggleClass('fa-chevron-up');
-                            }
-
-                            ibox.toggleClass('');
-                            $timeout(function () {
-                                ibox.resize();
-                                ibox.find('[id^=map-]').resize();
-                            }, 50);
-                        }
-                    });
-
-                    $scope.$watch('iboxToolVm.ppCollapsed', function (newValue, oldValue) {
-                        if (newValue !== oldValue) {
-                            iboxToolVm.showhide();
-                        }
-                    });
+                function resize(){
+                    $timeout(function () {
+                        ibox.resize();
+                        ibox.find('[id^=map-]').resize();
+                    }, 50);
                 }
             }
 })();
