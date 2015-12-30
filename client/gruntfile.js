@@ -203,7 +203,7 @@ module.exports = function (grunt) {
                 },
                 src: [
                     '<%= vendor_files.js %>',
-                    '<%= build_debug_dir %>/App/**/*.js',
+                    '<%= build_debug_dir %>/app/**/*.js',
                     '<%= html2js.app.dest %>'
                 ],
                 dest: '<%= build_dist_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.js'
@@ -724,6 +724,10 @@ module.exports = function (grunt) {
      */
     grunt.registerTask('build-dev', 'build:dev');
 
+    /**
+     * Snake case build:dist
+     */
+    grunt.registerTask('build-dist', 'build:dist');
     /**
      * Snake case build:dev
      */
