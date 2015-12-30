@@ -8,7 +8,7 @@
             .directive('ppConsentProviderSelect', ppConsentProviderSelect);
 
             /* @ngInject */
-            function ppConsentProviderSelect($modal, consentService) {
+            function ppConsentProviderSelect() {
                 var directive =  {
                     restrict: 'E',
                     replace: false,

@@ -8,7 +8,7 @@
             .directive('ppConsentCreate', ppConsentCreate);
 
             /* @ngInject */
-            function ppConsentCreate($stateParams) {
+            function ppConsentCreate() {
 
                 var driective =  {
                     restrict: 'E',

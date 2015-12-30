@@ -7,7 +7,7 @@
         .module('app.consent')
             .directive('ppConsentMedicalInformation', ppConsentMedicalInformation);
 
-            function ppConsentMedicalInformation($modal, consentService) {
+            function ppConsentMedicalInformation() {
                 var directive =  {
                     restrict: 'E',
                     replace: false,

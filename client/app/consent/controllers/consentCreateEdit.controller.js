@@ -8,7 +8,7 @@
             .controller("ConsentCreateEditController", ConsentCreateEditController);
 
             /* @ngInject */
-            function ConsentCreateEditController(consentService, loadedData ){
+            function ConsentCreateEditController(loadedData ){
                 var vm = this;
                 vm.providers = loadedData[0] ;
                 vm.purposeOfUse = loadedData[1] ;

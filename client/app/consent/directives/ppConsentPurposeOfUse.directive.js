@@ -8,7 +8,7 @@
              .directive('ppConsentPurposeOfUse', ppConsentPurposeOfUse);
 
             /* @ngInject */
-            function ppConsentPurposeOfUse(consentService, $modal) {
+            function ppConsentPurposeOfUse() {
                 var directive =  {
                     restrict: 'E',
                     replace: false,
@@ -25,7 +25,7 @@
             }
 
             /* @ngInject */
-            function ConsentPurposeOfUseController($modal, consentService, notificationService) {
+            function ConsentPurposeOfUseController(consentService, $modal) {
                 var vm = this;
                 //Getting default purpose of use code.
                 vm.selectedPurposeOfUse = consentService.getDefaultPurposeOfUse(vm.purposeofuse, vm.ngModel);

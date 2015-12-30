@@ -11,14 +11,14 @@
                     bindToController: {consent: '='},
                     restrict: 'E',
                     templateUrl: 'app/consent/directives/consentCard.html',
-                    controller: ['$modal', 'consentService', 'notificationService', ConsentCardController],
+                    controller: ConsentCardController,
                     controllerAs: 'consentCardVm'
                 };
                 return directive;
             }
 
             /* @ngInject */
-            function ConsentCardController($modal, consentService, notificationService) {
+            function ConsentCardController($modal, consentService) {
                 var vm = this;
                 vm.openManageConsentModal = openManageConsentModal;
                 vm.consentState = consentState;
