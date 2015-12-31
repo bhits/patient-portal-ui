@@ -120,22 +120,4 @@ describe('app.healthInformationService ', function() {
         expect(console.log).toHaveBeenCalledWith("Section: AllergySection missing.");
     });
 
-    it('should return menu toggle flags', function () {
-        var allergies = [{   Author: null, EndDate: null, Name: "Penicillin",
-            Reactions: [{Code: "123456", CodeSystem: "2.16.840.1.113883.6.96", CodeSystemName: "SNOMEDCT"}],
-            Severity: {Code: "123456", CodeSystem: "2.16.840.1.113883.6.96", CodeSystemName: "SNOMEDCT", DisplayName: "Mild"},
-            StartDate: "2011-10-19T10:32:02.367551-04:00",
-            Status: "Active",
-            Substance: {Code: "123456", CodeSystem: "2.16.840.1.113883.6.96", CodeSystemName: "SNOMEDCT"},
-        }];
-        var AllergySection = {
-            Allergies: allergies,
-            Code: {}, Name: "Allergy", Narrative: "", Title:""};
-        var ccdaDocument =  {AllergySection: AllergySection, CCDAHeader: {}, EncounterSection:{}};
-        var data = {CcdaDocuments: [ccdaDocument]};
-
-        var result = { demographics : true, medications : false, alerts : true, results : false, encounters : false, problems : false, vitalSigns : false, procedures : false, planofcare : false, familyHistory : false, healthcareProviders : false, socialhistory : false, advancedDirectives : false, functionalStatus : false, support : false, payers : false, immunization : false, medicalEquipment : false };
-        expect(HealthInformationService.calculateMenuToggleFlags(ccdaDocument)).toEqual(result);
-    });
-
 });

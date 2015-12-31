@@ -49,37 +49,6 @@
                 }else{
                     console.log("Section: " + sectionName + " missing.");
                 }
-            },
-
-            /**
-             * Determines the flags to toggle the menu.
-             *
-             * @param nameOfSection - The name of the section.
-             */
-            calculateMenuToggleFlags: function(ccdaData){
-                var menuItems = {
-                    demographics: isDefineAndNotNull(ccdaData.CCDAHeader),
-                    medications: isDefineAndNotNull(ccdaData.MedicationSection),
-                    alerts: isDefineAndNotNull(ccdaData.AllergySection),
-                    results: isDefineAndNotNull(ccdaData.ResultSection),
-                    //encounters: isDefineAndNotNull(ccdaData.EncounterSection),
-                    encounters: false,
-                    problems: isDefineAndNotNull(ccdaData.ProblemSection),
-                    //vitalSigns: isDefineAndNotNull(ccdaData.VitalSignSection),
-                    vitalSigns: false,
-                    procedures: isDefineAndNotNull(ccdaData.ProcedureSection),
-                    planofcare: isDefineAndNotNull(ccdaData.PlanOfCareSection),
-                    familyHistory: isDefineAndNotNull(ccdaData.FamilyHistorySection),
-                    healthcareProviders: isDefineAndNotNull(ccdaData.HealthcareProvidersSection),
-                    socialhistory: isDefineAndNotNull(ccdaData.SocialHistorySection),
-                    advancedDirectives: isDefineAndNotNull(ccdaData.AdvancedDirectivesSection),
-                    functionalStatus:  isDefineAndNotNull(ccdaData.FunctionalStatusSection),
-                    support: isDefineAndNotNull(ccdaData.SupportSection),
-                    payers: isDefineAndNotNull(ccdaData.PayersSection),
-                    immunization: isDefineAndNotNull(ccdaData.ImmunizationSection),
-                    medicalEquipment: isDefineAndNotNull(ccdaData.MedicalEquipmentSection)
-                };
-                return menuItems;
             }
         };
     }
