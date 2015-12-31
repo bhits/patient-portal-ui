@@ -26,7 +26,7 @@
                     })
                     .state('fe.index.home', {
                         url: '/home',
-                        templateUrl: 'app/home/home.tpl.html',
+                        templateUrl: 'app/home/home.html',
                         data: { pageTitle: 'Home' }
                     });
             }
