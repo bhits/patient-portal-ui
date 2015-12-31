@@ -87,7 +87,7 @@
                 url: '/healthinformation',
                 params: { scrollTo : null, expand: null},
                 data: { pageTitle: 'Health Information' },
-                templateUrl: 'app/healthinformation/tmpl/healthinformation.tpl.html',
+                templateUrl: 'app/healthinformation/tmpl/healthInformation.html',
                 controller: 'HealthInformationController',
                 controllerAs: 'HealthInformationVm',
                 resolve: HealthInformationController.resolve

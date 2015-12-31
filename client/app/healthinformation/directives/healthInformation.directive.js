@@ -25,7 +25,7 @@
                 document: '='
             },
             bindToController: true,
-            templateUrl: "app/healthinformation/tmpl/ccdaDocument.tpl.html",
+            templateUrl: "app/healthinformation/tmpl/ccdaDocument.html",
             controllerAs: 'ccdaDocumentVm',
             controller: CCDADocumentController
         };
@@ -49,7 +49,7 @@
                 section: '='
             },
             bindToController: true,
-            templateUrl: "app/healthinformation/tmpl/ccdaDocumentSection.tpl.html",
+            templateUrl: "app/healthinformation/tmpl/ccdaDocumentSection.html",
             controllerAs: 'ccdaDocumentSectionVm',
             controller: CCDADocumentSectionController
         };
