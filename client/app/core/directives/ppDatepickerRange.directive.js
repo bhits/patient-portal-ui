@@ -10,7 +10,7 @@
             function ppDatePickerRange() {
                 var directive =  {
                     restrict: 'EA',
-                    templateUrl: 'app/core/directives/datepicker-range.html',
+                    templateUrl: 'app/core/directives/datepickerRange.html',
                     bindToController:  {
                         tolabel: "@",
                         fromlabel: "@",
