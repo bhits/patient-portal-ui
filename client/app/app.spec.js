@@ -1,6 +1,6 @@
 'use strict';
 
-xdescribe('app module', function(){
+describe('app module', function(){
     var module;
 
     beforeEach(function() {
@@ -26,65 +26,42 @@ xdescribe('app module', function(){
             expect(hasModule('templates-app')).toEqual(true);
         });
 
-        it("should have templates-common as a dependency", function() {
-            expect(hasModule('templates-common')).toEqual(true);
+
+       it("should have app.core as a dependency", function() {
+            expect(hasModule('app.core')).toEqual(true);
         });
 
-       it("should have ui.router as a dependency", function() {
-            expect(hasModule('ui.router')).toEqual(true);
+        it("should have app.security as a dependency", function() {
+            expect(hasModule('app.security')).toEqual(true);
         });
 
-        it("should have angular-loading-bar as a dependency", function() {
-            expect(hasModule('angular-loading-bar')).toEqual(true);
+        it("should have app.config as a dependency", function() {
+            expect(hasModule('app.config')).toEqual(true);
         });
 
-        it("should have ngIdle as a dependency", function() {
-            expect(hasModule('ngIdle')).toEqual(true);
+        it("should have app.home as a dependency", function() {
+            expect(hasModule('app.home')).toEqual(true);
         });
 
-        it("should have ngIdle as a dependency", function() {
-            expect(hasModule('ngIdle')).toEqual(true);
+        it("should have app.healthInformation as a dependency", function() {
+            expect(hasModule('app.healthInformation')).toEqual(true);
         });
 
-        it("should have ui.bootstrap as a dependency", function() {
-            expect(hasModule('ui.bootstrap')).toEqual(true);
+        it("should have app.provider as a dependency", function() {
+            expect(hasModule('app.provider')).toEqual(true);
         });
 
-        it("should have app.homeModule as a dependency", function() {
-            expect(hasModule('app.homeModule')).toEqual(true);
+        it("should have app.layout as a dependency", function() {
+            expect(hasModule('app.layout')).toEqual(true);
         });
 
-        it("should have app.healthInformationModule as a dependency", function() {
-            expect(hasModule('app.healthInformationModule')).toEqual(true);
-        });
-
-        it("should have app.accessModule as a dependency", function() {
-            expect(hasModule('app.accessModule')).toEqual(true);
-        });
-
-        it("should have app.directivesModule as a dependency", function() {
-            expect(hasModule('app.directivesModule')).toEqual(true);
-        });
-
-        it("should have app.filtersModule as a dependency", function() {
-            expect(hasModule('app.filtersModule')).toEqual(true);
-        });
-
-        it("should have app.servicesModule as a dependency", function() {
-            expect(hasModule('app.servicesModule')).toEqual(true);
-        });
-
-        it("should have app.interceptorModule as a dependency", function() {
-            expect(hasModule('app.authInterceptorModule')).toEqual(true);
-        });
-
-        it("should have app.authenticationModule as a dependency", function() {
-            expect(hasModule('app.authenticationModule')).toEqual(true);
+        it("should have app.medicalDocument as a dependency", function() {
+            expect(hasModule('app.medicalDocument')).toEqual(true);
         });
     });
 });
 
-describe("app AppController ", function() {
+xdescribe("app AppController ", function() {
 
     beforeEach(module('ui.router'));
     beforeEach(module('ngIdle'));
@@ -93,7 +70,6 @@ describe("app AppController ", function() {
     beforeEach(module('ui.bootstrap'));
     beforeEach(module('templates-app'));
     beforeEach(module('ui.bootstrap'));
-    beforeEach(module('templates-common'));
     beforeEach(module('ngAria'));
     beforeEach(module('app.directivesModule'));
     beforeEach(module('app.servicesModule'));

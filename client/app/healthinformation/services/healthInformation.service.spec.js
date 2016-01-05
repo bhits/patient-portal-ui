@@ -32,7 +32,7 @@ xdescribe('app.healthInformationService  ', function(){
     });
 });
 
-describe('app.healthInformationService ', function() {
+xdescribe('app.healthInformationService ', function() {
     var HealthInformationService, $httpBackend;
 
     beforeEach(module('app.config'));

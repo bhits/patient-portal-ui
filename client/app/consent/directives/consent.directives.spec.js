@@ -57,7 +57,6 @@ xdescribe('app.consentDirectives', function () {
     beforeEach(module('ui.bootstrap'));
     beforeEach(module('app.consentDirectives'));
     beforeEach(module('templates-app'));
-    beforeEach(module('templates-common'));
     beforeEach(module('app.notificationModule'));
 
     // Store references to $rootScope and $compile

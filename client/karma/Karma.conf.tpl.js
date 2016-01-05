@@ -27,13 +27,11 @@ module.exports = function (karma) {
             <% scripts.forEach( function ( file ) { %>'<%= file %>',
                 <% }); %>
             'app/**/*module*.js','app/**/*config*.js',
-            'app/**/*.js',
-            'common/**/*.js'
+            'app/**/*.js'
         ],
 
          exclude: [
-            'app/**/*.e2e.js',
-            'common/**/*.e2e.js'
+            'app/**/*.e2e.js'
         ],
 
         /**

@@ -2,58 +2,57 @@
 
 'use strict';
 
-    function HealthInformationService($resource, ENVService){
-        var patientResource = $resource(ENVService.securedApis.phrApiBaseUrl + "/patientHealthData/:mrn", {mrn: '@mrn'});
+    angular
+        .module("app.healthInformation")
+            .factory('healthInformationService', healthInformationService);
 
-        var isDefineAndNotNull = function(value){
-            return (angular.isDefined(value) && value !== null );
-        };
+            /* @ngInject */
+            function healthInformationService($resource, ENVService){
+                var patientResource = $resource(ENVService.securedApis.phrApiBaseUrl + "/patientHealthData/:mrn", {mrn: '@mrn'});
+                var service = {};
 
-        return {
-            /**
-             * Gets the Health Information resource object
-             * @returns {Object} patientResource - The patient resource object
-             */
-            getHealthInformationResource: function(){
-                return patientResource;
-            },
+                service.getHealthInformationResource = getHealthInformationResource;
+                service.getHealthInformation = getHealthInformation;
+                service.getSectionByName = getSectionByName;
+                service.getSectionCollectionByName = getSectionCollectionByName;
 
-            /**
-             * Gets the Health Information object
-             * @returns {Object} health Information - The Health Information object
-             */
-            getHealthInformation: function(data){
-                if (isDefineAndNotNull(data) && isDefineAndNotNull(data.ccdaDocuments[0]) && isDefineAndNotNull(data.ccdaDocuments[0].Document)) {
-                    return data.ccdaDocuments[0];
-                }else{
-                    console.log("health information object missing.");
+                function isDefineAndNotNull(value){
+                    return (angular.isDefined(value) && value !== null );
                 }
-            },
 
-            getSectionByName: function(data, sectionName){
-                if(isDefineAndNotNull(data) && isDefineAndNotNull(data[sectionName])){
-                    return data[sectionName];
-                }else{
-                    console.log("Section missing.");
+                function getHealthInformationResource(){
+                    return patientResource;
                 }
-            },
 
-            getSectionCollectionByName: function(data, sectionName, collectionName){
-                if(isDefineAndNotNull(data) && isDefineAndNotNull(data[sectionName])){
-                    var section = data[sectionName];
-                    if(isDefineAndNotNull(section[collectionName])){
-                        return section[collectionName];
+                function getHealthInformation (data){
+                    if (isDefineAndNotNull(data) && isDefineAndNotNull(data.ccdaDocuments[0]) && isDefineAndNotNull(data.ccdaDocuments[0].Document)) {
+                        return data.ccdaDocuments[0];
                     }else{
-                        console.log("Section: " + sectionName + " collection is missing.");
+                        console.log("health information object missing.");
                     }
-                }else{
-                    console.log("Section: " + sectionName + " missing.");
                 }
+
+                function getSectionByName(data, sectionName){
+                    if(isDefineAndNotNull(data) && isDefineAndNotNull(data[sectionName])){
+                        return data[sectionName];
+                    }else{
+                        console.log("Section missing.");
+                    }
+                }
+
+                function getSectionCollectionByName (data, sectionName, collectionName){
+                    if(isDefineAndNotNull(data) && isDefineAndNotNull(data[sectionName])){
+                        var section = data[sectionName];
+                        if(isDefineAndNotNull(section[collectionName])){
+                            return section[collectionName];
+                        }else{
+                            console.log("Section: " + sectionName + " collection is missing.");
+                        }
+                    }else{
+                        console.log("Section: " + sectionName + " missing.");
+                    }
+                }
+
+                return service;
             }
-        };
-    }
-
-
-    angular.module("app.healthInformationService", ['app.core', 'app.config'])
-     .factory('HealthInformationService', HealthInformationService);
 })();
