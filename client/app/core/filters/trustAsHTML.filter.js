@@ -9,9 +9,7 @@
         .module('app.core')
         .filter('trustAsHTML', trustAsHTMLFilter);
 
-        /**
-         * @ngInject
-         */
+         /* @ngInject */
         function trustAsHTMLFilter($sce) {
             return sceFilter;
 

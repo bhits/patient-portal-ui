@@ -12,7 +12,6 @@
                     restrict: 'A',
                     link: linkFunc
                 };
-
                 return directive;
 
                 /* @ngInject */
@@ -23,4 +22,6 @@
                     });
                 }
             }
+
+
 })();

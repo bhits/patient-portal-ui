@@ -1,0 +1,12 @@
+<div class="inmodal">
+    <div class="modal-header">
+        <h4 class="modal-title">Delete Provider</h4>
+    </div>
+    <div class="modal-body">
+        <p>Are you sure you want to delete {{ deleteProviderModalVm.provider | pcmProviderNameOrFacility}} provider?</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-white" ng-click="deleteProviderModalVm.cancel()">Cancel</button>
+        <button type="button" class="btn btn-primary dark-green" ng-click="deleteProviderModalVm.ok()">Delete</button>
+    </div>
+</div>

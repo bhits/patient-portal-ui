@@ -5,9 +5,7 @@
         .module('app.layout')
             .directive('ppPageTitle', ppPageTitle);
 
-            /**
-             *  @ngInject
-             */
+            /* @ngInject */
             function ppPageTitle($rootScope, $timeout) {
                 var directive =  {
                     link:linkFunc
@@ -15,9 +13,7 @@
 
                 return directive;
 
-                /**
-                 *  @ngInject
-                 */
+                /* @ngInject */
                 function linkFunc(scope, element) {
                     var listener = function (event, toState, toParams, fromState, fromParams) {
                         // Default title - load on Dashboard 1
@@ -33,4 +29,5 @@
                     $rootScope.$on('$stateChangeStart', listener);
                 }
             }
+
 })();

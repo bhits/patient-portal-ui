@@ -1,0 +1,68 @@
+<pp-content-wrapper title="List Providers">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins margin-bottom-10">
+                <p>
+                    <a class="btn btn-primary dark-green" ui-sref="fe.provider.lookup">
+                        Add a Health Provider
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h2>Current Healthcare Providers</h2>
+
+                    <div pp-ibox-tools></div>
+                </div>
+                <div class="ibox-content">
+
+                    <table class="table table-bordered table-striped table-hover">
+                        <thead>
+                        <tr>
+                            <td></td>
+                            <th>Name/Facility</th>
+                            <th>NPI</th>
+                            <th>Contact Number</th>
+                            <th>Address</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-if="providerListVm.providers.length === 0">
+                            <td colspan="5" class="text-center"> No provider has been added.</td>
+                        </tr>
+                        <tr ng-repeat="provider in providerListVm.providers">
+                            <td>
+                                <button type="button" class="btn btn-xs"
+                                        ng-class="{ 'btn-red' : provider.deletable, 'btn-grey': !provider.deletable} "
+                                        ng-disabled="!provider.deletable"
+                                        ng-click="providerListVm.openDeleteProviderModal(provider, 'sm')">
+                                    <div class="fa fa-minus">
+                                        <span class="sr-only">delete provider</span>
+                                        <span class="sr-only" ng-bind="provider.lastName"></span>
+                                        <span class="sr-only" ng-bind="provider.firstName"></span>
+                                    </div>
+                                </button>
+                            </td>
+                            <td>
+                                <span ng-bind=" provider|pcmProviderNameOrFacility"></span>
+                            </td>
+                            <td><span ng-bind="provider.npi"></span></td>
+                            <td><span ng-bind="provider.practiceLocationAddressTelephoneNumber | phone"></span></td>
+                            <td>
+                                <span ng-bind="provider| pcmProviderAddress"></span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</pp-content-wrapper>

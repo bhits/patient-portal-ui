@@ -9,9 +9,7 @@
         .module('app.core')
             .filter('zip', zipFilter);
 
-            /**
-             * @ngInject
-             */
+            /* @ngInject */
             function zipFilter(utilityService) {
                 return zipcodeFilter;
 

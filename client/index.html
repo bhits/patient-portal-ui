@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title pp-page-title>Test Bed</title>
+    <title pp-page-title>Patient Portal</title>
 
     <base href="/pp-ui/">
 
@@ -64,19 +64,20 @@
     <script  type="text/javascript" src="assets/js/inspinia.js"></script>
 
     <!-- Main Angular scripts-->
-    <script  type="text/javascript" src="assets/js/angular/angular.min.js"></script>
+
+
+    <!-- compiled JavaScript -->
+    <% scripts.forEach( function ( file ) { %>
+    <script type="text/javascript" src="<%= file %>"></script>
+    <% }); %>
+
+    <!--<script  type="text/javascript" src="assets/js/angular/angular.min.js"></script>-->
     <script  type="text/javascript" src="assets/js/bootstrap/ui-bootstrap-tpls-0.12.0.min.js"></script>
     <script type="text/javascript" src="assets/js/angular-idle.js"></script>
     <script  type="text/javascript" src="assets/js/plugins/iCheck/icheck.min.js"></script>
     <script  type="text/javascript" src="assets/js/angular/angular-messages.min.js"></script>
     <script  type="text/javascript" src="assets/js/plugins/angular-notify/angular-notify.min.js"></script>
     <script  type="text/javascript" src="assets/js/plugins/datapicker/bootstrap-datepicker.js"></script>
-
-    <!-- TESTBED ANGULARJS RELATED -->
-    <!-- compiled JavaScript -->
-    <% scripts.forEach( function ( file ) { %>
-    <script type="text/javascript" src="<%= file %>"></script>
-    <% }); %>
 
     <!--Donot delete this comment-->
     <!-- angular -->

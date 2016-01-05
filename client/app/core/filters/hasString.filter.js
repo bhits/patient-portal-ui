@@ -2,17 +2,16 @@
  * Created by tomson.ngassa on 12/15/2015.
  */
 
-'use strict';
-
 (function () {
+
+    'use strict';
 
     angular
         .module('app.core')
-            .filter('hasString', HasString);
-            /**
-             * @ngInject
-             */
-            function HasString(utilityService) {
+            .filter('hasString', hasString);
+
+            /* @ngInject */
+            function hasString(utilityService) {
                 return hasStr;
 
                 function hasStr(str) {

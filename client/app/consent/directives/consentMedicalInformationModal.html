@@ -17,12 +17,13 @@
                             the following areas of potentially sensitive
                             information.
                         </div>
-                        <button class="btn btn-primary btn-xs m-r-xs dark-green" ng-click="selectAllMedicalSections()">Select All</button> <button class="btn btn-primary btn-xs dark-green" ng-click="deselectAllMedicalSections()">Deselect All</button>
-                        <div ng-repeat="medicalSection in mediactionSections">
+                        <button class="btn btn-primary btn-xs m-r-xs dark-green" ng-click="medicalInfoModalVm.selectAllMedicalSections(medicalInfofmationModalObj)">Select All</button>
+                        <button class="btn btn-primary btn-xs dark-green" ng-click="medicalInfoModalVm.deselectAllMedicalSections(medicalInfofmationModalObj)">Deselect All</button>
+                        <div ng-repeat="medicalSection in medicalInfoModalVm.mediactionSections">
                             <div>
                                 <div class="radio">
                                     <label>
-                                        <input type="checkbox" pp-icheck  checklist-model="consent.selectedMedicalSections" checklist-value="medicalSection.code" >
+                                        <input type="checkbox" pp-icheck  checklist-model="medicalInfoModalVm.consent.selectedMedicalSections" checklist-value="medicalSection.code" >
                                         <span class="m-l-xs" ng-bind="medicalSection.displayName"></span>
                                     </label>
 
@@ -43,12 +44,13 @@
                             Select the medical information that you <strong>DO
                             NOT</strong> wish to share.
                         </div>
-                        <button class="btn btn-primary btn-xs m-r-xs dark-green" ng-click="selectAllSensitivityPolicies()">Select All</button> <button class="btn btn-primary btn-xs dark-green" ng-click="deselectAllSensitivityPolicies()">Deselect All</button>
-                        <div ng-repeat="sensitivityPolicy in sensitivityPolicies">
+                        <button class="btn btn-primary btn-xs m-r-xs dark-green" ng-click="medicalInfoModalVm.selectAllSensitivityPolicies(medicalInfofmationModalObj)">Select All</button>
+                        <button class="btn btn-primary btn-xs dark-green" ng-click="medicalInfoModalVm.deselectAllSensitivityPolicies(medicalInfofmationModalObj)">Deselect All</button>
+                        <div ng-repeat="sensitivityPolicy in medicalInfoModalVm.sensitivityPolicies">
                             <div>
                                 <div class="radio">
                                     <label>
-                                        <input type="checkbox" pp-icheck  checklist-model="consent.selectedSensitivityPolicies" checklist-value="sensitivityPolicy.code" >
+                                        <input type="checkbox" pp-icheck  checklist-model="medicalInfoModalVm.consent.selectedSensitivityPolicies" checklist-value="sensitivityPolicy.code" >
                                         <span class="m-l-xs" ng-bind="sensitivityPolicy.displayName"></span>
                                     </label>
                                 </div>
@@ -60,7 +62,7 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-white m-r-xs" ng-click="cancel()">Cancel</button>
-        <button type="button" class="btn btn-primary dark-green" ng-click="ok()" ng-disabled="medicalInfofmationModalObj.$pristine">Save changes</button>
+        <button type="button" class="btn btn-white m-r-xs" ng-click="medicalInfoModalVm.cancel()">Cancel</button>
+        <button type="button" class="btn btn-primary dark-green" ng-click="medicalInfoModalVm.ok()" ng-disabled="medicalInfofmationModalObj.$pristine">Save changes</button>
     </div>
 </div>

@@ -1,15 +1,13 @@
 ﻿
-'use strict';
-
 (function () {
+
+    'use strict';
 
     angular
         .module("app.security")
             .factory('authenticationService', AuthenticationService);
 
-            /**
-             * @ngInject
-             */
+            /* @ngInject */
             function AuthenticationService($sessionStorage, utilityService) {
 
                 var service = {};

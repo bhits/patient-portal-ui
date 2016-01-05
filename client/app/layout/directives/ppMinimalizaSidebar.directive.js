@@ -5,10 +5,8 @@
         .module('app.layout')
             .directive('ppMinimalizaSidebar', ppMinimalizaSidebar);
 
-            /**
-             * @ngInject
-             */
-            function ppMinimalizaSidebar($timeout) {
+            /* @ngInject */
+            function ppMinimalizaSidebar() {
                 var directive =  {
                     restrict: 'A',
                     scope: {
@@ -23,7 +21,8 @@
 
                 return directive;
 
-                function MinimalizaSidebarController ($scope, $element) {
+                /* @ngInject */
+                function MinimalizaSidebarController ($timeout) {
                     var vm = this;
 
                     vm.minimalize = function () {
@@ -37,13 +36,13 @@
                             // Hide menu in order to smoothly turn on when maximize menu
                             $('#side-menu').hide();
                             // For smoothly turn on menu
-                            setTimeout(
+                            $timeout(
                                 function () {
                                     $('#side-menu').fadeIn(500);
                                 }, 100);
                         } else if ($('body').hasClass('fixed-sidebar')) {
                             $('#side-menu').hide();
-                            setTimeout(
+                            $timeout(
                                 function () {
                                     $('#side-menu').fadeIn(500);
                                 }, 300);
@@ -54,5 +53,7 @@
                     };
                 }
             }
+
+
 
 })();

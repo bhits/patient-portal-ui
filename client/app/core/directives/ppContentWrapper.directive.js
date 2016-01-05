@@ -10,7 +10,7 @@
                     restrict: 'E',
                     transclude: true,
                     scope: {title: '@'},
-                    templateUrl: 'app/core/directives/content-wrapper.html'
+                    templateUrl: 'app/core/directives/contentWrapper.html'
                 };
                 return directive;
             }

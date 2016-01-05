@@ -1,23 +1,14 @@
 
-'use strict';
-
 (function () {
+
+   'use strict';
 
     angular
         .module('app.consent')
             .controller("ConsentCreateEditController", ConsentCreateEditController);
 
-            /**
-             * @memberof app.consent
-             * @ngdoc controller
-             * @name ConsentCreateEditController
-             * @param consentService {service} The consent service
-             * @param ProviderService {service} The provider service
-             * @param loadedData {Array} The resolved data (lookup data and consent data when editing consent) for the controller
-             *
-             * @ngInject
-             */
-            function ConsentCreateEditController(consentService, ProviderService, loadedData ){
+            /* @ngInject */
+            function ConsentCreateEditController(loadedData ){
                 var vm = this;
                 vm.providers = loadedData[0] ;
                 vm.purposeOfUse = loadedData[1] ;
