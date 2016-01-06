@@ -10,14 +10,14 @@
         .factory('consentService', consentService);
 
         /* @ngInject */
-        function consentService($resource, ENVService) {
-            var consentListResource = $resource(ENVService.securedApis.pcmApiBaseUrl + "/consents/pageNumber/:pageNumber", {pageNumber: '@pageNumber'});
-            var consentResource = $resource(ENVService.securedApis.pcmApiBaseUrl + "/consents/:id",{id: '@id'}, {'update': { method:'PUT' }});
-            var purposeOfUseResource = $resource(ENVService.securedApis.pcmApiBaseUrl + "/purposeOfUse");
-            var medicationSectionResource = $resource(ENVService.securedApis.pcmApiBaseUrl + "/medicalSection");
-            var sensitvityPolicyResource = $resource(ENVService.securedApis.pcmApiBaseUrl + "/sensitivityPolicy");
-            var signConsentResource = $resource(ENVService.securedApis.pcmApiBaseUrl + "/consents/signConsent/:id", {id: '@id'});
-            var revokeConsentResource = $resource(ENVService.securedApis.pcmApiBaseUrl + "/consents/revokeConsent/:id", {id: '@id'});
+        function consentService($resource, envService) {
+            var consentListResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/pageNumber/:pageNumber", {pageNumber: '@pageNumber'});
+            var consentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/:id",{id: '@id'}, {'update': { method:'PUT' }});
+            var purposeOfUseResource = $resource(envService.securedApis.pcmApiBaseUrl + "/purposeOfUse");
+            var medicationSectionResource = $resource(envService.securedApis.pcmApiBaseUrl + "/medicalSection");
+            var sensitvityPolicyResource = $resource(envService.securedApis.pcmApiBaseUrl + "/sensitivityPolicy");
+            var signConsentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/signConsent/:id", {id: '@id'});
+            var revokeConsentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/revokeConsent/:id", {id: '@id'});
 
             var selectedNpi = {authorizeNpi: "", discloseNpi: ""};
             var selectedProvider = [];

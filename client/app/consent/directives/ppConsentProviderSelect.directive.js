@@ -13,12 +13,12 @@
                     restrict: 'E',
                     replace: false,
                     templateUrl: 'app/consent/directives/consentProviderSelect.html',
-                    scope: {
+                    scope: {}, // Isolated scope is required if you want to have multiple instances of the directives.
+                    bindToController: {
                         modaltitle: "=",
                         providers: "=",
                         ngModel: '='
                     },
-                    bindToController: true,
                     controllerAs: 'consentSelectProviderVm',
                     controller: ConsentSelectProviderController
                 };

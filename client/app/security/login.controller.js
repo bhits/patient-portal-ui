@@ -7,9 +7,9 @@
         .module("app.security")
             .controller('LoginController', LoginController);
             /* @ngInject */
-            function LoginController($scope, $state, Idle, ENVService) {
+            function LoginController($scope, $state, Idle, envService) {
                 var vm = this;
-                vm.version = ENVService.version;
+                vm.version = envService.version;
 
                 $scope.$on('oauth:authorized', function (event, token) {
                     Idle.watch();

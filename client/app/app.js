@@ -49,10 +49,10 @@
             }
 
             /* @ngInject */
-            function AppController($scope , $rootScope , utilityService, notificationService, authenticationService, ENVService, idleConfigParams, $state,  $modal, $modalStack, Idle) {
+            function AppController($scope , $rootScope , utilityService, notificationService, authenticationService, envService, idleConfigParams, $state,  $modal, $modalStack, Idle) {
 
                 var appVm = this;
-                appVm.oauth = ENVService.oauth;
+                appVm.oauth = envService.oauth;
                 appVm.oauth.state = authenticationService.getState();
 
                 $rootScope.$on('$stateChangeSuccess',stateChangeSuccess);
