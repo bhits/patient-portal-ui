@@ -3,13 +3,29 @@
         <div class="ibox panel panel-default float-e-margins">
             <div class="ibox-title modified panel-heading">
                 <h5>
-                    <span ng-bind="ccdaDocumentSectionVm.section.title"></span>
+                    <span ng-bind-html="ccdaDocumentSectionVm.section.title | trustAsHTML"></span>
                 </h5>
                 <div pp-ibox-tools></div>
             </div>
-            <div class="ibox-content">
+            <div class="ibox-content testContent">
                 <p>
-                    <span ng-bind="ccdaDocumentSectionVm.section.content"></span>
+                    <!--<span ng-bind-html="ccdaDocumentSectionVm.section.content | trustAsHTML "></span>-->
+                    <span ng-bind-html="ccdaDocumentSectionVm.testContent | trustAsHTML "></span>
+
+                    <table>
+                        <tr>
+                            <th>Month</th>
+                            <th>Savings</th>
+                        </tr>
+                        <tr>
+                            <td>January</td>
+                            <td>$100</td>
+                        </tr>
+                        <tr>
+                            <td>February</td>
+                            <td>$80</td>
+                        </tr>
+                    </table>
                 </p>
             </div>
         </div>

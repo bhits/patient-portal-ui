@@ -13,8 +13,6 @@
 
                 $scope.showHealthInformationMenu = utilityService.getShowHealthInformationMenu();
 
-                vm.toggleMenu = false;
-
                 vm.healthinfotmation = healthInformationService.getHealthInformation(patientData[0]);
                 vm.document =  healthInformationService.getSectionByName(vm.healthinfotmation, 'Document');
                 vm.provider =  healthInformationService.getSectionByName(vm.document, 'author');

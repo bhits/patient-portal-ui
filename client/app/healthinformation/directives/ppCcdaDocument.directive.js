@@ -21,11 +21,11 @@
                 return directive;
 
                 function CCDADocumentController(healthInformationService){
-                    var Vm = this;
-                    Vm.patient = healthInformationService.getSectionByName(Vm.document, 'patient');
-                    Vm.author = healthInformationService.getSectionByName(Vm.document, 'author');
-                    Vm.sections = healthInformationService.getSectionByName(Vm.document, 'section');
-                    Vm.treatment = healthInformationService.getSectionByName(Vm.document, 'treatment');
+                    var vm = this;
+                    vm.patient = healthInformationService.getSectionByName(vm.document, 'patient');
+                    vm.author = healthInformationService.getSectionByName(vm.document, 'author');
+                    vm.sections = healthInformationService.getSectionByName(vm.document, 'section');
+                    vm.treatment = healthInformationService.getSectionByName(vm.document, 'treatment');
                 }
             }
 })();
