@@ -17,7 +17,8 @@
 
                     <tbody>
                     <tr ng-if="uploadedDocumentVm.medicaldocumentslist.length === 0">
-                        <td colspan="5" class="text-center"> No Medical Documents has been added.</td>
+                        <td colspan="5" class="text-center"> No
+                            Medical Documents has been added.</td>
                     </tr>
                     <tr ng-repeat="medicalDocument in uploadedDocumentVm.medicaldocumentslist">
                         <td>
@@ -30,9 +31,9 @@
                             <span ng-bind="medicalDocument.description"></span>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-success btn-xs"
+                            <button type="button" class="btn btn-success dark-green btn-xs"
                                     ng-click="uploadedDocumentVm.downloadFile(medicalDocument)">
-                                <span class="fa fa-download"></span> Download
+                                <span class="fa fa-download"></span><span class="hidden-xs"> Download</span>
                             </button>
                             <button type="button" class="btn btn-danger btn-xs"
                                     ng-click="uploadedDocumentVm.openDeleteMedicalDocumentModal(medicalDocument, 'sm')">
