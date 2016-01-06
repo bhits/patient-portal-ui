@@ -12,6 +12,7 @@
                     restrict: 'E',
                     replace: false,
                     templateUrl: 'app/consent/directives/consentMedicalInformation.html',
+                    scope: {},
                     bindToController: {
                         data: "=",
                         ngModel: '=',

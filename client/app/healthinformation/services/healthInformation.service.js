@@ -7,8 +7,8 @@
             .factory('healthInformationService', healthInformationService);
 
             /* @ngInject */
-            function healthInformationService($resource, ENVService){
-                var patientResource = $resource(ENVService.securedApis.phrApiBaseUrl + "/patientHealthData/:mrn", {mrn: '@mrn'});
+            function healthInformationService($resource, envService){
+                var patientResource = $resource(envService.securedApis.phrApiBaseUrl + "/patientHealthData/:mrn", {mrn: '@mrn'});
                 var service = {};
 
                 service.getHealthInformationResource = getHealthInformationResource;

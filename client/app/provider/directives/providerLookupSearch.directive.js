@@ -13,6 +13,7 @@
             function providerLookupResultDirective() {
                 var directive =  {
                     restrict: 'E',
+                    scope: {},
                     templateUrl: 'app/provider/directives/provider-lookup-search.html',
                     controller: ProviderLookupSearchController,
                     controllerAs: 'providerLookupSearchVm'

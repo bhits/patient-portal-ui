@@ -8,6 +8,7 @@
 
             function ppConsentCard() {
                 var directive = {
+                    scope: {},
                     bindToController: {consent: '='},
                     restrict: 'E',
                     templateUrl: 'app/consent/directives/consentCard.html',

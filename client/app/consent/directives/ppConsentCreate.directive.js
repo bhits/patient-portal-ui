@@ -13,6 +13,7 @@
                 var directive =  {
                     restrict: 'E',
                     templateUrl: 'app/consent/directives/consentCreateEdit.html',
+                    scope: {},
                     bindToController: {
                         providers: "=",
                         purposeofuse: "=",

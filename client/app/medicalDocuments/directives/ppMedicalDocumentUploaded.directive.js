@@ -13,10 +13,11 @@
             restrict: 'E',
             replace: true,
             templateUrl: 'app/medicalDocuments/directives/medicalDocumentUploadedDocuments.html',
-            scope: {
+
+            scope: {},
+            bindToController:  {
                 medicaldocumentslist:'='
             },
-            bindToController: true,
             controller: ['$state', '$modal', 'medicalDocumentsService', 'notificationService', UploadedDocumentController],
             controllerAs: 'uploadedDocumentVm'
         };
