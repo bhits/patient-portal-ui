@@ -12,15 +12,8 @@
                 var vm = this;
 
                 $scope.showHealthInformationMenu = utilityService.getShowHealthInformationMenu();
-
-                vm.healthinfotmation = healthInformationService.getHealthInformation(patientData[0]);
-                vm.document =  healthInformationService.getSectionByName(vm.healthinfotmation, 'Document');
-                vm.provider =  healthInformationService.getSectionByName(vm.document, 'author');
-                vm.patient =  healthInformationService.getSectionByName(vm.document, 'patient');
-                vm.sections =  healthInformationService.getSectionByName(vm.document, 'section');
-                vm.ccdheader =  healthInformationService.getSectionByName(vm.healthinfotmation, 'CCDAHeader');
-                vm.patientDemographics =  healthInformationService.getSectionByName(vm.ccdheader, 'DemographicInformation');
-
+                vm.documents =  patientData[0].CDAdocuments;
+                
                 vm.expandAllAccordions = function(){
                     vm.noPatientDataAlert = false;
                     $rootScope.$broadcast('ExpandAccordions', { expand:true });

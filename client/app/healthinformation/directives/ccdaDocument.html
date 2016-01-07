@@ -44,7 +44,10 @@
                     <div class="col-sm-6">
                         <div>
                             <label for="author">Provider: </label>
-                            <span ng-bind="ccdaDocumentVm.author.providerName" id="author"></span>
+                            <div ng-repeat="author in ccdaDocumentVm.authors">
+                                <span ng-bind="author.providerName" id="author"></span>,
+                            </div>
+
                         </div>
                         <div>
                             <label for="service">Treatment: </label>

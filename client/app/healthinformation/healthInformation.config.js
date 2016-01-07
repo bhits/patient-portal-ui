@@ -22,10 +22,10 @@
                         data: { pageTitle: 'Health Information' },
                         templateUrl: 'app/healthInformation/controllers/healthInformation.html',
                         controller: 'HealthInformationController',
-                        controllerAs: 'HealthInformationVm',
+                        controllerAs: 'healthInformationVm',
                         resolve: {
                             /* @ngInject */
-                            patientData: ['healthInformationService', 'utilityService',  function(healthInformationService, $q){
+                            patientData: ['healthInformationService', '$q',  function(healthInformationService, $q){
 
                                 var deferred = $q.defer();
 

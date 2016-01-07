@@ -7,12 +7,14 @@
 <div  class="row border-bottom row-padding-10" id="sticktoolbar" >
     <div class="col-xs-7 col-sm-6">
         <div class="pull-left">
-            <button class="btn btn-sm btn-primary dark-green" type="button" ng-click="HealthInformationVm.expandAllAccordions()">Expand All</button>
-            <button class="btn btn-sm btn-primary dark-green" type="button" ng-click="HealthInformationVm.collapseAllAccordions()">Collapse All</button>
+            <button class="btn btn-sm btn-primary dark-green" type="button" ng-click="healthInformationVm.expandAllAccordions()">Expand All</button>
+            <button class="btn btn-sm btn-primary dark-green" type="button" ng-click="healthInformationVm.collapseAllAccordions()">Collapse All</button>
         </div>
     </div>
 </div>
 
-<div class="wrapper wrapper-content animated fadeInRight">
-    <pp-ccda-document document="HealthInformationVm.document" ></pp-ccda-document>
+<div class="wrapper wrapper-co  ntent animated fadeInRight">
+    <div ng-repeat="document in healthInformationVm.documents">
+        <pp-ccda-document document="document" ></pp-ccda-document>
+    </div>
 </div>

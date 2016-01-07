@@ -25,8 +25,8 @@
                 }
 
                 function getHealthInformation (data){
-                    if (isDefineAndNotNull(data) && isDefineAndNotNull(data.ccdaDocuments[0]) && isDefineAndNotNull(data.ccdaDocuments[0].Document)) {
-                        return data.ccdaDocuments[0];
+                    if (isDefineAndNotNull(data) && isDefineAndNotNull(data.CDAdocuments)) {
+                        return data.CDAdocuments;
                     }else{
                         console.log("health information object missing.");
                     }

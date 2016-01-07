@@ -22,9 +22,10 @@
 
                 function CCDADocumentController(healthInformationService){
                     var vm = this;
-                    vm.patient = healthInformationService.getSectionByName(vm.document, 'patient');
-                    vm.author = healthInformationService.getSectionByName(vm.document, 'author');
-                    vm.sections = healthInformationService.getSectionByName(vm.document, 'section');
+                    vm.patient = healthInformationService.getSectionByName(vm.document, 'targetPatient');
+                    vm.authors = healthInformationService.getSectionByName(vm.document, 'authors');
+                    vm.address =
+                    vm.sections = healthInformationService.getSectionByName(vm.document, 'sections');
                     vm.treatment = healthInformationService.getSectionByName(vm.document, 'treatment');
                 }
             }
