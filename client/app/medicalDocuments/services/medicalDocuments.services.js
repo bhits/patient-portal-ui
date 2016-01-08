@@ -10,9 +10,9 @@
             .factory('medicalDocumentsService', medicalDocumentsService);
 
             /* @ngInject */
-            function medicalDocumentsService($resource, $window, $q, $timeout, $http, ENVService) {
-                var medicalDocumentsListResource = $resource(ENVService.securedApis.pcmApiBaseUrl + "/clinicaldocuments");
-                var medicalDocumentsResource = $resource(ENVService.securedApis.pcmApiBaseUrl + "/clinicaldocuments/:id", {id: '@id'});
+            function medicalDocumentsService($resource, $window, $q, $timeout, $http, envService) {
+                var medicalDocumentsListResource = $resource(envService.securedApis.pcmApiBaseUrl + "/clinicaldocuments");
+                var medicalDocumentsResource = $resource(envService.securedApis.pcmApiBaseUrl + "/clinicaldocuments/:id", {id: '@id'});
 
                 var service = {};
                 service.listMedicalDocuments = listMedicalDocuments;
@@ -30,7 +30,7 @@
                     var deferred = $q.defer();
 
                     $timeout(function () {
-                        $window.location = ENVService.securedApis.pcmApiBaseUrl + "/clinicaldocuments/" + id;
+                        $window.location = envService.securedApis.pcmApiBaseUrl + "/clinicaldocuments/" + id;
                     }, 1000)
                         .then(function () {
                             deferred.resolve('success');
@@ -47,7 +47,7 @@
                 function uploadMedicalDocument(medicalDocument) {
                     var deferred = $q.defer();
 
-                    var uploadUrl = ENVService.securedApis.pcmApiBaseUrl + "/clinicaldocuments";
+                    var uploadUrl = envService.securedApis.pcmApiBaseUrl + "/clinicaldocuments";
                     var formData = new FormData();
 
                     formData.append('file', medicalDocument.file);

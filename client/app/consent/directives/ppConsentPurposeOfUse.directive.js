@@ -13,6 +13,7 @@
                     restrict: 'E',
                     replace: false,
                     templateUrl: 'app/consent/directives/consentPurposeOfUse.html',
+                    scope: {},
                     bindToController: {
                         ngModel: "=",
                         purposeofuse: "="

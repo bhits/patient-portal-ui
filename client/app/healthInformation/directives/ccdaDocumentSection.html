@@ -3,14 +3,14 @@
         <div class="ibox panel panel-default float-e-margins">
             <div class="ibox-title modified panel-heading">
                 <h5>
-                    <span ng-bind="ccdaDocumentSectionVm.section.title"></span>
+                    <span ng-bind-html="ccdaDocumentSectionVm.section.title | trustAsHTML"></span>
                 </h5>
                 <div pp-ibox-tools></div>
             </div>
             <div class="ibox-content">
-                <p>
-                    <span ng-bind="ccdaDocumentSectionVm.section.content"></span>
-                </p>
+                <div class="healthInfo">
+                    <span ng-bind-html="ccdaDocumentSectionVm.section.content | trustAsHTML "></span>
+                </div>
             </div>
         </div>
     </div>

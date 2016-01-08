@@ -10,8 +10,8 @@
             .factory('providerService', providerService);
 
             /* @ngInject */
-            function providerService($resource, ENVService) {
-                var providers = $resource(ENVService.securedApis.pcmApiBaseUrl + "/providers/:npi", {npi: '@npi'});
+            function providerService($resource, envService) {
+                var providers = $resource(envService.securedApis.pcmApiBaseUrl + "/providers/:npi", {npi: '@npi'});
 
                 var service = {};
 
@@ -54,7 +54,7 @@
                     queryParameters = plsQueryParameters.lastname ? queryParameters + "/lastname/" + plsQueryParameters.lastname : queryParameters;
                     queryParameters = plsQueryParameters.facilityname ? queryParameters + "/facilityname/" + plsQueryParameters.facilityname : queryParameters;
 
-                    var providerResource = $resource(ENVService.unsecuredApis.plsApiBaseUrl + "/pageNumber/:pageNumber" + queryParameters, {pageNumber: page});
+                    var providerResource = $resource(envService.unsecuredApis.plsApiBaseUrl + "/pageNumber/:pageNumber" + queryParameters, {pageNumber: page});
                     providerResource.get({pageNumber: page - 1}, adjustPageOnSuccessResponse, error);
 
                     function adjustPageOnSuccessResponse(response){

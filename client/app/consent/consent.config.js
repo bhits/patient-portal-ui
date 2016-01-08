@@ -5,10 +5,10 @@
 
     angular
         .module('app.consent')
-            .config(ConsentConfig);
+            .config(consentConfig);
 
             /* @ngInject */
-            function ConsentConfig($stateProvider) {
+            function consentConfig($stateProvider) {
                 $stateProvider
                     .state('fe.consent', {
                         abstract: true,

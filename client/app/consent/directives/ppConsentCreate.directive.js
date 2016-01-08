@@ -10,9 +10,10 @@
             /* @ngInject */
             function ppConsentCreate() {
 
-                var driective =  {
+                var directive =  {
                     restrict: 'E',
                     templateUrl: 'app/consent/directives/consentCreateEdit.html',
+                    scope: {},
                     bindToController: {
                         providers: "=",
                         purposeofuse: "=",
@@ -24,7 +25,7 @@
                     controllerAs: 'consentCreateVm'
                 };
 
-                return driective;
+                return directive;
             }
 
              /* @ngInject */
@@ -44,7 +45,7 @@
                 function activate (){
                     if (angular.isDefined($stateParams.consentId) && $stateParams.consentId.length > 0) {
 
-                        vm.isEditMode = angular.isDefined($stateParams.consentId.length) ? true : false;
+                        vm.isEditMode = angular.isDefined($stateParams.consentId.length);
 
                         vm.disclosureProvider = (utilityService.getProviderByNpis(vm.providers, vm.consent.providersDisclosureIsMadeToNpi, vm.consent.organizationalProvidersDisclosureIsMadeToNpi))[0];
                         vm.authorizeProvider = (utilityService.getProviderByNpis(vm.providers, vm.consent.providersPermittedToDiscloseNpi, vm.consent.organizationalProvidersPermittedToDiscloseNpi))[0];

@@ -34,12 +34,12 @@ xdescribe("app.accessModule LoginController ", function() {
     beforeEach(module('ngIdle'));
     beforeEach(module('app.security'));
 
-    var state, ENVService, Idle, authenticationService, controller, utilityService;
+    var state, envService, Idle, authenticationService, controller, utilityService;
 
-    beforeEach(inject(function( $controller, $state, _Idle_, _authenticationService_, _ENVService_, _utilityService_) {
+    beforeEach(inject(function( $controller, $state, _Idle_, _authenticationService_, _envService_, _utilityService_) {
         state = $state;
         Idle = _Idle_;
-        ENVService = _ENVService_;
+        envService = _envService_;
         authenticationService = _authenticationService_;
         utilityService = _utilityService_;
 
@@ -52,14 +52,14 @@ xdescribe("app.accessModule LoginController ", function() {
             $state: state,
             authenticationService: authenticationService,
             Idle: Idle,
-            ENVService: ENVService,
+            envService: envService,
             utilityService: utilityService
         });
     }));
 
     it('should have default values ', function(){
         expect(controller.loginData).toEqual({userName: "", password: ""});
-        expect(controller.version).toEqual(ENVService.version);
+        expect(controller.version).toEqual(envService.version);
     });
 
     it('should scroll to specify location', function(){
