@@ -534,7 +534,7 @@ module.exports = function (grunt) {
                     dest: '<%= config_dir %>/config.js'
                 },
                 constants: {
-                    ENVService: {
+                    envService: {
                         name: 'Development',
                         version:'<%= pkg.version %>',
                         securedApis: {
@@ -561,7 +561,7 @@ module.exports = function (grunt) {
                     dest: '<%= config_dir %>/config.js'
                 },
                 constants: {
-                    ENVService: {
+                    envService: {
                         name: 'QA',
                         version:'<%= pkg.version %>',
                         securedApis: {

@@ -31,7 +31,7 @@
                         controllerAs: 'providerListVm',
                         resolve: {
                             /* @ngInject */
-                            providers: function ($q, providerService, utilityService) {
+                            providers: function ($q, providerService, utilityService, notificationService) {
                                 var deferred = $q.defer();
                                 var providerResource = providerService.getProvidersResource();
                                 var providersData = providerResource.query(
@@ -39,6 +39,7 @@
                                         return response;
                                     },
                                     function (response) {
+                                        notificationService.error('Error in getting list of provider.');
                                         return response;
                                     });
 

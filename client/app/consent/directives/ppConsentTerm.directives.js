@@ -13,6 +13,7 @@
                     restrict: 'E',
                     replace: false,
                     templateUrl: 'app/consent/directives/consentTerm.html',
+                    scope: {},
                     bindToController: {
                         ngModel: '='
                     },

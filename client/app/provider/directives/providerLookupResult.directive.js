@@ -19,6 +19,7 @@
                         providerLookupResult: '=',
                         queryParameters: '='
                     },
+                    scope: {},
                     controller: ProviderLookupResultController,
                     controllerAs: 'providerLookupResultVm'
                 };

@@ -11,7 +11,7 @@
             .factory('AuthInterceptorService', AuthInterceptorService);
 
             /* @ngInject */
-            function AuthInterceptorService($q, $location, $rootScope, utilityService, ENVService, AccessToken){
+            function AuthInterceptorService($q, $location, $rootScope, utilityService, envService, AccessToken){
                var service = {};
                 service.request = request;
                 service.responseError = responseError;
@@ -74,7 +74,7 @@
 
                 function isSecuredApi(url){
                     var isSecured = false;
-                    angular.forEach(ENVService.securedApis, function(value){
+                    angular.forEach(envService.securedApis, function(value){
                         if(utilityService.startsWith(url.toLowerCase(), value.toLowerCase())){
                             isSecured = true;
                         }

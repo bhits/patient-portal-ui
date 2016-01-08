@@ -11,6 +11,7 @@
                 var directive =  {
                     restrict: 'EA',
                     templateUrl: 'app/core/directives/datepickerRange.html',
+                    scope: {},
                     bindToController:  {
                         tolabel: "@",
                         fromlabel: "@",

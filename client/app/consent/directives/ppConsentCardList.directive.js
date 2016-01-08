@@ -10,6 +10,7 @@
             function ppConsentCardList() {
                 var directive = {
                     restrict: 'E',
+                    scope: {},
                     bindToController: {
                         consentList: '='
                     },

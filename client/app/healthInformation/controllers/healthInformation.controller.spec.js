@@ -148,7 +148,7 @@ xdescribe("app.healthInformationModule HealthInformationController ", function()
         stateParams.scrollTo = 'allergies';
         stateParams.expand = 'none';
         state.go("patient.healthinformation");
-        httpBackend.expectGET('app/common/content.html').respond(200);
+        //httpBackend.expectGET('app/common/content.html').respond(200);
         httpBackend.expectGET('https://testbed-api-dev.feisystems.com/ccda/getccdajson?emrn=2323').respond(200);
         httpBackend.expectGET('app/healthinformation/healthInformation.html').respond(200);
 

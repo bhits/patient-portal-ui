@@ -9,12 +9,12 @@
             function ppIboxTools() {
                 var directive = {
                     restrict: 'A',
-                    scope: {
+                    scope: {},
+                    bindToController: {
                         total: '@',
                         ppCollapsed: '=?',
                         ppChevronPreventDefault: '=?'
                     },
-                    bindToController: true,
                     templateUrl: 'app/layout/directives/iBoxTools.html',
                     controller: IboxToolController,
                     controllerAs: 'iboxToolVm'

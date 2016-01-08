@@ -6,10 +6,10 @@
                 <div class="row">
                     <div class="col-sm-12 m-t-xs">
                         <h3>
-                            <span ng-bind="ccdaDocumentVm.document.type"></span>
+                            <span ng-bind="ccdaDocumentVm.cdaDocument.type"></span>
                             <span class="m-b-none m-l-sm">
-                                Created on <span ng-bind="ccdaDocumentVm.document.date"></span> at
-                                <span ng-bind="ccdaDocumentVm.document.title"></span>
+                                Created on <span ng-bind="ccdaDocumentVm.cdaDocument.date"></span> at
+                                <span ng-bind="ccdaDocumentVm.cdaDocument.title"></span>
                             </span>
                         </h3>
                     </div>
@@ -36,15 +36,18 @@
                         </div>
                         <div>
                             <label for="patientAddress">Address: </label>
-                            <span ng-bind="ccdaDocumentVm.patient.contactInfo.address.addressLine" id="patientAddress"></span>
-                            <span ng-bind="ccdaDocumentVm.patient.contactInfo.address.city"></span>
+                            <span ng-bind="ccdaDocumentVm.address.addressLine" id="patientAddress"></span>
+                            <span ng-bind="ccdaDocumentVm.address.city"></span>
                         </div>
 
                     </div>
                     <div class="col-sm-6">
                         <div>
                             <label for="author">Provider: </label>
-                            <span ng-bind="ccdaDocumentVm.author.providerName" id="author"></span>
+                            <div ng-repeat="author in ccdaDocumentVm.authors">
+                                <span ng-bind="author.providerName" id="author"></span>,
+                            </div>
+
                         </div>
                         <div>
                             <label for="service">Treatment: </label>
