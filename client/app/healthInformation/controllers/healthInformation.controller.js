@@ -12,7 +12,7 @@
                 var vm = this;
 
                 $scope.showHealthInformationMenu = utilityService.getShowHealthInformationMenu();
-                vm.documents =  patientData[0].CDAdocuments;
+                vm.documents =  patientData[0].Documents;
                 
                 vm.expandAllAccordions = function(){
                     vm.noPatientDataAlert = false;

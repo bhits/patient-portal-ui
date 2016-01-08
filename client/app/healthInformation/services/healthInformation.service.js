@@ -15,6 +15,7 @@
                 service.getHealthInformation = getHealthInformation;
                 service.getSectionByName = getSectionByName;
                 service.getSectionCollectionByName = getSectionCollectionByName;
+                service.getCDADocument = getCDADocument;
 
                 function isDefineAndNotNull(value){
                     return (angular.isDefined(value) && value !== null );
@@ -24,13 +25,6 @@
                     return patientResource;
                 }
 
-                function getHealthInformation (data){
-                    if (isDefineAndNotNull(data) && isDefineAndNotNull(data.CDAdocuments)) {
-                        return data.CDAdocuments;
-                    }else{
-                        console.log("health information object missing.");
-                    }
-                }
 
                 function getSectionByName(data, sectionName){
                     if(isDefineAndNotNull(data) && isDefineAndNotNull(data[sectionName])){
@@ -53,6 +47,14 @@
                     }
                 }
 
+                function getCDADocument(document){
+                    if(isDefineAndNotNull(document) && isDefineAndNotNull(document.CDAdocuments) && isDefineAndNotNull(document.CDAdocuments.length > 0)){
+                        return document.CDAdocuments[0];
+                    }else{
+                        console.log("Error getting CDA Document from Documents." );
+                        console.log(document);
+                    }
+                }
                 return service;
             }
 })();

@@ -22,12 +22,13 @@
 
                 function CCDADocumentController(healthInformationService){
                     var vm = this;
-                    vm.patient = healthInformationService.getSectionByName(vm.document, 'targetPatient');
-                    vm.authors = healthInformationService.getSectionByName(vm.document, 'authors');
+                    vm.cdaDocument = healthInformationService.getCDADocument(vm.document);
+                    vm.patient = healthInformationService.getSectionByName(vm.cdaDocument, 'targetPatient');
+                    vm.authors = healthInformationService.getSectionByName(vm.cdaDocument, 'authors');
                     vm.contactInfo = healthInformationService.getSectionByName(vm.patient, 'contactInfo');
                     vm.address = healthInformationService.getSectionByName(vm.contactInfo, 'address');
-                    vm.sections = healthInformationService.getSectionByName(vm.document, 'sections');
-                    vm.treatment = healthInformationService.getSectionByName(vm.document, 'treatment');
+                    vm.sections = healthInformationService.getSectionByName(vm.cdaDocument, 'sections');
+                    vm.treatment = healthInformationService.getSectionByName(vm.cdaDocument, 'treatment');
                 }
             }
 })();
