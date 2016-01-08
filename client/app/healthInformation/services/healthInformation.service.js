@@ -12,7 +12,6 @@
                 var service = {};
 
                 service.getHealthInformationResource = getHealthInformationResource;
-                service.getHealthInformation = getHealthInformation;
                 service.getSectionByName = getSectionByName;
                 service.getSectionCollectionByName = getSectionCollectionByName;
                 service.getCDADocument = getCDADocument;
