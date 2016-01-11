@@ -15,6 +15,7 @@
                 service.getSectionByName = getSectionByName;
                 service.getSectionCollectionByName = getSectionCollectionByName;
                 service.getCDADocument = getCDADocument;
+                service.getDocuments = getDocuments;
 
                 function isDefineAndNotNull(value){
                     return (angular.isDefined(value) && value !== null );
@@ -52,6 +53,15 @@
                     }else{
                         console.log("Error getting CDA Document from Documents." );
                         console.log(document);
+                    }
+                }
+
+                function getDocuments(patientData){
+                    if(isDefineAndNotNull(patientData) && (patientData.length > 0) && isDefineAndNotNull(patientData[0].Documents) ){
+                        return patientData[0].Documents;
+                    }else{
+                        console.log("Error getting Documents." );
+                        console.log(patientData);
                     }
                 }
                 return service;

@@ -12,8 +12,9 @@
                 var vm = this;
 
                 $scope.showHealthInformationMenu = utilityService.getShowHealthInformationMenu();
-                vm.documents =  patientData[0].Documents;
-                
+
+                vm.documents = healthInformationService.getDocuments(patientData);
+
                 vm.expandAllAccordions = function(){
                     vm.noPatientDataAlert = false;
                     $rootScope.$broadcast('ExpandAccordions', { expand:true });
