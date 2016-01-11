@@ -13,8 +13,16 @@
     </div>
 </div>
 
-<div class="wrapper wrapper-co  ntent animated fadeInRight">
-    <div ng-repeat="document in healthInformationVm.documents">
+<div class="wrapper wrapper-content animated fadeInRight top-padding10">
+    <div ng-repeat="document in healthInformationVm.documents" >
         <pp-ccda-document document="document" ></pp-ccda-document>
+    </div>
+    <div ng-if="healthInformationVm.documents.length === 0">
+        <div class="alert alert-warning alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong> No document was retrieved.</strong>
+        </div>
     </div>
 </div>
