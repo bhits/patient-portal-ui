@@ -10,7 +10,7 @@
                     restrict: 'E',
                     transclude: true,
                     scope:{},
-                    bindToController: {title: '@'},
+                    bindToController: {contenttitle: '@'},
                     templateUrl: 'app/core/directives/contentWrapper.html',
                     controller: ContentWrapperController,
                     controllerAs: 'contentWrapperVm'
