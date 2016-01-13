@@ -73,7 +73,7 @@
             function ManageConsentModalController($state, $modalInstance, consent, consentService, notificationService) {
                 var manageConsentModalVm = this;
                 manageConsentModalVm.cancel = cancel;
-                manageConsentModalVm.state = "manageConcent";
+                manageConsentModalVm.option = "manageConcent";
                 manageConsentModalVm.revoke = revoke;
                 manageConsentModalVm.edit = edit;
                 manageConsentModalVm.signConsent = signConsent;
@@ -81,7 +81,7 @@
                 manageConsentModalVm.toggleDeleteConfirmation = toggleDeleteConfirmation;
                 manageConsentModalVm.showConsentOptions = showConsentOptions;
                 manageConsentModalVm.applyTryMyPolicy = applyTryMyPolicy;
-                manageConsentModalVm.setState = setState;
+                manageConsentModalVm.setOption = setOption;
                 manageConsentModalVm.deleteInProcess = false;
 
                 function toggleDeleteConfirmation() {
@@ -132,8 +132,8 @@
                     $modalInstance.close();
                 }
 
-                function setState(state) {
-                    manageConsentModalVm.state = state;
+                function setOption(option) {
+                    manageConsentModalVm.option = option;
                 }
 
             }
