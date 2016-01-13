@@ -59,7 +59,7 @@
                     $modal.open({
                         templateUrl: 'app/consent/directives/consentListManageOptionsModal' + consentService.resolveConsentState(vm.consent) + '.html',
                         controller: ManageConsentModalController,
-                        controllerAs: 'ManageConsentModalVm',
+                        controllerAs: 'manageConsentModalVm',
                         resolve: {
                             consent: function () {
                                 return vm.consent;
@@ -71,17 +71,21 @@
 
             /* @ngInject */
             function ManageConsentModalController($state, $modalInstance, consent, consentService, notificationService) {
-                var ManageConsentModalVm = this;
-                ManageConsentModalVm.cancel = cancel;
-                ManageConsentModalVm.revoke = revoke;
-                ManageConsentModalVm.edit = edit;
-                ManageConsentModalVm.signConsent = signConsent;
-                ManageConsentModalVm.deleteConsent = deleteConsent;
-                ManageConsentModalVm.toggleDeleteConfirmation = toggleDeleteConfirmation;
-                ManageConsentModalVm.deleteInProcess = false;
+                var manageConsentModalVm = this;
+                manageConsentModalVm.cancel = cancel;
+                manageConsentModalVm.state = "manageConcent";
+                manageConsentModalVm.revoke = revoke;
+                manageConsentModalVm.edit = edit;
+                manageConsentModalVm.signConsent = signConsent;
+                manageConsentModalVm.deleteConsent = deleteConsent;
+                manageConsentModalVm.toggleDeleteConfirmation = toggleDeleteConfirmation;
+                manageConsentModalVm.showConsentOptions = showConsentOptions;
+                manageConsentModalVm.applyTryMyPolicy = applyTryMyPolicy;
+                manageConsentModalVm.setState = setState;
+                manageConsentModalVm.deleteInProcess = false;
 
                 function toggleDeleteConfirmation() {
-                    ManageConsentModalVm.deleteInProcess = !ManageConsentModalVm.deleteInProcess;
+                    manageConsentModalVm.deleteInProcess = !manageConsentModalVm.deleteInProcess;
                 }
 
                 function deleteConsent() {
@@ -118,5 +122,19 @@
                     $state.go('fe.consent.revoke', {consent: consent});
                     $modalInstance.close();
                 }
+
+                function showConsentOptions() {
+
+                }
+
+                function applyTryMyPolicy() {
+                    $state.go('fe.consent.trymypolicy', {consent: consent});
+                    $modalInstance.close();
+                }
+
+                function setState(state) {
+                    manageConsentModalVm.state = state;
+                }
+
             }
 })();
