@@ -83,6 +83,8 @@
                 manageConsentModalVm.applyTryMyPolicy = applyTryMyPolicy;
                 manageConsentModalVm.setOption = setOption;
                 manageConsentModalVm.deleteInProcess = false;
+                manageConsentModalVm.shareForPurposeOfUseCodes = consent.shareForPurposeOfUseCodes;
+                manageConsentModalVm.purposeOfUse = consent.shareForPurposeOfUseCodes[0]; // set default purpose of use.
 
                 function toggleDeleteConfirmation() {
                     manageConsentModalVm.deleteInProcess = !manageConsentModalVm.deleteInProcess;
@@ -131,7 +133,7 @@
                     $modalInstance.close();
                     //$window.open('http://localhost:8080/tryPolicy/tryPolicyByConsentIdXMLMock', '_blank');
 
-                    $state.go('fe.consent.trymypolicy', {ccdXml: "",consentId: consent.id, purposeOfUse: ""});
+                    $state.go('fe.consent.trymypolicy', {ccdXml: "",consentId: consent.id, purposeOfUse: manageConsentModalVm.purposeOfUse });
 
                 }
 
