@@ -10,7 +10,7 @@
         .factory('consentService', consentService);
 
         /* @ngInject */
-        function consentService($resource, envService) {
+        function consentService($resource, envService, xmlParser) {
             var consentListResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/pageNumber/:pageNumber", {pageNumber: '@pageNumber'});
             var consentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/:id",{id: '@id'}, {'update': { method:'PUT' }});
             var purposeOfUseResource = $resource(envService.securedApis.pcmApiBaseUrl + "/purposeOfUse");
@@ -18,6 +18,20 @@
             var sensitvityPolicyResource = $resource(envService.securedApis.pcmApiBaseUrl + "/sensitivityPolicy");
             var signConsentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/signConsent/:id", {id: '@id'});
             var revokeConsentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/revokeConsent/:id", {id: '@id'});
+
+            var tryPolicyResource = $resource(envService.securedApis.tryPolicyApiBaseUrl + "/tryPolicyByConsentIdXMLMock/:ccdXml/:consentId/:purposeOfUse",
+                                        {ccdXml: '@ccdXml', consentId: '@consentId', purposeOfUse: '@purposeOfUse'},
+                                        {
+                                            'get': {
+                                                method:'GET' ,
+                                                transformResponse: function(data, headers){
+                                                    var jsonObject = xmlParser.xml_str2json(data);
+                                                    console.log(jsonObject);
+                                                    return jsonObject;
+                                                }
+                                            }
+                                        }
+                                );
 
             var selectedNpi = {authorizeNpi: "", discloseNpi: ""};
             var selectedProvider = [];
@@ -50,6 +64,7 @@
             service.getCodes = getCodes;
             service.getLookupEntities = getLookupEntities;
             service.resetSelectedNpi = resetSelectedNpi;
+            service.tryMyPolicy = tryMyPolicy;
 
             return service;
 
@@ -245,6 +260,10 @@
                     }
                 }
                 return false;
+            }
+
+            function tryMyPolicy (ccdXml, consentId, purposeOfUse, success, error) {
+                return tryPolicyResource.get({ccdXml: "test",consentId: consentId, purposeOfUse: "test"}, success, error);
             }
         }
 })();

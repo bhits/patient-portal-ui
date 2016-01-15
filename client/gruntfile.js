@@ -539,7 +539,8 @@ module.exports = function (grunt) {
                         version:'<%= pkg.version %>',
                         securedApis: {
                             pcmApiBaseUrl: 'https://localhost:8443/pcm/patients',
-                            phrApiBaseUrl: 'http://localhost:8080/phr'
+                            phrApiBaseUrl: 'http://localhost:8080/phr',
+                            tryPolicyApiBaseUrl: 'http://localhost:8080/tryPolicy'
                         },
                         unsecuredApis:{
                             plsApiBaseUrl: 'http://localhost:8080/pls/providers'
@@ -566,7 +567,8 @@ module.exports = function (grunt) {
                         version:'<%= pkg.version %>',
                         securedApis: {
                             pcmApiBaseUrl: 'https://bhitsqaapp02:8443/pcm/patients',
-                            phrApiBaseUrl: 'https://bhitsqaapp02:8443/phr'
+                            phrApiBaseUrl: 'https://bhitsqaapp02:8443/phr',
+                            tryPolicyApiBaseUrl: 'http://bhitsqaapp02:8443/tryPolicy'
                         },
                         unsecuredApis:{
                             plsApiBaseUrl: 'https://bhitsqaapp02:8443/pls/providers'

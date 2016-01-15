@@ -70,7 +70,7 @@
             }
 
             /* @ngInject */
-            function ManageConsentModalController($state, $modalInstance, consent, consentService, notificationService) {
+            function ManageConsentModalController($window, $state, $modalInstance, consent, consentService, notificationService) {
                 var manageConsentModalVm = this;
                 manageConsentModalVm.cancel = cancel;
                 manageConsentModalVm.option = "manageConcent";
@@ -128,8 +128,11 @@
                 }
 
                 function applyTryMyPolicy() {
-                    $state.go('fe.consent.trymypolicy', {consent: consent});
                     $modalInstance.close();
+                    //$window.open('http://localhost:8080/tryPolicy/tryPolicyByConsentIdXMLMock', '_blank');
+
+                    $state.go('fe.consent.trymypolicy', {ccdXml: "",consentId: consent.id, purposeOfUse: ""});
+
                 }
 
                 function setOption(option) {
