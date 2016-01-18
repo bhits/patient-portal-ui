@@ -131,9 +131,24 @@
 
                 function applyTryMyPolicy() {
                     $modalInstance.close();
-                    //$window.open('http://localhost:8080/tryPolicy/tryPolicyByConsentIdXMLMock', '_blank');
 
-                    $state.go('fe.consent.trymypolicy', {ccdXml: "",consentId: consent.id, purposeOfUse: manageConsentModalVm.purposeOfUse });
+
+
+                    var result = consentService.tryMyPolicy("test",consent.id,manageConsentModalVm.purposeOfUse,
+                        function(response){
+                            var win = $window.open('','_blank');
+                            win.document.write(response.xhtmlString);
+
+                        },
+                        function(error){
+                            console.log("Error in getting Try my policy string ");
+                        }
+
+                    );
+
+                    //$window.open('http://localhost:8080/tryPolicy/tryPolicyByConsentIdXHTMLMock/test/00111/test', '_blank');
+
+                    //$state.go('fe.consent.trymypolicy', {ccdXml: "",consentId: consent.id, purposeOfUse: manageConsentModalVm.purposeOfUse });
 
                 }
 

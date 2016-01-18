@@ -10,7 +10,7 @@
         .factory('consentService', consentService);
 
         /* @ngInject */
-        function consentService($resource, envService, xmlParser) {
+        function consentService($resource, $window, envService, xmlParser) {
             var consentListResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/pageNumber/:pageNumber", {pageNumber: '@pageNumber'});
             var consentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/:id",{id: '@id'}, {'update': { method:'PUT' }});
             var purposeOfUseResource = $resource(envService.securedApis.pcmApiBaseUrl + "/purposeOfUse");
@@ -19,19 +19,11 @@
             var signConsentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/signConsent/:id", {id: '@id'});
             var revokeConsentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/revokeConsent/:id", {id: '@id'});
 
-            var tryPolicyResource = $resource(envService.securedApis.tryPolicyApiBaseUrl + "/tryPolicyByConsentIdXMLMock/:ccdXml/:consentId/:purposeOfUse",
-                                        {ccdXml: '@ccdXml', consentId: '@consentId', purposeOfUse: '@purposeOfUse'},
-                                        {
-                                            'get': {
-                                                method:'GET' ,
-                                                transformResponse: function(data, headers){
-                                                    var jsonObject = xmlParser.xml_str2json(data);
-                                                    console.log(jsonObject);
-                                                    return jsonObject;
-                                                }
-                                            }
-                                        }
-                                );
+            var tryPolicyResource = $resource(envService.securedApis.tryPolicyApiBaseUrl + "/tryPolicyByConsentIdXHTMLMock/:ccdXml/:consentId/:purposeOfUse",
+                                        {ccdXml: '@ccdXml', consentId: '@consentId', purposeOfUse: '@purposeOfUse'}
+                                     );
+
+
 
             var selectedNpi = {authorizeNpi: "", discloseNpi: ""};
             var selectedProvider = [];
@@ -263,7 +255,7 @@
             }
 
             function tryMyPolicy (ccdXml, consentId, purposeOfUse, success, error) {
-                return tryPolicyResource.get({ccdXml: "test",consentId: consentId, purposeOfUse: "test"}, success, error);
+                return tryPolicyResource.get({ccdXml: ccdXml,consentId: consentId, purposeOfUse: purposeOfUse}, success, error);
             }
         }
 })();
