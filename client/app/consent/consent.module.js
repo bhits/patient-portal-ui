@@ -7,6 +7,7 @@
                [
                 'app.core',
                 'app.config',
-                'app.provider'
+                'app.provider',
+                'app.data'
                ]);
 })();

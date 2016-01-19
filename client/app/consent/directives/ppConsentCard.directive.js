@@ -70,7 +70,7 @@
             }
 
             /* @ngInject */
-            function ManageConsentModalController($window, $state, $modalInstance, consent, consentService, notificationService, envService) {
+            function ManageConsentModalController($window, $state, $modalInstance, consent, consentService, notificationService, envService, dataService) {
                 var manageConsentModalVm = this;
                 manageConsentModalVm.cancel = cancel;
                 manageConsentModalVm.option = "manageConcent";
@@ -85,6 +85,23 @@
                 manageConsentModalVm.deleteInProcess = false;
                 manageConsentModalVm.shareForPurposeOfUseCodes = consent.shareForPurposeOfUseCodes;
                 manageConsentModalVm.purposeOfUse = consent.shareForPurposeOfUseCodes[0]; // set default purpose of use.
+
+                activate();
+
+                function activate(){
+                    dataService.listMedicalDocuments(function(response){
+                        manageConsentModalVm.medicalDocuments = response;
+                        manageConsentModalVm.selMedicalDocumentId =  getFirstMedicalDocument(manageConsentModalVm.medicalDocuments);
+                    }, function(error){
+                        notificationService.error('Error in getting list of documents for current user.');
+                    });
+                }
+
+                function getFirstMedicalDocument(document){
+                    if(angular.isDefined(manageConsentModalVm.medicalDocuments) && (manageConsentModalVm.medicalDocuments.length >0)){
+                        return manageConsentModalVm.medicalDocuments[0].id;
+                    }
+                }
 
                 function toggleDeleteConfirmation() {
                     manageConsentModalVm.deleteInProcess = !manageConsentModalVm.deleteInProcess;
@@ -133,8 +150,8 @@
                     $modalInstance.close();
 
                     var ccdXml = "test";
-                    if(angular.isDefined(ccdXml) && angular.isDefined(consent.id) && angular.isDefined(manageConsentModalVm.purposeOfUse)){
-                        var url = envService.securedApis.tryPolicyApiBaseUrl + "/tryPolicyByConsentIdXHTMLMock/" + ccdXml + "/"+ consent.id +"/" +manageConsentModalVm.purposeOfUse;
+                    if(angular.isDefined(manageConsentModalVm.selMedicalDocumentId) && angular.isDefined(consent.id) && angular.isDefined(manageConsentModalVm.purposeOfUse)){
+                        var url = envService.securedApis.tryPolicyApiBaseUrl + "/tryPolicyByConsentIdXHTMLMock/" + manageConsentModalVm.selMedicalDocumentId + "/"+ consent.id +"/" +manageConsentModalVm.purposeOfUse;
                         $window.open(url, '_blank');
                     }else{
                         notificationService.error("Insufficient parameters to apply try my policy.");
