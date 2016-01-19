@@ -70,7 +70,7 @@
             }
 
             /* @ngInject */
-            function ManageConsentModalController($window, $state, $modalInstance, consent, consentService, notificationService) {
+            function ManageConsentModalController($window, $state, $modalInstance, consent, consentService, notificationService, envService) {
                 var manageConsentModalVm = this;
                 manageConsentModalVm.cancel = cancel;
                 manageConsentModalVm.option = "manageConcent";
@@ -132,23 +132,13 @@
                 function applyTryMyPolicy() {
                     $modalInstance.close();
 
-
-
-                    var result = consentService.tryMyPolicy("test",consent.id,manageConsentModalVm.purposeOfUse,
-                        function(response){
-                            var win = $window.open('','_blank');
-                            win.document.write(response.xhtmlString);
-
-                        },
-                        function(error){
-                            console.log("Error in getting Try my policy string ");
-                        }
-
-                    );
-
-                    //$window.open('http://localhost:8080/tryPolicy/tryPolicyByConsentIdXHTMLMock/test/00111/test', '_blank');
-
-                    //$state.go('fe.consent.trymypolicy', {ccdXml: "",consentId: consent.id, purposeOfUse: manageConsentModalVm.purposeOfUse });
+                    var ccdXml = "test";
+                    if(angular.isDefined(ccdXml) && angular.isDefined(consent.id) && angular.isDefined(manageConsentModalVm.purposeOfUse)){
+                        var url = envService.securedApis.tryPolicyApiBaseUrl + "/tryPolicyByConsentIdXHTMLMock/" + ccdXml + "/"+ consent.id +"/" +manageConsentModalVm.purposeOfUse;
+                        $window.open(url, '_blank');
+                    }else{
+                        notificationService.error("Insufficient parameters to apply try my policy.");
+                    }
 
                 }
 
