@@ -565,11 +565,11 @@ module.exports = function (grunt) {
                         name: 'QA',
                         version:'<%= pkg.version %>',
                         securedApis: {
-                            pcmApiBaseUrl: 'https://bhitsqaapp02:8443/pcm/patients',
+                            pcmApiBaseUrl: 'http://bhitsqaapp02:8083/pcm/patients',
                             phrApiBaseUrl: 'http://bhitsqaapp02:8082/phr'
                         },
                         unsecuredApis:{
-                            plsApiBaseUrl: 'https://bhitsqaapp02:8443/pls/providers'
+                            plsApiBaseUrl: 'http://bhitsqaapp02/pls/providers'
                         },
                         oauth:{
                             site: "http://bhitsqaapp02/uaa",
