@@ -566,16 +566,16 @@ module.exports = function (grunt) {
                         version:'<%= pkg.version %>',
                         securedApis: {
                             pcmApiBaseUrl: 'https://bhitsqaapp02:8443/pcm/patients',
-                            phrApiBaseUrl: 'https://bhitsqaapp02:8443/phr'
+                            phrApiBaseUrl: 'http://bhitsqaapp02:8082/phr'
                         },
                         unsecuredApis:{
                             plsApiBaseUrl: 'https://bhitsqaapp02:8443/pls/providers'
                         },
                         oauth:{
-                            site: "https://bhitsqaapp02:8443/uaa",
+                            site: "http://bhitsqaapp02/uaa",
                             clientId:"patient-portal-ui",
-                            redirectUri: "https://bhitsqaapp02:8443/pp-ui/fe/login",
-                            profileUri: "https://bhitsqaapp02:8443/uaa/userinfo",
+                            redirectUri: "http://bhitsqaapp02:8081/pp-ui/fe/login",
+                            profileUri: "http://bhitsqaapp02/uaa/userinfo",
                             scope: "openid,phr.hie.readDocument",
                             template: "assets/oauth2_templates/button.html"
                         }
