@@ -15,24 +15,14 @@
             </div>
         </div>
 
-        <div ng-if="manageConsentModalVm.option === 'tryMyPolicy'">
-            <div class="form-horizontal">
-                <div class="form-group m-b-xs"><label class="col-sm-3 control-label">Document</label>
-                    <div class="col-sm-9">
-                        <select class="form-control m-b" name="account" ng-model="manageConsentModalVm.selMedicalDocumentId">
-                            <option ng-repeat="document in manageConsentModalVm.medicalDocuments" value="{{document.id}}">{{document.filename |fileName}}</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group"><label class="col-sm-3 control-label">Purpose of Use</label>
-                    <div class="col-sm-9">
-                        <select class="form-control m-b" name="account" ng-model="manageConsentModalVm.purposeOfUse" >
-                            <option ng-repeat="purposeOfUse in manageConsentModalVm.shareForPurposeOfUseCodes" value="{{purposeOfUse}}">{{purposeOfUse}}</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <pp-consent-try-policy-dropdown
+                documentid="manageConsentModalVm.selMedicalDocumentId"
+                option="manageConsentModalVm.option"
+                shareforpurposeofuse="manageConsentModalVm.shareForPurposeOfUse"
+                purposeofusecode="manageConsentModalVm.purposeOfUseCode"
+                medicaldocuments="manageConsentModalVm.medicalDocuments" >
+        </pp-consent-try-policy-dropdown>
+
     </div>
 
     <div class="modal-footer" >

@@ -28,8 +28,8 @@
                     </div>
                     <div class="form-group"><label class="col-sm-3 control-label">Purpose of Use</label>
                         <div class="col-sm-9">
-                            <select class="form-control m-b" name="account" ng-model="manageConsentModalVm.purposeOfUse" >
-                                <option ng-repeat="purposeOfUse in manageConsentModalVm.shareForPurposeOfUseCodes" value="{{purposeOfUse}}">{{purposeOfUse}}</option>
+                            <select class="form-control m-b" name="account" ng-model="manageConsentModalVm.purposeOfUseCode" >
+                                <option ng-repeat="purposeOfUse in manageConsentModalVm.shareForPurposeOfUse" value="{{purposeOfUse.code}}">{{purposeOfUse.displayName}}</option>
                             </select>
                         </div>
                     </div>

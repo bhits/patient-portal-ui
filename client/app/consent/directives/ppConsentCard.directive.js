@@ -83,8 +83,8 @@
                 manageConsentModalVm.applyTryMyPolicy = applyTryMyPolicy;
                 manageConsentModalVm.setOption = setOption;
                 manageConsentModalVm.deleteInProcess = false;
-                manageConsentModalVm.shareForPurposeOfUseCodes = consent.shareForPurposeOfUseCodes;
-                manageConsentModalVm.purposeOfUse = consent.shareForPurposeOfUseCodes[0]; // set default purpose of use.
+                manageConsentModalVm.shareForPurposeOfUse = consent.shareForPurposeOfUse;
+                manageConsentModalVm.purposeOfUseCode = consent.shareForPurposeOfUse[0].code; // set default purpose of use.
 
                 activate();
 
@@ -150,13 +150,12 @@
                     $modalInstance.close();
 
                     var ccdXml = "test";
-                    if(angular.isDefined(manageConsentModalVm.selMedicalDocumentId) && angular.isDefined(consent.id) && angular.isDefined(manageConsentModalVm.purposeOfUse)){
-                        var url = envService.securedApis.tryPolicyApiBaseUrl + "/tryPolicyByConsentIdXHTMLMock/" + manageConsentModalVm.selMedicalDocumentId + "/"+ consent.id +"/" +manageConsentModalVm.purposeOfUse;
+                    if(angular.isDefined(manageConsentModalVm.selMedicalDocumentId) && angular.isDefined(consent.id) && angular.isDefined(manageConsentModalVm.purposeOfUseCode)){
+                        var url = envService.securedApis.tryPolicyApiBaseUrl + "/tryPolicyByConsentIdXHTMLMock/" + manageConsentModalVm.selMedicalDocumentId + "/"+ consent.id +"/" +manageConsentModalVm.purposeOfUseCode;
                         $window.open(url, '_blank');
                     }else{
                         notificationService.error("Insufficient parameters to apply try my policy.");
                     }
-
                 }
 
                 function setOption(option) {

@@ -49,6 +49,7 @@
             service.getCodes = getCodes;
             service.getLookupEntities = getLookupEntities;
             service.resetSelectedNpi = resetSelectedNpi;
+            service.getPurposeOfUseCode = getPurposeOfUseCode;
 
             return service;
 
@@ -246,6 +247,9 @@
                 return false;
             }
 
+            function getPurposeOfUseCode(displayName, purposeOfUse){
+
+            }
 
         }
 })();

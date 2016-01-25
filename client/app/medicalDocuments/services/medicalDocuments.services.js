@@ -11,20 +11,14 @@
 
             /* @ngInject */
             function medicalDocumentsService($resource, $window, $q, $timeout, $http, envService) {
-                //var medicalDocumentsListResource = $resource(envService.securedApis.pcmApiBaseUrl + "/clinicaldocuments");
                 var medicalDocumentsResource = $resource(envService.securedApis.pcmApiBaseUrl + "/clinicaldocuments/:id", {id: '@id'});
 
                 var service = {};
-                //service.listMedicalDocuments = listMedicalDocuments;
                 service.downloadMedicalDocument = downloadMedicalDocument;
                 service.deleteMedicalDocument = deleteMedicalDocument;
                 service.uploadMedicalDocument = uploadMedicalDocument;
 
                 return service;
-
-                //function listMedicalDocuments(success, error) {
-                //    return medicalDocumentsListResource.query(success, error);
-                //}
 
                 function downloadMedicalDocument(id) {
                     var deferred = $q.defer();
