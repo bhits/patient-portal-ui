@@ -1,3 +1,8 @@
+<div ng-if="manageConsentModalVm.option === 'delete'">
+    <button type="button" class="btn btn-white m-r-xs" ng-click="manageConsentModalVm.setOption('manageConcent')">Cancel</button>
+    <button type="button" class="btn btn-primary" ng-click="manageConsentModalVm.deleteConsent()">Delete</button>
+
+</div>
 <div ng-if="consentModalFooterVm.option === 'tryMyPolicy'">
     <button type="button" class="btn btn-white m-r-xs" ng-click="consentModalFooterVm.setoption({option: 'manageConcent'})">Back to Consent Options</button>
     <button type="button" class="btn btn-primary" ng-click="consentModalFooterVm.applytrymypolicy()">Apply</button>

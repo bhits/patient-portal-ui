@@ -142,10 +142,8 @@
                 }
 
                 function applyTryMyPolicy() {
-                    $modalInstance.close();
-
-                    var ccdXml = "test";
                     if(angular.isDefined(manageConsentModalVm.selMedicalDocumentId) && angular.isDefined(consent.id) && angular.isDefined(manageConsentModalVm.purposeOfUseCode)){
+                        $modalInstance.close();
                         var url = envService.securedApis.tryPolicyApiBaseUrl + "/tryPolicyByConsentIdXHTMLMock/" + manageConsentModalVm.selMedicalDocumentId + "/"+ consent.id +"/" +manageConsentModalVm.purposeOfUseCode;
                         $window.open(url, '_blank');
                     }else{
