@@ -1,8 +1,6 @@
 <div class="inmodal">
     <div class="modal-header">
-        <button type="button" class="close" ng-click="manageConsentModalVm.cancel()" aria-hidden="true">X</button>
-        <h4 class="modal-title" ng-if="manageConsentModalVm.option === 'manageConcent'" >Consent Options</h4>
-        <h4 class="modal-title" ng-if="manageConsentModalVm.option === 'tryMyPolicy'" >Apply My Record</h4>
+        <pp-consent-modal-header option="manageConsentModalVm.option" cancel="manageConsentModalVm.cancel()"></pp-consent-modal-header>
     </div>
     <div class="modal-body">
         <div ng-if="manageConsentModalVm.option === 'manageConcent'">
@@ -14,7 +12,6 @@
                 <a href="" class="list-group-item" ng-click="manageConsentModalVm.revoke()"><h4><i class="fa fa-times fa-lg m-r-sm"></i>Withdrawal</h4></a>
             </div>
         </div>
-
         <pp-consent-try-policy-dropdown
                 documentid="manageConsentModalVm.selMedicalDocumentId"
                 option="manageConsentModalVm.option"
@@ -22,14 +19,10 @@
                 purposeofusecode="manageConsentModalVm.purposeOfUseCode"
                 medicaldocuments="manageConsentModalVm.medicalDocuments" >
         </pp-consent-try-policy-dropdown>
-
     </div>
 
     <div class="modal-footer" >
-        <pp-consent-modal-footer
-                option="manageConsentModalVm.option"
-                setoption="manageConsentModalVm.setOption(option)"
-                applytrymypolicy="manageConsentModalVm.applyTryMyPolicy()">
+        <pp-consent-modal-footer option="manageConsentModalVm.option" setoption="manageConsentModalVm.setOption(option)"  applytrymypolicy="manageConsentModalVm.applyTryMyPolicy()">
         </pp-consent-modal-footer>
     </div>
 </div>
