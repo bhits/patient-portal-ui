@@ -22,14 +22,13 @@
                         medicaldocuments:'='
                     },
                     controllerAs: 'tryPolicyDropdownVm',
-                    controller: TryPolicyDropdownVmController
+                    controller: TryPolicyDropdownController
                 };
 
                 return directive;
 
-                function TryPolicyDropdownVmController(){
+                function TryPolicyDropdownController(){
                     var vm = this;
-                    vm.daterange = vm.ngModel;
                 }
             }
 })();

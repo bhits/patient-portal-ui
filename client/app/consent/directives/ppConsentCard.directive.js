@@ -79,7 +79,6 @@
                 manageConsentModalVm.signConsent = signConsent;
                 manageConsentModalVm.deleteConsent = deleteConsent;
                 manageConsentModalVm.toggleDeleteConfirmation = toggleDeleteConfirmation;
-                manageConsentModalVm.showConsentOptions = showConsentOptions;
                 manageConsentModalVm.applyTryMyPolicy = applyTryMyPolicy;
                 manageConsentModalVm.setOption = setOption;
                 manageConsentModalVm.deleteInProcess = false;
@@ -140,10 +139,6 @@
                 function revoke() {
                     $state.go('fe.consent.revoke', {consent: consent});
                     $modalInstance.close();
-                }
-
-                function showConsentOptions() {
-
                 }
 
                 function applyTryMyPolicy() {
