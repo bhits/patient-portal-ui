@@ -22,9 +22,11 @@
     </div>
 
     <div class="modal-footer" >
-        <div ng-if="manageConsentModalVm.option === 'tryMyPolicy'">
-            <button type="button" class="btn btn-white m-r-xs" ng-click="manageConsentModalVm.setOption('manageConcent')">Back to Consent Options</button>
-            <button type="button" class="btn btn-primary" ng-click="manageConsentModalVm.applyTryMyPolicy()">Apply</button>
-        </div>
+        <pp-consent-modal-footer
+                option="manageConsentModalVm.option"
+                setoption="manageConsentModalVm.setOption(option)"
+                applytrymypolicy="manageConsentModalVm.applyTryMyPolicy()"
+                deleteconsent="manageConsentModalVm.deleteConsent()">
+        </pp-consent-modal-footer>
     </div>
 </div>

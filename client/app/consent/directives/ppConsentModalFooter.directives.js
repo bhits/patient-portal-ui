@@ -17,7 +17,8 @@
                     bindToController: {
                         option: '=',
                         setoption:'&',
-                        applytrymypolicy:'&'
+                        applytrymypolicy:'&',
+                        deleteconsent:'&'
                     },
                     controllerAs: 'consentModalFooterVm',
                     controller: ConsentModalFooterController

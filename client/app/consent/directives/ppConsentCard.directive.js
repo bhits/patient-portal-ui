@@ -154,6 +154,5 @@
                 function setOption(option) {
                     manageConsentModalVm.option = option;
                 }
-
             }
 })();
