@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-lg-12 relative">
-        <div class="ibox panel panel-success float-e-margins" ng-class="{'statusIcon_saved': consentCardVm.consentState('Saved'),'statusIcon_signed': consentCardVm.consentState('Signed'),'statusIcon_revoked': consentCardVm.consentState('Revoked')}">
-            <div class="ibox-title navy-blue left-padding55 right-padding30" ng-click="consentCardVm.toggleCollapse()">
+        <div class="ibox panel panel-success float-e-margins">
+            <div class="ibox-title navy-blue right-padding30" ng-click="consentCardVm.toggleCollapse()">
                 <div class="chevron_absolute">
                     <div pp-ibox-tools pp-collapsed="consentCardVm.collapsed" pp-chevron-prevent-default="true"></div>
                 </div>
@@ -59,13 +59,21 @@
                         <p><span ng-bind="consentCardVm.purposeOfUseItems()"/></p>
                     </div>
                 </div>
-
-                <div>
-                    <button class="btn btn-primary dark-green" ng-click="consentCardVm.openManageConsentModal()">Manage
-                        Consent
-                    </button>
+            </div>
+            <div class="panel-footer">
+                <div class="inline">
+                <div class="left-padding40 " ng-class="{'statusIcon_saved': consentCardVm.consentState('Saved'),'statusIcon_signed': consentCardVm.consentState('Signed'),'statusIcon_revoked': consentCardVm.consentState('Revoked')}">
+                Panel Footer test
+                    <span>
+                        <button class="btn btn-primary btn-sm dark-green" ng-click="consentCardVm.openManageConsentModal()">Manage
+                            Consent
+                        </button>
+                    </span>
+                </div>
                 </div>
             </div>
+
+
         </div>
     </div>
 </div>
