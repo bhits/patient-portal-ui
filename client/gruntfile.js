@@ -526,7 +526,7 @@ module.exports = function (grunt) {
             options: {
                 space: '  ',
                 wrap: '"use strict";\n\n {%= __ngModule %}',
-                name: 'app.config',
+                name: 'app.config'
             },
             // Environment targets
             dev: {
@@ -540,7 +540,7 @@ module.exports = function (grunt) {
                         securedApis: {
                             pcmApiBaseUrl: 'http://localhost:8083/pcm/patients',
                             phrApiBaseUrl: 'http://localhost:8080/phr',
-                            tryPolicyApiBaseUrl: 'http://localhost:8080/tryPolicy'
+                            tryPolicyApiBaseUrl: 'http://localhost:8086/tryPolicy'
                         },
                         unsecuredApis:{
                             plsApiBaseUrl: 'http://localhost:8080/pls/providers'
@@ -550,7 +550,7 @@ module.exports = function (grunt) {
                             clientId:"patient-portal-ui",
                             redirectUri: "http://localhost:8081/pp-ui/fe/login",
                             profileUri: "http://localhost:8080/uaa/userinfo",
-                            scope: "openid,phr.hie.readDocument",
+                            scope: "openid,phr.hie_read",
                             template: "assets/oauth2_templates/button.html"
                         }
                     }
@@ -566,19 +566,19 @@ module.exports = function (grunt) {
                         name: 'QA',
                         version:'<%= pkg.version %>',
                         securedApis: {
-                            pcmApiBaseUrl: 'https://bhitsqaapp02:8443/pcm/patients',
-                            phrApiBaseUrl: 'https://bhitsqaapp02:8443/phr',
-                            tryPolicyApiBaseUrl: 'http://bhitsqaapp02:8443/tryPolicy'
+                            pcmApiBaseUrl: 'http://bhitsqaapp02:8083/pcm/patients',
+                            phrApiBaseUrl: 'http://bhitsqaapp02:8082/phr',
+                            tryPolicyApiBaseUrl: 'http://bhitsqaapp02:8086/tryPolicy'
                         },
                         unsecuredApis:{
-                            plsApiBaseUrl: 'https://bhitsqaapp02:8443/pls/providers'
+                            plsApiBaseUrl: 'http://bhitsqaapp02/pls/providers'
                         },
                         oauth:{
-                            site: "https://bhitsqaapp02:8443/uaa",
+                            site: "http://bhitsqaapp02/uaa",
                             clientId:"patient-portal-ui",
-                            redirectUri: "https://bhitsqaapp02:8443/pp-ui/fe/login",
-                            profileUri: "https://bhitsqaapp02:8443/uaa/userinfo",
-                            scope: "openid,phr.hie.readDocument",
+                            redirectUri: "http://bhitsqaapp02:8081/pp-ui/fe/login",
+                            profileUri: "http://bhitsqaapp02/uaa/userinfo",
+                            scope: "openid,phr.hie_read",
                             template: "assets/oauth2_templates/button.html"
                         }
                     }
