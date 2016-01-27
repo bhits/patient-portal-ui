@@ -10,7 +10,7 @@
         .factory('consentService', consentService);
 
         /* @ngInject */
-        function consentService($resource, envService) {
+        function consentService($resource, $window, envService) {
             var consentListResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/pageNumber/:pageNumber", {pageNumber: '@pageNumber'});
             var consentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/:id",{id: '@id'}, {'update': { method:'PUT' }});
             var purposeOfUseResource = $resource(envService.securedApis.pcmApiBaseUrl + "/purposeOfUse");
@@ -18,7 +18,6 @@
             var sensitvityPolicyResource = $resource(envService.securedApis.pcmApiBaseUrl + "/sensitivityPolicy");
             var signConsentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/signConsent/:id", {id: '@id'});
             var revokeConsentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/revokeConsent/:id", {id: '@id'});
-
             var selectedNpi = {authorizeNpi: "", discloseNpi: ""};
             var selectedProvider = [];
 
@@ -50,6 +49,7 @@
             service.getCodes = getCodes;
             service.getLookupEntities = getLookupEntities;
             service.resetSelectedNpi = resetSelectedNpi;
+            service.getPurposeOfUseCode = getPurposeOfUseCode;
 
             return service;
 
@@ -246,5 +246,10 @@
                 }
                 return false;
             }
+
+            function getPurposeOfUseCode(displayName, purposeOfUse){
+
+            }
+
         }
 })();

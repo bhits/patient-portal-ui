@@ -538,8 +538,9 @@ module.exports = function (grunt) {
                         name: 'Development',
                         version:'<%= pkg.version %>',
                         securedApis: {
-                            pcmApiBaseUrl: 'https://localhost:8443/pcm/patients',
-                            phrApiBaseUrl: 'http://localhost:8082/phr'
+                            pcmApiBaseUrl: 'http://localhost:8083/pcm/patients',
+                            phrApiBaseUrl: 'http://localhost:8080/phr',
+                            tryPolicyApiBaseUrl: 'http://localhost:8080/tryPolicy'
                         },
                         unsecuredApis:{
                             plsApiBaseUrl: 'http://localhost:8080/pls/providers'
@@ -565,17 +566,18 @@ module.exports = function (grunt) {
                         name: 'QA',
                         version:'<%= pkg.version %>',
                         securedApis: {
-                            pcmApiBaseUrl: 'http://bhitsqaapp02:8083/pcm/patients',
-                            phrApiBaseUrl: 'http://bhitsqaapp02:8082/phr'
+                            pcmApiBaseUrl: 'https://bhitsqaapp02:8443/pcm/patients',
+                            phrApiBaseUrl: 'https://bhitsqaapp02:8443/phr',
+                            tryPolicyApiBaseUrl: 'http://bhitsqaapp02:8443/tryPolicy'
                         },
                         unsecuredApis:{
-                            plsApiBaseUrl: 'http://bhitsqaapp02/pls/providers'
+                            plsApiBaseUrl: 'https://bhitsqaapp02:8443/pls/providers'
                         },
                         oauth:{
-                            site: "http://bhitsqaapp02/uaa",
+                            site: "https://bhitsqaapp02:8443/uaa",
                             clientId:"patient-portal-ui",
-                            redirectUri: "http://bhitsqaapp02:8081/pp-ui/fe/login",
-                            profileUri: "http://bhitsqaapp02/uaa/userinfo",
+                            redirectUri: "https://bhitsqaapp02:8443/pp-ui/fe/login",
+                            profileUri: "https://bhitsqaapp02:8443/uaa/userinfo",
                             scope: "openid,phr.hie.readDocument",
                             template: "assets/oauth2_templates/button.html"
                         }

@@ -59,7 +59,7 @@
                     $modal.open({
                         templateUrl: 'app/consent/directives/consentListManageOptionsModal' + consentService.resolveConsentState(vm.consent) + '.html',
                         controller: ManageConsentModalController,
-                        controllerAs: 'ManageConsentModalVm',
+                        controllerAs: 'manageConsentModalVm',
                         resolve: {
                             consent: function () {
                                 return vm.consent;
@@ -70,18 +70,40 @@
             }
 
             /* @ngInject */
-            function ManageConsentModalController($state, $modalInstance, consent, consentService, notificationService) {
-                var ManageConsentModalVm = this;
-                ManageConsentModalVm.cancel = cancel;
-                ManageConsentModalVm.revoke = revoke;
-                ManageConsentModalVm.edit = edit;
-                ManageConsentModalVm.signConsent = signConsent;
-                ManageConsentModalVm.deleteConsent = deleteConsent;
-                ManageConsentModalVm.toggleDeleteConfirmation = toggleDeleteConfirmation;
-                ManageConsentModalVm.deleteInProcess = false;
+            function ManageConsentModalController($window, $state, $modalInstance, consent, consentService, notificationService, envService, dataService) {
+                var manageConsentModalVm = this;
+                manageConsentModalVm.cancel = cancel;
+                manageConsentModalVm.option = "manageConcent";
+                manageConsentModalVm.revoke = revoke;
+                manageConsentModalVm.edit = edit;
+                manageConsentModalVm.signConsent = signConsent;
+                manageConsentModalVm.deleteConsent = deleteConsent;
+                manageConsentModalVm.toggleDeleteConfirmation = toggleDeleteConfirmation;
+                manageConsentModalVm.applyTryMyPolicy = applyTryMyPolicy;
+                manageConsentModalVm.setOption = setOption;
+                manageConsentModalVm.deleteInProcess = false;
+                manageConsentModalVm.shareForPurposeOfUse = consent.shareForPurposeOfUse;
+                manageConsentModalVm.purposeOfUseCode = consent.shareForPurposeOfUse[0].code; // set default purpose of use.
+
+                activate();
+
+                function activate(){
+                    dataService.listMedicalDocuments(function(response){
+                        manageConsentModalVm.medicalDocuments = response;
+                        manageConsentModalVm.selMedicalDocumentId =  getFirstMedicalDocument(manageConsentModalVm.medicalDocuments);
+                    }, function(error){
+                        notificationService.error('Error in getting list of documents for current user.');
+                    });
+                }
+
+                function getFirstMedicalDocument(document){
+                    if(angular.isDefined(manageConsentModalVm.medicalDocuments) && (manageConsentModalVm.medicalDocuments.length >0)){
+                        return manageConsentModalVm.medicalDocuments[0].id;
+                    }
+                }
 
                 function toggleDeleteConfirmation() {
-                    ManageConsentModalVm.deleteInProcess = !ManageConsentModalVm.deleteInProcess;
+                    manageConsentModalVm.deleteInProcess = !manageConsentModalVm.deleteInProcess;
                 }
 
                 function deleteConsent() {
@@ -117,6 +139,20 @@
                 function revoke() {
                     $state.go('fe.consent.revoke', {consent: consent});
                     $modalInstance.close();
+                }
+
+                function applyTryMyPolicy() {
+                    if(angular.isDefined(manageConsentModalVm.selMedicalDocumentId) && angular.isDefined(consent.id) && angular.isDefined(manageConsentModalVm.purposeOfUseCode)){
+                        $modalInstance.close();
+                        var url = envService.securedApis.tryPolicyApiBaseUrl + "/tryPolicyByConsentIdXHTMLMock/" + manageConsentModalVm.selMedicalDocumentId + "/"+ consent.id +"/" +manageConsentModalVm.purposeOfUseCode;
+                        $window.open(url, '_blank');
+                    }else{
+                        notificationService.error("Insufficient parameters to apply try my policy.");
+                    }
+                }
+
+                function setOption(option) {
+                    manageConsentModalVm.option = option;
                 }
             }
 })();

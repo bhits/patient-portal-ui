@@ -2,5 +2,9 @@
     'use strict';
 
     angular
-        .module('app.medicalDocument', ['app.core']);
+        .module('app.medicalDocument',
+            [
+                'app.core',
+                'app.data'
+            ]);
 })();

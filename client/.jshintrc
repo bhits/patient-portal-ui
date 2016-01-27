@@ -70,6 +70,7 @@
         "console": false,
         "spyOn": false,
         "jasmine": false,
-        "alert": false
+        "alert": false,
+        "X2JS": false
     }
 }

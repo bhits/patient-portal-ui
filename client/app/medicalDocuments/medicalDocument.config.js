@@ -31,9 +31,9 @@
                          controllerAs: 'medicalDocumentsListVm',
                          resolve:  {
                              /* @ngInject */
-                             medicalDocumentsList: ['$q', 'medicalDocumentsService', 'notificationService', function($q, medicalDocumentsService, notificationService){
+                             medicalDocumentsList: ['$q', 'dataService', 'notificationService', function($q, dataService, notificationService){
                                  var deferred = $q.defer();
-                                 var listMedicalDocumentsPromise = medicalDocumentsService.listMedicalDocuments().$promise;
+                                 var listMedicalDocumentsPromise = dataService.listMedicalDocuments().$promise;
                                  listMedicalDocumentsPromise.then(function(onFulfilled){
                                      deferred.resolve(onFulfilled);
                                  }, function (onRejected) {
