@@ -539,7 +539,7 @@ module.exports = function (grunt) {
                         version:'<%= pkg.version %>',
                         securedApis: {
                             pcmApiBaseUrl: 'http://localhost:8083/pcm/patients',
-                            phrApiBaseUrl: 'http://localhost:8080/phr',
+                            phrApiBaseUrl: 'http://localhost:8082/phr',
                             tryPolicyApiBaseUrl: 'http://localhost:8080/tryPolicy'
                         },
                         unsecuredApis:{
