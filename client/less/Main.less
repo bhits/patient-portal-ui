@@ -64,6 +64,9 @@
 @pp-light-blue: #aed8ff;
 @pp-navy-blue: #005d98;
 @pp-dark-blue: #50687F;
+@pp-navbar-blue: #495969;
+@pp-navbar-dark-blue: #293846;
+@pp-navbar-blueGray: #607386;
 @pp-strong-blue: #0088CC;
 @pp-dark-red: #ac1d2c;
 /* End of Color Variables */
@@ -121,12 +124,12 @@
 
 /* consent */
 .border-bottom-red {
-  border-bottom: @pp-dark-red 2px solid;
+  border-bottom: @pp-dark-red 3px solid;
   padding-bottom: 5px;
 }
 
 .border-bottom-blue {
-  border-bottom: royalblue 2px solid;
+  border-bottom: royalblue 3px solid;
   padding-bottom: 5px;
 }
 
@@ -164,7 +167,7 @@ This implementation must be improved to prevent similar issues.
     font-family: FontAwesome;
     content: '\f05d';
     font-size: 20px;
-    color: red;
+    color: @pp-dark-green ;
     position: absolute;
     margin: -3px 0 0 -25px;
   }
@@ -233,6 +236,24 @@ This implementation must be improved to prevent similar issues.
     background-color: rgba(221,221,221,1); //same color as @pp-gray
     border-color: @pp-gray;
   }
+}
+
+.navbar-blue {
+  background-color: @pp-navbar-blue;
+  border-color: @pp-navbar-blue;
+  color: white;
+}
+
+.navbar-dark-blue {
+  background-color: @pp-navbar-dark-blue;
+  border-color: @pp-navbar-dark-blue;
+  color: white;
+}
+
+.navbar-blueGray {
+  background-color: @pp-navbar-blueGray;
+  border-color: @pp-navbar-blueGray;
+  color: white;
 }
 
 .navy-blue {
@@ -329,6 +350,25 @@ color:#262727;
 
 .light-grey {
   color: @pp-gray;
+}
+
+.panel-navbar-blue {
+  border-color: @pp-navbar-blue;
+
+  & > .panel-heading {
+    background-color: @pp-navbar-blue;
+    border-color: @pp-navbar-blue;
+    color: white;
+  }
+}
+.panel-navbar-blueGray {
+  border-color: @pp-navbar-blueGray;
+
+  & > .panel-heading {
+    background-color: @pp-navbar-blueGray;
+    border-color: @pp-navbar-blueGray;
+    color: white;
+  }
 }
 
 .panel-darkblue {
@@ -457,6 +497,10 @@ color:#262727;
 
 .side-padding10 {
     .side-padding(10px);
+}
+
+.left-padding25 {
+  padding-left:(25px);
 }
 
 .left-padding40 {
