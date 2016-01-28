@@ -20,7 +20,8 @@
     "angular-bootstrap": "0.14.x",
     "angular-ui-router": "0.2.x",
     "checklist-model": "0.8.x",
-    "oauth-ng": "0.4.x"
+    "oauth-ng": "0.4.x",
+    "x2js":"1.2.x"
   },
   "devDependencies": {
     "angular-mocks": "1.4.8"

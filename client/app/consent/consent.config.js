@@ -186,14 +186,7 @@
                                 return deferred.promise;
                             }
                         }
-                    })
-                    .state('fe.consent.trymypolicy', {
-                        url: '/trymypolicy',
-                        data: {pageTitle: 'Try My Policy'},
-                        templateUrl: 'app/consent/controllers/consentTryMyPolicy.html',
-                        params: {
-                            consentId: ''
-                        }
                     });
+
             }
 })();

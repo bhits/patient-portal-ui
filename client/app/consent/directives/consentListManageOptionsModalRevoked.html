@@ -1,15 +1,32 @@
 <div class="inmodal">
     <div class="modal-header">
-        <button type="button" class="close" ng-click="ManageConsentModalVm.cancel()" aria-hidden="true">X</button>
-        <h4 class="modal-title">Consent Options</h4>
+        <pp-consent-modal-header option="manageConsentModalVm.option" cancel="manageConsentModalVm.cancel()"></pp-consent-modal-header>
     </div>
     <div class="modal-body">
-        <h3>I want to:</h3>
-        <div class="list-group">
-            <a href="#" class="list-group-item"><h4><i class="fa fa-folder-open-o fa-lg m-r-sm"></i>View Signed Consent</h4></a>
-            <a href="#" class="list-group-item"><h4><i class="fa fa-file-text-o fa-lg m-r-sm"></i>Export to XACML</button></h4></a>
-            <a href="#" class="list-group-item" ui-sref="fe.consent.trymypolicy"><h4><i class="fa fa-gear fa-lg m-r-sm"></i>Try My Consent Settings against My Medical Record before Sharing</h4></a>
-            <a href="#" class="list-group-item"><h4><i class="fa fa-folder-open fa-lg m-r-sm"></i>View Signed Revocation</h4></a>
+        <div ng-if="manageConsentModalVm.option === 'manageConcent'">
+            <h3>I want to:</h3>
+            <div class="list-group" >
+                <a href="#" class="list-group-item"><h4><i class="fa fa-folder-open-o fa-lg m-r-sm"></i>View Signed Consent</h4></a>
+                <a href="#" class="list-group-item"><h4><i class="fa fa-file-text-o fa-lg m-r-sm"></i>Export to XACML</button></h4></a>
+                <a href="#" class="list-group-item" ng-click="manageConsentModalVm.setOption('tryMyPolicy')"><h4><i class="fa fa-gear fa-lg m-r-sm"></i>Try My Consent Settings against My Medical Record before Sharing</h4></a>
+                <a href="#" class="list-group-item"><h4><i class="fa fa-folder-open fa-lg m-r-sm"></i>View Signed Revocation</h4></a>
+            </div>
         </div>
+        <pp-consent-try-policy-dropdown
+                documentid="manageConsentModalVm.selMedicalDocumentId"
+                option="manageConsentModalVm.option"
+                shareforpurposeofuse="manageConsentModalVm.shareForPurposeOfUse"
+                purposeofusecode="manageConsentModalVm.purposeOfUseCode"
+                medicaldocuments="manageConsentModalVm.medicalDocuments" >
+        </pp-consent-try-policy-dropdown>
+    </div>
+
+    <div class="modal-footer" >
+        <pp-consent-modal-footer
+                option="manageConsentModalVm.option"
+                setoption="manageConsentModalVm.setOption(option)"
+                applytrymypolicy="manageConsentModalVm.applyTryMyPolicy()"
+                deleteconsent="manageConsentModalVm.deleteConsent()">
+        </pp-consent-modal-footer>
     </div>
 </div>
