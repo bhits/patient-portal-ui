@@ -550,7 +550,7 @@ module.exports = function (grunt) {
                             clientId:"patient-portal-ui",
                             redirectUri: "http://localhost:8081/pp-ui/fe/login",
                             profileUri: "http://localhost:8080/uaa/userinfo",
-                            scope: "openid,phr.hie_read",
+                            scope: "openid,phr.hie_read,pcm.provider_read,pcm.provider_create,pcm.provider_delete,pcm.consent_read,pcm.consent_create,pcm.consent_update,pcm.consent_delete,pcm.consent_sign,pcm.consent_revoke,pcm.clinicalDocument_read,pcm.clinicalDocument_create,pcm.clinicalDocument_delete",
                             template: "assets/oauth2_templates/button.html"
                         }
                     }
@@ -578,7 +578,7 @@ module.exports = function (grunt) {
                             clientId:"patient-portal-ui",
                             redirectUri: "http://bhitsqaapp02:8081/pp-ui/fe/login",
                             profileUri: "http://bhitsqaapp02/uaa/userinfo",
-                            scope: "openid,phr.hie_read",
+                            scope: "openid,phr.hie_read,pcm.provider_read,pcm.provider_create,pcm.provider_delete,pcm.consent_read,pcm.consent_create,pcm.consent_update,pcm.consent_delete,pcm.consent_sign,pcm.consent_revoke,pcm.clinicalDocument_read,pcm.clinicalDocument_create,pcm.clinicalDocument_delete",
                             template: "assets/oauth2_templates/button.html"
                         }
                     }
