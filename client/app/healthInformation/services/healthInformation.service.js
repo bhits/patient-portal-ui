@@ -8,7 +8,7 @@
 
             /* @ngInject */
             function healthInformationService($resource, envService){
-                var patientResource = $resource(envService.securedApis.phrApiBaseUrl + "/patientHealthData/:mrn", {mrn: '@mrn'});
+                var patientResource = $resource(envService.securedApis.phrApiBaseUrl + "/patients/healthInformation/:mrn", {mrn: '@mrn'});
                 var service = {};
 
                 service.getHealthInformationResource = getHealthInformationResource;
