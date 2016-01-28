@@ -186,41 +186,7 @@
                                 return deferred.promise;
                             }
                         }
-                    })
-                    .state('fe.consent.trymypolicy', {
-                        url: '/trymypolicy',
-                        data: {pageTitle: 'Try My Policy'},
-                        templateUrl: 'app/consent/controllers/consentTryMyPolicy.html',
-                        params: {
-                            ccdXml: "",
-                            consentId: "",
-                            purposeOfUse: ""
-                        },
-                        controller: 'ConsentTryMyPolicyController',
-                        controllerAs: 'consentTryMyPolicyVm',
-                        resolve: {
-                            /* @ngInject */
-                            loadedData: function ($q, $stateParams, consentService, notificationService) {
-
-                                var deferred = $q.defer();
-
-                                var ccdXml= $stateParams.ccdXml;
-                                var consentId= $stateParams.consentId;
-                                var purposeOfUse= $stateParams.purposeOfUse;
-
-                                var signConsentData = consentService.tryMyPolicy(ccdXml,consentId, purposeOfUse, onSignSuccess, onSignError);
-
-                                function onSignSuccess(response){
-                                    deferred.resolve(response);
-                                }
-
-                                function onSignError(response){
-                                    notificationService.error('Failed to get try my reponse! Please try again later...');
-                                    deferred.reject();
-                                }
-                                return deferred.promise;
-                            }
-                        }
                     });
+
             }
 })();
