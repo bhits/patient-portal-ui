@@ -1,0 +1,6 @@
+# application.yml template
+server:
+  contextPath: /pp-ui
+  port: 8081
+logging:
+  file: C:/java/MHC_LOGS/pp-ui/ppui.log
