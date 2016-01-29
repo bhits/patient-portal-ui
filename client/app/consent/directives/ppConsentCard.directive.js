@@ -69,8 +69,9 @@
                 }
             }
 
+            // FIXME: remove Profile from dependencies once Try Policy implements security
             /* @ngInject */
-            function ManageConsentModalController($window, $state, $modalInstance, consent, consentService, notificationService, envService, dataService) {
+            function ManageConsentModalController($window, $state, $modalInstance, Profile, consent, consentService, notificationService, envService, dataService) {
                 var manageConsentModalVm = this;
                 manageConsentModalVm.cancel = cancel;
                 manageConsentModalVm.option = "manageConcent";
@@ -144,7 +145,8 @@
                 function applyTryMyPolicy() {
                     if(angular.isDefined(manageConsentModalVm.selMedicalDocumentId) && angular.isDefined(consent.id) && angular.isDefined(manageConsentModalVm.purposeOfUseCode)){
                         $modalInstance.close();
-                        var url = envService.securedApis.tryPolicyApiBaseUrl + "/tryPolicyByConsentIdXHTMLMock/" + manageConsentModalVm.selMedicalDocumentId + "/"+ consent.id +"/" +manageConsentModalVm.purposeOfUseCode;
+                        // FIXME: remove username from URL once Try Policy implements security
+                        var url = envService.securedApis.tryPolicyApiBaseUrl + "/tryPolicyByConsentIdXHTMLMock/" + Profile.get().user_name + "/" + manageConsentModalVm.selMedicalDocumentId + "/"+ consent.id +"/" +manageConsentModalVm.purposeOfUseCode;
                         $window.open(url, '_blank');
                     }else{
                         notificationService.error("Insufficient parameters to apply try my policy.");
