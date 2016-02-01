@@ -61,6 +61,7 @@
 @pp-medium-gray: #b3b3b3;
 @pp-dark-gray: #333333;
 @pp-dark-green: #256357;
+@pp-teal: #31A578;
 @pp-light-blue: #aed8ff;
 @pp-navy-blue: #005d98;
 @pp-dark-blue: #50687F;
@@ -177,8 +178,8 @@ This implementation must be improved to prevent similar issues.
   &:before {
     font-family: FontAwesome;
     content: '\f00d';
-    font-size: 40px;
-    color: white;
+    font-size: 20px;
+    color: black;
     position: absolute;
     margin: -3px 0 0 -25px;
   }
@@ -368,6 +369,9 @@ color:#262727;
     background-color: @pp-navbar-blueGray;
     border-color: @pp-navbar-blueGray;
     color: white;
+    &:hover {
+      background-color: @pp-teal;
+    }
   }
 }
 
