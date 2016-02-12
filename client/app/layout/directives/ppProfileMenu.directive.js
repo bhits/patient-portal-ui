@@ -19,7 +19,7 @@
                 return directive;
 
                 /* @ngInject */
-                function ProfileMenuController ($scope, profileService, Profile) {
+                function ProfileMenuController ($scope, utilityService, profileService, Profile) {
                     var vm = this;
 
                     $scope.$on('oauth:profile', profileRetrievedHandler);
@@ -30,11 +30,21 @@
                     function profileRetrievedHandler(profile) {
                         var oAuthProfile = Profile.get();
                         vm.name = oAuthProfile.name;
+                        //TODO get/set image url dynamically
+                        vm.profileImgPath = getProfileImagePath(oAuthProfile.user_name);
                         profileService.setProfile(oAuthProfile);
                     }
 
                     function logout(){
 
+                    }
+
+                    function getProfileImagePath(profileName){
+                        var imagePath = "assets/img/generic-avatar-md-90.png";
+                        if(angular.isDefined(profileName) && utilityService.startsWith((profileName + "").toLocaleLowerCase(), "sally")){
+                            imagePath = "assets/img/sally-avatar-md-90.png";
+                        }
+                        return imagePath;
                     }
                 }
             }
