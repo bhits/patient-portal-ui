@@ -71,7 +71,7 @@
 
             // FIXME: remove Profile from dependencies once Try Policy implements security
             /* @ngInject */
-            function ManageConsentModalController($window, $state, $modalInstance, Profile, consent, consentService, notificationService, envService, dataService) {
+            function ManageConsentModalController($window, $state, $modalInstance, Profile, consent, consentService, notificationService, envService, dataService, utilityService) {
                 var manageConsentModalVm = this;
                 manageConsentModalVm.cancel = cancel;
                 manageConsentModalVm.option = "manageConcent";
@@ -82,6 +82,7 @@
                 manageConsentModalVm.toggleDeleteConfirmation = toggleDeleteConfirmation;
                 manageConsentModalVm.applyTryMyPolicy = applyTryMyPolicy;
                 manageConsentModalVm.setOption = setOption;
+                manageConsentModalVm.exportConsentDirective = exportConsentDirective;
                 manageConsentModalVm.deleteInProcess = false;
                 manageConsentModalVm.shareForPurposeOfUse = consent.shareForPurposeOfUse;
                 manageConsentModalVm.purposeOfUseCode = consent.shareForPurposeOfUse[0].code; // set default purpose of use.
@@ -155,6 +156,23 @@
 
                 function setOption(option) {
                     manageConsentModalVm.option = option;
+                }
+
+                function exportConsentDirective(){
+                    consentService.exportConsentDirective(consent.id,
+                    function(response){
+                        utilityService.downloadFile(response.data, "consentDirective"+consent.id+".xml","application/xml");
+                        notificationService.success('Consent directive is successfully downloaded.');
+                        $modalInstance.close();
+                        $state.reload();
+                    },
+                    function(response){
+                        notificationService.error('Failed to download the consent directive! Please try again later...');
+                        cancel();
+                        $state.reload();
+                    }
+                    );
+
                 }
             }
 })();

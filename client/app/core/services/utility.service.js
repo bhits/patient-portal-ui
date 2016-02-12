@@ -9,7 +9,7 @@
             .factory('utilityService',  utilityService);
 
             /* @ngInject */
-            function utilityService($location, $anchorScroll) {
+            function utilityService($location, $anchorScroll, $window, $document) {
                 var showHealthInformationMenu = false;
                 var service = {};
 
@@ -33,6 +33,7 @@
                 service.getProviderByNpis = getProviderByNpis;
                 service.getIndividualProvidersNpi = getIndividualProvidersNpi;
                 service.getOrganizationalProvidersNpi = getOrganizationalProvidersNpi;
+                service.downloadFile = downloadFile;
 
                 return service;
 
@@ -159,6 +160,17 @@
                         }
                     }
                     return result;
+                }
+
+                function downloadFile (consent, filename, fileFormat){
+                  var file = new Blob([consent], {
+                        type : fileFormat
+                    });
+                    var blobURL = ($window.URL || $window.webkitURL).createObjectURL(file);
+                    var anchor = document.createElement("a");
+                    anchor.download = filename;
+                    anchor.href = blobURL;
+                    anchor.click();
                 }
 
             }

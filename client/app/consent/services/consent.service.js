@@ -13,6 +13,7 @@
         function consentService($resource, $window, envService) {
             var consentListResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/pageNumber/:pageNumber", {pageNumber: '@pageNumber'});
             var consentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/:id",{id: '@id'}, {'update': { method:'PUT' }});
+            var consentExportConsentDirective = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/exportConsentDirective/:id",{id: '@id'});
             var purposeOfUseResource = $resource(envService.securedApis.pcmApiBaseUrl + "/purposeOfUse");
             var medicationSectionResource = $resource(envService.securedApis.pcmApiBaseUrl + "/medicalSection");
             var sensitvityPolicyResource = $resource(envService.securedApis.pcmApiBaseUrl + "/sensitivityPolicy");
@@ -50,6 +51,7 @@
             service.getLookupEntities = getLookupEntities;
             service.resetSelectedNpi = resetSelectedNpi;
             service.getPurposeOfUseCode = getPurposeOfUseCode;
+            service.exportConsentDirective = exportConsentDirective;
 
             return service;
 
@@ -91,6 +93,10 @@
 
             function deleteConsent (id, success, error) {
                 return consentResource.delete({id: id}, success, error);
+            }
+
+            function exportConsentDirective (id, success, error) {
+                return consentExportConsentDirective.get({id: id}, success, error);
             }
 
             function listConsent (page, success, error) {
