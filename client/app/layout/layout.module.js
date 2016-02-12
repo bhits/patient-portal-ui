@@ -2,5 +2,5 @@
     'use strict';
 
     angular
-        .module('app.layout', []);
+        .module('app.layout', ['app.security']);
 })();

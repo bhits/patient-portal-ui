@@ -49,7 +49,7 @@
             }
 
             /* @ngInject */
-            function AppController($scope , $rootScope , utilityService, notificationService, authenticationService, envService, idleConfigParams, $state,  $modal, $modalStack, Idle) {
+            function AppController($rootScope , utilityService, notificationService, authenticationService, envService, idleConfigParams, $state,  $modal, $modalStack, Idle) {
 
                 var appVm = this;
                 appVm.oauth = envService.oauth;
@@ -66,7 +66,7 @@
                 /**
                  * the user appears to have gone idle
                  */
-                $scope.$on('IdleStart',idleStart);
+                $rootScope.$on('IdleStart',idleStart);
 
                 /**
                  * follows after the IdleStart event, but includes a countdown until the user is considered timed out
@@ -74,20 +74,20 @@
                  * you can change the title or display a warning dialog from here.
                  * you can let them resume their session by calling Idle.watch()
                  */
-                $scope.$on('IdleWarn', idleWarn );
+                $rootScope.$on('IdleWarn', idleWarn );
                 /**
                  * the user has timed out (meaning idleDuration + timeout has passed without any activity)
                  * this is where you'd log them
                  */
-                $scope.$on('IdleTimeout', idleTimeout);
+                $rootScope.$on('IdleTimeout', idleTimeout);
                 /**
                  * the user has come back from AFK and is doing stuff. if you are warning them, you can use this to hide the dialog
                  */
-                $scope.$on('IdleEnd', idleEnd);
+                $rootScope.$on('IdleEnd', idleEnd);
                 /**
                  * do something to keep the user's session alive
                  */
-                $scope.$on('Keepalive', keepalive);
+                $rootScope.$on('Keepalive', keepalive);
 
                 appVm.healthInformationMenu = false;
                 appVm.showHealthInformationMenu = showHealthInformationMenu;

@@ -2,26 +2,7 @@
     <div class="sidebar-collapse">
         <ul pp-side-navigation class="nav" id="side-menu">
             <li class="nav-header">
-
-                <div class="dropdown profile-element" dropdown>
-                    <img alt="Patient profile photo" class="img-circle" src="assets/img/profile_small.jpg"/>
-                    <a class="dropdown-toggle" dropdown-toggle href="">
-                                    <span class="clear">
-                                        <span class="block m-t-xs">
-                                            <strong class="font-bold"><span ng-bind="AppVm.authentication.userName"></span></strong>
-                                        </span>
-                                        <span class="text-muted text-xs block light-blue">Male DOB <b class="caret"></b></span>
-                                     </span>
-                    </a>
-                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                        <li><a href="">Profile</a></li>
-                        <li class="divider"></li>
-                        <li><a href="" ng-click="AppVm.logOut()">Logout</a></li>
-                    </ul>
-                </div>
-                <div class="logo-element">
-                    HIE
-                </div>
+                <pp-profile-menu></pp-profile-menu>
             </li>
 
             <li ui-sref-active="active" >
