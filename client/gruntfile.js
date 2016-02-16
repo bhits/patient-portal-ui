@@ -538,18 +538,18 @@ module.exports = function (grunt) {
                         name: 'Development',
                         version:'<%= pkg.version %>',
                         securedApis: {
-                            pcmApiBaseUrl: 'http://localhost:8083/pcm/patients',
-                            phrApiBaseUrl: 'http://localhost:8082/phr',
+                            pcmApiBaseUrl: 'https://localhost:8446/pcm/patients',
+                            phrApiBaseUrl: 'https://localhost:8445/phr',
                             tryPolicyApiBaseUrl: 'http://localhost:8086/trypolicy'
                         },
                         unsecuredApis:{
                             plsApiBaseUrl: 'http://localhost:8080/pls/providers'
                         },
                         oauth:{
-                            site: "http://localhost:8080/uaa",
+                            site: "https://localhost:8443/uaa",
                             clientId:"patient-portal-ui",
-                            redirectUri: "http://localhost:8081/pp-ui/fe/login",
-                            profileUri: "http://localhost:8080/uaa/userinfo",
+                            redirectUri: "https://localhost:8444/pp-ui/fe/login",
+                            profileUri: "https://localhost:8443/uaa/userinfo",
                             scope: "openid,phr.hie_read,pcm.provider_read,pcm.provider_create,pcm.provider_delete,pcm.consent_read,pcm.consent_create,pcm.consent_update,pcm.consent_delete,pcm.consent_sign,pcm.consent_revoke,pcm.clinicalDocument_read,pcm.clinicalDocument_create,pcm.clinicalDocument_delete",
                             template: "assets/oauth2_templates/button.html"
                         }
