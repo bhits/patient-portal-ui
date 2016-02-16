@@ -1,9 +1,6 @@
 # application.yml template
 server:
   contextPath: /pp-ui
-  port: 8444
-  ssl:
-      key-store: C:/ssl_keystore.keystore
-      key-store-password: changeit
+  port: 8081
 logging:
   file: C:/java/MHC_LOGS/pp-ui/ppui.log
