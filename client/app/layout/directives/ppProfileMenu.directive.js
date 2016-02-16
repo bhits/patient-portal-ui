@@ -19,32 +19,32 @@
                 return directive;
 
                 /* @ngInject */
-                function ProfileMenuController ($scope, utilityService, profileService, Profile) {
+                function ProfileMenuController ($scope, utilityService, Profile) {
                     var vm = this;
-
-                    $scope.$on('oauth:profile', profileRetrievedHandler);
                     vm.logout = logout;
 
-                    //Fired when the profile data has been retrieved from the
+                    $scope.$on('oauth:profile', profileRetrievedHandler);
+
+                    // Fired when the profile data has been retrieved from the
                     // authorization server (UAA).
                     function profileRetrievedHandler(profile) {
                         var oAuthProfile = Profile.get();
                         vm.name = oAuthProfile.name;
                         //TODO get/set image url dynamically
-                        vm.profileImgPath = getProfileImagePath(oAuthProfile.user_name);
-                        profileService.setProfile(oAuthProfile);
+                        vm.profileImgName = getProfileImageName(oAuthProfile.user_name);
                     }
 
+                    //TODO
                     function logout(){
 
                     }
 
-                    function getProfileImagePath(profileName){
-                        var imagePath = "assets/img/generic-avatar-md-90.png";
+                    function getProfileImageName(profileName){
+                        var name = "generic-avatar-md-90.png";
                         if(angular.isDefined(profileName) && utilityService.startsWith((profileName + "").toLocaleLowerCase(), "sally")){
-                            imagePath = "assets/img/sally-avatar-md-90.png";
+                            name = "sally-avatar-md-90.png";
                         }
-                        return imagePath;
+                        return name;
                     }
                 }
             }
