@@ -162,8 +162,8 @@
                     return result;
                 }
 
-                function downloadFile (consent, filename, fileFormat){
-                  var file = new Blob([consent], {
+                function downloadFile (content, filename, fileFormat){
+                  var file = new Blob([content], {
                         type : fileFormat
                     });
                     var blobURL = ($window.URL || $window.webkitURL).createObjectURL(file);

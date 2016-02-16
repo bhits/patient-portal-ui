@@ -6,10 +6,10 @@
         <div ng-if="manageConsentModalVm.option === 'manageConcent'">
             <h3>I want to:</h3>
             <div class="list-group" >
-                <a href="#" class="list-group-item"><h4><i class="fa fa-folder-open-o fa-lg m-r-sm"></i>View Signed Consent</h4></a>
+                <a href="#" class="list-group-item" ng-click="manageConsentModalVm.downloadSignedConsent()"><h4><i class="fa fa-folder-open-o fa-lg m-r-sm"></i>View Signed Consent</h4></a>
                 <a href="#" class="list-group-item" ng-click="manageConsentModalVm.exportConsentDirective()"><h4><i class="fa fa-file-text-o fa-lg m-r-sm"></i>Export Consent Directive</button></h4></a>
                 <a href="#" class="list-group-item" ng-click="manageConsentModalVm.setOption('tryMyPolicy')"><h4><i class="fa fa-gear fa-lg m-r-sm"></i>Try My Consent Settings against My Medical Record before Sharing</h4></a>
-                <a href="#" class="list-group-item"><h4><i class="fa fa-folder-open fa-lg m-r-sm"></i>View Signed Revocation</h4></a>
+                <a href="#" class="list-group-item" ><h4><i class="fa fa-folder-open fa-lg m-r-sm"></i>View Signed Revocation</h4></a>
             </div>
         </div>
         <pp-consent-try-policy-dropdown

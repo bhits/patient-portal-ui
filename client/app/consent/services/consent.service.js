@@ -19,6 +19,8 @@
             var sensitvityPolicyResource = $resource(envService.securedApis.pcmApiBaseUrl + "/sensitivityPolicy");
             var signConsentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/signConsent/:id", {id: '@id'});
             var revokeConsentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/revokeConsent/:id", {id: '@id'});
+            var downloadSignedConsentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/download/signed/:id", {id: '@id'});
+            var downloadRevokationConsentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/download/revokation/:id", {id: '@id'});
             var selectedNpi = {authorizeNpi: "", discloseNpi: ""};
             var selectedProvider = [];
 
@@ -32,6 +34,7 @@
             service.revokeConsent = revokeConsent;
             service.createConsent = createConsent;
             service.updateConsent = updateConsent;
+            service.downloadSignedConsent = downloadSignedConsent;
             service.deleteConsent = deleteConsent;
             service.listConsent = listConsent;
             service.setAuthorizeNpi = setAuthorizeNpi;
@@ -89,6 +92,10 @@
 
             function updateConsent (consent, success, error) {
                 return consentResource.update(consent, success, error);
+            }
+
+            function downloadSignedConsent (id, success, error) {
+                return downloadSignedConsentResource.get({id: id}, success, error);
             }
 
             function deleteConsent (id, success, error) {

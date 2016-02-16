@@ -83,6 +83,7 @@
                 manageConsentModalVm.applyTryMyPolicy = applyTryMyPolicy;
                 manageConsentModalVm.setOption = setOption;
                 manageConsentModalVm.exportConsentDirective = exportConsentDirective;
+                manageConsentModalVm.downloadSignedConsent = downloadSignedConsent;
                 manageConsentModalVm.deleteInProcess = false;
                 manageConsentModalVm.shareForPurposeOfUse = consent.shareForPurposeOfUse;
                 manageConsentModalVm.purposeOfUseCode = consent.shareForPurposeOfUse[0].code; // set default purpose of use.
@@ -171,6 +172,27 @@
                         cancel();
                         $state.reload();
                     }
+                    );
+
+                }
+
+                function downloadSignedConsent(){
+                    consentService.downloadSignedConsent(consent.id,
+                        function(response){
+                            /*utilityService.downloadFile(response.data, "consent"+consent.id+".pdf","application/pdf");
+                            notificationService.success('Consent is successfully downloaded.');
+                            $modalInstance.close();
+                            $state.reload();*/
+                            //$window.open(response);
+                            var file = new Blob([(response.data)], {type : "application/octet-stream"});
+                            var blobURL = ($window.URL || $window.webkitURL).createObjectURL(file);
+                            $window.open(blobURL);
+                        },
+                        function(response){
+                            notificationService.error('Failed to download the consent! Please try again later...');
+                            cancel();
+                            $state.reload();
+                        }
                     );
 
                 }
