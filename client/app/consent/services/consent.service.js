@@ -10,7 +10,7 @@
         .factory('consentService', consentService);
 
         /* @ngInject */
-        function consentService($resource, $window, envService) {
+        function consentService($resource,$http,  $window, envService) {
             var consentListResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/pageNumber/:pageNumber", {pageNumber: '@pageNumber'});
             var consentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/:id",{id: '@id'}, {'update': { method:'PUT' }});
             var consentExportConsentDirective = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/exportConsentDirective/:id",{id: '@id'});
@@ -19,7 +19,7 @@
             var sensitvityPolicyResource = $resource(envService.securedApis.pcmApiBaseUrl + "/sensitivityPolicy");
             var signConsentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/signConsent/:id", {id: '@id'});
             var revokeConsentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/revokeConsent/:id", {id: '@id'});
-            var downloadSignedConsentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/download/signed/:id", {id: '@id'});
+            var downloadSignedConsentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/download/signed/:id", {id: '@id'},{'get': {responseType : "arrayBuffer "}});
             var downloadRevokationConsentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/download/revokation/:id", {id: '@id'});
             var selectedNpi = {authorizeNpi: "", discloseNpi: ""};
             var selectedProvider = [];
@@ -95,7 +95,31 @@
             }
 
             function downloadSignedConsent (id, success, error) {
-                return downloadSignedConsentResource.get({id: id}, success, error);
+
+                $http({
+                    url : envService.securedApis.pcmApiBaseUrl + "/consents/download/signed/" + id,
+                    method : 'GET',
+                    params : {},
+                    headers : {
+                        'Content-type' : 'application/pdf',
+                    },
+                    responseType : 'arraybuffer'
+                }).success(function(data, status, headers, config) {
+                    var file = new Blob([ data ], {
+                        type : 'application/pdf'
+                    });
+                    //trick to download store a file having its URL
+                    var fileURL = URL.createObjectURL(file);
+                    var a         = document.createElement('a');
+                    a.href        = fileURL;
+                    a.target      = '_blank';
+                    a.download    = 'yourfilename.pdf';
+                    document.body.appendChild(a);
+                    a.click();
+                }).error(function(data, status, headers, config) {
+
+                });
+
             }
 
             function deleteConsent (id, success, error) {
