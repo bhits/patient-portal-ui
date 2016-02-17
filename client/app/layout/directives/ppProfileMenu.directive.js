@@ -19,9 +19,8 @@
                 return directive;
 
                 /* @ngInject */
-                function ProfileMenuController ($scope, utilityService, Profile) {
+                function ProfileMenuController ($scope, utilityService, Profile, profileService) {
                     var vm = this;
-                    vm.logout = logout;
 
                     $scope.$on('oauth:profile', profileRetrievedHandler);
 
@@ -29,14 +28,10 @@
                     // authorization server (UAA).
                     function profileRetrievedHandler(profile) {
                         var oAuthProfile = Profile.get();
+                        profileService.setOauthProfile(oAuthProfile);
                         vm.name = oAuthProfile.name;
                         //TODO get/set image url dynamically
                         vm.profileImgName = getProfileImageName(oAuthProfile.user_name);
-                    }
-
-                    //TODO
-                    function logout(){
-
                     }
 
                     function getProfileImageName(profileName){

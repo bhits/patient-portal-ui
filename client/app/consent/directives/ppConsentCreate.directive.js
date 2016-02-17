@@ -29,8 +29,9 @@
             }
 
              /* @ngInject */
-            function ConsentCreateController ($state, $modal, $stateParams, notificationService,consentService, utilityService ) {
+            function ConsentCreateController ($state, $modal, $stateParams, notificationService,consentService, utilityService, profileService ) {
                 var vm = this;
+                vm.username = profileService.getUserName();
                 vm.authorize = "Authorize";
                 vm.disclosure = "Disclosure";
                 vm.dateRange = {consentStart: "", consentEnd: ""};

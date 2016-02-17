@@ -8,50 +8,37 @@
             .factory('profileService', profileService);
 
             /* @ngInject */
-            function profileService($resource, AccessToken, envService) {
-                var phrPatientResource = $resource(envService.securedApis.phrApiBaseUrl + "/patients/:email", {email:'@email'});
+            function profileService($resource, envService, notificationService) {
+                var phrPatientResource = $resource(envService.securedApis.phrApiBaseUrl + "/patients/profile/:email", {email:'@email'});
 
                 var service = {};
                 var profile = {};
 
+                service.getProfileFromPHR = getProfileFromPHR;
+                service.setOauthProfile = setOauthProfile;
                 service.getProfile = getProfile;
-                service.setProfile = setProfile;
-                service.getProfileFromUAA = getProfileFromUAA;
-                service.getProfileFromPHRByEmail = getProfileFromPHRByEmail;
+                service.getUserName = getUserName;
 
                 return service;
 
-                function getProfileFromUAA() {
-                    var token = AccessToken.get();
-                    var uaaResource = $resource(envService.oauth.profileUri,{},
-                        {
-                            get: {
-                                method: 'GET',
-                                params: {},
-                                headers: { Authorization: 'Bearer ' + token.access_token, 'Content-Type': 'application/json; charset=utf-8' }
-                            }
-                        }
-                    );
-
-                    return uaaResource.get({},
-                        function(oauthProfile){
-                            profile = oauthProfile;
-                        },
-                        function(error){
-                            console.log(error);
-                        }).$promise;
-                }
-                function setProfile(oauthProfile) {
+                function setOauthProfile (oauthProfile){
                     profile = oauthProfile;
                 }
 
-                function getProfile() {
+                function getProfile(){
                     return profile;
                 }
 
-                // TODO when needed to get profile information
-                // from PHR
-                function getProfileFromPHRByEmail(email) {
+                function getUserName(){
+                    if(angular.isDefined(profile.user_name)){
+                        return profile.user_name;
+                    }else{
+                        notificationService.error("No user profile found");
+                    }
+
+                }
+
+                function getProfileFromPHR(email) {
                     phrPatientResource.get({email: email},
                     function(response){
                         console.log(response);

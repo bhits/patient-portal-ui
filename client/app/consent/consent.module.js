@@ -8,6 +8,7 @@
                 'app.core',
                 'app.config',
                 'app.provider',
-                'app.data'
+                'app.data',
+                   'app.security'
                ]);
 })();
