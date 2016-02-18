@@ -18,6 +18,7 @@
                 service.setOauthProfile = setOauthProfile;
                 service.getProfile = getProfile;
                 service.getUserName = getUserName;
+                service.getName = getName;
 
                 return service;
 
@@ -32,6 +33,15 @@
                 function getUserName(){
                     if(angular.isDefined(profile.user_name)){
                         return profile.user_name;
+                    }else{
+                        notificationService.error("No user profile found");
+                    }
+
+                }
+
+                function getName(){
+                    if(angular.isDefined(profile.name)){
+                        return profile.name;
                     }else{
                         notificationService.error("No user profile found");
                     }
