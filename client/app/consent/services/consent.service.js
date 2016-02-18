@@ -10,7 +10,7 @@
         .factory('consentService', consentService);
 
         /* @ngInject */
-        function consentService($resource,$http, envService, utilityService) {
+        function consentService($resource,$http, envService, utilityService, notificationService) {
             var consentListResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/pageNumber/:pageNumber", {pageNumber: '@pageNumber'});
             var consentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/:id",{id: '@id'}, {'update': { method:'PUT' }});
             var consentExportConsentDirective = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/exportConsentDirective/:id",{id: '@id'});
@@ -19,13 +19,6 @@
             var sensitvityPolicyResource = $resource(envService.securedApis.pcmApiBaseUrl + "/sensitivityPolicy");
             var signConsentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/signConsent/:id", {id: '@id'});
             var revokeConsentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/revokeConsent/:id", {id: '@id'});
-            var downloadRevokationConsentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/download/revokation/:id", {id: '@id'});
-            var downloadSignedConsentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/download/signed/:id",
-                                                            {id: '@id'},
-                                                            {
-                                                                'get': {responseType : "arrayBuffer "}
-                                                            }
-                                                );
             var selectedNpi = {authorizeNpi: "", discloseNpi: ""};
             var selectedProvider = [];
 
@@ -39,7 +32,7 @@
             service.revokeConsent = revokeConsent;
             service.createConsent = createConsent;
             service.updateConsent = updateConsent;
-            service.downloadSignedConsent = downloadSignedConsent;
+            service.downloadConsent = downloadConsent;
             service.deleteConsent = deleteConsent;
             service.listConsent = listConsent;
             service.setAuthorizeNpi = setAuthorizeNpi;
@@ -99,11 +92,19 @@
                 return consentResource.update(consent, success, error);
             }
 
-            function downloadSignedConsent(id, success, error) {
+            function composeUrl(docType, id){
+                if(angular.isDefined(docType) && angular.isDefined(id)  ){
+                    return envService.securedApis.pcmApiBaseUrl + "/consents/download/" + docType + "/" + id;
+                }else{
+                    notificationService.error("Consent pdf document type or id is not defined.");
+                }
+            }
+
+            function downloadConsent(id, docType, success, error) {
                var request = {
                    method : 'GET',
                    responseType : 'arraybuffer',
-                   url : envService.securedApis.pcmApiBaseUrl + "/consents/download/signed/" + id
+                   url : composeUrl(docType, id)
                };
                $http(request).success(success).error(error);
             }

@@ -87,7 +87,7 @@
                 manageConsentModalVm.applyTryMyPolicy = applyTryMyPolicy;
                 manageConsentModalVm.setOption = setOption;
                 manageConsentModalVm.exportConsentDirective = exportConsentDirective;
-                manageConsentModalVm.downloadSignedConsent = downloadSignedConsent;
+                manageConsentModalVm.downloadConsent = downloadConsent;
                 manageConsentModalVm.deleteInProcess = false;
                 manageConsentModalVm.shareForPurposeOfUse = consent.shareForPurposeOfUse;
                 manageConsentModalVm.purposeOfUseCode = consent.shareForPurposeOfUse[0].code; // set default purpose of use.
@@ -179,15 +179,15 @@
                     );
                 }
 
-                function downloadSignedConsent(){
-                    var fileName = profileService.getName() + " " + consentState +" Consent";
+                function downloadConsent(docType){
+                    var fileName = profileService.getName() + " " + docType +" Consent" + consent.id;
                     function success(data){
                         utilityService.downloadFile(data, fileName,'application/pdf');
                     }
                     function error(respone){
-                        console.log("Error");
+                        notificationService.error("Error in downloading " + consentState + "consent.");
                     }
-                    consentService.downloadSignedConsent(consent.id, success, error);
+                    consentService.downloadConsent(consent.id, docType ,success, error);
                 }
             }
 })();
