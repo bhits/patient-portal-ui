@@ -14,22 +14,19 @@
                 <ul class="nav navbar-top-links modified navbar-right">
                     <li>
                     <span class="m-r-sm welcome-message">
-                        Welcome <span ng-bind="AppVm.authentication.userName">.</span>
+                        Welcome
                     </span>
                     </li>
                     <li>
                         <oauth
-                                site="{{AppVm.oauth.site}}"
-                                client-id="{{AppVm.oauth.clientId}}"
-                                redirect-uri="{{AppVm.oauth.redirectUri}}"
-                                profile-uri="{{AppVm.oauth.profileUri}}"
-                                scope="{{AppVm.oauth.scope}}"
-                                template="{{AppVm.oauth.template}}"
-                                state="{{AppVm.oauth.state}}">
+                        site="{{AppVm.oauth.site}}"
+                        client-id="{{AppVm.oauth.clientId}}"
+                        redirect-uri="{{AppVm.oauth.redirectUri}}"
+                        profile-uri="{{AppVm.oauth.profileUri}}"
+                        scope="{{AppVm.oauth.scope}}"
+                        template="{{AppVm.oauth.template}}"
+                        state="{{AppVm.oauth.state}}">
                         </oauth>
-                        <!--<a class="dark-grey" href="" ng-click="AppVm.logOut();">
-                            <i class="fa fa-sign-out"></i> Log out
-                        </a>-->
                     </li>
                 </ul>
             </div>

@@ -17,10 +17,10 @@
                 function linkFunc(scope, element) {
                     var listener = function (event, toState, toParams, fromState, fromParams) {
                         // Default title - load on Dashboard 1
-                        var title = 'TESTBED | Login';
+                        var title = 'MHC | Login';
                         // Create your own title pattern
                         if (toState.data && toState.data.pageTitle) {
-                            title = 'TESTBED | ' + toState.data.pageTitle;
+                            title = 'MHC | ' + toState.data.pageTitle;
                         }
                         $timeout(function () {
                             element.text(title);
