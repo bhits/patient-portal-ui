@@ -180,8 +180,9 @@
                 }
 
                 function downloadSignedConsent(){
+                    var fileName = profileService.getName() + " " + consentState +" Consent";
                     function success(data){
-                        utilityService.downloadFile(data, consentState +"_consent",'application/pdf');
+                        utilityService.downloadFile(data, fileName,'application/pdf');
                     }
                     function error(respone){
                         console.log("Error");
