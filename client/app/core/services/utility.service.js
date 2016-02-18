@@ -9,7 +9,7 @@
             .factory('utilityService',  utilityService);
 
             /* @ngInject */
-            function utilityService($location, $anchorScroll, $window, $document) {
+            function utilityService($location, $anchorScroll, $window) {
                 var showHealthInformationMenu = false;
                 var service = {};
 

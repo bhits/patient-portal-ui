@@ -56,13 +56,17 @@
                 }
 
                 function openManageConsentModal() {
+                    var consentState =  consentService.resolveConsentState(vm.consent);
                     $modal.open({
-                        templateUrl: 'app/consent/directives/consentListManageOptionsModal' + consentService.resolveConsentState(vm.consent) + '.html',
+                        templateUrl: 'app/consent/directives/consentListManageOptionsModal' + consentState + '.html',
                         controller: ManageConsentModalController,
                         controllerAs: 'manageConsentModalVm',
                         resolve: {
                             consent: function () {
                                 return vm.consent;
+                            },
+                            consentState: function(){
+                                return consentState;
                             }
                         }
                     });
@@ -71,7 +75,7 @@
 
             // FIXME: remove Profile from dependencies once Try Policy implements security
             /* @ngInject */
-            function ManageConsentModalController($window, $state, $modalInstance, Profile, consent, consentService, notificationService, envService, dataService, utilityService) {
+            function ManageConsentModalController($window, $state, $modalInstance, Profile, consent, consentService, notificationService, envService, dataService, utilityService, consentState) {
                 var manageConsentModalVm = this;
                 manageConsentModalVm.cancel = cancel;
                 manageConsentModalVm.option = "manageConcent";
@@ -173,28 +177,16 @@
                         $state.reload();
                     }
                     );
-
                 }
 
                 function downloadSignedConsent(){
-
-                    consentService.downloadSignedConsent(consent.id,
-                       function(response){
-                            ///*utilityService.downloadFile(response.data, "consent"+consent.id+".pdf","application/pdf");
-                            //notificationService.success('Consent is successfully downloaded.');
-                            //$modalInstance.close();
-                            //$state.reload();*/
-                            ////$window.open(response);
-                            //var file = new Blob([(response)], {type : "application/pdf"});
-                            //var blobURL = ($window.URL || $window.webkitURL).createObjectURL(file);
-                            //$window.open(blobURL);
-                        },
-                        function(response){
-                            notificationService.error('Failed to download the consent! Please try again later...');
-                            cancel();
-                            $state.reload();
-                        }
-                    );
+                    function success(data){
+                        utilityService.downloadFile(data, consentState +"_consent",'application/pdf');
+                    }
+                    function error(respone){
+                        console.log("Error");
+                    }
+                    consentService.downloadSignedConsent(consent.id, success, error);
                 }
             }
 })();
