@@ -10,14 +10,22 @@
         .factory('consentService', consentService);
 
         /* @ngInject */
-        function consentService($resource, $window, envService) {
+        function consentService($resource,$http, envService, utilityService) {
             var consentListResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/pageNumber/:pageNumber", {pageNumber: '@pageNumber'});
             var consentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/:id",{id: '@id'}, {'update': { method:'PUT' }});
+            var consentExportConsentDirective = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/exportConsentDirective/:id",{id: '@id'});
             var purposeOfUseResource = $resource(envService.securedApis.pcmApiBaseUrl + "/purposeOfUse");
             var medicationSectionResource = $resource(envService.securedApis.pcmApiBaseUrl + "/medicalSection");
             var sensitvityPolicyResource = $resource(envService.securedApis.pcmApiBaseUrl + "/sensitivityPolicy");
             var signConsentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/signConsent/:id", {id: '@id'});
             var revokeConsentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/revokeConsent/:id", {id: '@id'});
+            var downloadRevokationConsentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/download/revokation/:id", {id: '@id'});
+            var downloadSignedConsentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/download/signed/:id",
+                                                            {id: '@id'},
+                                                            {
+                                                                'get': {responseType : "arrayBuffer "}
+                                                            }
+                                                );
             var selectedNpi = {authorizeNpi: "", discloseNpi: ""};
             var selectedProvider = [];
 
@@ -31,6 +39,7 @@
             service.revokeConsent = revokeConsent;
             service.createConsent = createConsent;
             service.updateConsent = updateConsent;
+            service.downloadSignedConsent = downloadSignedConsent;
             service.deleteConsent = deleteConsent;
             service.listConsent = listConsent;
             service.setAuthorizeNpi = setAuthorizeNpi;
@@ -50,6 +59,7 @@
             service.getLookupEntities = getLookupEntities;
             service.resetSelectedNpi = resetSelectedNpi;
             service.getPurposeOfUseCode = getPurposeOfUseCode;
+            service.exportConsentDirective = exportConsentDirective;
 
             return service;
 
@@ -89,8 +99,21 @@
                 return consentResource.update(consent, success, error);
             }
 
+            function downloadSignedConsent(id, success, error) {
+               var request = {
+                   method : 'GET',
+                   responseType : 'arraybuffer',
+                   url : envService.securedApis.pcmApiBaseUrl + "/consents/download/signed/" + id
+               };
+               $http(request).success(success).error(error);
+            }
+
             function deleteConsent (id, success, error) {
                 return consentResource.delete({id: id}, success, error);
+            }
+
+            function exportConsentDirective (id, success, error) {
+                return consentExportConsentDirective.get({id: id}, success, error);
             }
 
             function listConsent (page, success, error) {

@@ -56,13 +56,17 @@
                 }
 
                 function openManageConsentModal() {
+                    var consentState =  consentService.resolveConsentState(vm.consent);
                     $modal.open({
-                        templateUrl: 'app/consent/directives/consentListManageOptionsModal' + consentService.resolveConsentState(vm.consent) + '.html',
+                        templateUrl: 'app/consent/directives/consentListManageOptionsModal' + consentState + '.html',
                         controller: ManageConsentModalController,
                         controllerAs: 'manageConsentModalVm',
                         resolve: {
                             consent: function () {
                                 return vm.consent;
+                            },
+                            consentState: function(){
+                                return consentState;
                             }
                         }
                     });
@@ -71,7 +75,7 @@
 
             // FIXME: remove Profile from dependencies once Try Policy implements security
             /* @ngInject */
-            function ManageConsentModalController($window, $state, $modalInstance, profileService, consent, consentService, notificationService, envService, dataService) {
+            function ManageConsentModalController($window, $state, $modalInstance, profileService, consent, consentService, notificationService, envService, dataService, utilityService, consentState) {
                 var manageConsentModalVm = this;
                 manageConsentModalVm.cancel = cancel;
                 manageConsentModalVm.option = "manageConcent";
@@ -82,6 +86,8 @@
                 manageConsentModalVm.toggleDeleteConfirmation = toggleDeleteConfirmation;
                 manageConsentModalVm.applyTryMyPolicy = applyTryMyPolicy;
                 manageConsentModalVm.setOption = setOption;
+                manageConsentModalVm.exportConsentDirective = exportConsentDirective;
+                manageConsentModalVm.downloadSignedConsent = downloadSignedConsent;
                 manageConsentModalVm.deleteInProcess = false;
                 manageConsentModalVm.shareForPurposeOfUse = consent.shareForPurposeOfUse;
                 manageConsentModalVm.purposeOfUseCode = consent.shareForPurposeOfUse[0].code; // set default purpose of use.
@@ -155,6 +161,32 @@
 
                 function setOption(option) {
                     manageConsentModalVm.option = option;
+                }
+
+                function exportConsentDirective(){
+                    consentService.exportConsentDirective(consent.id,
+                    function(response){
+                        utilityService.downloadFile(response.data, "consentDirective"+consent.id+".xml","application/xml");
+                        notificationService.success('Consent directive is successfully downloaded.');
+                        $modalInstance.close();
+                        $state.reload();
+                    },
+                    function(response){
+                        notificationService.error('Failed to download the consent directive! Please try again later...');
+                        cancel();
+                        $state.reload();
+                    }
+                    );
+                }
+
+                function downloadSignedConsent(){
+                    function success(data){
+                        utilityService.downloadFile(data, consentState +"_consent",'application/pdf');
+                    }
+                    function error(respone){
+                        console.log("Error");
+                    }
+                    consentService.downloadSignedConsent(consent.id, success, error);
                 }
             }
 })();
