@@ -19,6 +19,7 @@
                 service.getProfile = getProfile;
                 service.getUserName = getUserName;
                 service.getName = getName;
+                service.getUserId = getUserId;
 
                 return service;
 
@@ -33,6 +34,14 @@
                 function getUserName(){
                     if(angular.isDefined(profile.user_name)){
                         return profile.user_name;
+                    }else{
+                        notificationService.error("No user profile found");
+                    }
+
+                }
+                function getUserId(){
+                    if(angular.isDefined(profile.user_id)){
+                        return profile.user_id;
                     }else{
                         notificationService.error("No user profile found");
                     }
