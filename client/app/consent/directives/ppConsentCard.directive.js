@@ -56,9 +56,8 @@
                 }
 
                 function openManageConsentModal() {
-                    var consentState =  consentService.resolveConsentState(vm.consent);
                     $modal.open({
-                        templateUrl: 'app/consent/directives/consentListManageOptionsModal' + consentState + '.html',
+                        templateUrl: 'app/consent/directives/consentListManageOptionsModal' + consentService.resolveConsentState(vm.consent) + '.html',
                         controller: ManageConsentModalController,
                         controllerAs: 'manageConsentModalVm',
                         resolve: {
@@ -75,7 +74,7 @@
 
             // FIXME: remove Profile from dependencies once Try Policy implements security
             /* @ngInject */
-            function ManageConsentModalController($window, $state, $modalInstance, profileService, consent, consentService, notificationService, envService, dataService, utilityService, consentState) {
+            function ManageConsentModalController($window, $state, $modalInstance, Profile, consent, consentService, notificationService, envService, dataService) {
                 var manageConsentModalVm = this;
                 manageConsentModalVm.cancel = cancel;
                 manageConsentModalVm.option = "manageConcent";
@@ -86,8 +85,6 @@
                 manageConsentModalVm.toggleDeleteConfirmation = toggleDeleteConfirmation;
                 manageConsentModalVm.applyTryMyPolicy = applyTryMyPolicy;
                 manageConsentModalVm.setOption = setOption;
-                manageConsentModalVm.exportConsentDirective = exportConsentDirective;
-                manageConsentModalVm.downloadConsent = downloadConsent;
                 manageConsentModalVm.deleteInProcess = false;
                 manageConsentModalVm.shareForPurposeOfUse = consent.shareForPurposeOfUse;
                 manageConsentModalVm.purposeOfUseCode = consent.shareForPurposeOfUse[0].code; // set default purpose of use.
@@ -152,7 +149,7 @@
                     if(angular.isDefined(manageConsentModalVm.selMedicalDocumentId) && angular.isDefined(consent.id) && angular.isDefined(manageConsentModalVm.purposeOfUseCode)){
                         $modalInstance.close();
                         // FIXME: remove username from URL once Try Policy implements security
-                        var url = envService.securedApis.tryPolicyApiBaseUrl + "/policies/byConsentIdXHTML/" + profileService.getUserName() + "/" + manageConsentModalVm.selMedicalDocumentId + "/"+ consent.id +"/" +manageConsentModalVm.purposeOfUseCode;
+                        var url = envService.securedApis.tryPolicyApiBaseUrl + "/policies/byConsentIdXHTML/"+ Profile.get().user_name + "/" + Profile.get().user_id+ "/" + manageConsentModalVm.selMedicalDocumentId + "/"+ consent.id +"/" +manageConsentModalVm.purposeOfUseCode;
                         $window.open(url, '_blank');
                     }else{
                         notificationService.error("Insufficient parameters to apply try my policy.");
