@@ -152,7 +152,7 @@
             if(angular.isDefined(manageConsentModalVm.selMedicalDocumentId) && angular.isDefined(consent.id) && angular.isDefined(manageConsentModalVm.purposeOfUseCode)){
                 $modalInstance.close();
                 // FIXME: remove username from URL once Try Policy implements security
-                var url = envService.securedApis.tryPolicyApiBaseUrl + "/policies/byConsentIdXHTML/" + profileService.getUserName() + "/" + profileService.getUserId() + "/"+ manageConsentModalVm.selMedicalDocumentId + "/"+ consent.id +"/" +manageConsentModalVm.purposeOfUseCode;
+                var url = envService.securedApis.tryPolicyApiBaseUrl + "/tryPolicyXHTML/" + profileService.getUserName() + "/" + profileService.getUserId() + "/"+ manageConsentModalVm.selMedicalDocumentId + "/"+ consent.id +"/" +manageConsentModalVm.purposeOfUseCode;
                 $window.open(url, '_blank');
             }else{
                 notificationService.error("Insufficient parameters to apply try my policy.");
