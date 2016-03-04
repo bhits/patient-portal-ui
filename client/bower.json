@@ -12,19 +12,19 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "1.4.8",
-    "angular-resource": "1.4.8",
-    "angular-sanitize": "1.4.8",
-    "angular-aria": "1.4.8",
+    "angular": "1.5.0",
+    "angular-resource": "1.5.0",
+    "angular-sanitize": "1.5.0",
+    "angular-aria": "1.5.0",
     "angular-loading-bar": "0.8.x",
-    "angular-bootstrap": "0.14.x",
+    "angular-bootstrap": "1.2.x",
     "angular-ui-router": "0.2.x",
-    "checklist-model": "0.8.x",
+    "checklist-model": "0.9.x",
     "oauth-ng": "0.4.x",
     "x2js":"1.2.x"
   },
   "devDependencies": {
-    "angular-mocks": "1.4.8"
+    "angular-mocks": "~1.5.0"
   },
   "resolutions": {
     "angular": "~1.4.8"
