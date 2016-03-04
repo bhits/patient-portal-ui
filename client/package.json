@@ -1,26 +1,9 @@
 {
-  "name": "patient-portal",
+  "name": "my-health-compass",
   "version": "0.8.0",
   "description": "",
-  "title": "Patient Portal",
+  "title": "My Health Compass",
   "private": true,
-  "author": {
-    "name": ""
-  },
-  "homepage": "",
-  "repository": {
-    "type": "",
-    "url": ""
-  },
-  "bugs": {
-    "url": ""
-  },
-  "licenses": [
-    {
-      "type": "",
-      "url": ""
-    }
-  ],
   "devDependencies": {
 	"bower": "~1.7.7",
     "grunt": "^0.4.5",

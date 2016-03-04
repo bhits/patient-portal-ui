@@ -1,8 +1,6 @@
 {
-  "name": "testbed",
-  "version": "0.8.0",
-  "description": "Proof of concept",
-  "license": "Copyright @FEi Systems",
+  "name": "my-health-compass",
+  "description": "",
   "private": true,
   "ignore": [
     "**/.*",
@@ -21,7 +19,7 @@
     "angular-ui-router": "0.2.x",
     "checklist-model": "0.9.x",
     "oauth-ng": "0.4.x",
-    "x2js":"1.2.x"
+    "x2js": "1.2.x"
   },
   "devDependencies": {
     "angular-mocks": "~1.5.0"
