@@ -21,10 +21,8 @@
       "url": ""
     }
   ],
-  "dependencies": {
-    "bower": "~1.7.7"
-  },
   "devDependencies": {
+	"bower": "~1.7.7",
     "grunt": "^0.4.5",
     "grunt-angular-file-loader": "~1.1.5",
     "grunt-autoprefixer": "~3.0.4",
