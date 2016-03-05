@@ -9,7 +9,7 @@
 
         var service = {};
 
-        service.allowAnonymous = allowAnonymous;
+        //service.allowAnonymous = allowAnonymous;
         service.login = login;
         service.refresh = refresh;
         service.logout = logout;
@@ -17,20 +17,18 @@
         return service;
 
         function setTokenValues(response) {
-            tokenService.setToken(response.access_token); //jshint ignore:line
-            tokenService.setExpiresIn(response.expires_in);// jshint ignore:line
-            tokenService.setRefreshToken(response.refresh_token);// jshint ignore:line
+            tokenService.setToken(response);
         }
 
-        function allowAnonymous(targetPath) {
-            if (targetPath.split('/').length > 2) {
-                targetPath = '/' + targetPath.split('/')[1];
-            } else if (targetPath.split('?').length > 1) {
-                targetPath = targetPath.split('?')[0];
-            }
+        /*function allowAnonymous(targetPath) {
+         if (targetPath.split('/').length > 2) {
+         targetPath = '/' + targetPath.split('/')[1];
+         } else if (targetPath.split('?').length > 1) {
+         targetPath = targetPath.split('?')[0];
+         }
 
-            return oauthConfig.forgotPasswordURL === targetPath || oauthConfig.unsecuredPaths.indexOf(targetPath) > -1;
-        }
+         return oauthConfig.forgotPasswordURL === targetPath || oauthConfig.unsecuredPaths.indexOf(targetPath) > -1;
+         }*/
 
         function login(username, password) {
             return $http({
@@ -70,7 +68,7 @@
             return $http({
                 method: 'DELETE',
                 url: oauthConfig.revokeTokenUrl,
-                headers: {'Authorization': 'Bearer ' + tokenService.getToken()}
+                headers: {'Authorization': 'Bearer ' + tokenService.getAccessToken()}
             })
                 .success(function () {
                     tokenService.reset();

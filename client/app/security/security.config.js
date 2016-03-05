@@ -1,8 +1,3 @@
-/**
- * Created by tomson.ngassa on 12/14/2015.
- */
-
-
 (function () {
 
     'use strict';
@@ -13,16 +8,16 @@
             getAccessTokenUrl: '',
             base64BasicKey: '',
             revokeTokenUrl: '',
-            loginPath: '/login',
+            loginPath: '/fe/login',
             loginSuccessPath: '',
             interceptorIgnorePattern: / /,
             loginErrorMessage: '',
-            loginFunction: null,
-            forgotPasswordURL: null,
             logoutSuccessMessage: '',
             storageType: 'session',
-            useRouting: true,
-            unsecuredPaths: []
+            //loginFunction: null,
+            //useRouting: true,
+            //forgotPasswordURL: null,
+            //unsecuredPaths: []
         })
         .config(SecurityConfig);
 
@@ -44,12 +39,12 @@
         oauthConfig.base64BasicKey = 'cGF0aWVudC1wb3J0YWwtdWk6Y2hhbmdlaXQ=';
 
         //oauthConfig.revokeTokenUrl = 'http://www.mysite.com/token';
-        oauthConfig.loginSuccessPath = '/fe/index/home';
+        oauthConfig.loginSuccessPath = 'fe.index.home';
         oauthConfig.interceptorIgnorePattern = /oauth\/token/;
         oauthConfig.loginErrorMessage = 'error_description';
         oauthConfig.logoutSuccessMessage = 'logoutSuccess';
         oauthConfig.storageType = 'session';
-        oauthConfig.useRouting = true;
+        //oauthConfig.useRouting = true;
         //oauthConfig.forgotPasswordURL = 'http://localhost/#/forgot-password';
         //oauthConfig.unsecuredPaths.push('/forgot-password');
         //oauthConfig.unsecuredPaths.push('/unsecured');

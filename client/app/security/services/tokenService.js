@@ -11,31 +11,56 @@
 
         service.getToken = getToken;
         service.setToken = setToken;
-        service.setExpiresIn = setExpiresIn;
+        service.getAccessToken = getAccessToken;
+        service.getRefreshToken = getRefreshToken;
+        service.getExpiresIn = getExpiresIn;
         service.isValidToken = isValidToken;
         service.isValidAndExpiredToken = isValidAndExpiredToken;
-        service.setRefreshToken = setRefreshToken;
-        service.getRefreshToken = getRefreshToken;
         service.reset = reset;
 
         return service;
 
         function getToken() {
-            return storageService.getStorage().token;
+            var storage = storageService.getStorage();
+            return storage.token;
         }
 
         function setToken(token) {
-            storageService.getStorage().token = token;
+            var storage = storageService.getStorage();
+            storage.token = token;
         }
 
-        function setExpiresIn(seconds) {
-            storageService.getStorage().expiresIn = new Date(new Date().valueOf() + (seconds * 1000));
+        function getAccessToken() {
+            if (angular.isDefined(getToken())) {
+                return getToken().access_token;
+            } else {
+                return null;
+            }
         }
+
+        function getRefreshToken() {
+            if (angular.isDefined(getToken())) {
+                return getToken().refresh_token;
+            } else {
+                return null;
+            }
+        }
+
+        function getExpiresIn() {
+            if (angular.isDefined(getToken())) {
+                return (new Date(new Date().valueOf() + ((getToken().expires_in) * 1000)));
+            } else {
+                return null;
+            }
+        }
+
+        /*function setExpiresIn(seconds) {
+         storageService.getStorage().expiresIn = new Date(new Date().valueOf() + (seconds * 1000));
+         }*/
 
         function isValidToken() {
             //TODO
-            if (service.getToken() === null || storageService.getStorage().expiresIn === null ||
-                storageService.getStorage().expiresIn.valueOf() < new Date().valueOf()) {
+            if (getAccessToken() === null || getExpiresIn() === null || getExpiresIn().valueOf() < new Date().valueOf()) {
                 return false;
             }
             return true;
@@ -43,26 +68,16 @@
 
         function isValidAndExpiredToken() {
             //TODO
-            if (service.getToken() !== null && service.getRefreshToken() !== null &&
-                storageService.getStorage().expiresIn !== null && new Date().valueOf() < storageService.getStorage().expiresIn.valueOf()) {
+            if (getAccessToken() !== null && getRefreshToken() !== null &&
+                getExpiresIn() !== null && new Date().valueOf() < getExpiresIn().valueOf()) {
                 return true;
             }
             return false;
         }
 
-        function setRefreshToken(refreshToken) {
-            storageService.getStorage().refreshToken = refreshToken;
-        }
-
-        function getRefreshToken() {
-            return storageService.getStorage().refreshToken;
-        }
-
         function reset() {
             //TODO
-            service.setToken(null);
-            service.setRefreshToken(null);
-            storageService.getStorage().expiresIn = null;
+            setToken(null);
         }
     }
 })();
