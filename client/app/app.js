@@ -49,16 +49,16 @@
             }
 
             /* @ngInject */
-            function AppController($rootScope , utilityService, notificationService, authenticationService, envService, idleConfigParams, $state,  $modal, $modalStack, Idle) {
+            function AppController($rootScope , utilityService, notificationService, authenticationService, idleConfigParams, $state,  $modal, $modalStack, Idle) {
 
                 var appVm = this;
-                appVm.oauth = envService.oauth;
-                appVm.oauth.state = authenticationService.getState();
+                //appVm.oauth = envService.oauth;
+                //appVm.oauth.state = authenticationService.getState();
 
                 $rootScope.$on('$stateChangeSuccess',stateChangeSuccess);
-                $rootScope.$on('oauth:login',oauthLogin);
-                $rootScope.$on('oauth:loggedOut',oauthLoggedOut );
-                $rootScope.$on('oauth:expired',oauthExpired);
+                //$rootScope.$on('oauth:login',oauthLogin);
+                //$rootScope.$on('oauth:loggedOut',oauthLoggedOut );
+                //$rootScope.$on('oauth:expired',oauthExpired);
 
                 appVm.currentDate = utilityService.getYear();
                 appVm.closeModals = closeModals;
@@ -150,7 +150,7 @@
                     console.log("IdleTimeout...");
                     console.log("-------> Session expired at: " + new Date());
                     appVm.closeModals();
-                    $rootScope.$broadcast('oauth:expired');
+                    //$rootScope.$broadcast('oauth:expired');
                 }
 
                 function idleEnd() {

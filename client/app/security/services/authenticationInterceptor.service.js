@@ -20,14 +20,15 @@
             config.headers = config.headers || {};
 
             var authData = tokenService.getToken();
+            var accessToken = tokenService.getAccessToken();
 
             if (authData) {
-                if (authData.access_token && tokenService.isExpiredToken()) {
+                if (accessToken && tokenService.isExpiredToken()) {
                     logout();
                     utilityService.redirectTo(oauthConfig.loginPath);
                 } else {
                     if (!config.url.match(oauthConfig.interceptorIgnorePattern) && isSecuredApi(config.url)) {
-                        config.headers.Authorization = 'Bearer  ' + authData.access_token;
+                        config.headers.Authorization = 'Bearer  ' + accessToken;
                     }
                 }
             } else {

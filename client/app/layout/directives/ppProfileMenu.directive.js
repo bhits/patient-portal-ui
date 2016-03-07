@@ -19,20 +19,21 @@
                 return directive;
 
                 /* @ngInject */
-                function ProfileMenuController ($scope, utilityService, Profile, profileService) {
+                function ProfileMenuController ($scope, utilityService, profileService) {
                     var vm = this;
 
-                    $scope.$on('oauth:profile', profileRetrievedHandler);
+                    //TODO
+                    //$scope.$on('oauth:profile', profileRetrievedHandler);
 
                     // Fired when the profile data has been retrieved from the
                     // authorization server (UAA).
-                    function profileRetrievedHandler(profile) {
+                   /* function profileRetrievedHandler(profile) {
                         var oAuthProfile = Profile.get();
                         profileService.setOauthProfile(oAuthProfile);
                         vm.name = oAuthProfile.name;
                         //TODO get/set image url dynamically
                         vm.profileImgName = getProfileImageName(oAuthProfile.user_name);
-                    }
+                    }*/
 
                     function getProfileImageName(profileName){
                         var name = "generic-avatar-md-90.png";
