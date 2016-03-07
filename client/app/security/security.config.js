@@ -12,8 +12,7 @@
             loginSuccessPath: '',
             interceptorIgnorePattern: / /,
             loginErrorMessage: '',
-            logoutSuccessMessage: '',
-            storageType: 'session',
+            logoutSuccessMessage: ''
             //loginFunction: null,
             //useRouting: true,
             //forgotPasswordURL: null,
@@ -43,7 +42,6 @@
         oauthConfig.interceptorIgnorePattern = /oauth\/token/;
         oauthConfig.loginErrorMessage = 'error_description';
         oauthConfig.logoutSuccessMessage = 'logoutSuccess';
-        oauthConfig.storageType = 'session';
         //oauthConfig.useRouting = true;
         //oauthConfig.forgotPasswordURL = 'http://localhost/#/forgot-password';
         //oauthConfig.unsecuredPaths.push('/forgot-password');

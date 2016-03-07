@@ -20,7 +20,7 @@
         return directive;
 
         /* @ngInject */
-        function OauthLoginController($state, $sessionStorage, oauthAuthenticationService, oauthConfig) {
+        function OauthLoginController($state, tokenService, oauthAuthenticationService, oauthConfig) {
             var vm = this;
             vm.login = login;
 
@@ -40,8 +40,7 @@
                             vm.loginError = response.data[oauthConfig.loginErrorMessage];// jshint ignore:line
                             console.log("Error in logging in.");
 
-                            //TODO
-                            $sessionStorage.$reset();
+                            tokenService.removeToken();
                         });
             }
         }

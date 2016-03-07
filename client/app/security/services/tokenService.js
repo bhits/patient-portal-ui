@@ -5,7 +5,7 @@
         .factory('tokenService', TokenService);
 
     /* @ngInject */
-    function TokenService(storageService) {
+    function TokenService($sessionStorage) {
 
         var service = {};
 
@@ -17,18 +17,17 @@
         service.isValidToken = isValidToken;
         service.isExpiredToken = isExpiredToken;
         service.isValidAndExpiredToken = isValidAndExpiredToken;
+        service.removeToken = removeToken;
         service.reset = reset;
 
         return service;
 
         function getToken() {
-            var storage = storageService.getStorage();
-            return storage.token;
+            return $sessionStorage.token;
         }
 
         function setToken(token) {
-            var storage = storageService.getStorage();
-            storage.token = token;
+            $sessionStorage.token = token;
         }
 
         function getAccessToken() {
@@ -56,7 +55,7 @@
         }
 
         /*function setExpiresIn(seconds) {
-         storageService.getStorage().expiresIn = new Date(new Date().valueOf() + (seconds * 1000));
+         $sessionStorage.expiresIn = new Date(new Date().valueOf() + (seconds * 1000));
          }*/
 
         function isValidToken() {
@@ -83,9 +82,14 @@
             return false;
         }
 
+        function removeToken() {
+            $sessionStorage.$reset();
+        }
+
         function reset() {
             //TODO
             setToken(null);
+            $sessionStorage.expiresIn = null;
         }
     }
 })();
