@@ -15,6 +15,7 @@
         service.getRefreshToken = getRefreshToken;
         service.getExpiresIn = getExpiresIn;
         service.isValidToken = isValidToken;
+        service.isExpiredToken = isExpiredToken;
         service.isValidAndExpiredToken = isValidAndExpiredToken;
         service.reset = reset;
 
@@ -64,6 +65,13 @@
                 return false;
             }
             return true;
+        }
+
+        function isExpiredToken() {
+            //TODO
+            if (getExpiresIn().valueOf() < new Date().valueOf()) {
+                return true;
+            }
         }
 
         function isValidAndExpiredToken() {
