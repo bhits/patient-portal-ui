@@ -5,18 +5,15 @@
     angular
         .module('app.security')
         .constant('oauthConfig', {
-            getAccessTokenUrl: '',
             base64BasicKey: '',
+            getAccessTokenUrl: '',
+            getUserInfo: '',
             revokeTokenUrl: '',
             loginPath: '',
             loginSuccessPath: '',
             interceptorIgnorePattern: / /,
             loginErrorMessage: '',
             logoutSuccessMessage: ''
-            //loginFunction: null,
-            //useRouting: true,
-            //forgotPasswordURL: null,
-            //unsecuredPaths: []
         })
         .config(SecurityConfig);
 
@@ -32,21 +29,16 @@
                 controller: 'LoginController'
             });
 
-        oauthConfig.getAccessTokenUrl = 'https://localhost:8443/uaa/oauth/token';
-
         /*clientSecret*/
         oauthConfig.base64BasicKey = 'cGF0aWVudC1wb3J0YWwtdWk6Y2hhbmdlaXQ=';
 
+        oauthConfig.getAccessTokenUrl = 'https://localhost:8443/uaa/oauth/token';
+        oauthConfig.getUserInfo = 'https://localhost:8443/uaa/userinfo';
         //oauthConfig.revokeTokenUrl = 'http://www.mysite.com/token';
         oauthConfig.loginPath = '/fe/login';
         oauthConfig.loginSuccessPath = '/fe/index/home';
         oauthConfig.interceptorIgnorePattern = /oauth\/token/;
         oauthConfig.loginErrorMessage = 'error_description';
         oauthConfig.logoutSuccessMessage = 'logoutSuccess';
-        //oauthConfig.useRouting = true;
-        //oauthConfig.forgotPasswordURL = 'http://localhost/#/forgot-password';
-        //oauthConfig.unsecuredPaths.push('/forgot-password');
-        //oauthConfig.unsecuredPaths.push('/unsecured');
     }
-
 })();
