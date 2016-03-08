@@ -20,7 +20,7 @@
         return directive;
 
         /* @ngInject */
-        function OauthLoginController($state, tokenService, oauthAuthenticationService, oauthConfig) {
+        function OauthLoginController(utilityService, tokenService, oauthAuthenticationService, oauthConfig) {
             var vm = this;
             vm.login = login;
 
@@ -29,7 +29,7 @@
                     .then(function () {
 
                             console.log("Success in logging in.");
-                            $state.go(oauthConfig.loginSuccessPath);
+                            utilityService.redirectTo(oauthConfig.loginSuccessPath);
 
                             // Redirect user here to login page or perhaps some other intermediate page
                             // that requires email address verification before any other part of the site

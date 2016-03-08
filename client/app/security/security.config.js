@@ -38,8 +38,8 @@
         oauthConfig.base64BasicKey = 'cGF0aWVudC1wb3J0YWwtdWk6Y2hhbmdlaXQ=';
 
         //oauthConfig.revokeTokenUrl = 'http://www.mysite.com/token';
-        oauthConfig.loginPath = 'fe.login';
-        oauthConfig.loginSuccessPath = 'fe.index.home';
+        oauthConfig.loginPath = '/fe/login';
+        oauthConfig.loginSuccessPath = '/fe/index/home';
         oauthConfig.interceptorIgnorePattern = /oauth\/token/;
         oauthConfig.loginErrorMessage = 'error_description';
         oauthConfig.logoutSuccessMessage = 'logoutSuccess';
