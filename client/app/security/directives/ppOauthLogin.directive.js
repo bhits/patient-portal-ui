@@ -23,6 +23,7 @@
         function OauthLoginController(utilityService, oauthAuthenticationService, oauthConfig, profileService, notificationService) {
             var vm = this;
             vm.login = login;
+            vm.canSubmit = canSubmit;
 
             function login() {
                 // TODO return promises and chain them
@@ -36,8 +37,12 @@
                             });
                         },
                         function () {
-                            vm.loginError = oauthConfig.loginErrorMessage;
+                            vm.loginError = true;
                         });
+            }
+
+            function canSubmit(loginForm) {
+                return loginForm.$dirty && loginForm.$valid;
             }
         }
     }

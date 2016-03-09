@@ -11,8 +11,7 @@
             revokeTokenUrl: '',
             loginPath: '',
             loginSuccessPath: '',
-            interceptorIgnorePattern: / /,
-            loginErrorMessage: ''
+            interceptorIgnorePattern: / /
         })
         .config(SecurityConfig);
 
@@ -37,6 +36,5 @@
         oauthConfig.loginPath = '/fe/login';
         oauthConfig.loginSuccessPath = '/fe/index/home';
         oauthConfig.interceptorIgnorePattern = /oauth\/token/;
-        oauthConfig.loginErrorMessage = 'Wrong username or password';
     }
 })();

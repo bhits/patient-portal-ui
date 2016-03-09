@@ -544,14 +544,6 @@ module.exports = function (grunt) {
                         },
                         unsecuredApis:{
                             plsApiBaseUrl: 'https://localhost:8443/pls/providers'
-                        },
-                        oauth:{
-                            site: "https://localhost:8443/uaa",
-                            clientId:"patient-portal-ui",
-                            redirectUri: "https://localhost:8444/pp-ui/fe/login",
-                            profileUri: "https://localhost:8443/uaa/userinfo",
-                            scope: "openid,phr.hie_read,pcm.provider_read,pcm.provider_create,pcm.provider_delete,pcm.consent_read,pcm.consent_create,pcm.consent_update,pcm.consent_delete,pcm.consent_sign,pcm.consent_revoke,pcm.clinicalDocument_read,pcm.clinicalDocument_create,pcm.clinicalDocument_delete",
-                            template: "assets/oauth2_templates/button.html"
                         }
                     }
                 }

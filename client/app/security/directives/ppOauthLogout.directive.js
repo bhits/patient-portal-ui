@@ -20,10 +20,9 @@
         return directive;
 
         /* @ngInject */
-        function OauthLogoutController(profileService, AuthInterceptorService) {
+        function OauthLogoutController(AuthInterceptorService) {
             var vm = this;
             vm.logout = logout;
-            vm.name = profileService.getName();
 
             function logout() {
                 AuthInterceptorService.logout();

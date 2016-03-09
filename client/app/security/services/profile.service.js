@@ -11,11 +11,9 @@
         var phrPatientResource = $resource(envService.securedApis.phrApiBaseUrl + "/patients/profile/:email", {email: '@email'});
 
         var service = {};
-        var profile;
 
         service.getProfileFromPHR = getProfileFromPHR;
         service.loadProfile = loadProfile;
-        service.getProfile = getProfile;
         service.setProfile = setProfile;
         service.getUserName = getUserName;
         service.getName = getName;
@@ -39,7 +37,6 @@
 
         //TODO
         function setProfile(uaaProfile) {
-            profile = uaaProfile;
             $sessionStorage.profile = uaaProfile;
         }
 
