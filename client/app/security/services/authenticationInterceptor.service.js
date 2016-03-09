@@ -4,14 +4,14 @@
 
     angular
         .module('app.security')
-
         .factory('AuthInterceptorService', AuthInterceptorService);
 
     /* @ngInject */
-    function AuthInterceptorService($q, $location, $rootScope, utilityService, envService, tokenService, oauthConfig) {
+    function AuthInterceptorService($q, $location, utilityService, envService, tokenService, oauthConfig) {
         var service = {};
         service.request = request;
         service.responseError = responseError;
+        service.logout = logout;
 
         return service;
 
@@ -25,7 +25,6 @@
             if (authData) {
                 if (accessToken && tokenService.isExpiredToken()) {
                     logout();
-                    utilityService.redirectTo(oauthConfig.loginPath);
                 } else {
                     if (!config.url.match(oauthConfig.interceptorIgnorePattern) && isSecuredApi(config.url)) {
                         config.headers.Authorization = 'Bearer  ' + accessToken;
@@ -52,47 +51,20 @@
                 if (authData) {
                     if (tokenService.isExpiredToken()) {
                         logout();
-                        utilityService.redirectTo(oauthConfig.loginPath);
                     } else {
                         // Got to Error page
                     }
                     return $q.reject(rejection);
                 } else {
                     logout();
-                    utilityService.redirectTo(oauthConfig.loginPath);
                 }
             }
             return $q.reject(rejection);
         }
 
-        /*
-         function request(config) {
-
-         var token =  tokenService.getAccessToken();
-
-         if (!config.url.match(oauthConfig.interceptorIgnorePattern) && token !== null) {
-         if (isSecuredApi(config.url)) {
-         config.headers.Authorization = 'Bearer ' + token;
-         }
-         }
-         return config;
-         }
-
-         function responseError(rejection) {
-         if (rejection.status === 401 ||
-         (rejection.status === 400 // jshint ignore:line
-         && rejection.config.data// jshint ignore:line
-         && rejection.config.data.grant_type// jshint ignore:line
-         && rejection.config.data.grant_type === 'refresh_token')) {// jshint ignore:line
-         tokenService.reset();
-         $location.path(oauthConfig.loginPath);
-         }
-         return $q.reject(rejection);
-         }
-         */
-
         function logout() {
-            $rootScope.$broadcast('oauth:expired');
+            tokenService.removeToken();
+            utilityService.redirectTo(oauthConfig.loginPath);
         }
 
         function isSecuredApi(url) {

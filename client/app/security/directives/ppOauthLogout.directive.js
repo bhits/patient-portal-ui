@@ -20,14 +20,13 @@
         return directive;
 
         /* @ngInject */
-        function OauthLogoutController(tokenService, utilityService, oauthConfig, profileService) {
+        function OauthLogoutController(profileService, AuthInterceptorService) {
             var vm = this;
             vm.logout = logout;
             vm.name = profileService.getName();
 
             function logout() {
-                tokenService.removeToken();
-                utilityService.redirectTo(oauthConfig.loginPath);
+                AuthInterceptorService.logout();
             }
         }
     }

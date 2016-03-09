@@ -12,8 +12,7 @@
             loginPath: '',
             loginSuccessPath: '',
             interceptorIgnorePattern: / /,
-            loginErrorMessage: '',
-            logoutSuccessMessage: ''
+            loginErrorMessage: ''
         })
         .config(SecurityConfig);
 
@@ -38,7 +37,6 @@
         oauthConfig.loginPath = '/fe/login';
         oauthConfig.loginSuccessPath = '/fe/index/home';
         oauthConfig.interceptorIgnorePattern = /oauth\/token/;
-        oauthConfig.loginErrorMessage = 'error_description';
-        oauthConfig.logoutSuccessMessage = 'logoutSuccess';
+        oauthConfig.loginErrorMessage = 'Wrong username or password';
     }
 })();

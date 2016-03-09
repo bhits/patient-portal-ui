@@ -18,7 +18,6 @@
         service.isExpiredToken = isExpiredToken;
         service.isValidAndExpiredToken = isValidAndExpiredToken;
         service.removeToken = removeToken;
-        service.reset = reset;
 
         return service;
 
@@ -84,12 +83,6 @@
 
         function removeToken() {
             $sessionStorage.$reset();
-        }
-
-        function reset() {
-            //TODO
-            setToken(null);
-            $sessionStorage.expiresIn = null;
         }
     }
 })();

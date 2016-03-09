@@ -20,7 +20,7 @@
         return directive;
 
         /* @ngInject */
-        function OauthLoginController(utilityService, tokenService, oauthAuthenticationService, oauthConfig, profileService, notificationService) {
+        function OauthLoginController(utilityService, oauthAuthenticationService, oauthConfig, profileService, notificationService) {
             var vm = this;
             vm.login = login;
 
@@ -31,13 +31,12 @@
                             profileService.loadProfile(function (response) {
                                 profileService.setProfile(response);
                                 utilityService.redirectTo(oauthConfig.loginSuccessPath);
-                            }, function (response) {
+                            }, function () {
                                 notificationService.error("No profile found");
                             });
                         },
-                        function (response) {
-                            vm.loginError = response.data[oauthConfig.loginErrorMessage];// jshint ignore:line
-                            tokenService.removeToken();
+                        function () {
+                            vm.loginError = oauthConfig.loginErrorMessage;
                         });
             }
         }
