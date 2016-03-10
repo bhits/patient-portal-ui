@@ -22,8 +22,14 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-offset-2 col-sm-10 text-alert m-t-n-xs" id="login-error" ng-if="oauthLoginVm.loginError">
+            <div class="col-sm-offset-2 col-sm-10 text-alert m-t-n-xs m-b-xs" id="login-error" ng-if="oauthLoginVm.loginError">
                 <span>Wrong username or password</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-offset-2 col-sm-10 text-alert m-t-n-xs" id="profile-error"
+                 ng-if="oauthLoginVm.profileError">
+                <span>No profile found</span>
             </div>
         </div>
         <div class="form-group m-t-lg text-center">

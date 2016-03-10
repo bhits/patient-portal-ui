@@ -20,25 +20,31 @@
         return directive;
 
         /* @ngInject */
-        function OauthLoginController(utilityService, authenticationService, oauthConfig, profileService, notificationService) {
+        function OauthLoginController(utilityService, authenticationService, oauthConfig, profileService, tokenService) {
             var vm = this;
             vm.login = login;
             vm.canSubmit = canSubmit;
 
             function login() {
-                // TODO return promises and chain them
-                authenticationService.login(vm.user.email, vm.user.password).save().$promise.then(function () {
-                    profileService.loadProfile().get().$promise.then(function (data) {
-                        profileService.setProfile(data);
-                        utilityService.redirectTo(oauthConfig.loginSuccessPath);
-                    }, function (error) {
-                        utilityService.redirectTo(oauthConfig.loginSuccessPath);
-                        notificationService.error("No profile found");
-                    });
-                }, function (error) {
-                    vm.loginError = true;
-                });
-
+                authenticationService.login(vm.user.email, vm.user.password)
+                    .then(
+                        function (response) {
+                            tokenService.setToken(response);
+                            profileService.loadProfile()
+                                .then(
+                                    function (data) {
+                                        profileService.setProfile(data);
+                                        utilityService.redirectTo(oauthConfig.loginSuccessPath);
+                                    },
+                                    function (error) {
+                                        vm.profileError = true;
+                                    }
+                                );
+                        }, function (error) {
+                            tokenService.removeToken();
+                            vm.loginError = true;
+                        }
+                    );
             }
 
             function canSubmit(loginForm) {

@@ -23,7 +23,7 @@
         return service;
 
         function loadProfile() {
-            return profileResource;
+            return profileResource.get().$promise;
         }
 
         function getProfile() {
