@@ -39,10 +39,10 @@ module.exports = function (grunt) {
          */
         meta: {
             banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
-                '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
-                '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
-                '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
-                ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n'
+            '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
+            '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
+            '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
+            ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n'
         },
 
         bower: {
@@ -94,7 +94,7 @@ module.exports = function (grunt) {
         clean: {
             all: {
                 src: ['<%= build_dir %>**', '<%= build_reports_dir %>']
-            },
+            }
         },
 
         /**
@@ -536,22 +536,17 @@ module.exports = function (grunt) {
                 constants: {
                     envService: {
                         name: 'Development',
-                        version:'<%= pkg.version %>',
+                        version: '<%= pkg.version %>',
+                        base64BasicKey: 'cGF0aWVudC1wb3J0YWwtdWk6Y2hhbmdlaXQ=',
                         securedApis: {
                             pcmApiBaseUrl: 'https://localhost:8446/pcm/patients',
                             phrApiBaseUrl: 'https://localhost:8445/phr',
-                            tryPolicyApiBaseUrl: 'https://localhost:8449/trypolicy'
+                            tryPolicyApiBaseUrl: 'https://localhost:8449/trypolicy',
+                            userInfo : 'https://localhost:8443/uaa/userinfo'
                         },
-                        unsecuredApis:{
-                            plsApiBaseUrl: 'https://localhost:8443/pls/providers'
-                        },
-                        oauth:{
-                            site: "https://localhost:8443/uaa",
-                            clientId:"patient-portal-ui",
-                            redirectUri: "https://localhost:8444/pp-ui/fe/login",
-                            profileUri: "https://localhost:8443/uaa/userinfo",
-                            scope: "openid,phr.hie_read,pcm.provider_read,pcm.provider_create,pcm.provider_delete,pcm.consent_read,pcm.consent_create,pcm.consent_update,pcm.consent_delete,pcm.consent_sign,pcm.consent_revoke,pcm.clinicalDocument_read,pcm.clinicalDocument_create,pcm.clinicalDocument_delete",
-                            template: "assets/oauth2_templates/button.html"
+                        unsecuredApis: {
+                            plsApiBaseUrl: 'https://localhost:8443/pls/providers',
+                            tokenUrl : 'https://localhost:8443/uaa/oauth/token'
                         }
                     }
                 }
@@ -564,22 +559,17 @@ module.exports = function (grunt) {
                 constants: {
                     envService: {
                         name: 'QA',
-                        version:'<%= pkg.version %>',
+                        version: '<%= pkg.version %>',
+                        base64BasicKey: 'cGF0aWVudC1wb3J0YWwtdWk6QllqeVdYU2JEdmRx',
                         securedApis: {
                             pcmApiBaseUrl: 'https://bhitsqaapp02:8446/pcm/patients',
                             phrApiBaseUrl: 'https://bhitsqaapp02:8445/phr',
-                            tryPolicyApiBaseUrl: 'https://bhitsqaapp02:8449/trypolicy'
+                            tryPolicyApiBaseUrl: 'https://bhitsqaapp02:8449/trypolicy',
+                            userInfo : 'https://bhitsqaapp02:8443/uaa/userinfo'
                         },
-                        unsecuredApis:{
-                            plsApiBaseUrl: 'https://bhitsqaapp02:8443/pls/providers'
-                        },
-                        oauth:{
-                            site: "https://bhitsqaapp02:8443/uaa",
-                            clientId:"patient-portal-ui",
-                            redirectUri: "https://bhitsqaapp02:8444/pp-ui/fe/login",
-                            profileUri: "https://bhitsqaapp02:8443/uaa/userinfo",
-                            scope: "openid,phr.hie_read,pcm.provider_read,pcm.provider_create,pcm.provider_delete,pcm.consent_read,pcm.consent_create,pcm.consent_update,pcm.consent_delete,pcm.consent_sign,pcm.consent_revoke,pcm.clinicalDocument_read,pcm.clinicalDocument_create,pcm.clinicalDocument_delete",
-                            template: "assets/oauth2_templates/button.html"
+                        unsecuredApis: {
+                            plsApiBaseUrl: 'https://bhitsqaapp02:8443/pls/providers',
+                            tokenUrl : 'https://bhitsqaapp02:8443/uaa/oauth/token'
                         }
                     }
                 }
@@ -592,9 +582,9 @@ module.exports = function (grunt) {
         war: {
             target: {
                 options: {
-                    war_dist_folder: '<%= build_war_dir %>',    /* Folder where to generate the WAR. */
-                    war_name: '<%= pkg.name %>',    /* The name fo the WAR file (.war will be the extension) */
-                    webxml_display_name: '<%= pkg.name %>',
+                    war_dist_folder: '<%= build_war_dir %>', /* Folder where to generate the WAR. */
+                    war_name: '<%= pkg.name %>', /* The name fo the WAR file (.war will be the extension) */
+                    webxml_display_name: '<%= pkg.name %>'
                 },
                 files: [
                     {
@@ -609,9 +599,9 @@ module.exports = function (grunt) {
 
         ngAnnotate: {
             options: {
-              remove:true,
-              add: true,
-              singleQuotes: true
+                remove: true,
+                add: true,
+                singleQuotes: true
             },
             compile: {
                 files: [
@@ -761,22 +751,22 @@ module.exports = function (grunt) {
 
         taskList = ['clean', 'bower:install'];
 
-        if (target === targetEnum.dev || target === targetEnum.ci ) {
+        if (target === targetEnum.dev || target === targetEnum.ci) {
             taskList.push('ngconstant:dev');
-        }else if (target === targetEnum.qa ) {
+        } else if (target === targetEnum.qa) {
             taskList.push('ngconstant:qa');
         }
 
-        taskList.push('html2js', 'jshint-all', 'recess:build','concat:build_css', 'copy:build_app_assets',
-                       'copy:build_vendor_assets','copy:build_appjs', 'copy:build_vendorjs', 'index:build','angularFileLoader',  'karmaconfig');
+        taskList.push('html2js', 'jshint-all', 'recess:build', 'concat:build_css', 'copy:build_app_assets',
+            'copy:build_vendor_assets', 'copy:build_appjs', 'copy:build_vendorjs', 'index:build', 'angularFileLoader', 'karmaconfig');
 
-        if (target === targetEnum.debug || target === targetEnum.dist || target === targetEnum.dev  ) {
+        if (target === targetEnum.debug || target === targetEnum.dist || target === targetEnum.dev) {
             taskList.push('karma:unit');
-        }else if(target === targetEnum.ci){
+        } else if (target === targetEnum.ci) {
             taskList.push('karma:ci');
         }
 
-        if (target === targetEnum.dev || target === targetEnum.debug || target === targetEnum.dist || target === targetEnum.qa ||target === targetEnum.ci) {
+        if (target === targetEnum.dev || target === targetEnum.debug || target === targetEnum.dist || target === targetEnum.qa || target === targetEnum.ci) {
             taskList = taskList.concat(['compile']);
         }
 

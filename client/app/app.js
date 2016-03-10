@@ -34,7 +34,7 @@
 
                 $urlRouterProvider.otherwise("/fe/login");
 
-                $httpProvider.interceptors.push('AuthInterceptorService');
+                $httpProvider.interceptors.push('authInterceptorService');
 
                 // Configure Idle settingss
                 IdleProvider.idle(idleConfigParams.idle); // in seconds
@@ -49,16 +49,11 @@
             }
 
             /* @ngInject */
-            function AppController($rootScope , utilityService, notificationService, authenticationService, envService, idleConfigParams, $state,  $modal, $modalStack, Idle) {
+            function AppController($rootScope , utilityService, idleConfigParams, $state,  $modal, $modalStack, Idle) {
 
                 var appVm = this;
-                appVm.oauth = envService.oauth;
-                appVm.oauth.state = authenticationService.getState();
 
                 $rootScope.$on('$stateChangeSuccess',stateChangeSuccess);
-                $rootScope.$on('oauth:login',oauthLogin);
-                $rootScope.$on('oauth:loggedOut',oauthLoggedOut );
-                $rootScope.$on('oauth:expired',oauthExpired);
 
                 appVm.currentDate = utilityService.getYear();
                 appVm.closeModals = closeModals;
@@ -101,24 +96,7 @@
                     $modalStack.dismissAll('cancel');
                 }
 
-                function oauthLogin(event, token) {
-                    if (authenticationService.isValidState(token.state)) {
-                        Idle.watch();
-                        $state.go('fe.index.home');
-                    } else {
-                        notificationService.error('Invalid UAA token.');
-                        $rootScope.$broadcast('oauth:expired');
-                    }
-                }
-
-                function oauthLoggedOut(event) {
-                    handleLoggedOutAndExpiredSession(event);
-                }
-
-                function oauthExpired (event) {
-                    handleLoggedOutAndExpiredSession(event);
-                }
-
+                //TODO
                 function handleLoggedOutAndExpiredSession(event) {
                     Idle.unwatch();
                     $state.go('fe.login');
@@ -150,7 +128,6 @@
                     console.log("IdleTimeout...");
                     console.log("-------> Session expired at: " + new Date());
                     appVm.closeModals();
-                    $rootScope.$broadcast('oauth:expired');
                 }
 
                 function idleEnd() {

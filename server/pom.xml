@@ -3,8 +3,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>gov.samhsa.bhits.ppui</groupId>
-    <artifactId>ppui</artifactId>
+    <groupId>gov.samhsa.mhc</groupId>
+    <artifactId>pp-ui</artifactId>
     <version>0.8.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 

@@ -16,26 +16,23 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="loginColumns animated fadeInDown custom-login-column modified">
-                        <div class="row">
-                            <div class="col-md-5">
+                        <div class="row m-b-xl">
+                            <div class="col-md-5 m-b-md">
                                 <h1 class="font-bold">Take control of your health and well-being with My Health Compass.</h1>
                             </div>
                             <div class="col-md-7 skin-1">
                                 <div class="ibox-content img-circle">
-                                    <h2 class="font-bold">Register Today!</h2>
-                                    <small> To register for My Health Compass, please contact your provider and ask about a My Health Compass Account.</small>
-                                    <div class="m-t text-center">
-                                        <oauth
-                                                site="{{AppVm.oauth.site}}"
-                                                client-id="{{AppVm.oauth.clientId}}"
-                                                redirect-uri="{{AppVm.oauth.redirectUri}}"
-                                                profile-uri="{{AppVm.oauth.profileUri}}"
-                                                scope="{{AppVm.oauth.scope}}"
-                                                template="{{AppVm.oauth.template}}"
-                                                state="{{AppVm.oauth.state}}">
-                                        </oauth>
+                                    <div class="m-t-sm">
+                                        <pp-oauth-login></pp-oauth-login>
                                     </div>
-                                    <p class="m-t text-center"> Version: {{::loginVm.version}} </p>
+                                    <div class="text-center">
+                                        <a href="#"><small>Forget Password?</small></a>
+                                        <p> Version: {{::loginVm.version}} </p>
+                                    </div>
+                                </div>
+                                <div class="m-t alert alert-warning">
+                                    <h2 class="m-t-xs font-bold">No Account? Register Today!</h2>
+                                    <p> To register for My Health Compass, please contact your provider and ask about a My Health Compass Account.</p>
                                 </div>
                             </div>
                         </div>
