@@ -27,19 +27,18 @@
 
             function login() {
                 // TODO return promises and chain them
-                authenticationService.login(vm.user.email, vm.user.password)
-                    .then(function () {
-                            profileService.loadProfile().get().$promise.then(function (data) {
-                                profileService.setProfile(data);
-                                utilityService.redirectTo(oauthConfig.loginSuccessPath);
-                            }, function (error) {
-                                utilityService.redirectTo(oauthConfig.loginSuccessPath);
-                                notificationService.error("No profile found");
-                            });
-                        },
-                        function () {
-                            vm.loginError = true;
-                        });
+                authenticationService.login(vm.user.email, vm.user.password).save().$promise.then(function () {
+                    profileService.loadProfile().get().$promise.then(function (data) {
+                        profileService.setProfile(data);
+                        utilityService.redirectTo(oauthConfig.loginSuccessPath);
+                    }, function (error) {
+                        utilityService.redirectTo(oauthConfig.loginSuccessPath);
+                        notificationService.error("No profile found");
+                    });
+                }, function (error) {
+                    vm.loginError = true;
+                });
+
             }
 
             function canSubmit(loginForm) {
