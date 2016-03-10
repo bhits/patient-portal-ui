@@ -49,7 +49,7 @@
             }
 
             /* @ngInject */
-            function AppController($rootScope , utilityService, notificationService, authenticationService, idleConfigParams, $state,  $modal, $modalStack, Idle) {
+            function AppController($rootScope , utilityService, idleConfigParams, $state,  $modal, $modalStack, Idle) {
 
                 var appVm = this;
 

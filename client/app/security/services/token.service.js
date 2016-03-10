@@ -82,7 +82,8 @@
         }
 
         function removeToken() {
-            $sessionStorage.$reset();
+            delete $sessionStorage.token;
+            delete $sessionStorage.profile;
         }
     }
 })();

@@ -20,14 +20,14 @@
         return directive;
 
         /* @ngInject */
-        function OauthLoginController(utilityService, oauthAuthenticationService, oauthConfig, profileService, notificationService) {
+        function OauthLoginController(utilityService, authenticationService, oauthConfig, profileService, notificationService) {
             var vm = this;
             vm.login = login;
             vm.canSubmit = canSubmit;
 
             function login() {
                 // TODO return promises and chain them
-                oauthAuthenticationService.login(vm.user.email, vm.user.password)
+                authenticationService.login(vm.user.email, vm.user.password)
                     .then(function () {
                             profileService.loadProfile(function (response) {
                                 profileService.setProfile(response);
