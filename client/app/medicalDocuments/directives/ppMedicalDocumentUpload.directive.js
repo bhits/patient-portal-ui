@@ -15,7 +15,7 @@
             templateUrl: 'app/medicalDocuments/directives/medicalDocumentUpload.html',
             scope: {},
             bindToController: true,
-            controller: ['$state', 'medicalDocumentsService', 'notificationService', MedicalDocumentUploadController],
+            controller: MedicalDocumentUploadController,
             controllerAs: 'medicalDocumentsUploadVm'
         };
         return directive;

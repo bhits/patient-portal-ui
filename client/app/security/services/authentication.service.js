@@ -1,31 +1,34 @@
-﻿
-(function () {
-
+﻿(function () {
     'use strict';
 
-    angular
-        .module("app.security")
-            .factory('authenticationService', AuthenticationService);
+    angular.module('app.security')
+        .factory('authenticationService', AuthenticationService);
 
-            /* @ngInject */
-            function AuthenticationService($sessionStorage, utilityService) {
-
-                var service = {};
-
-                service.getState = getState;
-                service.isValidState = isValidState;
-
-                return service;
-
-                function getState() {
-                    if (typeof $sessionStorage.oauthState === 'undefined') {
-                        $sessionStorage.oauthState = utilityService.randomAlphanumeric(10);
+    /* @ngInject */
+    function AuthenticationService($resource, envService) {
+        var loginResource = function (userName, password) {
+            return $resource(envService.unsecuredApis.tokenUrl, {},
+                {
+                    save: {
+                        method: 'POST',
+                        headers: {'Authorization': 'Basic ' + envService.base64BasicKey},
+                        params: {
+                            'grant_type': 'password',
+                            'password': password,
+                            'username': userName
+                        }
                     }
-                    return $sessionStorage.oauthState;
-                }
+                });
+        };
 
-                function isValidState(stateToCheck) {
-                    return $sessionStorage.oauthState === stateToCheck;
-                }
-            }
+        var service = {};
+        service.login = login;
+
+        return service;
+
+        function login(userName, password) {
+            var getLoginResource = loginResource(userName, password);
+            return getLoginResource.save().$promise;
+        }
+    }
 })();
