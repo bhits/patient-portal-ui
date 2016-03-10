@@ -4,7 +4,7 @@
 
     angular
         .module('app.security')
-        .factory('AuthInterceptorService', AuthInterceptorService);
+        .factory('authInterceptorService', AuthInterceptorService);
 
     /* @ngInject */
     function AuthInterceptorService($q, $location, utilityService, envService, tokenService, oauthConfig) {
@@ -26,7 +26,7 @@
                 if (accessToken && tokenService.isExpiredToken()) {
                     logout();
                 } else {
-                    if (!config.url.match(oauthConfig.interceptorIgnorePattern) && isSecuredApi(config.url)) {
+                    if (isSecuredApi(config.url)) {
                         config.headers.Authorization = 'Bearer  ' + accessToken;
                     }
                 }

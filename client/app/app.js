@@ -34,7 +34,7 @@
 
                 $urlRouterProvider.otherwise("/fe/login");
 
-                $httpProvider.interceptors.push('AuthInterceptorService');
+                $httpProvider.interceptors.push('authInterceptorService');
 
                 // Configure Idle settingss
                 IdleProvider.idle(idleConfigParams.idle); // in seconds

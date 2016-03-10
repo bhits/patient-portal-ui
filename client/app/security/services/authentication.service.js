@@ -5,7 +5,7 @@
         .factory('authenticationService', AuthenticationService);
 
     /* @ngInject */
-    function AuthenticationService($http, tokenService, oauthConfig) {
+    function AuthenticationService($http, envService, tokenService) {
 
         var service = {};
 
@@ -21,8 +21,8 @@
         function login(username, password) {
             return $http({
                 method: 'POST',
-                url: oauthConfig.getAccessTokenUrl,
-                headers: {'Authorization': 'Basic ' + oauthConfig.base64BasicKey},
+                url: envService.unsecuredApis.tokenUrl,
+                headers: {'Authorization': 'Basic ' + envService.base64BasicKey},
                 params: {
                     'grant_type': 'password',
                     'password': password,
@@ -41,8 +41,8 @@
         function refresh() {
             return $http({
                 method: 'POST',
-                url: oauthConfig.getAccessTokenUrl,
-                headers: {'Authorization': 'Basic ' + oauthConfig.base64BasicKey},
+                url: envService.tokenUrl,
+                headers: {'Authorization': 'Basic ' + envService.base64BasicKey},
                 params: {
                     'refresh_token': tokenService.getRefreshToken(),
                     'grant_type': 'refresh_token'

@@ -7,7 +7,7 @@
         .factory('profileService', profileService);
 
     /* @ngInject */
-    function profileService($sessionStorage, $resource, $http, envService, notificationService, tokenService, oauthConfig) {
+    function profileService($sessionStorage, $resource, $http, envService, notificationService, tokenService) {
         var phrPatientResource = $resource(envService.securedApis.phrApiBaseUrl + "/patients/profile/:email", {email: '@email'});
 
         var service = {};
@@ -24,7 +24,7 @@
         function loadProfile(success, error) {
             return $http({
                 method: 'GET',
-                url: oauthConfig.getUserInfo,
+                url: envService.securedApis.userInfo,
                 headers: {'Authorization': 'Bearer ' + tokenService.getAccessToken()}
             })
                 .success(success)
@@ -35,7 +35,6 @@
             return $sessionStorage.profile;
         }
 
-        //TODO
         function setProfile(uaaProfile) {
             $sessionStorage.profile = uaaProfile;
         }
@@ -44,7 +43,7 @@
             if (angular.isDefined(getProfile())) {
                 return getProfile().user_name;
             } else {
-                notificationService.error("No user profile found");
+                notificationService.error("No userName found");
             }
         }
 
@@ -52,7 +51,7 @@
             if (angular.isDefined(getProfile())) {
                 return getProfile().user_id;
             } else {
-                notificationService.error("No user profile found");
+                notificationService.error("No userId found");
             }
 
         }
@@ -61,7 +60,7 @@
             if (angular.isDefined(getProfile())) {
                 return getProfile().name;
             } else {
-                notificationService.error("No user profile found");
+                notificationService.error("No user fullName found");
             }
 
         }

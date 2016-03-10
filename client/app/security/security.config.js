@@ -5,18 +5,13 @@
     angular
         .module('app.security')
         .constant('oauthConfig', {
-            base64BasicKey: '',
-            getAccessTokenUrl: '',
-            getUserInfo: '',
-            revokeTokenUrl: '',
-            loginPath: '',
-            loginSuccessPath: '',
-            interceptorIgnorePattern: / /
+            loginPath: '/fe/login',
+            loginSuccessPath: '/fe/index/home'
         })
         .config(SecurityConfig);
 
     /* @ngInject */
-    function SecurityConfig($stateProvider, oauthConfig) {
+    function SecurityConfig($stateProvider) {
 
         $stateProvider
             .state('fe.login', {
@@ -26,15 +21,5 @@
                 controllerAs: "loginVm",
                 controller: 'LoginController'
             });
-
-        /*clientSecret*/
-        oauthConfig.base64BasicKey = 'cGF0aWVudC1wb3J0YWwtdWk6Y2hhbmdlaXQ=';
-
-        oauthConfig.getAccessTokenUrl = 'https://localhost:8443/uaa/oauth/token';
-        oauthConfig.getUserInfo = 'https://localhost:8443/uaa/userinfo';
-        //oauthConfig.revokeTokenUrl = 'http://www.mysite.com/token';
-        oauthConfig.loginPath = '/fe/login';
-        oauthConfig.loginSuccessPath = '/fe/index/home';
-        oauthConfig.interceptorIgnorePattern = /oauth\/token/;
     }
 })();
