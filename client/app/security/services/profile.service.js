@@ -24,8 +24,7 @@
         function loadProfile(success, error) {
             return $http({
                 method: 'GET',
-                url: envService.securedApis.userInfo,
-                headers: {'Authorization': 'Bearer ' + tokenService.getAccessToken()}
+                url: envService.securedApis.userInfo
             })
                 .success(success)
                 .error(error);

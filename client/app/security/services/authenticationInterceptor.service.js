@@ -19,10 +19,9 @@
 
             config.headers = config.headers || {};
 
-            var authData = tokenService.getToken();
             var accessToken = tokenService.getAccessToken();
 
-            if (authData) {
+            if (accessToken) {
                 if (accessToken && tokenService.isExpiredToken()) {
                     logout();
                 } else {
