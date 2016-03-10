@@ -29,10 +29,11 @@
                 // TODO return promises and chain them
                 authenticationService.login(vm.user.email, vm.user.password)
                     .then(function () {
-                            profileService.loadProfile(function (response) {
-                                profileService.setProfile(response);
+                            profileService.loadProfile().get().$promise.then(function (data) {
+                                profileService.setProfile(data);
                                 utilityService.redirectTo(oauthConfig.loginSuccessPath);
-                            }, function () {
+                            }, function (error) {
+                                utilityService.redirectTo(oauthConfig.loginSuccessPath);
                                 notificationService.error("No profile found");
                             });
                         },

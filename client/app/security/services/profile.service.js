@@ -7,8 +7,9 @@
         .factory('profileService', profileService);
 
     /* @ngInject */
-    function profileService($sessionStorage, $resource, $http, envService, notificationService, tokenService) {
+    function profileService($sessionStorage, $resource, envService, notificationService) {
         var phrPatientResource = $resource(envService.securedApis.phrApiBaseUrl + "/patients/profile/:email", {email: '@email'});
+        var profileResource = $resource(envService.securedApis.userInfo);
 
         var service = {};
 
@@ -21,13 +22,8 @@
 
         return service;
 
-        function loadProfile(success, error) {
-            return $http({
-                method: 'GET',
-                url: envService.securedApis.userInfo
-            })
-                .success(success)
-                .error(error);
+        function loadProfile() {
+            return profileResource;
         }
 
         function getProfile() {
