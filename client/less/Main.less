@@ -72,6 +72,55 @@
 @pp-dark-red: #ac1d2c;
 /* End of Color Variables */
 
+/* Font Colors */
+.text-white {
+  color: #fff;
+}
+.text-black {
+  color: #000;
+}
+.text-gray {
+  color: @pp-gray;
+}
+.text-medium-gray {
+  color: @pp-medium-gray;
+}
+.text-dark-gray {
+  color: @pp-dark-gray;
+}
+.text-dark-green {
+  color: @pp-dark-green;
+}
+.text-teal {
+  color: @pp-teal;
+}
+.text-light-blue {
+  color: @pp-light-blue;
+}
+.text-navy-blue {
+  color: @pp-navy-blue;
+}
+.text-dark-blue {
+  color: @pp-dark-blue;
+}
+.text-navbar-blue {
+  color: @pp-navbar-blue;
+}
+.text-navbar-dark-blue {
+  color: @pp-navbar-dark-blue;
+}
+.text-navbar-blueGray {
+  color: @pp-navbar-blueGray;
+}
+.text-strong-blue {
+color: @pp-strong-blue;
+}
+.text-dark-red {
+  color: @pp-dark-red;
+}
+
+/* End of Font Colors*/
+
 /* Mixins */
 .highlight-component-border(){
   border-color: @pp-strong-blue;
@@ -133,6 +182,11 @@
   border-bottom: royalblue 3px solid;
   padding-bottom: 5px;
 }
+
+.border-top-navbar-blue {
+  border-top: @pp-navbar-blue 1px solid;
+}
+
 
 /* Bug #7321:Create Consent :: Accordion (Chevrons) Not Appearing
 This implementation must be improved to prevent similar issues.
@@ -283,7 +337,7 @@ color:#262727;
 }
 
 
-.nav.navbar-right .dark-grey{
+.nav.navbar-right .dark-grey {
   color: @pp-dark-gray;
 }
 
