@@ -539,14 +539,14 @@ module.exports = function (grunt) {
                         version: '<%= pkg.version %>',
                         base64BasicKey: 'cGF0aWVudC1wb3J0YWwtdWk6Y2hhbmdlaXQ=',
                         securedApis: {
-                            pcmApiBaseUrl: 'https://localhost:8446/pcm/patients',
-                            phrApiBaseUrl: 'https://localhost:8445/phr',
-                            tryPolicyApiBaseUrl: 'https://localhost:8449/trypolicy',
-                            userInfo : 'https://localhost:8443/uaa/userinfo'
+                            pcmApiBaseUrl: 'https://dockerhost:8446/pcm/patients',
+                            phrApiBaseUrl: 'https://dockerhost:8445/phr',
+                            tryPolicyApiBaseUrl: 'https://dockerhost:8449/trypolicy',
+                            userInfo : 'https://dockerhost:8443/uaa/userinfo'
                         },
                         unsecuredApis: {
-                            plsApiBaseUrl: 'https://localhost:8443/pls/providers',
-                            tokenUrl : 'https://localhost:8443/uaa/oauth/token'
+                            plsApiBaseUrl: 'https://dockerhost:8453/pls/providers',
+                            tokenUrl : 'https://dockerhost:8443/uaa/oauth/token'
                         }
                     }
                 }
