@@ -10,7 +10,7 @@
             .factory('medicalDocumentsService', medicalDocumentsService);
 
             /* @ngInject */
-            function medicalDocumentsService($resource, $window, $q, $timeout, $http, envService) {
+            function medicalDocumentsService($resource, $q, $http, envService) {
                 var medicalDocumentsResource = $resource(envService.securedApis.pcmApiBaseUrl + "/clinicaldocuments/:id", {id: '@id'});
 
                 var service = {};
@@ -20,18 +20,8 @@
 
                 return service;
 
-                function downloadMedicalDocument(id) {
-                    var deferred = $q.defer();
-
-                    $timeout(function () {
-                        $window.location = envService.securedApis.pcmApiBaseUrl + "/clinicaldocuments/" + id;
-                    }, 1000)
-                        .then(function () {
-                            deferred.resolve('success');
-                        }, function () {
-                            deferred.reject('error');
-                        });
-                    return deferred.promise;
+                function downloadMedicalDocument(id, success, error) {
+                    return medicalDocumentsResource.get({id: id}, success, error);
                 }
 
                 function deleteMedicalDocument(id, success, error) {
