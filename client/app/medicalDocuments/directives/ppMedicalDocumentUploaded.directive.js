@@ -9,6 +9,7 @@
         .directive("ppUploadedDocuments", ppUploadedDocuments);
 
     function ppUploadedDocuments() {
+
         var directive = {
             restrict: 'E',
             replace: true,
@@ -18,24 +19,29 @@
             bindToController:  {
                 medicaldocumentslist:'='
             },
-            controller: ['$state', '$modal', 'medicalDocumentsService', 'notificationService', UploadedDocumentController],
+            controller: UploadedDocumentController,
             controllerAs: 'uploadedDocumentVm'
         };
+
         return directive;
     }
+
     /* @ngInject */
-    function UploadedDocumentController($state, $modal, medicalDocumentsService, notificationService) {
+    function UploadedDocumentController($state, $modal, medicalDocumentsService, notificationService, utilityService) {
         var vm = this;
         vm.downloadFile = downloadFile;
         vm.openDeleteMedicalDocumentModal = openDeleteMedicalDocumentModal;
 
         function downloadFile(medicalDocument) {
-            medicalDocumentsService.downloadMedicalDocument(medicalDocument.id)
-                .then(function(){
+            medicalDocumentsService.downloadMedicalDocument(medicalDocument.id,
+                function(response){
+                    utilityService.downloadFile(response.data, medicalDocument.name+".xml","application/xml");
                     notificationService.success('Success in downloading medical document');
-                }, function() {
+                },
+                function(err){
                     notificationService.error('Error in downloading medical document');
-                });
+                }
+            );
         }
 
         /* @ngInject */
@@ -76,4 +82,5 @@
             }
         }
     }
+
 })();
