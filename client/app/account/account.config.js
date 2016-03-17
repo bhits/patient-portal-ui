@@ -19,26 +19,33 @@
     function AccountConfig($stateProvider) {
 
         $stateProvider
+            .state('fe.login', {
+                url: "/login",
+                data: {pageTitle: 'Login'},
+                templateUrl: "app/account/controllers/securityLogin.html",
+                controllerAs: "loginVm",
+                controller: 'LoginController'
+            })
             .state('fe.account', {
                 abstract: true,
                 url: '/account',
-                data: { pageTitle: 'Account' },
+                data: {pageTitle: 'Account'},
                 templateUrl: ''
             })
             .state('fe.account.verification', {
                 url: '/verification',
                 data: {pageTitle: 'Account Verification'},
-                templateUrl: 'app/account/userAccountVerification.html'
+                templateUrl: 'app/account/controllers/userAccountVerification.html'
             })
             .state('fe.account.createPassword', {
                 url: "/createPassword",
                 data: {pageTitle: 'Create Password'},
-                templateUrl: "app/account/createPassword.html"
+                templateUrl: "app/account/controllers/createPassword.html"
             })
             .state('fe.account.activationSuccess', {
                 url: "/activationSuccess",
                 data: {pageTitle: 'Account Success'},
-                templateUrl: "app/account/activationSuccess.html"
+                templateUrl: "app/account/controllers/activationSuccess.html"
             });
     }
 })();

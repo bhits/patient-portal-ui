@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.security')
+        .module('app.account')
         .directive('ppOauthLogin', ppOauthLogin);
 
     function ppOauthLogin() {
@@ -10,7 +10,7 @@
         var directive = {
             restrict: 'E',
             replace: true,
-            templateUrl: 'app/security/directives/oauthLogin.html',
+            templateUrl: 'app/account/directives/oauthLogin.html',
             scope: {},
             bindToController: {},
             controller: OauthLoginController,
