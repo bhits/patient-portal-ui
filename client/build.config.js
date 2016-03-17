@@ -76,6 +76,7 @@ module.exports = {
             'vendor/angular-resource/angular-resource.js',
             'vendor/angular-sanitize/angular-sanitize.js',
             'vendor/angular-aria/angular-aria.js',
+            'vendor/angular-messages/angular-messages.js',
             'vendor/angular-loading-bar/build/loading-bar.js',
             'vendor/angular-ui-router/release/angular-ui-router.js',
             'vendor/ngstorage/ngStorage.js',

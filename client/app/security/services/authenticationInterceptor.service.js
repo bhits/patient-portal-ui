@@ -7,7 +7,7 @@
         .factory('authInterceptorService', AuthInterceptorService);
 
     /* @ngInject */
-    function AuthInterceptorService($q, $location, utilityService, envService, tokenService, oauthConfig) {
+    function AuthInterceptorService($q, $location, utilityService, envService, tokenService, oauthConfig, accountConfig) {
         var service = {};
         service.request = request;
         service.responseError = responseError;
@@ -31,10 +31,15 @@
                 }
             } else {
                 var currentPath = $location.path();
-                var currentPathName = currentPath.substring(1, currentPath.length);
 
                 if ((currentPath.indexOf("fe/index") === 1)) {
                     utilityService.redirectTo("/fe/index");
+                } else if ((currentPath.indexOf("fe/account/verification") === 1)) {
+                    utilityService.redirectTo(accountConfig.verificationPath);
+                } else if ((currentPath.indexOf("fe/account/createPassword") === 1)) {
+                    utilityService.redirectTo(accountConfig.createPasswordPath);
+                } else if ((currentPath.indexOf("fe/account/activationSuccess") === 1)) {
+                    utilityService.redirectTo(accountConfig.activationSuccessPath);
                 } else {
                     utilityService.redirectTo(oauthConfig.loginPath);
                 }
