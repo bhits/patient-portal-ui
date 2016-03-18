@@ -99,15 +99,12 @@
         }
 
         function allowAccessActivation() {
-            var isAllowed = false;
-
-            var emailToken = 'mhca';
-            if (accountService.isValidEmailToken(emailToken) && !accountService.isExpiredEmailToken(emailToken) && !accountService.isAlreadyVerified()) {
-                isAllowed = true;
+            if (!accountService.isExpiredEmailToken() && !accountService.isAlreadyVerified()) {
+                return true;
+            } else {
+                utilityService.redirectTo(accountConfig.activationErrorPath);
+                return false;
             }
-            utilityService.redirectTo(accountConfig.activationErrorPath);
-
-            return isAllowed;
         }
     }
 })();
