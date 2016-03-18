@@ -7,7 +7,7 @@
         .factory('authInterceptorService', AuthInterceptorService);
 
     /* @ngInject */
-    function AuthInterceptorService($q, $location, utilityService, envService, tokenService, oauthConfig, accountConfig) {
+    function AuthInterceptorService($q, $location, utilityService, envService, tokenService, accountService, oauthConfig, accountConfig) {
         var service = {};
         service.request = request;
         service.responseError = responseError;
@@ -30,17 +30,22 @@
                     }
                 }
             } else {
-                //TODO naming
                 if (urlMatcher("fe/index")) {
                     utilityService.redirectTo("/fe/index");
-                } else if (urlMatcher("fe/account/verification")) {
-                    utilityService.redirectTo(accountConfig.verificationPath);
-                } else if (urlMatcher("fe/account/createPassword")) {
-                    utilityService.redirectTo(accountConfig.createPasswordPath);
-                } else if (urlMatcher("fe/account/activationSuccess")) {
-                    utilityService.redirectTo(accountConfig.activationSuccessPath);
                 } else if (urlMatcher("fe/account/activationError")) {
                     utilityService.redirectTo(accountConfig.activationErrorPath);
+                } else if (urlMatcher("fe/account/verification")) {
+                    if (allowAccessActivation()) {
+                        utilityService.redirectTo(accountConfig.verificationPath);
+                    }
+                } else if (urlMatcher("fe/account/createPassword")) {
+                    if (allowAccessActivation()) {
+                        utilityService.redirectTo(accountConfig.createPasswordPath);
+                    }
+                } else if (urlMatcher("fe/account/activationSuccess")) {
+                    if (allowAccessActivation()) {
+                        utilityService.redirectTo(accountConfig.activationSuccessPath);
+                    }
                 } else {
                     utilityService.redirectTo(oauthConfig.loginPath);
                 }
@@ -82,6 +87,7 @@
             return isSecured;
         }
 
+        //TODO naming
         function urlMatcher(url) {
             var isMatched = false;
             var currentPath = $location.path();
@@ -90,6 +96,18 @@
                 isMatched = true;
             }
             return isMatched;
+        }
+
+        function allowAccessActivation() {
+            var isAllowed = false;
+
+            var emailToken = 'mhca';
+            if (accountService.isValidEmailToken(emailToken) && !accountService.isExpiredEmailToken(emailToken) && !accountService.isAlreadyVerified()) {
+                isAllowed = true;
+            }
+            utilityService.redirectTo(accountConfig.activationErrorPath);
+
+            return isAllowed;
         }
     }
 })();
