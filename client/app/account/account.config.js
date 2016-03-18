@@ -11,7 +11,8 @@
         .constant('accountConfig', {
             verificationPath: '/fe/account/verification',
             createPasswordPath: '/fe/account/createPassword',
-            activationSuccessPath: '/fe/account/activationSuccess'
+            activationSuccessPath: '/fe/account/activationSuccess',
+            activationErrorPath: '/fe/account/activationError'
         })
         .config(AccountConfig);
 
@@ -46,6 +47,11 @@
                 url: "/activationSuccess",
                 data: {pageTitle: 'Account Success'},
                 templateUrl: "app/account/controllers/activationSuccess.html"
+            })
+            .state('fe.account.activationError', {
+                url: "/activationError",
+                data: {pageTitle: 'Activation Error'},
+                templateUrl: "app/account/controllers/activationError.html"
             });
     }
 })();

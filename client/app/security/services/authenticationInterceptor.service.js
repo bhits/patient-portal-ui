@@ -30,16 +30,17 @@
                     }
                 }
             } else {
-                var currentPath = $location.path();
-
-                if ((currentPath.indexOf("fe/index") === 1)) {
+                //TODO naming
+                if (urlMatcher("fe/index")) {
                     utilityService.redirectTo("/fe/index");
-                } else if ((currentPath.indexOf("fe/account/verification") === 1)) {
+                } else if (urlMatcher("fe/account/verification")) {
                     utilityService.redirectTo(accountConfig.verificationPath);
-                } else if ((currentPath.indexOf("fe/account/createPassword") === 1)) {
+                } else if (urlMatcher("fe/account/createPassword")) {
                     utilityService.redirectTo(accountConfig.createPasswordPath);
-                } else if ((currentPath.indexOf("fe/account/activationSuccess") === 1)) {
+                } else if (urlMatcher("fe/account/activationSuccess")) {
                     utilityService.redirectTo(accountConfig.activationSuccessPath);
+                } else if (urlMatcher("fe/account/activationError")) {
+                    utilityService.redirectTo(accountConfig.activationErrorPath);
                 } else {
                     utilityService.redirectTo(oauthConfig.loginPath);
                 }
@@ -79,6 +80,16 @@
                 }
             });
             return isSecured;
+        }
+
+        function urlMatcher(url) {
+            var isMatched = false;
+            var currentPath = $location.path();
+
+            if ((currentPath.indexOf(url) === 1)) {
+                isMatched = true;
+            }
+            return isMatched;
         }
     }
 })();
