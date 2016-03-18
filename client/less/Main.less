@@ -16,6 +16,11 @@
     vertical-align: top;
   }
 }
+.table-hover > tbody > tr:hover {
+  background-color: #fffac0;
+  cursor: pointer;
+}
+
 
 /* Bootstrap Breakpoint Sizes */
 @bs-xs-max: 767px;
@@ -77,7 +82,7 @@
   color: #fff;
 }
 .text-black {
-  color: #000;
+  color: #000 !important;
 }
 .text-gray {
   color: @pp-gray;
@@ -113,7 +118,7 @@
   color: @pp-navbar-blueGray;
 }
 .text-strong-blue {
-color: @pp-strong-blue;
+  color: @pp-strong-blue;
 }
 .text-dark-red {
   color: @pp-dark-red;
@@ -250,29 +255,29 @@ This implementation must be improved to prevent similar issues.
 
 
 .ibox-content.modified {
-    border-style: none;
-    border-width: 0;
-    background-color: transparent;
+  border-style: none;
+  border-width: 0;
+  background-color: transparent;
 
-    p {
-      margin-bottom: 7px;
-    }
+  p {
+    margin-bottom: 7px;
+  }
 }
 
- .panel-heading.item-heading {
-   padding: 5px 15px;
-   border-radius: 4px;
- }
+.panel-heading.item-heading {
+  padding: 5px 15px;
+  border-radius: 4px;
+}
 
 .navbar-top-links.modified li:last-child {
-    @media (max-width: @bs-xs-max) {
-        margin-right: 0;
+  @media (max-width: @bs-xs-max) {
+    margin-right: 0;
 
-    }
+  }
 }
 
 .custom-header.modified {
-    height: auto;
+  height: auto;
 }
 
 .custom-login-column.modified {
@@ -283,9 +288,9 @@ This implementation must be improved to prevent similar issues.
 
 // WCAG 2.0 AA Compliance Modifications
 .dark-green {
-    background-color: @pp-dark-green;
-    border-color: @pp-dark-green;
-    color:white;
+  background-color: @pp-dark-green;
+  border-color: @pp-dark-green;
+  color:white;
   &[disabled]{
     color: @pp-dark-gray;
     background-color: rgba(221,221,221,1); //same color as @pp-gray
@@ -319,7 +324,7 @@ This implementation must be improved to prevent similar issues.
 
 
 body.ng-scope.pace-done.grey{
-color:#262727;
+  color:#262727;
 }
 
 
@@ -344,20 +349,21 @@ color:#262727;
 //End of WCAG 2.0 AA Compliance Modifications
 
 
-  /*mixins*/
-  .side-padding(@paddingAmount) {
-    padding-left: @paddingAmount;
-    padding-right: @paddingAmount;
-  }
-  .left-padding(@paddingAmount) {
-    padding-left: @paddingAmount;
-  }
+/*mixins*/
+.side-padding(@paddingAmount) {
+  padding-left: @paddingAmount !important;
+  padding-right: @paddingAmount !important;
 
-  .right-padding(@paddingAmount) {
-    padding-right: @paddingAmount;
-  }
+}
+.left-padding(@paddingAmount) {
+  padding-left: @paddingAmount;
+}
 
-  /*end mixins*/
+.right-padding(@paddingAmount) {
+  padding-right: @paddingAmount;
+}
+
+/*end mixins*/
 
 /* Positioning */
 .relative {
@@ -387,7 +393,7 @@ color:#262727;
 /*PALETTE*/
 
 .bg-white-page {
-  background-color: white;
+  background-color: white !important;
 }
 /*.darkblue-panel {
     background-color: #4D565E;
@@ -432,7 +438,7 @@ color:#262727;
 .panel-darkblue {
   border-color: @pp-dark-blue;
 
-    & > .panel-heading {
+  & > .panel-heading {
     background-color: @pp-dark-blue;
     border-color: @pp-dark-blue;
     color: white;
@@ -500,11 +506,11 @@ color:#262727;
 }
 
 .ibox-title h5 {
-    margin-top: 2px;
+  margin-top: 2px;
 }
 
 .badge-icon {
-    margin-left: 5px;
+  margin-left: 5px;
 }
 
 .custom-login-column {
@@ -514,7 +520,7 @@ color:#262727;
 }
 
 .no-padding-right {
-    padding-right: 0;
+  padding-right: 0;
 }
 
 .login-logo {
@@ -526,8 +532,8 @@ color:#262727;
 }
 
 .left-right-padding-0 {
-    padding-left: 0;
-    padding-right: 0;
+  padding-left: 0;
+  padding-right: 0;
 }
 // Will be revisit for stickyheader
 //.fixed-header {
@@ -552,9 +558,28 @@ color:#262727;
 
 
 /* GENERAL*/
+.wrap {
+  background-color: #f3f3f4;
+  padding: 10px 20px;
+  border-radius: 6px;
+  &:hover {
+    background-color: #e7eaec;
+  }
+}
 
+.side-padding0 {
+  .side-padding(0px) !important;
+}
 .side-padding10 {
-    .side-padding(10px);
+  .side-padding(10px);
+}
+
+.right-padding0 {
+  padding-right: 0;
+}
+
+.left-padding0 {
+  padding-left: 0;
 }
 
 .left-padding25 {
@@ -578,13 +603,13 @@ color:#262727;
 }
 
 .row-padding-10 {
-    padding: 10px;
+  padding: 10px;
 }
 
 /* LOGIN CONTENT */
 
 .custom-margin-top{
-padding-top: 10px;
+  padding-top: 10px;
 }
 
 
@@ -632,7 +657,7 @@ padding-top: 10px;
 }
 
 .custom-no-margin-top{
-      margin-top: 0;
+  margin-top: 0;
 }
 
 .icon-border{
