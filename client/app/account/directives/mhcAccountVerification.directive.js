@@ -22,19 +22,19 @@
         };
 
         return directive;
+    }
 
-        /* @ngInject */
-        function VerificationController() {
-            var vm = this;
-            vm.clearField = clearField;
-            var verificationFormMaster = {month: "", day: "", year: "", verificationCode: ""};
+    /* @ngInject */
+    function VerificationController() {
+        var vm = this;
+        vm.clearField = clearField;
+        var verificationFormMaster = {month: "", day: "", year: "", verificationCode: ""};
 
-            function clearField(verificationForm) {
-                if (verificationForm) {
-                    verificationForm.$setPristine();
-                    verificationForm.$setUntouched();
-                    vm.verificationFormMaster = angular.copy(verificationFormMaster);
-                }
+        function clearField(verificationForm) {
+            if (verificationForm) {
+                verificationForm.$setPristine();
+                verificationForm.$setUntouched();
+                vm.verificationFormMaster = angular.copy(verificationFormMaster);
             }
         }
     }

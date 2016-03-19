@@ -18,15 +18,15 @@
         };
 
         return directive;
+    }
 
-        /* @ngInject */
-        function OauthLogoutController(authInterceptorService) {
-            var vm = this;
-            vm.logout = logout;
+    /* @ngInject */
+    function OauthLogoutController(authInterceptorService) {
+        var vm = this;
+        vm.logout = logout;
 
-            function logout() {
-                authInterceptorService.logout();
-            }
+        function logout() {
+            authInterceptorService.logout();
         }
     }
 })();
