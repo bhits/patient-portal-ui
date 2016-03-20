@@ -34,7 +34,7 @@
             if (verificationForm) {
                 verificationForm.$setPristine();
                 verificationForm.$setUntouched();
-                vm.verificationFormMaster = angular.copy(verificationFormMaster);
+                vm.patient = angular.copy(verificationFormMaster);
             }
         }
     }
