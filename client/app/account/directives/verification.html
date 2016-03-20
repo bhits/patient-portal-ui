@@ -17,7 +17,7 @@
                         <div class="row">
                             <div class="col-xs-8 col-sm-5 col-md-4 col-lg-3 m-b-xs">
                                 <input id="verificationCode" name="verificationCode" type="text"
-                                       ng-model="verificationVm.patient.verificationCode"
+                                       ng-model="verificationVm.verifyInfo.verificationCode"
                                        class="form-control"/>
                             </div>
                         </div>
@@ -29,7 +29,7 @@
                         <button type="button" class="btn btn-default m-r-sm"
                                 ng-click="verificationVm.clearField(verificationForm)">Clear
                         </button>
-                        <a class="btn btn-primary dark-green" ui-sref="fe.createPassword">
+                        <a class="btn btn-primary dark-green" ng-click="verificationVm.verify()">
                             Continue
                         </a>
                     </div>

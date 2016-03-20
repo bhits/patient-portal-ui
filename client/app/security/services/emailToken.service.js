@@ -20,6 +20,7 @@
         service.setEmailToken = setEmailToken;
         service.isValidEmailToken = isValidEmailToken;
         service.notExpiredEmailToken = notExpiredEmailToken;
+        service.removeEmailToken = removeEmailToken;
 
         return service;
 
@@ -43,6 +44,10 @@
 
         function notExpiredEmailToken() {
             return getEmailTokenExpiration().valueOf() >= new Date().valueOf();
+        }
+
+        function removeEmailToken() {
+            delete $sessionStorage.emailToken;
         }
     }
 })();

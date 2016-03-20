@@ -2,7 +2,7 @@
     <div class="col-xs-6 col-sm-5 col-md-4 col-lg-3">
         <label for="month" class="sr-only">Month</label>
         <select id="month" class="form-control"
-                ng-model="verificationVm.patient.month">
+                ng-model="verificationVm.verifyInfo.month">
             <option selected="selected" value="  ">Month</option>
             <option value="01">January</option>
             <option value="02">February</option>
@@ -21,7 +21,7 @@
 
     <div class="col-xs-2 col-sm-5 col-md-4 side-padding0">
         <label for="day" class="sr-only">Day</label>
-        <select id="day" class="form-control" ng-model="verificationVm.patient.day">
+        <select id="day" class="form-control" ng-model="verificationVm.verifyInfo.day">
             <option selected="selected" value="  ">Day</option>
             <option value="01">01</option>
             <option value="02">02</option>
@@ -60,7 +60,7 @@
     <div class="col-xs-4 col-sm-2">
         <label for="year" class="sr-only">Year</label>
         <select id="year" class="form-control"
-                ng-model="verificationVm.patient.year">
+                ng-model="verificationVm.verifyInfo.year">
             <option selected="selected" value="    ">Year</option>
             <option value="2000">2000</option>
         </select>

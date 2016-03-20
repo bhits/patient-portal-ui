@@ -25,17 +25,34 @@
     }
 
     /* @ngInject */
-    function VerificationController() {
+    function VerificationController($state, utilityService, notificationService, accountService, accountConfig) {
         var vm = this;
-        vm.clearField = clearField;
         var verificationFormMaster = {month: "", day: "", year: "", verificationCode: ""};
+        vm.clearField = clearField;
+        vm.verify = verify;
 
         function clearField(verificationForm) {
             if (verificationForm) {
                 verificationForm.$setPristine();
                 verificationForm.$setUntouched();
-                vm.patient = angular.copy(verificationFormMaster);
+                vm.verifyInfo = angular.copy(verificationFormMaster);
             }
+        }
+
+        function verify() {
+            accountService.verifyPatient(vm.verifyInfo, verifySuccess, verifyError);
+        }
+
+        function verifySuccess(response) {
+            notificationService.success("Success in verifying.");
+            //TODO setVerifyInfo to storage
+            accountService.setVerifyInfo(vm.verifyInfo);
+            utilityService.redirectTo(accountConfig.createPasswordPath);
+        }
+
+        function verifyError(response) {
+            notificationService.error("Error in verifying.");
+            $state.go($state.current, {}, {reload: true});
         }
     }
 })();
