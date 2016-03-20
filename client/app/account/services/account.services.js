@@ -14,46 +14,18 @@
         .factory('accountService', AccountService);
 
     /* @ngInject */
-    function AccountService($sessionStorage) {
+    function AccountService() {
         //TODO implement
-        var mockEmailTokenExpiration = 1558308959468;
-        var mockAlreadyVerified = false;
+        var mockNotAlreadyVerified = true;
 
         var service = {};
-
-        service.getEmailToken = getEmailToken;
-        service.setEmailToken = setEmailToken;
-        service.isValidEmailToken = isValidEmailToken;
-        service.isAlreadyVerified = isAlreadyVerified;
-        service.isExpiredEmailToken = isExpiredEmailToken;
+        service.notAlreadyVerified = notAlreadyVerified;
 
         return service;
 
-        function getEmailToken() {
-            return $sessionStorage.emailToken;
-        }
-
-        function setEmailToken(emailToken) {
-            $sessionStorage.emailToken = emailToken;
-        }
-
         //TODO
-        function getEmailTokenExpiration() {
-            return mockEmailTokenExpiration;
-        }
-
-        //TODO
-        function isValidEmailToken() {
-            return true;
-        }
-
-        //TODO
-        function isAlreadyVerified() {
-            return mockAlreadyVerified;
-        }
-
-        function isExpiredEmailToken() {
-            return getEmailTokenExpiration().valueOf() < new Date().valueOf();
+        function notAlreadyVerified() {
+            return mockNotAlreadyVerified;
         }
     }
 })();

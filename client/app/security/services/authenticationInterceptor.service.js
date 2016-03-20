@@ -7,7 +7,8 @@
         .factory('authInterceptorService', AuthInterceptorService);
 
     /* @ngInject */
-    function AuthInterceptorService($q, $location, utilityService, envService, tokenService, accountService, oauthConfig, accountConfig) {
+    function AuthInterceptorService($q, $location, utilityService, envService, tokenService, emailTokenService,
+                                    accountService, oauthConfig, accountConfig) {
         var service = {};
         service.request = request;
         service.responseError = responseError;
@@ -99,7 +100,7 @@
         }
 
         function allowAccessActivation() {
-            if (!accountService.isExpiredEmailToken() && !accountService.isAlreadyVerified()) {
+            if (emailTokenService.notExpiredEmailToken() && accountService.notAlreadyVerified()) {
                 return true;
             } else {
                 utilityService.redirectTo(accountConfig.activationErrorPath);
