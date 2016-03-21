@@ -2,10 +2,10 @@
     'use strict';
 
     angular.module('app.security')
-        .factory('authenticationService', AuthenticationService);
+        .factory('authenticationService', authenticationService);
 
     /* @ngInject */
-    function AuthenticationService($resource, envService) {
+    function authenticationService($resource, envService) {
         var loginResource = function (userName, password) {
             return $resource(envService.unsecuredApis.tokenUrl, {},
                 {

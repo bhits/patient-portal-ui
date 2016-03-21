@@ -4,11 +4,10 @@
 
     angular
         .module('app.security')
-        .factory('authInterceptorService', AuthInterceptorService);
+        .factory('authInterceptorService', authInterceptorService);
 
     /* @ngInject */
-    function AuthInterceptorService($q, $location, utilityService, envService, tokenService, emailTokenService,
-                                    oauthConfig, accountConfig) {
+    function authInterceptorService($q, utilityService, tokenService, emailTokenService, oauthConfig, accountConfig) {
         var service = {};
         service.request = request;
         service.responseError = responseError;
@@ -25,26 +24,24 @@
             if (accessToken) {
                 if (accessToken && tokenService.isExpiredToken()) {
                     logout();
-                } else {
-                    if (isSecuredApi(config.url)) {
-                        config.headers.Authorization = 'Bearer  ' + accessToken;
-                    }
+                } else if (utilityService.isSecuredApi(config.url)) {
+                    config.headers.Authorization = 'Bearer  ' + accessToken;
                 }
             } else {
-                if (urlMatcher("fe/index")) {
+                if (utilityService.urlMatcher("fe/index")) {
                     utilityService.redirectTo("/fe/index");
-                } else if (urlMatcher("fe/account/activationError")) {
+                } else if (utilityService.urlMatcher("fe/account/activationError")) {
                     utilityService.redirectTo(accountConfig.activationErrorPath);
-                } else if (urlMatcher("fe/account/verification")) {
-                    if (allowAccessActivation()) {
+                } else if (utilityService.urlMatcher("fe/account/verification")) {
+                    if (emailTokenService.isValidEmailToken()) {
                         utilityService.redirectTo(accountConfig.verificationPath);
                     }
-                } else if (urlMatcher("fe/account/createPassword")) {
-                    if (allowAccessActivation()) {
+                } else if (utilityService.urlMatcher("fe/account/createPassword")) {
+                    if (emailTokenService.isValidEmailToken()) {
                         utilityService.redirectTo(accountConfig.createPasswordPath);
                     }
-                } else if (urlMatcher("fe/account/activationSuccess")) {
-                    if (allowAccessActivation()) {
+                } else if (utilityService.urlMatcher("fe/account/activationSuccess")) {
+                    if (emailTokenService.isValidEmailToken()) {
                         utilityService.redirectTo(accountConfig.activationSuccessPath);
                     }
                 } else {
@@ -76,42 +73,6 @@
         function logout() {
             tokenService.removeToken();
             utilityService.redirectTo(oauthConfig.loginPath);
-        }
-
-        function isSecuredApi(url) {
-            var isSecured = false;
-            angular.forEach(envService.securedApis, function (value) {
-                if (utilityService.startsWith(url.toLowerCase(), value.toLowerCase())) {
-                    isSecured = true;
-                }
-            });
-            return isSecured;
-        }
-
-        //TODO naming
-        function urlMatcher(url) {
-            var isMatched = false;
-            var currentPath = $location.path();
-
-            if ((currentPath.indexOf(url) === 1)) {
-                isMatched = true;
-            }
-            return isMatched;
-        }
-
-        function allowAccessActivation() {
-           /* if (emailTokenService.notExpiredEmailToken() && accountService.notAlreadyVerified()) {
-                return true;
-            } else {
-                utilityService.redirectTo(accountConfig.activationErrorPath);
-                return false;
-            }*/
-            if (emailTokenService.notExpiredEmailToken()) {
-                return true;
-            } else {
-                utilityService.redirectTo(accountConfig.activationErrorPath);
-                return false;
-            }
         }
     }
 })();

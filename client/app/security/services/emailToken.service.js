@@ -7,19 +7,18 @@
     'use strict';
 
     angular.module('app.security')
-        .factory('emailTokenService', EmailTokenService);
+        .factory('emailTokenService', emailTokenService);
 
     /* @ngInject */
-    function EmailTokenService($sessionStorage) {
+    function emailTokenService($sessionStorage, utilityService, accountConfig) {
         //TODO implement
-        var mockEmailTokenExpiration = 1558308959468;
+        var mockEmailToken = true;
 
         var service = {};
 
         service.getEmailToken = getEmailToken;
         service.setEmailToken = setEmailToken;
         service.isValidEmailToken = isValidEmailToken;
-        service.notExpiredEmailToken = notExpiredEmailToken;
         service.removeEmailToken = removeEmailToken;
 
         return service;
@@ -33,17 +32,13 @@
         }
 
         //TODO
-        function getEmailTokenExpiration() {
-            return mockEmailTokenExpiration;
-        }
-
-        //TODO
         function isValidEmailToken() {
-            return true;
-        }
-
-        function notExpiredEmailToken() {
-            return getEmailTokenExpiration().valueOf() >= new Date().valueOf();
+            if (mockEmailToken) {
+                return true;
+            } else {
+                utilityService.redirectTo(accountConfig.activationErrorPath);
+                return false;
+            }
         }
 
         function removeEmailToken() {

@@ -11,10 +11,10 @@
      */
     angular
         .module("app.account")
-        .factory('accountService', AccountService);
+        .factory('accountService', accountService);
 
     /* @ngInject */
-    function AccountService($resource, $sessionStorage, envService) {
+    function accountService($resource, $sessionStorage, envService) {
         var verificationResource = $resource(envService.securedApis.patientUserApiBaseUrl + "/verifications");
         var activationResource = $resource(envService.securedApis.patientUserApiBaseUrl + "/activations");
         //TODO implement

@@ -9,7 +9,7 @@
             .factory('utilityService',  utilityService);
 
             /* @ngInject */
-            function utilityService($location, $anchorScroll, $window) {
+            function utilityService($location, $anchorScroll, $window, envService) {
                 var showHealthInformationMenu = false;
                 var service = {};
 
@@ -34,6 +34,8 @@
                 service.getIndividualProvidersNpi = getIndividualProvidersNpi;
                 service.getOrganizationalProvidersNpi = getOrganizationalProvidersNpi;
                 service.downloadFile = downloadFile;
+                service.urlMatcher = urlMatcher;
+                service.isSecuredApi = isSecuredApi;
 
                 return service;
 
@@ -171,6 +173,27 @@
                     anchor.download = filename;
                     anchor.href = blobURL;
                     anchor.click();
+                }
+
+                //TODO naming
+                function urlMatcher(url) {
+                    var isMatched = false;
+                    var currentPath = $location.path();
+
+                    if ((currentPath.indexOf(url) === 1)) {
+                        isMatched = true;
+                    }
+                    return isMatched;
+                }
+
+                function isSecuredApi(url) {
+                    var isSecured = false;
+                    angular.forEach(envService.securedApis, function (value) {
+                        if (startsWith(url.toLowerCase(), value.toLowerCase())) {
+                            isSecured = true;
+                        }
+                    });
+                    return isSecured;
                 }
 
             }
