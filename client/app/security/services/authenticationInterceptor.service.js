@@ -11,7 +11,6 @@
         var service = {};
         service.request = request;
         service.responseError = responseError;
-        service.logout = logout;
 
         return service;
 
@@ -23,7 +22,7 @@
 
             if (accessToken) {
                 if (accessToken && tokenService.isExpiredToken()) {
-                    logout();
+                    //authenticationService.logout();
                 } else if (utilityService.isSecuredApi(config.url)) {
                     config.headers.Authorization = 'Bearer  ' + accessToken;
                 }
@@ -58,21 +57,16 @@
 
                 if (authData) {
                     if (tokenService.isExpiredToken()) {
-                        logout();
+                        //authenticationService.logout();
                     } else {
                         // Got to Error page
                     }
                     return $q.reject(rejection);
                 } else {
-                    logout();
+                    //authenticationService.logout();
                 }
             }
             return $q.reject(rejection);
-        }
-
-        function logout() {
-            tokenService.removeToken();
-            utilityService.redirectTo(oauthConfig.loginPath);
         }
     }
 })();

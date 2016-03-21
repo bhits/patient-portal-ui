@@ -21,12 +21,12 @@
     }
 
     /* @ngInject */
-    function OauthLogoutController(authInterceptorService) {
+    function OauthLogoutController(authenticationService) {
         var vm = this;
         vm.logout = logout;
 
         function logout() {
-            authInterceptorService.logout();
+            authenticationService.logout();
         }
     }
 })();

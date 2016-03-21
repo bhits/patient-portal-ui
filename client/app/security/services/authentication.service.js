@@ -5,7 +5,7 @@
         .factory('authenticationService', authenticationService);
 
     /* @ngInject */
-    function authenticationService($resource, envService) {
+    function authenticationService($resource, envService, tokenService, utilityService, oauthConfig) {
         var loginResource = function (userName, password) {
             return $resource(envService.unsecuredApis.tokenUrl, {},
                 {
@@ -23,12 +23,18 @@
 
         var service = {};
         service.login = login;
+        service.logout = logout;
 
         return service;
 
         function login(userName, password) {
             var getLoginResource = loginResource(userName, password);
             return getLoginResource.save().$promise;
+        }
+
+        function logout() {
+            tokenService.removeToken();
+            utilityService.redirectTo(oauthConfig.loginPath);
         }
     }
 })();
