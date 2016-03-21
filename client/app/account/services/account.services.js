@@ -16,13 +16,16 @@
     /* @ngInject */
     function AccountService($resource, $sessionStorage, envService) {
         var verificationResource = $resource(envService.securedApis.patientUserApiBaseUrl + "/verifications");
+        var activationResource = $resource(envService.securedApis.patientUserApiBaseUrl + "/activations");
         //TODO implement
         var mockNotAlreadyVerified = true;
 
         var service = {};
         service.notAlreadyVerified = notAlreadyVerified;
         service.verifyPatient = verifyPatient;
+        service.activatePatient = activatePatient;
         service.setVerifyInfo = setVerifyInfo;
+        service.removeVerifyInfo = removeVerifyInfo;
 
         return service;
 
@@ -35,8 +38,16 @@
             verificationResource.get(verifyInfo, success, error);
         }
 
+        function activatePatient(patientInfo, success, error) {
+            activationResource.save(patientInfo, success, error);
+        }
+
         function setVerifyInfo(verifyInfo) {
             $sessionStorage.verifyInfo = verifyInfo;
+        }
+
+        function removeVerifyInfo() {
+            delete $sessionStorage.verifyInfo;
         }
     }
 })();

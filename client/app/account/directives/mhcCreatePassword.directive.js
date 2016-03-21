@@ -25,10 +25,13 @@
     }
 
     /* @ngInject */
-    function CreatePasswordController() {
+    function CreatePasswordController($state, utilityService, notificationService, accountService, accountConfig) {
         var vm = this;
-        vm.clearField = clearField;
         var createPasswordFormMaster = {password: "", confirmPassword: ""};
+
+        vm.clearField = clearField;
+        vm.activate = activate;
+        //todo prepare activate accountObj
 
         function clearField(createPasswordForm) {
             if (createPasswordForm) {
@@ -36,6 +39,20 @@
                 createPasswordForm.$setUntouched();
                 vm.account = angular.copy(createPasswordFormMaster);
             }
+        }
+
+        function activate() {
+            accountService.activatePatient(vm.account, activateSuccess, activateError);
+        }
+
+        function activateSuccess(response) {
+            notificationService.success("Success in activation.");
+            utilityService.redirectTo(accountConfig.activationSuccessPath);
+        }
+
+        function activateError(response) {
+            notificationService.error("Error in activation.");
+            $state.go($state.current, {}, {reload: true});
         }
     }
 })();

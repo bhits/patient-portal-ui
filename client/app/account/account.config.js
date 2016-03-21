@@ -46,7 +46,9 @@
             .state('fe.account.activationSuccess', {
                 url: "/activationSuccess",
                 data: {pageTitle: 'Account Success'},
-                templateUrl: "app/account/controllers/activationSuccess.html"
+                templateUrl: "app/account/controllers/activationSuccess.html",
+                controllerAs: "activateVm",
+                controller: 'ActivateController'
             })
             .state('fe.account.activationError', {
                 url: "/activationError",
