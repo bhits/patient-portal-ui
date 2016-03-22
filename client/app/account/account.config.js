@@ -8,12 +8,6 @@
 
     angular
         .module('app.account')
-        .constant('accountConfig', {
-            verificationPath: '/fe/account/verification',
-            createPasswordPath: '/fe/account/createPassword',
-            activationSuccessPath: '/fe/account/activationSuccess',
-            activationErrorPath: '/fe/account/activationError'
-        })
         .config(AccountConfig);
 
     /* @ngInject */
@@ -36,7 +30,29 @@
             .state('fe.account.verification', {
                 url: '/verification',
                 data: {pageTitle: 'Account Verification'},
-                templateUrl: 'app/account/controllers/userAccountVerification.html'
+                templateUrl: 'app/account/controllers/userAccountVerification.html',
+                controller: 'VerificationController',
+                controllerAs: 'verificationVm',
+                resolve: {
+                    /* @ngInject */
+                    allowVerification: function ($location, $q, emailTokenService, utilityService, accountConfig) {
+                        var deferred = $q.defer();
+                        var emailTokenStr = $location.hash();
+                        var emailToken = emailTokenService.loadEmailToken(emailTokenStr);
+                        var accessVerificationPromise = emailTokenService.isValidEmailToken(emailToken, onAccessSuccess, onAccessError);
+
+                        function onAccessSuccess(response) {
+                            emailTokenService.setEmailToken(emailToken);
+                            utilityService.redirectTo(accountConfig.verificationPath);
+                        }
+
+                        function onAccessError() {
+                            utilityService.redirectTo(accountConfig.activationErrorPath);
+                        }
+
+                        return deferred.promise;
+                    }
+                }
             })
             .state('fe.account.createPassword', {
                 url: "/createPassword",
