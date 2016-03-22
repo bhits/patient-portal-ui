@@ -146,6 +146,12 @@
 /* End of Color Schemes */
 
 /* Components */
+.pp-activation-button {
+  position: absolute;
+  top: 1px;
+  right: 13px;
+}
+
 .pp-block-text-bar {
   display: block;
   width: 100%;
@@ -244,6 +250,49 @@ This implementation must be improved to prevent similar issues.
   }
 }
 
+.statusIcon_notCreated {
+  &:before {
+    font-family: FontAwesome;
+    content: '\f147';
+    font-size: 20px;
+    color: @pp-dark-red;
+    position: absolute;
+    margin: -3px 0 0 -25px;
+  }
+}
+
+.statusIcon_created {
+  &:before {
+    font-family: FontAwesome;
+    content: '\f016';
+    font-size: 20px;
+    color: @pp-strong-blue;
+    position: absolute;
+    margin: -3px 0 0 -25px;
+  }
+}
+
+.statusIcon_activated {
+  &:before {
+    font-family: FontAwesome;
+    content: '\f1d9';
+    font-size: 20px;
+    color: @pp-strong-blue;
+    position: absolute;
+    margin: -3px 0 0 -25px;
+  }
+}
+
+.statusIcon_verified {
+  &:before {
+    font-family: FontAwesome;
+    content: '\f046';
+    font-size: 20px;
+    color: @pp-strong-blue;
+    position: absolute;
+    margin: -3px 0 0 -25px;
+  }
+}
 
 /*modifications*/
 .ibox-title.modified {
@@ -388,6 +437,9 @@ body.ng-scope.pace-done.grey{
 }
 .center {
   text-align: center;
+}
+.nowrap {
+  white-space: nowrap;
 }
 
 /*PALETTE*/
@@ -566,12 +618,25 @@ body.ng-scope.pace-done.grey{
     background-color: #e7eaec;
   }
 }
+.wrap-dark-green {
+  background-color: @pp-dark-green;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 6px;
+  //&:hover {
+  //  background-color: #e7eaec;
+  //}
+}
+
 
 .side-padding0 {
   .side-padding(0px) !important;
 }
 .side-padding10 {
   .side-padding(10px);
+}
+.side-padding15 {
+  .side-padding(15px);
 }
 
 .right-padding0 {
