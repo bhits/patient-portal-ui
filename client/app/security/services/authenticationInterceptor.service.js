@@ -7,7 +7,8 @@
         .factory('authInterceptorService', authInterceptorService);
 
     /* @ngInject */
-    function authInterceptorService($q, utilityService, tokenService, emailTokenService, oauthConfig, accountConfig) {
+    function authInterceptorService($q, $location, utilityService, tokenService, emailTokenService,
+                                    urlAuthorizationConfigurerService, oauthConfig, accountConfig) {
         var service = {};
         service.request = request;
         service.responseError = responseError;
@@ -15,7 +16,7 @@
         return service;
 
         function request(config) {
-
+            var currentPath = $location.path();
             config.headers = config.headers || {};
 
             var accessToken = tokenService.getAccessToken();
@@ -27,21 +28,11 @@
                     config.headers.Authorization = 'Bearer  ' + accessToken;
                 }
             } else {
-                if (utilityService.urlMatcher("fe/index")) {
-                    utilityService.redirectTo("/fe/index");
-                } else if (utilityService.urlMatcher("fe/account/activationError")) {
-                    utilityService.redirectTo(accountConfig.activationErrorPath);
-                } else if (utilityService.urlMatcher("fe/account/verification")) {
+                if (urlAuthorizationConfigurerService.isAllowAccess(currentPath)) {
                     if (emailTokenService.isValidEmailToken()) {
-                        utilityService.redirectTo(accountConfig.verificationPath);
-                    }
-                } else if (utilityService.urlMatcher("fe/account/createPassword")) {
-                    if (emailTokenService.isValidEmailToken()) {
-                        utilityService.redirectTo(accountConfig.createPasswordPath);
-                    }
-                } else if (utilityService.urlMatcher("fe/account/activationSuccess")) {
-                    if (emailTokenService.isValidEmailToken()) {
-                        utilityService.redirectTo(accountConfig.activationSuccessPath);
+                        utilityService.redirectTo(currentPath);
+                    } else {
+                        utilityService.redirectTo(accountConfig.activationErrorPath);
                     }
                 } else {
                     utilityService.redirectTo(oauthConfig.loginPath);

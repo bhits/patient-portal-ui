@@ -10,7 +10,7 @@
         .factory('emailTokenService', emailTokenService);
 
     /* @ngInject */
-    function emailTokenService($sessionStorage, utilityService, accountConfig) {
+    function emailTokenService($sessionStorage) {
         //TODO implement
         var mockEmailToken = true;
 
@@ -33,12 +33,7 @@
 
         //TODO
         function isValidEmailToken() {
-            if (mockEmailToken) {
-                return true;
-            } else {
-                utilityService.redirectTo(accountConfig.activationErrorPath);
-                return false;
-            }
+            return mockEmailToken;
         }
 
         function removeEmailToken() {
