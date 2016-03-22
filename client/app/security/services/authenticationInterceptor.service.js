@@ -7,7 +7,7 @@
         .factory('authInterceptorService', authInterceptorService);
 
     /* @ngInject */
-    function authInterceptorService($q, $location, utilityService, tokenService, emailTokenService,
+    function authInterceptorService($q, $location, utilityService, oauthTokenService, emailTokenService,
                                     urlAuthorizationConfigurerService, oauthConfig, accountConfig) {
         var service = {};
         service.request = request;
@@ -19,10 +19,10 @@
             var currentPath = $location.path();
             config.headers = config.headers || {};
 
-            var accessToken = tokenService.getAccessToken();
+            var accessToken = oauthTokenService.getAccessToken();
 
             if (accessToken) {
-                if (accessToken && tokenService.isExpiredToken()) {
+                if (accessToken && oauthTokenService.isExpiredToken()) {
                     //authenticationService.logout();
                 } else if (utilityService.isSecuredApi(config.url)) {
                     config.headers.Authorization = 'Bearer  ' + accessToken;
@@ -44,10 +44,10 @@
         function responseError(rejection) {
             if (rejection.status === 401) {
                 //var authService = $injector.get('AuthenticationService');
-                var authData = tokenService.getToken();
+                var authData = oauthTokenService.getToken();
 
                 if (authData) {
-                    if (tokenService.isExpiredToken()) {
+                    if (oauthTokenService.isExpiredToken()) {
                         //authenticationService.logout();
                     } else {
                         // Got to Error page

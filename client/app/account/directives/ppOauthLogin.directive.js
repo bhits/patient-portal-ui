@@ -21,7 +21,7 @@
     }
 
     /* @ngInject */
-    function OauthLoginController(utilityService, authenticationService, oauthConfig, profileService, tokenService) {
+    function OauthLoginController(utilityService, authenticationService, oauthConfig, profileService, oauthTokenService) {
         var vm = this;
         vm.login = login;
         vm.canSubmit = canSubmit;
@@ -30,7 +30,7 @@
             authenticationService.login(vm.user.email, vm.user.password)
                 .then(
                     function (response) {
-                        tokenService.setToken(response);
+                        oauthTokenService.setToken(response);
                         profileService.loadProfile()
                             .then(
                                 function (data) {
@@ -42,7 +42,7 @@
                                 }
                             );
                     }, function (error) {
-                        tokenService.removeToken();
+                        oauthTokenService.removeToken();
                         vm.loginError = true;
                     }
                 );

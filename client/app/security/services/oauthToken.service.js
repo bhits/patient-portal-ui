@@ -2,10 +2,10 @@
     'use strict';
 
     angular.module('app.security')
-        .factory('tokenService', tokenService);
+        .factory('oauthTokenService', oauthTokenService);
 
     /* @ngInject */
-    function tokenService($sessionStorage) {
+    function oauthTokenService($sessionStorage) {
 
         var service = {};
 
