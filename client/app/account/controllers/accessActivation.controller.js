@@ -7,10 +7,10 @@
 
     angular
         .module("app.account")
-        .controller('VerificationController', VerificationController);
+        .controller('AccessActivationController', AccessActivationController);
 
     /* @ngInject */
-    function VerificationController(allowVerification) {
+    function AccessActivationController(allowVerification) {
         var vm = this;
         vm.allowVerification = allowVerification;
     }

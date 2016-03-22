@@ -10,8 +10,8 @@
         .factory('emailTokenService', emailTokenService);
 
     /* @ngInject */
-    function emailTokenService($sessionStorage, accountConfig) {
-
+    function emailTokenService($resource, $sessionStorage, envService) {
+        var verificationResource = $resource(envService.unsecuredApis.verificationUrl + ":emailToken", {emailToken: '@emailToken'});
         var service = {};
 
         service.loadEmailToken = loadEmailToken;
@@ -35,10 +35,8 @@
             $sessionStorage.emailToken = emailToken;
         }
 
-        //TODO
-        function isValidEmailToken() {
-            var verifyToken = getEmailToken();
-            return verifyToken === 'dssfdsfdsf';
+        function isValidEmailToken(emailToken, success, error) {
+            return verificationResource.get({emailToken: emailToken}, success, error);
         }
 
         function removeEmailToken() {

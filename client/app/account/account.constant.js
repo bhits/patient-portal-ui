@@ -9,6 +9,7 @@
         .module('app.account')
         .constant('accountConfig',
             {
+                emailTokenPath: '/fe/account/activation',
                 verificationPath: '/fe/account/verification',
                 createPasswordPath: '/fe/account/createPassword',
                 activationSuccessPath: '/fe/account/activationSuccess',

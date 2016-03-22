@@ -27,19 +27,19 @@
                 data: {pageTitle: 'Account'},
                 templateUrl: ''
             })
-            .state('fe.account.verification', {
-                url: '/verification',
-                data: {pageTitle: 'Account Verification'},
-                templateUrl: 'app/account/controllers/userAccountVerification.html',
-                controller: 'VerificationController',
-                controllerAs: 'verificationVm',
+            .state('fe.account.activation', {
+                url: '/activation',
+                data: {pageTitle: 'Activation'},
+                controller: 'AccessActivationController',
+                controllerAs: 'accessActivationVm',
                 resolve: {
                     /* @ngInject */
                     allowVerification: function ($location, $q, emailTokenService, utilityService, accountConfig) {
                         var deferred = $q.defer();
                         var emailTokenStr = $location.hash();
                         var emailToken = emailTokenService.loadEmailToken(emailTokenStr);
-                        var accessVerificationPromise = emailTokenService.isValidEmailToken(emailToken, onAccessSuccess, onAccessError);
+
+                        emailTokenService.isValidEmailToken(emailToken, onAccessSuccess, onAccessError);
 
                         function onAccessSuccess(response) {
                             emailTokenService.setEmailToken(emailToken);
@@ -53,6 +53,11 @@
                         return deferred.promise;
                     }
                 }
+            })
+            .state('fe.account.verification', {
+                url: '/verification',
+                data: {pageTitle: 'Account Verification'},
+                templateUrl: 'app/account/controllers/userAccountVerification.html'
             })
             .state('fe.account.createPassword', {
                 url: "/createPassword",
