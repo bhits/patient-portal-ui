@@ -12,7 +12,6 @@
     function urlAuthorizationConfigurerService(accountConfig) {
         var requestMatcherRegistry = [
             "/fe/index",
-            accountConfig.emailTokenPath,
             accountConfig.activationErrorPath,
             accountConfig.verificationPath,
             accountConfig.createPasswordPath,

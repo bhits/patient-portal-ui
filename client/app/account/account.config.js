@@ -15,11 +15,11 @@
 
         $stateProvider
             .state('fe.login', {
-                url: "/login",
+                url: '/login',
                 data: {pageTitle: 'Login'},
-                templateUrl: "app/account/controllers/securityLogin.html",
-                controllerAs: "loginVm",
-                controller: 'LoginController'
+                templateUrl: 'app/account/controllers/securityLogin.html',
+                controller: 'LoginController',
+                controllerAs: 'loginVm'
             })
             .state('fe.account', {
                 abstract: true,
@@ -27,11 +27,12 @@
                 data: {pageTitle: 'Account'},
                 templateUrl: ''
             })
-            .state('fe.account.activation', {
-                url: '/activation',
-                data: {pageTitle: 'Activation'},
-                controller: 'AccessActivationController',
-                controllerAs: 'accessActivationVm',
+            .state('fe.account.verification', {
+                url: '/verification',
+                data: {pageTitle: 'Account Verification'},
+                templateUrl: 'app/account/controllers/userAccountVerification.html',
+                controller: 'VerificationController',
+                controllerAs: 'verificationVm',
                 resolve: {
                     /* @ngInject */
                     allowVerification: function ($location, $q, emailTokenService, utilityService, accountConfig) {
@@ -43,7 +44,7 @@
 
                         function onAccessSuccess(response) {
                             emailTokenService.setEmailToken(emailToken);
-                            utilityService.redirectTo(accountConfig.verificationPath);
+                            deferred.resolve(response);
                         }
 
                         function onAccessError() {
@@ -54,27 +55,22 @@
                     }
                 }
             })
-            .state('fe.account.verification', {
-                url: '/verification',
-                data: {pageTitle: 'Account Verification'},
-                templateUrl: 'app/account/controllers/userAccountVerification.html'
-            })
             .state('fe.account.createPassword', {
-                url: "/createPassword",
+                url: '/createPassword',
                 data: {pageTitle: 'Create Password'},
-                templateUrl: "app/account/controllers/createPassword.html"
+                templateUrl: 'app/account/controllers/createPassword.html'
             })
             .state('fe.account.activationSuccess', {
-                url: "/activationSuccess",
+                url: '/activationSuccess',
                 data: {pageTitle: 'Account Success'},
-                templateUrl: "app/account/controllers/activationSuccess.html",
-                controllerAs: "activateVm",
-                controller: 'ActivateController'
+                templateUrl: 'app/account/controllers/activationSuccess.html',
+                controller: 'ActivateController',
+                controllerAs: 'activateVm'
             })
             .state('fe.account.activationError', {
-                url: "/activationError",
+                url: '/activationError',
                 data: {pageTitle: 'Activation Error'},
-                templateUrl: "app/account/controllers/activationError.html"
+                templateUrl: 'app/account/controllers/activationError.html'
             });
     }
 })();
