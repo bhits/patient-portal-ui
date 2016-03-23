@@ -35,7 +35,7 @@
         }
 
         function activatePatient(patientInfo, success, error) {
-            activationResource.save(patientInfo, success, error);
+            return activationResource.save(patientInfo, success, error);
         }
 
         function setVerifyInfo(verifyInfo) {
@@ -59,7 +59,7 @@
         }
 
         function removeActivateInfo() {
-            $sessionStorage.reset();
+            $sessionStorage.$reset();
         }
     }
 })();
