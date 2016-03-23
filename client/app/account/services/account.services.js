@@ -17,22 +17,14 @@
     function accountService($resource, $sessionStorage, envService) {
         var verificationResource = $resource(envService.securedApis.patientUserApiBaseUrl + "/verifications");
         var activationResource = $resource(envService.securedApis.patientUserApiBaseUrl + "/activations");
-        //TODO implement
-        var mockNotAlreadyVerified = true;
 
         var service = {};
-        service.notAlreadyVerified = notAlreadyVerified;
         service.verifyPatient = verifyPatient;
         service.activatePatient = activatePatient;
         service.setVerifyInfo = setVerifyInfo;
         service.removeVerifyInfo = removeVerifyInfo;
 
         return service;
-
-        //TODO
-        function notAlreadyVerified() {
-            return mockNotAlreadyVerified;
-        }
 
         function verifyPatient(verifyInfo, success, error) {
             verificationResource.get(verifyInfo, success, error);

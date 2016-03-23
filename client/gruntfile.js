@@ -547,7 +547,7 @@ module.exports = function (grunt) {
                         unsecuredApis: {
                             plsApiBaseUrl: 'https://localhost:8443/pls/providers',
                             tokenUrl: 'https://localhost:8443/uaa/oauth/token',
-                            verificationUrl: 'https://localhost:8452/patientUser/verifications?emailToken='
+                            verificationUrl: 'https://localhost:8452/patientUser/verifications'
                         }
                     }
                 }
