@@ -49,11 +49,11 @@
 
         function activateSuccess(response) {
             utilityService.redirectTo(accountConfig.activationSuccessPath);
+            accountService.setPatientName(response);
         }
 
         function activateError(response) {
             vm.activateError = true;
-            vm.patient = angular.copy(createPasswordFormMaster);
         }
 
         function activate() {

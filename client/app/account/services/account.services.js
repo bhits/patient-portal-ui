@@ -18,13 +18,17 @@
         var verificationResource = $resource(envService.unsecuredApis.verificationUrl);
         var activationResource = $resource(envService.unsecuredApis.activationUrl);
 
+        var patientFullName = '';
         var service = {};
+
         service.verifyPatient = verifyPatient;
         service.activatePatient = activatePatient;
         service.setVerifyInfo = setVerifyInfo;
         service.getVerifyInfo = getVerifyInfo;
         service.setUserName = setUserName;
         service.getUserName = getUserName;
+        service.setPatientName = setPatientName;
+        service.getPatientName = getPatientName;
         service.removeVerifyInfo = removeVerifyInfo;
         service.removeActivateInfo = removeActivateInfo;
 
@@ -52,6 +56,14 @@
 
         function getUserName() {
             return $sessionStorage.userName;
+        }
+
+        function setPatientName(patientInfo) {
+            patientFullName = patientInfo.firstName + ' ' + patientInfo.lastName;
+        }
+
+        function getPatientName() {
+            return patientFullName;
         }
 
         function removeVerifyInfo() {

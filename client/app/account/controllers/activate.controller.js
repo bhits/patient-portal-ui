@@ -13,6 +13,7 @@
     function ActivateController($state, accountService) {
         var vm = this;
         vm.activated = activated;
+        vm.patientName = accountService.getPatientName();
 
         function activated() {
             accountService.removeActivateInfo();

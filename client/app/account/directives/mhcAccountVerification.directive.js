@@ -50,7 +50,6 @@
 
         function verifyError(response) {
             vm.verifyError = true;
-            vm.verifyInfo = angular.copy(verificationFormMaster);
         }
 
         function verify() {
