@@ -25,7 +25,7 @@
     }
 
     /* @ngInject */
-    function VerificationController($state, utilityService, notificationService, accountService, emailTokenService, accountConfig) {
+    function VerificationController(utilityService, accountService, emailTokenService, accountConfig) {
         var vm = this;
         var verificationFormMaster = {month: "", day: "", year: "", verificationCode: ""};
 
@@ -42,7 +42,6 @@
         }
 
         function verifySuccess(response) {
-            notificationService.success("Success in verifying.");
             var verifyInfo = prepareVerification();
             accountService.setVerifyInfo(verifyInfo);
             accountService.setUserName(response.username);
@@ -50,8 +49,8 @@
         }
 
         function verifyError(response) {
-            notificationService.error("Error in verifying.");
-            $state.go($state.current, {}, {reload: true});
+            vm.verifyError = true;
+            vm.verifyInfo = angular.copy(verificationFormMaster);
         }
 
         function verify() {
