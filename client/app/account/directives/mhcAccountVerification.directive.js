@@ -25,11 +25,38 @@
     }
 
     /* @ngInject */
-    function VerificationController($state, utilityService, notificationService, accountService, accountConfig) {
+    function VerificationController($state, utilityService, notificationService, accountService, emailTokenService, accountConfig) {
         var vm = this;
         var verificationFormMaster = {month: "", day: "", year: "", verificationCode: ""};
+
         vm.clearField = clearField;
         vm.verify = verify;
+
+        function prepareVerification() {
+            var birthDate = vm.year + '-' + vm.month + '-' + vm.day;
+            return {
+                emailToken: emailTokenService.getEmailToken(),
+                verificationCode: vm.verificationCode,
+                birthDate: birthDate
+            };
+        }
+
+        function verifySuccess(response) {
+            notificationService.success("Success in verifying.");
+            var verifyInfo = prepareVerification();
+            accountService.setVerifyInfo(verifyInfo);
+            utilityService.redirectTo(accountConfig.createPasswordPath);
+        }
+
+        function verifyError(response) {
+            notificationService.error("Error in verifying.");
+            $state.go($state.current, {}, {reload: true});
+        }
+
+        function verify() {
+            var verifyInfo = prepareVerification();
+            accountService.verifyPatient(verifyInfo, verifySuccess, verifyError);
+        }
 
         function clearField(verificationForm) {
             if (verificationForm) {
@@ -37,22 +64,6 @@
                 verificationForm.$setUntouched();
                 vm.verifyInfo = angular.copy(verificationFormMaster);
             }
-        }
-
-        function verify() {
-            accountService.verifyPatient(vm.verifyInfo, verifySuccess, verifyError);
-        }
-
-        function verifySuccess(response) {
-            notificationService.success("Success in verifying.");
-            //TODO setVerifyInfo to storage
-            accountService.setVerifyInfo(vm.verifyInfo);
-            utilityService.redirectTo(accountConfig.createPasswordPath);
-        }
-
-        function verifyError(response) {
-            notificationService.error("Error in verifying.");
-            $state.go($state.current, {}, {reload: true});
         }
     }
 })();

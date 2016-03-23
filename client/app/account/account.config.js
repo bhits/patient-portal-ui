@@ -34,6 +34,7 @@
                 controller: 'VerificationController',
                 controllerAs: 'verificationVm',
                 resolve: {
+
                     /* @ngInject */
                     allowVerification: function ($location, $q, emailTokenService, utilityService, accountConfig) {
                         var deferred = $q.defer();
@@ -58,7 +59,31 @@
             .state('fe.account.createPassword', {
                 url: '/createPassword',
                 data: {pageTitle: 'Create Password'},
-                templateUrl: 'app/account/controllers/createPassword.html'
+                templateUrl: 'app/account/controllers/createPassword.html',
+                controller: 'CreatePasswordController',
+                controllerAs: 'createPasswordVm',
+                resolve: {
+
+                    /* @ngInject */
+                    allowActivation: function ($location, $q, emailTokenService, utilityService, accountConfig) {
+                        var deferred = $q.defer();
+                        var emailToken = emailTokenService.getEmailToken();
+
+                        emailTokenService.isValidEmailToken(emailToken, onAccessSuccess, onAccessError);
+
+                        function onAccessSuccess(response) {
+                            deferred.resolve(response);
+                        }
+
+                        function onAccessError() {
+                            utilityService.redirectTo(accountConfig.activationErrorPath);
+                            //Todo fix not deleting
+                            emailTokenService.removeEmailToken();
+                        }
+
+                        return deferred.promise;
+                    }
+                }
             })
             .state('fe.account.activationSuccess', {
                 url: '/activationSuccess',

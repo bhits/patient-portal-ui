@@ -15,7 +15,7 @@
 
     /* @ngInject */
     function accountService($resource, $sessionStorage, envService) {
-        var verificationResource = $resource(envService.securedApis.patientUserApiBaseUrl + "/verifications");
+        var verificationResource = $resource(envService.unsecuredApis.verificationUrl);
         var activationResource = $resource(envService.securedApis.patientUserApiBaseUrl + "/activations");
 
         var service = {};
@@ -27,7 +27,7 @@
         return service;
 
         function verifyPatient(verifyInfo, success, error) {
-            verificationResource.get(verifyInfo, success, error);
+            return verificationResource.get(verifyInfo, success, error);
         }
 
         function activatePatient(patientInfo, success, error) {
