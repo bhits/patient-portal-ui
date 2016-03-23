@@ -31,19 +31,8 @@
 
         vm.clearField = clearField;
         vm.activate = activate;
+        vm.userName = accountService.getUserName();
         //todo prepare activate accountObj
-
-        function clearField(createPasswordForm) {
-            if (createPasswordForm) {
-                createPasswordForm.$setPristine();
-                createPasswordForm.$setUntouched();
-                vm.account = angular.copy(createPasswordFormMaster);
-            }
-        }
-
-        function activate() {
-            accountService.activatePatient(vm.account, activateSuccess, activateError);
-        }
 
         function activateSuccess(response) {
             notificationService.success("Success in activation.");
@@ -53,6 +42,18 @@
         function activateError(response) {
             notificationService.error("Error in activation.");
             $state.go($state.current, {}, {reload: true});
+        }
+
+        function activate() {
+            accountService.activatePatient(vm.account, activateSuccess, activateError);
+        }
+
+        function clearField(createPasswordForm) {
+            if (createPasswordForm) {
+                createPasswordForm.$setPristine();
+                createPasswordForm.$setUntouched();
+                vm.account = angular.copy(createPasswordFormMaster);
+            }
         }
     }
 })();

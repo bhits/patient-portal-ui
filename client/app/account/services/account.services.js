@@ -15,27 +15,22 @@
 
     /* @ngInject */
     function accountService($resource, $sessionStorage, envService) {
-        var verificationResource = $resource(envService.securedApis.patientUserApiBaseUrl + "/verifications");
+        var verificationResource = $resource(envService.unsecuredApis.verificationUrl);
         var activationResource = $resource(envService.securedApis.patientUserApiBaseUrl + "/activations");
-        //TODO implement
-        var mockNotAlreadyVerified = true;
 
         var service = {};
-        service.notAlreadyVerified = notAlreadyVerified;
         service.verifyPatient = verifyPatient;
         service.activatePatient = activatePatient;
         service.setVerifyInfo = setVerifyInfo;
+        service.setUserName = setUserName;
+        service.getUserName = getUserName;
         service.removeVerifyInfo = removeVerifyInfo;
+        service.removeActivateInfo = removeActivateInfo;
 
         return service;
 
-        //TODO
-        function notAlreadyVerified() {
-            return mockNotAlreadyVerified;
-        }
-
         function verifyPatient(verifyInfo, success, error) {
-            verificationResource.get(verifyInfo, success, error);
+            return verificationResource.get(verifyInfo, success, error);
         }
 
         function activatePatient(patientInfo, success, error) {
@@ -46,8 +41,20 @@
             $sessionStorage.verifyInfo = verifyInfo;
         }
 
+        function setUserName(userName) {
+            $sessionStorage.userName = userName;
+        }
+
+        function getUserName() {
+            return $sessionStorage.userName;
+        }
+
         function removeVerifyInfo() {
             delete $sessionStorage.verifyInfo;
+        }
+
+        function removeActivateInfo() {
+            $sessionStorage.reset();
         }
     }
 })();

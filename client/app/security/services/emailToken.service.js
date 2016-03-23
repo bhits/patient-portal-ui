@@ -10,18 +10,22 @@
         .factory('emailTokenService', emailTokenService);
 
     /* @ngInject */
-    function emailTokenService($sessionStorage) {
-        //TODO implement
-        var mockEmailToken = true;
-
+    function emailTokenService($resource, $sessionStorage, envService) {
+        var emailTokenResource = $resource(envService.unsecuredApis.verificationUrl);
         var service = {};
 
+        service.loadEmailToken = loadEmailToken;
         service.getEmailToken = getEmailToken;
         service.setEmailToken = setEmailToken;
         service.isValidEmailToken = isValidEmailToken;
         service.removeEmailToken = removeEmailToken;
 
         return service;
+
+        function loadEmailToken(emailTokenString) {
+            var emailToken = emailTokenString.split("emailToken=");
+            return emailToken[1];
+        }
 
         function getEmailToken() {
             return $sessionStorage.emailToken;
@@ -31,9 +35,8 @@
             $sessionStorage.emailToken = emailToken;
         }
 
-        //TODO
-        function isValidEmailToken() {
-            return mockEmailToken;
+        function isValidEmailToken(emailToken, success, error) {
+            return emailTokenResource.get({emailToken: emailToken}, success, error);
         }
 
         function removeEmailToken() {

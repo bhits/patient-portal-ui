@@ -15,7 +15,7 @@
         vm.activated = activated;
 
         function activated() {
-            accountService.removeVerifyInfo();
+            accountService.removeActivateInfo();
             $state.go('fe.login');
         }
     }

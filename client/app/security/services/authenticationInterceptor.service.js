@@ -7,8 +7,8 @@
         .factory('authInterceptorService', authInterceptorService);
 
     /* @ngInject */
-    function authInterceptorService($q, $location, utilityService, oauthTokenService, emailTokenService,
-                                    urlAuthorizationConfigurerService, oauthConfig, accountConfig) {
+    function authInterceptorService($q, $location, utilityService, oauthTokenService,
+                                    urlAuthorizationConfigurerService, oauthConfig) {
         var service = {};
         service.request = request;
         service.responseError = responseError;
@@ -29,11 +29,7 @@
                 }
             } else {
                 if (urlAuthorizationConfigurerService.isAllowAccess(currentPath)) {
-                    if (emailTokenService.isValidEmailToken()) {
-                        utilityService.redirectTo(currentPath);
-                    } else {
-                        utilityService.redirectTo(accountConfig.activationErrorPath);
-                    }
+                    utilityService.redirectTo(currentPath);
                 } else {
                     utilityService.redirectTo(oauthConfig.loginPath);
                 }
