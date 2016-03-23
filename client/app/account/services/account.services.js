@@ -16,12 +16,13 @@
     /* @ngInject */
     function accountService($resource, $sessionStorage, envService) {
         var verificationResource = $resource(envService.unsecuredApis.verificationUrl);
-        var activationResource = $resource(envService.securedApis.patientUserApiBaseUrl + "/activations");
+        var activationResource = $resource(envService.unsecuredApis.activationUrl);
 
         var service = {};
         service.verifyPatient = verifyPatient;
         service.activatePatient = activatePatient;
         service.setVerifyInfo = setVerifyInfo;
+        service.getVerifyInfo = getVerifyInfo;
         service.setUserName = setUserName;
         service.getUserName = getUserName;
         service.removeVerifyInfo = removeVerifyInfo;
@@ -39,6 +40,10 @@
 
         function setVerifyInfo(verifyInfo) {
             $sessionStorage.verifyInfo = verifyInfo;
+        }
+
+        function getVerifyInfo() {
+            return $sessionStorage.verifyInfo;
         }
 
         function setUserName(userName) {

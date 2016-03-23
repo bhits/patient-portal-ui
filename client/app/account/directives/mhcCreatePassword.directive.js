@@ -25,34 +25,47 @@
     }
 
     /* @ngInject */
-    function CreatePasswordController($state, utilityService, notificationService, accountService, accountConfig) {
+    function CreatePasswordController(utilityService, accountService, accountConfig) {
         var vm = this;
         var createPasswordFormMaster = {password: "", confirmPassword: ""};
 
         vm.clearField = clearField;
         vm.activate = activate;
-        vm.userName = accountService.getUserName();
-        //todo prepare activate accountObj
+        vm.username = accountService.getUserName();
+
+        function prepareActivation() {
+            var temp = {};
+            var patientInfoObject = {
+                emailToken: accountService.getVerifyInfo().emailToken,
+                verificationCode: accountService.getVerifyInfo().verificationCode,
+                birthDate: accountService.getVerifyInfo().birthDate,
+                password: vm.patient.password,
+                confirmPassword: vm.patient.confirmPassword,
+                username: vm.username
+            };
+            angular.copy(patientInfoObject, temp);
+            return temp;
+        }
 
         function activateSuccess(response) {
-            notificationService.success("Success in activation.");
             utilityService.redirectTo(accountConfig.activationSuccessPath);
         }
 
         function activateError(response) {
-            notificationService.error("Error in activation.");
-            $state.go($state.current, {}, {reload: true});
+            vm.activateError = true;
+            vm.patient = angular.copy(createPasswordFormMaster);
         }
 
         function activate() {
-            accountService.activatePatient(vm.account, activateSuccess, activateError);
+            var patientInfo = prepareActivation();
+            accountService.activatePatient(patientInfo, activateSuccess, activateError);
         }
 
         function clearField(createPasswordForm) {
             if (createPasswordForm) {
                 createPasswordForm.$setPristine();
                 createPasswordForm.$setUntouched();
-                vm.account = angular.copy(createPasswordFormMaster);
+                vm.patient = angular.copy(createPasswordFormMaster);
             }
         }
     }
