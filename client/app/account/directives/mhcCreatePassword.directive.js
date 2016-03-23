@@ -34,8 +34,7 @@
         vm.username = accountService.getUserName();
 
         function prepareActivation() {
-            var temp = {};
-            var patientInfoObject = {
+            return {
                 emailToken: accountService.getVerifyInfo().emailToken,
                 verificationCode: accountService.getVerifyInfo().verificationCode,
                 birthDate: accountService.getVerifyInfo().birthDate,
@@ -43,8 +42,6 @@
                 confirmPassword: vm.patient.confirmPassword,
                 username: vm.username
             };
-            angular.copy(patientInfoObject, temp);
-            return temp;
         }
 
         function activateSuccess(response) {
