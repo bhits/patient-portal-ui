@@ -22,7 +22,10 @@
         service.verifyPatient = verifyPatient;
         service.activatePatient = activatePatient;
         service.setVerifyInfo = setVerifyInfo;
+        service.setUserName = setUserName;
+        service.getUserName = getUserName;
         service.removeVerifyInfo = removeVerifyInfo;
+        service.removeActivateInfo = removeActivateInfo;
 
         return service;
 
@@ -38,8 +41,20 @@
             $sessionStorage.verifyInfo = verifyInfo;
         }
 
+        function setUserName(userName) {
+            $sessionStorage.userName = userName;
+        }
+
+        function getUserName() {
+            return $sessionStorage.userName;
+        }
+
         function removeVerifyInfo() {
             delete $sessionStorage.verifyInfo;
+        }
+
+        function removeActivateInfo() {
+            $sessionStorage.reset();
         }
     }
 })();

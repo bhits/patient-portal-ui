@@ -33,10 +33,10 @@
         vm.verify = verify;
 
         function prepareVerification() {
-            var birthDate = vm.year + '-' + vm.month + '-' + vm.day;
+            var birthDate = vm.verifyInfo.year + '-' + vm.verifyInfo.month + '-' + vm.verifyInfo.day;
             return {
                 emailToken: emailTokenService.getEmailToken(),
-                verificationCode: vm.verificationCode,
+                verificationCode: vm.verifyInfo.verificationCode,
                 birthDate: birthDate
             };
         }
@@ -45,6 +45,7 @@
             notificationService.success("Success in verifying.");
             var verifyInfo = prepareVerification();
             accountService.setVerifyInfo(verifyInfo);
+            accountService.setUserName(response.username);
             utilityService.redirectTo(accountConfig.createPasswordPath);
         }
 
