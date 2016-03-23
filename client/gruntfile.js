@@ -539,14 +539,14 @@ module.exports = function (grunt) {
                         version: '<%= pkg.version %>',
                         base64BasicKey: 'cGF0aWVudC1wb3J0YWwtdWk6Y2hhbmdlaXQ=',
                         securedApis: {
-                            pcmApiBaseUrl: 'https://localhost:8446/pcm/patients',
-                            phrApiBaseUrl: 'https://localhost:8445/phr',
-                            tryPolicyApiBaseUrl: 'https://localhost:8449/trypolicy',
-                            userInfo : 'https://localhost:8443/uaa/userinfo'
+                            pcmApiBaseUrl: '/pcm/patients',
+                            phrApiBaseUrl: '/phr',
+                            tryPolicyApiBaseUrl: '/trypolicy',
+                            userInfo : '/uaa/userinfo'
                         },
                         unsecuredApis: {
-                            plsApiBaseUrl: 'https://localhost:8443/pls/providers',
-                            tokenUrl : 'https://localhost:8443/uaa/oauth/token'
+                            plsApiBaseUrl: '/pls/providers',
+                            tokenUrl : '/uaa/oauth/token'
                         }
                     }
                 }
@@ -562,14 +562,14 @@ module.exports = function (grunt) {
                         version: '<%= pkg.version %>',
                         base64BasicKey: 'cGF0aWVudC1wb3J0YWwtdWk6QllqeVdYU2JEdmRx',
                         securedApis: {
-                            pcmApiBaseUrl: 'https://bhitsqaapp02:8446/pcm/patients',
-                            phrApiBaseUrl: 'https://bhitsqaapp02:8445/phr',
-                            tryPolicyApiBaseUrl: 'https://bhitsqaapp02:8449/trypolicy',
-                            userInfo : 'https://bhitsqaapp02:8443/uaa/userinfo'
+                            pcmApiBaseUrl: '/pcm/patients',
+                            phrApiBaseUrl: '/phr',
+                            tryPolicyApiBaseUrl: '/trypolicy',
+                            userInfo : '/uaa/userinfo'
                         },
                         unsecuredApis: {
-                            plsApiBaseUrl: 'https://bhitsqaapp02:8443/pls/providers',
-                            tokenUrl : 'https://bhitsqaapp02:8443/uaa/oauth/token'
+                            plsApiBaseUrl: '/pls/providers',
+                            tokenUrl : '/uaa/oauth/token'
                         }
                     }
                 }

@@ -1,9 +1,36 @@
-# application.yml template
 server:
-  contextPath: /pp-ui
+  port: 0
+logging:
+  file: /java/MHC_LOGS/pp-ui/ppui.log
+info:
+  component: Patient Portal UI
+eureka:
+  instance:
+    instance-id: ${spring.cloud.client.hostname}:${spring.application.name}:${spring.application.instance_id:${random.value}}
+#    hostname: localhost
+    secure-port-enabled: false
+    non-secure-port-enabled: true
+  client:
+    healthcheck:
+      enabled: true
+    service-url:
+      defaultZone: https://localhost:8761/eureka/
+---
+spring.profiles: ssl
+server:
   port: 8444
   ssl:
     key-store: /ssl_keystore.keystore
     key-store-password: changeit
-logging:
-  file: /java/MHC_LOGS/pp-ui/ppui.log
+eureka:
+  instance:
+    secure-port: ${server.port}
+    secure-port-enabled: true
+    non-secure-port-enabled: false
+---
+spring.profiles: standalone-ssl
+spring:
+  profiles:
+    include: ssl
+server:
+  context-path: /pp-ui
