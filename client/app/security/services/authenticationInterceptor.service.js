@@ -18,6 +18,8 @@
         function request(config) {
 
             config.headers = config.headers || {};
+            config.headers['Cache-Control'] = 'no-cache';
+            config.headers.Pragma = 'no-cache';
 
             var accessToken = tokenService.getAccessToken();
 
