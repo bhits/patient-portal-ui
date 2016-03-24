@@ -27,18 +27,25 @@
     /* @ngInject */
     function VerificationController(utilityService, accountService, emailTokenService, accountConfig) {
         var vm = this;
-        var verificationFormMaster = {month: "", day: "", year: "", verificationCode: ""};
+        var verificationFormMaster = {verificationCode: ""};
 
         vm.clearField = clearField;
         vm.verify = verify;
 
         function prepareVerification() {
-            var birthDate = vm.verifyInfo.year + '-' + vm.verifyInfo.month + '-' + vm.verifyInfo.day;
+            var birthday = formatBirthday(vm.verifyInfo.birthdayObj);
             return {
                 emailToken: emailTokenService.getEmailToken(),
                 verificationCode: vm.verifyInfo.verificationCode,
-                birthDate: birthDate
+                birthDate: birthday
             };
+        }
+
+        function formatBirthday(birthdayObj) {
+            var year = birthdayObj.year;
+            var month = utilityService.digitFormat(birthdayObj.month, 2);
+            var day = utilityService.digitFormat(birthdayObj.day, 2);
+            return year + '-' + month + '-' + day;
         }
 
         function verifySuccess(response) {
