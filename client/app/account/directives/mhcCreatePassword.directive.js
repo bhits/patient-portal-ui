@@ -31,6 +31,7 @@
 
         vm.clearField = clearField;
         vm.activate = activate;
+        vm.canActivate = canActivate;
         vm.username = accountService.getUserName();
 
         function prepareActivation() {
@@ -56,6 +57,10 @@
         function activate() {
             var patientInfo = prepareActivation();
             accountService.activatePatient(patientInfo, activateSuccess, activateError);
+        }
+
+        function canActivate(createPasswordForm) {
+            return (createPasswordForm.$dirty && createPasswordForm.$valid);
         }
 
         function clearField(createPasswordForm) {

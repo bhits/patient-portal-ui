@@ -571,7 +571,9 @@ module.exports = function (grunt) {
                         },
                         unsecuredApis: {
                             plsApiBaseUrl: 'https://bhitsqaapp02:8443/pls/providers',
-                            tokenUrl: 'https://bhitsqaapp02:8443/uaa/oauth/token'
+                            tokenUrl: 'https://bhitsqaapp02:8443/uaa/oauth/token',
+                            verificationUrl: 'https://bhitsqaapp02:8452/patientUser/verifications',
+                            activationUrl: 'https://bhitsqaapp02:8452/patientUser/activations'
                         }
                     }
                 }

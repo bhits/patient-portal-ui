@@ -31,6 +31,7 @@
 
         vm.clearField = clearField;
         vm.verify = verify;
+        vm.canVerify = canVerify;
 
         function prepareVerification() {
             var birthday = formatBirthday(vm.verifyInfo.birthdayObj);
@@ -62,6 +63,10 @@
         function verify() {
             var verifyInfo = prepareVerification();
             accountService.verifyPatient(verifyInfo, verifySuccess, verifyError);
+        }
+
+        function canVerify(verificationForm) {
+            return (verificationForm.$dirty && verificationForm.$valid);
         }
 
         function clearField(verificationForm) {

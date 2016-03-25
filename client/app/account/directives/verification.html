@@ -1,4 +1,10 @@
 <div class="row">
+    <script type="text/ng-template" id="verification-messages">
+        <div ng-message="required">Please complete this required field.</div>
+        <div ng-message="isValidDate">Dates must be in the following format: mm/dd/yyyy</div>
+        <div ng-message="isFutureDate">Date of birth cannot be today's date, or a future date.</div>
+    </script>
+
     <div class="col-sm-offset-1 col-sm-10">
         <form class="" name="verificationForm">
             <fieldset class="">
@@ -17,9 +23,12 @@
 
                         <div class="row">
                             <div class="col-xs-8 col-sm-5 col-md-4 col-lg-3 m-b-xs">
-                                <input id="verificationCode" name="verificationCode" type="text"
-                                       ng-model="verificationVm.verifyInfo.verificationCode"
-                                       class="form-control"/>
+                                <input id="verificationCode" name="verificationCode" class="form-control" type="text"
+                                       ng-model="verificationVm.verifyInfo.verificationCode" required/>
+                                <div ng-messages="verificationForm.verificationCode.$error"
+                                     ng-if="verificationForm.verificationCode.$dirty" class="text-alert">
+                                    <div ng-messages-include="verification-messages"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -36,8 +45,8 @@
                         <button type="button" class="btn btn-default m-r-sm"
                                 ng-click="verificationVm.clearField(verificationForm)">Clear
                         </button>
-                        <a class="btn btn-primary dark-green" ng-click="verificationVm.verify()">
-                            Continue
+                        <a class="btn btn-primary dark-green" ng-click="verificationVm.verify()"
+                           ng-disabled="!verificationVm.canVerify(verificationForm)">Continue
                         </a>
                     </div>
                 </div>
