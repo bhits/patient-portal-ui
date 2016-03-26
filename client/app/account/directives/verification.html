@@ -21,6 +21,9 @@
                                 <li ng-message="monthRequired">Month is required</li>
                                 <li ng-message="yearRequired">Year is required</li>
                             </ul>
+                            <div class="text-alert" ng-show="verificationVm.isFutureDate">
+                                <span>Date of birth cannot be today's date, or a future date.</span>
+                            </div>
                         </div>
                     </div>
                 </div>
