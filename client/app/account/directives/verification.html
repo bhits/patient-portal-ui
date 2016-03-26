@@ -15,7 +15,7 @@
                                                    ng-model="verificationVm.verifyInfo.birthdate"
                                                    year-order="desc" start-year="1900" end-year=""
                                                    required></mhc-multi-select-date>
-                            <ul class="text-alert list-inline" ng-messages-multiple ng-if="verificationForm.$invalid"
+                            <ul class="text-alert" ng-messages-multiple ng-if="verificationForm.$dirty"
                                 ng-messages="verificationForm.birthdate.$error">
                                 <li ng-message="dayRequired">Day is required</li>
                                 <li ng-message="monthRequired">Month is required</li>
