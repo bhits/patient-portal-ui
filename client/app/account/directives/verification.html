@@ -1,9 +1,6 @@
 <div class="row">
-    <script type="text/ng-template" id="multiSelectDate-messages">
-        <div ng-message="isFutureDate">Date of birth cannot be today's date, or a future date.</div>
-        <div ng-message="dayRequired">Day is required</div>
-        <div ng-message="monthRequired">Month is required</div>
-        <div ng-message="yearRequired">Year is required</div>
+    <script type="text/ng-template" id="verification-messages">
+        <div ng-message="required">Please complete this required field.</div>
     </script>
 
     <div class="col-sm-offset-1 col-sm-10">
@@ -18,11 +15,12 @@
                                                    ng-model="verificationVm.verifyInfo.birthdate"
                                                    year-order="desc" start-year="1900" end-year=""
                                                    required></mhc-multi-select-date>
-                            <br>
-                            <div class="text-alert" ng-messages-multiple ng-if="verificationForm.$invalid"
-                                 ng-messages="verificationForm.birthdate.$error">
-                                <div ng-messages-include="multiSelectDate-messages"></div>
-                            </div>
+                            <ul class="text-alert list-inline" ng-messages-multiple ng-if="verificationForm.$invalid"
+                                ng-messages="verificationForm.birthdate.$error">
+                                <li ng-message="dayRequired">Day is required</li>
+                                <li ng-message="monthRequired">Month is required</li>
+                                <li ng-message="yearRequired">Year is required</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -36,9 +34,9 @@
                             <div class="col-xs-8 col-sm-5 col-md-4 col-lg-3 m-b-xs">
                                 <input id="verificationCode" name="verificationCode" class="form-control" type="text"
                                        ng-model="verificationVm.verifyInfo.verificationCode" required/>
-                                <div ng-messages="verificationForm.verificationCode.$error"
-                                     ng-if="verificationForm.verificationCode.$dirty" class="text-alert">
-                                    <div ng-message="required">Please complete this required field.</div>
+                                <div class="text-alert" ng-messages="verificationForm.verificationCode.$error"
+                                     ng-if="verificationForm.verificationCode.$dirty">
+                                    <div ng-messages-include="verification-messages"></div>
                                 </div>
                             </div>
                         </div>

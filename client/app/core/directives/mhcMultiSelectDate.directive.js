@@ -15,13 +15,13 @@
             restrict: 'E',
             require: '?ngModel',
             templateUrl: 'app/core/directives/multiSelectDate.html',
-            link: linkFuc
+            link: linkFunc
         };
 
         return directive;
 
         /* @ngInject */
-        function linkFuc(scope, element, attrs, ngModel) {
+        function linkFunc(scope, element, attrs, ngModel) {
             if (!ngModel) {
                 return;
             }
