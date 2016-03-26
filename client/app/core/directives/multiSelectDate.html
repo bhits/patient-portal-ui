@@ -1,0 +1,23 @@
+<div class="row">
+    <div class="col-xs-3">
+        Month
+        <select ng-model="date.month" ng-options="month for month in selects.months()" class="form-control">
+            <option value="" disabled>Month</option>
+        </select>
+    </div>
+
+    <div class="col-xs-3">
+        Day
+        <select ng-model="date.day" ng-options="day for day in selects.days()" class="form-control">
+            <option value="" disabled>Day</option>
+        </select>
+    </div>
+
+    <div class="col-xs-6">
+        Year
+        <select ng-model="date.year" ng-options="year for year in selects.years() | orderBy: year:yearOrder"
+                class="form-control">
+            <option value="" disabled>Year</option>
+        </select>
+    </div>
+</div>

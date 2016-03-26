@@ -1,8 +1,9 @@
 <div class="row">
-    <script type="text/ng-template" id="verification-messages">
-        <div ng-message="required">Please complete this required field.</div>
-        <div ng-message="isValidDate">Dates must be in the following format: mm/dd/yyyy</div>
+    <script type="text/ng-template" id="multiSelectDate-messages">
         <div ng-message="isFutureDate">Date of birth cannot be today's date, or a future date.</div>
+        <div ng-message="dayRequired">Day is required</div>
+        <div ng-message="monthRequired">Month is required</div>
+        <div ng-message="yearRequired">Year is required</div>
     </script>
 
     <div class="col-sm-offset-1 col-sm-10">
@@ -10,10 +11,20 @@
             <fieldset class="">
                 <legend class="sr-only">Account Setup Verification</legend>
                 <div class="form-group wrap">
-                    <label for="birthday">Date of Birth</label>
-                    <mhc-date-dropdowns id="birthday"
-                                        ng-model="verificationVm.verifyInfo.birthdayObj">
-                    </mhc-date-dropdowns>
+                    <label for="birthdate">Date of Birth</label>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <mhc-multi-select-date id="birthdate" name="birthdate"
+                                                   ng-model="verificationVm.verifyInfo.birthdate"
+                                                   year-order="desc" start-year="1900" end-year=""
+                                                   required></mhc-multi-select-date>
+                            <br>
+                            <div class="text-alert" ng-messages-multiple ng-if="verificationForm.$invalid"
+                                 ng-messages="verificationForm.birthdate.$error">
+                                <div ng-messages-include="multiSelectDate-messages"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="form-group wrap">
@@ -27,7 +38,7 @@
                                        ng-model="verificationVm.verifyInfo.verificationCode" required/>
                                 <div ng-messages="verificationForm.verificationCode.$error"
                                      ng-if="verificationForm.verificationCode.$dirty" class="text-alert">
-                                    <div ng-messages-include="verification-messages"></div>
+                                    <div ng-message="required">Please complete this required field.</div>
                                 </div>
                             </div>
                         </div>

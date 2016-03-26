@@ -34,7 +34,7 @@
         vm.canVerify = canVerify;
 
         function prepareVerification() {
-            var birthday = formatBirthday(vm.verifyInfo.birthdayObj);
+            var birthday = formatBirthday(vm.verifyInfo.birthdate);
             return {
                 emailToken: emailTokenService.getEmailToken(),
                 verificationCode: vm.verifyInfo.verificationCode,
@@ -42,10 +42,10 @@
             };
         }
 
-        function formatBirthday(birthdayObj) {
-            var year = birthdayObj.year;
-            var month = utilityService.digitFormat(birthdayObj.month, 2);
-            var day = utilityService.digitFormat(birthdayObj.day, 2);
+        function formatBirthday(dateObj) {
+            var year = dateObj.getFullYear();
+            var month = utilityService.digitFormat((dateObj.getMonth()+1), 2);
+            var day = utilityService.digitFormat(dateObj.getDate(), 2);
             return year + '-' + month + '-' + day;
         }
 
