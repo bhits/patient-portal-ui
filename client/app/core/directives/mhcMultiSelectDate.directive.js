@@ -38,13 +38,12 @@
             // ATTRIBUTES (with default values if not set)
             scope.yearOrder = (attrs.yearOrder && attrs.yearOrder === 'asc') ? false : true; // year order: 'asc' or 'desc', default: desc
             var endYear = attrs.endYear || new Date().getFullYear(); // default: this year
-            var startYear = attrs.startYear || startYear - 100; // default: this year - 100
+            var startYear = attrs.startYear || endYear - 100; // default: this year - 100
 
             // INIT YEARS, MONTHS AND DAYS NUMBER
             scope.selects = {
 
                 days: function () {
-
                     // Get number of days based on month + year
                     // (January = 31, February = 28, April = 30, February 2000 = 29) or 31 if no month selected yet
                     var nbDays = new Date(scope.date.year, scope.date.month, 0).getDate() || 31;
@@ -57,10 +56,25 @@
                     return daysList;
                 },
                 months: function () {
+                    var monthName = [
+                        'January',
+                        'February',
+                        'March',
+                        'April',
+                        'May',
+                        'June',
+                        'July',
+                        'August',
+                        'September',
+                        'October',
+                        'November',
+                        'December'
+                    ];
                     var monthList = [];
                     for (var i = 1; i <= 12; i++) {
                         var iS = i.toString();
-                        monthList.push((iS.length < 2) ? '0' + iS : iS); // Adds a leading 0 if single digit
+                        monthList.push(
+                            {name: monthName[i - 1], value: ((iS.length < 2) ? '0' + iS : iS)}); // Adds a leading 0 if single digit
                     }
                     return monthList;
                 },
@@ -75,7 +89,6 @@
 
             // WATCH FOR scope.date CHANGES
             scope.$watch('date', function (date) {
-
                 // IF REQUIRED
                 if (attrs.required) {
 

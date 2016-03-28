@@ -1,7 +1,7 @@
 <div class="row">
-    <div class="col-xs-2">
+    <div class="col-xs-3">
         Month
-        <select ng-model="date.month" ng-options="month for month in selects.months()" class="form-control">
+        <select ng-model="date.month" ng-options="month.value as month.name for month in selects.months() track by month.value" class="form-control">
             <option value="" disabled>Month</option>
         </select>
     </div>
