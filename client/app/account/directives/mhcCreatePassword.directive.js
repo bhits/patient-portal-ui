@@ -51,6 +51,10 @@
         }
 
         function activateError(response) {
+            var emailTokenException = response.data.exception;
+            if (emailTokenException.indexOf('EmailTokenExpiredException') !== -1) {
+                utilityService.redirectTo(accountConfig.activationErrorPath);
+            }
             vm.activateError = true;
         }
 
