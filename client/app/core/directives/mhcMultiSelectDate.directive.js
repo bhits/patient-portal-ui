@@ -102,11 +102,6 @@
                 else if (date.year && date.month && date.day) {
                     ngModel.$setViewValue(new Date(date.year, date.month - 1, date.day));
                 }
-
-                // IF NOT REQUIRED (still need the 3 values filled to update the model)
-                else if (date.year && date.month && date.day) {
-                    ngModel.$setViewValue(new Date(date.year, date.month - 1, date.day));
-                }
             }, true);
         }
     }
