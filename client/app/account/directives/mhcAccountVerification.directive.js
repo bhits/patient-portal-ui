@@ -25,20 +25,13 @@
     }
 
     /* @ngInject */
-    function VerificationController($scope, utilityService, accountService, emailTokenService, accountConfig) {
+    function VerificationController(utilityService, accountService, emailTokenService, accountConfig) {
         var vm = this;
         var verificationFormMaster = {verificationCode: ""};
 
         vm.clearField = clearField;
         vm.verify = verify;
         vm.canVerify = canVerify;
-
-        $scope.$watch('verificationVm.verifyInfo.birthdate', function (birthdate) {
-                if (angular.isDefined(birthdate)) {
-                    vm.isFutureDate = !isBeforeToday(birthdate);
-                }
-            }
-        );
 
         function prepareVerification() {
             var birthday = formatBirthday(vm.verifyInfo.birthdate);
@@ -54,10 +47,6 @@
             var month = utilityService.digitFormat((dateObj.getMonth() + 1), 2);
             var day = utilityService.digitFormat(dateObj.getDate(), 2);
             return year + '-' + month + '-' + day;
-        }
-
-        function isBeforeToday(inputDate) {
-            return inputDate < new Date();
         }
 
         function verifySuccess(response) {
@@ -81,7 +70,7 @@
         }
 
         function canVerify(verificationForm) {
-            return (verificationForm.$dirty && verificationForm.$valid && isBeforeToday(vm.verifyInfo.birthdate));
+            return (verificationForm.$dirty && verificationForm.$valid);
         }
 
         function clearField(verificationForm) {

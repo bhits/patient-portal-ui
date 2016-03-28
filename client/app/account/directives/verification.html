@@ -1,6 +1,7 @@
 <div class="row">
     <script type="text/ng-template" id="verification-messages">
         <div ng-message="required">Please complete this required field.</div>
+        <div ng-message="isBeforeToday">Date of birth cannot be today's date, or a future date.</div>
     </script>
 
     <div class="col-sm-offset-1 col-sm-10">
@@ -14,16 +15,14 @@
                             <mhc-multi-select-date id="birthdate" name="birthdate"
                                                    ng-model="verificationVm.verifyInfo.birthdate"
                                                    year-order="desc" start-year="1900" end-year=""
-                                                   required></mhc-multi-select-date>
+                                                   mhc-check-before-today required ></mhc-multi-select-date>
                             <ul class="text-alert" ng-messages-multiple ng-if="verificationForm.$dirty"
                                 ng-messages="verificationForm.birthdate.$error">
                                 <li ng-message="dayRequired">Day is required</li>
                                 <li ng-message="monthRequired">Month is required</li>
                                 <li ng-message="yearRequired">Year is required</li>
+                                <li ng-messages-include="verification-messages"></li>
                             </ul>
-                            <div class="text-alert" ng-show="verificationVm.isFutureDate">
-                                <span>Date of birth cannot be today's date, or a future date.</span>
-                            </div>
                         </div>
                     </div>
                 </div>
