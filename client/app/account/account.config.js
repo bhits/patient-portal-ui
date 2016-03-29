@@ -25,7 +25,7 @@
                 abstract: true,
                 url: '/account',
                 data: {pageTitle: 'Account'},
-                templateUrl: ''
+                template: '<ui-view/>'
             })
             .state('fe.account.verification', {
                 url: '/verification',

@@ -16,7 +16,7 @@
                         abstract: true,
                         data: { pageTitle: 'Patient Portal' },
                         url: '/fe',
-                        templateUrl: ''
+                        template: '<ui-view/>'
                     })
                     .state('fe.index', {
                         abstract: true,
