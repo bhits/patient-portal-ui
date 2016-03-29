@@ -27,7 +27,7 @@
     /* @ngInject */
     function CreatePasswordController(utilityService, accountService, accountConfig) {
         var vm = this;
-        var createPasswordFormMaster = {password: "", confirmPassword: ""};
+        var original = vm.patient;
 
         vm.clearField = clearField;
         vm.activate = activate;
@@ -71,7 +71,7 @@
             if (createPasswordForm) {
                 createPasswordForm.$setPristine();
                 createPasswordForm.$setUntouched();
-                vm.patient = angular.copy(createPasswordFormMaster);
+                vm.patient = angular.copy(original);
             }
         }
     }

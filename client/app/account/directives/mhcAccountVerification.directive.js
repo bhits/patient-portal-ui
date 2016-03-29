@@ -27,7 +27,7 @@
     /* @ngInject */
     function VerificationController(utilityService, accountService, emailTokenService, accountConfig) {
         var vm = this;
-        var verificationFormMaster = {verificationCode: ""};
+        var original = vm.verifyInfo;
 
         vm.clearField = clearField;
         vm.verify = verify;
@@ -77,7 +77,7 @@
             if (verificationForm) {
                 verificationForm.$setPristine();
                 verificationForm.$setUntouched();
-                vm.verifyInfo = angular.copy(verificationFormMaster);
+                vm.verifyInfo = angular.copy(original);
             }
         }
     }
