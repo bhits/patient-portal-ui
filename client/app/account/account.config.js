@@ -65,7 +65,7 @@
                 resolve: {
 
                     /* @ngInject */
-                    allowActivation: function ($location, $q, emailTokenService, utilityService, accountConfig) {
+                    allowActivation: function ($location, $q, emailTokenService, accountService, utilityService, accountConfig) {
                         var deferred = $q.defer();
                         var emailToken = emailTokenService.getEmailToken();
 
@@ -76,9 +76,8 @@
                         }
 
                         function onAccessError() {
+                            accountService.removeActivateInfo();
                             utilityService.redirectTo(accountConfig.activationErrorPath);
-                            //Todo fix not deleting
-                            emailTokenService.removeEmailToken();
                         }
 
                         return deferred.promise;
