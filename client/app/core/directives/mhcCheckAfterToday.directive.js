@@ -8,10 +8,10 @@
 
     angular
         .module('app.core')
-        .directive('mhcCheckBeforeToday', mhcCheckBeforeToday);
+        .directive('mhcCheckAfterToday', mhcCheckAfterToday);
 
     /* @ngInject */
-    function mhcCheckBeforeToday() {
+    function mhcCheckAfterToday() {
         var directive = {
             require: 'ngModel',
             restrict: 'A',
@@ -23,7 +23,7 @@
 
         /* @ngInject */
         function linkFunc(scope, elm, attrs, ctrl) {
-            ctrl.$validators.isBeforeToday = function (modelDate) {
+            ctrl.$validators.isAfterToday = function (modelDate) {
                 if (angular.isDefined(modelDate)) {
                     return modelDate < new Date();
                 }
