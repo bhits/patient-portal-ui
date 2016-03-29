@@ -7,3 +7,9 @@ server:
     key-store-password: changeit
 logging:
   file: /java/MHC_LOGS/pp-ui/ppui.log
+
+---
+spring.profiles: docker
+server.ssl:
+  key-store: /java/keystore/mhc.keystore
+  key-store-password: changeit
