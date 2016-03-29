@@ -16,13 +16,13 @@
                                                    ng-model="verificationVm.verifyInfo.birthdate"
                                                    year-order="desc" start-year="" end-year=""
                                                    mhc-check-after-today required></mhc-multi-select-date>
-                            <ul class="text-alert" ng-messages-multiple ng-if="verificationForm.$dirty"
-                                ng-messages="verificationForm.birthdate.$error">
-                                <li ng-message="dayRequired">Day is required</li>
-                                <li ng-message="monthRequired">Month is required</li>
-                                <li ng-message="yearRequired">Year is required</li>
-                                <li ng-messages-include="verification-messages"></li>
-                            </ul>
+                            <div class="text-alert" ng-if="verificationForm.birthdate.$dirty"
+                                 ng-messages="verificationForm.birthdate.$error">
+                                <span ng-messages-include="verification-messages"></span>
+                            </div>
+                            <div class="text-alert" ng-if="verificationVm.fillOutDate">
+                                <span>Please complete all required date field.</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -35,7 +35,8 @@
                         <div class="row">
                             <div class="col-xs-8 col-sm-5 col-md-4 col-lg-3 m-b-xs">
                                 <input id="verificationCode" name="verificationCode" class="form-control" type="text"
-                                       placeholder="Verification Code "
+                                       placeholder="Verification Code"
+                                       ng-focus="verificationVm.checkDateField(verificationForm.birthdate)"
                                        ng-model="verificationVm.verifyInfo.verificationCode" required/>
                                 <div class="text-alert" ng-messages="verificationForm.verificationCode.$error"
                                      ng-if="verificationForm.verificationCode.$dirty">
@@ -54,7 +55,7 @@
 
                 <div class="form-group">
                     <div class="col-sm-12 m-t-sm">
-                        <button type="reset" class="btn btn-default m-r-sm"
+                        <button type="button" class="btn btn-default m-r-sm"
                                 ng-click="verificationVm.clearField(verificationForm)">Clear
                         </button>
                         <a class="btn btn-primary dark-green" ng-click="verificationVm.verify()"

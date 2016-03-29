@@ -27,10 +27,12 @@
     /* @ngInject */
     function VerificationController(utilityService, accountService, emailTokenService, accountConfig) {
         var vm = this;
+        var original  = vm.verifyInfo;
 
         vm.clearField = clearField;
         vm.verify = verify;
         vm.canVerify = canVerify;
+        vm.checkDateField = checkDateField;
 
         function prepareVerification() {
             var birthday = formatBirthday(vm.verifyInfo.birthdate);
@@ -72,12 +74,15 @@
             return (verificationForm.$dirty && verificationForm.$valid);
         }
 
+        function checkDateField(birthdate) {
+            vm.fillOutDate = !birthdate.$valid;
+        }
+
         function clearField(verificationForm) {
-            if (verificationForm) {
-                verificationForm.$setPristine();
-                verificationForm.$setUntouched();
-                vm.verifyError = false;
-            }
+            verificationForm.$setPristine();
+            verificationForm.$setUntouched();
+            vm.verifyInfo = angular.copy(original);
+            vm.verifyError = false;
         }
     }
 })();
