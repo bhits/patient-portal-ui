@@ -18,7 +18,7 @@
                                 providerName = provider.providerOrganizationName;
                                 break;
                             case 'Individual':
-                                providerName = provider.providerLastName + ', ' + provider.providerFirstName + (provider.providerMiddleName ? ' ' + provider.providerMiddleName : '');
+                                providerName = provider.providerFirstName  +  ' ' + provider.providerLastName;
                                 break;
                         }
                     }
