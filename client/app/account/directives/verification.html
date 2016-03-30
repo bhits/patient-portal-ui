@@ -1,7 +1,7 @@
 <div class="row">
     <script type="text/ng-template" id="verification-messages">
-        <div ng-message="required">Please complete this required field.</div>
-        <div ng-message="isAfterToday">Date of birth cannot be today's date, or a future date.</div>
+        <div ng-message="required">Please complete this required fields.</div>
+        <div class="m-t-n-xs m-b-xs" ng-message="isAfterToday">Date of birth cannot be today's date, or a future date.</div>
     </script>
 
     <div class="col-sm-offset-1 col-sm-10">
@@ -20,7 +20,7 @@
                                  ng-messages="verificationForm.birthdate.$error">
                                 <span ng-messages-include="verification-messages"></span>
                             </div>
-                            <div class="text-alert" ng-if="verificationVm.fillOutDate">
+                            <div class="m-t-n-xs text-alert" ng-if="verificationVm.fillOutDate">
                                 <span>Please complete all required date field.</span>
                             </div>
                         </div>
@@ -30,7 +30,7 @@
                 <div class="form-group wrap">
                     <div>
                         <label for="verificationCode">Verification Code</label>
-                        <span style="color: #808080; font-weight: 300;">(Verification Code is case sensitive)</span>
+                        <span class="m-l-xs font-light text-navbar-blueGray">(Verification Code is case sensitive)</span>
 
                         <div class="row">
                             <div class="col-xs-8 col-sm-5 col-md-4 col-lg-3 m-b-xs">
