@@ -9,6 +9,6 @@
     angular.module('app.core')
         .constant("coreConstants",
             {
-                PASSWORD_REGEX: /((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})/
+                PASSWORD_REGEX: /^((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,20})$/
             });
 })();
