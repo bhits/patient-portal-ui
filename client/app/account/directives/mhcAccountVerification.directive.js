@@ -27,7 +27,7 @@
     /* @ngInject */
     function VerificationController(utilityService, accountService, emailTokenService, accountConfig) {
         var vm = this;
-        var original  = vm.verifyInfo;
+        var original = vm.verifyInfo;
 
         vm.clearField = clearField;
         vm.verify = verify;
