@@ -2,10 +2,10 @@
     'use strict';
 
     angular.module('app.security')
-        .factory('authenticationService', AuthenticationService);
+        .factory('authenticationService', authenticationService);
 
     /* @ngInject */
-    function AuthenticationService($resource, envService) {
+    function authenticationService($resource, envService, oauthTokenService, utilityService, oauthConfig) {
         var loginResource = function (userName, password) {
             return $resource(envService.unsecuredApis.tokenUrl, {},
                 {
@@ -23,12 +23,18 @@
 
         var service = {};
         service.login = login;
+        service.logout = logout;
 
         return service;
 
         function login(userName, password) {
             var getLoginResource = loginResource(userName, password);
             return getLoginResource.save().$promise;
+        }
+
+        function logout() {
+            oauthTokenService.removeToken();
+            utilityService.redirectTo(oauthConfig.loginPath);
         }
     }
 })();

@@ -1,0 +1,70 @@
+<div class="row">
+    <script type="text/ng-template" id="verification-messages">
+        <div ng-message="required">Please complete this required fields.</div>
+        <div class="m-t-n-xs m-b-xs" ng-message="isAfterToday">Date of birth cannot be today's date, or a future date.</div>
+    </script>
+
+    <div class="col-sm-offset-1 col-sm-10">
+        <form class="" name="verificationForm">
+            <fieldset class="">
+                <legend class="sr-only">Account Setup Verification</legend>
+                <div class="form-group wrap">
+                    <label for="birthdate">Date of Birth</label>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <mhc-multi-select-date id="birthdate" name="birthdate"
+                                                   year-order="desc" start-year="" end-year=""
+                                                   ng-model="verificationVm.verifyInfo.birthdate"
+                                                   mhc-check-after-today required
+                                                   mhc-outside-click="verificationVm.checkDateField(verificationForm.birthdate)">
+                            </mhc-multi-select-date>
+                            <div class="text-alert" ng-if="verificationForm.birthdate.$dirty"
+                                 ng-messages="verificationForm.birthdate.$error">
+                                <span ng-messages-include="verification-messages"></span>
+                            </div>
+                            <div class="m-t-n-xs text-alert" ng-if="verificationVm.fillOutDate">
+                                <span>Please complete all required fields to continue.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group wrap">
+                    <div>
+                        <label for="verificationCode">Verification Code</label>
+                        <span class="m-l-xs font-light text-navbar-blueGray">(Verification Code is case sensitive)</span>
+
+                        <div class="row">
+                            <div class="col-xs-8 col-sm-5 col-md-4 col-lg-3 m-b-xs">
+                                <input id="verificationCode" name="verificationCode" class="form-control" type="text"
+                                       placeholder="Verification Code"
+                                       ng-model="verificationVm.verifyInfo.verificationCode" required/>
+                                <div class="text-alert" ng-messages="verificationForm.verificationCode.$error"
+                                     ng-if="verificationForm.verificationCode.$dirty">
+                                    <div ng-messages-include="verification-messages"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-10 text-alert m-t-n-xs m-b-xs" ng-if="verificationVm.verifyError">
+                        <span>Sorry, the Date of Birth and/or Verification Code entered does not match, please try again.</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-12 m-t-sm">
+                        <button type="button" class="btn btn-default m-r-sm"
+                                ng-click="verificationVm.clearField(verificationForm)">Clear
+                        </button>
+                        <a class="btn btn-primary dark-green" ng-click="verificationVm.verify()"
+                           ng-disabled="!verificationVm.canVerify(verificationForm)">Continue
+                        </a>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

@@ -3,7 +3,7 @@
 (function () {
 
     angular
-        .module("app.security")
+        .module("app.account")
         .controller('LoginController', LoginController);
 
     /* @ngInject */

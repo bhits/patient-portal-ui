@@ -542,11 +542,13 @@ module.exports = function (grunt) {
                             pcmApiBaseUrl: 'https://localhost:8446/pcm/patients',
                             phrApiBaseUrl: 'https://localhost:8445/phr',
                             tryPolicyApiBaseUrl: 'https://localhost:8449/trypolicy',
-                            userInfo : 'https://localhost:8443/uaa/userinfo'
+                            userInfo: 'https://localhost:8443/uaa/userinfo'
                         },
                         unsecuredApis: {
                             plsApiBaseUrl: 'https://localhost:8443/pls/providers',
-                            tokenUrl : 'https://localhost:8443/uaa/oauth/token'
+                            tokenUrl: 'https://localhost:8443/uaa/oauth/token',
+                            verificationUrl: 'https://localhost:8452/patientUser/verifications',
+                            activationUrl: 'https://localhost:8452/patientUser/activations'
                         }
                     }
                 }
@@ -587,11 +589,13 @@ module.exports = function (grunt) {
                             pcmApiBaseUrl: 'https://bhitsqaapp02:8446/pcm/patients',
                             phrApiBaseUrl: 'https://bhitsqaapp02:8445/phr',
                             tryPolicyApiBaseUrl: 'https://bhitsqaapp02:8449/trypolicy',
-                            userInfo : 'https://bhitsqaapp02:8443/uaa/userinfo'
+                            userInfo: 'https://bhitsqaapp02:8443/uaa/userinfo'
                         },
                         unsecuredApis: {
                             plsApiBaseUrl: 'https://bhitsqaapp02:8443/pls/providers',
-                            tokenUrl : 'https://bhitsqaapp02:8443/uaa/oauth/token'
+                            tokenUrl: 'https://bhitsqaapp02:8443/uaa/oauth/token',
+                            verificationUrl: 'https://bhitsqaapp02:8452/patientUser/verifications',
+                            activationUrl: 'https://bhitsqaapp02:8452/patientUser/activations'
                         }
                     }
                 }

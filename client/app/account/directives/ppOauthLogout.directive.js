@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.security')
+        .module('app.account')
         .directive('ppOauthLogout', ppOauthLogout);
 
     function ppOauthLogout() {
@@ -10,7 +10,7 @@
         var directive = {
             restrict: 'E',
             replace: true,
-            templateUrl: 'app/security/directives/oauthLogout.html',
+            templateUrl: 'app/account/directives/oauthLogout.html',
             scope: {},
             bindToController: {},
             controller: OauthLogoutController,
@@ -18,15 +18,15 @@
         };
 
         return directive;
+    }
 
-        /* @ngInject */
-        function OauthLogoutController(authInterceptorService) {
-            var vm = this;
-            vm.logout = logout;
+    /* @ngInject */
+    function OauthLogoutController(authenticationService) {
+        var vm = this;
+        vm.logout = logout;
 
-            function logout() {
-                authInterceptorService.logout();
-            }
+        function logout() {
+            authenticationService.logout();
         }
     }
 })();
