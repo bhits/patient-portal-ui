@@ -539,20 +539,21 @@ module.exports = function (grunt) {
                         version: '<%= pkg.version %>',
                         base64BasicKey: 'cGF0aWVudC1wb3J0YWwtdWk6Y2hhbmdlaXQ=',
                         securedApis: {
-                            pcmApiBaseUrl: 'https://localhost:8446/pcm/patients',
-                            phrApiBaseUrl: 'https://localhost:8445/phr',
-                            tryPolicyApiBaseUrl: 'https://localhost:8449/trypolicy',
-                            userInfo: 'https://localhost:8443/uaa/userinfo'
+                            pcmApiBaseUrl: '/pcm/patients',
+                            phrApiBaseUrl: '/phr',
+                            tryPolicyApiBaseUrl: '/trypolicy',
+                            userInfo : '/uaa/userinfo'
                         },
                         unsecuredApis: {
-                            plsApiBaseUrl: 'https://localhost:8443/pls/providers',
-                            tokenUrl: 'https://localhost:8443/uaa/oauth/token',
-                            verificationUrl: 'https://localhost:8452/patientUser/verifications',
-                            activationUrl: 'https://localhost:8452/patientUser/activations'
+                            plsApiBaseUrl: '/pls/providers',
+                            tokenUrl : '/uaa/oauth/token',
+                            verificationUrl: '/patientUser/verifications',
+                            activationUrl: '/patientUser/activations'
                         }
                     }
                 }
             },
+
             docker: {
                 options: {
                     dest: '<%= config_dir %>/config.js'
@@ -563,16 +564,16 @@ module.exports = function (grunt) {
                         version: '<%= pkg.version %>',
                         base64BasicKey: 'cGF0aWVudC1wb3J0YWwtdWk6Y2hhbmdlaXQ=',
                         securedApis: {
-                            pcmApiBaseUrl: 'https://dockerhost:8446/pcm/patients',
-                            phrApiBaseUrl: 'https://dockerhost:8445/phr',
-                            tryPolicyApiBaseUrl: 'https://dockerhost:8449/trypolicy',
-                            userInfo : 'https://dockerhost:8443/uaa/userinfo'
+                            pcmApiBaseUrl: '/pcm/patients',
+                            phrApiBaseUrl: '/phr',
+                            tryPolicyApiBaseUrl: '/trypolicy',
+                            userInfo : '/uaa/userinfo'
                         },
                         unsecuredApis: {
-                            plsApiBaseUrl: 'https://dockerhost:8453/pls/providers',
-                            tokenUrl : 'https://dockerhost:8443/uaa/oauth/token',
-                            verificationUrl: 'https://dockerhost:8452/patientUser/verifications',
-                            activationUrl: 'https://dockerhost:8452/patientUser/activations'
+                            plsApiBaseUrl: '/pls/providers',
+                            tokenUrl : '/uaa/oauth/token',
+                            verificationUrl: '/patientUser/verifications',
+                            activationUrl: '/patientUser/activations'
                         }
                     }
                 }
@@ -588,16 +589,16 @@ module.exports = function (grunt) {
                         version: '<%= pkg.version %>',
                         base64BasicKey: 'cGF0aWVudC1wb3J0YWwtdWk6QllqeVdYU2JEdmRx',
                         securedApis: {
-                            pcmApiBaseUrl: 'https://bhitsqaapp02:8446/pcm/patients',
-                            phrApiBaseUrl: 'https://bhitsqaapp02:8445/phr',
-                            tryPolicyApiBaseUrl: 'https://bhitsqaapp02:8449/trypolicy',
-                            userInfo: 'https://bhitsqaapp02:8443/uaa/userinfo'
+                            pcmApiBaseUrl: '/pcm/patients',
+                            phrApiBaseUrl: '/phr',
+                            tryPolicyApiBaseUrl: '/trypolicy',
+                            userInfo : '/uaa/userinfo'
                         },
                         unsecuredApis: {
-                            plsApiBaseUrl: 'https://bhitsqaapp02:8443/pls/providers',
-                            tokenUrl: 'https://bhitsqaapp02:8443/uaa/oauth/token',
-                            verificationUrl: 'https://bhitsqaapp02:8452/patientUser/verifications',
-                            activationUrl: 'https://bhitsqaapp02:8452/patientUser/activations'
+                            plsApiBaseUrl: '/pls/providers',
+                            tokenUrl : '/uaa/oauth/token',
+                            verificationUrl: '/patientUser/verifications',
+                            activationUrl: '/patientUser/activations'
                         }
                     }
                 }
