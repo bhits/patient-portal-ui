@@ -570,7 +570,9 @@ module.exports = function (grunt) {
                         },
                         unsecuredApis: {
                             plsApiBaseUrl: 'https://dockerhost:8453/pls/providers',
-                            tokenUrl : 'https://dockerhost:8443/uaa/oauth/token'
+                            tokenUrl : 'https://dockerhost:8443/uaa/oauth/token',
+                            verificationUrl: 'https://dockerhost:8452/patientUser/verifications',
+                            activationUrl: 'https://dockerhost:8452/patientUser/activations'
                         }
                     }
                 }
