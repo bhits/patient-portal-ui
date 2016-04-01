@@ -33,6 +33,17 @@
         vm.activate = activate;
         vm.canActivate = canActivate;
         vm.username = accountService.getUserName();
+        vm.popoverData = {
+            title: "Password Instructions",
+            description: "",
+            items: [
+                "8 characters in length",
+                "one number",
+                "one upper case letter (A, B, C)",
+                "one lower case letter (a, b, c)",
+                "one special character (e.g. #, *, @)"
+            ]
+        };
 
         function prepareActivation() {
             return {
