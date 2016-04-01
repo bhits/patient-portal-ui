@@ -29,9 +29,20 @@
             element.popover({
                 trigger: 'click',
                 html: true,
+                title: generateTitle(),
                 content: generateContent(),
                 placement: attrs.popoverPlacement
             });
+
+            function generateTitle() {
+                var title = "";
+                if (angular.isDefined(scope.popoverdata)) {
+                    if (angular.isDefined(scope.popoverdata.title)) {
+                        title += "<div>" + scope.popoverdata.title + "</div>";
+                    }
+                }
+                return title;
+            }
 
             function generateContent() {
                 var content = "";
