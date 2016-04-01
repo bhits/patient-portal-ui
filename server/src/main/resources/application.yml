@@ -43,6 +43,9 @@ eureka:
       defaultZone: https://localhost:8761/eureka/
 ---
 spring.profiles: docker
-server.ssl:
-  key-store: /java/keystore/mhc.keystore
-  key-store-password: changeit
+eureka:
+  client:
+    service-url:
+      defaultZone: https://discovery-server.mhc.com:8761/eureka/
+  instance:
+    prefer-ip-address: true
