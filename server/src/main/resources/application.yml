@@ -1,5 +1,5 @@
 server:
-  port: 0
+  port: 8444
 spring.profiles.active: eureka-ssl
 logging:
   file: /java/MHC_LOGS/pp-ui/ppui.log
