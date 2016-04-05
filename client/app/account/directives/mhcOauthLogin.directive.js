@@ -3,9 +3,9 @@
 
     angular
         .module('app.account')
-        .directive('ppOauthLogin', ppOauthLogin);
+        .directive('mhcOauthLogin', mhcOauthLogin);
 
-    function ppOauthLogin() {
+    function mhcOauthLogin() {
 
         var directive = {
             restrict: 'E',
