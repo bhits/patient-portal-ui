@@ -19,23 +19,23 @@
         return directive;
 
         /* @ngInject */
-        function linkFunc($scope, $element, $attributes) {
-            var scopeExpression = $attributes.mhcOutsideClick,
+        function linkFunc(scope, element, attributes) {
+            var scopeExpression = attributes.mhcOutsideClick,
                 onDocumentClick = function (event) {
                     var parent = event.target;
 
-                    while (parent && parent !== $element[0]) {
+                    while (parent && parent !== element[0]) {
                         parent = parent.parentNode;
                     }
 
                     if (!parent) {
-                        $scope.$apply(scopeExpression);
+                        scope.$apply(scopeExpression);
                     }
                 };
 
             $document.on("click", onDocumentClick);
 
-            $element.on('$destroy', function () {
+            element.on('$destroy', function () {
                 $document.off("click", onDocumentClick);
             });
         }
