@@ -97,7 +97,7 @@
                     $modalStack.dismissAll('cancel');
                 }
 
-                //TODO
+                //TODO Implement it when using Idle
                 function handleLoggedOutAndExpiredSession(event) {
                     Idle.unwatch();
                     $state.go('fe.login');
@@ -132,7 +132,6 @@
                 }
 
                 function idleEnd() {
-                    //console.log("IdleEnd...");
                     appVm.closeModals();
                 }
 
@@ -142,10 +141,7 @@
                     var today = new Date();
                     var now = today.getTime();
 
-                    //console.log("Now: " + now + ", last activity: " + Idle.getlastActiveTime());
                     var offset = now - Idle.getlastActiveTime();
-
-                    //console.log("Offset: " + offset + ", KeepAlive Time: " +(idleConfigParams.keepalive * 1000) );
 
                     console.log("-------> Current Time:" + today.getHours() + " : " + today.getMinutes() + " : " + today.getSeconds());
 

@@ -53,12 +53,8 @@
             }
         }
 
-        /*function setExpiresIn(seconds) {
-         $sessionStorage.expiresIn = new Date(new Date().valueOf() + (seconds * 1000));
-         }*/
-
         function isValidToken() {
-            //TODO
+            //TODO Implement this function if required
             if (getAccessToken() === null || getExpiresIn() === null || getExpiresIn().valueOf() < new Date().valueOf()) {
                 return false;
             }
@@ -66,14 +62,14 @@
         }
 
         function isExpiredToken() {
-            //TODO
+            //TODO Implement this function if required
             if (getExpiresIn().valueOf() < new Date().valueOf()) {
                 return true;
             }
         }
 
         function isValidAndExpiredToken() {
-            //TODO
+            //TODO Implement this function if required
             if (getAccessToken() !== null && getRefreshToken() !== null &&
                 getExpiresIn() !== null && new Date().valueOf() < getExpiresIn().valueOf()) {
                 return true;

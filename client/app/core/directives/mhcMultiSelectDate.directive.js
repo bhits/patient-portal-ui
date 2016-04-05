@@ -26,7 +26,7 @@
                 return;
             }
 
-            // GET FROM NG MODEL AND PUT IT IN LOCAL SCOPE
+            // Get from ng model and put it in local scope
             ngModel.$render = function () {
                 scope.date = {
                     day: $filter('date')(ngModel.$viewValue, 'dd'),
@@ -35,12 +35,12 @@
                 };
             };
 
-            // ATTRIBUTES (with default values if not set)
+            // Attributes (with default values if not set)
             scope.yearOrder = (attrs.yearOrder && attrs.yearOrder === 'asc') ? false : true; // year order: 'asc' or 'desc', default: desc
             var endYear = attrs.endYear || new Date().getFullYear(); // default: this year
             var startYear = attrs.startYear || endYear - 100; // default: this year - 100
 
-            // INIT YEARS, MONTHS AND DAYS NUMBER
+            // Init years, months and days number
             scope.selects = {
 
                 days: function () {
@@ -87,31 +87,29 @@
                 }
             };
 
-            // WATCH FOR scope.date CHANGES
+            // Watch for scope.date changes
             scope.$watch('date', function (date) {
                 // IF REQUIRED
                 if (attrs.required) {
 
-                    // VALIDATION RULES
+                    // Validation rules
                     var yearIsValid = !!date.year && parseInt(date.year) <= endYear && parseInt(date.year) >= startYear;
                     var monthIsValid = !!date.month;
                     var dayIsValid = !!date.day;
 
-                    //console.log(yearIsValid, monthIsValid, dayIsValid);
-
-                    // SET INPUT VALIDITY
+                    // Set input validity
                     ngModel.$setValidity('required', yearIsValid || monthIsValid || dayIsValid ? true : false);
                     ngModel.$setValidity('yearRequired', yearIsValid ? true : false);
                     ngModel.$setValidity('monthRequired', monthIsValid ? true : false);
                     ngModel.$setValidity('dayRequired', dayIsValid ? true : false);
 
-                    // UPDATE NG MODEL
+                    // Update ng model
                     if (yearIsValid && monthIsValid && dayIsValid) {
                         ngModel.$setViewValue(new Date(date.year, date.month - 1, date.day));
                     }
                 }
 
-                // IF NOT REQUIRED (still need the 3 values filled to update the model)
+                // If not required (still need the 3 values filled to update the model)
                 else if (date.year && date.month && date.day) {
                     ngModel.$setViewValue(new Date(date.year, date.month - 1, date.day));
                 }
