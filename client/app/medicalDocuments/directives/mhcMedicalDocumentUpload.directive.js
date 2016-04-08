@@ -6,9 +6,9 @@
 
     angular
         .module('app.medicalDocument')
-        .directive('ppMedicalDocumentsUpload', ppMedicalDocumentsUpload);
+        .directive('mhcMedicalDocumentsUpload', mhcMedicalDocumentsUpload);
 
-    function ppMedicalDocumentsUpload() {
+    function mhcMedicalDocumentsUpload() {
         var directive = {
             restrict: 'E',
             replace: true,
@@ -25,32 +25,33 @@
     function MedicalDocumentUploadController($state, medicalDocumentsService, notificationService) {
         var vm = this;
         vm.extension = /\.xml$/;
+        vm.uploadDocument = uploadDocument;
 
-        var prepareMedicalDocument = function () {
-            var medicalDocument = {
+        function prepareMedicalDocument() {
+            return {
                 file: vm.medicalFile,
                 name: vm.name,
                 description: vm.description,
                 documentType: vm.documentType
             };
-            return medicalDocument;
-        };
+        }
 
-        vm.uploadDocument = function () {
+        function uploadDocumentSuccess(response) {
+            $state.go($state.current, {}, {reload: true});
+            notificationService.success('Success in uploading medical document');
+        }
+
+        function uploadDocumentError(error) {
+            notificationService.error('Error in uploading medical document');
+        }
+
+        function uploadDocument() {
             var medicalDocument = prepareMedicalDocument();
 
-            if(angular.isUndefined(medicalDocument.description)) {
+            if (angular.isUndefined(medicalDocument.description)) {
                 medicalDocument.description = '';
             }
-
-            medicalDocumentsService.uploadMedicalDocument(medicalDocument)
-                .then(function () {
-                    $state.go($state.current, {}, {reload: true});
-                    notificationService.success('Success in uploading medical document');
-                }, function () {
-                    notificationService.error('Error in uploading medical document');
-                }
-            );
-        };
+            medicalDocumentsService.uploadMedicalDocument(medicalDocument, uploadDocumentSuccess, uploadDocumentError);
+        }
     }
 })();
