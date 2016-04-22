@@ -7,50 +7,50 @@
      */
     angular
         .module("app.medicalDocument")
-            .factory('medicalDocumentsService', medicalDocumentsService);
+        .factory('medicalDocumentsService', medicalDocumentsService);
 
-            /* @ngInject */
-            function medicalDocumentsService($resource, $q, $http, envService) {
-                var medicalDocumentsResource = $resource(envService.securedApis.pcmApiBaseUrl + "/clinicaldocuments/:id", {id: '@id'});
+    /* @ngInject */
+    function medicalDocumentsService($resource, envService) {
+        var medicalDocumentsResource = $resource(envService.securedApis.pcmApiBaseUrl + "/clinicaldocuments/:id", {id: '@id'});
 
-                var service = {};
-                service.downloadMedicalDocument = downloadMedicalDocument;
-                service.deleteMedicalDocument = deleteMedicalDocument;
-                service.uploadMedicalDocument = uploadMedicalDocument;
+        var service = {};
+        service.downloadMedicalDocument = downloadMedicalDocument;
+        service.deleteMedicalDocument = deleteMedicalDocument;
+        service.uploadMedicalDocument = uploadMedicalDocument;
 
-                return service;
+        return service;
 
-                function downloadMedicalDocument(id, success, error) {
-                    return medicalDocumentsResource.get({id: id}, success, error);
-                }
+        function medicalDocumentUploadResource() {
+            return $resource(envService.securedApis.pcmApiBaseUrl + "/clinicaldocuments", {},
+                {
+                    save: {
+                        method: 'POST',
+                        headers: {'Content-Type': undefined},
+                        transformRequest: function (data) {
+                            var formData = new FormData();
+                            formData.append('file', data.file);
+                            formData.append('name', data.name);
+                            formData.append('description', data.description);
+                            formData.append('documentType', data.documentType);
 
-                function deleteMedicalDocument(id, success, error) {
-                    medicalDocumentsResource.delete({id: id}, success, error);
-                }
+                            return formData;
+                        }
+                    }
+                });
+        }
 
-                function uploadMedicalDocument(medicalDocument) {
-                    var deferred = $q.defer();
+        function downloadMedicalDocument(id, success, error) {
+            return medicalDocumentsResource.get({id: id}, success, error);
+        }
 
-                    var uploadUrl = envService.securedApis.pcmApiBaseUrl + "/clinicaldocuments";
-                    var formData = new FormData();
+        function deleteMedicalDocument(id, success, error) {
+            medicalDocumentsResource.delete({id: id}, success, error);
+        }
 
-                    formData.append('file', medicalDocument.file);
-                    formData.append('name', medicalDocument.name);
-                    formData.append('description', medicalDocument.description);
-                    formData.append('documentType', medicalDocument.documentType);
-
-                    $http.post(uploadUrl, formData, {
-                        transformRequest: angular.identity,
-                        headers: {'Content-Type': undefined}
-                    })
-                        .then(function () {
-                            deferred.resolve('success');
-                        }, function () {
-                            deferred.reject('error');
-                        });
-                    return deferred.promise;
-                }
-            }
+        function uploadMedicalDocument(medicalDocument, success, error) {
+            return medicalDocumentUploadResource().save(medicalDocument, success, error);
+        }
+    }
 })();
 
 

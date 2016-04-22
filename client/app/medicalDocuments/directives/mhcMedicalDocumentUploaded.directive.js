@@ -6,9 +6,9 @@
 
     angular
         .module('app.medicalDocument')
-        .directive("ppUploadedDocuments", ppUploadedDocuments);
+        .directive("mhcUploadedDocuments", mhcUploadedDocuments);
 
-    function ppUploadedDocuments() {
+    function mhcUploadedDocuments() {
 
         var directive = {
             restrict: 'E',
