@@ -46,13 +46,29 @@
                         </div>
                         <button class="btn btn-primary btn-xs m-r-xs dark-green" ng-click="medicalInfoModalVm.selectAllSensitivityPolicies(medicalInfofmationModalObj)">Select All</button>
                         <button class="btn btn-primary btn-xs dark-green" ng-click="medicalInfoModalVm.deselectAllSensitivityPolicies(medicalInfofmationModalObj)">Deselect All</button>
-                        <div ng-repeat="sensitivityPolicy in medicalInfoModalVm.sensitivityPolicies">
-                            <div>
-                                <div class="radio">
-                                    <label>
-                                        <input type="checkbox" pp-icheck  checklist-model="medicalInfoModalVm.consent.selectedSensitivityPolicies" checklist-value="sensitivityPolicy.code" >
-                                        <span class="m-l-xs" ng-bind="sensitivityPolicy.displayName"></span>
-                                    </label>
+                        <div>
+                            <strong>Federal</strong>
+                            <div ng-repeat="sensitivityPolicy in medicalInfoModalVm.sensitivityPolicies | filter: { federal: 'true' } | orderBy:'displayOrder'">
+                                <div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="checkbox" pp-icheck  checklist-model="medicalInfoModalVm.consent.selectedSensitivityPolicies" checklist-value="sensitivityPolicy.code" >
+                                            <span class="m-l-xs" ng-bind="sensitivityPolicy.displayName"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <strong>State</strong>
+                            <div ng-repeat="sensitivityPolicy in medicalInfoModalVm.sensitivityPolicies | filter: { federal: 'false' } | orderBy:'displayOrder'">
+                                <div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="checkbox" pp-icheck  checklist-model="medicalInfoModalVm.consent.selectedSensitivityPolicies" checklist-value="sensitivityPolicy.code" >
+                                            <span class="m-l-xs" ng-bind="sensitivityPolicy.displayName"></span>
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
