@@ -47,14 +47,6 @@
                         <button class="btn btn-primary btn-xs m-r-xs dark-green" ng-click="medicalInfoModalVm.selectAllSensitivityPolicies(medicalInfofmationModalObj)">Select All</button>
                         <button class="btn btn-primary btn-xs dark-green" ng-click="medicalInfoModalVm.deselectAllSensitivityPolicies(medicalInfofmationModalObj)">Deselect All</button>
                         <div>
-                            <!--<strong>Federal</strong>-->
-                            <!--<div class="border-bottom">-->
-                            <!--<span class="fa-stack">-->
-                                <!--<i class="fa fa-circle fa-stack-2x text-gray"></i>-->
-                                <!--<i class="fa fa-university fa-stack-1x fa-inverse"></i>-->
-                            <!--</span>-->
-                                <!--<em>Federal Regulations</em>-->
-                            <!--</div>-->
                             <div class="border-bottom p-xxs m-t-sm m-b-xs text-dark-blue">
                                 <span class="fa fa-university m-r-xxs"></span>
                                 <em>Federal Categories</em>
@@ -66,8 +58,8 @@
                                             <input type="checkbox" pp-icheck  checklist-model="medicalInfoModalVm.consent.selectedSensitivityPolicies" checklist-value="sensitivityPolicy.code" >
                                             <span class="m-l-xs" ng-bind="sensitivityPolicy.displayName"></span>
                                         </label>
-                                        <span class="text-strong-blue">
-                                            <span mhc-popover popover-placement="right"
+                                        <span class="text-strong-blue m-l-xs">
+                                            <span mhc-popover popover-placement="bottom"
                                                   popoverdata="sensitivityPolicy"></span>
                                         </span>
                                     </div>
@@ -75,14 +67,6 @@
                             </div>
                         </div>
                         <div>
-                            <!--<strong>State</strong>-->
-                            <!--<div class="border-bottom">-->
-                            <!--<span class="fa-stack">-->
-                                <!--<i class="fa fa-circle fa-stack-2x text-dark-blue"></i>-->
-                                <!--<i class="fa fa-flag fa-stack-1x fa-inverse"></i>-->
-                            <!--</span>-->
-                                <!--<em>State Regulations</em>-->
-                            <!--</div>-->
                             <div class="border-bottom p-xxs m-t-sm m-b-xs text-dark-blue">
                                 <span class="fa fa-flag m-r-xxs"></span>
                                 <em>State Categories</em>
@@ -94,8 +78,8 @@
                                             <input type="checkbox" pp-icheck  checklist-model="medicalInfoModalVm.consent.selectedSensitivityPolicies" checklist-value="sensitivityPolicy.code" >
                                             <span class="m-l-xs" ng-bind="sensitivityPolicy.displayName"></span>
                                         </label>
-                                        <span class="text-strong-blue">
-                                            <span mhc-popover popover-placement="right"
+                                        <span class="text-strong-blue m-l-xs">
+                                            <span mhc-popover popover-placement="bottom"
                                                   popoverdata="sensitivityPolicy"></span>
                                         </span>
                                     </div>
