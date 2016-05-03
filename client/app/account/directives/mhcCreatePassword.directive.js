@@ -35,7 +35,6 @@
         vm.username = accountService.getUserName();
         vm.popoverData = {
             title: "Password Instructions",
-            description: "",
             items: [
                 "8 characters in length",
                 "one number",
