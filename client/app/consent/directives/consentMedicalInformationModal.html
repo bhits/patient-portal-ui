@@ -27,6 +27,11 @@
                             <div class="border-bottom p-xxs m-t-sm m-b-xs text-dark-blue fw-600">
                                 <span class="fa fa-university m-r-xxs"></span>
                                 Federal Categories
+                                <span class="text-navy-blue m-l-xs">
+                                    <mhc-popover popover-placement="bottom"
+                                                 popover-title="medicalInfoModalVm.federalInfo.title"
+                                                 popover-content="medicalInfoModalVm.federalInfo.description"></mhc-popover>
+                                </span>
                             </div>
                             <div ng-repeat="sensitivityPolicy in medicalInfoModalVm.sensitivityPolicies | orderBy:'displayOrder'">
                                 <div ng-if="sensitivityPolicy.federal">
@@ -42,6 +47,11 @@
                             <div class="border-bottom p-xxs m-t-sm m-b-xs text-dark-blue fw-600">
                                 <span class="fa fa-flag m-r-xs"></span>
                                 State Categories
+                                <span class="text-navy-blue m-l-xs">
+                                    <mhc-popover popover-placement="bottom"
+                                                 popover-title="medicalInfoModalVm.stateInfo.title"
+                                                 popover-content="medicalInfoModalVm.stateInfo.description"></mhc-popover>
+                                </span>
                             </div>
                             <div ng-repeat="sensitivityPolicy in medicalInfoModalVm.sensitivityPolicies | orderBy:'displayOrder'">
                                 <div ng-if="!sensitivityPolicy.federal">
