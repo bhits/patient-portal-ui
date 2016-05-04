@@ -67,9 +67,11 @@
                             </div>
                             <div ng-repeat="sensitivityPolicy in medicalInfoModalVm.sensitivityPolicies | orderBy:'displayOrder'">
                                 <div ng-if="sensitivityPolicy.federal">
-                                    <mhc-category-list-and-show-info
+                                    <mhc-category-list
                                             category-model="medicalInfoModalVm.consent.selectedSensitivityPolicies"
-                                            category-obj="sensitivityPolicy"></mhc-category-list-and-show-info>
+                                            category-obj="sensitivityPolicy"
+                                            category-title="sensitivityPolicy.displayName"
+                                            category-content="sensitivityPolicy.description"></mhc-category-list>
                                 </div>
                             </div>
                         </div>
@@ -80,9 +82,11 @@
                             </div>
                             <div ng-repeat="sensitivityPolicy in medicalInfoModalVm.sensitivityPolicies | orderBy:'displayOrder'">
                                 <div ng-if="!sensitivityPolicy.federal">
-                                    <mhc-category-list-and-show-info
+                                    <mhc-category-list
                                             category-model="medicalInfoModalVm.consent.selectedSensitivityPolicies"
-                                            category-obj="sensitivityPolicy"></mhc-category-list-and-show-info>
+                                            category-obj="sensitivityPolicy"
+                                            category-title="sensitivityPolicy.displayName"
+                                            category-content="sensitivityPolicy.description"></mhc-category-list>
                                 </div>
                             </div>
                         </div>
