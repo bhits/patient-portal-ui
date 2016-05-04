@@ -3,36 +3,7 @@
         <h4 class="modal-title">Privacy Settings</h4>
     </div>
     <div class="modal-body">
-
         <div class="row">
-            <div class="col-lg-12">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>Medical Information Categories</h5>
-                        <div pp-ibox-tools></div>
-                    </div>
-                    <div class="ibox-content">
-                        <div class="alert alert-warning">
-                            <strong><span>DO NOT</span></strong>&nbsp;share
-                            the following areas of potentially sensitive
-                            information.
-                        </div>
-                        <button class="btn btn-primary btn-xs m-r-xs dark-green" ng-click="medicalInfoModalVm.selectAllMedicalSections(medicalInfofmationModalObj)">Select All</button>
-                        <button class="btn btn-primary btn-xs dark-green" ng-click="medicalInfoModalVm.deselectAllMedicalSections(medicalInfofmationModalObj)">Deselect All</button>
-                        <div ng-repeat="medicalSection in medicalInfoModalVm.mediactionSections">
-                            <div>
-                                <div class="radio">
-                                    <label>
-                                        <input type="checkbox" pp-icheck  checklist-model="medicalInfoModalVm.consent.selectedMedicalSections" checklist-value="medicalSection.code" >
-                                        <span class="m-l-xs" ng-bind="medicalSection.displayName"></span>
-                                    </label>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">

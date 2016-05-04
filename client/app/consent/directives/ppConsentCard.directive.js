@@ -48,7 +48,7 @@
         }
 
         function notDisclosedItems() {
-            return [].concat(vm.consent.doNotShareClinicalDocumentSectionTypeCodes).concat(vm.consent.doNotShareSensitivityPolicyCodes).join(', ');
+            return [].concat(vm.consent.doNotShareSensitivityPolicyCodes).join(', ');
         }
 
         function purposeOfUseItems() {

@@ -79,16 +79,6 @@
                                         return response;
                                     });
 
-                                var medicalSectionResource = consentService.getMedicationSectionResource();
-                                var medicalSectionData = medicalSectionResource.query(
-                                    function (response) {
-                                        return response;
-                                    },
-                                    function (response) {
-                                        notificationService.error("Error in getting medical Section data.");
-                                        return response;
-                                    });
-
                                 var sensitvityPolicyResource = consentService.getSensitvityPolicyResource();
                                 var sensitvityPolicyData = sensitvityPolicyResource.query(
                                     function (response) {
@@ -98,7 +88,7 @@
                                         notificationService.error("Error in getting sensitivity policy data.");
                                         return response;
                                     });
-                                var promises = [providersData.$promise, purposeOfUseData.$promise, medicalSectionData.$promise, sensitvityPolicyData.$promise];
+                                var promises = [providersData.$promise, purposeOfUseData.$promise, sensitvityPolicyData.$promise];
 
                                 var consentData = null;
                                 if(angular.isDefined($stateParams.consentId) && $stateParams.consentId.length > 0){
