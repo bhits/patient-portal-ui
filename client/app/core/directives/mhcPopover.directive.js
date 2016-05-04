@@ -32,7 +32,8 @@
                 html: true,
                 title: generateTitle(),
                 content: generateContent(),
-                placement: attributes.popoverPlacement
+                placement: attributes.popoverPlacement,
+                template: '<div class="popover popover-width-medium"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>'
             });
 
             function generateTitle() {
