@@ -28,7 +28,7 @@
         /* @ngInject */
         function linkFunc(scope, element, attributes) {
             element.popover({
-                trigger: 'hover',
+                trigger: 'click',
                 html: true,
                 title: generateTitle(),
                 content: generateContent(),
