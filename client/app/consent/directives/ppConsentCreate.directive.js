@@ -17,7 +17,6 @@
                     bindToController: {
                         providers: "=",
                         purposeofuse: "=",
-                        medicalsections: "=",
                         sensitivitypolicies: "=",
                         consent: "="
                     },
@@ -35,7 +34,7 @@
                 vm.authorize = "Authorize";
                 vm.disclosure = "Disclosure";
                 vm.dateRange = {consentStart: "", consentEnd: ""};
-                vm.medicalInformation = { doNotShareSensitivityPolicyCodes: [], doNotShareClinicalDocumentSectionTypeCodes: []};
+                vm.medicalInformation = { doNotShareSensitivityPolicyCodes: []};
                 vm.createConsent = createConsent;
                 vm.updateConsent = updateConsent;
                 vm.cancelConsent = cancelConsent;
@@ -54,7 +53,6 @@
                         consentService.setDiscloseNpi(vm.disclosureProvider.npi);
                         consentService.setAuthorizeNpi(vm.authorizeProvider.npi);
                         vm.medicalInformation.doNotShareSensitivityPolicyCodes = vm.consent.doNotShareSensitivityPolicyCodes;
-                        vm.medicalInformation.doNotShareClinicalDocumentSectionTypeCodes = vm.consent.doNotShareClinicalDocumentSectionTypeCodes;
                         vm.shareForPurposeOfUseCodes = vm.consent.shareForPurposeOfUseCodes;
                         vm.dateRange = {
                             consentStart: vm.consent.consentStart,
@@ -85,7 +83,6 @@
                         organizationalProvidersDisclosureIsMadeToNpi: organizationalProvidersDisclosureIsMadeToNpi,
                         organizationalProvidersPermittedToDiscloseNpi: organizationalProvidersPermittedToDiscloseNpi,
                         doNotShareSensitivityPolicyCodes: vm.medicalInformation.doNotShareSensitivityPolicyCodes,
-                        doNotShareClinicalDocumentSectionTypeCodes: vm.medicalInformation.doNotShareClinicalDocumentSectionTypeCodes,
                         shareForPurposeOfUseCodes: vm.shareForPurposeOfUseCodes,
                         consentStart: vm.dateRange.consentStart,
                         consentEnd: vm.dateRange.consentEnd
