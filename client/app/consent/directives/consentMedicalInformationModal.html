@@ -67,19 +67,9 @@
                             </div>
                             <div ng-repeat="sensitivityPolicy in medicalInfoModalVm.sensitivityPolicies | orderBy:'displayOrder'">
                                 <div ng-if="sensitivityPolicy.federal">
-                                    <div class="radio">
-                                        <label>
-                                            <input type="checkbox" pp-icheck
-                                                   checklist-model="medicalInfoModalVm.consent.selectedSensitivityPolicies"
-                                                   checklist-value="sensitivityPolicy.code">
-                                            <span class="m-l-xs" ng-bind="sensitivityPolicy.displayName"></span>
-                                        </label>
-                                        <span class="text-strong-blue m-l-xs">
-                                            <mhc-popover popover-placement="bottom"
-                                                         popover-title="sensitivityPolicy.displayName"
-                                                         popover-content="sensitivityPolicy.description"></mhc-popover>
-                                        </span>
-                                    </div>
+                                    <mhc-category-list-and-show-info
+                                            category-model="medicalInfoModalVm.consent.selectedSensitivityPolicies"
+                                            category-obj="sensitivityPolicy"></mhc-category-list-and-show-info>
                                 </div>
                             </div>
                         </div>
@@ -90,19 +80,9 @@
                             </div>
                             <div ng-repeat="sensitivityPolicy in medicalInfoModalVm.sensitivityPolicies | orderBy:'displayOrder'">
                                 <div ng-if="!sensitivityPolicy.federal">
-                                    <div class="radio">
-                                        <label>
-                                            <input type="checkbox" pp-icheck
-                                                   checklist-model="medicalInfoModalVm.consent.selectedSensitivityPolicies"
-                                                   checklist-value="sensitivityPolicy.code">
-                                            <span class="m-l-xs" ng-bind="sensitivityPolicy.displayName"></span>
-                                        </label>
-                                        <span class="text-strong-blue m-l-xs">
-                                            <mhc-popover popover-placement="bottom"
-                                                         popover-title="sensitivityPolicy.displayName"
-                                                         popover-content="sensitivityPolicy.description"></mhc-popover>
-                                        </span>
-                                    </div>
+                                    <mhc-category-list-and-show-info
+                                            category-model="medicalInfoModalVm.consent.selectedSensitivityPolicies"
+                                            category-obj="sensitivityPolicy"></mhc-category-list-and-show-info>
                                 </div>
                             </div>
                         </div>

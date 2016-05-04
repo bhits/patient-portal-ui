@@ -1,0 +1,13 @@
+<div class="radio">
+    <label>
+        <input type="checkbox" pp-icheck
+               checklist-model="bindModel"
+               checklist-value="bindObj.code">
+        <span class="m-l-xs" ng-bind="bindObj.displayName"></span>
+    </label>
+    <span class="text-strong-blue m-l-xs">
+        <mhc-popover popover-placement="bottom"
+                     popover-title="bindObj.displayName"
+                     popover-content="bindObj.description"></mhc-popover>
+    </span>
+</div>
