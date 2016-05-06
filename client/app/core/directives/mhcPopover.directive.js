@@ -33,7 +33,7 @@
                 title: generateTitle(),
                 content: generateContent(),
                 placement: attributes.popoverPlacement,
-                template: '<div class="popover popover-width-medium mhc-popover-selector"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title text-navy-blue"></h3><div class="popover-content text-navbar-dark-blue"><p></p></div></div></div>'
+                template: '<div class="popover popover-width-medium mhc-popover-selector"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title text-navy-blue custom-no-margin-top"></h3><div class="popover-content text-navbar-dark-blue"><p></p></div></div></div>'
             });
 
             element.on('click', function (event) {
