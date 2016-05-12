@@ -1,38 +1,9 @@
-<div class="inmodal" ng-form name="medicalInfofmationModalObj">
+<div class="inmodal" ng-form name="medicalInfofmationModalObj" mhc-popover-close>
     <div class="modal-header">
         <h4 class="modal-title">Privacy Settings</h4>
     </div>
     <div class="modal-body">
-
         <div class="row">
-            <div class="col-lg-12">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>Medical Information Categories</h5>
-                        <div pp-ibox-tools></div>
-                    </div>
-                    <div class="ibox-content">
-                        <div class="alert alert-warning">
-                            <strong><span>DO NOT</span></strong>&nbsp;share
-                            the following areas of potentially sensitive
-                            information.
-                        </div>
-                        <button class="btn btn-primary btn-xs m-r-xs dark-green" ng-click="medicalInfoModalVm.selectAllMedicalSections(medicalInfofmationModalObj)">Select All</button>
-                        <button class="btn btn-primary btn-xs dark-green" ng-click="medicalInfoModalVm.deselectAllMedicalSections(medicalInfofmationModalObj)">Deselect All</button>
-                        <div ng-repeat="medicalSection in medicalInfoModalVm.mediactionSections">
-                            <div>
-                                <div class="radio">
-                                    <label>
-                                        <input type="checkbox" pp-icheck  checklist-model="medicalInfoModalVm.consent.selectedMedicalSections" checklist-value="medicalSection.code" >
-                                        <span class="m-l-xs" ng-bind="medicalSection.displayName"></span>
-                                    </label>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
@@ -44,15 +15,51 @@
                             Select the medical information that you <strong>DO
                             NOT</strong> wish to share.
                         </div>
-                        <button class="btn btn-primary btn-xs m-r-xs dark-green" ng-click="medicalInfoModalVm.selectAllSensitivityPolicies(medicalInfofmationModalObj)">Select All</button>
-                        <button class="btn btn-primary btn-xs dark-green" ng-click="medicalInfoModalVm.deselectAllSensitivityPolicies(medicalInfofmationModalObj)">Deselect All</button>
-                        <div ng-repeat="sensitivityPolicy in medicalInfoModalVm.sensitivityPolicies">
-                            <div>
-                                <div class="radio">
-                                    <label>
-                                        <input type="checkbox" pp-icheck  checklist-model="medicalInfoModalVm.consent.selectedSensitivityPolicies" checklist-value="sensitivityPolicy.code" >
-                                        <span class="m-l-xs" ng-bind="sensitivityPolicy.displayName"></span>
-                                    </label>
+                        <button class="btn btn-primary btn-xs m-r-xs dark-green"
+                                ng-click="medicalInfoModalVm.selectAllSensitivityPolicies(medicalInfofmationModalObj)">
+                            Select All
+                        </button>
+                        <button class="btn btn-primary btn-xs dark-green"
+                                ng-click="medicalInfoModalVm.deselectAllSensitivityPolicies(medicalInfofmationModalObj)">
+                            Deselect All
+                        </button>
+                        <div>
+                            <div class="border-bottom p-xxs m-t-sm m-b-xs text-dark-blue fw-600">
+                                <span class="fa fa-university m-r-xxs"></span>
+                                Federal Categories
+                                <span class="text-navy-blue m-l-xs">
+                                    <mhc-popover popover-placement="bottom"
+                                                 popover-title="medicalInfoModalVm.federalInfo.title"
+                                                 popover-content="medicalInfoModalVm.federalInfo.description"></mhc-popover>
+                                </span>
+                            </div>
+                            <div ng-repeat="sensitivityPolicy in medicalInfoModalVm.sensitivityPolicies | orderBy:'displayOrder'">
+                                <div ng-if="sensitivityPolicy.federal">
+                                    <mhc-category-list
+                                            category-model="medicalInfoModalVm.consent.selectedSensitivityPolicies"
+                                            category-obj="sensitivityPolicy"
+                                            category-title="sensitivityPolicy.displayName"
+                                            category-content="sensitivityPolicy.description"></mhc-category-list>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="border-bottom p-xxs m-t-sm m-b-xs text-dark-blue fw-600">
+                                <span class="fa fa-flag m-r-xs"></span>
+                                State Categories
+                                <span class="text-navy-blue m-l-xs">
+                                    <mhc-popover popover-placement="bottom"
+                                                 popover-title="medicalInfoModalVm.stateInfo.title"
+                                                 popover-content="medicalInfoModalVm.stateInfo.description"></mhc-popover>
+                                </span>
+                            </div>
+                            <div ng-repeat="sensitivityPolicy in medicalInfoModalVm.sensitivityPolicies | orderBy:'displayOrder'">
+                                <div ng-if="!sensitivityPolicy.federal">
+                                    <mhc-category-list
+                                            category-model="medicalInfoModalVm.consent.selectedSensitivityPolicies"
+                                            category-obj="sensitivityPolicy"
+                                            category-title="sensitivityPolicy.displayName"
+                                            category-content="sensitivityPolicy.description"></mhc-category-list>
                                 </div>
                             </div>
                         </div>
@@ -63,6 +70,8 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-white m-r-xs" ng-click="medicalInfoModalVm.cancel()">Cancel</button>
-        <button type="button" class="btn btn-primary dark-green" ng-click="medicalInfoModalVm.ok()" ng-disabled="medicalInfofmationModalObj.$pristine">Save changes</button>
+        <button type="button" class="btn btn-primary dark-green" ng-click="medicalInfoModalVm.ok()"
+                ng-disabled="medicalInfofmationModalObj.$pristine">Save changes
+        </button>
     </div>
 </div>

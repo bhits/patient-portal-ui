@@ -12,8 +12,7 @@
                 var vm = this;
                 vm.providers = loadedData[0] ;
                 vm.purposeOfUse = loadedData[1] ;
-                vm.medicalSections= loadedData[2] ;
-                vm.sensitivityPolicies = loadedData[3] ;
-                vm.consent = loadedData.length === 5? loadedData[4]: null ;
+                vm.sensitivityPolicies = loadedData[2] ;
+                vm.consent = loadedData.length === 4? loadedData[3]: null ;
             }
 })();

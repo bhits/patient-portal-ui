@@ -14,10 +14,11 @@
     function mhcPopover() {
 
         var directive = {
-            restrict: 'A',
+            restrict: 'E',
             template: '<i class="fa fa-info-circle"></i>',
             scope: {
-                popoverdata: "="
+                popoverTitle: "=",
+                popoverContent: "="
             },
             link: linkFunc
         };
@@ -25,35 +26,39 @@
         return directive;
 
         /* @ngInject */
-        function linkFunc(scope, element, attrs) {
+        function linkFunc(scope, element, attributes) {
             element.popover({
                 trigger: 'click',
                 html: true,
                 title: generateTitle(),
                 content: generateContent(),
-                placement: attrs.popoverPlacement
+                placement: attributes.popoverPlacement,
+                template: '<div class="popover popover-width-medium mhc-popover-selector"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title text-navy-blue custom-no-margin-top"></h3><div class="popover-content text-navbar-dark-blue"><p></p></div></div></div>'
+            });
+
+            element.on('click', function (event) {
+                event.stopPropagation();
+
             });
 
             function generateTitle() {
                 var title = "";
-                if (angular.isDefined(scope.popoverdata)) {
-                    if (angular.isDefined(scope.popoverdata.title)) {
-                        title += "<div>" + scope.popoverdata.title + "</div>";
-                    }
+                if (angular.isDefined(scope.popoverTitle)) {
+                    title += "<div>" + scope.popoverTitle + "</div>";
                 }
                 return title;
             }
 
             function generateContent() {
                 var content = "";
-                if (angular.isDefined(scope.popoverdata)) {
-                    if (angular.isDefined(scope.popoverdata.items)) {
-                        var contentList = scope.popoverdata.items;
+                if (angular.isDefined(scope.popoverContent)) {
+                    if (angular.isDefined(scope.popoverContent.items)) {
+                        var contentList = scope.popoverContent.items;
                         for (var i = 0; i < contentList.length; i++) {
-                            content += "<li style='min-width: 235px;'>" + contentList[i] + "</li>";
+                            content += "<li style='min-width: 255px;'>" + contentList[i] + "</li>";
                         }
-                    } else if (angular.isDefined(scope.popoverdata.description)) {
-                        content += "<div style='min-width: 200px;'>" + scope.popoverdata.description + "</div>";
+                    } else {
+                        content += scope.popoverContent;
                     }
                 }
                 return content;

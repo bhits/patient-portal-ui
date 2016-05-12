@@ -15,7 +15,6 @@
             var consentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/:id",{id: '@id'}, {'update': { method:'PUT' }});
             var consentExportConsentDirective = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/exportConsentDirective/:id",{id: '@id'});
             var purposeOfUseResource = $resource(envService.securedApis.pcmApiBaseUrl + "/purposeOfUse");
-            var medicationSectionResource = $resource(envService.securedApis.pcmApiBaseUrl + "/medicalSection");
             var sensitvityPolicyResource = $resource(envService.securedApis.pcmApiBaseUrl + "/sensitivityPolicy");
             var signConsentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/signConsent/:id", {id: '@id'});
             var revokeConsentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/revokeConsent/:id", {id: '@id'});
@@ -25,7 +24,6 @@
             var service = {};
             service.getConsentResource = getConsentResource;
             service.getPurposeOfUseResource = getPurposeOfUseResource;
-            service.getMedicationSectionResource = getMedicationSectionResource;
             service.getSensitvityPolicyResource = getSensitvityPolicyResource;
             service.getConsent = getConsent;
             service.signConsent = signConsent;
@@ -43,7 +41,6 @@
             service.resolveConsentState = resolveConsentState;
             service.isShareAll = isShareAll;
             service.getPurposeOfUse = getPurposeOfUse;
-            service.getMedicalSection = getMedicalSection;
             service.getSensitivityPolicies = getSensitivityPolicies;
             service.getEntitiesByCodes = getEntitiesByCodes;
             service.getDefaultPurposeOfUse = getDefaultPurposeOfUse;
@@ -62,10 +59,6 @@
 
             function getPurposeOfUseResource (){
                 return purposeOfUseResource;
-            }
-
-            function getMedicationSectionResource(){
-                return medicationSectionResource;
             }
 
             function getSensitvityPolicyResource(){
@@ -168,7 +161,7 @@
             }
 
             function isShareAll (consent) {
-                return isEmptyArray(consent.doNotShareClinicalDocumentSectionTypeCodes) && isEmptyArray(consent.doNotShareSensitivityPolicyCodes);
+                return isEmptyArray(consent.doNotShareSensitivityPolicyCodes);
 
                 function isEmptyArray(o) {
                     return angular.isUndefined(o) || !angular.isArray(o) || o.length === 0;
@@ -177,10 +170,6 @@
 
             function getPurposeOfUse (success, error) {
                 purposeOfUseResource.query(success, error);
-            }
-
-            function getMedicalSection (success, error) {
-                medicationSectionResource.query(success, error);
             }
 
             function getSensitivityPolicies (success, error) {
