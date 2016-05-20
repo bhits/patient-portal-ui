@@ -120,6 +120,11 @@
                             consent: {}
                         }
                     })
+                    .state('fe.consent.accept', {
+                        url: '/accept',
+                        data: {pageTitle: 'Accept Consent'},
+                        templateUrl: 'app/consent/controllers/accept.html'
+                    })
                     .state('fe.consent.sign', {
                         url: '/signConsent',
                         data: {pageTitle: 'Sign Consent'},
