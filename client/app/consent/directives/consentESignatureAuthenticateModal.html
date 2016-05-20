@@ -1,0 +1,22 @@
+<div class="inmodal" ng-form >
+    <div class="modal-header">
+        <h4 class="modal-title">Please Authenticate</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-sm-4 "></div>
+            <div class="col-sm-2 ">
+                <label for="password">Password</label>
+            </div>
+            <div class="col-sm-2">
+                <input type="password" name="password" id="password" ng-model="authenticateVm.password">
+            </div>
+            <div class="col-sm-4 ">
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-white m-r-xs" ng-click="authenticateVm.cancel()">Cancel</button>
+        <button type="button" class="btn btn-primary dark-green" ng-click="authenticateVm.ok()">Continue</button>
+    </div>
+</div>

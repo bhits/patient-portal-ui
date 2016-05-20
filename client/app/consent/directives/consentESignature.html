@@ -112,7 +112,7 @@
         <div class="col-md-12">
             <div class="pull-right">
                 <button class="btn btn-white m-r" ui-sref="fe.consent.list">Cancel</button>
-                <button class="btn btn-primary dark-green" type="submit" ng-disabled="!consentESignatureVm.patient.acceptTerms">Sign</button>
+                <button class="btn btn-primary dark-green" type="submit" ng-disabled="!consentESignatureVm.patient.acceptTerms" ng-click="consentESignatureVm.openAuthenticateModal()">Sign</button>
             </div>
         </div>
     </div>

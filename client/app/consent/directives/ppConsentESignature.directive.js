@@ -23,8 +23,8 @@
                 return directive;
             }
 
-             /* @ngInject */
-            function ConsentESignatureController () {
+            /* @ngInject */
+            function ConsentESignatureController ($modal) {
                 var vm = this;
                 vm.patient = {
                     createdDate: "04/08/2016",
@@ -50,5 +50,42 @@
                     expirationDate: "04/08/2017",
                     acceptTerms:false
                 };
+
+                vm.openAuthenticateModal = function() {
+                    var modalInstance = $modal.open({
+                        templateUrl: 'app/consent/directives/consentESignatureAuthenticateModal.html',
+                        controller: AuthenticateController,
+                        controllerAs: 'authenticateVm'
+                    });
+                };
+
+                /* @ngInject */
+                function AuthenticateController($modalInstance, notificationService, authenticationService, profileService) {
+                    var authenticateVm  = this;
+                    authenticateVm.cancel = cancel;
+                    authenticateVm.ok = ok;
+
+                    function cancel() {
+                        $modalInstance.dismiss('cancel');
+                    }
+
+                    function ok() {
+                        authenticate();
+                        $modalInstance.close();
+                    }
+                    
+                    function authenticate(){
+                        authenticationService.login(profileService.getUserName(), authenticateVm.password)
+                            .then(
+                                function (response) {
+                                    notificationService.success("Success in authenticating consent.");
+                                }, function (error) {
+                                    notificationService.error("Success in authenticating patient.");
+                                }
+                            );
+                    }
+                }
             }
+
+
 })();
