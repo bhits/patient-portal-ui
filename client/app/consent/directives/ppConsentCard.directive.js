@@ -80,7 +80,6 @@
         manageConsentModalVm.cancel = cancel;
         manageConsentModalVm.option = "manageConcent";
         manageConsentModalVm.revoke = revoke;
-        manageConsentModalVm.accept = accept;
         manageConsentModalVm.edit = edit;
         manageConsentModalVm.signConsent = signConsent;
         manageConsentModalVm.deleteConsent = deleteConsent;
@@ -133,10 +132,6 @@
         function edit(){
             $state.go('fe.consent.create', {consentId: consent.id});
             $modalInstance.close();
-        }
-
-        function accept(){
-            $state.go('fe.consent.accept');
         }
 
         function signConsent(){

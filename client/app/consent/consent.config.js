@@ -120,10 +120,12 @@
                             consent: {}
                         }
                     })
-                    .state('fe.consent.accept', {
-                        url: '/accept',
-                        data: {pageTitle: 'Accept Consent'},
-                        templateUrl: 'app/consent/controllers/accept.html'
+                    .state('fe.consent.esignature', {
+                        url: '/esignature',
+                        data: {pageTitle: 'Provide eSignature'},
+                        templateUrl: 'app/consent/controllers/consentESignature.html',
+                        controller: 'ConsentESignatureController',
+                        controllerAs: 'consentESignatureVm',
                     })
                     .state('fe.consent.sign', {
                         url: '/signConsent',

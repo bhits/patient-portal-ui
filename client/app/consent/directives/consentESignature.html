@@ -1,0 +1,119 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <h2 class="m-t-none"><strong>Consent to Share My Medical Information</strong></h2>
+                <div>
+                    <span>Created on:</span>
+                    <strong><span ng-bind="consentESignatureVm.patient.createdDate"></span></strong>
+                </div>
+                <div class="">
+                    <p class="m-b-xxs">Consent Reference Number:</p>
+                    <p><strong ng-bind="consentESignatureVm.patient.consentReferenceNumber"></strong></p>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <span> Patient Name:</span> <strong><span ng-bind="consentESignatureVm.patient.name"></span></strong>
+            </div>
+            <div class="col-sm-6">
+                <span> Patient DOB:</span> <strong><span ng-bind="consentESignatureVm.patient.dob"></span></strong>
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="alert alert-info navbar-blue p-xs"><strong>AUTHORIZATION TO DISCLOSE</strong></div>
+                <p><strong>Authorizes:</strong></p>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <p>Provider Name</p>
+                        <p ><strong ng-bind="consentESignatureVm.patient.authrizeProviderName"></strong></p>
+                    </div>
+                    <div class="col-sm-3">
+                        <p>NPI Number</p>
+                        <p > <strong ng-bind="consentESignatureVm.patient.authorizeProviderNPI"></strong></p>
+                    </div>
+                    <div class="col-sm-3">
+                        <p>Address</p>
+                        <p > <strong ng-bind="consentESignatureVm.patient.authorizeProviderAddress"></strong></p>
+                    </div>
+                    <div class="col-sm-3">
+                        <p>Phone</p>
+                        <p > <strong ng-bind="consentESignatureVm.patient.authorizeProviderTelephone"></strong></p>
+                    </div>
+                </div>
+                <br/>
+                <p><strong>To disclose to:</strong></p>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <p>Provider Name</p>
+                        <p > <strong ng-bind="consentESignatureVm.patient.discloseProviderName"></strong></p>
+                    </div>
+                    <div class="col-sm-3">
+                        <p>NPI Number</p>
+                        <p > <strong ng-bind="consentESignatureVm.patient.discloseProviderNPI"></strong></p>
+                    </div>
+                    <div class="col-sm-3">
+                        <p>Address</p>
+                        <p > <strong ng-bind="consentESignatureVm.patient.discloseProviderAddress"></strong></p>
+                    </div>
+                    <div class="col-sm-3">
+                        <p>Phone</p>
+                        <p > <strong ng-bind="consentESignatureVm.patient.discloseProviderTelephone"></strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="alert alert-info navbar-blue p-xs"><strong>HEALTH INFORMATION TO BE DISCLOSED</strong></div>
+                <div class="col-sm-6">
+                    <h4> <strong>To SHARE the following medical information:</strong></h4>
+                    <strong>Sensitivity Categories:</strong>
+                    <ul>
+                        <li ng-repeat="category in consentESignatureVm.patient.sensitiveCategories"> <span ng-bind="category.displayName"></span></li>
+                    </ul>
+                </div>
+                <div class="col-sm-6">
+                    <h4><strong>To SHARE for the following purpose(s):</strong></h4>
+                    <ul>
+                        <li ng-repeat="purposeOfUse in consentESignatureVm.patient.purposeOfUses"> <span ng-bind="purposeOfUse.displayName"></span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="alert alert-info navbar-blue p-xs"><strong>CONSENT TERMS</strong></div>
+                <p>
+                    I, <strong ng-bind="consentESignatureVm.patient.name"></strong>, understand that my records are protected under the federal regulations governing Confidentiality of
+                    Alcohol and Drug Abuse Patient Records, 42 CFR part 2, and cannot be disclosed without my written permission or
+                    as otherwise permitted by 42 CFR part 2. I also understand that I may revoke this consent at any time except to the
+                    extent that action has been taken in reliance on it, and that any event this consent expires automatically as follows:
+                </p>
+            </div>
+            <div class="col-sm-4">
+                <span><strong>Effective Date:</strong></span>
+                <strong ng-bind="consentESignatureVm.patient.effectiveDate"></strong>
+            </div>
+            <div class="col-sm-4">
+                <span><strong>Expiration Date:</strong></span>
+                <strong ng-bind="consentESignatureVm.patient.expirationDate"></strong>
+            </div>
+        </div>
+        <br/>
+        <div>
+            <input type="checkbox" pp-icheck ng-model="consentESignatureVm.patient.acceptTerms">
+            <span>I, <strong ng-bind="consentESignatureVm.patient.name"></strong>, hereby accept, and understand the terms of this consent.</span>
+        </div>
+    </div>
+    <div class="row m-b-md">
+        <div class="col-md-12">
+            <div class="pull-right">
+                <button class="btn btn-white m-r" ui-sref="fe.consent.list">Cancel</button>
+                <button class="btn btn-primary dark-green" type="submit" >Sign</button>
+            </div>
+        </div>
+    </div>
+</div>
