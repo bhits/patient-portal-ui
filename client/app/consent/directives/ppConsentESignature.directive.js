@@ -64,6 +64,7 @@
                     var authenticateVm  = this;
                     authenticateVm.cancel = cancel;
                     authenticateVm.ok = ok;
+                    authenticateVm.errorMessage="";
 
                     function cancel() {
                         $modalInstance.dismiss('cancel');
@@ -71,16 +72,17 @@
 
                     function ok() {
                         authenticate();
-                        $modalInstance.close();
                     }
                     
                     function authenticate(){
                         authenticationService.login(profileService.getUserName(), authenticateVm.password)
                             .then(
                                 function (response) {
-                                    notificationService.success("Success in authenticating consent.");
+                                    authenticateVm.errorMessage="";
+                                    notificationService.success("Success in authenticating patient. Signing consent ...");
+                                    $modalInstance.close();
                                 }, function (error) {
-                                    notificationService.error("Success in authenticating patient.");
+                                    authenticateVm.errorMessage="Invalid password.";
                                 }
                             );
                     }

@@ -4,6 +4,11 @@
     </div>
     <div class="modal-body">
         <div class="row">
+            <div class="col-sm-12">
+                <strong> Please provide you account password to authenticate, and complete e-signature</strong>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-sm-4 "></div>
             <div class="col-sm-2 ">
                 <label for="password">Password</label>
@@ -12,6 +17,9 @@
                 <input type="password" name="password" id="password" ng-model="authenticateVm.password">
             </div>
             <div class="col-sm-4 ">
+            </div>
+            <div class="col-sm-12">
+                <span ng-if="authenticateVm.errorMessage" class="text-alert" ng-bind="authenticateVm.errorMessage"></span>
             </div>
         </div>
     </div>
