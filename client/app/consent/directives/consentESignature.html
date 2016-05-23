@@ -104,7 +104,7 @@
         </div>
         <br/>
         <div>
-            <input type="checkbox" pp-icheck ng-model="consentESignatureVm.patient.acceptTerms">
+            <input type="checkbox" pp-icheck ng-model="consentESignatureVm.patient.acceptTerms" ng-change="consentESignatureVm.onchecked()">
             <span>I, <strong ng-bind="consentESignatureVm.patient.name"></strong>, hereby accept, and understand the terms of this consent.</span>
         </div>
     </div>
@@ -112,7 +112,7 @@
         <div class="col-md-12">
             <div class="pull-right">
                 <button class="btn btn-white m-r" ui-sref="fe.consent.list">Cancel</button>
-                <button class="btn btn-primary dark-green" type="submit" ng-disabled="!consentESignatureVm.patient.acceptTerms" ng-click="consentESignatureVm.openAuthenticateModal()">Sign</button>
+                <button class="btn btn-primary dark-green" type="submit" ng-disabled="!consentESignatureVm.isAuthenticated" >Complete</button>
             </div>
         </div>
     </div>

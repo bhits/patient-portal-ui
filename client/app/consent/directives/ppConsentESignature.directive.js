@@ -26,6 +26,9 @@
             /* @ngInject */
             function ConsentESignatureController ($modal) {
                 var vm = this;
+                vm.onchecked = onchecked;
+                vm.isAuthenticated = false;
+                
                 vm.patient = {
                     createdDate: "04/08/2016",
                     dob: "04/08/2016",
@@ -51,11 +54,20 @@
                     acceptTerms:false
                 };
 
+                function onchecked(){
+                    if(vm.patient.acceptTerms){
+                        vm.openAuthenticateModal();
+                    }else{
+                        vm.isAuthenticated = false;
+                    }
+                }
                 vm.openAuthenticateModal = function() {
                     var modalInstance = $modal.open({
                         templateUrl: 'app/consent/directives/consentESignatureAuthenticateModal.html',
                         controller: AuthenticateController,
-                        controllerAs: 'authenticateVm'
+                        controllerAs: 'authenticateVm',
+                        backdrop  : 'static',
+                        keyboard  : false
                     });
                 };
 
@@ -67,6 +79,7 @@
                     authenticateVm.errorMessage="";
 
                     function cancel() {
+                        vm.patient.acceptTerms = false;
                         $modalInstance.dismiss('cancel');
                     }
 
@@ -79,9 +92,11 @@
                             .then(
                                 function (response) {
                                     authenticateVm.errorMessage="";
-                                    notificationService.success("Success in authenticating patient. Signing consent ...");
+                                    vm.isAuthenticated = true;
+                                    notificationService.success("Success in authenticating patient.");
                                     $modalInstance.close();
                                 }, function (error) {
+                                    vm.isAuthenticated = false;
                                     authenticateVm.errorMessage="Invalid password.";
                                 }
                             );
