@@ -81,6 +81,7 @@
         manageConsentModalVm.option = "manageConcent";
         manageConsentModalVm.revoke = revoke;
         manageConsentModalVm.edit = edit;
+        manageConsentModalVm.viewAttestation = viewAttestation;
         manageConsentModalVm.signConsent = signConsent;
         manageConsentModalVm.deleteConsent = deleteConsent;
         manageConsentModalVm.toggleDeleteConfirmation = toggleDeleteConfirmation;
@@ -131,6 +132,11 @@
 
         function edit(){
             $state.go('fe.consent.create', {consentId: consent.id});
+            $modalInstance.close();
+        }
+
+        function viewAttestation(){
+            $state.go('fe.consent.esignature', {consentId: consent.id});
             $modalInstance.close();
         }
 

@@ -8,7 +8,8 @@
             .controller('ConsentESignatureController', ConsentESignatureController);
 
              /* @ngInject */
-            function ConsentESignatureController(){
+            function ConsentESignatureController(consentAttestation){
                 var vm = this;
+                vm.attestation = consentAttestation;
             }
 })();

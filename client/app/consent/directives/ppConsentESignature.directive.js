@@ -15,6 +15,7 @@
                     templateUrl: 'app/consent/directives/consentESignature.html',
                     scope: {},
                     bindToController: {
+                        attestation: "="
                     },
                     controller: ConsentESignatureController,
                     controllerAs: 'consentESignatureVm'
@@ -28,7 +29,30 @@
                 var vm = this;
                 vm.onchecked = onchecked;
                 vm.isAuthenticated = false;
-                
+
+                activate();
+
+                function activate(){
+                    computeAuthorizeProvider();
+                    computeDisclosureProvider();
+                }
+
+                function computeAuthorizeProvider(){
+                    if(vm.attestation.orgProvidersPermittedToDisclosure.length> 0 ){
+                        vm.authorizeProvider = vm.attestation.orgProvidersPermittedToDisclosure[0];
+                    }else if(vm.attestation.indProvidersPermittedToDisclosure.length> 0 ){
+                        vm.authorizeProvider = vm.attestation.indProvidersPermittedToDisclosure[0];
+                    }
+                }
+
+                function computeDisclosureProvider(){
+                    if(vm.attestation.indProvidersDisclosureIsMadeTo.length> 0 ){
+                        vm.disclosureProvider = vm.attestation.indProvidersDisclosureIsMadeTo[0];
+                    }else if(vm.attestation.orgProvidersDisclosureIsMadeTo.length> 0 ){
+                        vm.disclosureProvider = vm.attestation.orgProvidersDisclosureIsMadeTo[0];
+                    }
+                }
+
                 vm.patient = {
                     createdDate: "04/08/2016",
                     dob: "04/08/2016",

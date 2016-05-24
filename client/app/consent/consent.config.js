@@ -122,10 +122,31 @@
                     })
                     .state('fe.consent.esignature', {
                         url: '/esignature',
+                        params: {
+                            consentId: ''
+                        },
                         data: {pageTitle: 'Provide eSignature'},
                         templateUrl: 'app/consent/controllers/consentESignature.html',
                         controller: 'ConsentESignatureController',
                         controllerAs: 'consentESignatureVm',
+                        resolve: {
+                            /* @ngInject */
+                            consentAttestation: function ($q, $stateParams, consentService, notificationService) {
+                                var deferred = $q.defer();
+                                var consentId= $stateParams.consentId;
+                                var consentAttestationData = consentService.getConsentAttestation(consentId, success, error);
+
+                                function success(response){
+                                    deferred.resolve(response);
+                                }
+
+                                function error(){
+                                    notificationService.error('Failed to get consent attestation...');
+                                    deferred.reject();
+                                }
+                                return deferred.promise;
+                            }
+                        }
                     })
                     .state('fe.consent.sign', {
                         url: '/signConsent',

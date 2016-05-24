@@ -18,6 +18,7 @@
             var sensitvityPolicyResource = $resource(envService.securedApis.pcmApiBaseUrl + "/sensitivityPolicy");
             var signConsentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/signConsent/:id", {id: '@id'});
             var revokeConsentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/revokeConsent/:id", {id: '@id'});
+            var consentAttestationResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/attestation/:consentId", {id: '@id'});
             var selectedNpi = {authorizeNpi: "", discloseNpi: ""};
             var selectedProvider = [];
 
@@ -50,6 +51,7 @@
             service.resetSelectedNpi = resetSelectedNpi;
             service.getPurposeOfUseCode = getPurposeOfUseCode;
             service.exportConsentDirective = exportConsentDirective;
+            service.getConsentAttestation = getConsentAttestation;
 
             return service;
 
@@ -263,6 +265,11 @@
             function getPurposeOfUseCode(displayName, purposeOfUse){
 
             }
+
+            function getConsentAttestation (consentId, success, error) {
+                return consentAttestationResource.get({consentId:consentId}, success, error);
+            }
+
 
         }
 })();
