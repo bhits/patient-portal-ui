@@ -38,17 +38,17 @@
                 }
 
                 function computeAuthorizeProvider(){
-                    if(vm.attestation.orgProvidersPermittedToDisclosure.length> 0 ){
+                    if(angular.isDefined(vm.attestation) && angular.isDefined(vm.attestation.orgProvidersPermittedToDisclosure) && vm.attestation.orgProvidersPermittedToDisclosure.length> 0 ){
                         vm.authorizeProvider = vm.attestation.orgProvidersPermittedToDisclosure[0];
-                    }else if(vm.attestation.indProvidersPermittedToDisclosure.length> 0 ){
+                    }else if(angular.isDefined(vm.attestation) && angular.isDefined(vm.attestation.indProvidersPermittedToDisclosure) && vm.attestation.indProvidersPermittedToDisclosure.length> 0 ){
                         vm.authorizeProvider = vm.attestation.indProvidersPermittedToDisclosure[0];
                     }
                 }
 
                 function computeDisclosureProvider(){
-                    if(vm.attestation.indProvidersDisclosureIsMadeTo.length> 0 ){
+                    if(angular.isDefined(vm.attestation) && angular.isDefined(vm.attestation.indProvidersDisclosureIsMadeTo) && vm.attestation.indProvidersDisclosureIsMadeTo.length> 0 ){
                         vm.disclosureProvider = vm.attestation.indProvidersDisclosureIsMadeTo[0];
-                    }else if(vm.attestation.orgProvidersDisclosureIsMadeTo.length> 0 ){
+                    }else if( angular.isDefined(vm.attestation) && angular.isDefined(vm.attestation.orgProvidersDisclosureIsMadeTo) &&  vm.attestation.orgProvidersDisclosureIsMadeTo.length> 0 ){
                         vm.disclosureProvider = vm.attestation.orgProvidersDisclosureIsMadeTo[0];
                     }
                 }

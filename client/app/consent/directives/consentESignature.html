@@ -37,7 +37,7 @@
                     </div>
                     <div class="col-sm-3">
                         <p>Phone</p>
-                        <p > <strong ng-bind="consentESignatureVm.authorizeProvider.mailingAddressTelephoneNumber"></strong></p>
+                        <p > <strong ng-bind="consentESignatureVm.authorizeProvider.practiceLocationAddressTelephoneNumber | phone"></strong></p>
                     </div>
                 </div>
                 <br/>
@@ -57,10 +57,10 @@
                     </div>
                     <div class="col-sm-3">
                         <p>Phone</p>
-                        <p > <strong ng-bind="consentESignatureVm.disclosureProvider.mailingAddressTelephoneNumber"></strong></p>
+                        <p > <strong ng-bind="consentESignatureVm.disclosureProvider.practiceLocationAddressTelephoneNumber | phone"></strong></p>
                     </div>
                 </div>
-            </div>;
+            </div>
         </div>
 
         <div class="row">

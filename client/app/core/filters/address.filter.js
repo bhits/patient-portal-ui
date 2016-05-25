@@ -13,12 +13,25 @@
             return composeAddress;
 
             function composeAddress (data) {
-                var address = {};
+                var address = "";
                 if (angular.isDefined(data)) {
-                    address = data.firstLineMailingAddress + " , " + data.mailingAddressCityName + ", " + data.mailingAddressCountryCode + ", " + utilityService.formatZipCode(data.mailingAddressPostalCode);
+
+                    if(utilityService.isDefinedAndLenghtNotZero(data.firstLinePracticeLocationAddress)){
+                        address += data.firstLinePracticeLocationAddress + " , ";
+                    }
+                    if( utilityService.isDefinedAndLenghtNotZero(data.practiceLocationAddressCityName)){
+                        address += data.practiceLocationAddressCityName + ", ";
+                    }
+
+                    if( utilityService.isDefinedAndLenghtNotZero(data.practiceLocationAddressStateName)){
+                        address += data.practiceLocationAddressStateName + ", ";
+                    }
+
+                    if( utilityService.isDefinedAndLenghtNotZero(data.practiceLocationAddressPostalCode)){
+                        address += data.practiceLocationAddressPostalCode ;
+                    }
                 }
                 return address;
             }
-
         }
 })();

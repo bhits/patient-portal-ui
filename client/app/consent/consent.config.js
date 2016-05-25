@@ -131,20 +131,27 @@
                         controllerAs: 'consentESignatureVm',
                         resolve: {
                             /* @ngInject */
-                            consentAttestation: function ($q, $stateParams, consentService, notificationService) {
+                            consentAttestation: function ($q, $stateParams, utilityService, consentService, notificationService) {
                                 var deferred = $q.defer();
                                 var consentId= $stateParams.consentId;
-                                var consentAttestationData = consentService.getConsentAttestation(consentId, success, error);
+                                if(utilityService.isDefinedAndLenghtNotZero($stateParams.consentId)){
+                                    var success = function(response){
+                                        deferred.resolve(response);
+                                    };
 
-                                function success(response){
-                                    deferred.resolve(response);
-                                }
+                                    var error = function(){
+                                        notificationService.error('Failed to get consent attestation...');
+                                        deferred.reject();
+                                    };
 
-                                function error(){
-                                    notificationService.error('Failed to get consent attestation...');
-                                    deferred.reject();
+                                    var consentAttestationData = consentService.getConsentAttestation(consentId, success, error);
+                                    
+                                    return deferred.promise;
+                                }else {
+                                    notificationService.error('Consent id not provided. Redirecting to consent list.');
+                                    utilityService.redirectTo("fe/consent/list");
+
                                 }
-                                return deferred.promise;
                             }
                         }
                     })
