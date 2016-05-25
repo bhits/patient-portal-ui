@@ -17,7 +17,7 @@
                 if (angular.isDefined(data)) {
 
                     if(utilityService.isDefinedAndLenghtNotZero(data.firstLinePracticeLocationAddress)){
-                        address += data.firstLinePracticeLocationAddress + " , ";
+                        address += data.firstLinePracticeLocationAddress + ", ";
                     }
                     if( utilityService.isDefinedAndLenghtNotZero(data.practiceLocationAddressCityName)){
                         address += data.practiceLocationAddressCityName + ", ";
