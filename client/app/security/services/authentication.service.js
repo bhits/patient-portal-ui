@@ -6,23 +6,20 @@
 
     /* @ngInject */
     function authenticationService($resource, envService, oauthTokenService, utilityService, oauthConfig) {
-        var loginResource = function (userName, password) {
+        var loginResource = function () {
             return $resource(envService.unsecuredApis.tokenUrl, {},
                 {
                     save: {
                         method: 'POST',
                         headers: {
                             'Authorization': 'Basic ' + envService.base64BasicKey,
-                            'Content-Type' : 'application/x-www-form-urlencoded'},
-                        params: {
-                            'grant_type': 'password',
-                            'password': password,
-                            'username': userName
+                            'Content-Type': 'application/x-www-form-urlencoded'
                         },
-                        transformRequest: function (data, headersGetter) {
+                        /* convert to url encoded string */
+                        transformRequest: function (data) {
                             var str = [];
-                            for (var d in data){
-                                str.push(encodeURIComponent(d) + "=" + encodeURIComponent(data[d]));
+                            for (var p in data) {
+                                str.push(encodeURIComponent(p) + "=" + encodeURIComponent(data[p]));
                             }
                             return str.join("&");
                         }
@@ -36,9 +33,8 @@
 
         return service;
 
-        function login(userName, password) {
-            var getLoginResource = loginResource(userName, password);
-            return getLoginResource.save().$promise;
+        function login(loginInfo, success, error) {
+            return loginResource().save(loginInfo, success, error);
         }
 
         function logout() {

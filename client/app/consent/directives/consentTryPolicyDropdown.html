@@ -3,7 +3,7 @@
         <div class="form-group m-b-xs"><label class="col-sm-3 control-label">Document</label>
             <div class="col-sm-9">
                 <select class="form-control m-b" name="account" ng-model="tryPolicyDropdownVm.documentid">
-                    <option ng-repeat="document in tryPolicyDropdownVm.medicaldocuments" value="{{document.id}}">{{document.filename |fileName}}</option>
+                    <option ng-repeat="document in tryPolicyDropdownVm.medicaldocuments" value="{{document.id}}">{{document.name}}</option>
                 </select>
             </div>
         </div>
