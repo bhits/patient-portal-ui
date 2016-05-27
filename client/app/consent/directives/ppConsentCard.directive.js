@@ -193,7 +193,7 @@
             function error(respone){
                 notificationService.error("Error in downloading " + consentState + "consent.");
             }
-            consentService.downloadConsent(consent.id, docType ,success, error);
+            consentService.downloadConsent(consent.id,success, error);
         }
     }
 })();

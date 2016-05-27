@@ -87,22 +87,39 @@
                 return consentResource.update(consent, success, error);
             }
 
-            function composeUrl(docType, id){
-                if(angular.isDefined(docType) && angular.isDefined(id)  ){
-                    return envService.securedApis.pcmApiBaseUrl + "/consents/download/" + docType + "/" + id;
+            function composeUrl(id){
+                if(angular.isDefined(id)  ){
+                    return envService.securedApis.pcmApiBaseUrl + "/consents/attestation/download/"+ id;
                 }else{
                     notificationService.error("Consent pdf document type or id is not defined.");
                 }
             }
 
-            function downloadConsent(id, docType, success, error) {
-               var request = {
-                   method : 'GET',
-                   responseType : 'arraybuffer',
-                   url : composeUrl(docType, id)
-               };
-               $http(request).success(success).error(error);
+            function downloadConsent(id, success, error) {
+                var request = {
+                    method : 'GET',
+                    responseType : 'arraybuffer',
+                    url : composeUrl(id)
+                };
+                $http(request).success(success).error(error);
             }
+
+            // function composeUrl(docType, id){
+            //     if(angular.isDefined(docType) && angular.isDefined(id)  ){
+            //         return envService.securedApis.pcmApiBaseUrl + "/consents/download/" + docType + "/" + id;
+            //     }else{
+            //         notificationService.error("Consent pdf document type or id is not defined.");
+            //     }
+            // }
+            //
+            // function downloadConsent(id, docType, success, error) {
+            //    var request = {
+            //        method : 'GET',
+            //        responseType : 'arraybuffer',
+            //        url : composeUrl(docType, id)
+            //    };
+            //    $http(request).success(success).error(error);
+            // }
 
             function deleteConsent (id, success, error) {
                 return consentResource.delete({id: id}, success, error);
