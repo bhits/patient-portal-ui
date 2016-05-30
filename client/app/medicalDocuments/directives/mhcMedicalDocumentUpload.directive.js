@@ -43,7 +43,7 @@
 
         function uploadDocumentError(error) {
             var uploadDocumentException = error.data.exception;
-            if (uploadDocumentException.indexOf('InvalidOriginalClinicalDocumentException') !== -1) {
+            if (uploadDocumentException.indexOf('InvalidClinicalDocumentException') !== -1) {
                 notificationService.error('Invaild medical document');
             } else {
                 notificationService.error('Error in uploading medical document');
