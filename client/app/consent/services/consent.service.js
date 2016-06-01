@@ -18,7 +18,7 @@
             var sensitvityPolicyResource = $resource(envService.securedApis.pcmApiBaseUrl + "/sensitivityPolicy");
             var signConsentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/signConsent/:id", {id: '@id'});
             var revokeConsentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/revokeConsent/:id", {id: '@id'});
-            var consentAttestationResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/attestation/:consentId", {id: '@id'});
+            var consentAttestationResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/:consentId/attestation", {consentId: '@consentId'});
             var selectedNpi = {authorizeNpi: "", discloseNpi: ""};
             var selectedProvider = [];
 
