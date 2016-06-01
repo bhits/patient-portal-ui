@@ -16,7 +16,7 @@
             var consentExportConsentDirective = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/exportConsentDirective/:id",{id: '@id'});
             var purposeOfUseResource = $resource(envService.securedApis.pcmApiBaseUrl + "/purposeOfUse");
             var sensitvityPolicyResource = $resource(envService.securedApis.pcmApiBaseUrl + "/sensitivityPolicy");
-            var signConsentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/signConsent/:id", {id: '@id'});
+            var attestedConsentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/:consentId/attested", {consentId: '@consentId'});
             var revokeConsentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/revokeConsent/:id", {id: '@id'});
             var consentAttestationResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/:consentId/attestation", {consentId: '@consentId'});
             var selectedNpi = {authorizeNpi: "", discloseNpi: ""};
@@ -27,7 +27,6 @@
             service.getPurposeOfUseResource = getPurposeOfUseResource;
             service.getSensitvityPolicyResource = getSensitvityPolicyResource;
             service.getConsent = getConsent;
-            service.signConsent = signConsent;
             service.revokeConsent = revokeConsent;
             service.createConsent = createConsent;
             service.updateConsent = updateConsent;
@@ -52,6 +51,7 @@
             service.getPurposeOfUseCode = getPurposeOfUseCode;
             service.exportConsentDirective = exportConsentDirective;
             service.getConsentAttestation = getConsentAttestation;
+            service.getAttestedConsent = getAttestedConsent;
 
             return service;
 
@@ -69,10 +69,6 @@
 
             function getConsent (id, success, error) {
                 return consentResource.get({id:id}, success, error);
-            }
-
-            function signConsent (id, success, error) {
-                return signConsentResource.get({id:id}, success, error);
             }
 
             function revokeConsent (id, success, error) {
@@ -285,6 +281,10 @@
 
             function getConsentAttestation (consentId, success, error) {
                 return consentAttestationResource.get({consentId:consentId}, success, error);
+            }
+
+            function getAttestedConsent (consentId, success, error) {
+                return attestedConsentResource.get({consentId:consentId}, success, error);
             }
 
 

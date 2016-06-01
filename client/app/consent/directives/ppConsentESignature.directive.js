@@ -8,7 +8,7 @@
             .directive('ppConsentESignature', ppConsentESignature);
 
             /* @ngInject */
-            function ppConsentESignature() {
+            function ppConsentESignature(consentService) {
 
                 var directive =  {
                     restrict: 'E',
@@ -25,9 +25,10 @@
             }
 
             /* @ngInject */
-            function ConsentESignatureController ($modal) {
+            function ConsentESignatureController ($modal, consentService) {
                 var vm = this;
                 vm.onchecked = onchecked;
+                vm.onCompleteAttestation = onCompleteAttestation;
                 vm.isAuthenticated = false;
 
                 activate();
@@ -125,6 +126,17 @@
 
                         authenticationService.login(loginInfo, success, error);
                     }
+                }
+
+                function onCompleteAttestation(){
+                    var success = function(response){
+                        console.log("OK");
+                    };
+
+                    var error = function(response){
+                        console.log("Error");
+                    };
+                    consentService.getAttestedConsent(vm.attestation.consentId, success, error);
                 }
             }
 
