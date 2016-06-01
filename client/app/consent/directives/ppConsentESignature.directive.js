@@ -33,10 +33,28 @@
                 activate();
 
                 function activate(){
+                    prepareConsentTerm();
                     computeAuthorizeProvider();
                     computeDisclosureProvider();
                 }
 
+                function prepareConsentTerm(){
+                    if(angular.isDefined(vm.attestation) && angular.isDefined(vm.attestation.consentTermsVersions) ){
+                        var terms = vm.attestation.consentTermsVersions.consentTermsText;
+                        var userNameKey = "ATTESTER_FULL_NAME";
+                        vm.termsWithUserName = terms.replace(userNameKey,composeFullname(vm.attestation) );
+                    }
+                }
+
+                function composeFullname(attestation){
+                    var fullName = "";
+                    if(angular.isDefined(vm.attestation) && angular.isDefined(vm.attestation.firstName) && angular.isDefined(vm.attestation.lastName) ){
+                        fullName =  "<strong>" + vm.attestation.firstName + " " + vm.attestation.lastName + "</strong>";
+                    }else{
+                        console.erro("Cannot set full name");
+                    }
+                    return fullName;
+                }
                 function computeAuthorizeProvider(){
                     if(angular.isDefined(vm.attestation) && angular.isDefined(vm.attestation.orgProvidersPermittedToDisclosure) && vm.attestation.orgProvidersPermittedToDisclosure.length> 0 ){
                         vm.authorizeProvider = vm.attestation.orgProvidersPermittedToDisclosure[0];
@@ -53,30 +71,6 @@
                     }
                 }
 
-                // vm.patient = {
-                //     createdDate: "04/08/2016",
-                //     dob: "04/08/2016",
-                //     name: "Bob Lastname",
-                //     consentReferenceNumber: "MHC.HC3AFH:&2.16.840.1.113883.3.704.100.200.1.1.3.1&ISO:1518239631:1790718047:OEATAM",
-                //     authrizeProviderName: "KOYOMJI DENTAL",
-                //     authorizeProviderNPI: "1992916092",
-                //     authorizeProviderAddress: "8218 WISCONSIN AVE,BETHESDA, MD, 20814-3107",
-                //     authorizeProviderTelephone:"301-654-1111",
-                //     discloseProviderName:"SABA PEDIATRIC MEDICINE, LLC",
-                //     discloseProviderNPI: "1871783456",
-                //     discloseProviderAddress: "15225 SHADY GROVE RD,ROCKVILLE, MD, 20850-3258",
-                //     discloseProviderTelephone:"301-838-8977",
-                //     sensitiveCategories: [
-                //         {displayName: "Addictions Information"},
-                //         {displayName:"Alcohol use and Alcoholism Information"}
-                //     ],
-                //     purposeOfUses: [
-                //         {displayName: "Health Treatment"}
-                //     ],
-                //     effectiveDate: "04/08/2016",
-                //     expirationDate: "04/08/2017",
-                //     acceptTerms:false
-                // };
 
                 function onchecked(){
                     if(vm.patient.acceptTerms){

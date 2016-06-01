@@ -84,12 +84,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="alert alert-info navbar-blue p-xs"><strong>CONSENT TERMS</strong></div>
-                <p>
-                    I, <strong ng-bind="consentESignatureVm.attestation | fullName"></strong>, understand that my records are protected under the federal regulations governing Confidentiality of
-                    Alcohol and Drug Abuse Patient Records, 42 CFR part 2, and cannot be disclosed without my written permission or
-                    as otherwise permitted by 42 CFR part 2. I also understand that I may revoke this consent at any time except to the
-                    extent that action has been taken in reliance on it, and that any event this consent expires automatically as follows:
-                </p>
+                <p ng-bind-html="consentESignatureVm.termsWithUserName"></p>
             </div>
             <div class="col-sm-4">
                 <span><strong>Effective Date:</strong></span>
