@@ -85,9 +85,9 @@
 
             function composeUrl(id){
                 if(angular.isDefined(id)  ){
-                    return envService.securedApis.pcmApiBaseUrl + "/consents/attestation/download/"+ id;
+                    return envService.securedApis.pcmApiBaseUrl + "/consents/" + id + "/unattested/";
                 }else{
-                    notificationService.error("Consent pdf document type or id is not defined.");
+                    notificationService.error("Consent pdf document id is not defined.");
                 }
             }
 
