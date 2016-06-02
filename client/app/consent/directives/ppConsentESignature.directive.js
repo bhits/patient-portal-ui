@@ -116,7 +116,6 @@
                         var success = function (response) {
                             authenticateVm.errorMessage="";
                             vm.isAuthenticated = true;
-                            notificationService.success("Success in authenticating patient.");
                             $modalInstance.close();
                         };
                         var error = function (error) {
@@ -145,7 +144,9 @@
                     var modalInstance = $modal.open({
                         templateUrl: 'app/consent/directives/consentPreviewAttestationModal.html',
                         controller: PreviewAttestedConsentController,
-                        controllerAs: 'attestedConsentModalVm'
+                        controllerAs: 'attestedConsentModalVm',
+                        backdrop  : 'static',
+                        keyboard  : false
                     });
                 };
 
