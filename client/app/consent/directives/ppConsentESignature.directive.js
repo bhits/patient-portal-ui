@@ -8,7 +8,7 @@
             .directive('ppConsentESignature', ppConsentESignature);
 
             /* @ngInject */
-            function ppConsentESignature(consentService) {
+            function ppConsentESignature(consentService, profileService) {
 
                 var directive =  {
                     restrict: 'E',
@@ -25,7 +25,7 @@
             }
 
             /* @ngInject */
-            function ConsentESignatureController ($modal, consentService) {
+            function ConsentESignatureController ($modal, consentService, utilityService) {
                 var vm = this;
                 vm.onchecked = onchecked;
                 vm.onCompleteAttestation = onCompleteAttestation;
@@ -130,13 +130,47 @@
 
                 function onCompleteAttestation(){
                     var success = function(response){
-                        console.log("OK");
+                        // notificationService.success("Success in creating consent attestation.");
+                        vm.isAuthenticated = true;
+                        vm.openAttestedConsentPreviewModal();
                     };
 
                     var error = function(response){
                         console.log("Error");
                     };
                     consentService.getAttestedConsent(vm.attestation.consentId, success, error);
+                }
+
+                vm.openAttestedConsentPreviewModal = function() {
+                    var modalInstance = $modal.open({
+                        templateUrl: 'app/consent/directives/consentPreviewAttestationModal.html',
+                        controller: PreviewAttestedConsentController,
+                        controllerAs: 'attestedConsentModalVm'
+                    });
+                };
+
+                /* @ngInject */
+                function PreviewAttestedConsentController($modalInstance, notificationService, profileService) {
+                    var attestedConsentModalVm  = this;
+                    attestedConsentModalVm.closeAndRedirectAndToConsentList = closeAndRedirectAndToConsentList;
+                    attestedConsentModalVm.downloadAttestedConsentAndRedirectToConsentList = downloadAttestedConsentAndRedirectToConsentList;
+
+
+                    function closeAndRedirectAndToConsentList() {
+                        $modalInstance.dismiss('cancel');
+                    }
+
+
+                    function downloadAttestedConsentAndRedirectToConsentList(){
+                        var fileName = profileService.getName();
+                        var success = function(data){
+                            utilityService.downloadFile(data, fileName,'application/pdf');
+                        };
+                        var error = function (respone){
+                            notificationService.error("Error in downloading attested consent pdf.");
+                        };
+                        consentService.downloadAttestedConsentPdf(vm.attestation.consentId,success, error);
+                    }
                 }
             }
 

@@ -52,6 +52,7 @@
             service.exportConsentDirective = exportConsentDirective;
             service.getConsentAttestation = getConsentAttestation;
             service.getAttestedConsent = getAttestedConsent;
+            service.downloadAttestedConsentPdf = downloadAttestedConsentPdf;
 
             return service;
 
@@ -82,20 +83,21 @@
             function updateConsent (consent, success, error) {
                 return consentResource.update(consent, success, error);
             }
-
-            function composeUrl(id){
-                if(angular.isDefined(id)  ){
-                    return envService.securedApis.pcmApiBaseUrl + "/consents/" + id + "/unattested/";
-                }else{
-                    notificationService.error("Consent pdf document id is not defined.");
-                }
-            }
-
+            
             function downloadConsent(id, success, error) {
                 var request = {
                     method : 'GET',
                     responseType : 'arraybuffer',
-                    url : composeUrl(id)
+                    url : envService.securedApis.pcmApiBaseUrl + "/consents/" + id + "/unattested/"
+                };
+                $http(request).success(success).error(error);
+            }
+
+            function downloadAttestedConsentPdf(id, success, error) {
+                var request = {
+                    method : 'GET',
+                    responseType : 'arraybuffer',
+                    url : envService.securedApis.pcmApiBaseUrl + "/consents/" + id + "/attested/download"
                 };
                 $http(request).success(success).error(error);
             }

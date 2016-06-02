@@ -1,0 +1,17 @@
+<div class="inmodal" ng-form >
+    <div class="modal-header">
+        <h4 class="modal-title">Success in created Attested Consent.</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-sm-12">
+                <strong> Success in creating attested consent</strong>
+            </div>
+            <div> <button ng-click="attestedConsentModalVm.downloadAttestedConsentAndRedirectToConsentList()">Download</button>  Attested Consent</div>
+            <div> <button ng-click="attestedConsentModalVm.closeAndRedirectAndToConsentList()">Redirect</button>  to Consent List</div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-white m-r-xs" ng-click="attestedConsentModalVm.closeAndRedirectAndToConsentList()">Cancel</button>
+    </div>
+</div>
