@@ -42,7 +42,12 @@
         }
 
         function uploadDocumentError(error) {
-            notificationService.error('Error in uploading medical document');
+            var uploadDocumentException = error.data.exception;
+            if (uploadDocumentException.indexOf('InvalidClinicalDocumentException') !== -1) {
+                notificationService.error('Whoops, something is wrong with this document');
+            } else {
+                notificationService.error('Sorry, your document could not be uploaded at this time');
+            }
         }
 
         function uploadDocument() {

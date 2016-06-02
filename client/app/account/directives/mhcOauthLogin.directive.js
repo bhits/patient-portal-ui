@@ -26,26 +26,34 @@
         vm.login = login;
         vm.canSubmit = canSubmit;
 
-        function login() {
-            authenticationService.login(vm.user.email, vm.user.password)
+        function prepareLoginInfo() {
+            return {
+                username: vm.user.email,
+                password: vm.user.password
+            };
+        }
+
+        function loginSuccess(response) {
+            oauthTokenService.setToken(response);
+            profileService.loadProfile()
                 .then(
-                    function (response) {
-                        oauthTokenService.setToken(response);
-                        profileService.loadProfile()
-                            .then(
-                                function (data) {
-                                    profileService.setProfile(data);
-                                    utilityService.redirectTo(oauthConfig.loginSuccessPath);
-                                },
-                                function (error) {
-                                    vm.profileError = true;
-                                }
-                            );
-                    }, function (error) {
-                        oauthTokenService.removeToken();
-                        vm.loginError = true;
+                    function (data) {
+                        profileService.setProfile(data);
+                        utilityService.redirectTo(oauthConfig.loginSuccessPath);
+                    },
+                    function (error) {
+                        vm.profileError = true;
                     }
                 );
+        }
+
+        function loginError(error) {
+            oauthTokenService.removeToken();
+            vm.loginError = true;
+        }
+
+        function login() {
+            authenticationService.login(prepareLoginInfo(), loginSuccess, loginError);
         }
 
         function canSubmit(loginForm) {
