@@ -24,6 +24,10 @@
                 vm.cancel = cancel;
                 vm.params = $stateParams;
                 vm.consentId = vm.params.consent.id;
+                vm.revokeAttestation = vm.params.revokeAttestation;
+                vm.revokeAttestation.patient = {};
+                vm.revokeAttestation.patient.firstName = vm.params.revokeAttestation.patientFirstName;
+                vm.revokeAttestation.patient.lastName = vm.params.revokeAttestation.patientLastName;
                 vm.sign = sign;
 
                 activate();
