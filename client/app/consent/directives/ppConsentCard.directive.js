@@ -93,6 +93,8 @@
         manageConsentModalVm.deleteInProcess = false;
         manageConsentModalVm.shareForPurposeOfUse = consent.shareForPurposeOfUse;
         manageConsentModalVm.purposeOfUseCode = consent.shareForPurposeOfUse[0].code; // set default purpose of use.
+        manageConsentModalVm.onCompleteAttestationRevocation = onCompleteAttestationRevocation;
+        manageConsentModalVm.downloadAttestedConsentRevocation = downloadAttestedConsentRevocation;
 
         activate();
 
@@ -213,6 +215,28 @@
                 notificationService.error("Error in downloading " + consentState + "consent.");
             }
             consentService.downloadAttestedConsentPdf(consent.id,success, error);
+        }
+
+        function downloadAttestedConsentRevocation(docType){
+            var fileName = profileService.getName() + " " + docType +" Consent" + consent.id;
+            function success(data){
+                utilityService.downloadFile(data, fileName,'application/pdf');
+            }
+            function error(respone){
+                notificationService.error("Error in downloading " + consentState + "consent.");
+            }
+            consentService.downloadAttestedConsentRevocationPdf(consent.id,success, error);
+        }
+
+        function onCompleteAttestationRevocation(){
+            var success = function(response){
+                console.log("OK");
+            };
+
+            var error = function(response){
+                console.log("Error");
+            };
+            consentService.createAttestedConsentRevocation(consent.id, true, success, error);
         }
     }
 })();

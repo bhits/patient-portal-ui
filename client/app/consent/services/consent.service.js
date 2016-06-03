@@ -20,6 +20,7 @@
             var revokeConsentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/revokeConsent/:id", {id: '@id'});
             var consentAttestationResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/:consentId/attestation", {consentId: '@consentId'});
             var consentRevokeAttestationResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/:consentId/revokeConsent", {consentId: '@consentId'});
+            var attestedConsentRevocationResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/:consentId/revocation", {consentId: '@consentId'});
             var selectedNpi = {authorizeNpi: "", discloseNpi: ""};
             var selectedProvider = [];
 
@@ -55,6 +56,8 @@
             service.getConsentRevokeAttestation = getConsentRevokeAttestation;
             service.downloadAttestedConsentPdf = downloadAttestedConsentPdf;
             service.downloadUnAttestedConsentPdf = downloadUnAttestedConsentPdf;
+            service.createAttestedConsentRevocation = createAttestedConsentRevocation;
+            service.downloadAttestedConsentRevocationPdf = downloadAttestedConsentRevocationPdf;
 
             return service;
 
@@ -161,11 +164,11 @@
 
             function resolveConsentState (consent) {
                 var state = 'error';
-                if (consent.consentStage === 'CONSENT_SAVED' && consent.revokeStage === 'NA') {
+                if (consent.consentStage === 'CONSENT_SAVED') {
                     state = 'Saved';
-                } else if (consent.consentStage === 'CONSENT_SIGNED' && consent.revokeStage === 'REVOCATION_NOT_SUBMITTED') {
+                } else if (consent.consentStage === 'CONSENT_SIGNED') {
                     state = 'Signed';
-                } else if (consent.consentStage === 'CONSENT_SIGNED' && consent.revokeStage === 'REVOCATION_REVOKED') {
+                } else if (consent.consentStage === 'REVOCATION_REVOKED') {
                     state = 'Revoked';
                 }
                 return state;
@@ -285,6 +288,19 @@
             
             function getConsentRevokeAttestation (consentId, success, error) {
                 return consentRevokeAttestationResource.get({consentId:consentId}, success, error);
+            }
+
+            function createAttestedConsentRevocation (consentId,acceptTerms, success, error) {
+                return attestedConsentRevocationResource.save({consentId:consentId, acceptTerms: acceptTerms}, success, error);
+            }
+
+            function downloadAttestedConsentRevocationPdf(id, success, error) {
+                var request = {
+                    method : 'GET',
+                    responseType : 'arraybuffer',
+                    url : envService.securedApis.pcmApiBaseUrl + "/consents/" + id + "/revoked/download"
+                };
+                $http(request).success(success).error(error);
             }
         }
 })();
