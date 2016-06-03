@@ -19,12 +19,13 @@
             }
 
             /* @ngInject */
-            function ConsentRevokeController($stateParams, $state, $modal) {
+            function ConsentRevokeController($stateParams, $state, $modal, consentService, notificationService) {
                 var vm = this;
                 vm.cancel = cancel;
                 vm.params = $stateParams;
                 vm.consentId = vm.params.consent.id;
                 vm.revokeAttestation = vm.params.revokeAttestation;
+                vm.revokeAttestation.acceptTerms = false;
                 vm.revokeAttestation.patient = {};
                 vm.revokeAttestation.patient.firstName = vm.params.revokeAttestation.patientFirstName;
                 vm.revokeAttestation.patient.lastName = vm.params.revokeAttestation.patientLastName;
@@ -45,8 +46,16 @@
                 }
 
                 function sign() {
-                    $state.go('fe.consent.revokesign',{consent: vm.params.consent});
+                    var success = function(response){
+                        notificationService.success("Consent is revoked successfully!");
+                        $state.go('fe.consent.list');
+                    };
 
+                    var error = function(response){
+                        notificationService.error("Error in revoking consent!");
+                    };
+                    
+                    consentService.createAttestedConsentRevocation(parseInt(vm.consentId), vm.revokeAttestation.acceptTerms, success, error);
                 }
 
                 //TODO: refactor attestation checkbox into directive that can be reused both for signing and revoking
