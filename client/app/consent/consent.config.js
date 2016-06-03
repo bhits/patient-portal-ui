@@ -117,7 +117,8 @@
                         data: {pageTitle: 'Revoke Consent'},
                         templateUrl: 'app/consent/controllers/consentRevoke.html',
                         params: {
-                            consent: {}
+                            consent: {},
+                            revokeAttestation: {}
                         }
                     })
                     .state('fe.consent.esignature', {
