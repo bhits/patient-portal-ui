@@ -19,7 +19,7 @@
             }
 
             /* @ngInject */
-            function ConsentRevokeController($stateParams, $state) {
+            function ConsentRevokeController($stateParams, $state, $modal) {
                 var vm = this;
                 vm.cancel = cancel;
                 vm.params = $stateParams;
@@ -28,12 +28,14 @@
                 vm.revokeAttestation.patient = {};
                 vm.revokeAttestation.patient.firstName = vm.params.revokeAttestation.patientFirstName;
                 vm.revokeAttestation.patient.lastName = vm.params.revokeAttestation.patientLastName;
+                vm.onchecked = onchecked;
+                vm.openAuthenticateModal = openAuthenticateModal;
                 vm.sign = sign;
 
                 activate();
 
                 function activate (){
-                    if (angular.isUndefined(vm.params) || angular.equals(vm.params.consent, {})) {
+                    if (angular.isUndefined(vm.params) || angular.equals(vm.params.consent, {}) || angular.equals(vm.params.revokeAttestation, {})) {
                         cancel();
                     }
                 }
@@ -45,6 +47,61 @@
                 function sign() {
                     $state.go('fe.consent.revokesign',{consent: vm.params.consent});
 
+                }
+
+                //TODO: refactor attestation checkbox into directive that can be reused both for signing and revoking
+                function onchecked(){
+                    if(vm.revokeAttestation.acceptTerms){
+                        vm.openAuthenticateModal();
+                    }else{
+                        vm.isAuthenticated = false;
+                    }
+                }
+                function openAuthenticateModal() {
+                    var modalInstance = $modal.open({
+                        templateUrl: 'app/consent/directives/consentESignatureAuthenticateModal.html',
+                        controller: AuthenticateController,
+                        controllerAs: 'authenticateVm',
+                        backdrop  : 'static',
+                        keyboard  : false
+                    });
+                }
+
+                /* @ngInject */
+                function AuthenticateController($modalInstance, notificationService, authenticationService, profileService) {
+                    var authenticateVm  = this;
+                    authenticateVm.cancel = cancel;
+                    authenticateVm.ok = ok;
+                    authenticateVm.errorMessage="";
+
+                    function cancel() {
+                        vm.revokeAttestation.acceptTerms = false;
+                        $modalInstance.dismiss('cancel');
+                    }
+
+                    function ok() {
+                        authenticate();
+                    }
+
+                    function authenticate(){
+                        var loginInfo = {
+                            grant_type: 'password',
+                            response_type: 'token',
+                            username: profileService.getUserName(),
+                            password: authenticateVm.password
+                        };
+                        var success = function (response) {
+                            authenticateVm.errorMessage="";
+                            vm.isAuthenticated = true;
+                            $modalInstance.close();
+                        };
+                        var error = function (error) {
+                            vm.isAuthenticated = false;
+                            authenticateVm.errorMessage="Invalid password.";
+                        };
+
+                        authenticationService.login(loginInfo, success, error);
+                    }
                 }
             }
 })();

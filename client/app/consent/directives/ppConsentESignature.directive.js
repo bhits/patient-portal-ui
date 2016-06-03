@@ -72,7 +72,7 @@
                     }
                 }
 
-
+                //TODO: refactor attestation checkbox into directive that can be reused both for signing and revoking
                 function onchecked(){
                     if(vm.attestation.acceptTerms){
                         vm.openAuthenticateModal();
