@@ -19,6 +19,7 @@
             var attestedConsentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/:consentId/attested", {consentId: '@consentId'});
             var revokeConsentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/revokeConsent/:id", {id: '@id'});
             var consentAttestationResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/:consentId/attestation", {consentId: '@consentId'});
+            var consentRevokeAttestationResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/:consentId/revokeConsent", {consentId: '@consentId'});
             var selectedNpi = {authorizeNpi: "", discloseNpi: ""};
             var selectedProvider = [];
 
@@ -50,6 +51,7 @@
             service.getPurposeOfUseCode = getPurposeOfUseCode;
             service.exportConsentDirective = exportConsentDirective;
             service.getConsentAttestation = getConsentAttestation;
+            service.getConsentRevokeAttestation = getConsentRevokeAttestation;
             service.getAttestedConsent = getAttestedConsent;
             service.downloadAttestedConsentPdf = downloadAttestedConsentPdf;
             service.downloadUnAttestedConsentPdf = downloadUnAttestedConsentPdf;
@@ -275,6 +277,10 @@
 
             function getConsentAttestation (consentId, success, error) {
                 return consentAttestationResource.get({consentId:consentId}, success, error);
+            }
+
+            function getConsentRevokeAttestation (consentId, success, error) {
+                return consentRevokeAttestationResource.get({consentId:consentId}, success, error);
             }
 
             function getAttestedConsent (consentId, success, error) {
