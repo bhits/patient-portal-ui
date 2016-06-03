@@ -50,7 +50,7 @@
             service.getPurposeOfUseCode = getPurposeOfUseCode;
             service.exportConsentDirective = exportConsentDirective;
             service.getConsentAttestation = getConsentAttestation;
-            service.getAttestedConsent = getAttestedConsent;
+            service.createAttestedConsent = createAttestedConsent;
             service.downloadAttestedConsentPdf = downloadAttestedConsentPdf;
             service.downloadUnAttestedConsentPdf = downloadUnAttestedConsentPdf;
 
@@ -277,8 +277,8 @@
                 return consentAttestationResource.get({consentId:consentId}, success, error);
             }
 
-            function getAttestedConsent (consentId, success, error) {
-                return attestedConsentResource.get({consentId:consentId}, success, error);
+            function createAttestedConsent (consentId,acceptTerms, success, error) {
+                return attestedConsentResource.save({consentId:consentId, acceptTerms: acceptTerms}, success, error);
             }
 
 
