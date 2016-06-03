@@ -88,7 +88,8 @@
         manageConsentModalVm.applyTryMyPolicy = applyTryMyPolicy;
         manageConsentModalVm.setOption = setOption;
         manageConsentModalVm.exportConsentDirective = exportConsentDirective;
-        manageConsentModalVm.downloadConsent = downloadConsent;
+        manageConsentModalVm.downloadUnattestedConsent = downloadUnattestedConsent;
+        manageConsentModalVm.downloadAttestedConsent = downloadAttestedConsent;
         manageConsentModalVm.deleteInProcess = false;
         manageConsentModalVm.shareForPurposeOfUse = consent.shareForPurposeOfUse;
         manageConsentModalVm.purposeOfUseCode = consent.shareForPurposeOfUse[0].code; // set default purpose of use.
@@ -185,7 +186,18 @@
             );
         }
 
-        function downloadConsent(docType){
+        function downloadUnattestedConsent(docType){
+            var fileName = profileService.getName() + " " + docType +" Consent" + consent.id;
+            function success(data){
+                utilityService.downloadFile(data, fileName,'application/pdf');
+            }
+            function error(respone){
+                notificationService.error("Error in downloading " + consentState + "consent.");
+            }
+            consentService.downloadUnAttestedConsentPdf(consent.id,success, error);
+        }
+
+        function downloadAttestedConsent(docType){
             var fileName = profileService.getName() + " " + docType +" Consent" + consent.id;
             function success(data){
                 utilityService.downloadFile(data, fileName,'application/pdf');

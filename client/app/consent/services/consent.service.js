@@ -30,7 +30,6 @@
             service.revokeConsent = revokeConsent;
             service.createConsent = createConsent;
             service.updateConsent = updateConsent;
-            service.downloadConsent = downloadConsent;
             service.deleteConsent = deleteConsent;
             service.listConsent = listConsent;
             service.setAuthorizeNpi = setAuthorizeNpi;
@@ -53,6 +52,7 @@
             service.getConsentAttestation = getConsentAttestation;
             service.getAttestedConsent = getAttestedConsent;
             service.downloadAttestedConsentPdf = downloadAttestedConsentPdf;
+            service.downloadUnAttestedConsentPdf = downloadUnAttestedConsentPdf;
 
             return service;
 
@@ -84,7 +84,16 @@
                 return consentResource.update(consent, success, error);
             }
             
-            function downloadConsent(id, success, error) {
+            function downloadConsentPdf(id, success, error) {
+                var request = {
+                    method : 'GET',
+                    responseType : 'arraybuffer',
+                    url : envService.securedApis.pcmApiBaseUrl + "/consents/" + id + "/unattested/"
+                };
+                $http(request).success(success).error(error);
+            }
+
+            function downloadUnAttestedConsentPdf(id, success, error) {
                 var request = {
                     method : 'GET',
                     responseType : 'arraybuffer',
