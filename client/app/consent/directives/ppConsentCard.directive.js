@@ -151,8 +151,15 @@
         }
 
         function revoke() {
-            $state.go('fe.consent.revoke', {consent: consent});
-            $modalInstance.close();
+            consentService.getConsentRevokeAttestation(consent.id, onRevokeSuccess, onRevokeError);            
+            function onRevokeSuccess(response){
+                $state.go('fe.consent.revoke', {consent: consent, revokeAttestation: response});
+                $modalInstance.close();
+            }
+
+            function onRevokeError(){
+                notificationService.error("Error on getting consent revocation page");
+            }
         }
 
         function applyTryMyPolicy() {
