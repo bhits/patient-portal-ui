@@ -74,7 +74,7 @@
 
 
                 function onchecked(){
-                    if(vm.patient.acceptTerms){
+                    if(vm.attestation.acceptTerms){
                         vm.openAuthenticateModal();
                     }else{
                         vm.isAuthenticated = false;
@@ -98,7 +98,7 @@
                     authenticateVm.errorMessage="";
 
                     function cancel() {
-                        vm.patient.acceptTerms = false;
+                        vm.attestation.acceptTerms = false;
                         $modalInstance.dismiss('cancel');
                     }
 
@@ -137,7 +137,7 @@
                     var error = function(response){
                         console.log("Error");
                     };
-                    consentService.getAttestedConsent(vm.attestation.consentId, success, error);
+                    consentService.createAttestedConsent(vm.attestation.consentId, vm.attestation.acceptTerms, success, error);
                 }
 
                 vm.openAttestedConsentPreviewModal = function() {
