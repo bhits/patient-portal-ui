@@ -16,8 +16,11 @@
             var consentExportConsentDirective = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/exportConsentDirective/:id",{id: '@id'});
             var purposeOfUseResource = $resource(envService.securedApis.pcmApiBaseUrl + "/purposeOfUse");
             var sensitvityPolicyResource = $resource(envService.securedApis.pcmApiBaseUrl + "/sensitivityPolicy");
-            var signConsentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/signConsent/:id", {id: '@id'});
+            var attestedConsentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/:consentId/attested", {consentId: '@consentId'});
             var revokeConsentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/revokeConsent/:id", {id: '@id'});
+            var consentAttestationResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/:consentId/attestation", {consentId: '@consentId'});
+            var consentRevokeAttestationResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/:consentId/revokeConsent", {consentId: '@consentId'});
+            var attestedConsentRevocationResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/:consentId/revocation", {consentId: '@consentId'});
             var selectedNpi = {authorizeNpi: "", discloseNpi: ""};
             var selectedProvider = [];
 
@@ -26,11 +29,9 @@
             service.getPurposeOfUseResource = getPurposeOfUseResource;
             service.getSensitvityPolicyResource = getSensitvityPolicyResource;
             service.getConsent = getConsent;
-            service.signConsent = signConsent;
             service.revokeConsent = revokeConsent;
             service.createConsent = createConsent;
             service.updateConsent = updateConsent;
-            service.downloadConsent = downloadConsent;
             service.deleteConsent = deleteConsent;
             service.listConsent = listConsent;
             service.setAuthorizeNpi = setAuthorizeNpi;
@@ -50,6 +51,13 @@
             service.resetSelectedNpi = resetSelectedNpi;
             service.getPurposeOfUseCode = getPurposeOfUseCode;
             service.exportConsentDirective = exportConsentDirective;
+            service.getConsentAttestation = getConsentAttestation;
+            service.createAttestedConsent = createAttestedConsent;
+            service.getConsentRevokeAttestation = getConsentRevokeAttestation;
+            service.downloadAttestedConsentPdf = downloadAttestedConsentPdf;
+            service.downloadUnAttestedConsentPdf = downloadUnAttestedConsentPdf;
+            service.createAttestedConsentRevocation = createAttestedConsentRevocation;
+            service.downloadAttestedConsentRevocationPdf = downloadAttestedConsentRevocationPdf;
 
             return service;
 
@@ -69,10 +77,6 @@
                 return consentResource.get({id:id}, success, error);
             }
 
-            function signConsent (id, success, error) {
-                return signConsentResource.get({id:id}, success, error);
-            }
-
             function revokeConsent (id, success, error) {
                 return revokeConsentResource.get({id:id}, success, error);
             }
@@ -84,22 +88,32 @@
             function updateConsent (consent, success, error) {
                 return consentResource.update(consent, success, error);
             }
-
-            function composeUrl(docType, id){
-                if(angular.isDefined(docType) && angular.isDefined(id)  ){
-                    return envService.securedApis.pcmApiBaseUrl + "/consents/download/" + docType + "/" + id;
-                }else{
-                    notificationService.error("Consent pdf document type or id is not defined.");
-                }
+            
+            function downloadConsentPdf(id, success, error) {
+                var request = {
+                    method : 'GET',
+                    responseType : 'arraybuffer',
+                    url : envService.securedApis.pcmApiBaseUrl + "/consents/" + id + "/unattested/"
+                };
+                $http(request).success(success).error(error);
             }
 
-            function downloadConsent(id, docType, success, error) {
-               var request = {
-                   method : 'GET',
-                   responseType : 'arraybuffer',
-                   url : composeUrl(docType, id)
-               };
-               $http(request).success(success).error(error);
+            function downloadUnAttestedConsentPdf(id, success, error) {
+                var request = {
+                    method : 'GET',
+                    responseType : 'arraybuffer',
+                    url : envService.securedApis.pcmApiBaseUrl + "/consents/" + id + "/unattested/"
+                };
+                $http(request).success(success).error(error);
+            }
+
+            function downloadAttestedConsentPdf(id, success, error) {
+                var request = {
+                    method : 'GET',
+                    responseType : 'arraybuffer',
+                    url : envService.securedApis.pcmApiBaseUrl + "/consents/" + id + "/attested/download"
+                };
+                $http(request).success(success).error(error);
             }
 
             function deleteConsent (id, success, error) {
@@ -150,11 +164,11 @@
 
             function resolveConsentState (consent) {
                 var state = 'error';
-                if (consent.consentStage === 'CONSENT_SAVED' && consent.revokeStage === 'NA') {
+                if (consent.consentStage === 'CONSENT_SAVED') {
                     state = 'Saved';
-                } else if (consent.consentStage === 'CONSENT_SIGNED' && consent.revokeStage === 'REVOCATION_NOT_SUBMITTED') {
+                } else if (consent.consentStage === 'CONSENT_SIGNED') {
                     state = 'Signed';
-                } else if (consent.consentStage === 'CONSENT_SIGNED' && consent.revokeStage === 'REVOCATION_REVOKED') {
+                } else if (consent.consentStage === 'REVOCATION_REVOKED') {
                     state = 'Revoked';
                 }
                 return state;
@@ -264,5 +278,29 @@
 
             }
 
+            function getConsentAttestation (consentId, success, error) {
+                return consentAttestationResource.get({consentId:consentId}, success, error);
+            }
+
+            function createAttestedConsent (consentId,acceptTerms, success, error) {
+                return attestedConsentResource.save({consentId:consentId, acceptTerms: acceptTerms}, success, error);
+            }
+            
+            function getConsentRevokeAttestation (consentId, success, error) {
+                return consentRevokeAttestationResource.get({consentId:consentId}, success, error);
+            }
+
+            function createAttestedConsentRevocation (consentId,acceptTerms, success, error) {
+                return attestedConsentRevocationResource.save({consentId:consentId, acceptTerms: acceptTerms}, success, error);
+            }
+
+            function downloadAttestedConsentRevocationPdf(id, success, error) {
+                var request = {
+                    method : 'GET',
+                    responseType : 'arraybuffer',
+                    url : envService.securedApis.pcmApiBaseUrl + "/consents/" + id + "/revoked/download"
+                };
+                $http(request).success(success).error(error);
+            }
         }
 })();

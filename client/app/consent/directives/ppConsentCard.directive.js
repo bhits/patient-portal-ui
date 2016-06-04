@@ -81,16 +81,20 @@
         manageConsentModalVm.option = "manageConcent";
         manageConsentModalVm.revoke = revoke;
         manageConsentModalVm.edit = edit;
+        manageConsentModalVm.viewAttestation = viewAttestation;
         manageConsentModalVm.signConsent = signConsent;
         manageConsentModalVm.deleteConsent = deleteConsent;
         manageConsentModalVm.toggleDeleteConfirmation = toggleDeleteConfirmation;
         manageConsentModalVm.applyTryMyPolicy = applyTryMyPolicy;
         manageConsentModalVm.setOption = setOption;
         manageConsentModalVm.exportConsentDirective = exportConsentDirective;
-        manageConsentModalVm.downloadConsent = downloadConsent;
+        manageConsentModalVm.downloadUnattestedConsent = downloadUnattestedConsent;
+        manageConsentModalVm.downloadAttestedConsent = downloadAttestedConsent;
         manageConsentModalVm.deleteInProcess = false;
         manageConsentModalVm.shareForPurposeOfUse = consent.shareForPurposeOfUse;
         manageConsentModalVm.purposeOfUseCode = consent.shareForPurposeOfUse[0].code; // set default purpose of use.
+        manageConsentModalVm.onCompleteAttestationRevocation = onCompleteAttestationRevocation;
+        manageConsentModalVm.downloadAttestedConsentRevocation = downloadAttestedConsentRevocation;
 
         activate();
 
@@ -134,6 +138,11 @@
             $modalInstance.close();
         }
 
+        function viewAttestation(){
+            $state.go('fe.consent.esignature', {consentId: consent.id});
+            $modalInstance.close();
+        }
+
         function signConsent(){
             $state.go('fe.consent.sign', {consentId: consent.id});
             $modalInstance.close();
@@ -144,8 +153,15 @@
         }
 
         function revoke() {
-            $state.go('fe.consent.revoke', {consent: consent});
-            $modalInstance.close();
+            consentService.getConsentRevokeAttestation(consent.id, onRevokeSuccess, onRevokeError);            
+            function onRevokeSuccess(response){
+                $state.go('fe.consent.revoke', {consent: consent, revokeAttestation: response});
+                $modalInstance.close();
+            }
+
+            function onRevokeError(){
+                notificationService.error("Error on getting consent revocation page");
+            }
         }
 
         function applyTryMyPolicy() {
@@ -179,7 +195,7 @@
             );
         }
 
-        function downloadConsent(docType){
+        function downloadUnattestedConsent(docType){
             var fileName = profileService.getName() + " " + docType +" Consent" + consent.id;
             function success(data){
                 utilityService.downloadFile(data, fileName,'application/pdf');
@@ -187,7 +203,40 @@
             function error(respone){
                 notificationService.error("Error in downloading " + consentState + "consent.");
             }
-            consentService.downloadConsent(consent.id, docType ,success, error);
+            consentService.downloadUnAttestedConsentPdf(consent.id,success, error);
+        }
+
+        function downloadAttestedConsent(docType){
+            var fileName = profileService.getName() + " " + docType +" Consent" + consent.id;
+            function success(data){
+                utilityService.downloadFile(data, fileName,'application/pdf');
+            }
+            function error(respone){
+                notificationService.error("Error in downloading " + consentState + "consent.");
+            }
+            consentService.downloadAttestedConsentPdf(consent.id,success, error);
+        }
+
+        function downloadAttestedConsentRevocation(docType){
+            var fileName = profileService.getName() + " " + docType +" Consent" + consent.id;
+            function success(data){
+                utilityService.downloadFile(data, fileName,'application/pdf');
+            }
+            function error(respone){
+                notificationService.error("Error in downloading " + consentState + "consent.");
+            }
+            consentService.downloadAttestedConsentRevocationPdf(consent.id,success, error);
+        }
+
+        function onCompleteAttestationRevocation(){
+            var success = function(response){
+                console.log("OK");
+            };
+
+            var error = function(response){
+                console.log("Error");
+            };
+            consentService.createAttestedConsentRevocation(consent.id, true, success, error);
         }
     }
 })();

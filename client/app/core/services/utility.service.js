@@ -15,6 +15,7 @@
         service.getYear = getYear;
         service.redirectTo = redirectTo;
         service.isUnDefinedOrNull = isUnDefinedOrNull;
+        service.isDefinedAndLenghtNotZero = isDefinedAndLenghtNotZero;
         service.isDefinedAndNotNull = isDefinedAndNotNull;
         service.setShowHealthInformationMenu = setShowHealthInformationMenu;
         service.getShowHealthInformationMenu = getShowHealthInformationMenu;
@@ -55,6 +56,10 @@
             return (angular.isDefined(value) && value !== null );
         }
 
+        function isDefinedAndLenghtNotZero(value) {
+            return (angular.isDefined(value) && (value.length > 0) );
+        }
+        
         function setShowHealthInformationMenu(show) {
             showHealthInformationMenu = show;
         }
