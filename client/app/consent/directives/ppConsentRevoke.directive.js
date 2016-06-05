@@ -19,7 +19,7 @@
             }
 
             /* @ngInject */
-            function ConsentRevokeController($stateParams, $state, $modal, consentService, notificationService) {
+            function ConsentRevokeController($stateParams, $state, $modal, consentService, notificationService, utilityService) {
                 var vm = this;
                 vm.cancel = cancel;
                 vm.params = $stateParams;
@@ -32,6 +32,7 @@
                 vm.onchecked = onchecked;
                 vm.openAuthenticateModal = openAuthenticateModal;
                 vm.sign = sign;
+                vm.openAttestedConsentRevocationPreviewModal = openAttestedConsentRevocationPreviewModal;
 
                 activate();
 
@@ -47,8 +48,8 @@
 
                 function sign() {
                     var success = function(response){
-                        notificationService.success("Consent is revoked successfully!");
-                        $state.go('fe.consent.list');
+                        //notificationService.success("Consent is revoked successfully!");
+                        vm.openAttestedConsentRevocationPreviewModal();
                     };
 
                     var error = function(response){
@@ -56,6 +57,40 @@
                     };
                     
                     consentService.createAttestedConsentRevocation(parseInt(vm.consentId), vm.revokeAttestation.acceptTerms, success, error);
+                }
+                
+                function openAttestedConsentRevocationPreviewModal(){
+                    var modalInstance = $modal.open({
+                        templateUrl: 'app/consent/directives/consentRevocationPreviewAttestationModal.html',
+                        controller: PreviewAttestedConsentRevocationController,
+                        controllerAs: 'attestedConsentRevocationModalVm',
+                        backdrop  : 'static',
+                        keyboard  : false
+                    });
+                }
+
+                /* @ngInject */
+                function PreviewAttestedConsentRevocationController($modalInstance, notificationService, profileService) {
+                    var attestedConsentRevocationModalVm  = this;
+                    attestedConsentRevocationModalVm.closeAndRedirectAndToConsentList = closeAndRedirectAndToConsentList;
+                    attestedConsentRevocationModalVm.downloadAttestedConsentRevocationAndRedirectToConsentList = downloadAttestedConsentRevocationAndRedirectToConsentList;
+
+
+                    function closeAndRedirectAndToConsentList() {
+                        $modalInstance.dismiss('cancel');
+                    }
+
+
+                    function downloadAttestedConsentRevocationAndRedirectToConsentList(){
+                        var fileName = profileService.getName() + " revocation Consent" + vm.consentId;
+                        var success = function(data){
+                            utilityService.downloadFile(data, fileName,'application/pdf');
+                        };
+                        var error = function (respone){
+                            notificationService.error("Error in downloading attested consent revocation pdf.");
+                        };
+                        consentService.downloadAttestedConsentRevocationPdf(vm.consentId, success, error);
+                    }
                 }
 
                 //TODO: refactor attestation checkbox into directive that can be reused both for signing and revoking
