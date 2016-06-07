@@ -156,34 +156,7 @@
                             }
                         }
                     })
-                    .state('fe.consent.sign', {
-                        url: '/signConsent',
-                        data: {pageTitle: 'Sign Consent'},
-                        templateUrl: 'app/consent/controllers/consentSign.html',
-                        params: {
-                            consentId: ''
-                        },
-                        controller: 'ConsentSignController',
-                        controllerAs: 'consentSignVm',
-                        resolve: {
-                            /* @ngInject */
-                            loadedData: function ($q, $stateParams, consentService, notificationService) {
-                                var deferred = $q.defer();
-                                var consentId= $stateParams.consentId;
-                                var signConsentData = consentService.signConsent(consentId, onSignSuccess, onSignError);
-
-                                function onSignSuccess(response){
-                                    deferred.resolve(response.javascriptCode);
-                                }
-
-                                function onSignError(){
-                                    notificationService.error('Failed to sign the consent! Please try again later...');
-                                    deferred.reject();
-                                }
-                                return deferred.promise;
-                            }
-                        }
-                    })
+                    
                     .state('fe.consent.revokesign', {
                         url: '/signRevokeConsent',
                         data: {pageTitle: 'Sign Revoke Consent'},
