@@ -19,7 +19,8 @@
                 'app.provider',
                 'app.layout',
                 'app.medicalDocument',
-                'app.account'
+                'app.account',
+                'app.activity'
             ])
             .constant("idleConfigParams", {"idle": 780, "timeout": 120, "keepalive": 240})
             .config(appConfig)
