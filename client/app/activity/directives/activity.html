@@ -17,10 +17,10 @@
                         </thead>
                         <tbody>
                         <tr ng-repeat="activity in activityVm.activities" >
-                            <td ></td>
-                            <td > </span></td>
-                            <td > </span></td>
-                            <td > </span></td>
+                            <td > <span ng-bind="activity.timestamp"></span></td>
+                            <td > <span ng-bind="activity.recType"></span></span></td>
+                            <td > <span ng-bind="activity.type"></span></span></td>
+                            <td > <span ng-bind="activity.changedBy"></span></span></td>
                         </tr>
                         </tbody>
                     </table>

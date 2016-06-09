@@ -26,28 +26,28 @@
                 templateUrl: 'app/activity/controllers/activityHistory.html',
                 controller: 'ActivityHistoryController',
                 controllerAs: 'activityHistoryVm',
-                // resolve: {
-                //
-                //     /* @ngInject */
-                //     allowVerification: function ($location, $q, emailTokenService, utilityService, accountConfig) {
-                //         var deferred = $q.defer();
-                //         var emailTokenStr = $location.hash();
-                //         var emailToken = emailTokenService.loadEmailToken(emailTokenStr);
-                //
-                //         emailTokenService.isValidEmailToken(emailToken, onAccessSuccess, onAccessError);
-                //
-                //         function onAccessSuccess(response) {
-                //             emailTokenService.setEmailToken(emailToken);
-                //             deferred.resolve(response);
-                //         }
-                //
-                //         function onAccessError() {
-                //             utilityService.redirectTo(accountConfig.activationErrorPath);
-                //         }
-                //
-                //         return deferred.promise;
-                //     }
-                // }
+                resolve: {
+                    /* @ngInject */
+                    auditList: function ($location, $q, auditService, notificationService) {
+
+                        var success = function (response){
+                            return response;
+                        };
+                        var error = function (response){
+                            notificationService.error('Failed to get the audit history list.');
+                            return response;
+                        };
+                        var deferred = $q.defer();
+                        var auditHistoryPromise = auditService.getAuditHistory(success, error).$promise;
+                        auditHistoryPromise.then(function(response){
+                            deferred.resolve(response);
+                        }, function (error) {
+                            deferred.reject(error);
+                        });
+
+                        return deferred.promise;
+                    }
+                }
             });
     }
 })();
