@@ -182,7 +182,8 @@
         function exportConsentDirective(){
             consentService.exportConsentDirective(consent.id,
                 function(response){
-                    utilityService.downloadFile(response.data, "consentDirective"+consent.id+".xml","application/xml");
+                    var xmlString = response.data;
+                    utilityService.downloadFile(xmlString, "consentDirective"+consent.id+".xml","application/xml;");
                     notificationService.success('Consent directive is successfully downloaded.');
                     $modalInstance.close();
                     $state.reload();
