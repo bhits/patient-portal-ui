@@ -32,6 +32,12 @@
                 <span><small>Whoops! We can't seem to find your account.</small></span>
             </div>
         </div>
+        <div class="row">
+            <div class="col-sm-offset-2 col-sm-10 text-alert m-t-n-xs" id="scope-error"
+                 ng-if="oauthLoginVm.scopeError">
+                <span><small>Sorry, you do not have permission to access.</small></span>
+            </div>
+        </div>
         <div class="form-group m-t-lg text-center">
             <div class="col-sm-offset-3 col-sm-6">
                 <button type="button" class="btn btn-block btn-primary dark-green" ng-click="oauthLoginVm.login()"

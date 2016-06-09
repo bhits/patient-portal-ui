@@ -81,7 +81,8 @@ module.exports = {
             'vendor/angular-ui-router/release/angular-ui-router.js',
             'vendor/ngstorage/ngStorage.js',
             'vendor/checklist-model/checklist-model.js',
-            'vendor/x2js/xml2json.js'
+            'vendor/x2js/xml2json.js',
+            'vendor/angular-jwt/dist/angular-jwt.js'
         ],
         css: [
             'vendor/angular-loading-bar/build/loading-bar.css'

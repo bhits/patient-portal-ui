@@ -5,7 +5,7 @@
         .factory('oauthTokenService', oauthTokenService);
 
     /* @ngInject */
-    function oauthTokenService($sessionStorage) {
+    function oauthTokenService($sessionStorage, jwtHelper) {
 
         var service = {};
 
@@ -14,6 +14,7 @@
         service.getAccessToken = getAccessToken;
         service.getRefreshToken = getRefreshToken;
         service.getExpiresIn = getExpiresIn;
+        service.getOauthScope = getOauthScope;
         service.isValidToken = isValidToken;
         service.isExpiredToken = isExpiredToken;
         service.isValidAndExpiredToken = isValidAndExpiredToken;
@@ -50,6 +51,13 @@
                 return (new Date(new Date().valueOf() + ((getToken().expires_in) * 1000)));
             } else {
                 return null;
+            }
+        }
+
+        function getOauthScope() {
+            if (angular.isDefined(getAccessToken())) {
+                var tokenPayload = jwtHelper.decodeToken(getAccessToken());
+                return tokenPayload.scope;
             }
         }
 

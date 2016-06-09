@@ -39,7 +39,7 @@
                 .then(
                     function (data) {
                         profileService.setProfile(data);
-                        utilityService.redirectTo(oauthConfig.loginSuccessPath);
+                        isAllowAccess();
                     },
                     function (error) {
                         vm.profileError = true;
@@ -58,6 +58,16 @@
 
         function canSubmit(loginForm) {
             return loginForm.$dirty && loginForm.$valid;
+        }
+
+        function isAllowAccess() {
+            var authScopes = oauthTokenService.getOauthScope();
+            if (authScopes.indexOf(oauthConfig.accessScope) !== -1) {
+                utilityService.redirectTo(oauthConfig.loginSuccessPath);
+            } else {
+                oauthTokenService.removeToken();
+                vm.scopeError = true;
+            }
         }
     }
 })();
