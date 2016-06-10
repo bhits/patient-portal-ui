@@ -10,8 +10,8 @@
         .factory('auditService', auditService);
 
         /* @ngInject */
-        function auditService($resource,$http, envService, utilityService, notificationService) {
-            var auditHistoryResource = $resource(envService.securedApis.pcmApiBaseUrl + "/activity");
+        function auditService($resource, envService) {
+            var auditHistoryResource = $resource(envService.securedApis.pcmApiBaseUrl + "/activities");
 
 
             var service = {};
