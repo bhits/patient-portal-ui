@@ -11,7 +11,7 @@
 
         /* @ngInject */
         function auditService($resource,$http, envService, utilityService, notificationService) {
-            var auditHistoryResource = $resource(envService.securedApis.pcmApiBaseUrl + "/audit");
+            var auditHistoryResource = $resource(envService.securedApis.pcmApiBaseUrl + "/activity");
 
 
             var service = {};
