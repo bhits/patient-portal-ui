@@ -102,6 +102,11 @@
                 templateUrl: 'app/account/controllers/forgotPassword.html',
                 controller: 'ForgotPasswordController',
                 controllerAs: 'forgotPasswordVm'
+            })
+            .state('fe.account.resetPasswordSuccess', {
+                url: '/resetPasswordSuccess',
+                data: {pageTitle: 'Reset Password Success'},
+                templateUrl: 'app/account/controllers/resetPasswordSuccess.html'
             });
     }
 })();

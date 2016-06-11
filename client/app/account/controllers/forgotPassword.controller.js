@@ -10,7 +10,7 @@
         .controller('ForgotPasswordController', ForgotPasswordController);
 
     /* @ngInject */
-    function ForgotPasswordController(utilityService, oauthConfig, authenticationService) {
+    function ForgotPasswordController(utilityService, oauthConfig, accountConfig, authenticationService) {
         var vm = this;
         vm.forgotPassword = forgotPassword;
         vm.cancel = cancel;
@@ -23,7 +23,7 @@
         }
 
         function Success(response) {
-            utilityService.redirectTo(oauthConfig.loginPath);
+            utilityService.redirectTo(accountConfig.resetPasswordSuccessPath);
         }
 
         function Error(error) {
