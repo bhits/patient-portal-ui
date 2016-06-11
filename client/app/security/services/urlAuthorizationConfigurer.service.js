@@ -15,7 +15,8 @@
             accountConfig.activationErrorPath,
             accountConfig.verificationPath,
             accountConfig.createPasswordPath,
-            accountConfig.activationSuccessPath
+            accountConfig.activationSuccessPath,
+            accountConfig.forgotPasswordPath
         ];
         var service = {};
 

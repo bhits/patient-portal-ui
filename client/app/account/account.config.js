@@ -95,6 +95,13 @@
                 url: '/activationError',
                 data: {pageTitle: 'Activation Error'},
                 templateUrl: 'app/account/controllers/activationError.html'
+            })
+            .state('fe.account.forgotPassword', {
+                url: '/forgotPassword',
+                data: {pageTitle: 'Forgot Password'},
+                templateUrl: 'app/account/controllers/forgotPassword.html',
+                controller: 'ForgotPasswordController',
+                controllerAs: 'forgotPasswordVm'
             });
     }
 })();
