@@ -548,7 +548,8 @@ module.exports = function (grunt) {
                             plsApiBaseUrl: '/pls/providers',
                             tokenUrl : '/uaa/oauth/token',
                             verificationUrl: '/patientUser/verifications',
-                            activationUrl: '/patientUser/activations'
+                            activationUrl: '/patientUser/activations',
+                            forgotPasswordUrl: '/uaa/forgot_password.do'
                         }
                     }
                 }
@@ -573,7 +574,8 @@ module.exports = function (grunt) {
                             plsApiBaseUrl: '/pls/providers',
                             tokenUrl : '/uaa/oauth/token',
                             verificationUrl: '/patientUser/verifications',
-                            activationUrl: '/patientUser/activations'
+                            activationUrl: '/patientUser/activations',
+                            forgotPasswordUrl: '/uaa/forgot_password.do'
                         }
                     }
                 }
@@ -598,7 +600,8 @@ module.exports = function (grunt) {
                             plsApiBaseUrl: '/pls/providers',
                             tokenUrl : '/uaa/oauth/token',
                             verificationUrl: '/patientUser/verifications',
-                            activationUrl: '/patientUser/activations'
+                            activationUrl: '/patientUser/activations',
+                            forgotPasswordUrl: '/uaa/forgot_password.do'
                         }
                     }
                 }

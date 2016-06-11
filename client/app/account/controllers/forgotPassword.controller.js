@@ -10,7 +10,7 @@
         .controller('ForgotPasswordController', ForgotPasswordController);
 
     /* @ngInject */
-    function ForgotPasswordController($state, authenticationService) {
+    function ForgotPasswordController(utilityService, oauthConfig, authenticationService) {
         var vm = this;
         vm.forgotPassword = forgotPassword;
         vm.cancel = cancel;
@@ -18,22 +18,26 @@
 
         function prepareInfo() {
             return {
-                username: vm.user.email
+                email: vm.user.email
             };
         }
 
-        function manipulateSuccess(response) {
+        function Success(response) {
+            utilityService.redirectTo(oauthConfig.loginPath);
         }
 
-        function manipulateError(error) {
+        function Error(error) {
+            if (error.status === 422) {
+                vm.validEmailError = true;
+            }
         }
 
         function forgotPassword() {
-            authenticationService.forgotPassword(prepareInfo(), manipulateSuccess, manipulateError);
+            authenticationService.forgotPassword(prepareInfo(), Success, Error);
         }
 
         function cancel() {
-            $state.go("fe.login");
+            utilityService.redirectTo(oauthConfig.loginPath);
         }
 
         function canSubmit(loginForm) {

@@ -6,7 +6,7 @@
 
     /* @ngInject */
     function authenticationService($resource, envService, oauthTokenService, utilityService, oauthConfig) {
-        var loginResource = function () {
+        function loginResource() {
             return $resource(envService.unsecuredApis.tokenUrl, {},
                 {
                     save: {
@@ -25,11 +25,32 @@
                         }
                     }
                 });
-        };
+        }
+
+        function forgotPasswordResource() {
+            return $resource(envService.unsecuredApis.forgotPasswordUrl, {},
+                {
+                    save: {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        /* convert to url encoded string */
+                        transformRequest: function (data) {
+                            var str = [];
+                            for (var p in data) {
+                                str.push(encodeURIComponent(p) + "=" + encodeURIComponent(data[p]));
+                            }
+                            return str.join("&");
+                        }
+                    }
+                });
+        }
 
         var service = {};
         service.login = login;
         service.logout = logout;
+        service.forgotPassword = forgotPassword;
 
         return service;
 
@@ -45,6 +66,14 @@
         function logout() {
             oauthTokenService.removeToken();
             utilityService.redirectTo(oauthConfig.loginPath);
+        }
+
+        function forgotPassword(forgotPasswordInfo, success, error) {
+            var requiredParameters = {
+                client_id: 'patient-portal-ui'
+            };
+            var parameters = angular.extend(requiredParameters, forgotPasswordInfo);
+            return forgotPasswordResource().save(parameters, success, error);
         }
     }
 })();
