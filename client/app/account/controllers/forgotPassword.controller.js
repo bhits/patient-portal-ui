@@ -28,7 +28,7 @@
 
         function Error(error) {
             if (error.status === 422) {
-                vm.validEmailError = true;
+                vm.emailPatternError = true;
             }
         }
 
