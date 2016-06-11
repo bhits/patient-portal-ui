@@ -30,6 +30,7 @@
             if (error.status === 422) {
                 vm.emailPatternError = true;
             }
+            vm.emailNotFound = true;
         }
 
         function forgotPassword() {
