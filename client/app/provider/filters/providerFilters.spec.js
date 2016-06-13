@@ -1,43 +1,20 @@
 /**
  * Created by tomson.ngassa on 7/20/2015.
+ * Modified by cindy.ren on 6/13/2016
  */
 
 'use strict';
 
-xdescribe('app.providerFiltersModule ', function(){
-    var module;
+describe('app.providerFiltersModule ', function () {
 
-    beforeEach(function() {
-        module = angular.module("app.providerFiltersModule");
-    });
+    var pcmProviderAddress, pcmNameorfacility, utilityService, plsName, plsAddress;
+
+    beforeEach(module('app.provider'));
+    beforeEach(module('app.config'));
 
     it("should be registered", function() {
         expect(module).not.toEqual(null);
     });
-
-    describe("Dependencies:", function() {
-
-        var dependencies;
-
-        var hasModule = function(m) {
-            return dependencies.indexOf(m) >= 0;
-        };
-        beforeEach(function() {
-            dependencies = module.value('app.providerFiltersModule').requires;
-        });
-
-        it("should have app.servicesModule as a dependency", function() {
-            expect(hasModule('app.servicesModule')).toEqual(true);
-        });
-    });
-});
-
-xdescribe('app.providerFiltersModule ', function () {
-
-    var pcmProviderAddress, pcmNameorfacility, utilityService, plsName, plsAddress;
-
-    beforeEach(module('app.servicesModule'));
-    beforeEach(module('app.providerFiltersModule'));
 
     beforeEach(inject(function (_pcmProviderAddressFilter_, _pcmProviderNameOrFacilityFilter_, _utilityService_, _plsNameFilter_, _plsAddressFilter_) {
         pcmProviderAddress = _pcmProviderAddressFilter_;
@@ -48,14 +25,14 @@ xdescribe('app.providerFiltersModule ', function () {
     }));
 
     it('should filter address with', function () {
-        spyOn(utilityService, 'formatZipCode').andReturn("21044");
+        spyOn(utilityService, 'formatZipCode').and.returnValue("21044");
         var provider = {firstLinePracticeLocationAddress: "7175 Columbia Gateway", practiceLocationAddressCityName: "Columbia", practiceLocationAddressStateName: "MD", practiceLocationAddressPostalCode: "21044"};
         expect(pcmProviderAddress(provider)).toEqual("7175 Columbia Gateway, Columbia, MD, 21044");
         expect(utilityService.formatZipCode).toHaveBeenCalledWith('21044');
     });
 
     it('should filter address without no address fields', function () {
-        spyOn(utilityService, 'formatZipCode').andReturn("");
+        spyOn(utilityService, 'formatZipCode').and.returnValue("");
         var provider1 = {firstLinePracticeLocationAddress: "", practiceLocationAddressCityName: "", practiceLocationAddressStateName: "", practiceLocationAddressPostalCode: ""};
         expect(pcmProviderAddress(provider1)).toEqual(", , , ");
         expect(utilityService.formatZipCode).toHaveBeenCalledWith('');
@@ -94,7 +71,7 @@ xdescribe('app.providerFiltersModule ', function () {
             providerFirstName: 'firstName',
             providerMiddleName: 'middleName'
         };
-        var expectedResult = 'lastName, firstName middleName';
+        var expectedResult = 'firstName lastName';
 
         // Act & Assert
         expect(plsName(provider)).toEqual(expectedResult);
@@ -107,7 +84,7 @@ xdescribe('app.providerFiltersModule ', function () {
             providerLastName: 'lastName',
             providerFirstName: 'firstName'
         };
-        var expectedResult = 'lastName, firstName';
+        var expectedResult = 'firstName lastName';
 
         // Act & Assert
         expect(plsName(provider)).toEqual(expectedResult);
@@ -135,8 +112,8 @@ xdescribe('app.providerFiltersModule ', function () {
             providerBusinessPracticeLocationAddressStateName: "State",
             providerBusinessPracticeLocationAddressPostalCode: "207702033"
         };
-        spyOn(utilityService, 'hasString').andReturn(true);
-        spyOn(utilityService, 'formatZipCode').andReturn(formattedZipCode);
+        spyOn(utilityService, 'hasString').and.returnValue(true);
+        spyOn(utilityService, 'formatZipCode').and.returnValue(formattedZipCode);
         var expectedResult = 'FirstLine, SecondLine, City, State, 20770-2033';
 
         // Act & Assert
@@ -159,8 +136,8 @@ xdescribe('app.providerFiltersModule ', function () {
             providerBusinessPracticeLocationAddressStateName: "State",
             providerBusinessPracticeLocationAddressPostalCode: "207702033"
         };
-        spyOn(utilityService, 'hasString').andReturn(false);
-        spyOn(utilityService, 'formatZipCode').andReturn(formattedZipCode);
+        spyOn(utilityService, 'hasString').and.returnValue(false);
+        spyOn(utilityService, 'formatZipCode').and.returnValue(formattedZipCode);
         var expectedResult = '';
 
         // Act & Assert

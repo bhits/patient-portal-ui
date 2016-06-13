@@ -19,6 +19,7 @@
         service.getUserName = getUserName;
         service.getName = getName;
         service.getUserId = getUserId;
+        service.getProfile = getProfile;
 
         return service;
 

@@ -1,64 +1,52 @@
 /**
  * Created by tomson.ngassa on 10/14/2015.
+ * Modified by cindy.ren on 6/13/2016.
  */
 'use strict';
 
-xdescribe('app.providerService  ', function () {
-    var module;
 
-    beforeEach(function () {
-        module = angular.module("app.providerService");
-    });
+xdescribe('app.providerService ', function () {
+    var providerService, $httpBackend, resource, envService, scope, controller;
+
+    beforeEach(module('app.provider'));
+    beforeEach(module('app.config'));
+
+    // beforeEach(function () {
+    //     angular.mock.inject(function ($injector) {
+    //         $httpBackend = $injector.get('$httpBackend');
+    //         $resource = $injector.get('$resource');
+    //         envService = $injector.get('envService');
+    //         providerService = $injector.get('providerService');
+    //     });
+    // });
+
+    beforeEach(inject(function(_$httpBackend_, _$resource_, _envService_,
+                               _providerService_, _$rootScope_, _$controller_){
+        $httpBackend = _$httpBackend_;
+        resource = _$resource_;
+        envService = _envService_;
+        providerService = _providerService_;
+        scope = _$rootScope_.$new();
+
+
+    }));
+
+    // afterEach(function () {
+    //     $httpBackend.verifyNoOutstandingExpectation();
+    //     $httpBackend.verifyNoOutstandingRequest();
+    // });
 
     it("should be registered", function () {
         expect(module).not.toEqual(null);
     });
 
-    describe("Dependencies:", function () {
-
-        var dependencies;
-
-        var hasModule = function (m) {
-            return dependencies.indexOf(m) >= 0;
-        };
-        beforeEach(function () {
-            dependencies = module.value('app.providerService').requires;
-        });
-
-        it("should have ngResource as a dependency", function () {
-            expect(hasModule('ngResource')).toEqual(true);
-        });
-
-        it("should have app.config as a dependency", function () {
-            expect(hasModule('app.config')).toEqual(true);
-        });
-    });
-});
-
-xdescribe('app.providerService ', function () {
-    var ProviderServices, $httpBackend;
-
-    beforeEach(module('app.providerService'));
-
-    beforeEach(function () {
-        angular.mock.inject(function ($injector) {
-            $httpBackend = $injector.get('$httpBackend');
-            ProviderServices = $injector.get('ProviderService');
-        });
-    });
-
-    afterEach(function () {
-        $httpBackend.verifyNoOutstandingExpectation();
-        $httpBackend.verifyNoOutstandingRequest();
-    });
-
     it('should providers resource function', function () {
-        expect(angular.isFunction(ProviderServices.getProvidersResource())).toNotBe(null);
+        expect(angular.isFunction(providerService.getProvidersResource())).not.toBe(null);
     });
 
-    it('should add Providers', function () {
-        $httpBackend.expectPOST('https://localhost:8443/pcm/patients/providers/11111').respond({status: 201});
-        var status = ProviderServices.addProvider(
+    xit('should add Providers', function () {
+        $httpBackend.when('POST', 'https://localhost:8443/pcm/patients/providers/11111').respond({status: 201});
+        var status = providerService.addProvider(
             11111,
             function (data) {
                 status = data.status;
@@ -69,9 +57,9 @@ xdescribe('app.providerService ', function () {
         expect(status).toEqual(201);
     });
 
-    it('should delete Providers ', function () {
+    xit('should delete Providers ', function () {
         $httpBackend.expectDELETE('https://localhost:8443/pcm/patients/providers/11111').respond({status: 201});
-        var status = ProviderServices.deleteProvider(
+        var status = providerService.deleteProvider(
             11111,
             function (data) {
                 status = data.status;
@@ -82,7 +70,7 @@ xdescribe('app.providerService ', function () {
         expect(status).toEqual(201);
     });
 
-    it('should lookup providers with successful backend call', function () {
+    xit('should lookup providers with successful backend call', function () {
         // Arrange
         var statusCodeSuccess = 200;
         var statusCodeError = 500;
@@ -104,7 +92,7 @@ xdescribe('app.providerService ', function () {
         // Act
         var statusWhenSuccess = statusCodeNotSet;
         var statusWhenError = statusCodeNotSet;
-        ProviderServices.lookupProviders(plsQueryParameters, page, function (response) {
+        providerService.lookupProviders(plsQueryParameters, page, function (response) {
             statusWhenSuccess = response.status;
         }, function (response) {
             statusWhenError = response.status;
@@ -118,7 +106,7 @@ xdescribe('app.providerService ', function () {
     });
 
 
-    it('should get error status when lookup provider backend call fails', function () {
+    xit('should get error status when lookup provider backend call fails', function () {
         // Arrange
         var statusCodeSuccess = 200;
         var statusCodeError = 500;
@@ -140,7 +128,7 @@ xdescribe('app.providerService ', function () {
         // Act
         var statusWhenSuccess = statusCodeNotSet;
         var statusWhenError = statusCodeNotSet;
-        ProviderServices.lookupProviders(plsQueryParameters, page, function (response) {
+        providerService.lookupProviders(plsQueryParameters, page, function (response) {
             statusWhenSuccess = response.status;
         }, function (response) {
             statusWhenError = response.status;
@@ -153,43 +141,43 @@ xdescribe('app.providerService ', function () {
         expect(statusWhenError).toEqual(statusCodeError);
     });
 
-    it('should return true if providerLookupResult is undefined', function () {
+    xit('should return true if providerLookupResult is undefined', function () {
         // Arrange
         var providerLookupResult;
         var expectedResult = true;
 
         // Act
-        var result = ProviderServices.isEmptyLookupResult(providerLookupResult);
+        var result = providerService.isEmptyLookupResult(providerLookupResult);
 
         // Assert
         expect(result).toEqual(expectedResult);
     });
 
-    it('should return true if providerLookupResult.providers is undefined', function () {
+    xit('should return true if providerLookupResult.providers is undefined', function () {
         // Arrange
         var providerLookupResult = {someProperty: 'somePropertyValue'};
         var expectedResult = true;
 
         // Act
-        var result = ProviderServices.isEmptyLookupResult(providerLookupResult);
+        var result = providerService.isEmptyLookupResult(providerLookupResult);
 
         // Assert
         expect(result).toEqual(expectedResult);
     });
 
-    it('should return true if providerLookupResult.providers is defined but empty', function () {
+    xit('should return true if providerLookupResult.providers is defined but empty', function () {
         // Arrange
         var providerLookupResult = {someProperty: 'somePropertyValue', providers: []};
         var expectedResult = true;
 
         // Act
-        var result = ProviderServices.isEmptyLookupResult(providerLookupResult);
+        var result = providerService.isEmptyLookupResult(providerLookupResult);
 
         // Assert
         expect(result).toEqual(expectedResult);
     });
 
-    it('should return false if providerLookupResult.providers has at least one element', function () {
+    xit('should return false if providerLookupResult.providers has at least one element', function () {
         // Arrange
         var providerLookupResult = {
             someProperty: 'somePropertyValue',
@@ -198,13 +186,13 @@ xdescribe('app.providerService ', function () {
         var expectedResult = false;
 
         // Act
-        var result = ProviderServices.isEmptyLookupResult(providerLookupResult);
+        var result = providerService.isEmptyLookupResult(providerLookupResult);
 
         // Assert
         expect(result).toEqual(expectedResult);
     });
 
-    it('should verify if ', function () {
+    xit('should verify if ', function () {
         // Arrange
         var providerLookupResult = {
             someProperty: 'somePropertyValue',
@@ -213,13 +201,13 @@ xdescribe('app.providerService ', function () {
         var expectedResult = false;
 
         // Act
-        var result = ProviderServices.isEmptyLookupResult(providerLookupResult);
+        var result = providerService.isEmptyLookupResult(providerLookupResult);
 
         // Assert
         expect(result).toEqual(expectedResult);
     });
 
-    it('should verify provider in list of providers ', function () {
+    xit('should verify provider in list of providers ', function () {
         var providerData = [{
             deletable: false,
             entityType: "Individual",
@@ -236,15 +224,15 @@ xdescribe('app.providerService ', function () {
             providerTaxonomyDescription: "Family",
             secondLinePracticeLocationAddress: "BLALOCK 412"
         }];
-        expect(ProviderServices.hasNpi(providerData, '1083949036')).toBeTruthy();
+        expect(providerService.hasNpi(providerData, '1083949036')).toBeTruthy();
     });
 
-    it('should verify provider in list of empty providers ', function () {
+    xit('should verify provider in list of empty providers ', function () {
         var providerData1 = [];
-        expect(ProviderServices.hasNpi(providerData1, '1083949036')).toBeFalsy();
+        expect(providerService.hasNpi(providerData1, '1083949036')).toBeFalsy();
 
         var providerData2 = {};
-        expect(ProviderServices.hasNpi(providerData2, '1083949036')).toBeFalsy();
+        expect(providerService.hasNpi(providerData2, '1083949036')).toBeFalsy();
     });
 
 });

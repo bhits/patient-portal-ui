@@ -4,7 +4,7 @@
 
 'use strict';
 
-describe('app.authenticationModule, authenticationService ', function() {
+describe('app.authenticationService ', function() {
     var utilityService, oauthTokenService, authenticationService,
         location, profileService;
 

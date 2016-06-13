@@ -1,43 +1,44 @@
-/**
- * Created by cindy.ren on 6/9/2016.
- */
+/* Created by cindy.ren on 6/9/2016.*/
 
-describe('app.oauthModule, oauthTokenService ', function() {
-    var utilityService, oauthTokenService, authenticationService,
-        location, profileService;
+describe('app.oauthTokenService ', function() {
+    var oauthTokenService, sessionStorage, profileService, timeout;
+
+    var token = {access_token: 'access_token', refresh_token: 'refresh_token', expires_in: 1};
 
     beforeEach(module('ngResource'));
     beforeEach(module('app.security'));
+    beforeEach(jasmine.clock().install());
 
-    beforeEach(inject(function (_oauthTokenService_, _authenticationService_,
-                                _$location_, _utilityService_, _profileService_) {
-        utilityService = _utilityService_;
-        authenticationService = _authenticationService_;
+    beforeEach(inject(function (_oauthTokenService_, _$sessionStorage_,
+                                _profileService_, _$timeout_) {
         oauthTokenService = _oauthTokenService_;
         profileService = _profileService_;
-        location = _$location_;
+        sessionStorage = _$sessionStorage_;
+        timeout = _$timeout_
     }));
 
-    it("should remove token", function() {
-
-        oauthTokenService.setToken('token');
-        profileService.setProfile('profile');
-
-        oauthTokenService.removeToken();
-        expect(oauthTokenService.token).toBeUndefined();
-        expect(oauthTokenService.profile).toBeUndefined();
-    });
+    afterEach(jasmine.clock().uninstall());
 
     it("should set token", function() {
         oauthTokenService.removeToken();
         oauthTokenService.setToken('setTokenTest');
-        expect(oauthTokenService.getToken()).toBe('setTokenTest');
+        expect(sessionStorage.token).toBe('setTokenTest');
+    });
+
+    it("should remove token", function() {
+
+        oauthTokenService.setToken(token);
+        profileService.setProfile('profile');
+
+        oauthTokenService.removeToken();
+        expect(sessionStorage.token).toBeUndefined();
+        expect(sessionStorage.profile).toBeUndefined();
     });
 
     it("should get token", function() {
         oauthTokenService.removeToken();
-        oauthTokenService.setToken('token');
-        expect(oauthTokenService.getToken()).toBe('token');
+        oauthTokenService.setToken(token);
+        expect(oauthTokenService.getToken()).toBe(token);
     });
 
     it("should get access token", function() {
@@ -46,9 +47,8 @@ describe('app.oauthModule, oauthTokenService ', function() {
         spyOn(oauthTokenService,'getToken').and.callThrough();
         expect(oauthTokenService.getAccessToken()).toBeNull();
 
-        oauthTokenService.setToken('token');
-        expect(oauthTokenService.getAccessToken()).toBeUndefined();
-        //access_token is unresolved
+        oauthTokenService.setToken(token);
+        expect(oauthTokenService.getAccessToken()).toBe('access_token');
     });
 
     it("should get refresh token", function() {
@@ -57,9 +57,8 @@ describe('app.oauthModule, oauthTokenService ', function() {
         spyOn(oauthTokenService,'getToken').and.callThrough();
         expect(oauthTokenService.getRefreshToken()).toBeNull();
 
-        oauthTokenService.setToken('token');
-        expect(oauthTokenService.getRefreshToken()).toBeUndefined();
-        //access_token is unresolved
+        oauthTokenService.setToken(token);
+        expect(oauthTokenService.getRefreshToken()).toBe('refresh_token');
     });
 
     it("should get expiration time", function() {
@@ -67,6 +66,10 @@ describe('app.oauthModule, oauthTokenService ', function() {
 
         spyOn(oauthTokenService,'getToken').and.callThrough();
         expect(oauthTokenService.getExpiresIn()).toBeNull();
+
+        oauthTokenService.setToken(token);
+        var date = new Date(new Date().valueOf() + (1000));
+        expect(oauthTokenService.getExpiresIn()).toEqual(date);
 
     });
 
@@ -77,24 +80,40 @@ describe('app.oauthModule, oauthTokenService ', function() {
         spyOn(oauthTokenService,'getExpiresIn').and.callThrough();
         expect(oauthTokenService.isValidToken()).toBeFalsy();
 
+        oauthTokenService.setToken(token);
+        expect(oauthTokenService.isValidToken()).toBeTruthy();
     });
 
-    xit("should return if token has expired", function() {
+    it("should return if token has expired", function() {
         oauthTokenService.removeToken();
-
         spyOn(oauthTokenService,'getExpiresIn').and.callThrough();
+
+        oauthTokenService.setToken(token);
         expect(oauthTokenService.isExpiredToken()).toBeFalsy();
 
-    }); //cannot test, getExpiresIn returns null
+        waits(2000);
+        console.log(getExpiresIn().valueOf() < new Date().valueOf());
+        expect(oauthTokenService.isExpiredToken()).toBeTruthy();
 
-    xit("should return if token has expired", function() {
+        expect(oauthTokenService, getExpiresIn).toHaveBeenCalled();
+    });
+
+    it("should return if a valid token has expired", function() {
         oauthTokenService.removeToken();
-
         spyOn(oauthTokenService,'getExpiresIn').and.callThrough();
         spyOn(oauthTokenService,'getAccessToken').and.callThrough();
+
         expect(oauthTokenService.isValidAndExpiredToken()).toBeFalsy();
 
-    }); //cannot test, getExpiresIn returns null
+        oauthTokenService.setToken(token);
+        expect(oauthTokenService.isValidAndExpiredToken()).toBeFalsy();
+        waits(2000);
+        expect(oauthTokenService.isValidAndExpiredToken()).toBeTruthy();
+
+        expect(oauthTokenService, getAccessToken).toHaveBeenCalled();
+        expect(oauthTokenService, getRefreshToken).toHaveBeenCalled();
+        expect(oauthTokenService, getExpiresIn).toHaveBeenCalled();
+    });
 
 
 });
