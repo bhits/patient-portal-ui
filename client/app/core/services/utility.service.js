@@ -37,6 +37,7 @@
         service.digitFormat = digitFormat;
         service.isValidDate = isValidDate;
 
+
         return service;
 
         function getYear() {

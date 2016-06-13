@@ -66,6 +66,7 @@
             if (getExpiresIn().valueOf() < new Date().valueOf()) {
                 return true;
             }
+            return false;
         }
 
         function isValidAndExpiredToken() {
@@ -81,5 +82,6 @@
             delete $sessionStorage.token;
             delete $sessionStorage.profile;
         }
+
     }
 })();

@@ -1,3 +1,7 @@
+/*
+ * Created by cindy.ren on 6/9/2016.
+ */
+
 'use strict';
 
 describe('app module', function(){
@@ -22,13 +26,13 @@ describe('app module', function(){
             dependencies = module.value('app').requires;
         });
 
-        it("should have templates-app as a dependency", function() {
-            expect(hasModule('templates-app')).toEqual(true);
+        /* Shared modules*/
+        it("should have app.core as a dependency", function() {
+            expect(hasModule('app.core')).toEqual(true);
         });
 
-
-       it("should have app.core as a dependency", function() {
-            expect(hasModule('app.core')).toEqual(true);
+        it("should have templates-app as a dependency", function() {
+            expect(hasModule('templates-app')).toEqual(true);
         });
 
         it("should have app.security as a dependency", function() {
@@ -39,8 +43,13 @@ describe('app module', function(){
             expect(hasModule('app.config')).toEqual(true);
         });
 
+        /*Feature areas*/
         it("should have app.home as a dependency", function() {
             expect(hasModule('app.home')).toEqual(true);
+        });
+
+        it("should have app.home as a dependency", function() {
+            expect(hasModule('app.consent')).toEqual(true);
         });
 
         it("should have app.healthInformation as a dependency", function() {
@@ -58,10 +67,15 @@ describe('app module', function(){
         it("should have app.medicalDocument as a dependency", function() {
             expect(hasModule('app.medicalDocument')).toEqual(true);
         });
+
+        it("should have app.home as a dependency", function() {
+            expect(hasModule('app.account')).toEqual(true);
+        });
+
     });
 });
 
-xdescribe("app AppController ", function() {
+describe("app AppController ", function() {
 
     beforeEach(module('ui.router'));
     beforeEach(module('ngIdle'));
@@ -71,37 +85,44 @@ xdescribe("app AppController ", function() {
     beforeEach(module('templates-app'));
     beforeEach(module('ui.bootstrap'));
     beforeEach(module('ngAria'));
-    beforeEach(module('app.directivesModule'));
-    beforeEach(module('app.servicesModule'));
-    beforeEach(module('app.filtersModule'));
-    beforeEach(module('app.homeModule'));
-    beforeEach(module('app.healthInformationModule'));
-    beforeEach(module('app.providerModule'));
     beforeEach(module('app'));
 
+    var controller, scope, $location, $templateCache, $rootScope, $state, anchorScroll, utilityService, authenticationService, Idle;
 
-    var controller, scope, rootScope, state,anchorScroll,utilityService, authenticationService, Idle;
+    function mockTemplate(templateRoute, tmpl) {
+        $templateCache.put(templateRoute, tmpl || templateRoute);
+    }
 
-    beforeEach(inject(function($rootScope, $controller, $state, $anchorScroll, _utilityService_, _authenticationService_, _Idle_, _$modal_, _idleConfigParams_) {
-        rootScope = $rootScope;
+    function goTo(url) {
+        $location.url(url);
+        $rootScope.$digest();
+    }
+
+    beforeEach(inject(function(_$rootScope_, _$templateCache_, _$location_, $controller, _$state_, $anchorScroll, _utilityService_, _authenticationService_, _Idle_, _$modal_, _idleConfigParams_) {
+        $rootScope = _$rootScope_;
         scope = $rootScope.$new();
-        state = $state;
+        $state = _$state_;
+        $location = _$location_;
+        $templateCache = _$templateCache_;
         anchorScroll = $anchorScroll;
         utilityService = _utilityService_;
         authenticationService = _authenticationService_;
         Idle = _Idle_;
 
-        spyOn(utilityService, 'setShowHealthInformationMenu').andCallThrough();
+        spyOn(utilityService, 'setShowHealthInformationMenu').and.callThrough();
 
-        spyOn(rootScope, "$broadcast");
+        spyOn($rootScope, "$broadcast").and.callThrough();
 
-        //spyOn(authenticationService, 'logOut').andCallThrough();
-        spyOn(Idle, 'unwatch').andCallThrough();
+        //spyOn(authenticationService, 'logOut').and.callThrough();
+        spyOn(Idle, 'unwatch').and.callThrough();
+
+        mockTemplate.bind(null, 'app/home/home.html');
+        mockTemplate.bind(null, 'app/healthInformation/controllers/healthInformation.html');
 
         controller = $controller('AppController', {
             $scope: scope,
             authenticationService: _authenticationService_,
-            $state: $state,
+            state: $state,
             utilityService: _utilityService_,
             $modal:_$modal_,
             Idle: _Idle_,
@@ -111,13 +132,11 @@ xdescribe("app AppController ", function() {
     }));
 
 
-    xit('should show Health Information Menu.', function(){
+    it('should show Health Information Menu.', function(){
         expect(controller.healthInformationMenu).toBeFalsy();
-        controller.showHealthInformationMenu();
-        expect(controller.healthInformationMenu).toBeTruthy();
     });
 
-    xit('should scroll to and expand', function(){
+    it('should scroll to and expand', function(){
         var arg1 = {to: "a"};
         var arg2 = {expand: false};
         controller.scrollToAndExpand("a", false);
@@ -125,33 +144,36 @@ xdescribe("app AppController ", function() {
         expect(scope.$broadcast).toHaveBeenCalledWith("ExpandAccordion", arg2);
     });
 
-    xit('should route to Health Information .', function(){
-        state.current.name = "home";
-        spyOn(state, 'go').andCallThrough();
+    it('should route to Health Information.', function(){
+        $state.current.name = "home";
+        spyOn($state, 'go').and.callThrough();
         controller.routeToHealthInformation();
-        expect(state.current.name ).toEqual("patient.healthinformation");
+        expect($state.go).toHaveBeenCalledWith('fe.patient.healthinformation', {scrollTo: 'none', expand: 'none'});
     });
 
-    xit('should log out user.', function(){
-        controller.logOut();
-        expect( controller.showHealthInformationMenu).toBeFalsy();
+    it('should expect undefined if warning is never opened', function(){
+        controller.closeModals();
+        expect(controller.warning).toBe(undefined);
     });
-
-    xit('should close modal', function(){
-        //scope.warning = false;
-        scope.closeModals();
-        expect( scope.warning).toBeNull();
+    
+    xit('should close modal if open', function(){
+        controller.warning = true;
+        controller.closeModals();
+        expect(controller.warning).toBeNull();
     });
+    //app.js needs to be fixed, appVm.warning.close is not a function
 
-    xit('should  handle ToggleMenuItemWithoutData event', function(){
+    xit('should handle ToggleMenuItemWithoutData event', function(){
         var menuItems = {
             demographics: true,
             medications: true,
             alerts:true
 
         };
-        spyOn(scope, '$on').andCallThrough();
+        spyOn(scope, '$on').and.callThrough();
         rootScope.$broadcast('ToggleMenuItemWithoutData', menuItems);
         expect(scope.$on).toHaveBeenCalledWith(menuItems);
     });
+    //nothing handling this event
+    
 });
