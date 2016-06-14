@@ -140,21 +140,13 @@
             return {};
         }
 
-        function findProviderByNpi(providers, npi) {
-            for (var i = 0; i < providers.length; i++) {
-                if (providers[i].npi === npi) {
-                    return providers[i];
-                }
-            }
-        }
-
         function getProviderByNpis(providers, listOfNpi1, listOfNpi2) {
             var result = [];
             var listOfNpi = listOfNpi1.concat(listOfNpi2);
 
             if (angular.isDefined(providers)) {
                 for (var i = 0; i < listOfNpi.length; i++) {
-                    var provider = findProviderByNpi(providers, listOfNpi[i]);
+                    var provider = getProviderByNPI(providers, listOfNpi[i]);
                     if (provider.npi) {
                         result.push(provider);
                     }
@@ -165,9 +157,11 @@
 
         function getIndividualProvidersNpi(providers) {
             var result = [];
-            for (var i = 0; i < providers.length; i++) {
-                if (isIndividualProvider(providers[i])) {
-                    result.push(providers[i].npi);
+            if (angular.isDefined(providers)) {
+                for (var i = 0; i < providers.length; i++) {
+                    if (isIndividualProvider(providers[i])) {
+                        result.push(providers[i].npi);
+                    }
                 }
             }
             return result;
@@ -175,9 +169,11 @@
 
         function getOrganizationalProvidersNpi(providers) {
             var result = [];
-            for (var i = 0; i < providers.length; i++) {
-                if (isOrganizationProvider(providers[i])) {
-                    result.push(providers[i].npi);
+            if (angular.isDefined(providers)) {
+                for (var i = 0; i < providers.length; i++) {
+                    if (isOrganizationProvider(providers[i])) {
+                        result.push(providers[i].npi);
+                    }
                 }
             }
             return result;
@@ -196,20 +192,25 @@
 
         function isSecuredApi(url) {
             var isSecured = false;
-            angular.forEach(envService.securedApis, function (value) {
-                if (startsWith(url.toLowerCase(), value.toLowerCase())) {
-                    isSecured = true;
-                }
-            });
+            if (angular.isDefined(url)) {
+                angular.forEach(envService.securedApis, function (value) {
+                    if (startsWith(url.toLowerCase(), value.toLowerCase())) {
+                        isSecured = true;
+                    }
+                });
+            }
             return isSecured;
         }
 
         function digitFormat(number, digitLength) {
-            var output = number + '';
-            while (output.length < digitLength) {
-                output = '0' + output;
+            if (angular.isDefined(number) && angular.isDefined(digitLength)) {
+                var output = number + '';
+                while (output.length < digitLength) {
+                    output = '0' + output;
+                }
+                return output;
             }
-            return output;
+            return '';
         }
 
         // Expect input as m/d/y
@@ -224,7 +225,7 @@
                 return false;
             }
 
-            var month = matchArray[1]; // parse date into variables
+            var month = matchArray[1]%10+""; // parse date into variables
             var day = matchArray[3];
             var year = matchArray[4];
             if (month < 1 || month > 12) { // check month range
