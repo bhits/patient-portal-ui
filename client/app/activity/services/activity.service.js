@@ -7,20 +7,20 @@
 (function () {
 
     angular.module("app.activity")
-        .factory('auditService', auditService);
+        .factory('activityService', activityService);
 
         /* @ngInject */
-        function auditService($resource, envService) {
-            var auditHistoryResource = $resource(envService.securedApis.pcmApiBaseUrl + "/activities");
+        function activityService($resource, envService) {
+            var activityHistoryResource = $resource(envService.securedApis.pcmApiBaseUrl + "/activities");
 
 
             var service = {};
-            service.getAuditHistory= getAuditHistory;
+            service.getActivityHistory= getActivityHistory;
 
             return service;
 
-            function getAuditHistory(success, error){
-                return auditHistoryResource.query(success, error);
+            function getActivityHistory(success, error){
+                return activityHistoryResource.query(success, error);
             }
 
         }

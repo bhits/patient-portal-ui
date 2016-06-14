@@ -8,8 +8,8 @@
             .controller('ActivityHistoryController', ActivityHistoryController);
 
              /* @ngInject */
-            function ActivityHistoryController(auditList){
+            function ActivityHistoryController(activityList){
                 var vm = this;
-               vm.auditHistory = auditList;
+               vm.activityHistory = activityList;
             }
 })();
