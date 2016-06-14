@@ -16,6 +16,7 @@
                 service.getSectionCollectionByName = getSectionCollectionByName;
                 service.getCDADocument = getCDADocument;
                 service.getDocuments = getDocuments;
+                service.isDefineAndNotNull = isDefineAndNotNull;
 
                 function isDefineAndNotNull(value){
                     return (angular.isDefined(value) && value !== null );
