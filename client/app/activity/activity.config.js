@@ -28,17 +28,21 @@
                 controllerAs: 'activityHistoryVm',
                 resolve: {
                     /* @ngInject */
-                    activityList: function ($q, activityService, notificationService) {
-                        var success = function (response){
+                    loadedData: function ($q, activityService, notificationService) {
+                        var success = function (response) {
                             return response;
                         };
-                        var error = function (response){
-                            notificationService.error('Failed to get the activity history list.');
-                            return response;
+
+                        var error = function (data) {
+                            notificationService.error('Failed to get the activity history list, please try again later...');
+                            return data;
                         };
+
+                        var pageNumber = 1;
                         var deferred = $q.defer();
-                        var activityHistoryPromise = activityService.getActivityHistory(success, error).$promise;
-                        activityHistoryPromise.then(function(response){
+
+                        var activityHistoryPromise = activityService.getActivityHistoryList(pageNumber, success, error).$promise;
+                        activityHistoryPromise.then(function (response) {
                             deferred.resolve(response);
                         }, function (error) {
                             deferred.reject(error);

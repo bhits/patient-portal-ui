@@ -8,8 +8,8 @@
             .controller('ActivityHistoryController', ActivityHistoryController);
 
              /* @ngInject */
-            function ActivityHistoryController(activityList){
+            function ActivityHistoryController(loadedData){
                 var vm = this;
-               vm.activityHistory = activityList;
+               vm.paginationData = loadedData;
             }
 })();

@@ -9,19 +9,34 @@
     angular.module("app.activity")
         .factory('activityService', activityService);
 
-        /* @ngInject */
-        function activityService($resource, envService) {
-            var activityHistoryResource = $resource(envService.securedApis.pcmApiBaseUrl + "/activities");
+    /* @ngInject */
+    function activityService($resource, envService) {
 
+        var patientListResource = $resource(envService.securedApis.pcmApiBaseUrl + "/activities/pageNumber",
+            {pageNumber: '@pageNumber'},
+            {
+                'query': {
+                    method: 'GET',
+                    params: {pageNumber: '@pageNumber'}
+                }
+            }
+        );
 
-            var service = {};
-            service.getActivityHistory= getActivityHistory;
+        var service = {};
 
-            return service;
+        service.getActivityHistoryList = getActivityHistoryList;
 
-            function getActivityHistory(success, error){
-                return activityHistoryResource.query(success, error);
+        return service;
+
+        function getActivityHistoryList(page, success, error) {
+            function adjustPageOnSuccessResponse(response) {
+                if (angular.isDefined(response.currentPage) && angular.isNumber(response.currentPage)) {
+                    response.currentPage += 1;
+                }
+                (success || angular.identity)(response);
             }
 
+            return patientListResource.query({pageNumber: page - 1}, adjustPageOnSuccessResponse, error);
         }
+    }
 })();
