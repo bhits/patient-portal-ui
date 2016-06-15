@@ -15,7 +15,7 @@
             var consentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/:id",{id: '@id'}, {'update': { method:'PUT' }});
             var consentExportConsentDirective = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/exportConsentDirective/:id",{id: '@id'});
             var purposeOfUseResource = $resource(envService.securedApis.pcmApiBaseUrl + "/purposeOfUse");
-            var sensitvityPolicyResource = $resource(envService.securedApis.pcmApiBaseUrl + "/sensitivityPolicy");
+            var sensitivityPolicyResource = $resource(envService.securedApis.pcmApiBaseUrl + "/sensitivityPolicy");
             var signConsentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/signConsent/:id", {id: '@id'});
             var revokeConsentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/revokeConsent/:id", {id: '@id'});
             var selectedNpi = {authorizeNpi: "", discloseNpi: ""};
@@ -24,7 +24,7 @@
             var service = {};
             service.getConsentResource = getConsentResource;
             service.getPurposeOfUseResource = getPurposeOfUseResource;
-            service.getSensitvityPolicyResource = getSensitvityPolicyResource;
+            service.getSensitivityPolicyResource = getSensitivityPolicyResource;
             service.getConsent = getConsent;
             service.signConsent = signConsent;
             service.revokeConsent = revokeConsent;
@@ -61,8 +61,8 @@
                 return purposeOfUseResource;
             }
 
-            function getSensitvityPolicyResource(){
-                return sensitvityPolicyResource;
+            function getSensitivityPolicyResource(){
+                return sensitivityPolicyResource;
             }
 
             function getConsent (id, success, error) {
@@ -173,7 +173,7 @@
             }
 
             function getSensitivityPolicies (success, error) {
-                sensitvityPolicyResource.query(success, error);
+                sensitivityPolicyResource.query(success, error);
             }
 
             function getEntitiesByCodes (entities,codes){

@@ -25,9 +25,9 @@ describe('app.healthInformationService ', function() {
 
     beforeEach(module('app.config'));
     beforeEach(module('app.healthInformation'));
-    beforeEach(console.log = jasmine.createSpy("log")); //used so console does not fill up
+    // beforeEach(console.log = jasmine.createSpy("log")); //used so console does not fill up
+    // beforeEach(console.log.and.callThrough());
 
-    
     beforeEach(inject(function(_healthInformationService_, _$resource_, _envService_){
         healthInformationService = _healthInformationService_;
         $resource = _$resource_;
@@ -70,6 +70,7 @@ describe('app.healthInformationService ', function() {
     });
 
     it('should print out message to console if CCDA is empty', function(){
+        console.log = jasmine.createSpy("log");
         var ccdaDocument = {};
         expectEmpty = healthInformationService.getSectionByName(ccdaDocument, "AllergySection");
         expect(console.log).toHaveBeenCalledWith("Section missing.");

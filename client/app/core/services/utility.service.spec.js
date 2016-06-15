@@ -182,27 +182,26 @@ describe('app.utilityService ', function () {
     });
 
     it('should test if input date is valid', function(){
-        // expect(utilityService.isValidDate("03/25/2015")).toBeTruthy();
-        // expect(utilityService.isValidDate("03/05/2015")).toBeTruthy();
-        // //format is MM/DD/YYYY
-        // expect(utilityService.isValidDate("03/5/2015")).toBeFalsy();
-        // //(month < 1 || month > 12)
+        expect(utilityService.isValidDate("03/25/2015")).toBeTruthy();
+        expect(utilityService.isValidDate("03/05/2015")).toBeTruthy();
+        //format is MM/DD/YYYY
+        expect(utilityService.isValidDate("03/5/2015")).toBeFalsy();
+        //(month < 1 || month > 12)
         expect(utilityService.isValidDate("00/05/2015")).toBeFalsy();
-        // expect(utilityService.isValidDate("13/05/2015")).toBeFalsy();
-        // //(day < 1 || day > 31)
-        // expect(utilityService.isValidDate("02/00/2015")).toBeFalsy();
-        // expect(utilityService.isValidDate("02/32/2015")).toBeFalsy();
-        // //((month===4 || month===6 || month===9 || month===11) && day===31)
+        expect(utilityService.isValidDate("13/05/2015")).toBeFalsy();
+        //(day < 1 || day > 31)
+        expect(utilityService.isValidDate("02/00/2015")).toBeFalsy();
+        expect(utilityService.isValidDate("02/32/2015")).toBeFalsy();
+        //((month===4 || month===6 || month===9 || month===11) && day===31)
         expect(utilityService.isValidDate("04/31/2015")).toBeFalsy();
-        // expect(utilityService.isValidDate("06/31/2015")).toBeFalsy();
-        // expect(utilityService.isValidDate("09/31/2015")).toBeFalsy();
-        // expect(utilityService.isValidDate("11/31/2015")).toBeFalsy();
-        // //check for february 29th
-        // expect(utilityService.isValidDate("02/29/2015")).toBeFalsy();
-        // expect(utilityService.isValidDate("02/29/2016")).toBeTruthy();
-        //
-        //
-        // expect(utilityService.isValidDate("Mar 5 2015")).toBeFalsy();
+        expect(utilityService.isValidDate("06/31/2015")).toBeFalsy();
+        expect(utilityService.isValidDate("09/31/2015")).toBeFalsy();
+        expect(utilityService.isValidDate("11/31/2015")).toBeFalsy();
+        //check for february 29th
+        expect(utilityService.isValidDate("02/29/2015")).toBeFalsy();
+        expect(utilityService.isValidDate("02/29/2016")).toBeTruthy();
+        
+        expect(utilityService.isValidDate("Mar 5 2015")).toBeFalsy();
     });
 
 });

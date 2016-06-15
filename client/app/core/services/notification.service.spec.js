@@ -1,66 +1,31 @@
 /**
  * Created by tomson.ngassa on 10/14/2015.
+ * Modified by cindy.ren on 6/13/2016
  */
 
 'use strict';
 
-xdescribe('app.notificationModule  ', function(){
-    var module;
+xdescribe('app.notificationService ', function() {
+    var notificationService, notify;
 
-    beforeEach(function() {
-        module = angular.module("app.notificationModule");
-    });
+    var templateUrl = "app/core/services/notify.html";
+    var duration = 2000;
 
-    it("should be registered", function() {
-        expect(module).not.toEqual(null);
-    });
+    beforeEach(module('app.core'));
 
-    describe("Dependencies:", function() {
+    beforeEach(inject(function(_notificationService_, _notify_){
+        notificationService = _notificationService_;
+        notify = _notify_;
 
-        var dependencies;
-
-        var hasModule = function(m) {
-            return dependencies.indexOf(m) >= 0;
-        };
-        beforeEach(function() {
-            dependencies = module.value('app.notificationModule').requires;
-        });
-
-        it("should be registered", function() {
-            expect(module).not.toEqual(null);
-        });
-
-        it("should have cgNotify as a dependency", function() {
-            expect(hasModule('cgNotify')).toEqual(true);
-        });
-    });
-});
-
-
-xdescribe('app.notificationModule ', function() {
-    var notificationService,mockNotify;
-
-    beforeEach(module('cgNotify'));
-    beforeEach(module('app.notificationModule'));
-
-    beforeEach(function () {
-        angular.mock.inject(function ($injector) {
-            notificationService = $injector.get('notificationService');
-            mockNotify = $injector.get('notify');
-        });
-        //
-
-       spyOn(mockNotify, this).andCallThrough();
-    });
+    }));
 
     it('should show success notify', function () {
-
-        console.log(mockNotify);
+        spyOn(notificationService, 'success').and.callThrough();
+        console.log(notify);
         var msg = "test";
-        var notifyObj = { message: msg, duration: 2000, classes: 'alert-success', templateUrl: ""};
         notificationService.success(msg);
+        expect(success).toHaveBeenCalled();
 
-        expect(mockNotify).toHaveBeenCalled();
     });
 
     xit('should show error notify', function () {

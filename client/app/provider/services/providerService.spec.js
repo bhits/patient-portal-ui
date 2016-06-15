@@ -5,7 +5,7 @@
 'use strict';
 
 
-xdescribe('app.providerService ', function () {
+describe('app.providerService ', function () {
     var providerService, $httpBackend, resource, envService, scope, controller;
 
     beforeEach(module('app.provider'));
@@ -27,8 +27,6 @@ xdescribe('app.providerService ', function () {
         envService = _envService_;
         providerService = _providerService_;
         scope = _$rootScope_.$new();
-
-
     }));
 
     // afterEach(function () {
@@ -45,7 +43,7 @@ xdescribe('app.providerService ', function () {
     });
 
     xit('should add Providers', function () {
-        $httpBackend.when('POST', 'https://localhost:8443/pcm/patients/providers/11111').respond({status: 201});
+        $httpBackend.when('GET', 'https://localhost:8443/pcm/patients/providers/11111').respond({status: 201});
         var status = providerService.addProvider(
             11111,
             function (data) {

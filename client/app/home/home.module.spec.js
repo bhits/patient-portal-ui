@@ -1,13 +1,14 @@
 /**
  * Created by tomson.ngassa on 12/7/2015.
+ * Modified by cindy.ren on 6/15/2016
  */
 
 'use strict';
-xdescribe('app.home ', function(){
+describe('app.home ', function(){
     var module;
 
     beforeEach(function() {
-        module = angular.module("app");
+        module = angular.module("app.home");
     });
 
     it("should be registered", function() {
@@ -25,13 +26,10 @@ xdescribe('app.home ', function(){
             dependencies = module.value('app').requires;
         });
 
-        xit("should have app.servicesModule as a dependency", function() {
-            expect(hasModule('app.servicesModule')).toEqual(true);
+        it("should have app.servicesModule as a dependency", function() {
+            expect(hasModule('app.core')).toEqual(true);
         });
 
-        it("should have ui.routere as a dependency", function() {
-            expect(hasModule('ui.router')).toEqual(true);
-        });
     });
 });
 

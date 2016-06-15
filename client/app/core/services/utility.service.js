@@ -225,7 +225,7 @@
                 return false;
             }
 
-            var month = matchArray[1]%10+""; // parse date into variables
+            var month = matchArray[1]; // parse date into variables
             var day = matchArray[3];
             var year = matchArray[4];
             if (month < 1 || month > 12) { // check month range
@@ -234,12 +234,12 @@
             if (day < 1 || day > 31) {
                 return false;
             }
-            if ((month===4 || month===6 || month===9 || month===11) && day===31) {
+            if ((month==4 || month==6 || month==9 || month==11) && day==31) {
                 return false;
             }
-            if (month === 2) { // check for february 29th
-                var isleap = (year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0));
-                if (day>29 || (day===29 && !isleap)) {
+            if (month == 2) { // check for february 29th
+                var isleap = (year % 4 == 0 && (year % 100 !== 0 || year % 400 == 0));
+                if (day>29 || (day==29 && !isleap)) {
                     return false;
                 }
             }
