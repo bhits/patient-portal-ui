@@ -12,7 +12,9 @@
             replace: true,
             templateUrl: 'app/account/directives/oauthLogin.html',
             scope: {},
-            bindToController: {},
+            bindToController: {
+                brand:"="
+            },
             controller: OauthLoginController,
             controllerAs: 'oauthLoginVm'
         };

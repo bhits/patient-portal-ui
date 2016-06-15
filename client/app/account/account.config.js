@@ -94,7 +94,9 @@
             .state('fe.account.activationError', {
                 url: '/activationError',
                 data: {pageTitle: 'Activation Error'},
-                templateUrl: 'app/account/controllers/activationError.html'
+                templateUrl: 'app/account/controllers/activationError.html',
+                controller: 'ActivateErrorController',
+                controllerAs: 'activateErrorVm'
             })
             .state('fe.account.forgotPassword', {
                 url: '/forgotPassword',
@@ -106,7 +108,9 @@
             .state('fe.account.resetPasswordSuccess', {
                 url: '/resetPasswordSuccess',
                 data: {pageTitle: 'Reset Password Success'},
-                templateUrl: 'app/account/controllers/resetPasswordSuccess.html'
+                templateUrl: 'app/account/controllers/resetPasswordSuccess.html',
+                controller: 'ResetPasswordController',
+                controllerAs: 'resetPasswordVm'
             });
     }
 })();

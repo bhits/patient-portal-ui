@@ -26,8 +26,10 @@
                     })
                     .state('fe.index.home', {
                         url: '/home',
-                        templateUrl: 'app/home/home.html',
-                        data: { pageTitle: 'Home' }
+                        templateUrl: 'app/home/controllers/home.html',
+                        data: { pageTitle: 'Home' },
+                        controller: 'HomeController',
+                        controllerAs: 'homeVm',
                     });
             }
 

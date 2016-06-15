@@ -7,11 +7,13 @@
         .controller('LoginController', LoginController);
 
     /* @ngInject */
-    function LoginController(envService, utilityService, accountConfig) {
+    function LoginController(envService, utilityService, accountConfig, brand) {
         var vm = this;
         vm.version = envService.version;
         vm.forgotPassword = forgotPassword;
-
+        vm.brandName = brand.getBrandName();
+        vm.altLogoText = brand.getAppName() + " Logo";
+        
         function forgotPassword() {
             utilityService.redirectTo(accountConfig.forgotPasswordPath);
         }

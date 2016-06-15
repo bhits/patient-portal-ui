@@ -19,7 +19,8 @@
                 'app.provider',
                 'app.layout',
                 'app.medicalDocument',
-                'app.account'
+                'app.account',
+                'app.brand'
             ])
             .constant("idleConfigParams", {"idle": 780, "timeout": 120, "keepalive": 240})
             .config(appConfig)
@@ -28,8 +29,12 @@
 
 
             /* @ngInject */
-            function appConfig($urlRouterProvider, $locationProvider, $httpProvider, KeepaliveProvider, IdleProvider, idleConfigParams) {
+            function appConfig($urlRouterProvider, $locationProvider, $httpProvider, KeepaliveProvider, IdleProvider, idleConfigParams, brandProvider) {
 
+                //Set Brand Name
+                brandProvider.setBrandName("Consent2Share");
+                brandProvider.setAppName("Consent to Share");
+                
                 // enable html5 mode
                 $locationProvider.html5Mode(true).hashPrefix('!');
 

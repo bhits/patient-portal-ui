@@ -10,11 +10,12 @@
         .controller('ForgotPasswordController', ForgotPasswordController);
 
     /* @ngInject */
-    function ForgotPasswordController(utilityService, oauthConfig, accountConfig, authenticationService) {
+    function ForgotPasswordController(utilityService, oauthConfig, accountConfig, authenticationService, brand) {
         var vm = this;
         vm.forgotPassword = forgotPassword;
         vm.cancel = cancel;
         vm.canSubmit = canSubmit;
+        vm.title = brand.getBrandName() + " Forgot Password";
 
         function prepareInfo() {
             return {
