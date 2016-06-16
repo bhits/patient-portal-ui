@@ -10,8 +10,9 @@
         .controller('VerificationController', VerificationController);
 
     /* @ngInject */
-    function VerificationController(allowVerification) {
+    function VerificationController(allowVerification, brand) {
         var vm = this;
         vm.allowVerification = allowVerification;
+        vm.title = brand.getBrandName() + " Account Setup Activation";
     }
 })();
