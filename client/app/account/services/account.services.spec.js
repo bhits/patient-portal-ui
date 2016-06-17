@@ -6,12 +6,18 @@ describe('app.accountService', function(){
 
     var accountService, $resource, envService, sessionStorage, scope, $httpBackend;
 
-    var verifyInfo = {name: 'name'};
+    var verifyInfo = {
+        emailToken: 'emailToken',
+        verificationCode: 11111,
+        birthDate: '2015-5-20'
+    };
+    var basicVerifyInfo = {name: 'name'};
     var userName = 'username';
     var patientInfo = {firstName: 'firstName', lastName: 'lastName'};
 
     beforeEach(module('app.account'));
     beforeEach(module('app.config'));
+    beforeEach(module('ngResource'));
 
     beforeEach(inject(function(_accountService_, _$resource_, _envService_, _$sessionStorage_,
                                $controller, $rootScope, _$httpBackend_){
@@ -31,16 +37,17 @@ describe('app.accountService', function(){
     }));
 
     xit('should verify patient', function () {
-        $httpBackend.expectGET('/patientUser/verifications');
+        $httpBackend.expect('GET','https://localhost:8443/patientUser/verifications').respond(200,'success');
         var status = accountService.verifyPatient(
-            '/patientUser/verifications',
+            verifyInfo,
             function (data) {
                 status = data.status;
             },
             function (error) {
             });
-        $httpBackend.flush();
-        expect(status).toEqual(201);
+        //$httpBackend.flush();
+
+        expect(status).toEqual(200);
     });
 
     it('should remove the verify info', function(){
@@ -49,13 +56,13 @@ describe('app.accountService', function(){
 
     it('should set the verify info', function(){
         expect(sessionStorage.verifyInfo).toBeUndefined();
-        accountService.setVerifyInfo(verifyInfo);
-        expect(sessionStorage.verifyInfo).toEqual(verifyInfo);
+        accountService.setVerifyInfo(basicVerifyInfo);
+        expect(sessionStorage.verifyInfo).toEqual(basicVerifyInfo);
     });
 
     it('should get the verify info', function(){
-        accountService.setVerifyInfo(verifyInfo);
-        expect(accountService.getVerifyInfo()).toEqual(verifyInfo);
+        accountService.setVerifyInfo(basicVerifyInfo);
+        expect(accountService.getVerifyInfo()).toEqual(basicVerifyInfo);
     });
 
     it('should set the username', function(){

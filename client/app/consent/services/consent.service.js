@@ -37,7 +37,7 @@
             service.setDiscloseNpi = setDiscloseNpi;
             service.getSelectedNpi = getSelectedNpi;
             service.getSelectedProvider = getSelectedProvider;
-            service.prepareProviderList = prepareProviderList;
+            //service.prepareProviderList = prepareProviderList; //TODO: remove: not used
             service.resolveConsentState = resolveConsentState;
             service.isShareAll = isShareAll;
             service.getPurposeOfUse = getPurposeOfUse;
@@ -132,21 +132,22 @@
                 return selectedNpi;
             }
 
+            //TODO: this is always an empty array??
             function getSelectedProvider (){
                 return selectedProvider;
             }
 
-            function prepareProviderList (selectedProviders, providers) {
-                var providerList = [];
-                for (var i = 0; i < providers.length; i++) {
-                    if (hasNPI(selectedProviders, providers[i].npi)) {
-                        providerList.push({isDisabled: true, provider: providers[i]});
-                    } else {
-                        providerList.push({isDisabled: false, provider: providers[i]});
-                    }
-                }
-                return providerList;
-            }
+            // function prepareProviderList (selectedProviders, providers) {
+            //     var providerList = [];
+            //     for (var i = 0; i < providers.length; i++) {
+            //         if (hasNPI(selectedProviders, providers[i].npi)) {
+            //             providerList.push({isDisabled: true, provider: providers[i]});
+            //         } else {
+            //             providerList.push({isDisabled: false, provider: providers[i]});
+            //         }
+            //     }
+            //     return providerList;
+            // }
 
             function resolveConsentState (consent) {
                 var state = 'error';
@@ -215,12 +216,15 @@
 
             function getPurposeOfUseCodes (entities){
                 var result = {selectedPurposeOfUseCodes: ['TREATMENT']};
-                if(entities.length === 0 ){
-                    return result;
-                }else if(entities.length > 0 ){
-                    result.selectedPurposeOfUseCodes = getCodes(entities);
-                    return result;
+                if(angular.isDefined(entities)) {
+                    if (entities.length === 0) {
+                        return result;
+                    } else if (entities.length > 0) {
+                        result.selectedPurposeOfUseCodes = getCodes(entities);
+                        return result;
+                    }
                 }
+                return result;
             }
 
             function getCodes(data){
@@ -251,15 +255,17 @@
                 selectedNpi = {authorizeNpi: "", discloseNpi: ""};
             }
 
-            function hasNPI (list, npi) {
-                for (var j = 0; j < list.length; j++) {
-                    if (npi === list[j]) {
-                        return true;
-                    }
-                }
-                return false;
-            }
+            // function hasNPI (list, npi) {
+            //     for (var j = 0; j < list.length; j++) {
+            //         if (list[j] === npi) {
+            //             return true;
+            //         }
+            //     }
+            //     return false;
+            // }
+            //TODO: remove: unused
 
+            //TODO: remove: empty
             function getPurposeOfUseCode(displayName, purposeOfUse){
 
             }
