@@ -25,8 +25,6 @@ describe('app.healthInformationService ', function() {
 
     beforeEach(module('app.config'));
     beforeEach(module('app.healthInformation'));
-    // beforeEach(console.log = jasmine.createSpy("log")); //used so console does not fill up
-    // beforeEach(console.log.and.callThrough());
 
     beforeEach(inject(function(_healthInformationService_, _$resource_, _envService_){
         healthInformationService = _healthInformationService_;
