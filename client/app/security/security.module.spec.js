@@ -1,6 +1,9 @@
 /**
  * Created by cindy.ren on 6/9/2016.
  */
+
+'use strict';
+
 describe('app.security ', function(){
     var module;
 

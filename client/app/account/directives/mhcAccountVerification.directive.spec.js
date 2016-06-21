@@ -1,6 +1,8 @@
-6/**
+/**
  * Created by cindy.ren on 6/14/2016.
  */
+
+'use strict';
 
 xdescribe('app.mhcAccountVerification.directive', function(){
 
@@ -35,8 +37,6 @@ xdescribe('app.mhcAccountVerification.directive', function(){
         element = $compile(element)($scope);
         $scope.$digest();
 
-
-
         controller = element.controller("VerificationController", {
             //$scope: $scope,
             utilityService: utilityService,
@@ -47,11 +47,5 @@ xdescribe('app.mhcAccountVerification.directive', function(){
         //controller = element.controller("VerificationController");
 
     }));
-
-    it("should do something to the scope", function() {
-        expect($scope.prepareVerification()).toBeDefined()
-    })
-
-
-
+    
 });

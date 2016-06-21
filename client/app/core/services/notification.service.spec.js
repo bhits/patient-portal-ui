@@ -24,13 +24,12 @@ xdescribe('app.notificationService ', function() {
         console.log(notify);
         var msg = "test";
         notificationService.success(msg);
-        expect(success).toHaveBeenCalled();
+        //expect(notificationService.success).toHaveBeenCalled();
 
     });
 
     xit('should show error notify', function () {
         //expect(angular.isFunction(ProviderServices.getProviders())).toNotBe(null);
     });
-
 
 });

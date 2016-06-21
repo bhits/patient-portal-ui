@@ -2,6 +2,8 @@
  * Created by cindy.ren on 6/13/2016.
  */
 
+'use strict';
+
 describe('app.profileService ', function() {
     var profileService, sessionStorage, resource, envService, notificationService;
 

@@ -22,8 +22,6 @@ xdescribe("app.activateController", function() {
         accountConfig = _accountConfig_;
 
         controller = $controller('CreatePasswordController', {
-            $state: $state,
-            accountService: accountService
         });
 
 

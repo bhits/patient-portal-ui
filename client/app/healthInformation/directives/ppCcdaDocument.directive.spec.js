@@ -2,6 +2,8 @@
  * Created by cindy.ren on 6/15/2016.
  */
 
+'use strict';
+
 xdescribe('app.ppCcdaDocumentDirective', function() {
     var healthInformationService, controller, $scope, $httpBackend, element, $templateCache, template;
 

@@ -2,6 +2,8 @@
  * Created by cindy.ren on 6/14/2016.
  */
 
+'use strict';
+
 describe('app.accountService', function(){
 
     var accountService, $resource, envService, sessionStorage, scope, $httpBackend;

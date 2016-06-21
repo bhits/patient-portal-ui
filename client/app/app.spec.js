@@ -171,7 +171,7 @@ describe("app AppController ", function() {
 
         };
         spyOn(scope, '$on').and.callThrough();
-        rootScope.$broadcast('ToggleMenuItemWithoutData', menuItems);
+        $rootScope.$broadcast('ToggleMenuItemWithoutData', menuItems);
         expect(scope.$on).toHaveBeenCalledWith(menuItems);
     });
     //nothing handling this event
