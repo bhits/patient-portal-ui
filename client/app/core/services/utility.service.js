@@ -188,14 +188,26 @@
         }
 
         function downloadFile(content, filename, fileFormat) {
-            var file = new Blob([content], {
-                type: fileFormat
-            });
-            var blobURL = ($window.URL || $window.webkitURL).createObjectURL(file);
-            var anchor = document.createElement("a");
-            anchor.download = filename;
-            anchor.href = blobURL;
-            anchor.click();
+            var file = new Blob([content], {type: fileFormat});
+
+            // For IE
+            if (navigator.appVersion.toString().indexOf('.NET') > 0){
+                window.navigator.msSaveBlob(file, filename);
+            }
+            else{ // Firefox & Chrome
+                var blobURL = ($window.URL || $window.webkitURL).createObjectURL(file);
+                var anchor = document.createElement("a");
+                anchor.style = "display: none";
+                anchor.download = filename;
+                anchor.href = blobURL;
+                document.body.appendChild(anchor);
+                anchor.click();
+                setTimeout(function(){
+                    document.body.removeChild(anchor);
+                    window.URL.revokeObjectURL(blobURL);
+                }, 100);
+            }
+
         }
 
         function isSecuredApi(url) {

@@ -20,6 +20,7 @@
                 'app.layout',
                 'app.medicalDocument',
                 'app.account',
+                'app.activity',
                 'app.brand'
             ])
             .constant("idleConfigParams", {"idle": 780, "timeout": 120, "keepalive": 240})
