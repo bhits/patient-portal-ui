@@ -14,14 +14,12 @@
             function brandService(){
 
                 var brandName = "";
-                var appName = "";
-                var version = "";
+                var brandInitials = "";
 
 
                 var service = {};
                 service.setBrandName = setBrandName;
-                service.setAppName= setAppName;
-                service.setVersion = setVersion;
+                service.setBrandInitial= setBrandInitial;
                 service.$get = getBrand;
 
                 return service;
@@ -30,12 +28,8 @@
                     brandName = name;
                 }
 
-                function setAppName(name){
-                    appName = name;
-                }
-                
-                function setVersion(currentVersion){
-                    version = currentVersion;
+                function setBrandInitial(initials){
+                    brandInitials = initials;
                 }
 
                 function getBrand(){
@@ -44,11 +38,8 @@
                         getBrandName: function(){
                            return  brandName;
                         },
-                        getAppName: function(){
-                            return  appName;
-                        },
-                        getVersion: function(){
-                            return  version;
+                        getBrandInitials: function(){
+                            return  brandInitials;
                         }
                     };
                 }

@@ -34,7 +34,7 @@
 
                 //Set Brand Name
                 brandProvider.setBrandName("Consent2Share");
-                brandProvider.setAppName("Consent to Share");
+                brandProvider.setBrandInitial("C2S");
                 
                 // enable html5 mode
                 $locationProvider.html5Mode(true).hashPrefix('!');
