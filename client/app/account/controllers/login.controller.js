@@ -12,7 +12,7 @@
         vm.version = envService.version;
         vm.forgotPassword = forgotPassword;
         vm.brandName = brand.getBrandName();
-        vm.altLogoText = brand.getAppName() + " Logo";
+        vm.altLogoText = brand.getBrandInitials() + " Logo";
         
         function forgotPassword() {
             utilityService.redirectTo(accountConfig.forgotPasswordPath);
