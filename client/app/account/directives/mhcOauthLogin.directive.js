@@ -12,7 +12,9 @@
             replace: true,
             templateUrl: 'app/account/directives/oauthLogin.html',
             scope: {},
-            bindToController: {},
+            bindToController: {
+                brand:"="
+            },
             controller: OauthLoginController,
             controllerAs: 'oauthLoginVm'
         };
@@ -26,30 +28,48 @@
         vm.login = login;
         vm.canSubmit = canSubmit;
 
-        function login() {
-            authenticationService.login(vm.user.email, vm.user.password)
+        function prepareLoginInfo() {
+            return {
+                username: vm.user.email,
+                password: vm.user.password
+            };
+        }
+
+        function loginSuccess(response) {
+            oauthTokenService.setToken(response);
+            profileService.loadProfile()
                 .then(
-                    function (response) {
-                        oauthTokenService.setToken(response);
-                        profileService.loadProfile()
-                            .then(
-                                function (data) {
-                                    profileService.setProfile(data);
-                                    utilityService.redirectTo(oauthConfig.loginSuccessPath);
-                                },
-                                function (error) {
-                                    vm.profileError = true;
-                                }
-                            );
-                    }, function (error) {
-                        oauthTokenService.removeToken();
-                        vm.loginError = true;
+                    function (data) {
+                        profileService.setProfile(data);
+                        isAllowAccess();
+                    },
+                    function (error) {
+                        vm.profileError = true;
                     }
                 );
         }
 
+        function loginError(error) {
+            oauthTokenService.removeToken();
+            vm.loginError = true;
+        }
+
+        function login() {
+            authenticationService.login(prepareLoginInfo(), loginSuccess, loginError);
+        }
+
         function canSubmit(loginForm) {
             return loginForm.$dirty && loginForm.$valid;
+        }
+
+        function isAllowAccess() {
+            var authScopes = oauthTokenService.getOauthScope();
+            if (authScopes.indexOf(oauthConfig.accessScope) !== -1) {
+                utilityService.redirectTo(oauthConfig.loginSuccessPath);
+            } else {
+                oauthTokenService.removeToken();
+                vm.scopeError = true;
+            }
         }
     }
 })();

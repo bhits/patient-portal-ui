@@ -1,50 +1,42 @@
 <div class="row">
-    <div class="col-sm-10 col-sm-offset-1">
-        <p>Authorized to share: <strong><span ng-bind="consentRevokeVm.params.consent.toDiscloseName"/></strong> |
-            Sharing with: <strong><span
-                    ng-bind="consentRevokeVm.params.consent.isMadeToName"/></strong> | Effective Date: <strong><span
-                    ng-bind="consentRevokeVm.params.consent.consentStart | date"/></strong></p>
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-10 col-sm-offset-1">
-        <div class="alert alert-info">Withdrawal of Consent to Participate in Health Information Exchange</div>
-    </div>
-</div>
-<div class="row m-b">
-    <div class="col-sm-10 col-sm-offset-1">
-        <p>I have previously signed a patient consent form allowing my providers to access my electronic health records
-            through the Consent 2 Share system and now want to withdraw that consent. If I sign this form as the
-            Patient's Legal Representative, I understand that all references in this form to "me" or "my" refer to the
-            Patient.</p>
+    <div class="col-sm-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <h2 class="m-t-none"><strong>Withdrawal of Consent to Participate in Health Information Exchange</strong></h2>
+                <div class="">
+                    <p class="m-b-xxs">Consent Reference Number:</p>
+                    <p><strong ng-bind="consentRevokeVm.revokeAttestation.consentReferenceId"></strong></p>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <span> Patient Name:</span>
+                <strong ng-bind="consentRevokeVm.revokeAttestation.patient | fullName"></strong>
+            </div>
+            <div class="col-sm-6">
+                <span> Patient DOB:</span>
+                <strong ng-bind="consentRevokeVm.revokeAttestation.patientDateOfBirth"></strong>
+            </div>
+        </div>
+        <br/>
 
-        <p>By withdrawing my Consent, I understand that:</p>
-        <ol>
-            <li>I Deny Consent for all Participants to access my electronic health information through Consent 2 Share
-                for any purpose, <em>EXCEPT in a medical emergency.</em>
-            </li>
-            <li>Health care provider and health insurers that I am enrolled with will no longer be able to access health
-                information about me through Consent 2 Share, except in an emergency.
-            </li>
-            <li>The Withdrawal of Consent will not affect the exchange of my health information while my Consent was in
-                effect.
-            </li>
-            <li>No Consent 2 Share participating provider will deny me medical care and my insurance eligibility will
-                not be affected based on my Withdrawal of Consent.
-            </li>
-            <li>If I wish to reinstate Consent, I may do so by signing and completing a new Patient Consent form and
-                returning it to a participating provider or payer.
-            </li>
-            <li>Withdrawing my consent does not prevent my health care provider from submitting claims to my health
-                insurer for reimbursement for services rendered to me.
-            </li>
-            <li>I understand that I will get a copy of this form after I sign it.</li>
-        </ol>
+        <div class="row">
+            <div class="col-sm-12">
+                <span class="pre-wrap" ng-bind="consentRevokeVm.revokeAttestation.consentRevokeTermsText"></span>
+            </div>
+        </div>
+
+        <br/>
+        <div>
+            <input type="checkbox" pp-icheck ng-model="consentRevokeVm.revokeAttestation.acceptTerms" ng-change="consentRevokeVm.onchecked()">
+            <span>I, <strong ng-bind="consentRevokeVm.revokeAttestation.patient | fullName"></strong>, hereby accept, and understand the terms of this consent.</span>
+        </div>
     </div>
-</div>
-<div class="row m-b-md">
-    <div class="col-sm-10 col-sm-offset-1">
-        <button type="button" class="btn btn-white m-r" ng-click="consentRevokeVm.cancel()">Cancel</button>
-        <button type="button" class="btn btn-primary" ng-click="consentRevokeVm.sign()">Sign</button>
+    <div class="row m-b-md">
+        <div class="col-md-12">
+            <div class="pull-right">
+                <button class="btn btn-white m-r" ng-click="consentRevokeVm.cancel()">Cancel</button>
+                <button class="btn btn-primary dark-green" type="submit" ng-disabled="!consentRevokeVm.isAuthenticated" ng-click="consentRevokeVm.sign()">Complete</button>
+            </div>
+        </div>
     </div>
 </div>

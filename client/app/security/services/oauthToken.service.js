@@ -5,7 +5,7 @@
         .factory('oauthTokenService', oauthTokenService);
 
     /* @ngInject */
-    function oauthTokenService($sessionStorage) {
+    function oauthTokenService($sessionStorage, jwtHelper) {
 
         var service = {};
 
@@ -13,10 +13,9 @@
         service.setToken = setToken;
         service.getAccessToken = getAccessToken;
         service.getRefreshToken = getRefreshToken;
-        service.getExpiresIn = getExpiresIn;
-        service.isValidToken = isValidToken;
+        service.getTokenExpirationDate = getTokenExpirationDate;
+        service.getOauthScope = getOauthScope;
         service.isExpiredToken = isExpiredToken;
-        service.isValidAndExpiredToken = isValidAndExpiredToken;
         service.removeToken = removeToken;
 
         return service;
@@ -45,43 +44,28 @@
             }
         }
 
-        function getExpiresIn() {
-            if (angular.isDefined(getToken())) {
-                return (new Date(new Date().valueOf() + ((getToken().expires_in) * 1000)));
-            } else {
-                return null;
+        function getTokenExpirationDate() {
+            if (angular.isDefined(getAccessToken())) {
+                return jwtHelper.getTokenExpirationDate(getAccessToken());
             }
         }
 
-        function isValidToken() {
-            //TODO Implement this function if required
-            if (getAccessToken() === null || getExpiresIn() === null || getExpiresIn().valueOf() < new Date().valueOf()) {
-                return false;
+        function getOauthScope() {
+            if (angular.isDefined(getAccessToken())) {
+                var tokenPayload = jwtHelper.decodeToken(getAccessToken());
+                return tokenPayload.scope;
             }
-            return true;
         }
 
         function isExpiredToken() {
-            //TODO Implement this function if required
-            if (getExpiresIn().valueOf() < new Date().valueOf()) {
-                return true;
+            if (angular.isDefined(getAccessToken())) {
+                return jwtHelper.isTokenExpired(getAccessToken());
             }
-            return false;
-        }
-
-        function isValidAndExpiredToken() {
-            //TODO Implement this function if required
-            if (getAccessToken() !== null && getRefreshToken() !== null &&
-                getExpiresIn() !== null && new Date().valueOf() < getExpiresIn().valueOf()) {
-                return true;
-            }
-            return false;
         }
 
         function removeToken() {
             delete $sessionStorage.token;
             delete $sessionStorage.profile;
         }
-
     }
 })();

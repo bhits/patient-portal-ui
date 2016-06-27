@@ -6,6 +6,7 @@
         .module('app.security')
         .constant('oauthConfig', {
             loginPath: '/fe/login',
-            loginSuccessPath: '/fe/index/home'
+            loginSuccessPath: '/fe/index/home',
+            accessScope: "ppUI.access"
         });
 })();

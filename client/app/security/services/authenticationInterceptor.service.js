@@ -25,9 +25,8 @@
 
             if (accessToken) {
                 if (accessToken && oauthTokenService.isExpiredToken()) {
-                    //TODO Resolve circle dependencies injection
-                    //var authService = $injector.get('AuthenticationService');
-                    //authenticationService.logout();
+                    oauthTokenService.removeToken();
+                    utilityService.redirectTo(oauthConfig.loginPath);
                 } else if (utilityService.isSecuredApi(config.url)) {
                     config.headers.Authorization = 'Bearer  ' + accessToken;
                 }

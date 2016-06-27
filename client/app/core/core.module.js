@@ -21,6 +21,7 @@
             'angular-loading-bar',
             'checklist-model',
             'ngStorage',    //oauth module dependency
-            'cgNotify'
+            'cgNotify',
+            'angular-jwt'
         ]);
 })();

@@ -9,6 +9,6 @@
                 'app.config',
                 'app.provider',
                 'app.data',
-                   'app.security'
+                'app.security'
                ]);
 })();

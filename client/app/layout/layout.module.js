@@ -2,5 +2,5 @@
     'use strict';
 
     angular
-        .module('app.layout', ['app.security']);
+        .module('app.layout', ['app.security', 'app.brand']);
 })();

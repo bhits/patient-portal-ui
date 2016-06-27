@@ -117,37 +117,46 @@
                         data: {pageTitle: 'Revoke Consent'},
                         templateUrl: 'app/consent/controllers/consentRevoke.html',
                         params: {
-                            consent: {}
+                            consent: {},
+                            revokeAttestation: {}
                         }
                     })
-                    .state('fe.consent.sign', {
-                        url: '/signConsent',
-                        data: {pageTitle: 'Sign Consent'},
-                        templateUrl: 'app/consent/controllers/consentSign.html',
+                    .state('fe.consent.esignature', {
+                        url: '/esignature',
                         params: {
                             consentId: ''
                         },
-                        controller: 'ConsentSignController',
-                        controllerAs: 'consentSignVm',
+                        data: {pageTitle: 'Provide eSignature'},
+                        templateUrl: 'app/consent/controllers/consentESignature.html',
+                        controller: 'ConsentESignatureController',
+                        controllerAs: 'consentESignatureVm',
                         resolve: {
                             /* @ngInject */
-                            loadedData: function ($q, $stateParams, consentService, notificationService) {
+                            consentAttestation: function ($q, $stateParams, utilityService, consentService, notificationService) {
                                 var deferred = $q.defer();
                                 var consentId= $stateParams.consentId;
-                                var signConsentData = consentService.signConsent(consentId, onSignSuccess, onSignError);
+                                if(utilityService.isDefinedAndLenghtNotZero($stateParams.consentId)){
+                                    var success = function(response){
+                                        deferred.resolve(response);
+                                    };
 
-                                function onSignSuccess(response){
-                                    deferred.resolve(response.javascriptCode);
-                                }
+                                    var error = function(){
+                                        notificationService.error('Failed to get consent attestation...');
+                                        deferred.reject();
+                                    };
 
-                                function onSignError(){
-                                    notificationService.error('Failed to sign the consent! Please try again later...');
-                                    deferred.reject();
+                                    var consentAttestationData = consentService.getConsentAttestation(consentId, success, error);
+                                    
+                                    return deferred.promise;
+                                }else {
+                                    notificationService.error('Consent id not provided. Redirecting to consent list.');
+                                    utilityService.redirectTo("fe/consent/list");
+
                                 }
-                                return deferred.promise;
                             }
                         }
                     })
+                    
                     .state('fe.consent.revokesign', {
                         url: '/signRevokeConsent',
                         data: {pageTitle: 'Sign Revoke Consent'},

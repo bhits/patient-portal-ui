@@ -15,29 +15,30 @@
             var consentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/:id",{id: '@id'}, {'update': { method:'PUT' }});
             var consentExportConsentDirective = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/exportConsentDirective/:id",{id: '@id'});
             var purposeOfUseResource = $resource(envService.securedApis.pcmApiBaseUrl + "/purposeOfUse");
-            var sensitivityPolicyResource = $resource(envService.securedApis.pcmApiBaseUrl + "/sensitivityPolicy");
-            var signConsentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/signConsent/:id", {id: '@id'});
+            var sensitvityPolicyResource = $resource(envService.securedApis.pcmApiBaseUrl + "/sensitivityPolicy");
+            var attestedConsentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/:consentId/attested", {consentId: '@consentId'});
             var revokeConsentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/revokeConsent/:id", {id: '@id'});
+            var consentAttestationResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/:consentId/attestation", {consentId: '@consentId'});
+            var consentRevokeAttestationResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/:consentId/revokeConsent", {consentId: '@consentId'});
+            var attestedConsentRevocationResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/:consentId/revocation", {consentId: '@consentId'});
             var selectedNpi = {authorizeNpi: "", discloseNpi: ""};
             var selectedProvider = [];
 
             var service = {};
             service.getConsentResource = getConsentResource;
             service.getPurposeOfUseResource = getPurposeOfUseResource;
-            service.getSensitivityPolicyResource = getSensitivityPolicyResource;
+            service.getSensitvityPolicyResource = getSensitvityPolicyResource;
             service.getConsent = getConsent;
-            service.signConsent = signConsent;
             service.revokeConsent = revokeConsent;
             service.createConsent = createConsent;
             service.updateConsent = updateConsent;
-            service.downloadConsent = downloadConsent;
             service.deleteConsent = deleteConsent;
             service.listConsent = listConsent;
             service.setAuthorizeNpi = setAuthorizeNpi;
             service.setDiscloseNpi = setDiscloseNpi;
             service.getSelectedNpi = getSelectedNpi;
             service.getSelectedProvider = getSelectedProvider;
-            //service.prepareProviderList = prepareProviderList; //TODO: remove: not used
+            service.prepareProviderList = prepareProviderList;
             service.resolveConsentState = resolveConsentState;
             service.isShareAll = isShareAll;
             service.getPurposeOfUse = getPurposeOfUse;
@@ -50,6 +51,13 @@
             service.resetSelectedNpi = resetSelectedNpi;
             service.getPurposeOfUseCode = getPurposeOfUseCode;
             service.exportConsentDirective = exportConsentDirective;
+            service.getConsentAttestation = getConsentAttestation;
+            service.createAttestedConsent = createAttestedConsent;
+            service.getConsentRevokeAttestation = getConsentRevokeAttestation;
+            service.downloadAttestedConsentPdf = downloadAttestedConsentPdf;
+            service.downloadUnAttestedConsentPdf = downloadUnAttestedConsentPdf;
+            service.createAttestedConsentRevocation = createAttestedConsentRevocation;
+            service.downloadAttestedConsentRevocationPdf = downloadAttestedConsentRevocationPdf;
 
             return service;
 
@@ -61,16 +69,12 @@
                 return purposeOfUseResource;
             }
 
-            function getSensitivityPolicyResource(){
-                return sensitivityPolicyResource;
+            function getSensitvityPolicyResource(){
+                return sensitvityPolicyResource;
             }
 
             function getConsent (id, success, error) {
                 return consentResource.get({id:id}, success, error);
-            }
-
-            function signConsent (id, success, error) {
-                return signConsentResource.get({id:id}, success, error);
             }
 
             function revokeConsent (id, success, error) {
@@ -84,22 +88,32 @@
             function updateConsent (consent, success, error) {
                 return consentResource.update(consent, success, error);
             }
-
-            function composeUrl(docType, id){
-                if(angular.isDefined(docType) && angular.isDefined(id)  ){
-                    return envService.securedApis.pcmApiBaseUrl + "/consents/download/" + docType + "/" + id;
-                }else{
-                    notificationService.error("Consent pdf document type or id is not defined.");
-                }
+            
+            function downloadConsentPdf(id, success, error) {
+                var request = {
+                    method : 'GET',
+                    responseType : 'arraybuffer',
+                    url : envService.securedApis.pcmApiBaseUrl + "/consents/" + id + "/unattested/"
+                };
+                $http(request).success(success).error(error);
             }
 
-            function downloadConsent(id, docType, success, error) {
-               var request = {
-                   method : 'GET',
-                   responseType : 'arraybuffer',
-                   url : composeUrl(docType, id)
-               };
-               $http(request).success(success).error(error);
+            function downloadUnAttestedConsentPdf(id, success, error) {
+                var request = {
+                    method : 'GET',
+                    responseType : 'arraybuffer',
+                    url : envService.securedApis.pcmApiBaseUrl + "/consents/" + id + "/unattested/"
+                };
+                $http(request).success(success).error(error);
+            }
+
+            function downloadAttestedConsentPdf(id, success, error) {
+                var request = {
+                    method : 'GET',
+                    responseType : 'arraybuffer',
+                    url : envService.securedApis.pcmApiBaseUrl + "/consents/" + id + "/attested/download"
+                };
+                $http(request).success(success).error(error);
             }
 
             function deleteConsent (id, success, error) {
@@ -132,30 +146,29 @@
                 return selectedNpi;
             }
 
-            //TODO: this is always an empty array??
             function getSelectedProvider (){
                 return selectedProvider;
             }
 
-            // function prepareProviderList (selectedProviders, providers) {
-            //     var providerList = [];
-            //     for (var i = 0; i < providers.length; i++) {
-            //         if (hasNPI(selectedProviders, providers[i].npi)) {
-            //             providerList.push({isDisabled: true, provider: providers[i]});
-            //         } else {
-            //             providerList.push({isDisabled: false, provider: providers[i]});
-            //         }
-            //     }
-            //     return providerList;
-            // }
+            function prepareProviderList (selectedProviders, providers) {
+                var providerList = [];
+                for (var i = 0; i < providers.length; i++) {
+                    if (hasNPI(selectedProviders, providers[i].npi)) {
+                        providerList.push({isDisabled: true, provider: providers[i]});
+                    } else {
+                        providerList.push({isDisabled: false, provider: providers[i]});
+                    }
+                }
+                return providerList;
+            }
 
             function resolveConsentState (consent) {
                 var state = 'error';
-                if (consent.consentStage === 'CONSENT_SAVED' && consent.revokeStage === 'NA') {
+                if (consent.consentStage === 'CONSENT_SAVED') {
                     state = 'Saved';
-                } else if (consent.consentStage === 'CONSENT_SIGNED' && consent.revokeStage === 'REVOCATION_NOT_SUBMITTED') {
+                } else if (consent.consentStage === 'CONSENT_SIGNED') {
                     state = 'Signed';
-                } else if (consent.consentStage === 'CONSENT_SIGNED' && consent.revokeStage === 'REVOCATION_REVOKED') {
+                } else if (consent.consentStage === 'REVOCATION_REVOKED') {
                     state = 'Revoked';
                 }
                 return state;
@@ -174,7 +187,7 @@
             }
 
             function getSensitivityPolicies (success, error) {
-                sensitivityPolicyResource.query(success, error);
+                sensitvityPolicyResource.query(success, error);
             }
 
             function getEntitiesByCodes (entities,codes){
@@ -216,15 +229,12 @@
 
             function getPurposeOfUseCodes (entities){
                 var result = {selectedPurposeOfUseCodes: ['TREATMENT']};
-                if(angular.isDefined(entities)) {
-                    if (entities.length === 0) {
-                        return result;
-                    } else if (entities.length > 0) {
-                        result.selectedPurposeOfUseCodes = getCodes(entities);
-                        return result;
-                    }
+                if(entities.length === 0 ){
+                    return result;
+                }else if(entities.length > 0 ){
+                    result.selectedPurposeOfUseCodes = getCodes(entities);
+                    return result;
                 }
-                return result;
             }
 
             function getCodes(data){
@@ -255,20 +265,42 @@
                 selectedNpi = {authorizeNpi: "", discloseNpi: ""};
             }
 
-            // function hasNPI (list, npi) {
-            //     for (var j = 0; j < list.length; j++) {
-            //         if (list[j] === npi) {
-            //             return true;
-            //         }
-            //     }
-            //     return false;
-            // }
-            //TODO: remove: unused
+            function hasNPI (list, npi) {
+                for (var j = 0; j < list.length; j++) {
+                    if (npi === list[j]) {
+                        return true;
+                    }
+                }
+                return false;
+            }
 
-            //TODO: remove: empty
             function getPurposeOfUseCode(displayName, purposeOfUse){
 
             }
 
+            function getConsentAttestation (consentId, success, error) {
+                return consentAttestationResource.get({consentId:consentId}, success, error);
+            }
+
+            function createAttestedConsent (consentId,acceptTerms, success, error) {
+                return attestedConsentResource.save({consentId:consentId, acceptTerms: acceptTerms}, success, error);
+            }
+            
+            function getConsentRevokeAttestation (consentId, success, error) {
+                return consentRevokeAttestationResource.get({consentId:consentId}, success, error);
+            }
+
+            function createAttestedConsentRevocation (consentId,acceptTerms, success, error) {
+                return attestedConsentRevocationResource.save({consentId:consentId, acceptTerms: acceptTerms}, success, error);
+            }
+
+            function downloadAttestedConsentRevocationPdf(id, success, error) {
+                var request = {
+                    method : 'GET',
+                    responseType : 'arraybuffer',
+                    url : envService.securedApis.pcmApiBaseUrl + "/consents/" + id + "/revoked/download"
+                };
+                $http(request).success(success).error(error);
+            }
         }
 })();

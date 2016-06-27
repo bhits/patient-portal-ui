@@ -10,10 +10,11 @@
         .controller('ActivateController', ActivateController);
 
     /* @ngInject */
-    function ActivateController($state, accountService) {
+    function ActivateController($state, accountService, brand) {
         var vm = this;
         vm.activated = activated;
         vm.patientName = accountService.getPatientName();
+        vm.title = brand.getBrandName() + " Account Activation Complete";
 
         function activated() {
             accountService.removeActivateInfo();

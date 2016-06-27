@@ -40,6 +40,7 @@
         function clearMedicalInfoData() {
             vm.medicalInformation = 'A';
             vm.selectedSensitivityPolicies = [];
+            vm.ngModel.doNotShareSensitivityPolicyCodes = [];
         }
 
         function openPrivacySettingsModal() {

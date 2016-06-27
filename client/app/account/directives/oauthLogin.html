@@ -1,6 +1,6 @@
 <form class="form-horizontal" name="loginForm">
     <fieldset>
-        <legend class="alert alert-success center p-xs">Log in with your MHC account</legend>
+        <legend class="alert alert-success center p-xs">Log in with your <span ng-bind="loginVm.brand"></span> account</legend>
         <div class="form-group">
             <label for="email" class="col-sm-2 control-label">Username:</label>
             <div class="col-sm-10">
@@ -30,6 +30,12 @@
             <div class="col-sm-offset-2 col-sm-10 text-alert m-t-n-xs" id="profile-error"
                  ng-if="oauthLoginVm.profileError">
                 <span><small>Whoops! We can't seem to find your account.</small></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-offset-2 col-sm-10 text-alert m-t-n-xs" id="scope-error"
+                 ng-if="oauthLoginVm.scopeError">
+                <span><small>Sorry, you do not have permission to access this site.</small></span>
             </div>
         </div>
         <div class="form-group m-t-lg text-center">
