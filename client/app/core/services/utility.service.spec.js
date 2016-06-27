@@ -54,6 +54,11 @@ describe('app.utilityService ', function () {
         expect(utilityService.isDefinedAndNotNull(dummyValue)).toBeTruthy();
     });
 
+    it('should test isDefinedAndLengthNotZero function', function () {
+        expect(utilityService.isDefinedAndLengthNotZero(dummyEmptyValue)).toBeFalsy();
+        expect(utilityService.isDefinedAndLengthNotZero(dummyProviderList)).toBeTruthy();
+    });
+
     it('should have setShowHealthInformationMenu function', function () {
         expect(angular.isFunction(utilityService.setShowHealthInformationMenu)).toBeTruthy();
     });
@@ -160,6 +165,11 @@ describe('app.utilityService ', function () {
         expect(utilityService.getOrganizationalProvidersNpi(dummyProviderList)).toEqual([]);
     });
 
+    it('should test downloadFile', function(){
+        utilityService.downloadFile("example string", "consentDirective111.xml","application/xml;");
+        
+    });
+
     it('should test if API is secure', function(){
         var url = '/pcm/patients';
         expect(utilityService.isSecuredApi(url)).toBeTruthy();
@@ -189,6 +199,7 @@ describe('app.utilityService ', function () {
     it('should test format is MM/DD/YYYY', function(){
         //format is MM/DD/YYYY
         expect(utilityService.isValidDate("03/5/2015")).toBeFalsy();
+        expect(utilityService.isValidDate("3/05/2015")).toBeFalsy();
         expect(utilityService.isValidDate("Mar 5 2015")).toBeFalsy();
     });
 

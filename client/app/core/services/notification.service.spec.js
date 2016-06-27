@@ -5,11 +5,8 @@
 
 'use strict';
 
-xdescribe('app.notificationService ', function() {
+describe('app.notificationService ', function() {
     var notificationService, notify;
-
-    var templateUrl = "app/core/services/notify.html";
-    var duration = 2000;
 
     beforeEach(module('app.core'));
 
@@ -21,15 +18,34 @@ xdescribe('app.notificationService ', function() {
 
     it('should show success notify', function () {
         spyOn(notificationService, 'success').and.callThrough();
-        console.log(notify);
-        var msg = "test";
+        var msg = "success";
         notificationService.success(msg);
-        //expect(notificationService.success).toHaveBeenCalled();
+        expect(notificationService.success).toHaveBeenCalledWith(msg);
 
     });
 
-    xit('should show error notify', function () {
-        //expect(angular.isFunction(ProviderServices.getProviders())).toNotBe(null);
+    it('should show info notify', function () {
+        spyOn(notificationService, 'info').and.callThrough();
+        var msg = "info";
+        notificationService.info(msg);
+        expect(notificationService.info).toHaveBeenCalledWith(msg);
+
+    });
+
+    it('should show warn notify', function () {
+        spyOn(notificationService, 'warn').and.callThrough();
+        var msg = "warn";
+        notificationService.warn(msg);
+        expect(notificationService.warn).toHaveBeenCalledWith(msg);
+
+    });
+
+    it('should show error notify', function () {
+        spyOn(notificationService, 'error').and.callThrough();
+        var msg = "error";
+        notificationService.error(msg);
+        expect(notificationService.error).toHaveBeenCalledWith(msg);
+
     });
 
 });

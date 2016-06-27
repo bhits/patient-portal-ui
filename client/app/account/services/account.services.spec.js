@@ -6,7 +6,7 @@
 
 describe('app.accountService', function(){
 
-    var accountService, $resource, envService, sessionStorage, scope, $httpBackend;
+    var accountService, $resource, envService, sessionStorage, scope, $httpBackend, utilityService;
 
     var verifyInfo = {
         emailToken: 'emailToken',
@@ -15,41 +15,76 @@ describe('app.accountService', function(){
     };
     var basicVerifyInfo = {name: 'name'};
     var userName = 'username';
-    var patientInfo = {firstName: 'firstName', lastName: 'lastName'};
+    var patientInfo = {
+        emailToken: 'emailToken',
+        verificationCode: 11111,
+        birthDate: '2015-5-20',
+        password: "password",
+        confirmPassword: "password",
+        username: "username",
+        firstName: 'firstName',
+        lastName: 'lastName'
+    };
 
     beforeEach(module('app.account'));
     beforeEach(module('app.config'));
     beforeEach(module('ngResource'));
 
     beforeEach(inject(function(_accountService_, _$resource_, _envService_, _$sessionStorage_,
-                               $controller, $rootScope, _$httpBackend_){
+                               $controller, $rootScope, _$httpBackend_, _utilityService_){
         accountService = _accountService_;
         $resource = _$resource_;
         envService = _envService_;
         sessionStorage = _$sessionStorage_;
         scope = $rootScope.$new();
         $httpBackend = _$httpBackend_;
-
-        // ctrl = $controller('accountService', {
-        //     $scope: scope
-        // });
+        utilityService = _utilityService_;
 
         accountService.removeVerifyInfo();
         delete sessionStorage.userName;
     }));
 
-    xit('should verify patient', function () {
-        $httpBackend.expect('GET','https://localhost:8443/patientUser/verifications').respond(200,'success');
-        var status = accountService.verifyPatient(
-            verifyInfo,
-            function (data) {
-                status = data.status;
-            },
-            function (error) {
-            });
-        //$httpBackend.flush();
+    it('should verify patient', function () {
 
-        expect(status).toEqual(200);
+        $httpBackend.expect('GET','/patientUser/verifications?birthDate=2015-5-20&emailToken=emailToken&verificationCode=11111').respond(200, verifyInfo);
+
+        function verifySuccess(response) {
+            accountService.setVerifyInfo(verifyInfo);
+            accountService.setUserName(response.username);
+            utilityService.redirectTo('fe/account/createPassword');
+        }
+
+        function verifyError(response) {
+            var emailTokenException = response.data.exception;
+            if (emailTokenException.indexOf('EmailTokenExpiredException') !== -1) {
+                utilityService.redirectTo('/fe/account/activationError');
+            }
+        }
+
+        accountService.verifyPatient(verifyInfo, verifySuccess, verifyError);
+        $httpBackend.flush();
+        expect(accountService.getVerifyInfo().emailToken).toBe("emailToken");
+    });
+
+    it('should activate patient', function () {
+
+        $httpBackend.expect('POST','/patientUser/activations').respond(200, patientInfo);
+
+        function activateSuccess(response) {
+            utilityService.redirectTo('/fe/account/activationSuccess');
+            accountService.setPatientName(response);
+        }
+
+        function activateError(response) {
+            var emailTokenException = response.data.exception;
+            if (emailTokenException.indexOf('EmailTokenExpiredException') !== -1) {
+                utilityService.redirectTo('/fe/account/activationError');
+            }
+        }
+
+        accountService.activatePatient(patientInfo, activateSuccess, activateError);
+        $httpBackend.flush();
+        expect(accountService.getPatientName()).toBe("firstName lastName");
     });
 
     it('should remove the verify info', function(){
@@ -86,6 +121,6 @@ describe('app.accountService', function(){
     it('should reset session storage', function(){
         accountService.removeActivateInfo();
         //expect(sessionStorage).toBe(undefined);
-    });//TODO: what is this resetting?
+    });
 
 });

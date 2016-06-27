@@ -1,97 +1,20 @@
 /**
  * Created by tomson.ngassa on 7/20/2015.
+ * Modified by cindy.ren on 6/21/2016
  */
 
 'use strict';
 
-xdescribe('app.healthInformationModule ', function(){
-    var module;
-
-    beforeEach(function() {
-        module = angular.module("app.healthInformationModule");
-    });
-
-    it("should be registered", function() {
-        expect(module).not.toEqual(null);
-    });
-
-    describe("Dependencies:", function() {
-
-        var dependencies;
-
-        var hasModule = function(m) {
-            return dependencies.indexOf(m) >= 0;
-        };
-        beforeEach(function() {
-            dependencies = module.value('app.healthInformationModule').requires;
-        });
-
-        it("should have app.servicesModule as a dependency", function() {
-            expect(hasModule('app.servicesModule')).toEqual(true);
-        });
-
-        it("should have app.healthInformationService as a dependency", function() {
-            expect(hasModule('app.healthInformationService')).toEqual(true);
-        });
-    });
-});
-
-xdescribe("app.accessModule LoginController ", function() {
-
-    beforeEach(module('app.security'));
-    beforeEach(module('ngIdle'));
-    beforeEach(module('app.accessModule'));
-
-    var scope, state, rootScope, Idle, authenticationService, deferred;
-
-    beforeEach(inject(function($rootScope, $controller, $state, _Idle_, _$q_, _authenticationService_) {
-        rootScope = $rootScope;
-        scope = $rootScope.$new();
-        state = $state;
-        deferred = _$q_.defer();
-
-        Idle = _Idle_;
-        authenticationService = _authenticationService_;
-
-        deferred.resolve({Error: { message:"Invalid username and/or password."}});
-        spyOn(authenticationService, 'login').andReturn(deferred.promise);
-
-        $controller('LoginController', {
-            $scope: scope,
-            $state: state,
-            Idle: Idle,
-            authenticationService: authenticationService
-        });
-    }));
-
-    xit('should login user ', function(){
-        //state.go('login');
-
-        scope.loginData = {userName: "bob", passowrd: 'bob'};
-        scope.login();
-        rootScope.$apply();
-        expect(scope.message).toBe('Invalid username and/or password.');
-    });
-
-});
-
 xdescribe("app.healthInformationModule HealthInformationController ", function() {
 
     beforeEach(module('ui.router'));
-    beforeEach(module('app.servicesModule'));
-    beforeEach(module('app.healthInformationModule'));
+    beforeEach(module('app.core'));
+    beforeEach(module('app.config'));
+    beforeEach(module('app.healthInformation'));
 
-    beforeEach(function(){
-        this.addMatchers({
-            toEqualData: function(expected) {
-                return angular.equals(this.actual, expected);
-            }
-        });
-    });
+    var scope, healthInformationService, utilityService, patientData, anchorScroll, spyObject, state,stateParams, location, httpBackend, rootScope;
 
-    var scope, HealthInformationService, utilityService, patientData, anchorScroll, spyObject, state,stateParams, location, httpBackend, rootScope;
-
-    beforeEach(inject(function($rootScope, $controller, $state,$stateParams,  $anchorScroll, $location, $httpBackend,_$q_, _utilityService_, _HealthInformationService_) {
+    beforeEach(inject(function($rootScope, $controller, $state,$stateParams,  $anchorScroll, $location, $httpBackend,_$q_, _utilityService_, _healthInformationService_) {
         rootScope = $rootScope;
         scope = $rootScope.$new();
         state = $state;
@@ -101,7 +24,7 @@ xdescribe("app.healthInformationModule HealthInformationController ", function()
         httpBackend = $httpBackend;
         utilityService = _utilityService_;
         var deferred = _$q_.defer();
-        HealthInformationService = _HealthInformationService_;
+        healthInformationService = _healthInformationService_;
 
         patientData = {};
 
@@ -117,13 +40,13 @@ xdescribe("app.healthInformationModule HealthInformationController ", function()
             }
         };
         deferred.resolve(data);
-        spyOn(HealthInformationService, 'getCCDAHeader').andReturn(deferred.promise);
-
-        spyOn(scope, 'setShowHealthInformationMenu').andCallThrough();
-
-        spyOn(utilityService, 'scrollTo').andCallThrough();
-
-        spyOn(scope, "$on");
+        // spyOn(healthInformationService, 'getCCDAHeader').andReturn(deferred.promise);
+        //
+        // spyOn(scope, 'setShowHealthInformationMenu').andCallThrough();
+        //
+        // spyOn(utilityService, 'scrollTo').andCallThrough();
+        //
+        // spyOn(scope, "$on");
 
         $controller('HealthInformationController', {
             $scope: scope,
@@ -131,20 +54,20 @@ xdescribe("app.healthInformationModule HealthInformationController ", function()
             $stateParams: stateParams,
             utilityService: utilityService,
             patientData: patientData,
-            HealthInformationService: HealthInformationService
+            healthInformationService: healthInformationService
         });
 
         scope.$apply();
     }));
 
 
-    it('should scroll to ', function(){
+    xit('should scroll to ', function(){
         stateParams.scrollTo = 'allergies';
         stateParams.expand = 'none';
         expect(scope.$on).toHaveBeenCalled();
     });
 
-    it("should load resolve data", function(){
+    xit("should load resolve data", function(){
         stateParams.scrollTo = 'allergies';
         stateParams.expand = 'none';
         state.go("patient.healthinformation");
@@ -153,7 +76,7 @@ xdescribe("app.healthInformationModule HealthInformationController ", function()
         httpBackend.expectGET('app/healthinformation/healthInformation.html').respond(200);
 
         rootScope.$digest();
-        expect(HealthInformationService.getCCDAHeader ).toHaveBeenCalled();
+        expect(healthInformationService.getCCDAHeader ).toHaveBeenCalled();
     });
 
 });

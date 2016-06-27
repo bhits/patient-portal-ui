@@ -18,4 +18,4 @@
                     return medicalDocumentsListResource.query(success, error);
                 }
             }
-})();1
+})();

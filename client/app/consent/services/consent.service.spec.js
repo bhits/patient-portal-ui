@@ -100,11 +100,6 @@ describe('app.consentServices', function () {
             expect(consentService.getPurposeOfUseResource().toString()).toEqual(testURL.toString());
         });
 
-        it ('should get sensitivity policy resource (getSensitivityPolicyResource)', function(){
-            testURL = $resource(envService.securedApis.pcmApiBaseUrl + "/sensitivityPolicy");
-            expect(consentService.getSensitivityPolicyResource().toString()).toEqual(testURL.toString());
-        });
-
         it('should find the correct entity by the code from the list passed (getEntitiesByCodes)', function () {
             expect(consentService.getEntitiesByCodes(mockState, ['TREATMENT','ALLERGIES'])).toEqual([]);
             expect(consentService.getEntitiesByCodes(entityList, [333])).toEqual([]);
@@ -193,28 +188,19 @@ describe('app.consentServices', function () {
             expect(consentService.resolveConsentState(mockState)).toBe('error');
             expect(consentService.resolveConsentState(mockConsent)).toBe('Saved');
             mockConsent = {
-                "consentStage": "CONSENT_SAVED",
-                "revokeStage": "REVOCATION_NOT_SUBMITTED"
+                "consentStage": "CONSENT_SAVED"
             };
-            expect(consentService.resolveConsentState(mockConsent)).toBe('error');
+            expect(consentService.resolveConsentState(mockConsent)).toBe('Saved');
             mockConsent = {
-                "consentStage": "CONSENT_SIGNED",
-                "revokeStage": "REVOCATION_NOT_SUBMITTED"
+                "consentStage": "CONSENT_SIGNED"
             };
             expect(consentService.resolveConsentState(mockConsent)).toBe('Signed');
             mockConsent = {
-                "consentStage": "CONSENT_SIGNED",
-                "revokeStage": "NA"
-            };
-            expect(consentService.resolveConsentState(mockConsent)).toBe('error');
-            mockConsent = {
-                "consentStage": "CONSENT_SIGNED",
-                "revokeStage": "REVOCATION_REVOKED"
+                "consentStage": "REVOCATION_REVOKED"
             };
             expect(consentService.resolveConsentState(mockConsent)).toBe('Revoked');
             mockConsent = {
-                "consentStage": "CONSENT_SIGNED",
-                "revokeStage": "NA"
+                "consentStage": "NA"
             };
             expect(consentService.resolveConsentState(mockConsent)).toBe('error');
         });

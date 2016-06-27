@@ -10,17 +10,19 @@ describe("app.login.controller ", function() {
     beforeEach(module('app.account'));
     beforeEach(module('app.config'));
     beforeEach(module('app.security'));
+    beforeEach(module('app.brand'));
 
     var envService, controller, $resource;
 
     beforeEach(inject(function( $controller, $state, _Idle_, _authenticationService_,
-                                _envService_, _utilityService_, _$resource_) {
+                                _envService_, _utilityService_, _$resource_, _brand_) {
 
         envService = _envService_;
         $resource = _$resource_;
 
         controller = $controller('LoginController', {
-            envService: envService
+            envService: envService,
+            brand: _brand_
         });
     }));
 

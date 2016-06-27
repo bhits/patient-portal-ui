@@ -229,12 +229,13 @@
 
             function getPurposeOfUseCodes (entities){
                 var result = {selectedPurposeOfUseCodes: ['TREATMENT']};
-                if(entities.length === 0 ){
+                if(utilityService.isUnDefinedOrNull(entities) || entities.length === 0){
                     return result;
                 }else if(entities.length > 0 ){
                     result.selectedPurposeOfUseCodes = getCodes(entities);
                     return result;
                 }
+                return result;
             }
 
             function getCodes(data){

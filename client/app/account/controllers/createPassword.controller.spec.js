@@ -9,21 +9,27 @@ xdescribe("app.activateController", function() {
     beforeEach(module('app.account'));
     beforeEach(module('app.config'));
     beforeEach(module('app.security'));
+    beforeEach(module('ui.router'));
 
-    var $location, controller, $q, emailTokenService, utilityService, accountConfig;
+    var controller, $state;
+    var $location, $q, emailTokenService, accountService, utilityService, accountConfig;
 
-    beforeEach(inject(function( $controller, _$q_, _emailTokenService_, _utilityService_,
-                                _$location_, _accountConfig_) {
+    beforeEach(inject(function( $controller, _$state_,
+                                _$location_, _$q_, _emailTokenService_, _accountService_, _utilityService_, _accountConfig_) {
 
         $location = _$location_;
         $q = _$q_;
         emailTokenService = _emailTokenService_;
+        accountService = _accountService_;
         utilityService = _utilityService_;
         accountConfig = _accountConfig_;
+        
+        $state = _$state_;
+        spyOn($state, 'go');
 
         controller = $controller('CreatePasswordController', {
+            //allowVerification: allowVerification 
         });
-
 
     }));
 
@@ -32,8 +38,8 @@ xdescribe("app.activateController", function() {
     });
 
     it('should have correct patient name', function(){
-        expect(controller.patientName).toBeDefined();
-        expect(controller.patientName).toEqual('firstName lastName');
+
+        expect(controller.allowActivation).toBeDefined();
     });
 
 });
