@@ -3,12 +3,38 @@
 describe('app.consentServices', function () {
 
     var consentService, $resource, envService, utilityService,
-        notificationService, $httpBackend, $scope;
+        notificationService, $httpBackend, $scope, status, passed, testURL;
 
     var mockConsent, mockState = {};
     var entity1 = {entityType: 'Individual', code: 'PAYMENT'};
     var entity2 = {entityType: 'Organization', code: 'ALLERGIES'};
     var entityList = [entity1, entity2];
+
+    var success = function (data) {
+        status = data.status;
+        passed = true;
+    };
+
+    var error = function (error) {
+        status = error.status;
+        passed = false;
+    };
+
+    var consentSuccess = function (response){
+
+    };
+
+    var consent = {
+        providersPermittedToDiscloseNpi: ["providersPermittedToDiscloseNpi"],
+        providersDisclosureIsMadeToNpi: ["providersDisclosureIsMadeToNpi"],
+        organizationalProvidersDisclosureIsMadeToNpi: ["organizationalProvidersDisclosureIsMadeToNpi"],
+        organizationalProvidersPermittedToDiscloseNpi: ["organizationalProvidersPermittedToDiscloseNpi"],
+        doNotShareSensitivityPolicyCodes: ["doNotShareSensitivityPolicyCodes"],
+        shareForPurposeOfUseCodes: ["shareForPurposeOfUseCodes"],
+        consentStart: ["consentStart"],
+        consentEnd: ["consentEnd"]
+    };
+
 
     beforeEach(module('app.config'));
     beforeEach(module('app.consent'));
@@ -24,6 +50,7 @@ describe('app.consentServices', function () {
         notificationService = _notificationService_;
         $httpBackend = $injector.get('$httpBackend');
 
+        passed = null;
     }));
 
     beforeEach(function () {
@@ -45,10 +72,58 @@ describe('app.consentServices', function () {
             "medicalInformationNotDisclosed": true
         };
     });
-
-
+    
     it("should be registered", function () {
         expect(module).not.toEqual(null);
+    });
+
+    it ('should get consent resource (getConsentResource)', function(){
+        testURL = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/pageNumber/:pageNumber", {pageNumber: '@pageNumber'});
+        expect(consentService.getConsentResource().toString()).toEqual(testURL.toString());
+    });
+
+    it ('should get purpose of use resource (getPurposeOfUseResource)', function(){
+        testURL = $resource(envService.securedApis.pcmApiBaseUrl + "/purposeOfUse");
+        expect(consentService.getPurposeOfUseResource().toString()).toEqual(testURL.toString());
+    });
+
+    it ('should get purpose of use resource (getSensitivityPolicyResource)', function(){
+        testURL = $resource(envService.securedApis.pcmApiBaseUrl + "/sensitivityPolicy");
+        expect(consentService.getSensitivityPolicyResource().toString()).toEqual(testURL.toString());
+    });
+
+    it ('should get consent (getConsent)', function(){
+        $httpBackend.expect('GET',"/pcm/patients/consents/%5Bobject%20Object%5D").respond(200, {id: 111, status: 200});
+
+        status = consentService.getConsent({id: 111}, success, error);
+        $httpBackend.flush();
+        expect(status).toEqual(200);
+        expect(passed).toBeTruthy();
+    });
+
+    it ('should fail get consent (getConsent)', function(){
+        $httpBackend.expect('GET',"/pcm/patients/consents").respond(0, "error");
+        status = consentService.getConsent(undefined, success, error);
+        $httpBackend.flush();
+        expect(status).toEqual(0);
+        expect(passed).toBeFalsy();
+    });
+
+    it ('should create a consent (createConsent)', function(){
+        $httpBackend.expect('POST',"/pcm/patients/consents").respond(200, consent);
+
+        status = consentService.createConsent(consent, success, error);
+        $httpBackend.flush();
+        expect(status).toEqual(200);
+        expect(passed).toBeTruthy();
+    });
+
+    it ('should fail create consent (createConsent)', function(){
+        $httpBackend.expect('POST',"/pcm/patients/consents").respond(0, "error");
+        status = consentService.createConsent(undefined, success, error);
+        $httpBackend.flush();
+        expect(status).toEqual(0);
+        expect(passed).toBeFalsy();
     });
     
     describe("test setters", function(){
@@ -66,39 +141,9 @@ describe('app.consentServices', function () {
         });
     });
     
-
     describe("test getters", function(){
 
-        var testURL;
 
-        xit ('should get consent', function(){
-
-            $httpBackend.when('GET',envService.securedApis.pcmApiBaseUrl + "/consents/:d").respond(200, {id: 111});
-
-            var status = consentService.getConsent(
-                {id: 111},
-                function (data) {
-                    status = data.status;
-                    console.log('success!');
-                },
-                function (error) {
-                    console.log('error!');
-                });
-            $httpBackend.flush();
-            $httpBackend.expectGET(envService.securedApis.pcmApiBaseUrl + "/consents/:id");
-            expect(status).toEqual(200);
-        });
-
-
-        it ('should get consent resource (getConsentResource)', function(){
-            testURL = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/pageNumber/:pageNumber", {pageNumber: '@pageNumber'});
-            expect(consentService.getConsentResource().toString()).toEqual(testURL.toString());
-        });
-
-        it ('should get purpose of use resource (getSensitivityPolicyResource)', function(){
-            testURL = $resource(envService.securedApis.pcmApiBaseUrl + "/purposeOfUse");
-            expect(consentService.getPurposeOfUseResource().toString()).toEqual(testURL.toString());
-        });
 
         it('should find the correct entity by the code from the list passed (getEntitiesByCodes)', function () {
             expect(consentService.getEntitiesByCodes(mockState, ['TREATMENT','ALLERGIES'])).toEqual([]);
@@ -106,7 +151,6 @@ describe('app.consentServices', function () {
             expect(consentService.getEntitiesByCodes(entityList, [])).toEqual([]);
             expect(consentService.getEntitiesByCodes(entityList, ['PAYMENT'])).toEqual([entity1]);
             expect(consentService.getEntitiesByCodes(entityList, ['PAYMENT','ALLERGIES'])).toEqual([entity1, entity2]);
-
         });
 
         it('should find the correct purpose of use by the code from the list passed (getDefaultPurposeOfUse)', function () {
@@ -143,6 +187,22 @@ describe('app.consentServices', function () {
     }); //end describe: test getters
 
     describe("test everything else", function(){
+
+        it ('should revoke consent (revokeConsent)', function(){
+            $httpBackend.expect('GET',"/pcm/patients/consents/revokeConsent/%5Bobject%20Object%5D").respond(200, {id: 111, status: 200});
+
+            status = consentService.revokeConsent({id: 111}, success, error);
+            $httpBackend.flush();
+            expect(status).toEqual(200);
+        });
+
+        it ('should fail revoke consent (revokeConsent)', function(){
+            $httpBackend.expect('GET',"/pcm/patients/consents/revokeConsent").respond(0, "error");
+            status = consentService.revokeConsent(undefined, success, error);
+            $httpBackend.flush();
+            expect(status).toEqual(0);
+            expect(passed).toBeFalsy();
+        });
 
         it ('should reset selected NPI', function(){
             consentService.resetSelectedNpi();

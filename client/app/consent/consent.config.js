@@ -79,7 +79,7 @@
                                         return response;
                                     });
 
-                                var sensitvityPolicyResource = consentService.getSensitvityPolicyResource();
+                                var sensitvityPolicyResource = consentService.getSensitivityPolicyResource();
                                 var sensitvityPolicyData = sensitvityPolicyResource.query(
                                     function (response) {
                                         return response;
