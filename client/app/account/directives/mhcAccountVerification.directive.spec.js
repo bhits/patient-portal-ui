@@ -4,9 +4,9 @@
 
 'use strict';
 
-xdescribe('app.mhcAccountVerification.directive', function(){
+xdescribe('app.AccountVerification.directive', function(){
 
-    var mhcAccountVerification, $resource, envService, controller, $scope, $httpBackend, utilityService,
+    var $resource, envService, controller, $scope, $httpBackend, utilityService,
         accountService, emailTokenService, accountConfig;
 
     var verifyInfo = {
@@ -33,7 +33,7 @@ xdescribe('app.mhcAccountVerification.directive', function(){
         emailTokenService = _emailTokenService_;
         accountConfig = _accountConfig_;
 
-        var element = angular.element("<mhcAccountVerification></mhcAccountVerification>");
+        var element = angular.element("<AccountVerification></AccountVerification>");
         element = $compile(element)($scope);
         $scope.$digest();
 

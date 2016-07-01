@@ -166,7 +166,7 @@ describe('app.utilityService ', function () {
     });
 
     it('should test downloadFile', function(){
-        utilityService.downloadFile("example string", "consentDirective111.xml","application/xml;");
+        utilityService.downloadFile("utility.service.spec.js", "consentDirective111.xml","application/xml;");
         
     });
 

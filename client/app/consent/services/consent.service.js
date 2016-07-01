@@ -148,7 +148,7 @@
 
             function getSelectedProvider (){
                 return selectedProvider;
-            }
+            } //TODO: remove, not used
 
             function prepareProviderList (selectedProviders, providers) {
                 var providerList = [];

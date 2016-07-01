@@ -20,10 +20,6 @@ describe('app.consentServices', function () {
         passed = false;
     };
 
-    var consentSuccess = function (response){
-
-    };
-
     var consent = {
         providersPermittedToDiscloseNpi: ["providersPermittedToDiscloseNpi"],
         providersDisclosureIsMadeToNpi: ["providersDisclosureIsMadeToNpi"],
@@ -34,7 +30,6 @@ describe('app.consentServices', function () {
         consentStart: ["consentStart"],
         consentEnd: ["consentEnd"]
     };
-
 
     beforeEach(module('app.config'));
     beforeEach(module('app.consent'));
@@ -111,10 +106,8 @@ describe('app.consentServices', function () {
 
     it ('should create a consent (createConsent)', function(){
         $httpBackend.expect('POST',"/pcm/patients/consents").respond(200, consent);
-
         status = consentService.createConsent(consent, success, error);
         $httpBackend.flush();
-        expect(status).toEqual(200);
         expect(passed).toBeTruthy();
     });
 
@@ -125,146 +118,268 @@ describe('app.consentServices', function () {
         expect(status).toEqual(0);
         expect(passed).toBeFalsy();
     });
-    
-    describe("test setters", function(){
-        
-        it('should set authorized NPI', function(){
-            consentService.setAuthorizeNpi('authorizeNPI');
-            var selected = consentService.getSelectedNpi();
-            expect(selected.authorizeNpi).toBe('authorizeNPI');
-        });
 
-        it('should set authorized NPI', function(){
-            consentService.setDiscloseNpi('discloseNPI');
-            var selected = consentService.getSelectedNpi();
-            expect(selected.discloseNpi).toBe('discloseNPI');
-        });
+    it ('should update a consent (updateConsent)', function(){
+        $httpBackend.expect('PUT',"/pcm/patients/consents").respond(200, consent);
+        status = consentService.updateConsent(consent, success, error);
+        $httpBackend.flush();
+        expect(passed).toBeTruthy();
     });
-    
-    describe("test getters", function(){
 
-
-
-        it('should find the correct entity by the code from the list passed (getEntitiesByCodes)', function () {
-            expect(consentService.getEntitiesByCodes(mockState, ['TREATMENT','ALLERGIES'])).toEqual([]);
-            expect(consentService.getEntitiesByCodes(entityList, [333])).toEqual([]);
-            expect(consentService.getEntitiesByCodes(entityList, [])).toEqual([]);
-            expect(consentService.getEntitiesByCodes(entityList, ['PAYMENT'])).toEqual([entity1]);
-            expect(consentService.getEntitiesByCodes(entityList, ['PAYMENT','ALLERGIES'])).toEqual([entity1, entity2]);
-        });
-
-        it('should find the correct purpose of use by the code from the list passed (getDefaultPurposeOfUse)', function () {
-            expect(consentService.getDefaultPurposeOfUse(mockState, ['TREATMENT','ALLERGIES'])).toEqual([]);
-            expect(consentService.getDefaultPurposeOfUse(entityList, [333])).toEqual([]);
-            expect(consentService.getDefaultPurposeOfUse(entityList, [])).toEqual([]);
-            expect(consentService.getDefaultPurposeOfUse(entityList, ['PAYMENT'])).toEqual([entity1]);
-            expect(consentService.getDefaultPurposeOfUse(entityList, ['PAYMENT','ALLERGIES'])).toEqual([entity1, entity2]);
-        });
-
-        it('should compile array of codes from the list of entities passed passed (getCodes)', function () {
-            mockState = {};
-            expect(consentService.getCodes(mockState)).toEqual([]);
-            expect(consentService.getCodes(undefined)).toEqual([]);
-            expect(consentService.getCodes(entityList)).toEqual(['PAYMENT', 'ALLERGIES']);
-        });
-
-        it('should compile array of codes from the list of entities passed passed (getPurposeOfUseCodes)', function () {
-            mockState = {};
-            expect(consentService.getPurposeOfUseCodes(mockState)).toEqual({selectedPurposeOfUseCodes: ['TREATMENT']});
-            expect(consentService.getPurposeOfUseCodes(undefined)).toEqual({selectedPurposeOfUseCodes: ['TREATMENT']});
-            expect(consentService.getPurposeOfUseCodes([])).toEqual({selectedPurposeOfUseCodes: ['TREATMENT']});
-            expect(consentService.getPurposeOfUseCodes(entityList)).toEqual({selectedPurposeOfUseCodes: ['PAYMENT','ALLERGIES']});
-        });
-
-        it('should find the correct lookup entity by the code from the list passed (getLookupEntities)', function () {
-            expect(consentService.getLookupEntities(mockState, ['TREATMENT','ALLERGIES'])).toEqual([]);
-            expect(consentService.getLookupEntities(entityList, [333])).toEqual([]);
-            expect(consentService.getLookupEntities(entityList, [])).toEqual([]);
-            expect(consentService.getLookupEntities(entityList, ['PAYMENT'])).toEqual([entity1]);
-            expect(consentService.getLookupEntities(entityList, ['PAYMENT','ALLERGIES'])).toEqual([entity1, entity2]);
-        });
-
-    }); //end describe: test getters
-
-    describe("test everything else", function(){
-
-        it ('should revoke consent (revokeConsent)', function(){
-            $httpBackend.expect('GET',"/pcm/patients/consents/revokeConsent/%5Bobject%20Object%5D").respond(200, {id: 111, status: 200});
-
-            status = consentService.revokeConsent({id: 111}, success, error);
-            $httpBackend.flush();
-            expect(status).toEqual(200);
-        });
-
-        it ('should fail revoke consent (revokeConsent)', function(){
-            $httpBackend.expect('GET',"/pcm/patients/consents/revokeConsent").respond(0, "error");
-            status = consentService.revokeConsent(undefined, success, error);
-            $httpBackend.flush();
-            expect(status).toEqual(0);
-            expect(passed).toBeFalsy();
-        });
-
-        it ('should reset selected NPI', function(){
-            consentService.resetSelectedNpi();
-            expect(consentService.getSelectedNpi()).toEqual({authorizeNpi: "", discloseNpi: ""});
-        });
-
-        // it('should prepare provider list', function(){
-        //     var providers = [{npi: 111},{npi: 222}];
-        //     var dummyValue = {entityType: 'Individual', npi: 111};
-        //     var dummyValue2 = {entityType: 'Organization', npi: 222};
-        //     var selectedProviders = [dummyValue, dummyValue2];
-        //
-        //     var what = consentService.prepareProviderList(selectedProviders, providers);
-        //     console.log(what);
-        // });
-
-        it ('should return true if all Sensitivity Policy Codes can be shared (isShareAll)', function(){
-            mockConsent = {
-                "doNotShareSensitivityPolicyCodes": ["Mental health information sensitivity", "HIV/AIDS information sensitivity"]
-            };
-            expect(consentService.isShareAll(mockConsent)).toBeFalsy();
-            mockConsent = {
-                "doNotShareSensitivityPolicyCodes": []
-            };
-            expect(consentService.isShareAll(mockConsent)).toBeTruthy();
-            mockConsent = {
-            };
-            expect(consentService.isShareAll(mockConsent)).toBeTruthy();
-            mockConsent = {
-                "doNotShareSensitivityPolicyCodes": undefined
-            };
-            expect(consentService.isShareAll(mockConsent)).toBeTruthy();
-            mockConsent = {
-                "doNotShareSensitivityPolicyCodes": 'value'
-            };
-            expect(consentService.isShareAll(mockConsent)).toBeTruthy();
-        });
-
-        it ('should return the correct resolve state for consent (resolveConsentState)', function(){
-            spyOn(consentService, 'resolveConsentState').and.callThrough();
-            $scope.consent = mockState;
-            consentService.resolveConsentState(mockConsent);
-            expect(consentService.resolveConsentState(mockState)).toBe('error');
-            expect(consentService.resolveConsentState(mockConsent)).toBe('Saved');
-            mockConsent = {
-                "consentStage": "CONSENT_SAVED"
-            };
-            expect(consentService.resolveConsentState(mockConsent)).toBe('Saved');
-            mockConsent = {
-                "consentStage": "CONSENT_SIGNED"
-            };
-            expect(consentService.resolveConsentState(mockConsent)).toBe('Signed');
-            mockConsent = {
-                "consentStage": "REVOCATION_REVOKED"
-            };
-            expect(consentService.resolveConsentState(mockConsent)).toBe('Revoked');
-            mockConsent = {
-                "consentStage": "NA"
-            };
-            expect(consentService.resolveConsentState(mockConsent)).toBe('error');
-        });
-
+    it ('should fail update consent (updateConsent)', function(){
+        $httpBackend.expect('PUT',"/pcm/patients/consents").respond(0, "error");
+        status = consentService.updateConsent(undefined, success, error);
+        $httpBackend.flush();
+        expect(status).toEqual(0);
+        expect(passed).toBeFalsy();
     });
+
+    it ('should download unattested consent PDF (downloadUnAttestedConsentPdf)', function(){
+        $httpBackend.expect('GET',"/pcm/patients/consents/unattested").respond(200, "success");
+        consentService.downloadUnAttestedConsentPdf("consent.service.spec.js", success, error);
+    });
+
+    it ('should download attested consent PDF (downloadAttestedConsentPdf)', function(){
+        $httpBackend.expect('GET',"/pcm/patients/consents/attested").respond(200, "success");
+        consentService.downloadAttestedConsentPdf("consent.service.spec.js", success, error);
+    });
+
+    it ('should delete a consent (deleteConsent)', function(){
+        $httpBackend.expect('DELETE',"/pcm/patients/consents/%5Bobject%20Object%5D").respond(200, consent);
+        status = consentService.deleteConsent(consent, success, error);
+        $httpBackend.flush();
+        expect(passed).toBeTruthy();
+    });
+
+    it ('should fail delete consent (deleteConsent)', function(){
+        $httpBackend.expect('DELETE',"/pcm/patients/consents").respond(0, "error");
+        status = consentService.deleteConsent(undefined, success, error);
+        $httpBackend.flush();
+        expect(status).toEqual(0);
+        expect(passed).toBeFalsy();
+    });
+
+    it ('should export consent directive (exportConsentDirective)', function(){
+        $httpBackend.expect('GET',"/pcm/patients/consents/exportConsentDirective/%5Bobject%20Object%5D").respond(200, {id: 111});
+        status = consentService.exportConsentDirective({id: 111}, success, error);
+        $httpBackend.flush();
+        expect(passed).toBeTruthy();
+    });
+
+    it ('should fail export consent directive (exportConsentDirective)', function(){
+        $httpBackend.expect('GET',"/pcm/patients/consents/exportConsentDirective").respond(0, "error");
+        status = consentService.exportConsentDirective(undefined, success, error);
+        $httpBackend.flush();
+        expect(status).toEqual(0);
+        expect(passed).toBeFalsy();
+    });
+
+    it ('should get list of consents (listConsent)', function(){
+        var page = {
+            currentPage: 1
+        };
+
+        $httpBackend.expect('GET','/pcm/patients/consents/pageNumber/1').respond(200, page);
+
+        var success = function (response) {
+            passed = true;
+            return response;
+        };
+
+        var error = function (data) {
+            passed = false;
+            return data;
+        };
+
+        var called = consentService.listConsent(2, success, error);
+        $httpBackend.flush();
+        expect(called.currentPage).toBe(2);
+    });
+
+    it('should error get list of consents (listConsent)', function(){
+
+        var page = {
+            currentPage: "error"
+        };
+
+        $httpBackend.expect('GET','/pcm/patients/consents/pageNumber/NaN').respond(200, page);
+
+        var success = function (response) {
+            passed = true;
+            return response;
+        };
+
+        var error = function (data) {
+            passed = false;
+            return data;
+        };
+
+        var called = consentService.listConsent("string", success, error);
+        $httpBackend.flush();
+        expect(called.currentPage).toBe("error");
+    });
+
+    it('should set authorized NPI', function(){
+        consentService.setAuthorizeNpi('authorizeNPI');
+        var selected = consentService.getSelectedNpi();
+        expect(selected.authorizeNpi).toBe('authorizeNPI');
+    });
+
+    it('should set authorized NPI', function(){
+        consentService.setDiscloseNpi('discloseNPI');
+        var selected = consentService.getSelectedNpi();
+        expect(selected.discloseNpi).toBe('discloseNPI');
+    });
+
+    it('should get selectedProvider', function(){
+        var providers = [{npi: 111},{npi: 222}];
+        var selectedProviders = [111, 222];
+
+        consentService.prepareProviderList(selectedProviders, providers);
+        expect(consentService.getSelectedProvider()).toEqual([]);
+    });
+
+    it('should prepare provider list', function(){
+        var providers = [{npi: 111},{npi: 222}];
+        var selectedProviders = [111, 222];
+
+        var what = consentService.prepareProviderList(selectedProviders, providers);
+        expect(what[0].isDisabled).toBeTruthy();
+    });
+
+    it('should prepare provider list', function(){
+        var providers = [{npi: 111},{npi: 222}];
+        var selectedProviders = [null, null];
+
+        var what = consentService.prepareProviderList(selectedProviders, providers);
+        expect(what[0].isDisabled).toBeFalsy();
+    });
+
+    it ('should return the correct resolve state for consent (resolveConsentState)', function(){
+        spyOn(consentService, 'resolveConsentState').and.callThrough();
+        $scope.consent = mockState;
+        consentService.resolveConsentState(mockConsent);
+        expect(consentService.resolveConsentState(mockState)).toBe('error');
+        expect(consentService.resolveConsentState(mockConsent)).toBe('Saved');
+        mockConsent = {
+            "consentStage": "CONSENT_SAVED"
+        };
+        expect(consentService.resolveConsentState(mockConsent)).toBe('Saved');
+        mockConsent = {
+            "consentStage": "CONSENT_SIGNED"
+        };
+        expect(consentService.resolveConsentState(mockConsent)).toBe('Signed');
+        mockConsent = {
+            "consentStage": "REVOCATION_REVOKED"
+        };
+        expect(consentService.resolveConsentState(mockConsent)).toBe('Revoked');
+        mockConsent = {
+            "consentStage": "NA"
+        };
+        expect(consentService.resolveConsentState(mockConsent)).toBe('error');
+    });
+
+    it ('should return true if all Sensitivity Policy Codes can be shared (isShareAll)', function(){
+        mockConsent = {
+            "doNotShareSensitivityPolicyCodes": ["Mental health information sensitivity", "HIV/AIDS information sensitivity"]
+        };
+        expect(consentService.isShareAll(mockConsent)).toBeFalsy();
+        mockConsent = {
+            "doNotShareSensitivityPolicyCodes": []
+        };
+        expect(consentService.isShareAll(mockConsent)).toBeTruthy();
+        mockConsent = {
+        };
+        expect(consentService.isShareAll(mockConsent)).toBeTruthy();
+        mockConsent = {
+            "doNotShareSensitivityPolicyCodes": undefined
+        };
+        expect(consentService.isShareAll(mockConsent)).toBeTruthy();
+        mockConsent = {
+            "doNotShareSensitivityPolicyCodes": 'value'
+        };
+        expect(consentService.isShareAll(mockConsent)).toBeTruthy();
+    });
+
+    it ('should get purpose of use (getPurposeOfUse)', function(){
+        $httpBackend.expect('GET',"/pcm/patients/purposeOfUse?0=purpose").respond(200, ["purpose"]);
+        status = consentService.getPurposeOfUse(["purpose"], success, error);
+        $httpBackend.flush();
+        expect(passed).toBeTruthy();
+    });
+
+    it ('should get sensitivities policies (getSensitivityPolicies)', function(){
+        $httpBackend.expect('GET',"/pcm/patients/sensitivityPolicy?0=purpose").respond(200, ["purpose"]);
+        status = consentService.getSensitivityPolicies(["purpose"], success, error);
+        $httpBackend.flush();
+        expect(passed).toBeTruthy();
+    });
+
+    it('should find the correct entity by the code from the list passed (getEntitiesByCodes)', function () {
+        expect(consentService.getEntitiesByCodes(mockState, ['TREATMENT','ALLERGIES'])).toEqual([]);
+        expect(consentService.getEntitiesByCodes(entityList, [333])).toEqual([]);
+        expect(consentService.getEntitiesByCodes(entityList, [])).toEqual([]);
+        expect(consentService.getEntitiesByCodes(entityList, ['PAYMENT'])).toEqual([entity1]);
+        expect(consentService.getEntitiesByCodes(entityList, ['PAYMENT','ALLERGIES'])).toEqual([entity1, entity2]);
+    });
+
+    it('should find the correct purpose of use by the code from the list passed (getDefaultPurposeOfUse)', function () {
+        expect(consentService.getDefaultPurposeOfUse(mockState, ['TREATMENT','ALLERGIES'])).toEqual([]);
+        expect(consentService.getDefaultPurposeOfUse(entityList, [333])).toEqual([]);
+        expect(consentService.getDefaultPurposeOfUse(entityList, [])).toEqual([]);
+        expect(consentService.getDefaultPurposeOfUse(entityList, ['PAYMENT'])).toEqual([entity1]);
+        expect(consentService.getDefaultPurposeOfUse(entityList, ['PAYMENT','ALLERGIES'])).toEqual([entity1, entity2]);
+    });
+
+    it('should compile array of codes from the list of entities passed passed (getPurposeOfUseCodes)', function () {
+        mockState = {};
+        expect(consentService.getPurposeOfUseCodes(mockState)).toEqual({selectedPurposeOfUseCodes: ['TREATMENT']});
+        expect(consentService.getPurposeOfUseCodes(undefined)).toEqual({selectedPurposeOfUseCodes: ['TREATMENT']});
+        expect(consentService.getPurposeOfUseCodes([])).toEqual({selectedPurposeOfUseCodes: ['TREATMENT']});
+        expect(consentService.getPurposeOfUseCodes(entityList)).toEqual({selectedPurposeOfUseCodes: ['PAYMENT','ALLERGIES']});
+    });
+
+    it('should compile array of codes from the list of entities passed passed (getCodes)', function () {
+        mockState = {};
+        expect(consentService.getCodes(mockState)).toEqual([]);
+        expect(consentService.getCodes(undefined)).toEqual([]);
+        expect(consentService.getCodes(entityList)).toEqual(['PAYMENT', 'ALLERGIES']);
+    });
+
+    it('should find the correct lookup entity by the code from the list passed (getLookupEntities)', function () {
+        expect(consentService.getLookupEntities(mockState, ['TREATMENT','ALLERGIES'])).toEqual([]);
+        expect(consentService.getLookupEntities(entityList, [333])).toEqual([]);
+        expect(consentService.getLookupEntities(entityList, [])).toEqual([]);
+        expect(consentService.getLookupEntities(entityList, ['PAYMENT'])).toEqual([entity1]);
+        expect(consentService.getLookupEntities(entityList, ['PAYMENT','ALLERGIES'])).toEqual([entity1, entity2]);
+    });
+
+    it ('should reset selected NPI', function(){
+        consentService.resetSelectedNpi();
+        expect(consentService.getSelectedNpi()).toEqual({authorizeNpi: "", discloseNpi: ""});
+    });
+
+    it ('should revoke consent (revokeConsent)', function(){
+        $httpBackend.expect('GET',"/pcm/patients/consents/revokeConsent/%5Bobject%20Object%5D").respond(200, {id: 111, status: 200});
+
+        status = consentService.revokeConsent({id: 111}, success, error);
+        $httpBackend.flush();
+        expect(status).toEqual(200);
+    });
+
+    it ('should fail revoke consent (revokeConsent)', function(){
+        $httpBackend.expect('GET',"/pcm/patients/consents/revokeConsent").respond(0, "error");
+        status = consentService.revokeConsent(undefined, success, error);
+        $httpBackend.flush();
+        expect(status).toEqual(0);
+        expect(passed).toBeFalsy();
+    });
+
+
+
+
+
+
+    
 
 });
