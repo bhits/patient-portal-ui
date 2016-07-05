@@ -46,6 +46,7 @@ describe('app.consentServices', function () {
         $httpBackend = $injector.get('$httpBackend');
 
         passed = null;
+        status = null;
     }));
 
     beforeEach(function () {
@@ -104,11 +105,28 @@ describe('app.consentServices', function () {
         expect(passed).toBeFalsy();
     });
 
+    it ('should revoke consent (revokeConsent)', function(){
+        $httpBackend.expect('GET',"/pcm/patients/consents/revokeConsent/%5Bobject%20Object%5D").respond(200, {id: 111, status: 200});
+
+        status = consentService.revokeConsent({id: 111}, success, error);
+        $httpBackend.flush();
+        expect(status).toEqual(200);
+    });
+
+    it ('should fail revoke consent (revokeConsent)', function(){
+        $httpBackend.expect('GET',"/pcm/patients/consents/revokeConsent").respond(0, "error");
+        status = consentService.revokeConsent(undefined, success, error);
+        $httpBackend.flush();
+        expect(status).toEqual(0);
+        expect(passed).toBeFalsy();
+    });
+
     it ('should create a consent (createConsent)', function(){
         $httpBackend.expect('POST',"/pcm/patients/consents").respond(200, consent);
         status = consentService.createConsent(consent, success, error);
         $httpBackend.flush();
         expect(passed).toBeTruthy();
+        console.log()
     });
 
     it ('should fail create consent (createConsent)', function(){
@@ -132,6 +150,11 @@ describe('app.consentServices', function () {
         $httpBackend.flush();
         expect(status).toEqual(0);
         expect(passed).toBeFalsy();
+    });
+
+    it ('should download consent PDF (downloadConsentPdf)', function(){
+        $httpBackend.expect('GET',"/pcm/patients/consents/attested").respond(200, "success");
+        consentService.downloadConsentPdf("consent.service.spec.js", success, error);
     });
 
     it ('should download unattested consent PDF (downloadUnAttestedConsentPdf)', function(){
@@ -359,27 +382,64 @@ describe('app.consentServices', function () {
         expect(consentService.getSelectedNpi()).toEqual({authorizeNpi: "", discloseNpi: ""});
     });
 
-    it ('should revoke consent (revokeConsent)', function(){
-        $httpBackend.expect('GET',"/pcm/patients/consents/revokeConsent/%5Bobject%20Object%5D").respond(200, {id: 111, status: 200});
+    it ('should get consent attestation (getConsentAttestation)', function(){
+        $httpBackend.expect('GET',"/pcm/patients/consents/%5Bobject%20Object%5D/attestation").respond(200, {consentID: 111, status: 200});
 
-        status = consentService.revokeConsent({id: 111}, success, error);
+        status = consentService.getConsentAttestation({consentID: 111}, success, error);
         $httpBackend.flush();
         expect(status).toEqual(200);
+        expect(passed).toBeTruthy();
     });
 
-    it ('should fail revoke consent (revokeConsent)', function(){
-        $httpBackend.expect('GET',"/pcm/patients/consents/revokeConsent").respond(0, "error");
-        status = consentService.revokeConsent(undefined, success, error);
+    it ('should fail get consent attestation (getConsentAttestation)', function(){
+        $httpBackend.expect('GET',"/pcm/patients/consents/attestation").respond(0, "error");
+        status = consentService.getConsentAttestation(undefined, success, error);
         $httpBackend.flush();
         expect(status).toEqual(0);
         expect(passed).toBeFalsy();
     });
 
+    it ('should create consent attestation (createAttestedConsent)', function(){
+        var passed = {consentID: 111, acceptTerms: ["something"]};
+        $httpBackend.expect('POST',"/pcm/patients/consents/%5Bobject%20Object%5D/attested").respond(200, {status: 200});
 
+        status = consentService.createAttestedConsent(passed, success, error);
+        $httpBackend.flush();
+        expect(status).toEqual(200);
+        expect(passed).toBeTruthy();
+    });
 
+    it ('should get consent revoke attestation (getConsentRevokeAttestation)', function(){
+        $httpBackend.expect('GET',"/pcm/patients/consents/%5Bobject%20Object%5D/revokeConsent").respond(200, {consentID: 111, status: 200});
 
+        status = consentService.getConsentRevokeAttestation({consentID: 111}, success, error);
+        $httpBackend.flush();
+        expect(status).toEqual(200);
+        expect(passed).toBeTruthy();
+    });
 
+    it ('should fail get consent revoke attestation (getConsentRevokeAttestation)', function(){
+        $httpBackend.expect('GET',"/pcm/patients/consents/revokeConsent").respond(0, "error");
+        status = consentService.getConsentRevokeAttestation(undefined, success, error);
+        $httpBackend.flush();
+        expect(status).toEqual(0);
+        expect(passed).toBeFalsy();
+    });
 
+    it ('should create attested consent revocation (createAttestedConsentRevocation)', function(){
+        var passed = {consentID: 111, acceptTerms: ["something"]};
+        $httpBackend.expect('POST',"/pcm/patients/consents/%5Bobject%20Object%5D/revocation").respond(200, {status: 200});
+
+        status = consentService.createAttestedConsentRevocation(passed, success, error);
+        $httpBackend.flush();
+        expect(status).toEqual(200);
+        expect(passed).toBeTruthy();
+    });
+
+    it ('should download attested consent revocation PDF (downloadAttestedConsentRevocationPdf)', function(){
+        $httpBackend.expect('GET',"/pcm/patients/consents/attested").respond(200, "success");
+        consentService.downloadAttestedConsentRevocationPdf("consent.service.spec.js", success, error);
+    });
     
 
 });

@@ -32,6 +32,7 @@
             service.revokeConsent = revokeConsent;
             service.createConsent = createConsent;
             service.updateConsent = updateConsent;
+            service.downloadConsentPdf = downloadConsentPdf;
             service.deleteConsent = deleteConsent;
             service.listConsent = listConsent;
             service.setAuthorizeNpi = setAuthorizeNpi;

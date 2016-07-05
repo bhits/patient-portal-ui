@@ -2,57 +2,50 @@
  * Created by tomson.ngassa on 10/14/2015.
  * Modified by cindy.ren on 6/13/2016.
  */
+
 'use strict';
 
-
 describe('app.providerService ', function () {
-    var providerService, $httpBackend, resource, envService, scope, controller;
+    var providerService, $httpBackend, resource, envService, scope, status, passed;
+
+    var providerSuccess = function (response) {
+        status = response.status;
+        passed = true;
+        return response;
+    };
+
+    var providerError = function (response) {
+        status = response.status;
+        passed = false;
+        return response;
+    };
 
     beforeEach(module('app.provider'));
     beforeEach(module('app.config'));
+    beforeEach(module('app.core'));
 
-    // beforeEach(function () {
-    //     angular.mock.inject(function ($injector) {
-    //         $httpBackend = $injector.get('$httpBackend');
-    //         $resource = $injector.get('$resource');
-    //         envService = $injector.get('envService');
-    //         providerService = $injector.get('providerService');
-    //     });
-    // });
-
-    beforeEach(inject(function(_$httpBackend_, _$resource_, _envService_,
-                               _providerService_, _$rootScope_, _$controller_){
-        $httpBackend = _$httpBackend_;
+    beforeEach(inject(function(_$resource_, _envService_,
+                               _providerService_, _$rootScope_, $injector){
         resource = _$resource_;
         envService = _envService_;
         providerService = _providerService_;
         scope = _$rootScope_.$new();
+        $httpBackend = $injector.get('$httpBackend');
+
+        passed = null;
+        status = null;
     }));
 
-    // afterEach(function () {
-    //     $httpBackend.verifyNoOutstandingExpectation();
-    //     $httpBackend.verifyNoOutstandingRequest();
-    // });
+    it('should add providers (addProvider)', function () {
+        var npi = {npi: 111, status: 200};
+        $httpBackend.expect('POST',"/pcm/patients/providers/%5Bobject%20Object%5D").respond(200, npi);
+        providerService.addProvider(npi, providerSuccess, providerError);
 
-    it("should be registered", function () {
-        expect(module).not.toEqual(null);
-    });
-
-    it('should providers resource function', function () {
-        expect(angular.isFunction(providerService.getProvidersResource())).not.toBe(null);
-    });
-
-    xit('should add Providers', function () {
-        $httpBackend.when('GET', 'https://localhost:8443/pcm/patients/providers/11111').respond({status: 201});
-        var status = providerService.addProvider(
-            11111,
-            function (data) {
-                status = data.status;
-            },
-            function (error) {
-            });
+        // $httpBackend.expect('POST',"/pcm/patients/providers/111").respond(200, 111);
+        // providerService.addProvider(111, providerSuccess, providerError);
         $httpBackend.flush();
-        expect(status).toEqual(201);
+        expect(passed).toBeTruthy();
+        expect(status).toBe(200);
     });
 
     xit('should delete Providers ', function () {
