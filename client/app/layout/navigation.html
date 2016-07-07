@@ -25,7 +25,7 @@
                 <a ui-sref="fe.activity.list"><i class="fa fa-clock-o"></i> <span class="nav-label">Activity History</span></a>
             </li>
 
-             <li ng-class="{active: $state.includes('fe.patient')}" ng-if="AppVm.healthInformationMenu" ng-click="AppVm.routeToHealthInformation()"  >
+             <li ng-class="{active: $state.includes('fe.patient')}" ng-click="AppVm.routeToHealthInformation()"  >
                 <a ui-sref="fe.patient.healthinformation"><i class="fa fa-user-md"></i> <span class="nav-label">Health Information</span></a>
             </li>
         </ul>
