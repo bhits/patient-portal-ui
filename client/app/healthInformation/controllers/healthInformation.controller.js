@@ -8,10 +8,8 @@
             .controller('HealthInformationController', HealthInformationController);
 
             /* @ngInject */
-            function HealthInformationController($rootScope, $scope, utilityService, patientData, healthInformationService ){
+            function HealthInformationController($rootScope, patientData, healthInformationService ){
                 var vm = this;
-
-                $scope.showHealthInformationMenu = utilityService.getShowHealthInformationMenu();
 
                 vm.documents = healthInformationService.getDocuments(patientData);
 
