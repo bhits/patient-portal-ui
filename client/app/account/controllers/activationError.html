@@ -1,14 +1,20 @@
 <div id="wrapper" class="container-fluid page-bg-white">
     <mhc-unsecure-top-navbar title="activateErrorVm.title"></mhc-unsecure-top-navbar>
 
-    <div id="page-wrapper "class="padding-top-60 m-b-lg m-l-none m-r-none">
+    <div id="page-wrapper " class="padding-top-60 m-b-lg m-l-none m-r-none">
 
         <div class="row">
             <div class="col-sm-offset-1 col-sm-10">
                 <h1> Sorry! Activation Code Expired! </h1>
                 <div class="m-t-md">
-                    <p><strong>We're very sorry. This email link is no longer valid.</strong> Please contact your provider for a new Verification Code.</p>
-                    <p class="m-t-md">Please click the link below for more information about MyHealthCompass available on the MHC Login Page.</p>
+                    <p>
+                        <strong>We're very sorry. This email link is no longer valid.</strong> Please contact your
+                        provider for a new Verification Code.
+                    </p>
+                    <p class="m-t-md">Please click the link below for more information about
+                        <span ng-bind="activateErrorVm.brandName"></span> available on the
+                        <span ng-bind="activateErrorVm.brandInitial"></span> Login Page.
+                    </p>
                 </div>
             </div>
         </div>

@@ -15,6 +15,7 @@
         vm.activated = activated;
         vm.patientName = accountService.getPatientName();
         vm.title = brand.getBrandName() + " Account Activation Complete";
+        vm.brandName = brand.getBrandName();
 
         function activated() {
             accountService.removeActivateInfo();

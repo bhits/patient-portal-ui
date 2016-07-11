@@ -89,9 +89,9 @@ xdescribe("app.healthInformationModule HealthInformationController ", function()
         });
     });
 
-    var scope, HealthInformationService, utilityService, patientData, anchorScroll, spyObject, state,stateParams, location, httpBackend, rootScope;
+    var scope, HealthInformationService, patientData, anchorScroll, state,stateParams, location, httpBackend, rootScope;
 
-    beforeEach(inject(function($rootScope, $controller, $state,$stateParams,  $anchorScroll, $location, $httpBackend,_$q_, _utilityService_, _HealthInformationService_) {
+    beforeEach(inject(function($rootScope, $controller, $state, $stateParams, $anchorScroll, $location, $httpBackend,_$q_, _HealthInformationService_) {
         rootScope = $rootScope;
         scope = $rootScope.$new();
         state = $state;
@@ -99,7 +99,6 @@ xdescribe("app.healthInformationModule HealthInformationController ", function()
         anchorScroll = $anchorScroll;
         location = $location;
         httpBackend = $httpBackend;
-        utilityService = _utilityService_;
         var deferred = _$q_.defer();
         HealthInformationService = _HealthInformationService_;
 
@@ -119,17 +118,11 @@ xdescribe("app.healthInformationModule HealthInformationController ", function()
         deferred.resolve(data);
         spyOn(HealthInformationService, 'getCCDAHeader').andReturn(deferred.promise);
 
-        spyOn(scope, 'setShowHealthInformationMenu').andCallThrough();
-
-        spyOn(utilityService, 'scrollTo').andCallThrough();
-
         spyOn(scope, "$on");
 
         $controller('HealthInformationController', {
-            $scope: scope,
             $state: state,
             $stateParams: stateParams,
-            utilityService: utilityService,
             patientData: patientData,
             HealthInformationService: HealthInformationService
         });
