@@ -90,9 +90,7 @@
                  * do something to keep the user's session alive
                  */
                 $rootScope.$on('Keepalive', keepalive);
-
-                appVm.healthInformationMenu = false;
-                appVm.showHealthInformationMenu = showHealthInformationMenu;
+                
                 appVm.scrollToAndExpand = scrollToAndExpand;
                 appVm.routeToHealthInformation = routeToHealthInformation;
                 appVm.togglebar = true;
@@ -107,10 +105,6 @@
                 function handleLoggedOutAndExpiredSession(event) {
                     Idle.unwatch();
                     $state.go('fe.login');
-
-                    var toggle = false; // hide the health information menu
-                    utilityService.setShowHealthInformationMenu(toggle);
-                    appVm.healthInformationMenu = toggle;
                 }
 
                 function closeModals() {
@@ -167,11 +161,6 @@
                     } else {
                         console.log("The was no activity.");
                     }
-                }
-
-                function showHealthInformationMenu() {
-                    appVm.healthInformationMenu = true;
-                    utilityService.setShowHealthInformationMenu(true);
                 }
 
                 function scrollToAndExpand(target, expand) {

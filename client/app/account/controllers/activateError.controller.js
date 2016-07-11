@@ -13,5 +13,7 @@
     function ActivateErrorController(brand) {
         var vm = this;
         vm.title = brand.getBrandName() + " Account Activation - Invalid";
+        vm.brandName = brand.getBrandName();
+        vm.brandInitial = brand.getBrandInitials();
     }
 })();
