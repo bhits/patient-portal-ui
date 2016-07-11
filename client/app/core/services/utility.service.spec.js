@@ -59,15 +59,6 @@ describe('app.utilityService ', function () {
         expect(utilityService.isDefinedAndLengthNotZero(dummyProviderList)).toBeTruthy();
     });
 
-    it('should have setShowHealthInformationMenu function', function () {
-        expect(angular.isFunction(utilityService.setShowHealthInformationMenu)).toBeTruthy();
-    });
-
-    it('should setShowHealthInformationMenu value', function () {
-        utilityService.setShowHealthInformationMenu(true);
-        expect(utilityService.getShowHealthInformationMenu()).toBeTruthy();
-    });
-
     it('should scroll to a position in a page', function () {
         spyOn($location, 'hash').and.callThrough();
         utilityService.scrollTo("#home");

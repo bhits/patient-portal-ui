@@ -75,7 +75,7 @@ describe('app module', function(){
     });
 });
 
-describe("app AppController ", function() {
+xdescribe("app AppController ", function() {
 
     beforeEach(module('ui.router'));
     beforeEach(module('ngIdle'));

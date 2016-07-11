@@ -49,20 +49,6 @@ describe('app.healthInformationService ', function() {
         //TODO: test if it returns the correct patientResource
     });
 
-    /*    xit('should get getHealthInformation data', function () {
-        var ccdaDocument =  {AllergySection: {}, CCDAHeader: {}, EncounterSection:{}};
-        var data = {CcdaDocuments: [ccdaDocument]};
-        expect(angular.isFunction(healthInformationService.getHealthInformation)).toBe(true);
-        expect(healthInformationService.getHealthInformation(data)).toEqual(ccdaDocument);
-     });*/
-
-    /*    xit('should print error message if data parameter in getHealthInformation is empty', function () {
-        spyOn(console, 'log').and.callThrough();
-        var emptyData = {CcdaDocuments:[]};
-        healthInformationService.getHealthInformation(emptyData);
-        expect(console.log).toHaveBeenCalledWith("health information object missing.");
-     });*/
-
     it('should get CCDA section by name or print console message if empty', function () {
         expect(healthInformationService.getSectionByName(ccdaDocument, "AllergySection")).toEqual(AllergySection);
     });

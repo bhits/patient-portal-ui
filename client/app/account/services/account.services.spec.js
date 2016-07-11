@@ -27,19 +27,14 @@ describe('app.accountService', function(){
     };
 
     beforeEach(module('app.account'));
-    beforeEach(module('app.config'));
-    beforeEach(module('ngResource'));
 
-    beforeEach(inject(function(_accountService_, _$resource_, _envService_, _$sessionStorage_,
+    beforeEach(inject(function(_accountService_, _$sessionStorage_,
                                $controller, $rootScope, _$httpBackend_, _utilityService_){
         accountService = _accountService_;
-        $resource = _$resource_;
-        envService = _envService_;
         sessionStorage = _$sessionStorage_;
         scope = $rootScope.$new();
         $httpBackend = _$httpBackend_;
         utilityService = _utilityService_;
-
         accountService.removeVerifyInfo();
         delete sessionStorage.userName;
     }));

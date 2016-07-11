@@ -6,14 +6,24 @@
 
 describe('app.authenticationService ', function() {
     var utilityService, oauthTokenService, authenticationService,
-        location, profileService;
+        location, profileService, $httpBackend;
+    var loginInfo = {username: "userName", password: "password"};
+
+    var success = function (response) {
+        return response;
+    };
+
+    var error = function (data) {
+        return data;
+    };
 
     beforeEach(module('ngResource'));
     beforeEach(module('app.security'));
 
-    beforeEach(inject(function (_oauthTokenService_, _authenticationService_,
+    beforeEach(inject(function (_oauthTokenService_, _authenticationService_, _$httpBackend_,
                                 _$location_, _utilityService_, _profileService_) {
 
+        $httpBackend = _$httpBackend_;
         utilityService = _utilityService_;
         authenticationService = _authenticationService_;
         oauthTokenService = _oauthTokenService_;
@@ -23,16 +33,23 @@ describe('app.authenticationService ', function() {
 
     it("should login", function() {
 
-        var username='test', password='password';
         spyOn(authenticationService,'login').and.callThrough();
 
+        var loginResource = authenticationService.login(loginInfo, success, error);
+        expect(loginResource.username).toEqual("userName");
 
-        var loginResource = authenticationService.login(username, password);
+        expect(authenticationService.login).toHaveBeenCalledWith(loginInfo, success, error);
 
-        //for line: var getLoginResource = loginResource(userName, password);
+    });
 
-        expect(authenticationService.login).toHaveBeenCalledWith(username, password);
-        //TODO: test if the promised save saved the correct parameters
+    xit("should forget password", function() {
+
+        spyOn(authenticationService,'forgotPassword').and.callThrough();
+
+        var forgotPasswordResource = authenticationService.forgotPassword(loginInfo, success, error);
+        expect(forgotPasswordResource.username).toEqual("username");
+
+        expect(authenticationService.forgotPassword).toHaveBeenCalledWith(loginInfo, success, error);
 
     });
     
@@ -56,6 +73,8 @@ describe('app.authenticationService ', function() {
         expect(utilityService.redirectTo).toHaveBeenCalledWith('/fe/login');
         
     });
+
+
     
 });
 
