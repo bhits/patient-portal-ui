@@ -13,6 +13,6 @@
     function CreatePasswordController(allowActivation, brand) {
         var vm = this;
         vm.allowActivation = allowActivation;
-        vm.title = brand.getBrandName() + " Create Password";
+        vm.title = brand.$get().getBrandName() + " Create Password";
     }
 })();

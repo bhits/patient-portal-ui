@@ -1,35 +1,36 @@
-/**
- * Created by cindy.ren on 6/15/2016.
- */
-
+/**Created by cindy.ren on 6/15/2016.*/
 'use strict';
 
 describe("app.activateController", function() {
 
     beforeEach(module('app.account'));
-    beforeEach(module('app.config'));
-    beforeEach(module('app.security'));
-    beforeEach(module('app.brand'));
-    beforeEach(module('ui.router'));
 
-    var controller, $state, accountService;
+    var controller, $state, accountService, brand;
 
     var patientInfo = {firstName: 'firstName', lastName: 'lastName'};
 
+    beforeEach(function () {
+        var fakeModule = angular.module('test.app.brand', function () {});
+        fakeModule.config( function (brandProvider) {
+            brand = brandProvider;
+        });
+        module('app.brand', 'test.app.brand');
+        inject(function () {});
+        brand.setBrandName("Brand Name");
+        brand.setBrandInitial("BI");
+    });
 
-    beforeEach(inject(function( $controller, _$state_, _accountService_, _brand_) {
+    beforeEach(inject(function( $controller, _$state_, _accountService_) {
 
         $state = _$state_;
         accountService = _accountService_;
         accountService.setPatientName(patientInfo);
-        var brand = _brand_;
 
         controller = $controller('ActivateController', {
             accountService: accountService,
             brand: brand
         });
-
-
+        
     }));
 
     it('should create controller ', function(){
@@ -39,6 +40,16 @@ describe("app.activateController", function() {
     it('should have correct patient name', function(){
         expect(controller.patientName).toBeDefined();
         expect(controller.patientName).toEqual('firstName lastName');
+    });
+
+    it('should have correct title', function(){
+        expect(controller.title).toBeDefined();
+        expect(controller.title).toEqual('Brand Name Account Activation Complete');
+    });
+
+    it('should have correct brand name', function(){
+        expect(controller.brandName).toBeDefined();
+        expect(controller.brandName).toEqual('Brand Name');
     });
 
     it('should call on activated()', function(){
