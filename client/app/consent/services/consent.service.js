@@ -212,7 +212,7 @@
             function getDefaultPurposeOfUse (PurposeOfUse, selectedPurposeOfUseCodes){
                 var result = [];
                 if(selectedPurposeOfUseCodes.length === 0){
-                    result = getEntitiesByCodes(PurposeOfUse,['HEALTHCARE_TREATMENT'] );
+                    result = getEntitiesByCodes(PurposeOfUse,['TREATMENT'] );
                 }else if( selectedPurposeOfUseCodes.length > 0 ){
                     for(var i = 0; i < selectedPurposeOfUseCodes.length; i++){
                         var selectedCode = selectedPurposeOfUseCodes[i];
