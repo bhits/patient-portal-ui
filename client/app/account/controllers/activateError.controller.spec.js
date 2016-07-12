@@ -1,13 +1,14 @@
 /**
- * Created by cindy.ren on 7/12/2016.
+ * Created by cindy.ren on 6/15/2016.
  */
+
 'use strict';
 
-describe("app.CreatePasswordController", function() {
+describe("app.activateErrorController", function() {
 
     beforeEach(module('app.account'));
 
-    var controller, $state, allowActivation, brand;
+    var controller, $state, brand;
 
     beforeEach(function () {
         var fakeModule = angular.module('test.app.brand', function () {});
@@ -20,15 +21,12 @@ describe("app.CreatePasswordController", function() {
         brand.setBrandInitial("BI");
     });
 
-    beforeEach(inject(function($controller, _$state_) {
-
+    beforeEach(inject(function( $controller, _$state_) {
         $state = _$state_;
 
-        controller = $controller('CreatePasswordController', {
-            allowActivation: true,
+        controller = $controller('ActivateErrorController', {
             brand: brand
         });
-
     }));
 
     it('should create controller ', function(){
@@ -37,27 +35,17 @@ describe("app.CreatePasswordController", function() {
 
     it('should have correct title', function(){
         expect(controller.title).toBeDefined();
-        expect(controller.title).toEqual('Brand Name Create Password');
+        expect(controller.title).toEqual('Brand Name Account Activation - Invalid');
     });
 
-    it('should allowActivation', function(){
-        expect(controller.allowActivation).toBeDefined();
-        expect(controller.allowActivation).toBeTruthy();
+    it('should have correct brand name', function(){
+        expect(controller.brandName).toBeDefined();
+        expect(controller.brandName).toEqual('Brand Name');
     });
 
-    it('should not allowActivation', function(){
-        inject(function($controller, _$state_) {
-
-            $state = _$state_;
-
-            controller = $controller('CreatePasswordController', {
-                allowActivation: false,
-                brand: brand
-            });
-
-        });
-        expect(controller.allowActivation).toBeDefined();
-        expect(controller.allowActivation).toBeFalsy();
+    it('should have correct brand initial', function(){
+        expect(controller.brandInitial).toBeDefined();
+        expect(controller.brandInitial).toEqual('BI');
     });
 
 

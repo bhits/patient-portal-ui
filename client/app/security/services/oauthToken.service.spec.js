@@ -11,8 +11,7 @@ describe('app.oauthTokenService ', function() {
     beforeEach(module('app.security'));
     beforeEach(jasmine.clock().install());
 
-    beforeEach(inject(function (_oauthTokenService_, _$sessionStorage_,
-                                _profileService_, _$timeout_) {
+    beforeEach(inject(function (_oauthTokenService_, _$sessionStorage_, _profileService_, _$timeout_) {
         oauthTokenService = _oauthTokenService_;
         profileService = _profileService_;
         sessionStorage = _$sessionStorage_;
@@ -63,58 +62,16 @@ describe('app.oauthTokenService ', function() {
         expect(oauthTokenService.getRefreshToken()).toBe('refresh_token');
     });
 
-    it("should get expiration time", function() {
+    it("should get expiration date (getTokenExpirationDate)", function() {
         oauthTokenService.removeToken();
 
-        spyOn(oauthTokenService,'getToken').and.callThrough();
-        expect(oauthTokenService.getExpiresIn()).toBeNull();
+        spyOn(oauthTokenService,'getTokenExpirationDate').and.callThrough();
+        expect(oauthTokenService.getTokenExpirationDate()).toBeNull();
 
         oauthTokenService.setToken(token);
         var date = new Date(new Date().valueOf() + (1000));
-        expect(oauthTokenService.getExpiresIn()).toEqual(date);
-
+        expect(oauthTokenService.getTokenExpirationDate()).toEqual(date);
     });
 
-    it("should return if valid token", function() {
-        oauthTokenService.removeToken();
-
-        spyOn(oauthTokenService,'getAccessToken').and.callThrough();
-        spyOn(oauthTokenService,'getExpiresIn').and.callThrough();
-        expect(oauthTokenService.isValidToken()).toBeFalsy();
-
-        oauthTokenService.setToken(token);
-        expect(oauthTokenService.isValidToken()).toBeTruthy();
-    });
-
-    // xit("should return if token has expired", function() {
-    //     oauthTokenService.removeToken();
-    //     spyOn(oauthTokenService,'getExpiresIn').and.callThrough();
-    //
-    //     oauthTokenService.setToken(token);
-    //     expect(oauthTokenService.isExpiredToken()).toBeFalsy();
-    //
-    //     //waits(2000);
-    //     console.log(oauthTokenService.getExpiresIn().valueOf() < new Date().valueOf());
-    //     expect(oauthTokenService.isExpiredToken()).toBeTruthy();
-    //
-    //     expect(oauthTokenService, getExpiresIn).toHaveBeenCalled();
-    // });
-    //
-    // xit("should return if a valid token has expired", function() {
-    //     oauthTokenService.removeToken();
-    //     spyOn(oauthTokenService,'getExpiresIn').and.callThrough();
-    //     spyOn(oauthTokenService,'getAccessToken').and.callThrough();
-    //
-    //     expect(oauthTokenService.isValidAndExpiredToken()).toBeFalsy();
-    //
-    //     oauthTokenService.setToken(token);
-    //     expect(oauthTokenService.isValidAndExpiredToken()).toBeFalsy();
-    //     //waits(2000);
-    //     expect(oauthTokenService.isValidAndExpiredToken()).toBeTruthy();
-    //
-    //     expect(oauthTokenService, getAccessToken).toHaveBeenCalled();
-    //     expect(oauthTokenService, getRefreshToken).toHaveBeenCalled();
-    //     expect(oauthTokenService, getExpiresIn).toHaveBeenCalled();
-    // });
     
 });

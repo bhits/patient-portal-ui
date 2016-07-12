@@ -23,6 +23,7 @@ describe('app.providerService ', function () {
         practiceLocationAddressTelephoneNumber: "4106141937",
         providerTaxonomyDescription: "Family",
         secondLinePracticeLocationAddress: "BLALOCK 412",
+        currentPage: 1
     }];
     var emptyProvider = [];
 
@@ -49,8 +50,17 @@ describe('app.providerService ', function () {
         $httpBackend = $injector.get('$httpBackend');
 
         passed = null;
-        status = null;
     }));
+
+    it('should return providers resource (getProvidersResource)', function () {
+        $httpBackend.expect('POST',"/pcm/patients/providers").respond(200);
+        providerService.addProvider(providerData.npi, providerSuccess, providerError);
+        var provider = providerService.getProvidersResource();
+
+        $httpBackend.flush();
+        expect(passed).toBeTruthy();
+        expect(provider).not.toBeNull();
+    });
 
     it('should add providers (addProvider)', function () {
         $httpBackend.expect('POST',"/pcm/patients/providers").respond(200, providerData.npi);
@@ -60,11 +70,18 @@ describe('app.providerService ', function () {
         expect(passed).toBeTruthy();
     });
 
-    xit('should delete Providers ', function () {
+    it('should fail delete Providers ', function () {
+        $httpBackend.expect('DELETE','/pcm/patients/providers').respond(500, null);
+        providerService.deleteProvider(null, providerSuccess, providerError);
+        $httpBackend.flush();
+        expect(passed).toBeFalsy();
+    });
+
+    it('should fail delete Providers ', function () {
         $httpBackend.expect('DELETE','/pcm/patients/providers/111').respond(200, 111);
         providerService.deleteProvider(111, providerSuccess, providerError);
         $httpBackend.flush();
-        expect(passed).toBeFalsy();
+        expect(passed).toBeTruthy();
     });
 
     it('should lookup providers with successful backend call', function () {
@@ -96,7 +113,9 @@ describe('app.providerService ', function () {
         });
 
         // Assert
-        $httpBackend.expectGET('/pls/providers/pageNumber/9/usstate/usstateValue/city/cityValue/zipcode/zipcodeValue/gender/genderValue/phone/phoneValue/firstname/firstnameValue/lastname/lastnameValue/facilityname/facilitynameValue').respond(statusCodeReturnedFromBackend, {status: statusCodeReturnedFromBackend});
+        $httpBackend.expectGET('/pls/providers/pageNumber/9/usstate/usstateValue/city/cityValue/zipcode/zipcodeValue/' +
+            'gender/genderValue/phone/phoneValue/firstname/firstnameValue/lastname/lastnameValue/facilityname/' +
+            'facilitynameValue').respond(statusCodeReturnedFromBackend, {status: statusCodeReturnedFromBackend});
         $httpBackend.flush();
         expect(statusWhenSuccess).toEqual(statusCodeSuccess);
         expect(statusWhenError).toEqual(statusCodeNotSet);
@@ -130,7 +149,9 @@ describe('app.providerService ', function () {
         });
 
         // Assert
-        $httpBackend.expectGET('/pls/providers/pageNumber/9/usstate/usstateValue/city/cityValue/zipcode/zipcodeValue/gender/genderValue/phone/phoneValue/firstname/firstnameValue/lastname/lastnameValue/facilityname/facilitynameValue').respond(statusCodeReturnedFromBackend, {status: statusCodeReturnedFromBackend});
+        $httpBackend.expectGET('/pls/providers/pageNumber/9/usstate/usstateValue/city/cityValue/zipcode/zipcodeValue/' +
+            'gender/genderValue/phone/phoneValue/firstname/firstnameValue/lastname/lastnameValue/facilityname/' +
+            'facilitynameValue').respond(statusCodeReturnedFromBackend, {status: statusCodeReturnedFromBackend});
         $httpBackend.flush();
         expect(statusWhenSuccess).toEqual(statusCodeNotSet);
         expect(statusWhenError).toEqual(statusCodeError);
@@ -155,7 +176,7 @@ describe('app.providerService ', function () {
         var providerLookupResult = {someProperty: 'somePropertyValue', providers: []};
 
         expect(providerService.isEmptyLookupResult(providerLookupResult)).toEqual(true);
-    });
+    }); 
 
     it('should return false if providerLookupResult.providers has at least one element', function () {
 

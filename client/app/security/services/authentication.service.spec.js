@@ -7,7 +7,7 @@
 describe('app.authenticationService ', function() {
     var utilityService, oauthTokenService, authenticationService,
         location, profileService, $httpBackend;
-    var loginInfo = {username: "userName", password: "password"};
+    var loginInfo = {username: "userName", password: "password", email: "email"};
 
     var success = function (response) {
         return response;

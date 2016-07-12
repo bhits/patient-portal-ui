@@ -4,7 +4,7 @@
 
 'use strict';
 
-describe("app.activateController", function() {
+describe("app.resetPassword.controller", function() {
 
     beforeEach(module('app.account'));
 
@@ -22,8 +22,7 @@ describe("app.activateController", function() {
         brand.setBrandInitial("BI");
     });
 
-    beforeEach(inject(function( $controller, _$state_, _accountService_) {
-
+    beforeEach(inject(function( $controller) {
 
         controller = $controller('ResetPasswordController', {
             brand: brand

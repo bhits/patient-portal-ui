@@ -1,13 +1,14 @@
 /**
  * Created by cindy.ren on 7/12/2016.
  */
+
 'use strict';
 
-describe("app.CreatePasswordController", function() {
+describe("app.activateController", function() {
 
     beforeEach(module('app.account'));
 
-    var controller, $state, allowActivation, brand;
+    var controller, brand;
 
     beforeEach(function () {
         var fakeModule = angular.module('test.app.brand', function () {});
@@ -20,12 +21,11 @@ describe("app.CreatePasswordController", function() {
         brand.setBrandInitial("BI");
     });
 
-    beforeEach(inject(function($controller, _$state_) {
+    beforeEach(inject(function($controller) {
 
-        $state = _$state_;
 
-        controller = $controller('CreatePasswordController', {
-            allowActivation: true,
+        controller = $controller('VerificationController', {
+            allowVerification: true,
             brand: brand
         });
 
@@ -37,27 +37,25 @@ describe("app.CreatePasswordController", function() {
 
     it('should have correct title', function(){
         expect(controller.title).toBeDefined();
-        expect(controller.title).toEqual('Brand Name Create Password');
+        expect(controller.title).toEqual('Brand Name Account Setup Activation');
     });
 
     it('should allowActivation', function(){
-        expect(controller.allowActivation).toBeDefined();
-        expect(controller.allowActivation).toBeTruthy();
+        expect(controller.allowVerification).toBeDefined();
+        expect(controller.allowVerification).toBeTruthy();
     });
 
     it('should not allowActivation', function(){
-        inject(function($controller, _$state_) {
+        inject(function($controller) {
 
-            $state = _$state_;
-
-            controller = $controller('CreatePasswordController', {
-                allowActivation: false,
+            controller = $controller('VerificationController', {
+                allowVerification: false,
                 brand: brand
             });
 
         });
-        expect(controller.allowActivation).toBeDefined();
-        expect(controller.allowActivation).toBeFalsy();
+        expect(controller.allowVerification).toBeDefined();
+        expect(controller.allowVerification).toBeFalsy();
     });
 
 
