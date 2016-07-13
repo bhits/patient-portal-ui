@@ -25,7 +25,7 @@ describe("app.login.controller ", function() {
         brand.setBrandInitial("BI");
     });
 
-    beforeEach(inject(function( $controller, $state, _envService_,
+    beforeEach(inject(function( $controller, _envService_,
                                 _utilityService_, _$resource_, _accountConfig_) {
 
         envService = _envService_;
