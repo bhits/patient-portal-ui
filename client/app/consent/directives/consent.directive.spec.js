@@ -46,7 +46,7 @@ describe('app.consent', function () {
     });
 });
 
-describe('app.consent', function () {
+xdescribe('app.consent', function () {
     var $compile,
         $rootScope,
         $httpBackend,
@@ -218,7 +218,7 @@ describe('app.consent', function () {
         // expect(consentService.resolveConsentState).toHaveBeenCalledWith(mockConsent);
     });
 
-    xit('should open a manage modal for consent-card directive', function () {
+    it('should open a manage modal for consent-card directive', function () {
         // Arrange
         var directiveController;
         var mockState = "success";

@@ -75,7 +75,7 @@ describe('app module', function(){
     });
 });
 
-xdescribe("app AppController ", function() {
+describe("app AppController ", function() {
 
     beforeEach(module('ui.router'));
     beforeEach(module('ngIdle'));
@@ -109,7 +109,6 @@ xdescribe("app AppController ", function() {
         authenticationService = _authenticationService_;
         Idle = _Idle_;
 
-        spyOn(utilityService, 'setShowHealthInformationMenu').and.callThrough();
 
         spyOn($rootScope, "$broadcast").and.callThrough();
 
@@ -155,25 +154,9 @@ xdescribe("app AppController ", function() {
         controller.closeModals();
         expect(controller.warning).toBe(undefined);
     });
-    
-    xit('should close modal if open', function(){
-        controller.warning = true;
-        controller.closeModals();
-        expect(controller.warning).toBeNull();
-    });
-    //app.js needs to be fixed, appVm.warning.close is not a function
 
-    xit('should handle ToggleMenuItemWithoutData event', function(){
-        var menuItems = {
-            demographics: true,
-            medications: true,
-            alerts:true
-
-        };
-        spyOn(scope, '$on').and.callThrough();
-        $rootScope.$broadcast('ToggleMenuItemWithoutData', menuItems);
-        expect(scope.$on).toHaveBeenCalledWith(menuItems);
-    });
-    //nothing handling this event
+    it ('should state change (stateChangeSuccess)', function(){
+        
+    })
     
 });

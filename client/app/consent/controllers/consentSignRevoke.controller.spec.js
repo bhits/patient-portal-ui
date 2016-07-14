@@ -4,7 +4,7 @@
 
 'use strict';
 
-describe("app.activateController", function() {
+describe("app.ConsentSignRevokeController", function() {
 
     beforeEach(module('app.consent'));
 
