@@ -69,6 +69,6 @@
                 function (response) {
                     console.log(response);
                 });
-        }
+        }//TODO: remove - not used elsewhere
     }
 })();

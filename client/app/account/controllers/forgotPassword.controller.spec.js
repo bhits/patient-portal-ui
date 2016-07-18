@@ -7,7 +7,6 @@
 describe("app.forgotPassword.controller ", function() {
 
     beforeEach(module('app.account'));
-    beforeEach(module('app.config'));
     beforeEach(module('app.security'));
     beforeEach(module('app.brand'));
 
