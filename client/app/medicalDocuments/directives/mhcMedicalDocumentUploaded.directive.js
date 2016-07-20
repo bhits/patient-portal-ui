@@ -30,6 +30,7 @@
     function UploadedDocumentController($state, $modal, medicalDocumentsService, notificationService, utilityService) {
         var vm = this;
         vm.downloadFile = downloadFile;
+        vm.uploadDocumentToHIEOS = uploadDocumentToHIEOS;
         vm.openDeleteMedicalDocumentModal = openDeleteMedicalDocumentModal;
 
         function downloadFile(medicalDocument) {
@@ -40,6 +41,17 @@
                 },
                 function(err){
                     notificationService.error('Error in downloading medical document');
+                }
+            );
+        }
+
+        function uploadDocumentToHIEOS(medicalDocument) {
+            medicalDocumentsService.uploadDocumentToHIEOS(medicalDocument.content,
+                function(response){
+                    notificationService.success('Success in Uploading medical document');
+                },
+                function(err){
+                    notificationService.error('Error in Uploading medical document');
                 }
             );
         }

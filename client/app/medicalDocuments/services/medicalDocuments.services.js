@@ -17,6 +17,7 @@
         service.downloadMedicalDocument = downloadMedicalDocument;
         service.deleteMedicalDocument = deleteMedicalDocument;
         service.uploadMedicalDocument = uploadMedicalDocument;
+        service.uploadDocumentToHIEOS = uploadDocumentToHIEOS;
 
         return service;
 
@@ -49,6 +50,10 @@
 
         function uploadMedicalDocument(medicalDocument, success, error) {
             return medicalDocumentUploadResource().save(medicalDocument, success, error);
+        }
+
+        function uploadDocumentToHIEOS(document, success, error) {
+            // return medicalDocumentUploadResource().save(document, success, error);
         }
     }
 })();
