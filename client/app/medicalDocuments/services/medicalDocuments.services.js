@@ -12,6 +12,7 @@
     /* @ngInject */
     function medicalDocumentsService($resource, envService) {
         var medicalDocumentsResource = $resource(envService.securedApis.pcmApiBaseUrl + "/clinicaldocuments/:id", {id: '@id'});
+        var phrResource = $resource(envService.securedApis.phrApiBaseUrl + "/patients/healthInformation/publish");
 
         var service = {};
         service.downloadMedicalDocument = downloadMedicalDocument;
@@ -53,7 +54,7 @@
         }
 
         function uploadDocumentToHIEOS(document, success, error) {
-            // return medicalDocumentUploadResource().save(document, success, error);
+            return phrResource.save(document, success, error);
         }
     }
 })();

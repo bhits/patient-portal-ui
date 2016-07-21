@@ -46,12 +46,13 @@
         }
 
         function uploadDocumentToHIEOS(medicalDocument) {
-            medicalDocumentsService.uploadDocumentToHIEOS(medicalDocument.content,
+            var content = {document: medicalDocument.content};
+            medicalDocumentsService.uploadDocumentToHIEOS(content,
                 function(response){
-                    notificationService.success('Success in Uploading medical document');
+                    notificationService.success('Success in publishing medical document to HIE.');
                 },
                 function(err){
-                    notificationService.error('Error in Uploading medical document');
+                    notificationService.error('Error in publishing medical document to HIE.');
                 }
             );
         }
