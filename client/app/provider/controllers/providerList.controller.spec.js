@@ -11,10 +11,12 @@ describe("app.providerModule ProviderListController ", function() {
     beforeEach(module('app.provider'));
     beforeEach(module('app.config'));
 
-    var $modal, providerService, $state, notificationService, controller;
+    var $modal, providerService, $state,
+        notificationService, controller;
+
     var providers = {providers: "provider"};
 
-    beforeEach(inject(function(_$modal_, _providerService_, _$state_, _notificationService_, $controller) {
+    beforeEach(inject(function(_$rootScope_, _$modal_, _providerService_, _$state_, _notificationService_, $controller) {
 
         $modal = _$modal_;
         providerService = _providerService_;
@@ -39,5 +41,9 @@ describe("app.providerModule ProviderListController ", function() {
         spyOn($modal, 'open').and.callThrough();
         controller.openDeleteProviderModal(providers, 2);
         expect($modal.open).toHaveBeenCalled();
+    });
+
+    it('should open delete provider', function(){
+        controller.deleteProviderModalVm(providers, notificationService, $modalInstance,  $state);
     });
 });

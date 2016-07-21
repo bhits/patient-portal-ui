@@ -41,15 +41,47 @@ describe('app.authInterceptorService', function(){
         expect($location.path()).toEqual("/fe/login");
     });
 
-
     it("should set token in header ", function() {
+        spyOn(oauthTokenService, 'getAccessToken').and.returnValue("token");
+        spyOn(oauthTokenService, 'isExpiredToken').and.returnValue(false);
+        spyOn(utilityService, 'isSecuredApi').and.returnValue(true);
         config = {header: "information"};
         config = authInterceptorService.request(config);
-        expect(config.headers.Authorization).toEqual("Bearer  my token");
+        expect(config.headers.Authorization).toEqual("Bearer  token");
     });
 
+    it("should fail set token in header (expired token) and redirect", function() {
+        spyOn(oauthTokenService, 'getAccessToken').and.returnValue("token");
+        spyOn(oauthTokenService, 'isExpiredToken').and.returnValue(true);
+        spyOn(utilityService, 'redirectTo');
+        config = {header: "information"};
+        config = authInterceptorService.request(config);
+        expect(utilityService.redirectTo).toHaveBeenCalled();
+    });
+
+    it("should fail set token in header (isAllowAccess=true) and redirect", function() {
+        spyOn($location, 'path').and.returnValue("path");
+        spyOn(urlAuthorizationConfigurerService, 'isAllowAccess').and.returnValue(true);
+        spyOn(utilityService, 'redirectTo');
+        config = {header: "information"};
+        config = authInterceptorService.request(config);
+        expect(utilityService.redirectTo).toHaveBeenCalledWith("path");
+    });
+
+    it("should fail set token in header (isAllowAccess=false) and redirect", function() {
+        spyOn(urlAuthorizationConfigurerService, 'isAllowAccess').and.returnValue(false);
+        spyOn(utilityService, 'redirectTo');
+        config = {header: "information"};
+        config = authInterceptorService.request(config);
+        expect(utilityService.redirectTo).toHaveBeenCalledWith("/fe/login");
+    });
+
+    //TODO: responseError is not finished?
     xit("should route to login in case of 401 ", function() {
-        spyOn(localStorage, 'getItem').andReturn("");
+        spyOn(oauthTokenService, 'getToken').and.returnValue("token");
+        spyOn(oauthTokenService, 'isExpiredToken').and.returnValue(false);
+        spyOn(utilityService, 'isSecuredApi').and.returnValue(true);
+        spyOn(localStorage, 'getItem').and.returnValue("");
         var rejection = {status: 401};
         config = authInterceptorService.responseError(rejection);
         expect($location.path()).toEqual("/fe/login");
