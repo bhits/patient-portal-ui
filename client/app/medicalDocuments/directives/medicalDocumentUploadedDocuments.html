@@ -1,4 +1,4 @@
-<div class="col-sm-6">
+<div class="col-sm-12 col-md-7">
     <div>
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -18,7 +18,8 @@
                     <tbody>
                     <tr ng-if="uploadedDocumentVm.medicaldocumentslist.length === 0">
                         <td colspan="5" class="text-center"> No
-                            Medical Documents has been added.</td>
+                            Medical Documents has been added.
+                        </td>
                     </tr>
                     <tr ng-repeat="medicalDocument in uploadedDocumentVm.medicaldocumentslist">
                         <td>
@@ -47,6 +48,56 @@
                     </tr>
                     </tbody>
                 </table>
+
+                <!-- new stuff -->
+                <div class="side-padding10">
+
+                    <div class="row border-bottom-medium-gray-thin p-b-xs">
+                        <div class="col-sm-5 col-xs-12 m-b-xxs">
+                            <div class="bold">Name</div>
+                        </div>
+                        <div class="col-sm-7 col-xs-12 m-b-xxs">
+                            <div class="bold">Document Type</div>
+                        </div>
+
+                        <div class="col-sm-5 col-xs-12 m-b-xxs">
+                            <div class="bold italic">Description</div>
+                        </div>
+                        <div class="col-sm-7 col-xs-12 m-b-xxs">
+                            <div class="bold">Operation</div>
+                        </div>
+                    </div>
+
+                    <div class="row row-striped p-t-xs p-b-xs">
+                        <div class="col-sm-5 col-xs-12 m-b-xs">
+                            <div class="">Test</div>
+                        </div>
+                        <div class="col-sm-7 col-xs-12 m-b-xs">
+                            <div class="">Episode Summary Note</div>
+                        </div>
+
+                        <div class="col-sm-5 col-xs-12 m-b-xs">
+                            <div class="italic">Test Document</div>
+                        </div>
+                        <div class="col-sm-7 col-xs-12 m-b-xs">
+                            <button type="button" class="btn btn-success dark-green btn-xs m-r-xs"
+                                    ng-click="uploadedDocumentVm.downloadFile(medicalDocument)">
+                                <!--<span class="fa fa-upload hidden-xs m-r-xs"></span> Publish-->Publish
+                            </button>
+                            <button type="button" class="btn btn-default btn-outline btn-xs m-r-xs"
+                                    ng-click="uploadedDocumentVm.downloadFile(medicalDocument)">
+                                <!--<span class="fa fa-download hidden-xs m-r-xs"></span>Download-->Download
+                            </button>
+                            <a href="" type="button" class=""
+                               ng-click="uploadedDocumentVm.openDeleteMedicalDocumentModal(medicalDocument, 'sm')">
+                                <span class="fa fa-times m-r-xxs text-dark-red"></span> Remove
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- END New Stuff -->
+
             </div>
         </div>
     </div>
