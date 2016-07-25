@@ -52,32 +52,16 @@
                 <!-- new stuff -->
                 <div class="side-padding10">
 
-                    <div class="row border-bottom-medium-gray-thin p-b-xs">
-                        <div class="col-sm-5 col-xs-12 m-b-xxs">
-                            <div class="bold">Name</div>
-                        </div>
-                        <div class="col-sm-7 col-xs-12 m-b-xxs">
-                            <div class="bold">Document Type</div>
-                        </div>
-
-                        <div class="col-sm-5 col-xs-12 m-b-xxs">
-                            <div class="bold italic">Description</div>
-                        </div>
-                        <div class="col-sm-7 col-xs-12 m-b-xxs">
-                            <div class="bold">Operation</div>
-                        </div>
-                    </div>
-
                     <div class="row row-striped p-t-xs p-b-xs">
                         <div class="col-sm-5 col-xs-12 m-b-xs">
-                            <div class="">Test</div>
+                            <div class="bold">Test</div>
                         </div>
                         <div class="col-sm-7 col-xs-12 m-b-xs">
-                            <div class="">Episode Summary Note</div>
+                            <div><span class="mini-Label font-size10 m-r-xs">Doc Type</span>Episode Summary Note</div>
                         </div>
 
                         <div class="col-sm-5 col-xs-12 m-b-xs">
-                            <div class="italic">Test Document</div>
+                            <div class="">Test Document</div>
                         </div>
                         <div class="col-sm-7 col-xs-12 m-b-xs">
                             <button type="button" class="btn btn-success dark-green btn-xs m-r-xs"
@@ -88,7 +72,7 @@
                                     ng-click="uploadedDocumentVm.downloadFile(medicalDocument)">
                                 <!--<span class="fa fa-download hidden-xs m-r-xs"></span>Download-->Download
                             </button>
-                            <a href="" type="button" class=""
+                            <a href="" type="button" class="hover-extraBold"
                                ng-click="uploadedDocumentVm.openDeleteMedicalDocumentModal(medicalDocument, 'sm')">
                                 <span class="fa fa-times m-r-xxs text-dark-red"></span> Remove
                             </a>
