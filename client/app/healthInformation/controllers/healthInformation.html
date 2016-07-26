@@ -17,7 +17,7 @@
     <div ng-repeat="document in healthInformationVm.documents" >
         <pp-ccda-document document="document" ></pp-ccda-document>
     </div>
-    <div ng-if=" ((!healthInformationVm.documents) || healthInformationVm.documents.length === 0)">
+    <div ng-show="healthInformationVm.noDocumentFound">
         <div class="alert alert-warning alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>

@@ -21,6 +21,123 @@
   cursor: pointer;
 }
 
+.row-striped {
+  &:nth-of-type(odd) {
+    background-color: #f9f9f9;
+  }
+  &.alternateGrays {
+    &:nth-of-type(even) {background-color: @pp-light-gray;}
+    &:last-of-type {margin-bottom: 0;}
+  }
+  &:last-of-type {
+    .border-bottom-medium-gray-thin;
+    margin-bottom: 20px;
+  }
+  &:hover {
+    background-color: #fffac0 !important;
+  }
+}
+
+/* Styling SPECIFIC for Medical Information Controls */
+
+.currentPast-button {
+  label.active {
+    &:first-of-type {
+      background-color: @pp-dark-green;
+      &:before {
+        content: "\f00c";
+        font-family: FontAwesome;
+        color: white;
+      }
+    }
+    &:last-of-type {
+      background-color: @pp-dark-green;
+      &:after {
+        content: "\f00c";
+        font-family: FontAwesome;
+        color: white;
+      }
+    }
+  }
+  label:not(.active) {
+    color: @pp-dark-green;
+    &:hover {background-color: @pp-light-gray; color: @pp-dark-green}
+  }
+}
+
+.focus-border {
+  border: #607386 2px solid !important;
+}
+
+.lasb {
+  min-height: 23px;
+  ul {
+    //display: inline;
+    padding: 3px;
+    border-radius: 0 0 0 11px;
+    li {
+      position: relative;
+      display: inline;
+      padding: 0 10px;
+      font-size: 11px;
+      &:before {
+        content: "\f111";
+        font-family: FontAwesome;
+        font-style: normal;
+        font-weight: normal;
+        text-decoration: inherit;
+        /*--adjust as necessary--*/
+        //color: #000;
+        font-size: 6px;
+        position: absolute;
+        top: 4px;
+        left: -4px;
+      }
+      &:first-of-type {
+        padding-left: 15px;
+        &:before {
+          content: none;
+        }
+      }
+    }
+  }
+}
+
+.scrollBox {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: 300px;
+}
+
+.row-eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.xs-top-rule {
+  @media (max-width: @bs-xs-max) {
+    border-top: solid thin #E3E7E8;
+    margin-top: 7px;
+    padding-top: 5px;
+    &.past {
+      margin-top: 0;
+      padding-top: 7px;
+      padding-bottom: 9px;
+    }
+  }
+}
+
+/* End Styling SPECIFIC for Medical Information Controls */
+
+
+.top-rule {
+  border-top: solid thin #CFD4D6;
+  margin-top: 6px;
+  padding-top: 6px;
+}
+
 
 /* Bootstrap Breakpoint Sizes */
 @bs-xs-max: 767px;
@@ -62,6 +179,7 @@
 /* End of Sizing Variables */
 
 /* Color Variables */
+@pp-light-gray: #E4E4E4;
 @pp-gray: #cccccc;
 @pp-medium-gray: #b3b3b3;
 @pp-dark-gray: #333333;
@@ -75,6 +193,12 @@
 @pp-navbar-blueGray: #607386;
 @pp-strong-blue: #0088CC;
 @pp-dark-red: #ac1d2c;
+@pp-lasb-light-blue:#D5E2E2;
+@pp-lasb-dark-blue: #B4CCE0;
+@pp-orange: #E4A547;
+@pp-highlight: #ffed0f;
+@pp-yellow-sticky: #fffbbb;
+
 /* End of Color Variables */
 
 /* Font Colors */
@@ -122,6 +246,9 @@
 }
 .text-dark-red {
   color: @pp-dark-red;
+}
+.text-orange {
+  color: @pp-orange;
 }
 
 /* End of Font Colors*/
@@ -197,7 +324,12 @@
 .border-top-navbar-blue {
   border-top: @pp-navbar-blue 1px solid;
 }
-
+.border-top-medium-gray-thin {
+  border-top: @pp-medium-gray thin solid;
+}
+.border-bottom-medium-gray-thin {
+  border-bottom: @pp-medium-gray thin solid;
+}
 
 /* Bug #7321:Create Consent :: Accordion (Chevrons) Not Appearing
 This implementation must be improved to prevent similar issues.
@@ -321,7 +453,6 @@ This implementation must be improved to prevent similar issues.
 .navbar-top-links.modified li:last-child {
   @media (max-width: @bs-xs-max) {
     margin-right: 0;
-
   }
 }
 
@@ -371,6 +502,17 @@ This implementation must be improved to prevent similar issues.
   color: white;
 }
 
+.medium-gray {
+  background-color: @pp-medium-gray;
+  border-color: @pp-medium-gray;
+  color: black;
+}
+
+.orange {
+  background-color: @pp-orange;
+  border-color: @pp-orange;
+  color: white;
+}
 
 body.ng-scope.pace-done.grey{
   color:#262727;
@@ -381,6 +523,16 @@ body.ng-scope.pace-done.grey{
 {
   background-color: white;
   color: @pp-dark-green;
+}
+
+.lasb-light-blue {
+  background-color: @pp-lasb-light-blue;
+  color: black;
+}
+
+.lasb-dark-blue {
+  background-color: @pp-lasb-dark-blue;
+  color: black;
 }
 
 
@@ -430,8 +582,9 @@ body.ng-scope.pace-done.grey{
 
 /*Text-Font Classes */
 
-.fw-600 {
-  font-weight: 600;
+.vertical-align {
+  display: flex;
+  align-items: center;
 }
 .bold {
   font-weight: bold;
@@ -445,8 +598,33 @@ body.ng-scope.pace-done.grey{
 .nowrap {
   white-space: nowrap;
 }
-.pre-wrap {
-  white-space: pre-wrap;
+.nowrap {
+  white-space: nowrap;
+}
+
+.font-size8 {
+  font-size: 8px;
+}
+.font-size9 {
+  font-size: 9px;
+}
+.font-size10 {
+  font-size: 10px;
+}
+.font-size12 {
+  font-size: 12px;
+}
+.font-size14 {
+  font-size: 14px;
+}
+.font-size16 {
+  font-size: 16px;
+}
+.font-size18 {
+  font-size: 18px;
+}
+.font-size20 {
+  font-size: 20px;
 }
 .font-extraBold {
   font-weight: 700;
@@ -459,8 +637,16 @@ body.ng-scope.pace-done.grey{
   font-weight: 400;
 }
 */
+.font-medium {
+  font-weight: 500;
+}
+
 .font-light {
   font-weight: 300;
+}
+
+.hover-extraBold {
+  &:hover {font-weight: 700 !important;}
 }
 
 /*PALETTE*/
@@ -518,6 +704,17 @@ body.ng-scope.pace-done.grey{
   }
 }
 
+.panel-allergy {
+  border-color: #9db1bd;
+
+  & .panel-heading {
+    background-color: rgba(188, 212,224, .5);
+    //border-color: @pp-dark-blue;
+    color: #2F435A;
+    &:hover { background-color: #fffac0; font-weight: 600;}
+  }
+}
+
 .page-bg-white {
   position: absolute;
   background-color: white;
@@ -526,10 +723,32 @@ body.ng-scope.pace-done.grey{
   bottom: 0;
 }
 
+.bg-white-page {
+  background-color: white !important;
+}
+
+.bg-white {
+  background-color: white !important;
+}
+
+.bg-white-alpha80 {
+  background-color: rgba(255, 255, 255, .8) !important;
+}
+
 .mediumgray-bg {
   background-color: @pp-medium-gray;
 }
 
+.lightGrayAlpha-bg {
+  background-color: rgba(204,204,204,.6);
+}
+
+.bg-highlight {
+  background-color: @pp-highlight;
+}
+.bg-yellow-sticky {
+  background-color: @pp-yellow-sticky;
+}
 
 /* HEADER */
 
@@ -637,6 +856,11 @@ body.ng-scope.pace-done.grey{
 
 
 /* GENERAL*/
+.mini-Label {
+  border-right: thin solid @pp-light-gray;
+  padding-right: 5px;
+}
+
 .wrap {
   background-color: #f3f3f4;
   padding: 10px 20px;
@@ -655,7 +879,65 @@ body.ng-scope.pace-done.grey{
   //}
 }
 
+.border-radius-top-0 {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
 
+//padding
+.p-t-none {
+  padding-top: 0 !important;
+}
+.p-t-xxs {
+  padding-top: 1px;
+}
+.p-t-xs {
+  padding-top: 5px;
+}
+.p-t-sm {
+  padding-top: 10px;
+}
+.p-t {
+  padding-top: 15px;
+}
+.p-t-md {
+  padding-top: 20px;
+}
+.p-t-lg {
+  padding-top: 30px;
+}
+.p-t-xl {
+  padding-top: 40px;
+}
+
+.p-b-none {
+  padding-bottom: 0 !important;
+}
+.p-b-xxs {
+  padding-bottom: 1px;
+}
+.p-b-xs {
+  padding-bottom: 5px;
+}
+.p-b-sm {
+  padding-bottom: 10px;
+}
+.p-b {
+  padding-bottom: 15px;
+}
+.p-b-md {
+  padding-bottom: 20px;
+}
+.p-b-lg {
+  padding-bottom: 30px;
+}
+.p-b-xl {
+  padding-bottom: 40px;
+}
+
+.p-none {
+  padding: 0;
+}
 .side-padding0 {
   .side-padding(0px) !important;
 }
@@ -749,7 +1031,7 @@ body.ng-scope.pace-done.grey{
 }
 
 .custom-no-margin-top{
-  margin-top: 0 !important;
+  margin-top: 0;
 }
 
 .icon-border{
@@ -783,6 +1065,22 @@ body.ng-scope.pace-done.grey{
 .label-top-margin{
   margin-top: 5px;
 }
+/* patient list */
+.patient-autoComplete {
+  position: absolute;
+  top: 34px;
+  left: 0px;
+  right: 0;
+  z-index: 10;
+  background-color: white;
+  border: thin solid rgba(27, 121, 27, 0.35);
+  border-radius: 0 0 6px 6px;
+  li:hover {
+    font-weight: 600;
+    background-color: rgba(223, 240, 216, 1);
+  }
+}
+
 
 /*provider-list-page*/
 .btn-red{
@@ -806,11 +1104,11 @@ body.ng-scope.pace-done.grey{
   background-color: @pp-navy-blue ;
   color: white;
 }
+
+
 /* end of provider-lookup search page */
 
-.popover-width-medium {
-  max-width: 330px;
-}
+
 
 /* State Modifiers */
 
