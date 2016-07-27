@@ -11,19 +11,16 @@ describe("app.healthInformation controller", function() {
     beforeEach(module('ui.router'));
     beforeEach(module('app.healthInformation'));
 
-    var $scope, healthInformationService, controller;
-    var data = {Documents: "document"};
-    var patientData = [data];
+    var $scope, controller;
+    var patientData = {Documents: "document"};
 
-    beforeEach(inject(function($rootScope, $controller, _healthInformationService_) {
+    beforeEach(inject(function($rootScope, $controller) {
 
         $scope = $rootScope.$new();
-        healthInformationService = _healthInformationService_;
 
         controller = $controller('HealthInformationController', {
             $rootScope: $scope,
-            patientData: patientData,
-            healthInformationService: healthInformationService
+            patientData: patientData
         });
 
     }));

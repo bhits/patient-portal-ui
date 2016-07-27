@@ -4,7 +4,7 @@
 
 'use strict';
 
-describe('app.AccountVerification.directive', function(){
+xdescribe('app.AccountVerification.directive', function(){
 
     var $resource, envService, controller, $scope, $httpBackend, utilityService,
         accountService, emailTokenService, accountConfig, form;
@@ -33,6 +33,8 @@ describe('app.AccountVerification.directive', function(){
         emailTokenService = _emailTokenService_;
         accountConfig = _accountConfig_;
 
+        $httpBackend.whenGET('app/account/directives/verification.html').passThrough();
+
         var element = angular.element(
             '<form name="form">' +
             '<input ng-model="model.num" name="num" integer />' +
@@ -50,13 +52,20 @@ describe('app.AccountVerification.directive', function(){
         //     emailTokenService: emailTokenService,
         //     accountConfig: accountConfig
         // });
-        controller = element.controller("VerificationController");
+        //controller = element.controller("VerificationController");
+        var local = {
+                utilityService: utilityService,
+                accountService: accountService,
+                emailTokenService: emailTokenService,
+                accountConfig: accountConfig
+        };
+        controller = $controller('VerificationController', local, verifyInfo);
         controller.verifyInfo = verifyInfo;
 
     }));
     
-    xit('should clearField', function(){
-        controller.clearField()
-    })
+    it('should clearField', function(){
+        controller.clearField();
+    });
     
 });

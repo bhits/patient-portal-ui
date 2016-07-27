@@ -45,7 +45,7 @@ describe("app.login.controller ", function() {
     it('should create controller and have correct version based on config.js', function(){
         expect(controller).toBeDefined();
         expect(controller.version).toBeDefined();
-        expect(controller.version).toEqual('0.12.0');
+        expect(controller.version).toEqual('0.15.0');
     });
 
     it('should forget password', function(){

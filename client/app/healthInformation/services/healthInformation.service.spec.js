@@ -36,14 +36,6 @@ describe('app.healthInformationService ', function() {
         expect(module).not.toEqual(null);
     });
 
-    it('should be defined and not null', function(){
-        expect(healthInformationService.isDefineAndNotNull(patientResource)).toBeFalsy();
-        patientResource = null;
-        expect(healthInformationService.isDefineAndNotNull(patientResource)).toBeFalsy();
-        patientResource = {value: 'value'};
-        expect(healthInformationService.isDefineAndNotNull(patientResource)).toBeTruthy();
-    });
-    
     it('should have getHealthInformationResource function', function () {
         patientResource = $resource(envService.securedApis.phrApiBaseUrl + "/patients/healthInformation/:mrn", {mrn: '@mrn'});
         //TODO: test if it returns the correct patientResource
@@ -86,18 +78,6 @@ describe('app.healthInformationService ', function() {
     it('should get CDA Document', function(){
         document = {CDAdocuments: ['doc1.doc','doc2.doc']};
         expect(healthInformationService.getCDADocument(document)).toBe('doc1.doc');
-    });
-
-    it('should log error message if patientData is empty', function(){
-        healthInformationService.getDocuments(patientData);
-        expect(console.log).toHaveBeenCalledWith("Error getting CDA Document from Documents.");
-        expect(console.log).toHaveBeenCalledWith(patientData);
-    });
-
-    it('should get CDA Document', function(){
-        document = {Documents: 'Dummy document'};
-        patientData = [document,ccdaDocument];
-        expect(healthInformationService.getDocuments(patientData)).toBe('Dummy document');
     });
 
 

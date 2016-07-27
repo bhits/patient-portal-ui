@@ -84,7 +84,5 @@
             vm.verifyInfo = angular.copy(original);
             vm.verifyError = false;
         }
-        angular.module('app.account').controller('VerificationController', VerificationController);
-
     }
 })();

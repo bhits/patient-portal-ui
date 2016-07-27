@@ -157,6 +157,6 @@ describe("app AppController ", function() {
 
     it ('should state change (stateChangeSuccess)', function(){
         
-    })
+    });
     
 });

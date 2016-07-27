@@ -28,7 +28,20 @@ describe('app.consentServices', function () {
         doNotShareSensitivityPolicyCodes: ["doNotShareSensitivityPolicyCodes"],
         shareForPurposeOfUseCodes: ["shareForPurposeOfUseCodes"],
         consentStart: ["consentStart"],
-        consentEnd: ["consentEnd"]
+        consentEnd: ["consentEnd"],
+        status: 200
+    };
+
+    var failedConsent = {
+        providersPermittedToDiscloseNpi: ["providersPermittedToDiscloseNpi"],
+        providersDisclosureIsMadeToNpi: ["providersDisclosureIsMadeToNpi"],
+        organizationalProvidersDisclosureIsMadeToNpi: ["organizationalProvidersDisclosureIsMadeToNpi"],
+        organizationalProvidersPermittedToDiscloseNpi: ["organizationalProvidersPermittedToDiscloseNpi"],
+        doNotShareSensitivityPolicyCodes: ["doNotShareSensitivityPolicyCodes"],
+        shareForPurposeOfUseCodes: ["shareForPurposeOfUseCodes"],
+        consentStart: ["consentStart"],
+        consentEnd: ["consentEnd"],
+        status: 0
     };
 
     beforeEach(module('app.config'));
@@ -111,6 +124,7 @@ describe('app.consentServices', function () {
         status = consentService.revokeConsent({id: 111}, success, error);
         $httpBackend.flush();
         expect(status).toEqual(200);
+        expect(passed).toBeTruthy();
     });
 
     it ('should fail revoke consent (revokeConsent)', function(){
@@ -125,8 +139,8 @@ describe('app.consentServices', function () {
         $httpBackend.expect('POST',"/pcm/patients/consents").respond(200, consent);
         status = consentService.createConsent(consent, success, error);
         $httpBackend.flush();
+        expect(status).toEqual(200);
         expect(passed).toBeTruthy();
-        console.log()
     });
 
     it ('should fail create consent (createConsent)', function(){
@@ -141,6 +155,7 @@ describe('app.consentServices', function () {
         $httpBackend.expect('PUT',"/pcm/patients/consents").respond(200, consent);
         status = consentService.updateConsent(consent, success, error);
         $httpBackend.flush();
+        expect(status).toEqual(200);
         expect(passed).toBeTruthy();
     });
 
@@ -171,6 +186,7 @@ describe('app.consentServices', function () {
         $httpBackend.expect('DELETE',"/pcm/patients/consents/%5Bobject%20Object%5D").respond(200, consent);
         status = consentService.deleteConsent(consent, success, error);
         $httpBackend.flush();
+        expect(status).toEqual(200);
         expect(passed).toBeTruthy();
     });
 
@@ -183,9 +199,10 @@ describe('app.consentServices', function () {
     });
 
     it ('should export consent directive (exportConsentDirective)', function(){
-        $httpBackend.expect('GET',"/pcm/patients/consents/exportConsentDirective/%5Bobject%20Object%5D").respond(200, {id: 111});
+        $httpBackend.expect('GET',"/pcm/patients/consents/exportConsentDirective/%5Bobject%20Object%5D").respond(200, {id: 111, status: 200});
         status = consentService.exportConsentDirective({id: 111}, success, error);
         $httpBackend.flush();
+        expect(status).toEqual(200);
         expect(passed).toBeTruthy();
     });
 
@@ -262,19 +279,31 @@ describe('app.consentServices', function () {
         expect(consentService.getSelectedProvider()).toEqual([]);
     });
 
-    it('should prepare provider list', function(){
+    it('should prepare provider list (prepareProviderList)', function(){
         var providers = [{npi: 111},{npi: 222}];
         var selectedProviders = [111, 222];
 
         var what = consentService.prepareProviderList(selectedProviders, providers);
+        expect(what.length).toBe(2);
         expect(what[0].isDisabled).toBeTruthy();
+        expect(what[1].isDisabled).toBeTruthy();
     });
 
-    it('should prepare provider list', function(){
+    it('should fail prepare provider list with null providers (prepareProviderList)', function(){
         var providers = [{npi: 111},{npi: 222}];
         var selectedProviders = [null, null];
 
         var what = consentService.prepareProviderList(selectedProviders, providers);
+        expect(what.length).toBe(2);
+        expect(what[0].isDisabled).toBeFalsy();
+    });
+
+    it('should fail prepare provider list with invalid providers (prepareProviderList)', function(){
+        var providers = [{npi: 111},{npi: 222}];
+        var selectedProviders = [333, 444];
+
+        var what = consentService.prepareProviderList(selectedProviders, providers);
+        expect(what.length).toBe(2);
         expect(what[0].isDisabled).toBeFalsy();
     });
 
@@ -282,7 +311,6 @@ describe('app.consentServices', function () {
         spyOn(consentService, 'resolveConsentState').and.callThrough();
         $scope.consent = mockState;
         consentService.resolveConsentState(mockConsent);
-        expect(consentService.resolveConsentState(mockState)).toBe('error');
         expect(consentService.resolveConsentState(mockConsent)).toBe('Saved');
         mockConsent = {
             "consentStage": "CONSENT_SAVED"
@@ -296,6 +324,13 @@ describe('app.consentServices', function () {
             "consentStage": "REVOCATION_REVOKED"
         };
         expect(consentService.resolveConsentState(mockConsent)).toBe('Revoked');
+    });
+
+    it ('should fail to return the correct resolve state for consent (resolveConsentState)', function(){
+        spyOn(consentService, 'resolveConsentState').and.callThrough();
+        $scope.consent = mockState;
+        consentService.resolveConsentState(mockConsent);
+        expect(consentService.resolveConsentState(mockState)).toBe('error');
         mockConsent = {
             "consentStage": "NA"
         };
