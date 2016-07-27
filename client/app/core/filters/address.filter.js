@@ -16,18 +16,18 @@
                 var address = "";
                 if (angular.isDefined(data)) {
 
-                    if(utilityService.isDefinedAndLenghtNotZero(data.firstLinePracticeLocationAddress)){
+                    if(utilityService.isDefinedAndLengthNotZero(data.firstLinePracticeLocationAddress)){
                         address += data.firstLinePracticeLocationAddress + ", ";
                     }
-                    if( utilityService.isDefinedAndLenghtNotZero(data.practiceLocationAddressCityName)){
+                    if( utilityService.isDefinedAndLengthNotZero(data.practiceLocationAddressCityName)){
                         address += data.practiceLocationAddressCityName + ", ";
                     }
 
-                    if( utilityService.isDefinedAndLenghtNotZero(data.practiceLocationAddressStateName)){
+                    if( utilityService.isDefinedAndLengthNotZero(data.practiceLocationAddressStateName)){
                         address += data.practiceLocationAddressStateName + ", ";
                     }
 
-                    if( utilityService.isDefinedAndLenghtNotZero(data.practiceLocationAddressPostalCode)){
+                    if( utilityService.isDefinedAndLengthNotZero(data.practiceLocationAddressPostalCode)){
                         address += data.practiceLocationAddressPostalCode ;
                     }
                 }

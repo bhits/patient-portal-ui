@@ -1,76 +1,69 @@
 /**
  * Created by tomson.ngassa on 7/20/2015.
+ * Modified by cindy.ren on 6/13/2016
  */
 
 'use strict';
 
-xdescribe('app.accessModule ', function(){
-    var module;
+describe("app.login.controller ", function() {
 
-    beforeEach(function() {
-        module = angular.module("app");
-    });
-
-    it("should be registered", function() {
-        expect(module).not.toEqual(null);
-    });
-
-    describe("Dependencies:", function() {
-
-        var dependencies;
-
-        var hasModule = function(m) {
-            return dependencies.indexOf(m) >= 0;
-        };
-        beforeEach(function() {
-            dependencies = module.value('app').requires;
-        });
-    });
-});
-
-xdescribe("app.accessModule LoginController ", function() {
-
-    beforeEach(module('ui.router'));
-    beforeEach(module('ngIdle'));
+    beforeEach(module('app.account'));
+    beforeEach(module('app.config'));
     beforeEach(module('app.security'));
+    beforeEach(module('app.brand'));
 
-    var state, envService, Idle, authenticationService, controller, utilityService;
+    var envService, controller, $resource, brand, utilityService, accountConfig;
 
-    beforeEach(inject(function( $controller, $state, _Idle_, _authenticationService_, _envService_, _utilityService_) {
-        state = $state;
-        Idle = _Idle_;
+    beforeEach(function () {
+        var fakeModule = angular.module('test.app.brand', function () {});
+        fakeModule.config( function (brandProvider) {
+            brand = brandProvider;
+        });
+        module('app.brand', 'test.app.brand');
+        inject(function () {});
+        brand.setBrandName("Brand Name");
+        brand.setBrandInitial("BI");
+    });
+
+    beforeEach(inject(function( $controller, _envService_,
+                                _utilityService_, _$resource_, _accountConfig_) {
+
         envService = _envService_;
-        authenticationService = _authenticationService_;
+        $resource = _$resource_;
         utilityService = _utilityService_;
-
-        spyOn(utilityService,'scrollTo').andCallThrough();
-        spyOn(authenticationService,'login').andCallThrough();
-        spyOn(Idle,'watch').andCallThrough();
-        spyOn(state,'go').andCallThrough();
+        accountConfig = _accountConfig_;
 
         controller = $controller('LoginController', {
-            $state: state,
-            authenticationService: authenticationService,
-            Idle: Idle,
             envService: envService,
-            utilityService: utilityService
+            utilityService: utilityService,
+            accountConfig: accountConfig,
+            brand: brand
         });
+
     }));
 
-    it('should have default values ', function(){
-        expect(controller.loginData).toEqual({userName: "", password: ""});
-        expect(controller.version).toEqual(envService.version);
+    it('should create controller and have correct version based on config.js', function(){
+        expect(controller).toBeDefined();
+        expect(controller.version).toBeDefined();
+        expect(controller.version).toEqual('0.15.0');
     });
 
-    it('should scroll to specify location', function(){
-        controller.scrollTo("#test");
-        expect(utilityService.scrollTo).toHaveBeenCalledWith('#test');
+    it('should forget password', function(){
+        expect(controller.forgotPassword).toBeDefined();
+        spyOn(utilityService, 'redirectTo').and.callThrough();
+        controller.forgotPassword();
+        expect(accountConfig.forgotPasswordPath).toBe('/fe/account/forgotPassword');
+        expect(utilityService.redirectTo).toHaveBeenCalledWith('/fe/account/forgotPassword');
     });
 
-    it('should login user', function(){
-        controller.loginData = {userName: "test", password: "test"};
-        controller.login();
-        expect(authenticationService.login).toHaveBeenCalledWith({userName: "test", password: "test"});
+    it('should get brand name', function(){
+        expect(controller.brandName).toBeDefined();
+        expect(controller.brandName).toEqual('Brand Name');
+    });
+
+    it('should get brand initials for alt logo text', function(){
+        expect(controller.altLogoText).toBeDefined();
+        expect(controller.altLogoText).toEqual('BI Logo');
     });
 
 });

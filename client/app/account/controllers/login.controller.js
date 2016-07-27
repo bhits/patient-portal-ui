@@ -11,8 +11,8 @@
         var vm = this;
         vm.version = envService.version;
         vm.forgotPassword = forgotPassword;
-        vm.brandName = brand.getBrandName();
-        vm.altLogoText = brand.getBrandInitials() + " Logo";
+        vm.brandName = brand.$get().getBrandName();
+        vm.altLogoText = brand.$get().getBrandInitials() + " Logo";
         
         function forgotPassword() {
             utilityService.redirectTo(accountConfig.forgotPasswordPath);

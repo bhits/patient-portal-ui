@@ -19,6 +19,7 @@
         service.getUserName = getUserName;
         service.getName = getName;
         service.getUserId = getUserId;
+        service.getProfile = getProfile;
 
         return service;
 
@@ -68,6 +69,6 @@
                 function (response) {
                     console.log(response);
                 });
-        }
+        }//TODO: remove - not used elsewhere
     }
 })();

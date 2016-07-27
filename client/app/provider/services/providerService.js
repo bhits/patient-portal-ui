@@ -31,7 +31,7 @@
 
                 function getProviders (success, error) {
                     providers.query(success, error);
-                }
+                } //TODO: remove, not used
 
                 function deleteProvider(npi, success, error) {
                     providers.delete({npi: npi}, success, error);

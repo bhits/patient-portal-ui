@@ -14,8 +14,8 @@
         var vm = this;
         vm.activated = activated;
         vm.patientName = accountService.getPatientName();
-        vm.title = brand.getBrandName() + " Account Activation Complete";
-        vm.brandName = brand.getBrandName();
+        vm.title = brand.$get().getBrandName() + " Account Activation Complete";
+        vm.brandName = brand.$get().getBrandName();
 
         function activated() {
             accountService.removeActivateInfo();

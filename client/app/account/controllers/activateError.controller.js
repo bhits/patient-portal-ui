@@ -12,8 +12,8 @@
     /* @ngInject */
     function ActivateErrorController(brand) {
         var vm = this;
-        vm.title = brand.getBrandName() + " Account Activation - Invalid";
-        vm.brandName = brand.getBrandName();
-        vm.brandInitial = brand.getBrandInitials();
+        vm.title = brand.$get().getBrandName() + " Account Activation - Invalid";
+        vm.brandName = brand.$get().getBrandName();
+        vm.brandInitial = brand.$get().getBrandInitials();
     }
 })();
