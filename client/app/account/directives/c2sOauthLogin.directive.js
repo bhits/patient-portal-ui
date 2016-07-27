@@ -3,9 +3,9 @@
 
     angular
         .module('app.account')
-        .directive('mhcOauthLogin', mhcOauthLogin);
+        .directive('c2sOauthLogin', c2sOauthLogin);
 
-    function mhcOauthLogin() {
+    function c2sOauthLogin() {
 
         var directive = {
             restrict: 'E',
