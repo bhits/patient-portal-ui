@@ -5,13 +5,12 @@
 
 'use strict';
 
-
 describe("app.healthInformation controller", function() {
 
     beforeEach(module('ui.router'));
     beforeEach(module('app.healthInformation'));
 
-    var $scope, controller;
+    var $scope, controller, failController;
     var patientData = {Documents: "document"};
 
     beforeEach(inject(function($rootScope, $controller) {
@@ -22,11 +21,20 @@ describe("app.healthInformation controller", function() {
             $rootScope: $scope,
             patientData: patientData
         });
+        patientData = {FailDocuments: "document"};
+        failController = $controller('HealthInformationController', {
+            $rootScope: $scope,
+            patientData: patientData
+        });
 
     }));
 
     it('should have correct documents', function(){
        expect(controller.documents).toBe("document");
+    });
+
+    it('should have correct documents', function(){
+        expect(controller.noDocumentFound).toBeTruthy();
     });
 
     it('should expand all accordions in model', function(){

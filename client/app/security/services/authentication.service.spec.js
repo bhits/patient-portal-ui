@@ -32,25 +32,23 @@ describe('app.authenticationService ', function() {
     }));
 
     it("should login", function() {
-
+        $httpBackend.expect('POST', '/uaa/oauth/token').respond(200);
         spyOn(authenticationService,'login').and.callThrough();
 
         var loginResource = authenticationService.login(loginInfo, success, error);
+        $httpBackend.flush();
         expect(loginResource.username).toEqual("userName");
-
         expect(authenticationService.login).toHaveBeenCalledWith(loginInfo, success, error);
-
     });
 
-    xit("should forget password", function() {
-
+    it("should forget password", function() {
+        $httpBackend.expect('POST', '/uaa/forgot_password.do').respond(200);
         spyOn(authenticationService,'forgotPassword').and.callThrough();
 
         var forgotPasswordResource = authenticationService.forgotPassword(loginInfo, success, error);
-        expect(forgotPasswordResource.username).toEqual("username");
-
+        $httpBackend.flush();
+        expect(forgotPasswordResource.username).toEqual("userName");
         expect(authenticationService.forgotPassword).toHaveBeenCalledWith(loginInfo, success, error);
-
     });
     
     it("should logout", function() {

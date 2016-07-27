@@ -10,7 +10,7 @@ describe("app.forgotPassword.controller ", function() {
     beforeEach(module('app.security'));
     beforeEach(module('app.brand'));
 
-    var utilityService, oauthConfig, accountConfig, authenticationService;
+    var utilityService, oauthConfig, accountConfig, authenticationService, $httpBackend;
     var controller, brand, $scope, form;
 
     beforeEach(function () {
@@ -25,13 +25,14 @@ describe("app.forgotPassword.controller ", function() {
     });
 
     beforeEach(inject(function( $controller, $state, $rootScope, $compile, _authenticationService_,
-                                _utilityService_, _oauthConfig_, _accountConfig_) {
+                                _utilityService_, _oauthConfig_, _accountConfig_, _$httpBackend_) {
 
         utilityService = _utilityService_;
         oauthConfig = _oauthConfig_;
         accountConfig = _accountConfig_;
         authenticationService = _authenticationService_;
         $scope = $rootScope;
+        $httpBackend = _$httpBackend_;
 
         var element = angular.element(
             '<form name="form">' +
@@ -53,15 +54,42 @@ describe("app.forgotPassword.controller ", function() {
 
     }));
 
-    xit('should forget password', function(){
+    it('should forget password', function(){
+        $httpBackend.expect('POST', '/uaa/forgot_password.do').respond(200);
+        expect(controller.forgotPassword).toBeDefined();
+        spyOn(authenticationService, 'forgotPassword').and.callThrough();
+        spyOn(utilityService, 'redirectTo').and.callThrough();
+        controller.user= {email: "test"};
+        controller.forgotPassword();
+        $httpBackend.flush();
+        expect(accountConfig.forgotPasswordPath).toBe('/fe/account/forgotPassword');
+        expect(authenticationService.forgotPassword).toHaveBeenCalled();
+        expect(utilityService.redirectTo).toHaveBeenCalledWith('/fe/account/resetPasswordSuccess');
+    });
+
+    it('should fail forget password with error status 0', function(){
+        $httpBackend.expect('POST', '/uaa/forgot_password.do').respond(0);
         expect(controller.forgotPassword).toBeDefined();
         spyOn(authenticationService, 'forgotPassword').and.callThrough();
         controller.user= {email: "test"};
         controller.forgotPassword();
+        $httpBackend.flush();
         expect(accountConfig.forgotPasswordPath).toBe('/fe/account/forgotPassword');
-        expect(utilityService.redirectTo).toHaveBeenCalledWith('/fe/account/forgotPassword');
+        expect(controller.emailNotFound).toBeTruthy();
         expect(authenticationService.forgotPassword).toHaveBeenCalled();
-    }); //TODO: fails because authentication.service.spec.js forgotpassword also fails!
+    });
+
+    it('should fail forget password with error status 422', function(){
+        $httpBackend.expect('POST', '/uaa/forgot_password.do').respond(422);
+        expect(controller.forgotPassword).toBeDefined();
+        spyOn(authenticationService, 'forgotPassword').and.callThrough();
+        controller.user= {email: "test"};
+        controller.forgotPassword();
+        $httpBackend.flush();
+        expect(accountConfig.forgotPasswordPath).toBe('/fe/account/forgotPassword');
+        expect(controller.emailNotFound).toBeTruthy();
+        expect(authenticationService.forgotPassword).toHaveBeenCalled();
+    });
 
     it('should get brand name', function(){
         expect(controller.title).toBeDefined();
