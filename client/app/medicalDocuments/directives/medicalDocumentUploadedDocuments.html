@@ -6,66 +6,7 @@
             </div>
             <div class="panel-body">
                 <div class="side-padding10">
-                    <!--<div class="row row-striped p-t-xs p-b-xs"-->
-                         <!--ng-repeat="medicalDocument in uploadedDocumentVm.medicaldocumentslist">-->
-                        <!--<div class="col-sm-5 col-xs-12 m-b-xs">-->
-                            <!--<div class="bold">-->
-                                <!--<span ng-bind="medicalDocument.name"></span>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="col-sm-7 col-xs-12 m-b-xs">-->
-                            <!--<div><span class="mini-Label font-size10 m-r-xs">Doc Type</span>Episode Summary Note</div>-->
-                        <!--</div>-->
 
-                        <!--<div class="col-sm-5 col-xs-12 m-b-xs">-->
-                            <!--<div class="">-->
-                                <!--<span ng-bind="medicalDocument.description"></span>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="col-sm-7 col-xs-12 m-b-xs">-->
-                            <!--<button type="button" class="btn btn-success dark-green btn-xs m-r-xs"-->
-                                    <!--ng-click="uploadedDocumentVm.uploadDocumentToHIEOS(medicalDocument)">-->
-                                <!--Publish-->
-                            <!--</button>-->
-                            <!--<button type="button" class="btn btn-default btn-outline btn-xs m-r-xs"-->
-                                    <!--ng-click="uploadedDocumentVm.downloadFile(medicalDocument)">-->
-                                <!--Download-->
-                            <!--</button>-->
-                            <!--<a href="" type="button" class="hover-extraBold"-->
-                               <!--ng-click="uploadedDocumentVm.openDeleteMedicalDocumentModal(medicalDocument, 'sm')">-->
-                                <!--<span class="fa fa-times m-r-xxs text-dark-red"></span> Remove-->
-                            <!--</a>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!-- new -->
-                    <!--<div class="row row-striped p-t-xs p-b-xs"-->
-                         <!--ng-repeat="medicalDocument in uploadedDocumentVm.medicaldocumentslist">-->
-                        <!--<div class="col-sm-6">-->
-                        <!--<div><span class="mini-Label font-size10 m-r-xs">Doc Type</span><span>Episode Summary Note</span></div>-->
-                        <!--<div><span class="mini-Label font-size10 m-r-xs">Name</span><span ng-bind="medicalDocument.name"></span></div>-->
-                        <!--<div><span class="mini-Label font-size10 m-r-xs">Description</span><span ng-bind="medicalDocument.description"></span></div>-->
-                        <!--</div>-->
-                        <!--<div class="col-sm-6">-->
-                            <!--<div><span class="bold">Episode Summary Note</span></div>-->
-                            <!--<div><span ng-bind="medicalDocument.name"></span></div>-->
-                            <!--<div><span class="italic" ng-bind="medicalDocument.description"></span></div>-->
-                        <!--</div>-->
-                        <!--<div class="col-sm-6">-->
-                            <!--<button type="button" class="btn btn-success dark-green btn-xs m-r-xs"-->
-                                    <!--ng-click="uploadedDocumentVm.uploadDocumentToHIEOS(medicalDocument)">-->
-                                <!--Publish-->
-                            <!--</button>-->
-                            <!--<button type="button" class="btn btn-default btn-outline btn-xs m-r-xs"-->
-                                    <!--ng-click="uploadedDocumentVm.downloadFile(medicalDocument)">-->
-                                <!--Download-->
-                            <!--</button>-->
-                            <!--<a href="" type="button" class="hover-extraBold"-->
-                               <!--ng-click="uploadedDocumentVm.openDeleteMedicalDocumentModal(medicalDocument, 'sm')">-->
-                                <!--<span class="fa fa-times m-r-xxs text-dark-red"></span> Remove-->
-                            <!--</a>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!-- ANOTHER -->
                     <div class="row p-b-xs border-bottom-medium-gray-thin">
                         <div class="col-sm-4 bold">
                             Document Type
@@ -85,10 +26,10 @@
                                     Summary of Episode Note
                                 </div>
                                 <div class="col-sm-4 font-size12">
-                                    Doc Name
+                                    <span ng-bind="medicalDocument.name"></span>
                                 </div>
                                 <div class="col-sm-4 font-size12">
-                                    Document Description
+                                    <span ng-bind="medicalDocument.description"></span>
                                 </div>
                             </div>
                             <div class="border-bottom p-t-xxs p-b-xxs side-padding15"></div>
@@ -112,9 +53,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- END ANOTHER -->
-                    <!-- end NEW -->
-
                     <div class="row row-striped p-t-xs p-b-xs"
                          ng-if="uploadedDocumentVm.medicaldocumentslist.length == 0">
                         <strong> No document was has been uploaded.</strong>
