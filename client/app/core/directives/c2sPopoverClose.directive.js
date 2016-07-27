@@ -7,10 +7,10 @@
 
     angular
         .module('app.core')
-        .directive('mhcPopoverClose', mhcPopoverClose);
+        .directive('c2sPopoverClose', c2sPopoverClose);
 
     /* @ngInject */
-    function mhcPopoverClose($timeout) {
+    function c2sPopoverClose($timeout) {
         var directive = {
             restrict: 'A',
             link: linkFunc
@@ -19,7 +19,7 @@
 
         /* @ngInject */
         function linkFunc(scope, element) {
-            var popoverSelectorName = "mhc-popover-selector";
+            var popoverSelectorName = "c2s-popover-selector";
             var trigger = document.getElementsByClassName(popoverSelectorName);
 
             element.on('click', function (event) {
