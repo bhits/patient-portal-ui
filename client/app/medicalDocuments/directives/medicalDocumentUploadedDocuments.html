@@ -6,8 +6,7 @@
             </div>
             <div class="panel-body">
                 <div class="side-padding10">
-
-                    <div class="row p-b-xs border-bottom-medium-gray-thin">
+                    <div class="row p-b-xs border-bottom-medium-gray-thin hidden-xs">
                         <div class="col-sm-4 bold">
                             Document Type
                         </div>
@@ -22,13 +21,13 @@
                          ng-repeat="medicalDocument in uploadedDocumentVm.medicaldocumentslist">
                         <div class="col-sm-12">
                             <div class="row m-b-xs">
-                                <div class="col-sm-4 font-size12">
+                                <div class="col-sm-4 font-size12 bold">
                                     Summary of Episode Note
                                 </div>
                                 <div class="col-sm-4 font-size12">
                                     <span ng-bind="medicalDocument.name"></span>
                                 </div>
-                                <div class="col-sm-4 font-size12">
+                                <div class="col-sm-4 font-size12 italic">
                                     <span ng-bind="medicalDocument.description"></span>
                                 </div>
                             </div>
