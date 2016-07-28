@@ -7,9 +7,9 @@
 
     angular
         .module('app.account')
-        .directive('mhcAccountVerification', mhcAccountVerification);
+        .directive('c2sAccountVerification', c2sAccountVerification);
 
-    function mhcAccountVerification() {
+    function c2sAccountVerification() {
 
         var directive = {
             restrict: 'E',
