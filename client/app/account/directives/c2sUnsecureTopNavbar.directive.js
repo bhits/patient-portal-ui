@@ -3,7 +3,7 @@
 
     angular
         .module('app.account')
-        .directive('mhcUnsecureTopNavbar', topNavbar);
+        .directive('c2sUnsecureTopNavbar', topNavbar);
 
     function topNavbar() {
 
