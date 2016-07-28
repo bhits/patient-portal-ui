@@ -8,10 +8,10 @@
 
     angular
         .module('app.core')
-        .directive('mhcOutsideClick', mhcOutsideClick);
+        .directive('c2sOutsideClick', c2sOutsideClick);
 
     /* @ngInject */
-    function mhcOutsideClick($document) {
+    function c2sOutsideClick($document) {
 
         var directive = {
             link: linkFunc
@@ -20,7 +20,7 @@
 
         /* @ngInject */
         function linkFunc(scope, element, attributes) {
-            var scopeExpression = attributes.mhcOutsideClick,
+            var scopeExpression = attributes.c2sOutsideClick,
                 onDocumentClick = function (event) {
                     var parent = event.target;
 
