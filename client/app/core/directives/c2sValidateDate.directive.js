@@ -5,10 +5,10 @@
 
     angular
         .module('app.core')
-            .directive('mhcValidateDate', mhcValidateDate);
+            .directive('c2sValidateDate', c2sValidateDate);
 
             /* @ngInject */
-            function mhcValidateDate(utilityService) {
+            function c2sValidateDate(utilityService) {
                 var directive =  {
                     require: 'ngModel',
                     restrict: 'A',
