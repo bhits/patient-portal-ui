@@ -1,159 +1,78 @@
-/**
- * Created by tomson.ngassa on 7/20/2015.
+/*
+ * Created by cindy.ren on 6/9/2016.
  */
 
 'use strict';
 
-xdescribe('app.security ', function(){
-    var module;
+describe('app.authenticationService ', function() {
+    var utilityService, oauthTokenService, authenticationService,
+        location, profileService, $httpBackend;
+    var loginInfo = {username: "userName", password: "password", email: "email"};
 
-    beforeEach(function() {
-        module = angular.module("app.security");
-    });
+    var success = function (response) {
+        return response;
+    };
 
-    it("should be registered", function() {
-        expect(module).not.toEqual(null);
-    });
+    var error = function (data) {
+        return data;
+    };
 
-    describe("Dependencies:", function() {
-
-        var dependencies;
-
-        var hasModule = function(m) {
-            return dependencies.indexOf(m) >= 0;
-        };
-        beforeEach(function() {
-            dependencies = module.value('app.authenticationModule').requires;
-        });
-
-        it("should have LocalStorageModule as a dependency", function() {
-            expect(hasModule('LocalStorageModule')).toEqual(true);
-        });
-
-        it("should have angular-jwt as a dependency", function() {
-            expect(hasModule('angular-jwt')).toEqual(true);
-        });
-
-        it("should have app.servicesModule as a dependency", function() {
-            expect(hasModule('app.servicesModule')).toEqual(true);
-        });
-
-        it("should have ngResource as a dependency", function() {
-            expect(hasModule('ngResource')).toEqual(true);
-        });
-
-    });
-});
-
-
-xdescribe('app.authenticationModule, authenticationService ', function() {
-    var utilityService, localStorageService, q, jwtHelper, authenticationService, location, base64, $httpBackend;
-
-    beforeEach(module('LocalStorageModule'));
-    beforeEach(module('angular-jwt'));
-    beforeEach(module('app.servicesModule'));
-    beforeEach(module('ab-base64'));
     beforeEach(module('ngResource'));
     beforeEach(module('app.security'));
 
-    beforeEach(inject(function ( _localStorageService_, _$q_, _jwtHelper_, _authenticationService_, _$location_, _base64_, _utilityService_, _$httpBackend_) {
+    beforeEach(inject(function (_oauthTokenService_, _authenticationService_, _$httpBackend_,
+                                _$location_, _utilityService_, _profileService_) {
 
-        utilityService = utilityService;
-        localStorageService = _localStorageService_;
-        q = _$q_;
-        jwtHelper = _jwtHelper_;
-        authenticationService = _authenticationService_;
-        location = _$location_;
-        base64 = _base64_;
         $httpBackend = _$httpBackend_;
+        utilityService = _utilityService_;
+        authenticationService = _authenticationService_;
+        oauthTokenService = _oauthTokenService_;
+        profileService = _profileService_;
+        location = _$location_;
     }));
 
-    afterEach(function() {
-        $httpBackend.verifyNoOutstandingExpectation();
-        $httpBackend.verifyNoOutstandingRequest();
-    });
+    it("should login", function() {
+        $httpBackend.expect('POST', '/uaa/oauth/token').respond(200);
+        spyOn(authenticationService,'login').and.callThrough();
 
-    it("should clear cache", function() {
-        $httpBackend.expectPOST("https://testbed-api-dev.feisystems.com/user/clearcacheforuser").respond({status: 201});
-
-        spyOn(localStorageService, 'get').andReturn({
-            token: { AccessToken: "", ExpiresIn: 3600, RefreshToken: "d387461fdbb0ee8d9a4dfbc39003ac85", TokenType: "Bearer"}
-        });
-        var status = authenticationService.clearCache(
-            function(data ){ status = data.status;},
-            function(error){}
-        );
+        var loginResource = authenticationService.login(loginInfo, success, error);
         $httpBackend.flush();
-        expect(status).toEqual(201);
-
+        expect(loginResource.username).toEqual("userName");
+        expect(authenticationService.login).toHaveBeenCalledWith(loginInfo, success, error);
     });
 
-    it("should revoke token", function() {
-        $httpBackend.expectPOST("https://sts-dev.feisystems.com/identity/tokens/revoke").respond({status: 201});
+    it("should forget password", function() {
+        $httpBackend.expect('POST', '/uaa/forgot_password.do').respond(200);
+        spyOn(authenticationService,'forgotPassword').and.callThrough();
 
-        spyOn(localStorageService, 'get').andReturn({
-            token: { AccessToken: "", ExpiresIn: 3600, RefreshToken: "d387461fdbb0ee8d9a4dfbc39003ac85", TokenType: "Bearer"}
-        });
-        var status = authenticationService.revokeToken(
-            function(data ){ status = data.status;},
-            function(error){}
-        );
+        var forgotPasswordResource = authenticationService.forgotPassword(loginInfo, success, error);
         $httpBackend.flush();
-        expect(status).toEqual(201);
+        expect(forgotPasswordResource.username).toEqual("userName");
+        expect(authenticationService.forgotPassword).toHaveBeenCalledWith(loginInfo, success, error);
     });
-
-    it("should set authentication data", function() {
-
-        spyOn(localStorageService, 'get').andReturn({
-            session: { AccessToken: "", ExpiresIn: 3600, RefreshToken: "d387461fdbb0ee8d9a4dfbc39003ac85", TokenType: "Bearer"},
-            userName: "test"
-        });
-
-        expect(authenticationService.authentication.isAuth).toBeFalsy();
-        expect(authenticationService.authentication.userName).toEqual("");
-        authenticationService.fillAuthData();
-
-        expect(authenticationService.authentication.isAuth).toBeTruthy();
-        expect(authenticationService.authentication.userName).toEqual("test");
-    });
-
+    
     it("should logout", function() {
-        $httpBackend.expectPOST("https://sts-dev.feisystems.com/identity/tokens/revoke").respond({status: 201});
-        $httpBackend.expectPOST("https://testbed-api-dev.feisystems.com/user/clearcacheforuser").respond({status: 201});
+        spyOn(oauthTokenService, 'removeToken').and.callThrough();
+        spyOn(utilityService, 'redirectTo').and.callThrough();
 
-        spyOn(authenticationService, 'revokeToken').andCallThrough();
-        spyOn(authenticationService, 'clearCache').andCallThrough();
+        /*make sure the tokens are set in the services so that we're not removing nothing*/
+        oauthTokenService.setToken('token');
+        profileService.setProfile('profile');
 
-        spyOn(localStorageService, 'get').andReturn({
-            session: { AccessToken: "", ExpiresIn: 3600, RefreshToken: "d387461fdbb0ee8d9a4dfbc39003ac85", TokenType: "Bearer"},
-            userName: "test"
-        });
+        authenticationService.logout();
 
-        authenticationService.logOut();
-        $httpBackend.flush();
+        //for line: oauthTokenService.removeToken();
+        expect(oauthTokenService.token).toBeUndefined();
+        expect(oauthTokenService.profile).toBeUndefined();
 
-        expect(authenticationService.authentication.isAuth).toBeFalsy();
-        expect(authenticationService.authentication.userName).toEqual("");
+        //for line: utilityService.redirectTo(oauthConfig.loginPath);
+        //path taken from: oauthConfig.loginPath
+        expect(location.path()).toBe('/fe/login');
+        expect(utilityService.redirectTo).toHaveBeenCalledWith('/fe/login');
+        
     });
 
-    xit("should login", function() {
-        //$httpBackend.expectGET("https://sts-dev.feisystems.com/identity/tokens/get").respond({status: 201});
 
-        spyOn(utilityService, 'isUnDefinedOrNull').andReturn(true);
-
-        //spyOn(utilityService, 'isUnDefinedOrNull').andReturn(true);
-
-        spyOn(localStorageService, 'get').andReturn({
-            session: { AccessToken: "", ExpiresIn: 3600, RefreshToken: "d387461fdbb0ee8d9a4dfbc39003ac85", TokenType: "Bearer"},
-            userName: "test"
-        });
-
-        authenticationService.login();
-        $httpBackend.flush();
-
-        expect(authenticationService.authentication.isAuth).toBeFalsy();
-        expect(authenticationService.authentication.userName).toEqual("");
-    });
-
+    
 });
 

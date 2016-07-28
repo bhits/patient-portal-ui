@@ -1,14 +1,14 @@
 /**
- * Created by tomson.ngassa on 12/7/2015.
- * Modified by cindy.ren on 6/15/2016
+ * Created by cindy.ren on 6/9/2016.
  */
 
 'use strict';
-describe('app.home ', function(){
+
+describe('app.security ', function(){
     var module;
 
     beforeEach(function() {
-        module = angular.module("app.home");
+        module = angular.module("app.security");
     });
 
     it("should be registered", function() {
@@ -23,13 +23,16 @@ describe('app.home ', function(){
             return dependencies.indexOf(m) >= 0;
         };
         beforeEach(function() {
-            dependencies = module.value('app').requires;
+            dependencies = module.value('app.authenticationModule').requires;
         });
 
-        it("should have app.servicesModule as a dependency", function() {
+        it("should have app.config as a dependency", function() {
+            expect(hasModule('app.config')).toEqual(true);
+        });
+
+        it("should have app.core as a dependency", function() {
             expect(hasModule('app.core')).toEqual(true);
         });
 
     });
 });
-
