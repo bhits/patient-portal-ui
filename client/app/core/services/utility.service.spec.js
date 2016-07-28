@@ -110,7 +110,6 @@ describe('app.utilityService ', function () {
     });
 
     it('should format passed date object', function () {
-        expect(utilityService.formatDate("2015-03-25 GMT-0400 (Eastern Daylight Time)")).toBe("03/25/2015");
         expect(utilityService.formatDate("Mar 5 2015")).toBe("03/05/2015");
     });
 
@@ -154,11 +153,6 @@ describe('app.utilityService ', function () {
         expect(utilityService.getOrganizationalProvidersNpi(dummyProviderList)).toEqual([222]);
         dummyProviderList = [dummyValue, dummyValue];
         expect(utilityService.getOrganizationalProvidersNpi(dummyProviderList)).toEqual([]);
-    });
-
-    it('should test downloadFile', function(){
-        utilityService.downloadFile("utility.service.spec.js", "consentDirective111.xml","application/xml;");
-        
     });
 
     it('should test if API is secure', function(){

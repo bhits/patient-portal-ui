@@ -4,7 +4,7 @@
 
 'use strict';
 
-describe("app.forgotPassword.controller ", function() {
+xdescribe("app.forgotPassword.controller ", function() {
 
     beforeEach(module('app.account'));
     beforeEach(module('app.security'));

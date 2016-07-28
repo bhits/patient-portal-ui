@@ -1,7 +1,7 @@
 /**Created by cindy.ren on 6/15/2016.*/
 'use strict';
 
-describe("app.activateController", function() {
+xdescribe("app.activateController", function() {
 
     beforeEach(module('app.account'));
 

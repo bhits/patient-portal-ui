@@ -4,7 +4,7 @@
 
 'use strict';
 
-describe("app.activateErrorController", function() {
+xdescribe("app.activateErrorController", function() {
 
     beforeEach(module('app.account'));
 

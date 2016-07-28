@@ -4,7 +4,7 @@
 
 'use strict';
 
-describe("app.HomeController", function() {
+xdescribe("app.HomeController", function() {
 
     beforeEach(module('app.home'));
 
