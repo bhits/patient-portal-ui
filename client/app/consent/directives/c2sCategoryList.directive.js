@@ -7,9 +7,9 @@
 
     angular
         .module('app.consent')
-        .directive('mhcCategoryList', mhcCategoryList);
+        .directive('c2sCategoryList', c2sCategoryList);
 
-    function mhcCategoryList() {
+    function c2sCategoryList() {
 
         var directive = {
             restrict: 'E',
