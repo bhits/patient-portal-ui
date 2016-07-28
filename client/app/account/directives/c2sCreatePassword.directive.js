@@ -7,9 +7,9 @@
 
     angular
         .module('app.account')
-        .directive('mhcCreatePassword', mhcCreatePassword);
+        .directive('c2sCreatePassword', c2sCreatePassword);
 
-    function mhcCreatePassword() {
+    function c2sCreatePassword() {
 
         var directive = {
             restrict: 'E',
