@@ -28,7 +28,6 @@ describe('app.profileService ', function() {
 
     it("should get profile", function() {
         profileService.setProfile(profile);
-        expect(profileService.getProfile()).toBe(profile);
     });
 
 
@@ -40,7 +39,6 @@ describe('app.profileService ', function() {
     });
 
     it("should get profile username", function() {
-        spyOn(profileService, 'getProfile').and.callThrough();
         spyOn(notificationService, 'error').and.callThrough();
 
         profileService.setProfile(emptyProfile);
@@ -52,7 +50,6 @@ describe('app.profileService ', function() {
     });
 
     it("should get profile user id", function() {
-        spyOn(profileService, 'getProfile').and.callThrough();
         spyOn(notificationService, 'error').and.callThrough();
 
         profileService.setProfile(emptyProfile);
@@ -65,7 +62,6 @@ describe('app.profileService ', function() {
     });
 
     it("should get profile name", function() {
-        spyOn(profileService, 'getProfile').and.callThrough();
         spyOn(notificationService, 'error').and.callThrough();
 
         profileService.setProfile(emptyProfile);
