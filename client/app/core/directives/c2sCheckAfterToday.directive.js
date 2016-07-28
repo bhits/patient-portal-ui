@@ -8,10 +8,10 @@
 
     angular
         .module('app.core')
-        .directive('mhcCheckAfterToday', mhcCheckAfterToday);
+        .directive('c2sCheckAfterToday', c2sCheckAfterToday);
 
     /* @ngInject */
-    function mhcCheckAfterToday() {
+    function c2sCheckAfterToday() {
         var directive = {
             require: 'ngModel',
             restrict: 'A',
