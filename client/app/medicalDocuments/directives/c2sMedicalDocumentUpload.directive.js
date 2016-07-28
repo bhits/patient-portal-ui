@@ -6,9 +6,9 @@
 
     angular
         .module('app.medicalDocument')
-        .directive('mhcMedicalDocumentsUpload', mhcMedicalDocumentsUpload);
+        .directive('c2sMedicalDocumentsUpload', c2sMedicalDocumentsUpload);
 
-    function mhcMedicalDocumentsUpload() {
+    function c2sMedicalDocumentsUpload() {
         var directive = {
             restrict: 'E',
             replace: true,

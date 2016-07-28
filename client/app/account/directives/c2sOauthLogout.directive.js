@@ -3,9 +3,9 @@
 
     angular
         .module('app.account')
-        .directive('mhcOauthLogout', mhcOauthLogout);
+        .directive('c2sOauthLogout', c2sOauthLogout);
 
-    function mhcOauthLogout() {
+    function c2sOauthLogout() {
 
         var directive = {
             restrict: 'E',
