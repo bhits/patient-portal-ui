@@ -8,10 +8,10 @@
 
     angular
         .module('app.core')
-        .directive('mhcValidatePassword', mhcValidatePassword);
+        .directive('c2sValidatePassword', c2sValidatePassword);
 
     /* @ngInject */
-    function mhcValidatePassword(coreConstants) {
+    function c2sValidatePassword(coreConstants) {
 
         var PASSWORD_REGEX = coreConstants.PASSWORD_REGEX;
 
