@@ -7,9 +7,9 @@
 
     angular
         .module('app.core')
-        .directive('mhcMultiSelectDate', mhcMultiSelectDate);
+        .directive('c2sMultiSelectDate', c2sMultiSelectDate);
 
-    function mhcMultiSelectDate($filter) {
+    function c2sMultiSelectDate($filter) {
 
         var directive = {
             restrict: 'E',
