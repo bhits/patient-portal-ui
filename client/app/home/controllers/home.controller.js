@@ -12,6 +12,6 @@
     /* @ngInject */
     function HomeController(brand){
         var vm = this;
-        vm.brandName = brand.$get().getBrandName();
+        vm.brandName = brand.getBrandName();
     }
 })();

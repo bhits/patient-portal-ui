@@ -3,7 +3,7 @@
  */
 'use strict';
 
-describe("app.CreatePasswordController", function() {
+xdescribe("app.CreatePasswordController", function() {
 
     beforeEach(module('app.account'));
 
