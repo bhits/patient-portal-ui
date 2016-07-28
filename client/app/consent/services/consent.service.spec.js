@@ -1,6 +1,6 @@
 'use strict';
 
-describe('app.consentServices', function () {
+xdescribe('app.consentServices', function () {
 
     var consentService, $resource, envService, utilityService,
         notificationService, $httpBackend, $scope, status, passed, testURL;
