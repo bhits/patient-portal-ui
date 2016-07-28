@@ -4,14 +4,14 @@
 
     angular
         .module('app.core')
-        .directive('mhcCompareTo', mhcCompareTo);
+        .directive('c2sCompareTo', c2sCompareTo);
 
     /* @ngInject */
-    function mhcCompareTo() {
+    function c2sCompareTo() {
         var directive = {
             require: "ngModel",
             scope: {
-                otherModelValue: "=mhcCompareTo"
+                otherModelValue: "=c2sCompareTo"
             },
             link: linkFunc
         };
