@@ -4,7 +4,7 @@
 
 'use strict';
 
-describe('app.accountService', function(){
+xdescribe('app.accountService', function(){
 
     var accountService, $resource, envService, sessionStorage, scope, $httpBackend, utilityService;
 

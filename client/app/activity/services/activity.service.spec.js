@@ -4,7 +4,7 @@
 
 'use strict';
 
-describe('app.activityService', function(){
+xdescribe('app.activityService', function(){
 
     var activityService, notificationService, $resource, envService, scope, $httpBackend;
 

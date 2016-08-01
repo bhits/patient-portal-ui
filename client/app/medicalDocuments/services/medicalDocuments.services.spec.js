@@ -4,7 +4,7 @@
 
 'use strict';
 
-describe('app.medicalDocumentsService', function () {
+xdescribe('app.medicalDocumentsService', function () {
 
     var medicalDocumentsService, $resource, envService, $httpBackend, $scope, status, passed;
 

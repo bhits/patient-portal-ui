@@ -5,7 +5,7 @@
 
 'use strict';
 
-describe('app.providerService ', function () {
+xdescribe('app.providerService ', function () {
     var providerService, $httpBackend, resource, envService, scope, status, passed;
 
     var providerData = [{
