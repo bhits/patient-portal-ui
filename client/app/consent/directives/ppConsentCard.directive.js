@@ -1,4 +1,3 @@
-
 (function () {
     'use strict';
 
@@ -39,10 +38,10 @@
 
         function consentState(state) {
 
-            if(state.length !== 0){
+            if (state.length !== 0) {
                 var result = (consentService.resolveConsentState(vm.consent) === state);
                 return result;
-            }else{
+            } else {
                 return consentService.resolveConsentState(vm.consent);
             }
         }
@@ -56,7 +55,7 @@
         }
 
         function openManageConsentModal() {
-            var consentState =  consentService.resolveConsentState(vm.consent);
+            var consentState = consentService.resolveConsentState(vm.consent);
             $modal.open({
                 templateUrl: 'app/consent/directives/consentListManageOptionsModal' + consentState + '.html',
                 controller: ManageConsentModalController,
@@ -65,7 +64,7 @@
                     consent: function () {
                         return vm.consent;
                     },
-                    consentState: function(){
+                    consentState: function () {
                         return consentState;
                     }
                 }
@@ -98,17 +97,17 @@
 
         activate();
 
-        function activate(){
-            dataService.listMedicalDocuments(function(response){
+        function activate() {
+            dataService.listMedicalDocuments(function (response) {
                 manageConsentModalVm.medicalDocuments = response;
-                manageConsentModalVm.selMedicalDocumentId =  getFirstMedicalDocument(manageConsentModalVm.medicalDocuments);
-            }, function(error){
+                manageConsentModalVm.selMedicalDocumentId = getFirstMedicalDocument(manageConsentModalVm.medicalDocuments);
+            }, function (error) {
                 notificationService.error('Error in getting list of documents for current user.');
             });
         }
 
-        function getFirstMedicalDocument(document){
-            if(angular.isDefined(manageConsentModalVm.medicalDocuments) && (manageConsentModalVm.medicalDocuments.length >0)){
+        function getFirstMedicalDocument(document) {
+            if (angular.isDefined(manageConsentModalVm.medicalDocuments) && (manageConsentModalVm.medicalDocuments.length > 0)) {
                 return manageConsentModalVm.medicalDocuments[0].id;
             }
         }
@@ -133,17 +132,17 @@
             }
         }
 
-        function edit(){
+        function edit() {
             $state.go('fe.consent.create', {consentId: consent.id});
             $modalInstance.close();
         }
 
-        function viewAttestation(){
+        function viewAttestation() {
             $state.go('fe.consent.esignature', {consentId: consent.id});
             $modalInstance.close();
         }
 
-        function signConsent(){
+        function signConsent() {
             $state.go('fe.consent.sign', {consentId: consent.id});
             $modalInstance.close();
         }
@@ -153,24 +152,44 @@
         }
 
         function revoke() {
-            consentService.getConsentRevokeAttestation(consent.id, onRevokeSuccess, onRevokeError);            
-            function onRevokeSuccess(response){
+            consentService.getConsentRevokeAttestation(consent.id, onRevokeSuccess, onRevokeError);
+            function onRevokeSuccess(response) {
                 $state.go('fe.consent.revoke', {consent: consent, revokeAttestation: response});
                 $modalInstance.close();
             }
 
-            function onRevokeError(){
+            function onRevokeError() {
                 notificationService.error("Error on getting consent revocation page");
             }
         }
 
         function applyTryMyPolicy() {
-            if(angular.isDefined(manageConsentModalVm.selMedicalDocumentId) && angular.isDefined(consent.id) && angular.isDefined(manageConsentModalVm.purposeOfUseCode)){
-                $modalInstance.close();
-                // FIXME: remove username from URL once Try Policy implements security
-                var url = envService.securedApis.tryPolicyApiBaseUrl + "/tryPolicyXHTML/" + profileService.getUserName() + "/" + profileService.getUserId() + "/"+ manageConsentModalVm.selMedicalDocumentId + "/"+ consent.id +"/" +manageConsentModalVm.purposeOfUseCode;
-                $window.open(url, '_blank');
-            }else{
+            $modalInstance.close();
+            consentService.getTryPolicyXHTML(prepareRequestData(), tryPolicySuccess, tryPolicyError);
+        }
+
+        function tryPolicySuccess(response) {
+            var encodedDocument = response.document;
+            var decodedDocument = atob(encodedDocument);
+            var windowSpecs = 'toolbar=no, status=no, scrollbars=yes, resizable=yes, height = ' + screen.height + ', width = ' + screen.width;
+            var viewer = $window.open('', '_blank', windowSpecs);
+            viewer.document.open().write(decodedDocument);
+        }
+
+        function tryPolicyError(response) {
+            console.log(response);
+        }
+
+        function prepareRequestData() {
+            if (angular.isDefined(manageConsentModalVm.selMedicalDocumentId) && angular.isDefined(consent.id) && angular.isDefined(manageConsentModalVm.purposeOfUseCode)) {
+                return {
+                    patientUserName: profileService.getUserName(),
+                    patientId: profileService.getUserId(),
+                    documentId: manageConsentModalVm.selMedicalDocumentId,
+                    consentId: consent.id,
+                    purposeOfUseCode: manageConsentModalVm.purposeOfUseCode
+                };
+            } else {
                 notificationService.error("Insufficient parameters to apply try my policy.");
             }
         }
@@ -179,16 +198,16 @@
             manageConsentModalVm.option = option;
         }
 
-        function exportConsentDirective(){
+        function exportConsentDirective() {
             consentService.exportConsentDirective(consent.id,
-                function(response){
+                function (response) {
                     var xmlString = response.data;
-                    utilityService.downloadFile(xmlString, "consentDirective"+consent.id+".xml","application/xml;");
+                    utilityService.downloadFile(xmlString, "consentDirective" + consent.id + ".xml", "application/xml;");
                     notificationService.success('Consent directive is successfully downloaded.');
                     $modalInstance.close();
                     $state.reload();
                 },
-                function(response){
+                function (response) {
                     notificationService.error('Failed to download the consent directive! Please try again later...');
                     cancel();
                     $state.reload();
@@ -196,45 +215,54 @@
             );
         }
 
-        function downloadUnattestedConsent(docType){
-            var fileName = profileService.getName() + " " + docType +" Consent" + consent.id;
-            function success(data){
-                utilityService.downloadFile(data, fileName,'application/pdf');
+        function downloadUnattestedConsent(docType) {
+            var fileName = profileService.getName() + " " + docType + " Consent" + consent.id;
+
+            function success(data) {
+                utilityService.downloadFile(data, fileName, 'application/pdf');
             }
-            function error(respone){
+
+            function error(respone) {
                 notificationService.error("Error in downloading " + consentState + "consent.");
             }
-            consentService.downloadUnAttestedConsentPdf(consent.id,success, error);
+
+            consentService.downloadUnAttestedConsentPdf(consent.id, success, error);
         }
 
-        function downloadAttestedConsent(docType){
-            var fileName = profileService.getName() + " " + docType +" Consent" + consent.id;
-            function success(data){
-                utilityService.downloadFile(data, fileName,'application/pdf');
+        function downloadAttestedConsent(docType) {
+            var fileName = profileService.getName() + " " + docType + " Consent" + consent.id;
+
+            function success(data) {
+                utilityService.downloadFile(data, fileName, 'application/pdf');
             }
-            function error(respone){
+
+            function error(respone) {
                 notificationService.error("Error in downloading " + consentState + "consent.");
             }
-            consentService.downloadAttestedConsentPdf(consent.id,success, error);
+
+            consentService.downloadAttestedConsentPdf(consent.id, success, error);
         }
 
-        function downloadAttestedConsentRevocation(docType){
-            var fileName = profileService.getName() + " " + docType +" Consent" + consent.id;
-            function success(data){
-                utilityService.downloadFile(data, fileName,'application/pdf');
+        function downloadAttestedConsentRevocation(docType) {
+            var fileName = profileService.getName() + " " + docType + " Consent" + consent.id;
+
+            function success(data) {
+                utilityService.downloadFile(data, fileName, 'application/pdf');
             }
-            function error(respone){
+
+            function error(respone) {
                 notificationService.error("Error in downloading " + consentState + "consent.");
             }
-            consentService.downloadAttestedConsentRevocationPdf(consent.id,success, error);
+
+            consentService.downloadAttestedConsentRevocationPdf(consent.id, success, error);
         }
 
-        function onCompleteAttestationRevocation(){
-            var success = function(response){
+        function onCompleteAttestationRevocation() {
+            var success = function (response) {
                 console.log("OK");
             };
 
-            var error = function(response){
+            var error = function (response) {
                 console.log("Error");
             };
             consentService.createAttestedConsentRevocation(consent.id, true, success, error);
