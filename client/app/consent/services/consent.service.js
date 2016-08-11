@@ -28,8 +28,6 @@
                 'query': {
                     method: 'GET',
                     params: {
-                        patientUserName: '@patientUserName',
-                        patientId: '@patientId',
                         documentId: '@documentId',
                         consentId: '@consentId',
                         purposeOfUseCode: '@purposeOfUseCode'

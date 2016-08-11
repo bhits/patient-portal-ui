@@ -183,8 +183,6 @@
         function prepareRequestData() {
             if (angular.isDefined(manageConsentModalVm.selMedicalDocumentId) && angular.isDefined(consent.id) && angular.isDefined(manageConsentModalVm.purposeOfUseCode)) {
                 return {
-                    patientUserName: profileService.getUserName(),
-                    patientId: profileService.getUserId(),
                     documentId: manageConsentModalVm.selMedicalDocumentId,
                     consentId: consent.id,
                     purposeOfUseCode: manageConsentModalVm.purposeOfUseCode
