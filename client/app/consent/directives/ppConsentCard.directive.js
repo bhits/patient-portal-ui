@@ -177,7 +177,7 @@
         }
 
         function tryPolicyError(response) {
-            console.log(response);
+            notificationService.error("Error on viewing policies applied on medical document");
         }
 
         function prepareRequestData() {
