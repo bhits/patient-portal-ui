@@ -10,12 +10,12 @@
         .factory('consentService', consentService);
 
     /* @ngInject */
-    function consentService($resource, $http, envService, utilityService, notificationService) {
+    function consentService($resource, $http, envService, utilityService) {
         var consentListResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/pageNumber/:pageNumber", {pageNumber: '@pageNumber'});
         var consentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/:id", {id: '@id'}, {'update': {method: 'PUT'}});
         var consentExportConsentDirective = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/exportConsentDirective/:id", {id: '@id'});
         var purposeOfUseResource = $resource(envService.securedApis.pcmApiBaseUrl + "/purposeOfUse");
-        var sensitvityPolicyResource = $resource(envService.securedApis.pcmApiBaseUrl + "/sensitivityPolicy");
+        var sensitivityPolicyResource = $resource(envService.securedApis.pcmApiBaseUrl + "/sensitivityPolicy");
         var attestedConsentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/:consentId/attested", {consentId: '@consentId'});
         var revokeConsentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/revokeConsent/:id", {id: '@id'});
         var consentAttestationResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/:consentId/attestation", {consentId: '@consentId'});
@@ -41,7 +41,7 @@
         var service = {};
         service.getConsentResource = getConsentResource;
         service.getPurposeOfUseResource = getPurposeOfUseResource;
-        service.getSensitvityPolicyResource = getSensitvityPolicyResource;
+        service.getSensitivityPolicyResource = getSensitivityPolicyResource;
         service.getConsent = getConsent;
         service.revokeConsent = revokeConsent;
         service.createConsent = createConsent;
@@ -63,7 +63,6 @@
         service.getCodes = getCodes;
         service.getLookupEntities = getLookupEntities;
         service.resetSelectedNpi = resetSelectedNpi;
-        service.getPurposeOfUseCode = getPurposeOfUseCode;
         service.exportConsentDirective = exportConsentDirective;
         service.getConsentAttestation = getConsentAttestation;
         service.createAttestedConsent = createAttestedConsent;
@@ -84,8 +83,8 @@
             return purposeOfUseResource;
         }
 
-        function getSensitvityPolicyResource() {
-            return sensitvityPolicyResource;
+        function getSensitivityPolicyResource() {
+            return sensitivityPolicyResource;
         }
 
         function getConsent(id, success, error) {
@@ -102,15 +101,6 @@
 
         function updateConsent(consent, success, error) {
             return consentResource.update(consent, success, error);
-        }
-
-        function downloadConsentPdf(id, success, error) {
-            var request = {
-                method: 'GET',
-                responseType: 'arraybuffer',
-                url: envService.securedApis.pcmApiBaseUrl + "/consents/" + id + "/unattested/"
-            };
-            $http(request).success(success).error(error);
         }
 
         function downloadUnAttestedConsentPdf(id, success, error) {
@@ -164,7 +154,7 @@
 
         function getSelectedProvider() {
             return selectedProvider;
-        }
+        } //TODO: remove, not used
 
         function prepareProviderList(selectedProviders, providers) {
             var providerList = [];
@@ -203,7 +193,7 @@
         }
 
         function getSensitivityPolicies(success, error) {
-            sensitvityPolicyResource.query(success, error);
+            sensitivityPolicyResource.query(success, error);
         }
 
         function getEntitiesByCodes(entities, codes) {
@@ -245,12 +235,13 @@
 
         function getPurposeOfUseCodes(entities) {
             var result = {selectedPurposeOfUseCodes: ['TREATMENT']};
-            if (entities.length === 0) {
+            if (utilityService.isUnDefinedOrNull(entities) || entities.length === 0) {
                 return result;
             } else if (entities.length > 0) {
                 result.selectedPurposeOfUseCodes = getCodes(entities);
                 return result;
             }
+            return result;
         }
 
         function getCodes(data) {
@@ -288,10 +279,6 @@
                 }
             }
             return false;
-        }
-
-        function getPurposeOfUseCode(displayName, purposeOfUse) {
-
         }
 
         function getConsentAttestation(consentId, success, error) {

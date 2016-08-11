@@ -79,7 +79,7 @@
                                         return response;
                                     });
 
-                                var sensitvityPolicyResource = consentService.getSensitvityPolicyResource();
+                                var sensitvityPolicyResource = consentService.getSensitivityPolicyResource();
                                 var sensitvityPolicyData = sensitvityPolicyResource.query(
                                     function (response) {
                                         return response;
@@ -135,7 +135,7 @@
                             consentAttestation: function ($q, $stateParams, utilityService, consentService, notificationService) {
                                 var deferred = $q.defer();
                                 var consentId= $stateParams.consentId;
-                                if(utilityService.isDefinedAndLenghtNotZero($stateParams.consentId)){
+                                if(utilityService.isDefinedAndLengthNotZero($stateParams.consentId)){
                                     var success = function(response){
                                         deferred.resolve(response);
                                     };

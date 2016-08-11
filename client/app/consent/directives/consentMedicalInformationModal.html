@@ -1,4 +1,4 @@
-<div class="inmodal" ng-form name="medicalInfofmationModalObj" mhc-popover-close>
+<div class="inmodal" ng-form name="medicalInfofmationModalObj" c2s-popover-close>
     <div class="modal-header">
         <h4 class="modal-title">Privacy Settings</h4>
     </div>
@@ -28,18 +28,18 @@
                                 <span class="fa fa-university m-r-xxs"></span>
                                 Federal Categories
                                 <span class="text-navy-blue m-l-xs">
-                                    <mhc-popover popover-placement="bottom"
+                                    <c2s-popover popover-placement="bottom"
                                                  popover-title="medicalInfoModalVm.federalInfo.title"
-                                                 popover-content="medicalInfoModalVm.federalInfo.description"></mhc-popover>
+                                                 popover-content="medicalInfoModalVm.federalInfo.description"></c2s-popover>
                                 </span>
                             </div>
                             <div ng-repeat="sensitivityPolicy in medicalInfoModalVm.sensitivityPolicies | orderBy:'displayOrder'">
                                 <div ng-if="sensitivityPolicy.federal">
-                                    <mhc-category-list
+                                    <c2s-category-list
                                             category-model="medicalInfoModalVm.consent.selectedSensitivityPolicies"
                                             category-obj="sensitivityPolicy"
                                             category-title="sensitivityPolicy.displayName"
-                                            category-content="sensitivityPolicy.description"></mhc-category-list>
+                                            category-content="sensitivityPolicy.description"></c2s-category-list>
                                 </div>
                             </div>
                         </div>
@@ -48,18 +48,18 @@
                                 <span class="fa fa-flag m-r-xs"></span>
                                 State Categories
                                 <span class="text-navy-blue m-l-xs">
-                                    <mhc-popover popover-placement="bottom"
+                                    <c2s-popover popover-placement="bottom"
                                                  popover-title="medicalInfoModalVm.stateInfo.title"
-                                                 popover-content="medicalInfoModalVm.stateInfo.description"></mhc-popover>
+                                                 popover-content="medicalInfoModalVm.stateInfo.description"></c2s-popover>
                                 </span>
                             </div>
                             <div ng-repeat="sensitivityPolicy in medicalInfoModalVm.sensitivityPolicies | orderBy:'displayOrder'">
                                 <div ng-if="!sensitivityPolicy.federal">
-                                    <mhc-category-list
+                                    <c2s-category-list
                                             category-model="medicalInfoModalVm.consent.selectedSensitivityPolicies"
                                             category-obj="sensitivityPolicy"
                                             category-title="sensitivityPolicy.displayName"
-                                            category-content="sensitivityPolicy.description"></mhc-category-list>
+                                            category-content="sensitivityPolicy.description"></c2s-category-list>
                                 </div>
                             </div>
                         </div>

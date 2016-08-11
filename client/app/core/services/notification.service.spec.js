@@ -1,71 +1,51 @@
 /**
  * Created by tomson.ngassa on 10/14/2015.
+ * Modified by cindy.ren on 6/13/2016
  */
 
 'use strict';
 
-xdescribe('app.notificationModule  ', function(){
-    var module;
+describe('app.notificationService ', function() {
+    var notificationService, notify;
 
-    beforeEach(function() {
-        module = angular.module("app.notificationModule");
-    });
+    beforeEach(module('app.core'));
 
-    it("should be registered", function() {
-        expect(module).not.toEqual(null);
-    });
+    beforeEach(inject(function(_notificationService_, _notify_){
+        notificationService = _notificationService_;
+        notify = _notify_;
 
-    describe("Dependencies:", function() {
-
-        var dependencies;
-
-        var hasModule = function(m) {
-            return dependencies.indexOf(m) >= 0;
-        };
-        beforeEach(function() {
-            dependencies = module.value('app.notificationModule').requires;
-        });
-
-        it("should be registered", function() {
-            expect(module).not.toEqual(null);
-        });
-
-        it("should have cgNotify as a dependency", function() {
-            expect(hasModule('cgNotify')).toEqual(true);
-        });
-    });
-});
-
-
-xdescribe('app.notificationModule ', function() {
-    var notificationService,mockNotify;
-
-    beforeEach(module('cgNotify'));
-    beforeEach(module('app.notificationModule'));
-
-    beforeEach(function () {
-        angular.mock.inject(function ($injector) {
-            notificationService = $injector.get('notificationService');
-            mockNotify = $injector.get('notify');
-        });
-        //
-
-       spyOn(mockNotify, this).andCallThrough();
-    });
+    }));
 
     it('should show success notify', function () {
-
-        console.log(mockNotify);
-        var msg = "test";
-        var notifyObj = { message: msg, duration: 2000, classes: 'alert-success', templateUrl: ""};
+        spyOn(notificationService, 'success').and.callThrough();
+        var msg = "success";
         notificationService.success(msg);
+        expect(notificationService.success).toHaveBeenCalledWith(msg);
 
-        expect(mockNotify).toHaveBeenCalled();
     });
 
-    xit('should show error notify', function () {
-        //expect(angular.isFunction(ProviderServices.getProviders())).toNotBe(null);
+    it('should show info notify', function () {
+        spyOn(notificationService, 'info').and.callThrough();
+        var msg = "info";
+        notificationService.info(msg);
+        expect(notificationService.info).toHaveBeenCalledWith(msg);
+
     });
 
+    it('should show warn notify', function () {
+        spyOn(notificationService, 'warn').and.callThrough();
+        var msg = "warn";
+        notificationService.warn(msg);
+        expect(notificationService.warn).toHaveBeenCalledWith(msg);
+
+    });
+
+    it('should show error notify', function () {
+        spyOn(notificationService, 'error').and.callThrough();
+        var msg = "error";
+        notificationService.error(msg);
+        expect(notificationService.error).toHaveBeenCalledWith(msg);
+
+    });
 
 });
