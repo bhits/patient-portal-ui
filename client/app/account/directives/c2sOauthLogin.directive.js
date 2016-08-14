@@ -13,7 +13,7 @@
             templateUrl: 'app/account/directives/oauthLogin.html',
             scope: {},
             bindToController: {
-                brand:"="
+                brand: "="
             },
             controller: OauthLoginController,
             controllerAs: 'oauthLoginVm'
@@ -51,7 +51,10 @@
 
         function loginError(error) {
             oauthTokenService.removeToken();
-            vm.loginError = true;
+            var errorDescription = error.data.error_description;
+            var accountHasLocked = angular.equals(errorDescription, oauthConfig.accountLockedErrorMessage);
+            vm.accountLocked = accountHasLocked;
+            vm.loginError = !accountHasLocked;
         }
 
         function login() {
