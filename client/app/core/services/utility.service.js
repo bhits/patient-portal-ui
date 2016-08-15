@@ -176,25 +176,42 @@
         function downloadFile(content, filename, fileFormat) {
             var file = new Blob([content], {type: fileFormat});
 
-            // For IE
-            if (navigator.appVersion.toString().indexOf('.NET') > 0){
+
+            if (navigator.appVersion.toString().indexOf('.NET') > 0) {
+                //IE
+                if (fileFormat === 'application/pdf') {
+                    filename = filename + '.pdf';
+                }
+
                 window.navigator.msSaveBlob(file, filename);
+            }else if(navigator.userAgent.indexOf("Firefox") !== -1 ){
+                //FireFox
+                if (fileFormat === 'application/pdf') {
+                    filename = filename + '.pdf';
+                }
+
+                saveFileToDiskInChromeAndFF(file, filename);
             }
-            else{ // Firefox & Chrome
-                var blobURL = ($window.URL || $window.webkitURL).createObjectURL(file);
-                var anchor = document.createElement("a");
-                anchor.style = "display: none";
-                anchor.download = filename;
-                anchor.href = blobURL;
-                document.body.appendChild(anchor);
-                anchor.click();
-                setTimeout(function(){
-                    document.body.removeChild(anchor);
-                    window.URL.revokeObjectURL(blobURL);
-                }, 100);
+            else{ //Chrome
+                saveFileToDiskInChromeAndFF(file, filename);
             }
 
         }
+
+        function saveFileToDiskInChromeAndFF(blobFile, filename){
+            var blobURL = ($window.URL || $window.webkitURL).createObjectURL(blobFile);
+            var anchor = document.createElement("a");
+            anchor.style = "display: none";
+            anchor.download = filename;
+            anchor.href = blobURL;
+            document.body.appendChild(anchor);
+            anchor.click();
+            setTimeout(function(){
+                document.body.removeChild(anchor);
+                window.URL.revokeObjectURL(blobURL);
+            }, 100);
+        }
+
 
         function isSecuredApi(url) {
             var isSecured = false;

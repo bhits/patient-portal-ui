@@ -27,6 +27,11 @@
             </div>
         </div>
         <div class="row">
+            <div class="col-sm-offset-2 col-sm-10 text-alert m-t-n-xs m-b-xs" id="account-locked" ng-if="oauthLoginVm.accountLocked">
+                <span><small>Your account has exceeded maximum failed authentication attempts. Please wait 10 minutes to retry.</small></span>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-sm-offset-2 col-sm-10 text-alert m-t-n-xs" id="profile-error"
                  ng-if="oauthLoginVm.profileError">
                 <span><small>Whoops! We can't seem to find your account.</small></span>
