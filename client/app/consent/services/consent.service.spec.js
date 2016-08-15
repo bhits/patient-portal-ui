@@ -167,11 +167,6 @@ xdescribe('app.consentServices', function () {
         expect(passed).toBeFalsy();
     });
 
-    it ('should download consent PDF (downloadConsentPdf)', function(){
-        $httpBackend.expect('GET',"/pcm/patients/consents/attested").respond(200, "success");
-        consentService.downloadConsentPdf("consent.service.spec.js", success, error);
-    });
-
     it ('should download unattested consent PDF (downloadUnAttestedConsentPdf)', function(){
         $httpBackend.expect('GET',"/pcm/patients/consents/unattested").respond(200, "success");
         consentService.downloadUnAttestedConsentPdf("consent.service.spec.js", success, error);

@@ -541,7 +541,7 @@ module.exports = function (grunt) {
                         securedApis: {
                             pcmApiBaseUrl: '/pcm/patients',
                             phrApiBaseUrl: '/phr',
-                            tryPolicyApiBaseUrl: '/trypolicy',
+                            tryPolicyApiBaseUrl: '/tryPolicy',
                             userInfo : '/uaa/userinfo'
                         },
                         unsecuredApis: {
@@ -567,7 +567,7 @@ module.exports = function (grunt) {
                         securedApis: {
                             pcmApiBaseUrl: '/pcm/patients',
                             phrApiBaseUrl: '/phr',
-                            tryPolicyApiBaseUrl: '/trypolicy',
+                            tryPolicyApiBaseUrl: '/tryPolicy',
                             userInfo : '/uaa/userinfo'
                         },
                         unsecuredApis: {
@@ -593,7 +593,7 @@ module.exports = function (grunt) {
                         securedApis: {
                             pcmApiBaseUrl: '/pcm/patients',
                             phrApiBaseUrl: '/phr',
-                            tryPolicyApiBaseUrl: '/trypolicy',
+                            tryPolicyApiBaseUrl: '/tryPolicy',
                             userInfo : '/uaa/userinfo'
                         },
                         unsecuredApis: {
