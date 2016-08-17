@@ -30,7 +30,7 @@
                 vm.onchecked = onchecked;
                 vm.onCompleteAttestation = onCompleteAttestation;
                 vm.isAuthenticated = false;
-
+                vm.hasSensitiveCategoriesToDisplay = hasSensitiveCategoriesToDisplay;
                 activate();
 
                 function activate(){
@@ -71,6 +71,16 @@
                         vm.disclosureProvider = vm.attestation.orgProvidersDisclosureIsMadeTo[0];
                     }
                 }
+                
+                function hasSensitiveCategoriesToDisplay(){
+                    if(angular.isDefined(vm.attestation) && angular.isDefined(vm.attestation.doNotShareSensitivityPolicyDisplayNames) && vm.attestation.doNotShareSensitivityPolicyDisplayNames.length > 0 ){
+                        return true;
+                    } else {
+                        return false;
+                    }
+
+                }
+                
 
                 //TODO: refactor attestation checkbox into directive that can be reused both for signing and revoking
                 function onchecked(){

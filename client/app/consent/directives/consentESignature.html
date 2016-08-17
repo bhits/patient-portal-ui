@@ -68,7 +68,7 @@
                 <div class="alert alert-info navbar-blue p-xs"><strong>HEALTH INFORMATION TO BE DISCLOSED</strong></div>
                 <div class="col-sm-6">
                     <h4> <strong>To SHARE the following medical information:</strong></h4>
-                    <strong>Sensitivity Categories:</strong>
+                    <strong>Sensitivity Categories:</strong> <span ng-if="!consentESignatureVm.hasSensitiveCategoriesToDisplay()">None</span>
                     <ul>
                         <li ng-repeat="category in consentESignatureVm.attestation.doNotShareSensitivityPolicyDisplayNames"> <span ng-bind="category"></span></li>
                     </ul>
