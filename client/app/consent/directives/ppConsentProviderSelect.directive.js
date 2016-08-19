@@ -64,6 +64,18 @@
                     selectProviderModalVm.selectedProvider = {npi: ((data.selectedProvider !== null) && angular.isDefined(data.selectedProvider) && angular.isDefined(data.selectedProvider.npi)) ? data.selectedProvider.npi : ''};
                     selectProviderModalVm.selectedNpi = consentService.getSelectedNpi();
                     selectProviderModalVm.title = data.modalTitle;
+                    selectProviderModalVm.hasAtleast2Providers = hasAtleast2Providers;
+
+                    function hasAtleast2Providers(){
+                        if(angular.isDefined(selectProviderModalVm.providers) && selectProviderModalVm.providers.length > 1 ){
+                            console.log("hasAtleast2Providers = true");
+                            return true;
+                        } else {
+                            console.log("hasAtleast2Providers = false");
+                            return false;
+
+                        }
+                    }
 
                     function cancel () {
                         $modalInstance.dismiss('cancel');
