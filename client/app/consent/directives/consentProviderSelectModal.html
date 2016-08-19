@@ -3,8 +3,9 @@
         <h1 class="modal-title"><strong> <span ng-bind="title"></span></strong></h1>
     </div>
     <div class="modal-body">
-                <p ng-if="selectProviderModalVm.title === 'Authorize'">Please select <strong>one</strong> individual or organization authorized to share your information:</p>
-                <p ng-if="selectProviderModalVm.title === 'Disclosure'">Please select <strong>one</strong> individual or organization for disclosure:</p>
+                <p ng-if="!selectProviderModalVm.hasAtleast2Providers()">Please add atleast <strong>two</strong> Providers before creating this consent </p>
+                <p ng-if="selectProviderModalVm.hasAtleast2Providers() && selectProviderModalVm.title === 'Authorize'">Please select <strong>one</strong> individual or organization authorized to share your information:</p>
+                <p ng-if="selectProviderModalVm.hasAtleast2Providers() && selectProviderModalVm.title === 'Disclosure'">Please select <strong>one</strong> individual or organization for disclosure:</p>
                 <div class="row">
                     <div class="col-sm-12 m-b-xs">
                         <h2><strong>Individuals:</strong></h2>
@@ -38,6 +39,6 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-white" ng-click="selectProviderModalVm.cancel()">Cancel</button>
-        <button type="button" class="btn btn-primary dark-green" ng-click="selectProviderModalVm.ok()">Add Selected</button>
+        <button type="button" class="btn btn-primary dark-green" ng-disabled="!selectProviderModalVm.hasAtleast2Providers()" ng-click="selectProviderModalVm.ok()">Add Selected</button>
     </div>
 </div>
