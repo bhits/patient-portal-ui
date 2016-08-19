@@ -68,12 +68,9 @@
 
                     function hasAtleast2Providers(){
                         if(angular.isDefined(selectProviderModalVm.providers) && selectProviderModalVm.providers.length > 1 ){
-                            console.log("hasAtleast2Providers = true");
                             return true;
                         } else {
-                            console.log("hasAtleast2Providers = false");
                             return false;
-
                         }
                     }
 
