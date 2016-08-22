@@ -3,7 +3,7 @@
         <h1 class="modal-title"><strong> <span ng-bind="title"></span></strong></h1>
     </div>
     <div class="modal-body">
-                <p ng-if="!selectProviderModalVm.hasAtleast2Providers()">Please add atleast <strong>two</strong> Providers before creating this consent </p>
+                <p ng-if="!selectProviderModalVm.hasAtleast2Providers()">Please add at least <strong>two</strong> Providers before creating this consent </p>
                 <p ng-if="selectProviderModalVm.hasAtleast2Providers() && selectProviderModalVm.title === 'Authorize'">Please select <strong>one</strong> individual or organization authorized to share your information:</p>
                 <p ng-if="selectProviderModalVm.hasAtleast2Providers() && selectProviderModalVm.title === 'Disclosure'">Please select <strong>one</strong> individual or organization for disclosure:</p>
                 <div class="row">
