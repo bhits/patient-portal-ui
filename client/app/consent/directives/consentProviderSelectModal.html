@@ -3,12 +3,13 @@
         <h1 class="modal-title"><strong> <span ng-bind="title"></span></strong></h1>
     </div>
     <div class="modal-body">
-                <p ng-if="!selectProviderModalVm.hasAtleast2Providers()">Please add atleast <strong>two</strong> Providers before creating this consent </p>
+                <p ng-if="!selectProviderModalVm.hasAtleast2Providers()|| selectProviderModalVm.hasNoProviders()">In order to create a consent, you must add at least <strong>one individual</strong> and <strong>one organization</strong></p>
+                <p ng-if="!selectProviderModalVm.hasAtleast2Providers()|| selectProviderModalVm.hasNoProviders()"><a class="btn btn-primary dark-green" ui-sref="fe.provider.lookup">Add a Health Provider</a></p>
                 <p ng-if="selectProviderModalVm.hasAtleast2Providers() && selectProviderModalVm.title === 'Authorize'">Please select <strong>one</strong> individual or organization authorized to share your information:</p>
                 <p ng-if="selectProviderModalVm.hasAtleast2Providers() && selectProviderModalVm.title === 'Disclosure'">Please select <strong>one</strong> individual or organization for disclosure:</p>
                 <div class="row">
                     <div class="col-sm-12 m-b-xs">
-                        <h2><strong>Individuals:</strong></h2>
+                        <h2 ng-if="!selectProviderModalVm.hasNoProviders()"><strong>Individuals:</strong></h2>
                         <div ng-repeat="provider in selectProviderModalVm.providers">
                                 <div ng-if="selectProviderModalVm.isIndividualProvider(provider)">
                                     <div class="radio">
@@ -23,7 +24,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12 m-b-md">
-                        <h2><strong>Organization:</strong></h2>
+                        <h2 ng-if="!selectProviderModalVm.hasNoProviders()"><strong>Organization:</strong></h2>
                         <div ng-repeat="provider in selectProviderModalVm.providers">
                             <div ng-if="selectProviderModalVm.isOrganizationProvider(provider)">
                                 <div class="radio">
