@@ -46,6 +46,6 @@ spring.profiles: docker
 eureka:
   client:
     service-url:
-      defaultZone: https://discovery-server.mhc.com:8761/eureka/
+      defaultZone: https://discovery-server.c2s.com:8761/eureka/
   instance:
     prefer-ip-address: true
