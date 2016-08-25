@@ -8,7 +8,7 @@
         .factory('utilityService', utilityService);
 
     /* @ngInject */
-    function utilityService($location, $anchorScroll, $window, envService) {
+    function utilityService($location, $anchorScroll, $window, envService, browser) {
         var service = {};
 
         service.getYear = getYear;
@@ -113,6 +113,8 @@
             var formatedDate = month + "/" + day + "/" + year;
 
             return formatedDate;
+
+           
         }
 
         function isIndividualProvider(provider) {
@@ -176,27 +178,31 @@
         function downloadFile(content, filename, fileFormat) {
             var file = new Blob([content], {type: fileFormat});
 
-
-            if (navigator.appVersion.toString().indexOf('.NET') > 0) {
-                //IE
-                if (fileFormat === 'application/pdf') {
+            if(browser.isIE()){
+                if(isFileFormatPDF(fileFormat)){
                     filename = filename + '.pdf';
                 }
-
                 window.navigator.msSaveBlob(file, filename);
-            }else if(navigator.userAgent.indexOf("Firefox") !== -1 ){
-                //FireFox
-                if (fileFormat === 'application/pdf') {
+
+            } else if(browser.isFireFox()){
+                if(isFileFormatPDF(fileFormat)){
                     filename = filename + '.pdf';
                 }
+                saveFileToDiskInChromeAndFF(file, filename);
 
+            } else if(browser.isChrome() || browser.isSafari()){
                 saveFileToDiskInChromeAndFF(file, filename);
             }
-            else{ //Chrome
-                saveFileToDiskInChromeAndFF(file, filename);
-            }
-
         }
+
+        function isFileFormatPDF(fileFormat){
+            if (fileFormat === 'application/pdf') {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
 
         function saveFileToDiskInChromeAndFF(blobFile, filename){
             var blobURL = ($window.URL || $window.webkitURL).createObjectURL(blobFile);
@@ -268,6 +274,7 @@
             }
             return true;  // date is valid
         }
+
     }
 
 })();
