@@ -44,17 +44,17 @@
                 <div class="row">
                     <div class="col-md-6 m-b">
                         <div ng-if="consentCardVm.isShareAll()">
-                            <h3 class="border-bottom-blue"><span class="m-r-xs"><i class="fa fa-eye"></i></span>Sharing all medical information:</h3>
+                            <div class="font-size16 font-medium m-b-sm border-bottom-blue"><span class="m-r-xs"><i class="fa fa-eye"></i></span>Sharing all medical information:</div>
                             All my medical information can be shared.
                         </div>
                         <div ng-if="!consentCardVm.isShareAll()">
-                            <h3 class="border-bottom-red"><span class="m-r-xs"><i class="fa fa-eye-slash"></i></span>Medical Information NOT disclosed:</h3>
+                            <div class="font-size16 font-medium m-b-sm border-bottom-red"><span class="m-r-xs"><i class="fa fa-eye-slash"></i></span>Medical Information NOT disclosed:</div>
 
                             <p><span ng-bind="consentCardVm.notDisclosedItems()"/></p>
                         </div>
                     </div>
                     <div class="col-md-6 m-b">
-                        <h3 class="border-bottom-blue"><span class="m-r-xs"><i class="fa fa-eye"></i></span>Share for following purposes:</h3>
+                        <div class="font-size16 font-medium m-b-sm border-bottom-blue"><span class="m-r-xs"><i class="fa fa-eye"></i></span>Share for following purposes:</div>
 
                         <p><span ng-bind="consentCardVm.purposeOfUseItems()"/></p>
                     </div>
@@ -66,7 +66,7 @@
                         <div class="left-padding25" ng-class="{'statusIcon_saved': consentCardVm.consentState('Saved'),'statusIcon_signed': consentCardVm.consentState('Signed'),'statusIcon_revoked': consentCardVm.consentState('Revoked')}">
                             <span> Consent State: <span class="bold" ng-bind="consentCardVm.consentState('') | uppercase"/></span>
                             <span class="pull-right">
-                                <button class="btn btn-primary btn-xs dark-green" ng-click="consentCardVm.openManageConsentModal()">Manage
+                                <button class="btn btn-primary btn-xs dark-green" type="button" ng-click="consentCardVm.openManageConsentModal()">Manage
                                     Consent
                                 </button>
                             </span>
