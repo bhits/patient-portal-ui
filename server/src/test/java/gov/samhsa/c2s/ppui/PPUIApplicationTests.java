@@ -1,4 +1,4 @@
-package gov.samhsa.bhits.ppui;
+package gov.samhsa.c2s.ppui;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -65,7 +65,7 @@
                     selectProviderModalVm.selectedNpi = consentService.getSelectedNpi();
                     selectProviderModalVm.title = data.modalTitle;
                     selectProviderModalVm.hasNoProviders = hasNoProviders;
-                    selectProviderModalVm.hasAtleast2Providers = hasAtleast2Providers;
+                    selectProviderModalVm.hasAtLeastTwoProviders = hasAtLeastTwoProviders;
 
                     function hasNoProviders(){
                         if(angular.isDefined(selectProviderModalVm.providers) && selectProviderModalVm.providers.length > 0 ){
@@ -75,7 +75,7 @@
                         }
                     }
 
-                    function hasAtleast2Providers(){
+                    function hasAtLeastTwoProviders(){
                         if(angular.isDefined(selectProviderModalVm.providers) && selectProviderModalVm.providers.length > 1 ){
                             return true;
                         } else {
