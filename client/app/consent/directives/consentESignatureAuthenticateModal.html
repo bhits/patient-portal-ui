@@ -1,6 +1,6 @@
 <div class="inmodal" ng-form >
     <div class="modal-header">
-        <h4 class="modal-title">Please Authenticate</h4>
+        <h2 class="modal-title">Please Authenticate</h2>
     </div>
     <div class="modal-body">
         <div class="row">
@@ -8,16 +8,18 @@
                 <strong> Please provide your account password to authenticate, and complete e-signature</strong>
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-4 "></div>
+        <div class="row m-t">
+            <!--<div class="col-sm-4 "></div>-->
             <div class="col-sm-2 ">
                 <label for="password">Password</label>
             </div>
-            <div class="col-sm-2">
+            <div class="col-sm-3">
                 <input type="password" name="password" id="password" ng-model="authenticateVm.password">
             </div>
-            <div class="col-sm-4 ">
-            </div>
+            <!--<div class="col-sm-4 ">-->
+            <!--</div>-->
+        </div>
+        <div class="row m-t-xs">
             <div class="col-sm-12">
                 <span ng-if="authenticateVm.errorMessage" class="text-alert" ng-bind="authenticateVm.errorMessage"></span>
             </div>
