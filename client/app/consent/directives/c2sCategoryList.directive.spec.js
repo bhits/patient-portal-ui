@@ -4,7 +4,7 @@
 
 'use strict';
 
-xdescribe("app.mhcCategoryList", function() {
+xdescribe("app.c2sCategoryList", function() {
 
     beforeEach(module('app.consent'));
 

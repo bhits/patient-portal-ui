@@ -4,7 +4,7 @@
 
 'use strict';
 
-xdescribe('app.AccountVerification.directive', function(){
+xdescribe('app.c2sAccountVerification.directive', function(){
 
     var $resource, envService, controller, $scope, $httpBackend, utilityService,
         accountService, emailTokenService, accountConfig, form;
