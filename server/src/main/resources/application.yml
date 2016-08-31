@@ -2,7 +2,7 @@ server:
   port: 8444
 spring.profiles.active: eureka-ssl
 logging:
-  file: /java/MHC_LOGS/pp-ui/ppui.log
+  file: /java/C2S_LOGS/pp-ui/ppui.log
 info:
   component: Patient Portal UI
 eureka:
