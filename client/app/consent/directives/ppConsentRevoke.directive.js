@@ -87,7 +87,7 @@
                             utilityService.downloadFile(data, fileName,'application/pdf');
                         };
                         var error = function (respone){
-                            notificationService.error("Error in downloading attested consent revocation pdf.");
+                            notificationService.error("Error in downloading signed consent revocation pdf.");
                         };
                         consentService.downloadAttestedConsentRevocationPdf(vm.consentId, success, error);
                     }

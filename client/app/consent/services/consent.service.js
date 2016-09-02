@@ -169,7 +169,7 @@
         function resolveConsentState(consent) {
             var state = 'error';
             if (consent.consentStage === 'CONSENT_SAVED') {
-                state = 'Saved';
+                state = 'In Progress';
             } else if (consent.consentStage === 'CONSENT_SIGNED') {
                 state = 'Signed';
             } else if (consent.consentStage === 'REVOCATION_REVOKED') {
