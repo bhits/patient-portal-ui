@@ -172,7 +172,7 @@ xdescribe('app.consentServices', function () {
         consentService.downloadUnAttestedConsentPdf("consent.service.spec.js", success, error);
     });
 
-    it ('should download attested consent PDF (downloadAttestedConsentPdf)', function(){
+    it ('should download signed consent PDF (downloadAttestedConsentPdf)', function(){
         $httpBackend.expect('GET',"/pcm/patients/consents/attested").respond(200, "success");
         consentService.downloadAttestedConsentPdf("consent.service.spec.js", success, error);
     });
@@ -456,7 +456,7 @@ xdescribe('app.consentServices', function () {
         expect(passed).toBeFalsy();
     });
 
-    it ('should create attested consent revocation (createAttestedConsentRevocation)', function(){
+    it ('should create signed consent revocation (createAttestedConsentRevocation)', function(){
         var passed = {consentID: 111, acceptTerms: ["something"]};
         $httpBackend.expect('POST',"/pcm/patients/consents/%5Bobject%20Object%5D/revocation").respond(200, {status: 200});
 
@@ -466,7 +466,7 @@ xdescribe('app.consentServices', function () {
         expect(passed).toBeTruthy();
     });
 
-    it ('should download attested consent revocation PDF (downloadAttestedConsentRevocationPdf)', function(){
+    it ('should download signed consent revocation PDF (downloadAttestedConsentRevocationPdf)', function(){
         $httpBackend.expect('GET',"/pcm/patients/consents/attested").respond(200, "success");
         consentService.downloadAttestedConsentRevocationPdf("consent.service.spec.js", success, error);
     });
