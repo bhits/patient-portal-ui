@@ -4,9 +4,9 @@
 
     angular
         .module('app.activity')
-        .directive('ppActivity', ppActivity);
+        .directive('c2sActivity', c2sActivity);
 
-    function ppActivity() {
+    function c2sActivity() {
 
         var directive = {
             restrict: 'E',
