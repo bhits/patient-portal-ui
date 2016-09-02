@@ -3,9 +3,9 @@
 
     angular
         .module('app.core')
-            .directive('ppContentWrapper', ppContentWrapper);
+            .directive('c2sContentWrapper', c2sContentWrapper);
 
-            function ppContentWrapper() {
+            function c2sContentWrapper() {
                 var directive  =  {
                     restrict: 'E',
                     transclude: true,
