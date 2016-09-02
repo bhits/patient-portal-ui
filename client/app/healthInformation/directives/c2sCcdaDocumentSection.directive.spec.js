@@ -4,7 +4,7 @@
 
 'use strict';
 
-xdescribe('app.ppCcdaDocumentSectionDirective ', function() {
+xdescribe('app.c2sCcdaDocumentSectionDirective ', function() {
     var healthInformationService, controller, $scope, $httpBackend, element, $templateCache, template;
 
     var patient = {
@@ -48,7 +48,7 @@ xdescribe('app.ppCcdaDocumentSectionDirective ', function() {
         $scope = _$rootScope_.$new();
         $scope.document = "document";
 
-        element = angular.element("<ppCcdaDocument></ppCcdaDocument>");
+        element = angular.element("<c2sCcdaDocument></c2sCcdaDocument>");
         template = $compile(element)($scope);
         template.append($templateCache);
         $scope.$digest();
