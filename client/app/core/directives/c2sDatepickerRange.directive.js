@@ -5,9 +5,9 @@
 
     angular
         .module('app.core')
-            .directive('ppDatepickerRange', ppDatePickerRange);
+            .directive('c2sDatepickerRange', c2sDatepickerRange);
 
-            function ppDatePickerRange() {
+            function c2sDatepickerRange() {
                 var directive =  {
                     restrict: 'EA',
                     templateUrl: 'app/core/directives/datepickerRange.html',
