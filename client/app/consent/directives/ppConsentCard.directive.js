@@ -39,8 +39,7 @@
         function consentState(state) {
 
             if (state.length !== 0) {
-                var result = (consentService.resolveConsentState(vm.consent) === state);
-                return result;
+                return (consentService.resolveConsentState(vm.consent) === state);
             } else {
                 return consentService.resolveConsentState(vm.consent);
             }
@@ -56,8 +55,10 @@
 
         function openManageConsentModal() {
             var consentState = consentService.resolveConsentState(vm.consent);
+            var templateFileName = mapToTemplateFileName(consentState);
+
             $modal.open({
-                templateUrl: 'app/consent/directives/consentListManageOptionsModal' + consentState + '.html',
+                templateUrl: 'app/consent/directives/consentListManageOptionsModal' + templateFileName + '.html',
                 controller: ManageConsentModalController,
                 controllerAs: 'manageConsentModalVm',
                 resolve: {
@@ -69,6 +70,14 @@
                     }
                 }
             });
+        }
+
+        function mapToTemplateFileName(consentState) {
+            if (angular.equals(consentState, 'In Progress')) {
+                return 'Saved';
+            } else {
+                return consentState;
+            }
         }
     }
 

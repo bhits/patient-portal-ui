@@ -139,7 +139,6 @@
 
                 function onCompleteAttestation(){
                     var success = function(response){
-                        // notificationService.success("Success in creating consent attestation.");
                         vm.isAuthenticated = true;
                         vm.openAttestedConsentPreviewModal();
                     };
@@ -178,7 +177,7 @@
                             utilityService.downloadFile(data, fileName,'application/pdf');
                         };
                         var error = function (respone){
-                            notificationService.error("Error in downloading attested consent pdf.");
+                            notificationService.error("Error in downloading signed consent pdf.");
                         };
                         consentService.downloadAttestedConsentPdf(vm.attestation.consentId,success, error);
                     }
