@@ -5,10 +5,10 @@
 
     angular
         .module('app.core')
-            .directive('ppIcheck', ppIcheck);
+            .directive('c2sIcheck', c2sIcheck);
 
             /* @ngInject */
-            function ppIcheck($timeout) {
+            function c2sIcheck($timeout) {
 
                 var directive = {
                     restrict: 'A',
