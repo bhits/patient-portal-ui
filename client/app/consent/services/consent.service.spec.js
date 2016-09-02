@@ -306,11 +306,11 @@ xdescribe('app.consentServices', function () {
         spyOn(consentService, 'resolveConsentState').and.callThrough();
         $scope.consent = mockState;
         consentService.resolveConsentState(mockConsent);
-        expect(consentService.resolveConsentState(mockConsent)).toBe('Saved');
+        expect(consentService.resolveConsentState(mockConsent)).toBe('In Progress');
         mockConsent = {
             "consentStage": "CONSENT_SAVED"
         };
-        expect(consentService.resolveConsentState(mockConsent)).toBe('Saved');
+        expect(consentService.resolveConsentState(mockConsent)).toBe('In Progress');
         mockConsent = {
             "consentStage": "CONSENT_SIGNED"
         };

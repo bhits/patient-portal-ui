@@ -63,7 +63,7 @@
             <div class="panel-footer">
                 <div class="row">
                     <div class="col-xs-12">
-                        <div class="left-padding25" ng-class="{'statusIcon_saved': consentCardVm.consentState('Saved'),'statusIcon_signed': consentCardVm.consentState('Signed'),'statusIcon_revoked': consentCardVm.consentState('Revoked')}">
+                        <div class="left-padding25" ng-class="{'statusIcon_saved': consentCardVm.consentState('In Progress'),'statusIcon_signed': consentCardVm.consentState('Signed'),'statusIcon_revoked': consentCardVm.consentState('Revoked')}">
                             <span> Consent State: <span class="bold" ng-bind="consentCardVm.consentState('') | uppercase"/></span>
                             <span class="pull-right">
                                 <button class="btn btn-primary btn-xs dark-green" type="button" ng-click="consentCardVm.openManageConsentModal()">Manage
