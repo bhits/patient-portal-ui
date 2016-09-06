@@ -14,7 +14,7 @@
 
         var directive = {
             restrict: 'E',
-            templateUrl: 'app/provider/directives/provider-lookup-result.html',
+            templateUrl: 'app/provider/directives/providerLookupResult.html',
             bindToController: {
                 providerLookupResult: '=',
                 queryParameters: '='

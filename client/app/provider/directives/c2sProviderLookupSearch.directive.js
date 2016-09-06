@@ -14,7 +14,7 @@
         var directive = {
             restrict: 'E',
             scope: {},
-            templateUrl: 'app/provider/directives/provider-lookup-search.html',
+            templateUrl: 'app/provider/directives/providerLookupSearch.html',
             controller: ProviderLookupSearchController,
             controllerAs: 'providerLookupSearchVm'
         };
