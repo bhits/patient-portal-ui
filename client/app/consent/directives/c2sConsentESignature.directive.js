@@ -157,11 +157,9 @@
             attestedConsentModalVm.closeAndRedirectAndToConsentList = closeAndRedirectAndToConsentList;
             attestedConsentModalVm.downloadAttestedConsentAndRedirectToConsentList = downloadAttestedConsentAndRedirectToConsentList;
 
-
             function closeAndRedirectAndToConsentList() {
                 $modalInstance.dismiss('cancel');
             }
-
 
             function downloadAttestedConsentAndRedirectToConsentList() {
                 var fileName = profileService.getName();
