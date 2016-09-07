@@ -1,12 +1,11 @@
 (function () {
-
     'use strict';
 
     angular
         .module('app.consent')
-        .directive('ppConsentMedicalInformation', ppConsentMedicalInformation);
+        .directive('c2sConsentMedicalInformation', c2sConsentMedicalInformation);
 
-    function ppConsentMedicalInformation() {
+    function c2sConsentMedicalInformation() {
         var directive = {
             restrict: 'E',
             replace: false,
@@ -20,7 +19,6 @@
             controllerAs: 'consentMedicalInformationVm',
             controller: MedicalInformationController
         };
-
         return directive;
     }
 
