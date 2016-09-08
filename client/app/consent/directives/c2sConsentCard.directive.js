@@ -3,9 +3,9 @@
 
     angular
         .module('app.consent')
-        .directive('ppConsentCard', ppConsentCard);
+        .directive('c2sConsentCard', c2sConsentCard);
 
-    function ppConsentCard() {
+    function c2sConsentCard() {
         var directive = {
             scope: {},
             bindToController: {consent: '='},

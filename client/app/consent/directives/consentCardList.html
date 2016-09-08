@@ -12,7 +12,7 @@
 <div class="row" id="consent_list" ng-if="consentCardListVm.hasConsents()">
     <div class="col-sm-12">
         <div ng-repeat="consent in consentCardListVm.consentList.consentList">
-            <pp-consent-card consent="consent"/>
+            <c2s-consent-card consent="consent"></c2s-consent-card>
         </div>
         <div class="text-center">
             <pagination total-items="consentCardListVm.pagination.totalItems"
@@ -28,7 +28,9 @@
 <div class="row" ng-if="!consentCardListVm.hasConsents()">
     <div class="col-sm-12">
         <div class="alert alert-danger">
-            There are currently no Consents available. Please click the <a class="alert-link" ui-sref="fe.consent.create">Add a Consent</a> button to create a new consent.
+            There are currently no Consents available. Please click the <a class="alert-link"
+                                                                           ui-sref="fe.consent.create">Add a Consent</a>
+            button to create a new consent.
         </div>
     </div>
 </div>
