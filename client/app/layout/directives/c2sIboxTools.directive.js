@@ -12,8 +12,8 @@
             scope: {},
             bindToController: {
                 total: '@',
-                ppCollapsed: '=?',
-                ppChevronPreventDefault: '=?'
+                c2sCollapsed: '=?',
+                c2sChevronPreventDefault: '=?'
             },
             templateUrl: 'app/layout/directives/iBoxTools.html',
             controller: IboxToolController,
@@ -26,7 +26,7 @@
     /* @ngInject */
     function IboxToolController($scope, $element, $timeout) {
         var iboxToolVm = this;
-        iboxToolVm.ppChevronPreventDefault = !!iboxToolVm.ppChevronPreventDefault;
+        iboxToolVm.c2sChevronPreventDefault = !!iboxToolVm.c2sChevronPreventDefault;
         var ibox = $element.closest('div.ibox');
         var icon = $element.find('i:first');
         var content = ibox.find('div.ibox-content');
@@ -35,19 +35,19 @@
         $scope.$on('ExpandAccordions', ExpandAccordionsEventHandler);
         $scope.$on('CollapseAccordions', CollapseAccordionsEventHandler);
 
-        $scope.$watch('iboxToolVm.ppCollapsed', collapseWatchHandler);
+        $scope.$watch('iboxToolVm.c2sCollapsed', collapseWatchHandler);
 
         activate();
 
         function activate() {
-            if (iboxToolVm.ppCollapsed) {
+            if (iboxToolVm.c2sCollapsed) {
                 content.slideUp(0);
             }
         }
 
         function toggleCollapsed() {
-            if (!iboxToolVm.ppChevronPreventDefault) {
-                iboxToolVm.ppCollapsed = !iboxToolVm.ppCollapsed;
+            if (!iboxToolVm.c2sChevronPreventDefault) {
+                iboxToolVm.c2sCollapsed = !iboxToolVm.c2sCollapsed;
             }
         }
 
