@@ -3,13 +3,14 @@
         <div class="ibox panel panel-navbar-blueGray float-e-margins">
             <div class="ibox-title modified panel-heading right-padding30" ng-click="consentCardVm.toggleCollapse()">
                 <div class="chevron_absolute">
-                    <div pp-ibox-tools pp-collapsed="consentCardVm.collapsed" pp-chevron-prevent-default="true"></div>
+                    <div c2s-ibox-tools c2s-collapsed="consentCardVm.collapsed"
+                         c2s-chevron-prevent-default="true"></div>
                 </div>
 
                 <div class="row">
-                    <!--<div pp-ibox-tools init-collapsed="true"></div>-->
                     <div class="col-sm-4 col-sm-push-8 col-xs-12">
-                        <p class="">Effective Dates: <strong><span ng-bind="(consentCardVm.consent.consentStart | date) + ' - ' + (consentCardVm.consent.consentEnd | date)"/></strong>
+                        <p class="">Effective Dates: <strong><span
+                                ng-bind="(consentCardVm.consent.consentStart | date) + ' - ' + (consentCardVm.consent.consentEnd | date)"></span></strong>
                         </p>
                     </div>
 
@@ -19,13 +20,15 @@
                                 <p class="m-b-xxs">Authorized to share:
                                 </p>
 
-                                <p><strong><span ng-repeat="discloseName in consentCardVm.consent.toDiscloseName" ng-bind="discloseName"/></strong>
+                                <p><strong><span ng-repeat="discloseName in consentCardVm.consent.toDiscloseName"
+                                                 ng-bind="discloseName"></span></strong>
                                 </p>
                             </div>
                             <div class="col-sm-6">
                                 <p class="m-b-xxs">Sharing with:</p>
 
-                                <p><strong><span ng-repeat="madeToName in consentCardVm.consent.isMadeToName" ng-bind="madeToName"/></strong>
+                                <p><strong><span ng-repeat="madeToName in consentCardVm.consent.isMadeToName"
+                                                 ng-bind="madeToName"></span></strong>
                                 </p>
                             </div>
                         </div>
@@ -35,38 +38,41 @@
             </div>
 
             <div class="ibox-content modified">
-                <!--<div class="btn-grey pp-block-text-bar pp-block-text-bar_sm pp-block-text-bar_default">-->
-                    <!--<span>-->
-                        <!--Consent State: <span class="bold" ng-bind="consentCardVm.consentState('') | uppercase"/>-->
-                    <!--</span>-->
-                <!--</div>-->
-
                 <div class="row">
                     <div class="col-md-6 m-b">
                         <div ng-if="consentCardVm.isShareAll()">
-                            <div class="font-size16 font-medium m-b-sm border-bottom-blue"><span class="m-r-xs"><i class="fa fa-eye"></i></span>Sharing all medical information:</div>
+                            <div class="font-size16 font-medium m-b-sm border-bottom-blue"><span class="m-r-xs"><i
+                                    class="fa fa-eye"></i></span>Sharing all medical information:
+                            </div>
                             All my medical information can be shared.
                         </div>
                         <div ng-if="!consentCardVm.isShareAll()">
-                            <div class="font-size16 font-medium m-b-sm border-bottom-red"><span class="m-r-xs"><i class="fa fa-eye-slash"></i></span>Medical Information NOT disclosed:</div>
+                            <div class="font-size16 font-medium m-b-sm border-bottom-red"><span class="m-r-xs"><i
+                                    class="fa fa-eye-slash"></i></span>Medical Information NOT disclosed:
+                            </div>
 
-                            <p><span ng-bind="consentCardVm.notDisclosedItems()"/></p>
+                            <p><span ng-bind="consentCardVm.notDisclosedItems()"></span></p>
                         </div>
                     </div>
                     <div class="col-md-6 m-b">
-                        <div class="font-size16 font-medium m-b-sm border-bottom-blue"><span class="m-r-xs"><i class="fa fa-eye"></i></span>Share for following purposes:</div>
+                        <div class="font-size16 font-medium m-b-sm border-bottom-blue"><span class="m-r-xs"><i
+                                class="fa fa-eye"></i></span>Share for following purposes:
+                        </div>
 
-                        <p><span ng-bind="consentCardVm.purposeOfUseItems()"/></p>
+                        <p><span ng-bind="consentCardVm.purposeOfUseItems()"></span></p>
                     </div>
                 </div>
             </div>
             <div class="panel-footer">
                 <div class="row">
                     <div class="col-xs-12">
-                        <div class="left-padding25" ng-class="{'statusIcon_saved': consentCardVm.consentState('In Progress'),'statusIcon_signed': consentCardVm.consentState('Signed'),'statusIcon_revoked': consentCardVm.consentState('Revoked')}">
-                            <span> Consent State: <span class="bold" ng-bind="consentCardVm.consentState('') | uppercase"/></span>
+                        <div class="left-padding25"
+                             ng-class="{'statusIcon_saved': consentCardVm.consentState('In Progress'),'statusIcon_signed': consentCardVm.consentState('Signed'),'statusIcon_revoked': consentCardVm.consentState('Revoked')}">
+                            <span> Consent State: <span class="bold"
+                                                        ng-bind="consentCardVm.consentState('') | uppercase"></span></span>
                             <span class="pull-right">
-                                <button class="btn btn-primary btn-xs dark-green" type="button" ng-click="consentCardVm.openManageConsentModal()">Manage
+                                <button class="btn btn-primary btn-xs dark-green" type="button"
+                                        ng-click="consentCardVm.openManageConsentModal()">Manage
                                     Consent
                                 </button>
                             </span>
@@ -74,8 +80,6 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
     </div>
 </div>

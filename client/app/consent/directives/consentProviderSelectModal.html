@@ -1,6 +1,6 @@
 <div class="inmodal">
     <div class="modal-header">
-        <h1 class="modal-title"><strong> <span ng-bind="title"></span></strong></h1>
+        <h2 class="modal-title"><span ng-bind="selectProviderModalVm.title"></span></h2>
     </div>
     <div class="modal-body">
                 <p ng-if="!selectProviderModalVm.hasAtLeastTwoProviders()|| selectProviderModalVm.hasNoProviders()">In order to create a consent, you must add at least <strong>two Health Providers</strong></p>
@@ -14,7 +14,7 @@
                                 <div ng-if="selectProviderModalVm.isIndividualProvider(provider)">
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" pp-icheck ng-model="selectProviderModalVm.selectedProvider.npi"  ng-value="provider.npi" name="npi" ng-disabled="selectProviderModalVm.isSelected(provider.npi)" >
+                                            <input type="radio" c2s-icheck ng-model="selectProviderModalVm.selectedProvider.npi"  ng-value="provider.npi" name="npi" ng-disabled="selectProviderModalVm.isSelected(provider.npi)" >
                                                 <span class="m-l-xs" ng-bind="provider|pcmProviderNameOrFacility"> </span>
                                         </label>
                                     </div>
@@ -29,7 +29,7 @@
                             <div ng-if="selectProviderModalVm.isOrganizationProvider(provider)">
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" pp-icheck ng-model="selectProviderModalVm.selectedProvider.npi"  ng-value="provider.npi" name="npi" ng-disabled="selectProviderModalVm.isSelected(provider.npi)" >
+                                        <input type="radio" c2s-icheck ng-model="selectProviderModalVm.selectedProvider.npi"  ng-value="provider.npi" name="npi" ng-disabled="selectProviderModalVm.isSelected(provider.npi)" >
                                         <span class="m-l-xs" ng-bind="provider|pcmProviderNameOrFacility"></span>
                                     </label>
                                 </div>
