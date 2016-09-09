@@ -21,12 +21,12 @@
                     .state('fe.provider.lookup', {
                         url: '/lookup',
                         data: { pageTitle: 'Provider lookup' },
-                        templateUrl: 'app/provider/controllers/provider-lookup.html'
+                        templateUrl: 'app/provider/controllers/providerLookup.html'
                     })
                     .state('fe.provider.list', {
                         url: '/list',
                         data: {pageTitle: 'Provider List'},
-                        templateUrl: 'app/provider/controllers/provider-list.html',
+                        templateUrl: 'app/provider/controllers/providerList.html',
                         controller: 'ProviderListController',
                         controllerAs: 'providerListVm',
                         resolve: {

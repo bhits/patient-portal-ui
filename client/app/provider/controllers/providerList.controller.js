@@ -14,7 +14,7 @@
 
                 vm.openDeleteProviderModal = function (provider, size) {
                     var modalInstance = $modal.open({
-                        templateUrl: 'app/provider/controllers/provider-delete-modal.html',
+                        templateUrl: 'app/provider/controllers/providerDeleteModal.html',
                         size: size,
                         resolve: {
                             provider: function () {
