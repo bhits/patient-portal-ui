@@ -3,7 +3,7 @@
 
     angular
         .module('app.account')
-        .directive('c2sUnsecureTopNavbar', topNavbar);
+            .directive('c2sUnsecureTopNavbar', topNavbar);
 
     function topNavbar() {
 

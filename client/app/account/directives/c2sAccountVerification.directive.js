@@ -7,7 +7,7 @@
 
     angular
         .module('app.account')
-        .directive('c2sAccountVerification', c2sAccountVerification);
+            .directive('c2sAccountVerification', c2sAccountVerification);
 
     function c2sAccountVerification() {
 
@@ -28,7 +28,6 @@
     function VerificationController(utilityService, accountService, emailTokenService, accountConfig) {
         var vm = this;
         var original = vm.verifyInfo;
-
         vm.clearField = clearField;
         vm.verify = verify;
         vm.canVerify = canVerify;

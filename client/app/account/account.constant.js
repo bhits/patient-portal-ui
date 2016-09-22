@@ -7,14 +7,14 @@
 
     angular
         .module('app.account')
-        .constant('accountConfig',
-            {
-                verificationPath: '/fe/account/verification',
-                createPasswordPath: '/fe/account/createPassword',
-                activationSuccessPath: '/fe/account/activationSuccess',
-                activationErrorPath: '/fe/account/activationError',
-                forgotPasswordPath: '/fe/account/forgotPassword',
-                resetPasswordSuccessPath: '/fe/account/resetPasswordSuccess'
-            }
-        );
+            .constant('accountConfig',
+                {
+                    verificationPath: '/fe/account/verification',
+                    createPasswordPath: '/fe/account/createPassword',
+                    activationSuccessPath: '/fe/account/activationSuccess',
+                    activationErrorPath: '/fe/account/activationError',
+                    forgotPasswordPath: '/fe/account/forgotPassword',
+                    resetPasswordSuccessPath: '/fe/account/resetPasswordSuccess'
+                }
+            );
 })();

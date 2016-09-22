@@ -7,7 +7,7 @@
 
     angular
         .module("app.account")
-        .controller('CreatePasswordController', CreatePasswordController);
+            .controller('CreatePasswordController', CreatePasswordController);
 
     /* @ngInject */
     function CreatePasswordController(allowActivation, brand) {

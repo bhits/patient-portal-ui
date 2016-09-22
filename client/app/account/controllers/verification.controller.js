@@ -7,7 +7,7 @@
 
     angular
         .module("app.account")
-        .controller('VerificationController', VerificationController);
+            .controller('VerificationController', VerificationController);
 
     /* @ngInject */
     function VerificationController(allowVerification, brand) {

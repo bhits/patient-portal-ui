@@ -7,7 +7,7 @@
 
     angular
         .module('app.account')
-        .directive('c2sCreatePassword', c2sCreatePassword);
+            .directive('c2sCreatePassword', c2sCreatePassword);
 
     function c2sCreatePassword() {
 
@@ -28,11 +28,17 @@
     function CreatePasswordController(utilityService, accountService, accountConfig) {
         var vm = this;
         var original = vm.patient;
-
         vm.clearField = clearField;
         vm.activate = activate;
         vm.canActivate = canActivate;
         vm.username = accountService.getUserName();
+
+        function activate() {
+            var patientInfo = prepareActivation();
+            accountService.activatePatient(patientInfo, activateSuccess, activateError);
+        }
+
+        //TODO popover data should come from the backend
         vm.popoverData = {
             title: "Password Instructions",
             items: [
@@ -66,11 +72,6 @@
                 utilityService.redirectTo(accountConfig.activationErrorPath);
             }
             vm.activateError = true;
-        }
-
-        function activate() {
-            var patientInfo = prepareActivation();
-            accountService.activatePatient(patientInfo, activateSuccess, activateError);
         }
 
         function canActivate(createPasswordForm) {

@@ -7,7 +7,7 @@
 
     angular
         .module("app.account")
-        .controller('ForgotPasswordController', ForgotPasswordController);
+            .controller('ForgotPasswordController', ForgotPasswordController);
 
     /* @ngInject */
     function ForgotPasswordController(utilityService, oauthConfig, accountConfig, authenticationService, brand) {

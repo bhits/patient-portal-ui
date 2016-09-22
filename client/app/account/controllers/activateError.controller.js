@@ -7,7 +7,7 @@
 
     angular
         .module("app.account")
-        .controller('ActivateErrorController', ActivateErrorController);
+            .controller('ActivateErrorController', ActivateErrorController);
 
     /* @ngInject */
     function ActivateErrorController(brand) {
