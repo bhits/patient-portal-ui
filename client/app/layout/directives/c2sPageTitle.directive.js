@@ -10,7 +10,6 @@
         var directive = {
             link: linkFunc
         };
-
         return directive;
 
         /* @ngInject */
@@ -29,5 +28,4 @@
             $rootScope.$on('$stateChangeStart', listener);
         }
     }
-
 })();

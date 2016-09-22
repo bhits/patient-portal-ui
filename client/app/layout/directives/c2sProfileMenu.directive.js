@@ -15,7 +15,6 @@
             bindToController: true,
             controller: ProfileMenuController
         };
-
         return directive;
 
         /* @ngInject */
