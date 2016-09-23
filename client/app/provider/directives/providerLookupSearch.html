@@ -12,7 +12,8 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="alert alert-info">
-                                    <span class="badge btn-success btn-circle bg-color-blue m-r-xs">1</span>&nbsp;<b>Step 1.</b>
+                                    <span class="badge btn-success btn-circle bg-color-blue m-r-xs">1</span>&nbsp;<b>Step
+                                    1.</b>
                                     Please enter
                                     the
                                     provider <b>State and City</b> OR <b>Zip Code</b>.
@@ -87,7 +88,6 @@
                                             <div ng-message="pattern">Please provide a valid zip code (12345 or
                                                 12345-6789)
                                             </div>
-                                            <!--<div ng-message="required">Required</div>-->
                                         </div>
                                     </div>
                                     <div class="col-sm-12 info-blue italic m-b m-t-n"
@@ -101,7 +101,8 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="alert alert-info">
-                                    <span class="badge btn-success bg-color-blue btn-circle m-r-xs">2</span>&nbsp;<b>Step 2.</b>
+                                    <span class="badge btn-success bg-color-blue btn-circle m-r-xs">2</span>&nbsp;<b>Step
+                                    2.</b>
                                     Please enter
                                     the
                                     <b>Facility Name</b> OR <b>Provider Name and
@@ -217,7 +218,6 @@
                                         <div ng-message="maxlength">Maximum {{providerLookupSearchVm.formMaxlength}}
                                             characters
                                         </div>
-                                        <!--<div ng-message="required">Required</div>-->
                                     </div>
                                     <div class="info-blue italic m-b"
                                          ng-if="providerLookupSearchVm.formViewValue(providerSearchForm,'providerLastName')">
@@ -270,6 +270,6 @@
     </div>
 
     <c2s-provider-lookup-result ng-if="providerLookupSearchVm.providerLookupResult"
-                            provider-lookup-result="providerLookupSearchVm.providerLookupResult"
-                            query-parameters="providerLookupSearchVm.plsQueryParameters"></c2s-provider-lookup-result>
+                                provider-lookup-result="providerLookupSearchVm.providerLookupResult"
+                                query-parameters="providerLookupSearchVm.plsQueryParameters"></c2s-provider-lookup-result>
 </div>

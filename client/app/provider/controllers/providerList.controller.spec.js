@@ -5,7 +5,7 @@
 
 'use strict';
 
-xdescribe("app.providerModule ProviderListController ", function() {
+xdescribe("app.providerModule ProviderListController ", function () {
 
 
     beforeEach(module('app.provider'));
@@ -16,8 +16,8 @@ xdescribe("app.providerModule ProviderListController ", function() {
 
     var providers = {providers: "provider"};
 
-    beforeEach(inject(function(_$rootScope_, _$modal_, _providerService_, _$state_,
-                               _notificationService_, _$controller_) {
+    beforeEach(inject(function (_$rootScope_, _$modal_, _providerService_, _$state_,
+                                _notificationService_, _$controller_) {
 
         $modal = _$modal_;
         providerService = _providerService_;
@@ -49,17 +49,17 @@ xdescribe("app.providerModule ProviderListController ", function() {
         });
     }));
 
-    xit('should open delete provider modal ', function(){
+    xit('should open delete provider modal ', function () {
         expect($controller.providers).toEqual(providers);
     });
 
-    xit('should open delete provider', function(){
+    xit('should open delete provider', function () {
         spyOn($modal, 'open').and.callThrough();
         $controller.openDeleteProviderModal(providers, 2);
         expect($modal.open).toHaveBeenCalled();
     });
 
-    it('should open delete provider', function(){
+    it('should open delete provider', function () {
 
     });
 });
