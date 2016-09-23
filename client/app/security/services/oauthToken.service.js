@@ -1,7 +1,8 @@
 (function () {
     'use strict';
 
-    angular.module('app.security')
+    angular
+        .module('app.security')
         .factory('oauthTokenService', oauthTokenService);
 
     /* @ngInject */

@@ -10,7 +10,7 @@ xdescribe("app.forgotPassword.controller ", function() {
     beforeEach(module('app.security'));
     beforeEach(module('app.brand'));
 
-    var utilityService, oauthConfig, accountConfig, authenticationService, $httpBackend;
+    var utilityService, securityConstants, accountConfig, authenticationService, $httpBackend;
     var controller, brand, $scope, form;
 
     beforeEach(function () {
@@ -25,10 +25,10 @@ xdescribe("app.forgotPassword.controller ", function() {
     });
 
     beforeEach(inject(function( $controller, $state, $rootScope, $compile, _authenticationService_,
-                                _utilityService_, _oauthConfig_, _accountConfig_, _$httpBackend_) {
+                                _utilityService_, _securityConstants_, _accountConfig_, _$httpBackend_) {
 
         utilityService = _utilityService_;
-        oauthConfig = _oauthConfig_;
+        securityConstants = _securityConstants_;
         accountConfig = _accountConfig_;
         authenticationService = _authenticationService_;
         $scope = $rootScope;
@@ -46,7 +46,7 @@ xdescribe("app.forgotPassword.controller ", function() {
 
         controller = $controller('ForgotPasswordController', {
             utilityService: utilityService,
-            oauthConfig: oauthConfig,
+            securityConstants: securityConstants,
             accountConfig: accountConfig,
             authenticationService: authenticationService,
             brand: brand

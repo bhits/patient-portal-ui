@@ -2,7 +2,7 @@
 
 'use strict';
 
-describe('app.profileService ', function() {
+describe('app.profileService ', function () {
     var profileService, sessionStorage, resource, envService, notificationService, httpBackend;
 
     var emptyProfile;
@@ -11,7 +11,7 @@ describe('app.profileService ', function() {
     beforeEach(module('app.security'));
 
     beforeEach(inject(function (_profileService_, _$sessionStorage_, _$resource_,
-                                _envService_, _notificationService_, _$httpBackend_){
+                                _envService_, _notificationService_, _$httpBackend_) {
         profileService = _profileService_;
         sessionStorage = _$sessionStorage_;
         resource = _$resource_;
@@ -20,25 +20,25 @@ describe('app.profileService ', function() {
         httpBackend = _$httpBackend_;
     }));
 
-    it("should set profile", function() {
+    it("should set profile", function () {
         expect(profileService.profile).toBeUndefined();
         profileService.setProfile(profile);
         expect(sessionStorage.profile).toBe(profile);
     });
 
-    it("should get profile", function() {
+    it("should get profile", function () {
         profileService.setProfile(profile);
     });
 
 
-    it("should load profile", function() {
+    it("should load profile", function () {
         //httpBackend.expect('GET', "/uaa/userinfo").respond(200,profile);
         profileService.setProfile(profile);
         var called = profileService.loadProfile();
         expect(called).toBeDefined();
     });
 
-    it("should get profile username", function() {
+    it("should get profile username", function () {
         spyOn(notificationService, 'error').and.callThrough();
 
         profileService.setProfile(emptyProfile);
@@ -49,7 +49,7 @@ describe('app.profileService ', function() {
         expect(profileService.getUserName()).toBe('username');
     });
 
-    it("should get profile user id", function() {
+    it("should get profile user id", function () {
         spyOn(notificationService, 'error').and.callThrough();
 
         profileService.setProfile(emptyProfile);
@@ -61,7 +61,7 @@ describe('app.profileService ', function() {
         expect(profileService.getUserId()).toBe(101);
     });
 
-    it("should get profile name", function() {
+    it("should get profile name", function () {
         spyOn(notificationService, 'error').and.callThrough();
 
         profileService.setProfile(emptyProfile);

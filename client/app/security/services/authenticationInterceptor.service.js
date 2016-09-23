@@ -8,7 +8,7 @@
 
     /* @ngInject */
     function authInterceptorService($q, $location, utilityService, oauthTokenService,
-                                    urlAuthorizationConfigurerService, oauthConfig) {
+                                    urlAuthorizationConfigurerService, securityConstants) {
         var service = {};
         service.request = request;
         service.responseError = responseError;
@@ -26,7 +26,7 @@
             if (accessToken) {
                 if (accessToken && oauthTokenService.isExpiredToken()) {
                     oauthTokenService.removeToken();
-                    utilityService.redirectTo(oauthConfig.loginPath);
+                    utilityService.redirectTo(securityConstants.loginPath);
                 } else if (utilityService.isSecuredApi(config.url)) {
                     config.headers.Authorization = 'Bearer  ' + accessToken;
                 }
@@ -34,7 +34,7 @@
                 if (urlAuthorizationConfigurerService.isAllowAccess(currentPath)) {
                     utilityService.redirectTo(currentPath);
                 } else {
-                    utilityService.redirectTo(oauthConfig.loginPath);
+                    utilityService.redirectTo(securityConstants.loginPath);
                 }
             }
             return config;
