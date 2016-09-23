@@ -1,4 +1,3 @@
-
 (function () {
 
     'use strict';
@@ -8,7 +7,7 @@
         .controller('ConsentListController', ConsentListController);
 
     /* @ngInject */
-    function ConsentListController(loadedData){
+    function ConsentListController(loadedData) {
         var vm = this;
         vm.consentList = loadedData;
     }

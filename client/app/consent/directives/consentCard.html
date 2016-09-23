@@ -6,27 +6,23 @@
                     <div c2s-ibox-tools c2s-collapsed="consentCardVm.collapsed"
                          c2s-chevron-prevent-default="true"></div>
                 </div>
-
                 <div class="row">
                     <div class="col-sm-4 col-sm-push-8 col-xs-12">
                         <p class="">Effective Dates: <strong><span
                                 ng-bind="(consentCardVm.consent.consentStart | date) + ' - ' + (consentCardVm.consent.consentEnd | date)"></span></strong>
                         </p>
                     </div>
-
                     <div class="col-sm-8 col-sm-pull-4 col-xs-12">
                         <div class="row">
                             <div class="col-sm-6">
                                 <p class="m-b-xxs">Authorized to share:
                                 </p>
-
                                 <p><strong><span ng-repeat="discloseName in consentCardVm.consent.toDiscloseName"
                                                  ng-bind="discloseName"></span></strong>
                                 </p>
                             </div>
                             <div class="col-sm-6">
                                 <p class="m-b-xxs">Sharing with:</p>
-
                                 <p><strong><span ng-repeat="madeToName in consentCardVm.consent.isMadeToName"
                                                  ng-bind="madeToName"></span></strong>
                                 </p>
@@ -34,9 +30,7 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-
             <div class="ibox-content modified">
                 <div class="row">
                     <div class="col-md-6 m-b">
@@ -58,7 +52,6 @@
                         <div class="font-size16 font-medium m-b-sm border-bottom-blue"><span class="m-r-xs"><i
                                 class="fa fa-eye"></i></span>Share for following purposes:
                         </div>
-
                         <p><span ng-bind="consentCardVm.purposeOfUseItems()"></span></p>
                     </div>
                 </div>

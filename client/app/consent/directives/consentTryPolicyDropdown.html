@@ -4,15 +4,20 @@
             <label for="document" class="col-sm-3 control-label">Document</label>
             <div class="col-sm-9">
                 <select id="document" class="form-control m-b" name="account" ng-model="tryPolicyDropdownVm.documentid">
-                    <option ng-repeat="document in tryPolicyDropdownVm.medicaldocuments" value="{{document.id}}">{{document.name}}</option>
+                    <option ng-repeat="document in tryPolicyDropdownVm.medicaldocuments" value="{{document.id}}">
+                        {{document.name}}
+                    </option>
                 </select>
             </div>
         </div>
         <div class="form-group">
             <label for="purposeOfUse" class="col-sm-3 control-label">Purpose of Use</label>
             <div class="col-sm-9">
-                <select id="purposeOfUse" class="form-control m-b" name="account" ng-model="tryPolicyDropdownVm.purposeofusecode" >
-                    <option ng-repeat="purposeOfUse in tryPolicyDropdownVm.shareforpurposeofuse" value="{{purposeOfUse.code}}">{{purposeOfUse.displayName}}</option>
+                <select id="purposeOfUse" class="form-control m-b" name="account"
+                        ng-model="tryPolicyDropdownVm.purposeofusecode">
+                    <option ng-repeat="purposeOfUse in tryPolicyDropdownVm.shareforpurposeofuse"
+                            value="{{purposeOfUse.code}}">{{purposeOfUse.displayName}}
+                    </option>
                 </select>
             </div>
         </div>

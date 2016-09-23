@@ -4,39 +4,57 @@
             <h1> I, <span ng-bind="consentCreateVm.username"></span>, hereby authorize... </h1>
             <div class="hr-line-dashed"></div>
             <div class="row">
-                    <div class="col-md-5">
-                        <c2s-consent-provider-select ng-model="consentCreateVm.authorizeProvider" modaltitle="consentCreateVm.authorize" name="authorizeProvider" providers="consentCreateVm.providers"></c2s-consent-provider-select>
-                    </div>
-                <div class="col-md-1 center"><span class="fa fa-chevron-right fa-3x m-t-md visible-md-inline-block visible-lg-inline-block" ></span></div>
                 <div class="col-md-5">
-                    <c2s-consent-provider-select ng-model="consentCreateVm.disclosureProvider" modaltitle="consentCreateVm.disclosure"  name="disclosureProvider" providers="consentCreateVm.providers"></c2s-consent-provider-select>
+                    <c2s-consent-provider-select ng-model="consentCreateVm.authorizeProvider"
+                                                 modaltitle="consentCreateVm.authorize" name="authorizeProvider"
+                                                 providers="consentCreateVm.providers"></c2s-consent-provider-select>
+                </div>
+                <div class="col-md-1 center"><span
+                        class="fa fa-chevron-right fa-3x m-t-md visible-md-inline-block visible-lg-inline-block"></span>
+                </div>
+                <div class="col-md-5">
+                    <c2s-consent-provider-select ng-model="consentCreateVm.disclosureProvider"
+                                                 modaltitle="consentCreateVm.disclosure" name="disclosureProvider"
+                                                 providers="consentCreateVm.providers"></c2s-consent-provider-select>
                 </div>
             </div>
             <div class="hr-line-dashed"></div>
             <div class="row">
                 <div class="col-md-11">
-                    <c2s-consent-medical-information ng-model="consentCreateVm.medicalInformation" name="medicalInformation" sensitivitypolicies="consentCreateVm.sensitivitypolicies"></c2s-consent-medical-information>
+                    <c2s-consent-medical-information ng-model="consentCreateVm.medicalInformation"
+                                                     name="medicalInformation"
+                                                     sensitivitypolicies="consentCreateVm.sensitivitypolicies"></c2s-consent-medical-information>
                 </div>
             </div>
             <div class="hr-line-dashed"></div>
             <div class="row">
                 <div class="col-md-11">
-                    <c2s-consent-purpose-of-use ng-model="consentCreateVm.shareForPurposeOfUseCodes" name="shareForPurposeOfUseCodes" purposeofuse="consentCreateVm.purposeofuse"></c2s-consent-purpose-of-use>
+                    <c2s-consent-purpose-of-use ng-model="consentCreateVm.shareForPurposeOfUseCodes"
+                                                name="shareForPurposeOfUseCodes"
+                                                purposeofuse="consentCreateVm.purposeofuse"></c2s-consent-purpose-of-use>
                 </div>
             </div>
             <div class="hr-line-dashed"></div>
             <div class="row">
                 <div class="col-md-11">
-                    <c2s-consent-term ng-model="consentCreateVm.dateRange" name="dateRange" ></c2s-consent-term>
+                    <c2s-consent-term ng-model="consentCreateVm.dateRange" name="dateRange"></c2s-consent-term>
                 </div>
             </div>
             <div class="hr-line-dashed"></div>
             <div class="row m-b-md">
                 <div class="col-md-11">
                     <div class="pull-right">
-                        <button class="btn btn-white m-r" type="reset" ng-click="consentCreateVm.cancelConsent()">Cancel</button>
-                        <button class="btn btn-primary dark-green" type="submit" ng-click="consentCreateVm.createConsent()" ng-disabled="!consentCreateVm.canSave()" ng-if="!consentCreateVm.isEditMode">Save</button>
-                        <button class="btn btn-primary dark-green" type="submit" ng-click="consentCreateVm.updateConsent()" ng-disabled="!consentCreateVm.canSave()" ng-if="consentCreateVm.isEditMode">Save</button>
+                        <button class="btn btn-white m-r" type="reset" ng-click="consentCreateVm.cancelConsent()">
+                            Cancel
+                        </button>
+                        <button class="btn btn-primary dark-green" type="submit"
+                                ng-click="consentCreateVm.createConsent()" ng-disabled="!consentCreateVm.canSave()"
+                                ng-if="!consentCreateVm.isEditMode">Save
+                        </button>
+                        <button class="btn btn-primary dark-green" type="submit"
+                                ng-click="consentCreateVm.updateConsent()" ng-disabled="!consentCreateVm.canSave()"
+                                ng-if="consentCreateVm.isEditMode">Save
+                        </button>
                     </div>
                 </div>
             </div>

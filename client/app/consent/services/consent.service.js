@@ -2,9 +2,8 @@
  * Created by tomson.ngassa on 9/30/2015.
  */
 
-'use strict';
-
 (function () {
+    'use strict';
 
     angular.module("app.consent")
         .factory('consentService', consentService);
