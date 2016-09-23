@@ -16,15 +16,15 @@
             controllerAs: 'minimalizaSidebarVm',
             bindToController: true,
             controller: MinimalizaSidebarController
-
         };
         return directive;
 
         /* @ngInject */
         function MinimalizaSidebarController($timeout) {
             var vm = this;
+            vm.minimalize = minimalize;
 
-            vm.minimalize = function () {
+            function minimalize() {
                 vm.togglesidebar();
 
                 // Side Navbar
@@ -48,7 +48,7 @@
                     // Remove all inline style from jquery fadeIn function to reset menu state
                     $('#side-menu').removeAttr('style');
                 }
-            };
+            }
         }
     }
 })();

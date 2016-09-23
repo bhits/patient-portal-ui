@@ -8,7 +8,7 @@
 
 describe('app.authInterceptorService', function(){
     var $q, $location, utilityService, oauthTokenService,
-        urlAuthorizationConfigurerService, oauthConfig, authInterceptorService;
+        urlAuthorizationConfigurerService, securityConstants, authInterceptorService;
 
     var config;
 
@@ -17,14 +17,14 @@ describe('app.authInterceptorService', function(){
 
 
     beforeEach(inject(function(_$q_, _$location_, _utilityService_, _oauthTokenService_,
-                               _urlAuthorizationConfigurerService_, _oauthConfig_, _authInterceptorService_){
+                               _urlAuthorizationConfigurerService_, _securityConstants_, _authInterceptorService_){
 
         $q = _$q_;
         $location = _$location_;
         utilityService = _utilityService_;
         oauthTokenService = _oauthTokenService_;
         urlAuthorizationConfigurerService = _urlAuthorizationConfigurerService_;
-        oauthConfig = _oauthConfig_;
+        securityConstants = _securityConstants_;
         authInterceptorService = _authInterceptorService_;
     }));
 

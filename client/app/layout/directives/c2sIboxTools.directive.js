@@ -18,7 +18,6 @@
             templateUrl: 'app/layout/directives/iBoxTools.html',
             controller: IboxToolController,
             controllerAs: 'iboxToolVm'
-
         };
         return directive;
     }
@@ -52,7 +51,6 @@
         }
 
         function ExpandAccordionsEventHandler(event, args) {
-
             if (args.expand) {
                 //Accordion down
                 content.slideDown(200);
@@ -66,7 +64,6 @@
         }
 
         function CollapseAccordionsEventHandler(event, args) {
-
             if (args.collapse) {
                 //Accordion down
                 content.slideUp(200);

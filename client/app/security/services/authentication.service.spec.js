@@ -65,8 +65,8 @@ xdescribe('app.authenticationService ', function() {
         expect(oauthTokenService.token).toBeUndefined();
         expect(oauthTokenService.profile).toBeUndefined();
 
-        //for line: utilityService.redirectTo(oauthConfig.loginPath);
-        //path taken from: oauthConfig.loginPath
+        //for line: utilityService.redirectTo(securityConstants.loginPath);
+        //path taken from: securityConstants.loginPath
         expect(location.path()).toBe('/fe/login');
         expect(utilityService.redirectTo).toHaveBeenCalledWith('/fe/login');
         
