@@ -34,7 +34,7 @@
                 itemsPerPage: vm.activitiesData.itemsPerPage,
                 maxSize: 10
             };
-            
+
             vm.loadPage = loadPage;
 
             function loadPage() {
