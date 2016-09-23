@@ -7,14 +7,14 @@
 
     angular
         .module('app.core')
-            .filter('zip', zipFilter);
+        .filter('zip', zipFilter);
 
-            /* @ngInject */
-            function zipFilter(utilityService) {
-                return zipcodeFilter;
+    /* @ngInject */
+    function zipFilter(utilityService) {
+        return zipcodeFilter;
 
-                function zipcodeFilter (zipCode) {
-                    return utilityService.formatZipCode(zipCode);
-                }
-            }
+        function zipcodeFilter(zipCode) {
+            return utilityService.formatZipCode(zipCode);
+        }
+    }
 })();

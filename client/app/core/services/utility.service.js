@@ -1,6 +1,4 @@
 ﻿(function () {
-
-
     'use strict';
 
     angular
@@ -8,7 +6,7 @@
         .factory('utilityService', utilityService);
 
     /* @ngInject */
-    function utilityService($location, $anchorScroll, $window, envService, browser) {
+    function utilityService($location, $anchorScroll, $window, envService, browser, coreConstants) {
         var service = {};
 
         service.getYear = getYear;
@@ -78,7 +76,7 @@
         }
 
         function randomAlphanumeric(len, charSet) {
-            charSet = charSet || 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            charSet = charSet || coreConstants.alphanumericConstant;
             var randomString = '';
             for (var i = 0; i < len; i++) {
                 var randomPoz = Math.floor(Math.random() * charSet.length);
@@ -113,8 +111,6 @@
             var formatedDate = month + "/" + day + "/" + year;
 
             return formatedDate;
-
-           
         }
 
         function isIndividualProvider(provider) {
@@ -178,24 +174,24 @@
         function downloadFile(content, filename, fileFormat) {
             var file = new Blob([content], {type: fileFormat});
 
-            if(browser.isIE()){
-                if(isFileFormatPDF(fileFormat)){
+            if (browser.isIE()) {
+                if (isFileFormatPDF(fileFormat)) {
                     filename = filename + '.pdf';
                 }
                 window.navigator.msSaveBlob(file, filename);
 
-            } else if(browser.isFireFox()){
-                if(isFileFormatPDF(fileFormat)){
+            } else if (browser.isFireFox()) {
+                if (isFileFormatPDF(fileFormat)) {
                     filename = filename + '.pdf';
                 }
                 saveFileToDiskInChromeAndFF(file, filename);
 
-            } else if(browser.isChrome() || browser.isSafari()){
+            } else if (browser.isChrome() || browser.isSafari()) {
                 saveFileToDiskInChromeAndFF(file, filename);
             }
         }
 
-        function isFileFormatPDF(fileFormat){
+        function isFileFormatPDF(fileFormat) {
             if (fileFormat === 'application/pdf') {
                 return true;
             } else {
@@ -204,7 +200,7 @@
         }
 
 
-        function saveFileToDiskInChromeAndFF(blobFile, filename){
+        function saveFileToDiskInChromeAndFF(blobFile, filename) {
             var blobURL = ($window.URL || $window.webkitURL).createObjectURL(blobFile);
             var anchor = document.createElement("a");
             anchor.style = "display: none";
@@ -212,7 +208,7 @@
             anchor.href = blobURL;
             document.body.appendChild(anchor);
             anchor.click();
-            setTimeout(function(){
+            setTimeout(function () {
                 document.body.removeChild(anchor);
                 window.URL.revokeObjectURL(blobURL);
             }, 100);
@@ -254,8 +250,8 @@
                 return false;
             }
 
-            var month = parseInt(matchArray[1],10); // parse date into variables
-            var day = parseInt(matchArray[3],10);
+            var month = parseInt(matchArray[1], 10); // parse date into variables
+            var day = parseInt(matchArray[3], 10);
             var year = matchArray[4];
             if (month < 1 || month > 12) { // check month range
                 return false;
@@ -263,12 +259,12 @@
             if (day < 1 || day > 31) {
                 return false;
             }
-            if ((month===4 || month===6 || month===9 || month===11) && day===31) {
+            if ((month === 4 || month === 6 || month === 9 || month === 11) && day === 31) {
                 return false;
             }
             if (month === 2) { // check for february 29th
                 var isleap = (year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0));
-                if (day>29 || (day===29 && !isleap)) {
+                if (day > 29 || (day === 29 && !isleap)) {
                     return false;
                 }
             }
