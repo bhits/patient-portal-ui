@@ -16,8 +16,8 @@
             templateUrl: 'app/medicalDocuments/directives/medicalDocumentUploadedDocuments.html',
 
             scope: {},
-            bindToController:  {
-                medicaldocumentslist:'='
+            bindToController: {
+                medicaldocumentslist: '='
             },
             controller: UploadedDocumentController,
             controllerAs: 'uploadedDocumentVm'
@@ -35,11 +35,11 @@
 
         function downloadFile(medicalDocument) {
             medicalDocumentsService.downloadMedicalDocument(medicalDocument.id,
-                function(response){
-                    utilityService.downloadFile(response.data, medicalDocument.name+".xml","application/xml");
+                function (response) {
+                    utilityService.downloadFile(response.data, medicalDocument.name + ".xml", "application/xml");
                     notificationService.success('Success in downloading medical document');
                 },
-                function(err){
+                function (err) {
                     notificationService.error('Error in downloading medical document');
                 }
             );
@@ -48,10 +48,10 @@
         function uploadDocumentToHIE(medicalDocument) {
             var content = {document: medicalDocument.content};
             medicalDocumentsService.uploadDocumentToHIE(content,
-                function(response){
+                function (response) {
                     notificationService.success('Success in publishing medical document to HIE.');
                 },
-                function(err){
+                function (err) {
                     notificationService.error('Error in publishing medical document to HIE.');
                 }
             );
@@ -72,18 +72,18 @@
             });
 
             /* @ngInject */
-            function MedicalDocumentModalDeleteController ($modalInstance, medicalDocument) {
+            function MedicalDocumentModalDeleteController($modalInstance, medicalDocument) {
                 var vm = this;
                 vm.id = medicalDocument.id;
                 vm.medicalDocument = medicalDocument;
 
                 vm.delete = function () {
                     medicalDocumentsService.deleteMedicalDocument(vm.id,
-                        function(data){
+                        function (data) {
                             $state.go($state.current, {}, {reload: true});
                             notificationService.success('Success in deleting medical document');
                         },
-                        function(data){
+                        function (data) {
                             notificationService.error('Error in deleting medical document');
                         }
                     );

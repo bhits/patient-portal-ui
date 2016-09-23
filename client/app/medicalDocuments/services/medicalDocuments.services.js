@@ -3,7 +3,6 @@
 
     /**
      * The Medical Documents Service
-     *
      */
     angular
         .module("app.medicalDocument")
