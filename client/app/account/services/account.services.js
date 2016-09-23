@@ -10,7 +10,7 @@
      */
     angular
         .module("app.account")
-            .factory('accountService', accountService);
+        .factory('accountService', accountService);
 
     /* @ngInject */
     function accountService($resource, $sessionStorage, envService) {

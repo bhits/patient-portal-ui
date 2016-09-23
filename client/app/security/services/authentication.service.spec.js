@@ -4,7 +4,7 @@
 
 'use strict';
 
-xdescribe('app.authenticationService ', function() {
+xdescribe('app.authenticationService ', function () {
     var utilityService, oauthTokenService, authenticationService,
         location, profileService, $httpBackend;
     var loginInfo = {username: "userName", password: "password", email: "email"};
@@ -31,9 +31,9 @@ xdescribe('app.authenticationService ', function() {
         location = _$location_;
     }));
 
-    it("should login", function() {
+    it("should login", function () {
         $httpBackend.expect('POST', '/uaa/oauth/token').respond(200);
-        spyOn(authenticationService,'login').and.callThrough();
+        spyOn(authenticationService, 'login').and.callThrough();
 
         var loginResource = authenticationService.login(loginInfo, success, error);
         $httpBackend.flush();
@@ -41,17 +41,17 @@ xdescribe('app.authenticationService ', function() {
         expect(authenticationService.login).toHaveBeenCalledWith(loginInfo, success, error);
     });
 
-    it("should forget password", function() {
+    it("should forget password", function () {
         $httpBackend.expect('POST', '/uaa/forgot_password.do').respond(200);
-        spyOn(authenticationService,'forgotPassword').and.callThrough();
+        spyOn(authenticationService, 'forgotPassword').and.callThrough();
 
         var forgotPasswordResource = authenticationService.forgotPassword(loginInfo, success, error);
         $httpBackend.flush();
         expect(forgotPasswordResource.username).toEqual("userName");
         expect(authenticationService.forgotPassword).toHaveBeenCalledWith(loginInfo, success, error);
     });
-    
-    it("should logout", function() {
+
+    it("should logout", function () {
         spyOn(oauthTokenService, 'removeToken').and.callThrough();
         spyOn(utilityService, 'redirectTo').and.callThrough();
 
@@ -69,10 +69,9 @@ xdescribe('app.authenticationService ', function() {
         //path taken from: securityConstants.loginPath
         expect(location.path()).toBe('/fe/login');
         expect(utilityService.redirectTo).toHaveBeenCalledWith('/fe/login');
-        
+
     });
 
 
-    
 });
 

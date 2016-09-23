@@ -3,7 +3,7 @@
 
     angular
         .module('app.account')
-            .directive('c2sUnsecureTopNavbar', topNavbar);
+        .directive('c2sUnsecureTopNavbar', topNavbar);
 
     function topNavbar() {
 
@@ -13,7 +13,7 @@
             templateUrl: 'app/account/directives/topNavbar.html',
             scope: {},
             bindToController: {
-                title:"="
+                title: "="
             },
             controller: TopNavbarController,
             controllerAs: 'topNavbarVm'

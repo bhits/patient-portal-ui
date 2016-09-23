@@ -7,7 +7,7 @@
 
     angular
         .module('app.account')
-            .directive('c2sCreatePassword', c2sCreatePassword);
+        .directive('c2sCreatePassword', c2sCreatePassword);
 
     function c2sCreatePassword() {
 

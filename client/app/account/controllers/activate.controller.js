@@ -7,7 +7,7 @@
 
     angular
         .module("app.account")
-            .controller('ActivateController', ActivateController);
+        .controller('ActivateController', ActivateController);
 
     /* @ngInject */
     function ActivateController($state, accountService, brand) {

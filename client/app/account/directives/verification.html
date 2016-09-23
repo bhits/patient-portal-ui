@@ -1,7 +1,8 @@
 <div class="row">
     <script type="text/ng-template" id="verification-messages">
         <div ng-message="required">Please complete this required fields.</div>
-        <div class="m-t-n-xs m-b-xs" ng-message="isAfterToday">Date of birth cannot be today's date, or a future date.</div>
+        <div class="m-t-n-xs m-b-xs" ng-message="isAfterToday">Date of birth cannot be today's date, or a future date.
+        </div>
     </script>
 
     <div class="col-sm-offset-1 col-sm-10">
@@ -13,12 +14,12 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <c2s-multi-select-date
-                                   id="birthdate"
-                                   name="birthdate"
-                                   year-order="desc" start-year="" end-year=""
-                                   ng-model="verificationVm.verifyInfo.birthdate"
-                                   c2s-check-after-today required
-                                   c2s-outside-click="verificationVm.checkDateField(verificationForm.birthdate)">
+                                    id="birthdate"
+                                    name="birthdate"
+                                    year-order="desc" start-year="" end-year=""
+                                    ng-model="verificationVm.verifyInfo.birthdate"
+                                    c2s-check-after-today required
+                                    c2s-outside-click="verificationVm.checkDateField(verificationForm.birthdate)">
                             </c2s-multi-select-date>
                             <div class="text-alert" ng-if="verificationForm.birthdate.$dirty"
                                  ng-messages="verificationForm.birthdate.$error">

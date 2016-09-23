@@ -4,7 +4,7 @@
 
 'use strict';
 
-xdescribe('app.c2sAccountVerification.directive', function(){
+xdescribe('app.c2sAccountVerification.directive', function () {
 
     var $resource, envService, controller, $scope, $httpBackend, utilityService,
         accountService, emailTokenService, accountConfig, form;
@@ -20,9 +20,9 @@ xdescribe('app.c2sAccountVerification.directive', function(){
     beforeEach(module('app.security'));
     beforeEach(module('ngResource'));
 
-    beforeEach(inject(function(_$resource_, _envService_, $compile, $controller, $rootScope,
-                               _$httpBackend_, _utilityService_, _accountService_, _emailTokenService_,
-                               _accountConfig_){
+    beforeEach(inject(function (_$resource_, _envService_, $compile, $controller, $rootScope,
+                                _$httpBackend_, _utilityService_, _accountService_, _emailTokenService_,
+                                _accountConfig_) {
 
         $httpBackend = _$httpBackend_;
         $resource = _$resource_;
@@ -40,7 +40,7 @@ xdescribe('app.c2sAccountVerification.directive', function(){
             '<input ng-model="model.num" name="num" integer />' +
             '</form>'
         );
-        $scope.model = { num: null };
+        $scope.model = {num: null};
         $compile(element)($scope);
         $scope.$digest();
         form = $scope.form;
@@ -54,18 +54,18 @@ xdescribe('app.c2sAccountVerification.directive', function(){
         // });
         //controller = element.controller("VerificationController");
         var local = {
-                utilityService: utilityService,
-                accountService: accountService,
-                emailTokenService: emailTokenService,
-                accountConfig: accountConfig
+            utilityService: utilityService,
+            accountService: accountService,
+            emailTokenService: emailTokenService,
+            accountConfig: accountConfig
         };
         controller = $controller('VerificationController', local, verifyInfo);
         controller.verifyInfo = verifyInfo;
 
     }));
-    
-    it('should clearField', function(){
+
+    it('should clearField', function () {
         controller.clearField();
     });
-    
+
 });

@@ -3,12 +3,11 @@
  */
 
 (function () {
-
     'use strict';
 
     angular
         .module('app.account')
-            .config(AccountConfig);
+        .config(AccountConfig);
 
     /* @ngInject */
     function AccountConfig($stateProvider) {
@@ -51,6 +50,7 @@
                         function onAccessError() {
                             utilityService.redirectTo(accountConfig.activationErrorPath);
                         }
+
                         return deferred.promise;
                     }
                 }
@@ -78,6 +78,7 @@
                             accountService.removeActivateInfo();
                             utilityService.redirectTo(accountConfig.activationErrorPath);
                         }
+
                         return deferred.promise;
                     }
                 }

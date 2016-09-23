@@ -13,21 +13,21 @@
     /* @ngInject */
     function c2sCheckAfterToday() {
         var directive = {
-require: 'ngModel',
-    restrict: 'A',
-    scope: {},
-link: linkFunc
-};
+            require: 'ngModel',
+            restrict: 'A',
+            scope: {},
+            link: linkFunc
+        };
 
-return directive;
+        return directive;
 
-/* @ngInject */
-function linkFunc(scope, elm, attrs, ctrl) {
-    ctrl.$validators.isAfterToday = function (modelDate) {
-        if (angular.isDefined(modelDate)) {
-            return modelDate < new Date();
+        /* @ngInject */
+        function linkFunc(scope, elm, attrs, ctrl) {
+            ctrl.$validators.isAfterToday = function (modelDate) {
+                if (angular.isDefined(modelDate)) {
+                    return modelDate < new Date();
+                }
+            };
         }
-    };
-}
-}
+    }
 })();

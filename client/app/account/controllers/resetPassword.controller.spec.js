@@ -4,7 +4,7 @@
 
 'use strict';
 
-xdescribe("app.resetPassword.controller", function() {
+xdescribe("app.resetPassword.controller", function () {
 
     beforeEach(module('app.account'));
 
@@ -12,17 +12,19 @@ xdescribe("app.resetPassword.controller", function() {
 
 
     beforeEach(function () {
-        var fakeModule = angular.module('test.app.brand', function () {});
-        fakeModule.config( function (brandProvider) {
+        var fakeModule = angular.module('test.app.brand', function () {
+        });
+        fakeModule.config(function (brandProvider) {
             brand = brandProvider;
         });
         module('app.brand', 'test.app.brand');
-        inject(function () {});
+        inject(function () {
+        });
         brand.setBrandName("Brand Name");
         brand.setBrandInitial("BI");
     });
 
-    beforeEach(inject(function($controller) {
+    beforeEach(inject(function ($controller) {
 
         controller = $controller('ResetPasswordController', {
             brand: brand
@@ -30,14 +32,14 @@ xdescribe("app.resetPassword.controller", function() {
 
     }));
 
-    it('should create controller ', function(){
+    it('should create controller ', function () {
         expect(controller).toBeDefined();
     });
 
-    xit('should have correct title', function(){
+    xit('should have correct title', function () {
         expect(controller.title).toBeDefined();
         expect(controller.title).toEqual('Brand Name Reset Password Complete');
     });
-    
+
 
 });

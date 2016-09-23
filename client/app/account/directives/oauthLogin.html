@@ -1,13 +1,16 @@
 <form class="form-horizontal" name="loginForm">
     <fieldset>
-        <legend class="alert alert-success center p-xs">Log in with your <span ng-bind="loginVm.brand"></span> account</legend>
+        <legend class="alert alert-success center p-xs">Log in with your <span ng-bind="loginVm.brand"></span> account
+        </legend>
         <div class="form-group">
             <label for="email" class="col-sm-2 control-label">Username:</label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" id="email" name="email" ng-model="oauthLoginVm.user.email"
                        name="email" required>
                 <div ng-messages="loginForm.email.$error" ng-if="loginForm.email.$dirty" class="text-alert m-t-xs">
-                    <div ng-message="required"><small>A username is required to login, please try again.</small></div>
+                    <div ng-message="required">
+                        <small>A username is required to login, please try again.</small>
+                    </div>
                 </div>
             </div>
         </div>
@@ -16,19 +19,26 @@
             <div class="col-sm-10">
                 <input type="password" class="form-control" id="password" name="password"
                        ng-model="oauthLoginVm.user.password" name="password" required>
-                <div ng-messages="loginForm.password.$error" ng-if="loginForm.password.$dirty" class="text-alert m-t-xs">
-                    <div ng-message="required"><small>A password is required to login, please try again.</small></div>
+                <div ng-messages="loginForm.password.$error" ng-if="loginForm.password.$dirty"
+                     class="text-alert m-t-xs">
+                    <div ng-message="required">
+                        <small>A password is required to login, please try again.</small>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-offset-2 col-sm-10 text-alert m-t-n-xs m-b-xs" id="login-error" ng-if="oauthLoginVm.loginError">
+            <div class="col-sm-offset-2 col-sm-10 text-alert m-t-n-xs m-b-xs" id="login-error"
+                 ng-if="oauthLoginVm.loginError">
                 <span><small>Sorry, the user name and/or password entered does not match, please try again.</small></span>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-offset-2 col-sm-10 text-alert m-t-n-xs m-b-xs" id="account-locked" ng-if="oauthLoginVm.accountLocked">
-                <span><small>Your account has exceeded maximum failed authentication attempts. Please wait 10 minutes to retry.</small></span>
+            <div class="col-sm-offset-2 col-sm-10 text-alert m-t-n-xs m-b-xs" id="account-locked"
+                 ng-if="oauthLoginVm.accountLocked">
+                <span>
+                    <small>Your account has exceeded maximum failed authentication attempts. Please wait 10 minutes to retry.</small>
+                </span>
             </div>
         </div>
         <div class="row">

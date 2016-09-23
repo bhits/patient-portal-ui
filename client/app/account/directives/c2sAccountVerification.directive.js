@@ -7,7 +7,7 @@
 
     angular
         .module('app.account')
-            .directive('c2sAccountVerification', c2sAccountVerification);
+        .directive('c2sAccountVerification', c2sAccountVerification);
 
     function c2sAccountVerification() {
 

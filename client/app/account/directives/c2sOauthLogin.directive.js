@@ -3,7 +3,7 @@
 
     angular
         .module('app.account')
-            .directive('c2sOauthLogin', c2sOauthLogin);
+        .directive('c2sOauthLogin', c2sOauthLogin);
 
     function c2sOauthLogin() {
 
@@ -38,15 +38,15 @@
         function loginSuccess(response) {
             oauthTokenService.setToken(response);
             profileService.loadProfile()
-                                .then(
-                                    function (data) {
-                                        profileService.setProfile(data);
-                                        isAllowAccess();
-                                    },
-                                    function (error) {
-                                        vm.profileError = true;
-                                    }
-                                );
+                .then(
+                    function (data) {
+                        profileService.setProfile(data);
+                        isAllowAccess();
+                    },
+                    function (error) {
+                        vm.profileError = true;
+                    }
+                );
         }
 
         function loginError(error) {

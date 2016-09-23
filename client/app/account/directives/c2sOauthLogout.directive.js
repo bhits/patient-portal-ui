@@ -3,7 +3,7 @@
 
     angular
         .module('app.account')
-            .directive('c2sOauthLogout', c2sOauthLogout);
+        .directive('c2sOauthLogout', c2sOauthLogout);
 
     function c2sOauthLogout() {
 

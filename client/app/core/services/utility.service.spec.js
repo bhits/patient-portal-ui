@@ -155,7 +155,7 @@ describe('app.utilityService ', function () {
         expect(utilityService.getOrganizationalProvidersNpi(dummyProviderList)).toEqual([]);
     });
 
-    it('should test if API is secure', function(){
+    it('should test if API is secure', function () {
         var url = '/pcm/patients';
         expect(utilityService.isSecuredApi(url)).toBeTruthy();
         url = '/phr';
@@ -176,31 +176,31 @@ describe('app.utilityService ', function () {
         expect(utilityService.digitFormat(dummyEmptyValue, dummyEmptyValue)).toBe("");
     });
 
-    it('should test if correct input date is valid', function(){
+    it('should test if correct input date is valid', function () {
         expect(utilityService.isValidDate("03/25/2015")).toBeTruthy();
         expect(utilityService.isValidDate("03/05/2015")).toBeTruthy();
     });
 
-    it('should test format is MM/DD/YYYY', function(){
+    it('should test format is MM/DD/YYYY', function () {
         //format is MM/DD/YYYY
         expect(utilityService.isValidDate("03/5/2015")).toBeFalsy();
         expect(utilityService.isValidDate("3/05/2015")).toBeFalsy();
         expect(utilityService.isValidDate("Mar 5 2015")).toBeFalsy();
     });
 
-    it('should test (month < 1 || month > 12)', function(){
+    it('should test (month < 1 || month > 12)', function () {
         //(month < 1 || month > 12)
         expect(utilityService.isValidDate("00/05/2015")).toBeFalsy();
         expect(utilityService.isValidDate("13/05/2015")).toBeFalsy();
     });
 
-    it('should test (day < 1 || day > 31)', function(){
+    it('should test (day < 1 || day > 31)', function () {
         //(day < 1 || day > 31)
         expect(utilityService.isValidDate("02/00/2015")).toBeFalsy();
         expect(utilityService.isValidDate("02/32/2015")).toBeFalsy();
     });
 
-    it('should test ((month===4 || month===6 || month===9 || month===11) && day===31)', function(){
+    it('should test ((month===4 || month===6 || month===9 || month===11) && day===31)', function () {
         //((month===4 || month===6 || month===9 || month===11) && day===31)
         expect(utilityService.isValidDate("04/31/2015")).toBeFalsy();
         expect(utilityService.isValidDate("06/31/2015")).toBeFalsy();
@@ -208,7 +208,7 @@ describe('app.utilityService ', function () {
         expect(utilityService.isValidDate("11/31/2015")).toBeFalsy();
     });
 
-    it('should test for february 29th', function(){
+    it('should test for february 29th', function () {
         //check for february 29th
         expect(utilityService.isValidDate("02/29/2015")).toBeFalsy();
         expect(utilityService.isValidDate("02/29/2016")).toBeTruthy();
