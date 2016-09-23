@@ -13,9 +13,8 @@
                             </span>
                         </h3>
                     </div>
-
                     <div class="chevron_absolute">
-                        <div c2s-ibox-tools class="white"  total=""></div>
+                        <div c2s-ibox-tools class="white" total=""></div>
                     </div>
                 </div>
             </div>
@@ -48,7 +47,6 @@
                                 <span ng-bind="author.providerName" id="author"></span>
                                 <span ng-if="!$last">,</span>
                             </span>
-
                         </div>
                         <div>
                             <label for="service">Treatment: </label>
@@ -73,11 +71,9 @@
                         <strong> Document does not contain sections.</strong>
                     </div>
                 </div>
-
                 <div ng-repeat="section in ccdaDocumentVm.sections">
-                    <c2s-ccda-document-section section="section" ></c2s-ccda-document-section>
+                    <c2s-ccda-document-section section="section"></c2s-ccda-document-section>
                 </div>
-
             </div>
         </div>
     </div>

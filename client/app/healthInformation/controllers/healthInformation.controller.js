@@ -1,5 +1,4 @@
 ﻿(function () {
-
     'use strict';
 
     angular
@@ -9,9 +8,12 @@
     /* @ngInject */
     function HealthInformationController($rootScope, patientData) {
         var vm = this;
-        getPatientDocument();
+        vm.expandAllAccordions = expandAllAccordions;
+        vm.collapseAllAccordions = collapseAllAccordions;
 
-        function getPatientDocument() {
+        activate();
+
+        function activate() {
             if (angular.isDefined(patientData)) {
                 var patientDocument = patientData.Documents;
                 if (angular.isDefined(patientDocument) && patientDocument.length > 0) {
@@ -22,14 +24,14 @@
             }
         }
 
-        vm.expandAllAccordions = function () {
+        function expandAllAccordions () {
             vm.noPatientDataAlert = false;
             $rootScope.$broadcast('ExpandAccordions', {expand: true});
-        };
+        }
 
-        vm.collapseAllAccordions = function () {
+        function collapseAllAccordions() {
             vm.noPatientDataAlert = false;
             $rootScope.$broadcast('CollapseAccordions', {collapse: true});
-        };
+        }
     }
 })();

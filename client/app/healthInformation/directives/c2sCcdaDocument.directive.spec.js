@@ -4,7 +4,7 @@
 
 'use strict';
 
-xdescribe('app.c2sCcdaDocumentDirective', function() {
+xdescribe('app.c2sCcdaDocumentDirective', function () {
     var healthInformationService, controller, $scope, $httpBackend, $templateCache, template;
 
     var patient = {
@@ -16,12 +16,12 @@ xdescribe('app.c2sCcdaDocumentDirective', function() {
     };
     var exampleDocument = {
         targetPatient: patient,
-        authors: ['author1','author2'],
+        authors: ['author1', 'author2'],
         sections: 'Section 1',
         treatment: 'Treatment 1'
     };
     var healthInfo = {
-        CDAdocuments: [exampleDocument,'doc2.doc'],
+        CDAdocuments: [exampleDocument, 'doc2.doc'],
         type: 'Document Type',
         date: '06/20/2016',
         title: 'Test Title'
@@ -61,7 +61,7 @@ xdescribe('app.c2sCcdaDocumentDirective', function() {
         // console.log(controller);
     }));
 
-    it('should test directive in c2sCcdaDocument', function(){
+    it('should test directive in c2sCcdaDocument', function () {
         // /var templateHTML = template.html();
         // /expect(controller).toContain('Document Type');
         // /expect(element.scope().document).toBe('document');
