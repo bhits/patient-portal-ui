@@ -16,7 +16,8 @@ module.exports = function (karma) {
             'assets/js/plugins/metisMenu/jquery.metisMenu.js',
             'assets/js/plugins/slimscroll/jquery.slimscroll.min.js',
             'assets/js/inspinia.js',
-            'assets/js/angular/angular.min.js',
+        <% scripts.forEach( function ( file ) { %>'<%= file %>',
+            <% }); %>
             'assets/js/plugins/oclazyload/dist/ocLazyLoad.min.js',
             'assets/js/angular-translate/angular-translate.min.js',
             'assets/js/ui-router/angular-ui-router.min.js',
@@ -24,10 +25,10 @@ module.exports = function (karma) {
             'assets/js/plugins/angular-idle/angular-idle.js',
             'assets/js/plugins/angular-notify/angular-notify.min.js',
             'assets/js/angular/angular-messages.min.js',
-            <% scripts.forEach( function ( file ) { %>'<%= file %>',
-            <% }); %>
+
             'app/**/*module*.js',
             'app/**/*config*.js',
+            'app/**/*run*.js',
             'app/**/*.js'
         ],
 
