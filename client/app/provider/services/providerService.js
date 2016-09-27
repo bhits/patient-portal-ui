@@ -16,7 +16,6 @@
         var service = {};
 
         service.getProvidersResource = getProvidersResource;
-        service.getProviders = getProviders;
         service.deleteProvider = deleteProvider;
         service.addProvider = addProvider;
         service.lookupProviders = lookupProviders;
@@ -28,10 +27,6 @@
         function getProvidersResource() {
             return providers;
         }
-
-        function getProviders(success, error) {
-            providers.query(success, error);
-        } //TODO: remove, not used
 
         function deleteProvider(npi, success, error) {
             providers.delete({npi: npi}, success, error);

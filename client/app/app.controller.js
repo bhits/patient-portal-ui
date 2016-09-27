@@ -1,59 +1,8 @@
 ﻿(function () {
-
     'use strict';
 
-        angular.module('app',
-            [
-                /* Shared modules*/
-                'app.core',
-                'templates-app',
-                'app.security',
-                'app.config',
- 
-                /*
-                 * Feature areas
-                 */
-                'app.home',
-                'app.consent',
-                'app.healthInformation',
-                'app.provider',
-                'app.layout',
-                'app.medicalDocument',
-                'app.account',
-                'app.activity',
-                'app.brand'
-            ])
-            .constant("idleConfigParams", {"idle": 780, "timeout": 120, "keepalive": 240})
-            .config(appConfig)
-            .run(appRun)
+        angular.module('app')
             .controller('AppController', AppController);
-
-
-            /* @ngInject */
-            function appConfig($urlRouterProvider, $locationProvider, $httpProvider, KeepaliveProvider, IdleProvider, idleConfigParams, brandProvider) {
-
-                //Set Brand Name
-                brandProvider.setBrandName("Consent2Share");
-                brandProvider.setBrandInitial("C2S");
-                
-                // enable html5 mode
-                $locationProvider.html5Mode(true).hashPrefix('!');
-
-                $urlRouterProvider.otherwise("/fe/login");
-
-                $httpProvider.interceptors.push('authInterceptorService');
-
-                // Configure Idle settingss
-                IdleProvider.idle(idleConfigParams.idle); // in seconds
-                IdleProvider.timeout(idleConfigParams.timeout); // in seconds
-                KeepaliveProvider.interval(idleConfigParams.keepalive); // in seconds
-            }
-
-             /* @ngInject */
-            function appRun($rootScope, $state, $anchorScroll) {
-                $rootScope.$state = $state;
-                $anchorScroll.yOffset = 135;
-            }
 
             /* @ngInject */
             function AppController($rootScope , utilityService, idleConfigParams, $state,  $modal, $modalStack, Idle) {
@@ -101,7 +50,7 @@
                     $modalStack.dismissAll('cancel');
                 }
 
-                //TODO Implement it when using Idle
+                //TODO: Completely implement the ngIdle module to log out user when idle.
                 function handleLoggedOutAndExpiredSession(event) {
                     Idle.unwatch();
                     $state.go('fe.login');

@@ -22,7 +22,6 @@
             return healthInformationResource.get(success, error);
         }
 
-        //Fixme: Need to refactor
         function getSectionByName(data, sectionName) {
             if (isDefineAndNotNull(data) && isDefineAndNotNull(data[sectionName])) {
                 return data[sectionName];

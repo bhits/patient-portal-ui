@@ -21,7 +21,7 @@
         function ProfileMenuController(utilityService, profileService) {
             var vm = this;
             vm.name = profileService.getName();
-            //TODO get/set image url dynamically
+            //TODO: Dynamically load user image when from the backend during login. Remove default to Sally Share user.
             vm.profileImgName = getProfileImageName(profileService.getUserName());
 
             function getProfileImageName(profileName) {

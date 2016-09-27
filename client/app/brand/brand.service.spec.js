@@ -4,7 +4,7 @@
 
 'use strict';
 
-describe('app.brand', function () {
+xdescribe('app.brand', function () {
 
     var brand;
 

@@ -311,7 +311,7 @@ module.exports = function (grunt) {
                     base: '.'
                 },
                 src: ['<%= app_files.atpl %>'],
-                dest: '<%= build_debug_dir %>/templates-app.js'
+                dest: '<%= build_debug_dir %>/templates-app.module.js'
             }
         },
 
