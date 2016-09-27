@@ -41,10 +41,6 @@ describe('app.healthInformationService ', function () {
         expect(module).not.toEqual(null);
     });
 
-    it('should have getHealthInformationResource function', function () {
-        patientResource = $resource(envService.securedApis.phrApiBaseUrl + "/patients/healthInformation/:mrn", {mrn: '@mrn'});
-        //TODO: test if it returns the correct patientResource
-    });
 
     it('should get CCDA section by name or print console message if empty', function () {
         expect(healthInformationService.getSectionByName(ccdaDocument, "AllergySection")).toEqual(AllergySection);

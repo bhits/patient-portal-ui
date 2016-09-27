@@ -57,13 +57,11 @@
 
             function selectAll(purposeOfUseModalObj) {
                 purposeOfUseModalVm.consent.selectedPurposeOfUseCodes = consentService.getCodes(purposeOfUseModalVm.data);
-                //TODO: This should be refactored to avoid directly referencing the 'purposeOfUseModalObj' name, which is declared in the HTML markup but not in this directive.
                 purposeOfUseModalObj.$setDirty();
             }
 
             function deselectAll(purposeOfUseModalObj) {
                 purposeOfUseModalVm.consent.selectedPurposeOfUseCodes = [];
-                //TODO: This should be refactored to avoid directly referencing the 'purposeOfUseModalObj' name, which is declared in the HTML markup but not in this directive.
                 purposeOfUseModalObj.$setDirty();
             }
 

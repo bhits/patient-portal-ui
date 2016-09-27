@@ -173,19 +173,16 @@
 
         function downloadFile(content, filename, fileFormat) {
             var file = new Blob([content], {type: fileFormat});
-
             if (browser.isIE()) {
                 if (isFileFormatPDF(fileFormat)) {
                     filename = filename + '.pdf';
                 }
                 window.navigator.msSaveBlob(file, filename);
-
             } else if (browser.isFireFox()) {
                 if (isFileFormatPDF(fileFormat)) {
                     filename = filename + '.pdf';
                 }
                 saveFileToDiskInChromeAndFF(file, filename);
-
             } else if (browser.isChrome() || browser.isSafari()) {
                 saveFileToDiskInChromeAndFF(file, filename);
             }

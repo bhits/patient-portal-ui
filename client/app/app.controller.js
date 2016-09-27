@@ -50,7 +50,7 @@
                     $modalStack.dismissAll('cancel');
                 }
 
-                //TODO Implement it when using Idle
+                //TODO: Completely implement the ngIdle module to log out user when idle.
                 function handleLoggedOutAndExpiredSession(event) {
                     Idle.unwatch();
                     $state.go('fe.login');

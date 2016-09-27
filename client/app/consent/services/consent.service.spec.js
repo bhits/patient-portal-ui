@@ -272,14 +272,6 @@ xdescribe('app.consentServices', function () {
         expect(selected.discloseNpi).toBe('discloseNPI');
     });
 
-    it('should get selectedProvider', function () {
-        var providers = [{npi: 111}, {npi: 222}];
-        var selectedProviders = [111, 222];
-
-        consentService.prepareProviderList(selectedProviders, providers);
-        expect(consentService.getSelectedProvider()).toEqual([]);
-    });
-
     it('should prepare provider list (prepareProviderList)', function () {
         var providers = [{npi: 111}, {npi: 222}];
         var selectedProviders = [111, 222];

@@ -81,9 +81,8 @@
         }
     }
 
-    // FIXME: remove Profile from dependencies once Try Policy implements security
     /* @ngInject */
-    function ManageConsentModalController($window, $state, $modalInstance, profileService, consent, consentService, notificationService, envService, dataService, utilityService, consentState) {
+    function ManageConsentModalController($window, $state, $modalInstance, profileService, consent, consentService, notificationService, dataService, utilityService, consentState) {
         var manageConsentModalVm = this;
         manageConsentModalVm.cancel = cancel;
         manageConsentModalVm.option = "manageConcent";

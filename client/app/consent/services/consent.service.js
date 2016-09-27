@@ -48,7 +48,6 @@
         service.setAuthorizeNpi = setAuthorizeNpi;
         service.setDiscloseNpi = setDiscloseNpi;
         service.getSelectedNpi = getSelectedNpi;
-        service.getSelectedProvider = getSelectedProvider;
         service.prepareProviderList = prepareProviderList;
         service.resolveConsentState = resolveConsentState;
         service.isShareAll = isShareAll;
@@ -148,10 +147,6 @@
         function getSelectedNpi() {
             return selectedNpi;
         }
-
-        function getSelectedProvider() {
-            return selectedProvider;
-        } //TODO: remove, not used
 
         function prepareProviderList(selectedProviders, providers) {
             var providerList = [];
