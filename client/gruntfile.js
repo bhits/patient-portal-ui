@@ -1,26 +1,23 @@
-// These Grunt build scrips are based on famous ngbp, angular-app and yo angular generated template which is based on angular-seed
-
-/*global module:false*/
+/**
+ * These Grunt build scrips are based on famous ngbp, angular-app and yo angular generated template
+ * which is based on angular-seed
+ */
 
 'use strict';
 
-// The "wrapper" function
 module.exports = function (grunt) {
-
     /**
      * Load required Grunt tasks. These are installed based on the versions listed
      * in `package.json` when you do `npm install` in this directory.
      * Load multiple grunt plugin tasks using globbing patterns.
      */
-    require('load-grunt-tasks')(grunt); // Equivalent to: require('load-grunt-tasks')(grunt, {pattern: 'grunt-*'});
+    require('load-grunt-tasks')(grunt);
 
-    require('time-grunt')(grunt); // Tasks that take less than 1% of the total time are hidden to reduce clutter. Run grunt with grunt --verbose to see all tasks.
-
+    require('time-grunt')(grunt);
     /**
      * Load in our build configuration file.
      */
     var userConfig = require('./build.config.js');
-
     /**
      * This is the configuration object Grunt uses to give each plugin its
      * instructions.
@@ -31,7 +28,6 @@ module.exports = function (grunt) {
          * version. It's already there, so we don't repeat ourselves here.
          */
         pkg: grunt.file.readJSON("package.json"),
-
         /**
          * The banner is the comment that is placed at the top of our compiled
          * source files. It is first processed as a Grunt template, where the `<%=`
@@ -44,7 +40,6 @@ module.exports = function (grunt) {
             '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
             ' Licensed <%= _.map(pkg.licenses, "type").join(", ") %> */\n'
         },
-
         bower: {
             install: {
                 options: {
@@ -54,7 +49,6 @@ module.exports = function (grunt) {
                 }
             }
         },
-
         /**
          * Increments the version number, etc.
          */
@@ -77,14 +71,6 @@ module.exports = function (grunt) {
                 pushTo: 'origin'
             }
         },
-
-        /**
-         * The directories to delete when `grunt clean` is executed.
-         */
-        /*clean: [
-         '<%= build_dir %>'
-         ],*/
-
         /**
          * Should use above clean task configuration. But
          * we are using WebStorm's functionalities provided for karma.
@@ -96,7 +82,6 @@ module.exports = function (grunt) {
                 src: ['<%= build_dir %>**', '<%= build_reports_dir %>']
             }
         },
-
         /**
          * The `copy` task just copies files from A to B. We use it here to copy
          * our project assets (images, fonts, etc.) and javascripts into
@@ -164,8 +149,6 @@ module.exports = function (grunt) {
                     }
                 ]
             }
-
-
         },
 
         /**
@@ -209,7 +192,6 @@ module.exports = function (grunt) {
                 dest: '<%= build_dist_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.js'
             }
         },
-
         /**
          * Minify the sources!
          */
@@ -223,7 +205,6 @@ module.exports = function (grunt) {
                 }
             }
         },
-
         /**
          * `recess` handles our LESS compilation and uglification automatically.
          * Only our `main.less` file is included in compilation; all other files
@@ -253,7 +234,6 @@ module.exports = function (grunt) {
                 }
             }
         },
-
         cssmin: {
             target: {
                 files: [{
@@ -262,7 +242,6 @@ module.exports = function (grunt) {
                 }]
             }
         },
-
         /**
          * `jshint` defines the rules of our linter as well as which files we
          * should check. This file, all javascript sources, and all our unit tests
@@ -295,7 +274,6 @@ module.exports = function (grunt) {
              src: ['<%= app_files.js %>', '<%= app_files.jsunit %>', 'Gruntfile.js']
              }*/
         },
-
         /**
          * HTML2JS is a Grunt plugin that takes all of your template files and
          * places them into JavaScript files as strings that are added to
@@ -314,7 +292,6 @@ module.exports = function (grunt) {
                 dest: '<%= build_debug_dir %>/templates-app.module.js'
             }
         },
-
         /**
          * The Karma configurations.
          */
@@ -356,16 +333,13 @@ module.exports = function (grunt) {
                 autoWatch: true,
                 background: false,
                 browsers: ['Chrome']
-
             }
         },
-
         /**
          * The `index` task compiles the `index.html` file as a Grunt template. CSS
          * and JS files co-exist here but they get split apart later.
          */
         index: {
-
             /**
              * During development, we don't want to have wait for compilation,
              * concatenation, minification, etc. So to avoid these steps, we simply
@@ -379,7 +353,6 @@ module.exports = function (grunt) {
                     '<%= recess.build.dest %>'
                 ]
             },
-
             /**
              * When it is time to have a completely compiled application, we can
              * alter the above to include only a single JavaScript and a single CSS
@@ -393,7 +366,6 @@ module.exports = function (grunt) {
                 ]
             }
         },
-
         /**
          * This task compiles the karma template so that changes to its file array
          * don't have to be managed manually.
@@ -408,7 +380,6 @@ module.exports = function (grunt) {
                 ]
             }
         },
-
         /**
          * And for rapid development, we have a watch set up that checks to see if
          * any of the files listed below change, and then to execute the listed
@@ -429,7 +400,6 @@ module.exports = function (grunt) {
             options: {
                 livereload: true
             },
-
             /**
              * When the Gruntfile changes, we just want to lint it. In fact, when
              * your Gruntfile changes, it will automatically be reloaded!
@@ -441,7 +411,6 @@ module.exports = function (grunt) {
                     livereload: false
                 }
             },
-
             /**
              * When our JavaScript source files change, we want to run lint them and
              * run our unit tests.
@@ -452,8 +421,6 @@ module.exports = function (grunt) {
                 ],
                 tasks: ['jshint:src', 'karma:gWatch:run', 'copy:build_appjs']
             },
-
-
             /**
              * When Assets are changed, copy them. Note that this will *not* copy new
              * files, so this is probably not very useful.
@@ -464,7 +431,6 @@ module.exports = function (grunt) {
                 ],
                 tasks: ['copy:build_Assets']
             },
-
             /**
              * When index.html changes, we need to compile it.
              */
@@ -472,7 +438,6 @@ module.exports = function (grunt) {
                 files: ['<%= app_files.html %>'],
                 tasks: ['index:build']
             },
-
             /**
              * When our templates change, we only rewrite the template cache.
              */
@@ -480,7 +445,6 @@ module.exports = function (grunt) {
                 files: ['<%= app_files.atpl %>'],
                 tasks: ['html2js']
             },
-
             /**
              * When the CSS files change, we need to compile and minify them.
              */
@@ -488,7 +452,6 @@ module.exports = function (grunt) {
                 files: ['src/**/*.less'],
                 tasks: ['recess:build']
             },
-
             /**
              * When a JavaScript unit test file changes, we only want to lint it and
              * run the unit tests. We don't want to do any live reloading.
@@ -502,10 +465,7 @@ module.exports = function (grunt) {
                     livereload: false
                 }
             }
-
-
         },
-
         compress: {
             dist: {
                 options: {
@@ -520,7 +480,6 @@ module.exports = function (grunt) {
                 ]
             }
         },
-
         ngconstant: {
             // Options for all targets
             options: {
@@ -554,7 +513,6 @@ module.exports = function (grunt) {
                     }
                 }
             },
-
             docker: {
                 options: {
                     dest: '<%= config_dir %>/config.js'
@@ -580,7 +538,6 @@ module.exports = function (grunt) {
                     }
                 }
             },
-
             qa: {
                 options: {
                     dest: '<%= config_dir %>/config.js'
@@ -607,7 +564,6 @@ module.exports = function (grunt) {
                 }
             }
         },
-
         /*
          * Build a WAR (web archive) without Maven or the JVM installed.
          */
@@ -628,7 +584,6 @@ module.exports = function (grunt) {
                 ]
             }
         },
-
         ngAnnotate: {
             options: {
                 remove: true,
@@ -653,9 +608,7 @@ module.exports = function (grunt) {
             }
         }
     };
-
     grunt.initConfig(grunt.util._.extend(taskConfig, userConfig));
-
     /**
      * A utility function to get all app JavaScript sources.
      */
@@ -664,7 +617,6 @@ module.exports = function (grunt) {
             return file.match(/\.js$/);
         });
     }
-
     /**
      * A utility function to get all app CSS sources.
      */
@@ -673,7 +625,6 @@ module.exports = function (grunt) {
             return file.match(/\.css$/);
         });
     }
-
     /**
      * The index.html template includes the stylesheet and javascript sources
      * based on dynamic names calculated in this Gruntfile. This task assembles
@@ -701,7 +652,6 @@ module.exports = function (grunt) {
             }
         });
     });
-
     /**
      * In order to avoid having to specify manually the files needed for karma to
      * run, we use grunt to manage the list for us. The `karma/*` files are
@@ -724,7 +674,6 @@ module.exports = function (grunt) {
 
         grunt.log.oklns('Created karma configuration file as ' + filePath);
     });
-
     grunt.registerTask('jshint-all', ['jshint:src', 'jshint:test', 'jshint:gruntfile']);
 
     /**
@@ -734,20 +683,16 @@ module.exports = function (grunt) {
     grunt.registerTask('compile', [
         'cssmin', 'copy:compile_assets', 'ngAnnotate', 'concat:compile_js', 'uglify', 'index:compile'
     ]);
-
     // Alias task for karma:watch. Run this task after grunt build
     grunt.registerTask('karma-watch', ['karma:watch']);
-
     /**
      * The `build` task gets your app ready to run for development and testing.
      */
     grunt.registerTask('build-debug', 'build:debug');
-
     /**
      * Snake case build:dev
      */
     grunt.registerTask('build-dev', 'build:dev');
-
     /**
      * Snake case build:dist
      */
@@ -758,7 +703,6 @@ module.exports = function (grunt) {
     grunt.registerTask('build-qa', 'build:qa');
 
     grunt.registerTask('build-docker', 'build:docker');
-
     /**
      * Snake case build:ci
      */
@@ -768,7 +712,6 @@ module.exports = function (grunt) {
         var pkg = grunt.file.readJSON('package.json');
         console.log(pkg.name, pkg.version);
     });
-
     /**
      * build task supporting multiple targets, but it is not multi-target task
      */
@@ -822,10 +765,8 @@ module.exports = function (grunt) {
     // But build task couldn't be put inside of watch alisa task. If doing so, will not get karma:gWatch output
     // karma:gWatch:start is to start karma server
     grunt.registerTask('watch', ['karma:gWatch:start', 'delta']);
-
     /**
      * The default task is to build and compile.
      */
     grunt.registerTask('default', ['build:dist']);
-
 };
