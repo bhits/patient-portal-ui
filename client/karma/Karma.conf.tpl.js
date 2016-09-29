@@ -18,13 +18,9 @@ module.exports = function (karma) {
             'assets/js/inspinia.js',
         <% scripts.forEach( function ( file ) { %>'<%= file %>',
             <% }); %>
-            'assets/js/plugins/oclazyload/dist/ocLazyLoad.min.js',
-            'assets/js/angular-translate/angular-translate.min.js',
-            'assets/js/ui-router/angular-ui-router.min.js',
             'assets/js/bootstrap/ui-bootstrap-tpls-0.12.0.min.js',
             'assets/js/plugins/angular-idle/angular-idle.js',
             'assets/js/plugins/angular-notify/angular-notify.min.js',
-            'assets/js/angular/angular-messages.min.js',
 
             'app/**/*module*.js',
             'app/**/*config*.js',
