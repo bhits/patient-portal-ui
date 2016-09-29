@@ -31,7 +31,7 @@ eureka:
     secure-port-enabled: true
     non-secure-port-enabled: false
 ---
-# enables ssl and adds /phr context path when activated
+# enables ssl and adds /pp-ui context path when activated
 spring.profiles: standalone-ssl
 spring:
   profiles:
