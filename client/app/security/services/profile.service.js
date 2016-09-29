@@ -1,5 +1,4 @@
 ﻿(function () {
-
     'use strict';
 
     angular
@@ -8,12 +7,10 @@
 
     /* @ngInject */
     function profileService($sessionStorage, $resource, envService, notificationService) {
-        var phrPatientResource = $resource(envService.securedApis.phrApiBaseUrl + "/patients/profile/:email", {email: '@email'});
         var profileResource = $resource(envService.securedApis.userInfo);
 
         var service = {};
 
-        service.getProfileFromPHR = getProfileFromPHR;
         service.loadProfile = loadProfile;
         service.setProfile = setProfile;
         service.getUserName = getUserName;
@@ -57,17 +54,6 @@
             } else {
                 notificationService.error("No user fullName found");
             }
-
         }
-
-        function getProfileFromPHR(email) {
-            phrPatientResource.get({email: email},
-                function (response) {
-                    console.log(response);
-                },
-                function (response) {
-                    console.log(response);
-                });
-        }//TODO: remove - not used elsewhere
     }
 })();

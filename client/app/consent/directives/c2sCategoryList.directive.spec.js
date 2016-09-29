@@ -4,7 +4,7 @@
 
 'use strict';
 
-xdescribe("app.c2sCategoryList", function() {
+xdescribe("app.c2sCategoryList", function () {
 
     beforeEach(module('app.consent'));
 
@@ -13,17 +13,19 @@ xdescribe("app.c2sCategoryList", function() {
     var patientInfo = {firstName: 'firstName', lastName: 'lastName'};
 
     beforeEach(function () {
-        var fakeModule = angular.module('test.app.brand', function () {});
-        fakeModule.config( function (brandProvider) {
+        var fakeModule = angular.module('test.app.brand', function () {
+        });
+        fakeModule.config(function (brandProvider) {
             brand = brandProvider;
         });
         module('app.brand', 'test.app.brand');
-        inject(function () {});
+        inject(function () {
+        });
         brand.setBrandName("Brand Name");
         brand.setBrandInitial("BI");
     });
 
-    beforeEach(inject(function( $controller, _$state_, _accountService_) {
+    beforeEach(inject(function ($controller, _$state_, _accountService_) {
 
         $state = _$state_;
         accountService = _accountService_;
@@ -36,7 +38,7 @@ xdescribe("app.c2sCategoryList", function() {
 
     }));
 
-    it('should create controller ', function(){
+    it('should create controller ', function () {
         expect(controller).toBeDefined();
     });
 

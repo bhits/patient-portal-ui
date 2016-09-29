@@ -90,8 +90,6 @@
                 consentService.downloadAttestedConsentRevocationPdf(vm.consentId, success, error);
             }
         }
-
-        //TODO: refactor attestation checkbox into directive that can be reused both for signing and revoking
         function onchecked() {
             if (vm.revokeAttestation.acceptTerms) {
                 vm.openAuthenticateModal();

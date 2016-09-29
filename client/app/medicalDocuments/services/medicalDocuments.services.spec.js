@@ -33,34 +33,34 @@ xdescribe('app.medicalDocumentsService', function () {
         status = null;
     }));
 
-    it ('should download medical document (downloadMedicalDocument)', function(){
-        $httpBackend.expect('GET',"/pcm/patients/consents/attested").respond(200, "success");
+    it('should download medical document (downloadMedicalDocument)', function () {
+        $httpBackend.expect('GET', "/pcm/patients/consents/attested").respond(200, "success");
         medicalDocumentsService.downloadMedicalDocument("consent.service.spec.js", success, error);
     });
 
-    it ('should delete medical document (deleteMedicalDocument)', function(){
-        $httpBackend.expect('DELETE',"/pcm/patients/clinicaldocuments/%5Bobject%20Object%5D").respond(200, {id: 111});
+    it('should delete medical document (deleteMedicalDocument)', function () {
+        $httpBackend.expect('DELETE', "/pcm/patients/clinicaldocuments/%5Bobject%20Object%5D").respond(200, {id: 111});
         status = medicalDocumentsService.deleteMedicalDocument({id: 111}, success, error);
         $httpBackend.flush();
         expect(passed).toBeTruthy();
     });
 
-    it ('should fail delete medical document (deleteMedicalDocument)', function(){
-        $httpBackend.expect('DELETE',"/pcm/patients/clinicaldocuments").respond(0, "error");
+    it('should fail delete medical document (deleteMedicalDocument)', function () {
+        $httpBackend.expect('DELETE', "/pcm/patients/clinicaldocuments").respond(0, "error");
         status = medicalDocumentsService.deleteMedicalDocument(undefined, success, error);
         $httpBackend.flush();
         expect(status).toEqual(0);
         expect(passed).toBeFalsy();
     });
 
-    it ('should upload medical document (uploadMedicalDocument)', function(){
+    it('should upload medical document (uploadMedicalDocument)', function () {
         var document = {
             file: "document.doc",
             name: "name",
             description: "description",
             documentType: "doc"
         };
-        $httpBackend.expect('POST',"/pcm/patients/clinicaldocuments").respond(200, document);
+        $httpBackend.expect('POST', "/pcm/patients/clinicaldocuments").respond(200, document);
 
         medicalDocumentsService.uploadMedicalDocument(document, success, error);
         $httpBackend.flush();

@@ -28,7 +28,6 @@
     function VerificationController(utilityService, accountService, emailTokenService, accountConfig) {
         var vm = this;
         var original = vm.verifyInfo;
-
         vm.clearField = clearField;
         vm.verify = verify;
         vm.canVerify = canVerify;

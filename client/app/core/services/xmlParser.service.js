@@ -7,7 +7,7 @@
 
 
     /* @ngInject */
-    function xmlParser(){
+    function xmlParser() {
 
         var x2js = new X2JS();
 
@@ -18,15 +18,15 @@
 
         return service;
 
-        function xml2json (xmlResponse) {
+        function xml2json(xmlResponse) {
             return angular.bind(x2js, x2js.xml2json, xmlResponse)();
         }
 
-        function xml_str2json (xmlResponse) {
+        function xml_str2json(xmlResponse) {
             return angular.bind(x2js, x2js.xml_str2json, xmlResponse)();
         }
 
-        function json2xml_str (xmlResponse) {
+        function json2xml_str(xmlResponse) {
             return angular.bind(x2js, x2js.json2xml_str, xmlResponse)();
         }
     }

@@ -14,7 +14,9 @@
                            ng-model="medicalDocumentsUploadVm.name" required/>
                     <div ng-messages="medicalDocumentUploadForm.name.$error"
                          class="text-alert" role="alert">
-                        <div class="m-t-xs" ng-message="required" ng-if="medicalDocumentUploadForm.name.$dirty" >Required</div>
+                        <div class="m-t-xs" ng-message="required" ng-if="medicalDocumentUploadForm.name.$dirty">
+                            Required
+                        </div>
                     </div>
                 </div>
 
@@ -37,11 +39,15 @@
                 <div class="form-group">
                     <label for="file">Medical Document</label>
                     <input type="file" name="file" id="file" accept=".xml" c2s-file-validate
-                           ng-model="medicalDocumentsUploadVm.file" c2s-file-model="medicalDocumentsUploadVm.medicalFile"  ng-pattern="medicalDocumentsUploadVm.extension" required/>
+                           ng-model="medicalDocumentsUploadVm.file"
+                           c2s-file-model="medicalDocumentsUploadVm.medicalFile"
+                           ng-pattern="medicalDocumentsUploadVm.extension" required/>
                     <div ng-messages="medicalDocumentUploadForm.file.$error"
                          class="text-alert" role="alert">
-                        <div class="m-t-xs" ng-message="pattern" >Only .xml files are permitted.</div>
-                        <div class="m-t-xs" ng-if="medicalDocumentUploadForm.file.$error.sizeLimit" >The file you tried to upload is over the 10MB limit.</div>
+                        <div class="m-t-xs" ng-message="pattern">Only .xml files are permitted.</div>
+                        <div class="m-t-xs" ng-if="medicalDocumentUploadForm.file.$error.sizeLimit">The file you tried
+                            to upload is over the 10MB limit.
+                        </div>
                     </div>
                 </div>
 

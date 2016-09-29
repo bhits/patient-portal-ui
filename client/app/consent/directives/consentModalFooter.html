@@ -1,9 +1,14 @@
 <div ng-if="consentModalFooterVm.option === 'delete'">
-    <button type="button" class="btn btn-white m-r-xs" ng-click="consentModalFooterVm.setoption({option: 'manageConcent'})">Cancel</button>
+    <button type="button" class="btn btn-white m-r-xs"
+            ng-click="consentModalFooterVm.setoption({option: 'manageConcent'})">Cancel
+    </button>
     <button type="button" class="btn btn-primary" ng-click="consentModalFooterVm.deleteconsent()">Delete</button>
 
 </div>
 <div ng-if="consentModalFooterVm.option === 'tryMyPolicy'">
-    <button type="button" class="btn btn-white m-r-xs" ng-click="consentModalFooterVm.setoption({option: 'manageConcent'})">Back to Consent Options</button>
-    <button type="button" class="btn btn-primary dark-green" ng-click="consentModalFooterVm.applytrymypolicy()">Apply</button>
+    <button type="button" class="btn btn-white m-r-xs"
+            ng-click="consentModalFooterVm.setoption({option: 'manageConcent'})">Back to Consent Options
+    </button>
+    <button type="button" class="btn btn-primary dark-green" ng-click="consentModalFooterVm.applytrymypolicy()">Apply
+    </button>
 </div>

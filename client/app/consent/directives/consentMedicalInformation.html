@@ -7,15 +7,26 @@
             <p>Select how you would like to share your medical information.</p>
             <fieldset>
                 <legend class="hidden">Sharing Medical Information</legend>
-                <p> <input aria-label="SHARE ALL information in my medical record." type="radio" c2s-icheck class="m-r-xs"  ng-model="consentMedicalInformationVm.medicalInformation" value="A" name="medicalInformation" ng-checked="consentMedicalInformationVm.medicalInformation == 'A'" ng-change="consentMedicalInformationVm.clearMedicalInfoData()"> <span class="m-l-xs"><strong>SHARE ALL</strong> information in my medical record.</span></p>
-                <p> <input aria-label="SHARE my medical record WITH EXCEPTION of specific information." type="radio" c2s-icheck  ng-model="consentMedicalInformationVm.medicalInformation" value="B"  name="medicalInformation" ng-checked="consentMedicalInformationVm.hasException()" ng-change="consentMedicalInformationVm.openPrivacySettingsModal()">
+                <p><input aria-label="SHARE ALL information in my medical record." type="radio" c2s-icheck
+                          class="m-r-xs" ng-model="consentMedicalInformationVm.medicalInformation" value="A"
+                          name="medicalInformation" ng-checked="consentMedicalInformationVm.medicalInformation == 'A'"
+                          ng-change="consentMedicalInformationVm.clearMedicalInfoData()"> <span class="m-l-xs"><strong>SHARE ALL</strong> information in my medical record.</span>
+                </p>
+                <p><input aria-label="SHARE my medical record WITH EXCEPTION of specific information." type="radio"
+                          c2s-icheck ng-model="consentMedicalInformationVm.medicalInformation" value="B"
+                          name="medicalInformation" ng-checked="consentMedicalInformationVm.hasException()"
+                          ng-change="consentMedicalInformationVm.openPrivacySettingsModal()">
                     <span class="m-l-xs m-r-sm"><strong>SHARE</strong> my medical record <strong>WITH EXCEPTION</strong> of specific information.</span>
-                    <button type="button" class="btn btn-primary btn-xs dark-green"  ng-if="consentMedicalInformationVm.hasException()" ng-click="consentMedicalInformationVm.openPrivacySettingsModal()">Edit</button>
+                    <button type="button" class="btn btn-primary btn-xs dark-green"
+                            ng-if="consentMedicalInformationVm.hasException()"
+                            ng-click="consentMedicalInformationVm.openPrivacySettingsModal()">Edit
+                    </button>
                 </p>
             </fieldset>
             <div>
-                <div class="label label-info m-l-xs inline" ng-repeat="SensitivityPolicies in consentMedicalInformationVm.selectedSensitivityPolicies">
-                    <span class="fa fa-lock m-r-xs" ></span>
+                <div class="label label-info m-l-xs inline"
+                     ng-repeat="SensitivityPolicies in consentMedicalInformationVm.selectedSensitivityPolicies">
+                    <span class="fa fa-lock m-r-xs"></span>
                     <span ng-bind="SensitivityPolicies.displayName"> </span>
                 </div>
             </div>

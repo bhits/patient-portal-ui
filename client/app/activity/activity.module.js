@@ -7,8 +7,8 @@
 
     angular
         .module('app.activity',
-               [
-                 'app.config',
-                 'app.core'
-               ]);
+            [
+                'app.config',
+                'app.core'
+            ]);
 })();

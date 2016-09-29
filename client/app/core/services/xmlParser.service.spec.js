@@ -2,17 +2,17 @@
 
 'use strict';
 
-describe('app.xmlParserService ', function() {
+describe('app.xmlParserService ', function () {
     var xmlParser, x2js;
 
     beforeEach(module('app.core'));
 
-    beforeEach(inject(function(_xmlParser_){
+    beforeEach(inject(function (_xmlParser_) {
         xmlParser = _xmlParser_;
 
     }));
 
-    beforeEach(function(){
+    beforeEach(function () {
         x2js = new X2JS();
     });
 

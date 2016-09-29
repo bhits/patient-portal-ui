@@ -3,24 +3,26 @@
  */
 'use strict';
 
-xdescribe("app.CreatePasswordController", function() {
+xdescribe("app.CreatePasswordController", function () {
 
     beforeEach(module('app.account'));
 
     var controller, $state, allowActivation, brand;
 
     beforeEach(function () {
-        var fakeModule = angular.module('test.app.brand', function () {});
-        fakeModule.config( function (brandProvider) {
+        var fakeModule = angular.module('test.app.brand', function () {
+        });
+        fakeModule.config(function (brandProvider) {
             brand = brandProvider;
         });
         module('app.brand', 'test.app.brand');
-        inject(function () {});
+        inject(function () {
+        });
         brand.setBrandName("Brand Name");
         brand.setBrandInitial("BI");
     });
 
-    beforeEach(inject(function($controller, _$state_) {
+    beforeEach(inject(function ($controller, _$state_) {
 
         $state = _$state_;
 
@@ -31,22 +33,22 @@ xdescribe("app.CreatePasswordController", function() {
 
     }));
 
-    it('should create controller ', function(){
+    it('should create controller ', function () {
         expect(controller).toBeDefined();
     });
 
-    it('should have correct title', function(){
+    it('should have correct title', function () {
         expect(controller.title).toBeDefined();
         expect(controller.title).toEqual('Brand Name Create Password');
     });
 
-    it('should allowActivation', function(){
+    it('should allowActivation', function () {
         expect(controller.allowActivation).toBeDefined();
         expect(controller.allowActivation).toBeTruthy();
     });
 
-    it('should not allowActivation', function(){
-        inject(function($controller, _$state_) {
+    it('should not allowActivation', function () {
+        inject(function ($controller, _$state_) {
 
             $state = _$state_;
 

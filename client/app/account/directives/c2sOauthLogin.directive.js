@@ -23,7 +23,7 @@
     }
 
     /* @ngInject */
-    function OauthLoginController(utilityService, authenticationService, oauthConfig, profileService, oauthTokenService) {
+    function OauthLoginController(utilityService, authenticationService, securityConstants, profileService, oauthTokenService) {
         var vm = this;
         vm.login = login;
         vm.canSubmit = canSubmit;
@@ -52,7 +52,7 @@
         function loginError(error) {
             oauthTokenService.removeToken();
             var errorDescription = error.data.error_description;
-            var accountHasLocked = angular.equals(errorDescription, oauthConfig.accountLockedErrorMessage);
+            var accountHasLocked = angular.equals(errorDescription, securityConstants.accountLockedErrorMessage);
             vm.accountLocked = accountHasLocked;
             vm.loginError = !accountHasLocked;
         }
@@ -67,8 +67,8 @@
 
         function isAllowAccess() {
             var authScopes = oauthTokenService.getOauthScope();
-            if (authScopes.indexOf(oauthConfig.accessScope) !== -1) {
-                utilityService.redirectTo(oauthConfig.loginSuccessPath);
+            if (authScopes.indexOf(securityConstants.accessScope) !== -1) {
+                utilityService.redirectTo(securityConstants.loginSuccessPath);
             } else {
                 oauthTokenService.removeToken();
                 vm.scopeError = true;

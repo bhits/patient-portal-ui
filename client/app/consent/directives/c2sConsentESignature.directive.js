@@ -73,7 +73,7 @@
             return !!(angular.isDefined(vm.attestation) && angular.isDefined(vm.attestation.doNotShareSensitivityPolicyDisplayNames) && vm.attestation.doNotShareSensitivityPolicyDisplayNames.length > 0);
         }
 
-        //TODO: refactor attestation checkbox into directive that can be reused both for signing and revoking
+        //TODO: refactor attestation checkbox into directive that can be reused for both signing and revoking
         function onchecked() {
             if (vm.attestation.acceptTerms) {
                 vm.openAuthenticateModal();

@@ -4,7 +4,7 @@
 
 'use strict';
 
-xdescribe('app.c2sCcdaDocumentSectionDirective ', function() {
+xdescribe('app.c2sCcdaDocumentSectionDirective ', function () {
     var healthInformationService, controller, $scope, $httpBackend, element, $templateCache, template;
 
     var patient = {
@@ -16,13 +16,13 @@ xdescribe('app.c2sCcdaDocumentSectionDirective ', function() {
     };
     var exampleDocument = {
         targetPatient: patient,
-        authors: ['author1','author2'],
+        authors: ['author1', 'author2'],
         sections: 'Section 1',
         treatment: 'Treatment 1'
     };
     var healthInfo = {
         document: {
-            CDAdocuments: [exampleDocument,'doc2.doc'],
+            CDAdocuments: [exampleDocument, 'doc2.doc'],
         },
         type: 'Document Type',
         date: '06/20/2016',

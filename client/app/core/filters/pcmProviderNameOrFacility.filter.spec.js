@@ -4,14 +4,14 @@
 
 'use strict';
 
-describe('app.pcmProviderNameOrFacilityFilter', function(){
+describe('app.pcmProviderNameOrFacilityFilter', function () {
 
     var $filter;
 
     beforeEach(module('app.core'));
     beforeEach(module('app.account'));
 
-    beforeEach(inject(function (_$filter_){
+    beforeEach(inject(function (_$filter_) {
         $filter = _$filter_('pcmProviderNameOrFacility');
     }));
 

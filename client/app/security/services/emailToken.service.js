@@ -1,12 +1,11 @@
 /**
  * Created by Jiahao.Li on 3/20/2016.
  */
-
-
 (function () {
     'use strict';
 
-    angular.module('app.security')
+    angular
+        .module('app.security')
         .factory('emailTokenService', emailTokenService);
 
     /* @ngInject */

@@ -5,7 +5,7 @@
 
 'use strict';
 
-xdescribe("app.login.controller ", function() {
+xdescribe("app.login.controller ", function () {
 
     beforeEach(module('app.account'));
     beforeEach(module('app.config'));
@@ -15,17 +15,19 @@ xdescribe("app.login.controller ", function() {
     var envService, controller, $resource, brand, utilityService, accountConfig;
 
     beforeEach(function () {
-        var fakeModule = angular.module('test.app.brand', function () {});
-        fakeModule.config( function (brandProvider) {
+        var fakeModule = angular.module('test.app.brand', function () {
+        });
+        fakeModule.config(function (brandProvider) {
             brand = brandProvider;
         });
         module('app.brand', 'test.app.brand');
-        inject(function () {});
+        inject(function () {
+        });
         brand.setBrandName("Brand Name");
         brand.setBrandInitial("BI");
     });
 
-    beforeEach(inject(function( $controller, _envService_,
+    beforeEach(inject(function ($controller, _envService_,
                                 _utilityService_, _$resource_, _accountConfig_) {
 
         envService = _envService_;
@@ -42,13 +44,13 @@ xdescribe("app.login.controller ", function() {
 
     }));
 
-    it('should create controller and have correct version based on config.js', function(){
+    it('should create controller and have correct version based on config.js', function () {
         expect(controller).toBeDefined();
         expect(controller.version).toBeDefined();
         expect(controller.version).toEqual('0.15.0');
     });
 
-    it('should forget password', function(){
+    it('should forget password', function () {
         expect(controller.forgotPassword).toBeDefined();
         spyOn(utilityService, 'redirectTo').and.callThrough();
         controller.forgotPassword();
@@ -56,12 +58,12 @@ xdescribe("app.login.controller ", function() {
         expect(utilityService.redirectTo).toHaveBeenCalledWith('/fe/account/forgotPassword');
     });
 
-    it('should get brand name', function(){
+    it('should get brand name', function () {
         expect(controller.brandName).toBeDefined();
         expect(controller.brandName).toEqual('Brand Name');
     });
 
-    it('should get brand initials for alt logo text', function(){
+    it('should get brand initials for alt logo text', function () {
         expect(controller.altLogoText).toBeDefined();
         expect(controller.altLogoText).toEqual('BI Logo');
     });

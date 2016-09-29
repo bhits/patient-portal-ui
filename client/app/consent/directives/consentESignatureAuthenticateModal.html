@@ -1,4 +1,4 @@
-<div class="inmodal" ng-form >
+<div class="inmodal" ng-form>
     <div class="modal-header">
         <h2 class="modal-title">Please Authenticate</h2>
     </div>
@@ -9,19 +9,17 @@
             </div>
         </div>
         <div class="row m-t">
-            <!--<div class="col-sm-4 "></div>-->
             <div class="col-sm-2 ">
                 <label for="password">Password</label>
             </div>
             <div class="col-sm-3">
                 <input type="password" name="password" id="password" ng-model="authenticateVm.password">
             </div>
-            <!--<div class="col-sm-4 ">-->
-            <!--</div>-->
         </div>
         <div class="row m-t-xs">
             <div class="col-sm-12">
-                <span ng-if="authenticateVm.errorMessage" class="text-alert" ng-bind="authenticateVm.errorMessage"></span>
+                <span ng-if="authenticateVm.errorMessage" class="text-alert"
+                      ng-bind="authenticateVm.errorMessage"></span>
             </div>
         </div>
     </div>

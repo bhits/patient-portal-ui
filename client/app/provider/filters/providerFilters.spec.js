@@ -12,7 +12,7 @@ describe('app.providerFiltersModule ', function () {
     beforeEach(module('app.provider'));
     beforeEach(module('app.config'));
 
-    it("should be registered", function() {
+    it("should be registered", function () {
         expect(module).not.toEqual(null);
     });
 
@@ -26,25 +26,45 @@ describe('app.providerFiltersModule ', function () {
 
     it('should filter address with', function () {
         spyOn(utilityService, 'formatZipCode').and.returnValue("21044");
-        var provider = {firstLinePracticeLocationAddress: "7175 Columbia Gateway", practiceLocationAddressCityName: "Columbia", practiceLocationAddressStateName: "MD", practiceLocationAddressPostalCode: "21044"};
+        var provider = {
+            firstLinePracticeLocationAddress: "7175 Columbia Gateway",
+            practiceLocationAddressCityName: "Columbia",
+            practiceLocationAddressStateName: "MD",
+            practiceLocationAddressPostalCode: "21044"
+        };
         expect(pcmProviderAddress(provider)).toEqual("7175 Columbia Gateway, Columbia, MD, 21044");
         expect(utilityService.formatZipCode).toHaveBeenCalledWith('21044');
     });
 
     it('should filter address without no address fields', function () {
         spyOn(utilityService, 'formatZipCode').and.returnValue("");
-        var provider1 = {firstLinePracticeLocationAddress: "", practiceLocationAddressCityName: "", practiceLocationAddressStateName: "", practiceLocationAddressPostalCode: ""};
+        var provider1 = {
+            firstLinePracticeLocationAddress: "",
+            practiceLocationAddressCityName: "",
+            practiceLocationAddressStateName: "",
+            practiceLocationAddressPostalCode: ""
+        };
         expect(pcmProviderAddress(provider1)).toEqual(", , , ");
         expect(utilityService.formatZipCode).toHaveBeenCalledWith('');
     });
 
     it('should filter individual provider name ', function () {
-        var provider = {firstName: "firstName", lastName: "lastName", entityType: "Individual", orgName: "Organization"};
+        var provider = {
+            firstName: "firstName",
+            lastName: "lastName",
+            entityType: "Individual",
+            orgName: "Organization"
+        };
         expect(pcmNameorfacility(provider)).toEqual("lastName,firstName");
     });
 
     it('should filter provider facility name ', function () {
-        var provider = {firstName: "firstName", lastName: "lastName", entityType: "Organization", orgName: "Organization"};
+        var provider = {
+            firstName: "firstName",
+            lastName: "lastName",
+            entityType: "Organization",
+            orgName: "Organization"
+        };
         expect(pcmNameorfacility(provider)).toEqual("Organization");
     });
 
