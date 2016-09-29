@@ -45,6 +45,9 @@
         <relativePath/><!-- lookup parent from repository -->
     </parent>
 
+    <!-- Full Build: mvn clean install -->
+    <!-- Full Build & Run: mvn spring-boot:run -Drun.arguments=-\-server.port=8081,-\-server.contextPath=/admin-ui (remove backslashes) -->
+    <!-- Package & Run: mvn spring-boot:run -PskipGrunt -Drun.arguments=-\-server.port=8081,-\-server.contextPath=/admin-ui (remove backslashes) -->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <start-class>gov.samhsa.c2s.ppui.PPUIApplication</start-class>
