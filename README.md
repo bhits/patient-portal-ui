@@ -28,10 +28,10 @@ To build the project, navigate to the folder that contains `pom.xml` file using 
     + For Windows, run `mvnw.cmd clean package docker:build`
     + For *nix systems, run `mvnw clean package docker:build`
 
-Note: For frontend developers, there is a fast way to build project in developing mode. You are able to separately build frontend and backend and then flexible to build project with skipping grunt build:
+Note: Frontend developers can build frontend and backend code separately and save building time by skipping the Grunt build as needed.
   
-+ To build frontend code, navigate to the client folder run: `grunt build:dev`
-+ Then navigate to the server folder run `mvnw.cmd clean install -PskipGrunt`
++ To build the frontend code, navigate to the client folder and run: `grunt build:dev`
++ Then navigate to the server folder and run `mvnw.cmd clean install -PskipGrunt`
 
 ## Run
 
@@ -48,29 +48,19 @@ This is a [Spring Boot](https://projects.spring.io/spring-boot/) project and ser
 
 ### Server Side
 
-This project runs with some default configuration that is primarily targeted for development environment. However, [Spring Boot](https://projects.spring.io/spring-boot/) supports several methods to override the default configuration to configure the project for a certain deployment environment.
+The server side is mainly responsible for serving static client content. All configuration of itself is to setup the dependency microservices and support level infrastructure. All configuration of client side is set in grunt file (*See [Client Side](#client-side) for details*).
 
-Please see the [default configuration](server/src/main/resources/application.yml) for this project as a guidance and override the specific configuration per environment as needed. Also, please refer to [Spring Boot Externalized Configuration](http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html) documentation to see how Spring Boot applies the order to load the properties and [Spring Boot Common Properties](http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html) documentation to see the common properties used by Spring Boot.
+*NOTE: In order to remove the hashtag from theURL. We enable HTML5 mode instead of Hashbang mode (default mode). But using this mode requires rewriting all the links to entry point of the application on server side. We set to start from `/fe` as the application base.*
 
-#### Examples for Overriding a Configuration in Spring Boot
-
-##### Override a Configuration Using Program Arguments While Running as a JAR:
-
-+ `java -jar pp-ui-x.x.x-SNAPSHOT.jar --logging.file=newpath`
-
-##### Override a Configuration Using Program Arguments While Running as a Docker Container:
-
-+ `docker run -d bhits/pp-ui:latest --logging.file=newpath`
-
-+ In the `docker-compose.yml`, this can be provided as:
-```yml
+In the `PPUIApplication.java`, this can be provided as:
+```java
 ...
-  pp-ui.c2s.com:
-    image: "bhits/pp-ui:latest"
-    command: ["--logging.file=newpath"]
+  @RequestMapping(value = "/fe/**")
+      public String redirect() {
+          return "forward:/";
+      }
 ...
 ```
-*NOTE: Please note that these additional arguments will be appended to the default `ENTRYPOINT` specified in the `Dockerfile` unless the `ENTRYPOINT` is overridden.*
 
 #### Enable SSL
 
@@ -104,7 +94,7 @@ Java has a default CA Certificates Store that allows it to trust well-known cert
 
 ### Client Side
 
-This project runs with some default configuration that is primarily targeted for development environment. You are able to change them in grunt file before building client code.
+This project runs with some default configuration that is primarily targeted for development environment. You can change the default configuration in the grunt file but you need to build the client code after you changed.
 
 Please see the [default configuration](client/gruntfile.js) for this Client Side as a guidance and specific configuration for a new environment as needed.
 
