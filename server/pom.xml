@@ -10,7 +10,7 @@
 
     <name>ppui</name>
     <description>Patient Portal UI</description>
-    <url>${scm.url}</url>
+    <url>${project.scm.url}</url>
 
     <developers>
         <developer>
@@ -23,7 +23,7 @@
     <licenses>
         <license>
             <name>See license in LICENSE.md</name>
-            <url>${scm.url}/blob/master/LICENSE.md</url>
+            <url>${project.scm.url}/blob/master/LICENSE.md</url>
         </license>
     </licenses>
 
@@ -33,9 +33,9 @@
     </ciManagement>
 
     <scm>
-        <url>https://github.com/BHITS/patient-portal-ui</url>
-        <connection>scm:git:${scm.url}.git</connection>
-        <developerConnection>scm:git:${scm.url}.git</developerConnection>
+        <url>https://github.com/bhits/patient-portal-ui</url>
+        <connection>scm:git:${project.scm.url}.git</connection>
+        <developerConnection>scm:git:${project.scm.url}.git</developerConnection>
     </scm>
 
     <parent>

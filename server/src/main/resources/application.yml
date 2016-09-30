@@ -7,7 +7,6 @@ info:
 eureka:
   instance:
     instance-id: ${spring.cloud.client.hostname}:${spring.application.name}:${spring.application.instance_id:${random.value}}
-#    hostname: localhost
     secure-port-enabled: false
     non-secure-port-enabled: true
   client:
@@ -17,9 +16,11 @@ eureka:
       # endpoint for discovery-server, pass '--eureka.client.protocol=https' if discovery-server is running on https
       defaultZone: ${eureka.client.protocol:http}://localhost:8761/eureka/
 ---
+# enables ssl in this service when activated
 spring.profiles: ssl
 server:
   port: 8444
+  # configure keystore and keystore password for ssl per environment
   ssl:
     key-store: /ssl_keystore.keystore
     key-store-password: changeit
@@ -29,6 +30,7 @@ eureka:
     secure-port-enabled: true
     non-secure-port-enabled: false
 ---
+# enables ssl and adds /pp-ui context path when activated
 spring.profiles: standalone-ssl
 spring:
   profiles:
@@ -36,6 +38,7 @@ spring:
 server:
   context-path: /pp-ui
 ---
+# updates configuration for docker environment
 spring.profiles: docker
 eureka:
   client:
