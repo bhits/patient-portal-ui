@@ -1,6 +1,5 @@
 server:
   port: 8444
-spring.profiles.active: eureka-ssl
 logging:
   file: /java/C2S_LOGS/pp-ui/ppui.log
 info:
@@ -15,7 +14,8 @@ eureka:
     healthcheck:
       enabled: true
     service-url:
-      defaultZone: http://localhost:8761/eureka/
+      # endpoint for discovery-server, pass '--eureka.client.protocol=https' if discovery-server is running on https
+      defaultZone: ${eureka.client.protocol:http}://localhost:8761/eureka/
 ---
 spring.profiles: ssl
 server:
@@ -36,16 +36,10 @@ spring:
 server:
   context-path: /pp-ui
 ---
-spring.profiles: eureka-ssl
-eureka:
-  client:
-    service-url:
-      defaultZone: https://localhost:8761/eureka/
----
 spring.profiles: docker
 eureka:
   client:
     service-url:
-      defaultZone: https://discovery-server.c2s.com:8761/eureka/
+      defaultZone: ${eureka.client.protocol:http}://discovery-server.c2s.com:8761/eureka/
   instance:
     prefer-ip-address: true
