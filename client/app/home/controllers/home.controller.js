@@ -2,7 +2,6 @@
  * Created by Feruz.Abdella on 3/21/2016.
  */
 (function () {
-
     'use strict';
 
     angular
@@ -10,7 +9,7 @@
         .controller('HomeController', HomeController);
 
     /* @ngInject */
-    function HomeController(brand){
+    function HomeController(brand) {
         var vm = this;
         vm.brandName = brand.getBrandName();
     }

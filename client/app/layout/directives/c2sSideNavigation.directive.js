@@ -7,7 +7,6 @@
 
     /* @ngInject */
     function c2sSideNavigation($timeout) {
-
         var directive = {
             restrict: 'A',
             link: linkFunc

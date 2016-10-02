@@ -5,12 +5,12 @@
 
 'use strict';
 
-describe('app.notificationService ', function() {
+describe('app.notificationService ', function () {
     var notificationService, notify;
 
     beforeEach(module('app.core'));
 
-    beforeEach(inject(function(_notificationService_, _notify_){
+    beforeEach(inject(function (_notificationService_, _notify_) {
         notificationService = _notificationService_;
         notify = _notify_;
 

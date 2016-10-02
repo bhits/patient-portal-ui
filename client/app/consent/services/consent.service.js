@@ -2,9 +2,8 @@
  * Created by tomson.ngassa on 9/30/2015.
  */
 
-'use strict';
-
 (function () {
+    'use strict';
 
     angular.module("app.consent")
         .factory('consentService', consentService);
@@ -49,7 +48,6 @@
         service.setAuthorizeNpi = setAuthorizeNpi;
         service.setDiscloseNpi = setDiscloseNpi;
         service.getSelectedNpi = getSelectedNpi;
-        service.getSelectedProvider = getSelectedProvider;
         service.prepareProviderList = prepareProviderList;
         service.resolveConsentState = resolveConsentState;
         service.isShareAll = isShareAll;
@@ -149,10 +147,6 @@
         function getSelectedNpi() {
             return selectedNpi;
         }
-
-        function getSelectedProvider() {
-            return selectedProvider;
-        } //TODO: remove, not used
 
         function prepareProviderList(selectedProviders, providers) {
             var providerList = [];

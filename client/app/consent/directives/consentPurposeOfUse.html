@@ -6,10 +6,14 @@
         <div class="panel-body">
             <p>Choose for what purposes your medical information may be used.</p>
             <p>
-                <span class="m-r-sm"><strong>SHARE</strong> my medical record ONLY for the selected purposes of use.</span> <button type="button" class="btn btn-primary btn-xs dark-green" ng-click="consentPurposeOfUseVm.openSelectPurposeModal()">Edit</button>
+                <span class="m-r-sm"><strong>SHARE</strong> my medical record ONLY for the selected purposes of use.</span>
+                <button type="button" class="btn btn-primary btn-xs dark-green"
+                        ng-click="consentPurposeOfUseVm.openSelectPurposeModal()">Edit
+                </button>
             </p>
             <div>
-                <div class="label label-primary m-l-xs inline dark-green" ng-repeat="purposeOfUse in consentPurposeOfUseVm.selectedPurposeOfUse" >
+                <div class="label label-primary m-l-xs inline dark-green"
+                     ng-repeat="purposeOfUse in consentPurposeOfUseVm.selectedPurposeOfUse">
                     <span class="fa fa-check m-r-xs"></span>
                     <span ng-bind="purposeOfUse.displayName"></span>
                 </div>

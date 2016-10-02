@@ -4,13 +4,13 @@
 
 'use strict';
 
-describe("app.ConsentListController", function() {
+describe("app.ConsentListController", function () {
 
     beforeEach(module('app.consent'));
 
     var controller, loadedData = {data: "something"};
 
-    beforeEach(inject(function( $controller) {
+    beforeEach(inject(function ($controller) {
 
         controller = $controller('ConsentListController', {
             loadedData: loadedData
@@ -18,11 +18,11 @@ describe("app.ConsentListController", function() {
 
     }));
 
-    it('should create controller ', function(){
+    it('should create controller ', function () {
         expect(controller).toBeDefined();
     });
 
-    it('should set correct data', function(){
+    it('should set correct data', function () {
         expect(controller.consentList).toBeDefined();
         expect(controller.consentList).toEqual(loadedData);
     });

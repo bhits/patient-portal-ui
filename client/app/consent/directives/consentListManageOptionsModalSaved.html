@@ -8,18 +8,22 @@
             <div ng-if="manageConsentModalVm.option === 'manageConcent'">
                 <h3>I want to:</h3>
                 <div class="list-group">
-                    <a href="#" class="list-group-item" ng-click="manageConsentModalVm.edit()"><h4><i
-                            class="fa fa-edit fa-lg m-r-sm"></i>Edit This Consent</h4></a>
-                    <a href="#" class="list-group-item"
-                       ng-click="manageConsentModalVm.downloadUnattestedConsent('unsigned')"><h4><i
-                            class="fa fa-search fa-lg m-r-sm"></i>Preview This Consent</h4></a>
-                    <a href="#" class="list-group-item" ng-click="manageConsentModalVm.viewAttestation()"><h4><i
-                            class="fa fa-mail-forward fa-lg m-r-sm"></i>Provide eSignature</h4></a>
-                    <a href="#" class="list-group-item" ng-click="manageConsentModalVm.setOption('tryMyPolicy')"><h4><i
-                            class="fa fa-gear fa-lg m-r-sm"></i>Try My Consent Settings against My Medical Record before
-                        Sharing</h4></a>
-                    <a href="#" class="list-group-item" ng-click="manageConsentModalVm.setOption('delete')"><h4><i
-                            class="fa fa-trash-o fa-lg m-r-sm"></i>Delete This Consent</h4></a>
+                    <a href="#" class="list-group-item" ng-click="manageConsentModalVm.edit()">
+                        <h4><i class="fa fa-edit fa-lg m-r-sm"></i>Edit This Consent</h4>
+                    </a>
+                    <a href="#" class="list-group-item" ng-click="manageConsentModalVm.downloadUnattestedConsent('unsigned')">
+                        <h4><i class="fa fa-search fa-lg m-r-sm"></i>Preview This Consent</h4>
+                    </a>
+                    <a href="#" class="list-group-item" ng-click="manageConsentModalVm.viewAttestation()">
+                        <h4><i class="fa fa-mail-forward fa-lg m-r-sm"></i>Provide eSignature</h4>
+                    </a>
+                    <a href="#" class="list-group-item" ng-click="manageConsentModalVm.setOption('tryMyPolicy')">
+                        <h4><i class="fa fa-gear fa-lg m-r-sm"></i>Try My Consent Settings against My Medical Record before
+                        Sharing</h4>
+                    </a>
+                    <a href="#" class="list-group-item" ng-click="manageConsentModalVm.setOption('delete')">
+                        <h4><i class="fa fa-trash-o fa-lg m-r-sm"></i>Delete This Consent</h4>
+                    </a>
                 </div>
             </div>
 

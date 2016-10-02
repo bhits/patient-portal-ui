@@ -5,21 +5,21 @@
         .module('app.core')
         .filter('fullName', fullNameFilter);
 
-        /**
-         * Filter to format phone number
-         */
-        function fullNameFilter() {
+    /**
+     * Filter to format phone number
+     */
+    function fullNameFilter() {
 
-            return fullName;
+        return fullName;
 
-            function fullName (data) {
-                var fullName = {};
-                if (angular.isDefined(data) && angular.isDefined(data.orgName)) {
-                    fullName = data.orgName ;
-                }else if (angular.isDefined(data) && angular.isDefined(data.firstName) && angular.isDefined(data.lastName)) {
-                    fullName = data.firstName + " " + data.lastName;
-                }
-                return fullName;
+        function fullName(data) {
+            var fullName = {};
+            if (angular.isDefined(data) && angular.isDefined(data.orgName)) {
+                fullName = data.orgName;
+            } else if (angular.isDefined(data) && angular.isDefined(data.firstName) && angular.isDefined(data.lastName)) {
+                fullName = data.firstName + " " + data.lastName;
             }
+            return fullName;
         }
+    }
 })();

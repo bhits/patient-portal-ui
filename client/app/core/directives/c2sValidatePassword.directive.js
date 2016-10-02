@@ -3,7 +3,6 @@
  */
 
 (function () {
-
     'use strict';
 
     angular
@@ -15,7 +14,7 @@
 
         var PASSWORD_REGEX = coreConstants.PASSWORD_REGEX;
 
-        var directive =  {
+        var directive = {
             require: 'ngModel',
             restrict: 'A',
             scope: {},
@@ -25,10 +24,10 @@
 
         /* @ngInject */
         function linkFunc(scope, elm, attrs, ctrl) {
-            ctrl.$validators.isValidPassword = function(modelValue) {
-                if(angular.isDefined(modelValue)){
+            ctrl.$validators.isValidPassword = function (modelValue) {
+                if (angular.isDefined(modelValue)) {
                     return ctrl.$isEmpty(modelValue) || PASSWORD_REGEX.test(modelValue);
-                }else{
+                } else {
                     return true;
                 }
             };

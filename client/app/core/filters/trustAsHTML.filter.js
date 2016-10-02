@@ -9,12 +9,12 @@
         .module('app.core')
         .filter('trustAsHTML', trustAsHTMLFilter);
 
-         /* @ngInject */
-        function trustAsHTMLFilter($sce) {
-            return sceFilter;
+    /* @ngInject */
+    function trustAsHTMLFilter($sce) {
+        return sceFilter;
 
-            function sceFilter (text) {
-                return $sce.trustAsHtml(text);
-            }
+        function sceFilter(text) {
+            return $sce.trustAsHtml(text);
         }
+    }
 })();

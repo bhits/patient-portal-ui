@@ -2,9 +2,9 @@
     'use strict';
 
     angular.module("app.medicalDocument")
-        .controller("MedicalDocumentsListController",MedicalDocumentsListController);
+        .controller("MedicalDocumentsListController", MedicalDocumentsListController);
 
-    function MedicalDocumentsListController(medicalDocumentsList){
+    function MedicalDocumentsListController(medicalDocumentsList) {
         var vm = this;
         vm.medicalDocumentsList = medicalDocumentsList;
     }
