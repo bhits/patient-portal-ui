@@ -1,6 +1,6 @@
 # Patient Portal UI
 
-The Patient Portal UI (patient-portal-ui) is patient user interface module of the Consent2share (C2S) used by the patient to manage his/her health information. Patients can use this to register, log in, visit their home page, review their health records, conduct consent management activities, and view prior consent decisions.
+The Patient Portal UI (patient-portal-ui) is a patient user interface module of Consent2share (C2S) used by the patient to manage his or her health information. Patients can use this to register, log in, visit their home page, review their health records, conduct consent management activities, and view prior consent decisions.
 
 ## Build
 
@@ -13,11 +13,11 @@ The Patient Portal UI (patient-portal-ui) is patient user interface module of th
 
 ### Structure
 
-There are two main modules in this project, one folder named client contains all frontend view code, which is client side using Angular framework to build. Another folder named server is server side with Spring Boot, which servers static client content. This is a Maven project and it uses [Frontend maven plugin](https://github.com/eirslett/frontend-maven-plugin). This plugin can locally download node.js and grunt to build client code and then build packing with server side code in a jar. You even do not need to install Node.js and Grunt. But you need to install them if you want to separately build frontend and backend code.
+There are two main modules in this project. One folder named client contains all frontend view code, which is client side using Angular framework to build. Another folder named server is server side with Spring Boot, serving static client content. This is a Maven project and it uses [Frontend maven plugin](https://github.com/eirslett/frontend-maven-plugin). This plugin can locally download Node.js and Grunt to build client code and then build packing with server side code in a jar. You even do not need to install Node.js and Grunt. But you need to install them if you want to separately build frontend and backend code.
 
 ### Commands
 
-This Maven project requires Apache Maven 3.3.3 or greater to build it. It is recommended to use the *Maven Wrapper* scripts provided with this project. *Maven Wrapper* requires internet connection to download Maven and project dependencies for the very first build.
+This Maven project requires Apache Maven 3.3.3 or greater to build it. It is recommended to use the *Maven Wrapper* scripts provided with this project. *Maven Wrapper* requires an internet connection to download Maven and project dependencies for the very first build.
 
 To build the project, navigate to the folder that contains `pom.xml` file using terminal/command line.
 
@@ -48,9 +48,9 @@ This is a [Spring Boot](https://projects.spring.io/spring-boot/) project and ser
 
 ### Server Side
 
-The server side is mainly responsible for serving static client content. All configuration of itself is to setup the dependency microservices and support level infrastructure. All configuration of client side is set in grunt file (*See [Client Side](#client-side) for details*).
+The server side is mainly responsible for serving static client content. All configuration of itself is to setup the dependency microservices and support level infrastructure. All configuration of client side is set in Grunt file (*See [Client Side](#client-side) for details*).
 
-*NOTE: In order to remove the hashtag from theURL. We enable HTML5 mode instead of Hashbang mode (default mode). But using this mode requires rewriting all the links to entry point of the application on server side. We set to start from `/fe` as the application base.*
+*NOTE: In order to remove the hashtag from the URL. We enable HTML5 mode instead of Hashbang mode (default mode). But using this mode requires rewriting all the links to entry point of the application on server side. We set to start from `/fe` as the application base.*
 
 In the `PPUIApplication.java`, this can be provided as:
 ```java
@@ -88,13 +88,13 @@ For simplicity in development and testing environments, SSL is **NOT** enabled b
 
 #### Override Java CA Certificates Store In Docker Environment
 
-Java has a default CA Certificates Store that allows it to trust well-known certificate authorities. For development and testing purposes, one might want to trust additional self-signed certificates. In order to override the default Java CA Certificates Store in docker container, one can mount a custom `cacerts` file over the default one in the docker image as `docker run -d -v "/path/on/dockerhost/to/custom/cacerts:/etc/ssl/certs/java/cacerts" bhits/pp-ui:latest`
+Java has a default CA Certificates Store that allows it to trust well-known certificate authorities. For development and testing purposes, one might want to trust additional self-signed certificates. In order to override the default Java CA Certificates Store in Docker container, one can mount a custom `cacerts` file over the default one in the Docker image as `docker run -d -v "/path/on/dockerhost/to/custom/cacerts:/etc/ssl/certs/java/cacerts" bhits/pp-ui:latest`
 
 *NOTE: The `cacerts` references given in the both sides of volume mapping above are files, not directories.*
 
 ### Client Side
 
-This project runs with some default configuration that is primarily targeted for development environment. You can change the default configuration in the grunt file but you need to build the client code after you changed.
+This project runs with some default configuration that is primarily targeted for development environment. You can change the default configuration in the Grunt file but you need to build the client code after you changed.
 
 Please see the [default configuration](client/gruntfile.js) for this Client Side as a guidance and specific configuration for a new environment as needed.
 
