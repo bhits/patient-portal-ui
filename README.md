@@ -16,7 +16,9 @@ The Patient Portal UI (patient-portal-ui) is a patient user interface module of 
 There are two main modules in this project:
 
 + `client`: This folder contains all frontend user interface code which is written using [Angular](https://angularjs.org/) v1.5.
-+ `server`: This folder contains a [Spring Boot](http://projects.spring.io/spring-boot/) project, which is primarily responsible for packaging and serving the static resources that are built from the `client` module. This is also an [Apache Maven](https://maven.apache.org/) project and utilizes [Frontend Maven Plugin](https://github.com/eirslett/frontend-maven-plugin) to: (1) locally install [Node.js](https://nodejs.org/en/) and the `client` module Node.js dependencies; (2) build the `client` module using locally installed [Grunt](http://gruntjs.com/) Node.js package. Finally, it uses [Apache Maven Resources Plugin](https://maven.apache.org/plugins/maven-resources-plugin/) to copy the resources that are built from the `client` module into the `server` module that will be eventually packaged as a build artifact in `jar` format. Therefore, there is no need to install Node.js or Grunt globally if `server` module is built with Maven.
++ `server`: This folder contains a [Spring Boot](http://projects.spring.io/spring-boot/) project, which is primarily responsible for packaging and serving the static resources that are built from the `client` module. This is also an [Apache Maven](https://maven.apache.org/) project and utilizes [Frontend Maven Plugin](https://github.com/eirslett/frontend-maven-plugin) to: 
+    1. locally install [Node.js](https://nodejs.org/en/) and the `client` module Node.js dependencies; 
+    2. build the `client` module using locally installed [Grunt](http://gruntjs.com/) Node.js package. Finally, it uses [Apache Maven Resources Plugin](https://maven.apache.org/plugins/maven-resources-plugin/) to copy the resources that are built from the `client` module into the `server` module that will be eventually packaged as a build artifact in `jar` format. Therefore, there is no need to install Node.js or Grunt globally if `server` module is built with Maven.
 
 ### Commands
 
