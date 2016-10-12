@@ -1,6 +1,6 @@
 # Patient Portal UI
 
-The Patient Portal UI (patient-portal-ui) is a patient user interface module of Consent2share (C2S) used by the patient to manage his or her health information and consent. Patients can use this application to register, log in, visit their home page, review their health records, conduct consent management activities, and view prior consent decisions.
+The Patient Portal UI (patient-portal-ui) is a patient user interface component of Consent2share (C2S) used by the patient to manage his or her health information and consent. Patients can use this application to register, log in, visit their home page, review their health records, conduct consent management activities, and view prior consent decisions.
 
 ## Build
 
