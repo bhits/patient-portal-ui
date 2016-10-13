@@ -1,4 +1,3 @@
-
 # Short Description
 The Patient Portal UI is used by the patient to manage his or her health information and consent.
 
