@@ -62,6 +62,16 @@
         <docker.maven.version>0.4.3</docker.maven.version>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>repo.spring.io</id>
+            <name>Spring Milestone Repository</name>
+            <url>https://repo.spring.io/libs-milestone-local</url>
+        </repository>
+    </repositories>
+
+    <!-- Comment out the below distributionManagement if you couldn't connect to FEi Nexus repository manager to upload dependencies when you run 'mvn deploy' command -->
+
     <distributionManagement>
         <repository>
             <id>deployment</id>
