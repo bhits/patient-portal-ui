@@ -131,7 +131,7 @@ In the `gruntfile.js`, locate the `dev` environment configuration. After adjusti
 [//]: # (## Contribute)
 
 ## Contact
-If you have any questions, comments, or concerns please see [Consent2Share](../../contact) page
+If you have any questions, comments, or concerns please see [Consent2Share](https://bhits.github.io/consent2share/) project site.
 
 ## Report Issues
 Please use [GitHub Issues](https://github.com/bhits/patient-portal-ui/issues) page to report issues.
