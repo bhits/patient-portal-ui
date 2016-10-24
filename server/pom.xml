@@ -5,7 +5,7 @@
 
     <groupId>gov.samhsa.c2s</groupId>
     <artifactId>pp-ui</artifactId>
-    <version>0.19.0-SNAPSHOT</version>
+    <version>0.20.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>ppui</name>
@@ -70,8 +70,8 @@
         </repository>
     </repositories>
 
-    <!-- Comment out the below distributionManagement if you couldn't connect to FEi Nexus repository manager to upload dependencies when you run 'mvn deploy' command -->
-
+    <!-- This configuration is for BHITS team to deploy the artifacts to organization repository with 'mvn deploy' command -->
+    <!-- Please reconfigure based on your environment setup to run 'mvn deploy' -->
     <distributionManagement>
         <repository>
             <id>deployment</id>
