@@ -4,13 +4,13 @@
 
 'use strict';
 
-describe("app.activateController", function() {
+describe("app.activateController", function () {
 
     beforeEach(module('app.activity'));
 
     var controller, loadedData = {data: "something"};
 
-    beforeEach(inject(function( $controller) {
+    beforeEach(inject(function ($controller) {
 
         controller = $controller('ActivityHistoryController', {
             loadedData: loadedData
@@ -18,11 +18,11 @@ describe("app.activateController", function() {
 
     }));
 
-    it('should create controller ', function(){
+    it('should create controller ', function () {
         expect(controller).toBeDefined();
     });
 
-    it('should set correct data', function(){
+    it('should set correct data', function () {
         expect(controller.paginationData).toBeDefined();
         expect(controller.paginationData).toEqual(loadedData);
     });

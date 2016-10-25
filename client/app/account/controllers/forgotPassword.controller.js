@@ -1,7 +1,6 @@
 /**
  * Created by Jiahao.Li on 6/10/2016.
  */
-
 (function () {
     'use strict';
 
@@ -10,7 +9,7 @@
         .controller('ForgotPasswordController', ForgotPasswordController);
 
     /* @ngInject */
-    function ForgotPasswordController(utilityService, oauthConfig, accountConfig, authenticationService, brand) {
+    function ForgotPasswordController(utilityService, securityConstants, accountConfig, authenticationService, brand) {
         var vm = this;
         vm.forgotPassword = forgotPassword;
         vm.cancel = cancel;
@@ -39,7 +38,7 @@
         }
 
         function cancel() {
-            utilityService.redirectTo(oauthConfig.loginPath);
+            utilityService.redirectTo(securityConstants.loginPath);
         }
 
         function canSubmit(loginForm) {

@@ -5,7 +5,7 @@
 
 'use strict';
 
-describe("app.healthInformation controller", function() {
+describe("app.healthInformation controller", function () {
 
     beforeEach(module('ui.router'));
     beforeEach(module('app.healthInformation'));
@@ -13,7 +13,7 @@ describe("app.healthInformation controller", function() {
     var $scope, controller, failController;
     var patientData = {Documents: "document"};
 
-    beforeEach(inject(function($rootScope, $controller) {
+    beforeEach(inject(function ($rootScope, $controller) {
 
         $scope = $rootScope.$new();
 
@@ -29,25 +29,25 @@ describe("app.healthInformation controller", function() {
 
     }));
 
-    it('should have correct documents', function(){
-       expect(controller.documents).toBe("document");
+    it('should have correct documents', function () {
+        expect(controller.documents).toBe("document");
     });
 
-    it('should have correct documents', function(){
+    it('should have correct documents', function () {
         expect(controller.noDocumentFound).toBeTruthy();
     });
 
-    it('should expand all accordions in model', function(){
+    it('should expand all accordions in model', function () {
         spyOn($scope, '$broadcast').and.callThrough();
         controller.expandAllAccordions();
-        expect($scope.$broadcast).toHaveBeenCalledWith('ExpandAccordions', { expand:true });
+        expect($scope.$broadcast).toHaveBeenCalledWith('ExpandAccordions', {expand: true});
         expect(controller.noPatientDataAlert).toBeFalsy();
     });
 
-    it('should collapse all accordions in model', function(){
+    it('should collapse all accordions in model', function () {
         spyOn($scope, '$broadcast').and.callThrough();
         controller.collapseAllAccordions();
-        expect($scope.$broadcast).toHaveBeenCalledWith('CollapseAccordions', { collapse:true });
+        expect($scope.$broadcast).toHaveBeenCalledWith('CollapseAccordions', {collapse: true});
         expect(controller.noPatientDataAlert).toBeFalsy();
     });
 

@@ -4,18 +4,22 @@
     </div>
 </div>
 
-<div  class="row border-bottom row-padding-10" id="sticktoolbar" >
+<div class="row border-bottom row-padding-10" id="sticktoolbar">
     <div class="col-xs-7 col-sm-6">
         <div class="pull-left">
-            <button class="btn btn-sm btn-primary dark-green" type="button" ng-click="healthInformationVm.expandAllAccordions()">Expand All</button>
-            <button class="btn btn-sm btn-primary dark-green" type="button" ng-click="healthInformationVm.collapseAllAccordions()">Collapse All</button>
+            <button class="btn btn-sm btn-primary dark-green" type="button"
+                    ng-click="healthInformationVm.expandAllAccordions()">Expand All
+            </button>
+            <button class="btn btn-sm btn-primary dark-green" type="button"
+                    ng-click="healthInformationVm.collapseAllAccordions()">Collapse All
+            </button>
         </div>
     </div>
 </div>
 
 <div class="wrapper wrapper-content animated fadeInRight top-padding10">
-    <div ng-repeat="document in healthInformationVm.documents" >
-        <pp-ccda-document document="document" ></pp-ccda-document>
+    <div ng-repeat="document in healthInformationVm.documents">
+        <c2s-ccda-document document="document"></c2s-ccda-document>
     </div>
     <div ng-show="healthInformationVm.noDocumentFound">
         <div class="alert alert-warning alert-dismissible" role="alert">

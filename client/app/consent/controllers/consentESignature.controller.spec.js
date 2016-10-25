@@ -4,14 +4,14 @@
 
 'use strict';
 
-describe("app.ConsentESignatureController", function() {
+describe("app.ConsentESignatureController", function () {
 
     beforeEach(module('app.consent'));
 
     var controller;
     var consentAttestation = ["providers", "purposeOfUse", "sensitivityPolicies", "consent"];
 
-    beforeEach(inject(function( $controller) {
+    beforeEach(inject(function ($controller) {
 
         controller = $controller('ConsentESignatureController', {
             consentAttestation: consentAttestation
@@ -19,11 +19,11 @@ describe("app.ConsentESignatureController", function() {
 
     }));
 
-    it('should create controller ', function(){
+    it('should create controller ', function () {
         expect(controller).toBeDefined();
     });
 
-    it('should set correct data', function(){
+    it('should set correct data', function () {
         expect(controller.attestation).toEqual(consentAttestation);
     });
 

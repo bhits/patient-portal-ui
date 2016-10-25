@@ -1,86 +1,88 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7">
+<![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8">
+<![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9">
+<![endif]-->
 <!--[if gt IE 8]><!-->
 <html lang="en" ng-app="app">
 <!--<![endif]-->
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title pp-page-title>C2S | Patient Portal</title>
+        <title c2s-page-title>C2S | Patient Portal</title>
 
-    <base href="/pp-ui/">
+        <base href="/pp-ui/">
 
-    <!-- INSPINIA RELATED CSS START -->
-    <!-- Font awesome --> 
-    <link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-   
-    <!-- Bootstrap  -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Main Inspinia CSS files  -->
-    <link href="assets/css/animate.css" rel="stylesheet">
-    <link id="loadBefore" href="assets/css/style.css" rel="stylesheet">
-    <link  href="assets/css/plugins/iCheck/custom.css" rel="stylesheet">
-    <link  href="assets/css/plugins/angular-notify/angular-notify.min.css" rel="stylesheet">
-    <link  href="assets/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
+        <!-- INSPINIA RELATED CSS START -->
+        <!-- Font awesome -->
+        <link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 
-    <!-- INSPINIA RELATED CSS END -->
-    <!-- Custom styles for this template -->
-    <!-- POC styles + vendor style-->
-    <!-- compiled CSS  -->
-       <% styles.forEach( function ( file ) { %>
-    <link rel="stylesheet" type="text/css" href="<%= file %>" />
-    <% }); %>
+        <!-- Bootstrap  -->
+        <link href="assets/css/bootstrap.min.css" rel="stylesheet">
 
-</head>
+        <!-- Main Inspinia CSS files  -->
+        <link href="assets/css/animate.css" rel="stylesheet">
+        <link id="loadBefore" href="assets/css/style.css" rel="stylesheet">
+        <link  href="assets/css/plugins/iCheck/custom.css" rel="stylesheet">
+        <link  href="assets/css/plugins/angular-notify/angular-notify.min.css" rel="stylesheet">
+        <link  href="assets/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
 
-<body class="grey fixed-sidebar" ng-controller="AppController as AppVm">
+        <!-- INSPINIA RELATED CSS END -->
+        <!-- Custom styles for this template -->
+        <!-- POC styles + vendor style-->
+        <!-- compiled CSS  -->
+        <% styles.forEach( function ( file ) { %>
+        <link rel="stylesheet" type="text/css" href="<%= file %>" />
+        <% }); %>
+    </head>
+    <body class="grey fixed-sidebar" ng-controller="AppController as AppVm">
 
-    <div ui-view ></div>
+        <div ui-view ></div>
 
-    <!-- INSPINIA RELATED JS  -->
+        <!-- INSPINIA RELATED JS  -->
 
-    <!-- jQuery and Bootstrap -->
-    <script type="text/javascript" src="assets/js/jquery/jquery-2.1.1.min.js"></script>
-    <script  type="text/javascript" src="assets/js/plugins/jquery-ui/jquery-ui.js"></script>
-    <script  type="text/javascript" src="assets/js/bootstrap/bootstrap.min.js"></script>
-    <script  type="text/javascript" src="assets/js/plugins/jasny/jasny-bootstrap.min.js"></script>
+        <!-- jQuery and Bootstrap -->
+        <script type="text/javascript" src="assets/js/jquery/jquery-2.1.1.min.js"></script>
+        <script  type="text/javascript" src="assets/js/plugins/jquery-ui/jquery-ui.js"></script>
+        <script  type="text/javascript" src="assets/js/bootstrap/bootstrap.min.js"></script>
+        <script  type="text/javascript" src="assets/js/plugins/jasny/jasny-bootstrap.min.js"></script>
 
-    <!-- MetsiMenu -->
-    <script  type="text/javascript" src="assets/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+        <!-- MetsiMenu -->
+        <script  type="text/javascript" src="assets/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 
-    <!-- SlimScroll -->
-    <script  type="text/javascript" src="assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+        <!-- SlimScroll -->
+        <script  type="text/javascript" src="assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
-    <!-- Peace JS -->
-    <script  type="text/javascript" src="assets/js/plugins/pace/pace.min.js"></script>
+        <!-- Peace JS -->
+        <script  type="text/javascript" src="assets/js/plugins/pace/pace.min.js"></script>
 
-    <!-- Custom and plugin javascript -->
-    <script  type="text/javascript" src="assets/js/inspinia.js"></script>
+        <!-- Custom and plugin javascript -->
+        <script  type="text/javascript" src="assets/js/inspinia.js"></script>
 
-    <!-- Main Angular scripts-->
+        <!-- Main Angular scripts-->
 
+        <!-- compiled JavaScript -->
+        <% scripts.forEach( function ( file ) { %>
+        <script type="text/javascript" src="<%= file %>"></script>
+        <% }); %>
 
-    <!-- compiled JavaScript -->
-    <% scripts.forEach( function ( file ) { %>
-    <script type="text/javascript" src="<%= file %>"></script>
-    <% }); %>
+        <!--<script  type="text/javascript" src="assets/js/angular/angular.min.js"></script>-->
+        <script  type="text/javascript" src="assets/js/bootstrap/ui-bootstrap-tpls-0.12.0.min.js"></script>
+        <script type="text/javascript" src="assets/js/angular-idle.js"></script>
+        <script  type="text/javascript" src="assets/js/plugins/iCheck/icheck.min.js"></script>
+        <script  type="text/javascript" src="assets/js/plugins/angular-notify/angular-notify.min.js"></script>
+        <script  type="text/javascript" src="assets/js/plugins/datapicker/bootstrap-datepicker.js"></script>
 
-    <!--<script  type="text/javascript" src="assets/js/angular/angular.min.js"></script>-->
-    <script  type="text/javascript" src="assets/js/bootstrap/ui-bootstrap-tpls-0.12.0.min.js"></script>
-    <script type="text/javascript" src="assets/js/angular-idle.js"></script>
-    <script  type="text/javascript" src="assets/js/plugins/iCheck/icheck.min.js"></script>
-    <script  type="text/javascript" src="assets/js/plugins/angular-notify/angular-notify.min.js"></script>
-    <script  type="text/javascript" src="assets/js/plugins/datapicker/bootstrap-datepicker.js"></script>
-
-    <!--Donot delete this comment-->
-    <!-- angular -->
-    <!-- endangular -->
-
-</body>
+        <!-- Compile application JS files will be injected between the angularand endangular comments below. -->
+        <!-- angular -->
+        <!-- endangular -->
+    </body>
 </html>

@@ -13,7 +13,7 @@
             templateUrl: 'app/account/directives/topNavbar.html',
             scope: {},
             bindToController: {
-                title:"="
+                title: "="
             },
             controller: TopNavbarController,
             controllerAs: 'topNavbarVm'

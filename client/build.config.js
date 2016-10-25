@@ -16,16 +16,18 @@ module.exports = {
 
     /**
      * The `karma_conf_file` file name is where karma testing configuration resides.
-     * We use this 'karma.conf.js' as the file to utilize WebStorm Karma features
      */
     karma_conf_file: 'karma.conf.js',
 
     /**
-     * This is a collection of file patterns that refer to our app code (thez
-     * stuff in `src/`). These file paths are used in the configuration of
-     * build tasks. `js` is all project javascript, less tests. `html` is just our
-     * main HTML file, `less` is our main stylesheet, and `unit` contains our
-     * app's unit tests.
+     * This is a collection of file patterns that refer to our app code.
+     * These file paths are used in the configuration of build tasks:
+     *  - `js` is all project javascript, less tests,
+     *  - `jsunit` is all project javascript unit test files,
+     *  - `html` is just our main HTML file,
+     *  - `less` is our main stylesheet, and
+     *  - `unit` contains our app's unit tests.
+     *  - `debug_js` contains all the generated JS in the target\debug folder.
      */
     app_files: {
         js: ['app/**/*.js', '!app/**/*.spec.js', '!app/**/*.e2e.js'],
@@ -41,7 +43,6 @@ module.exports = {
 
     /**
      * This is a collection of files used during testing only.
-     *
      * The order of the files: These files will be put in the html files as the order in the array
      */
     test_files: {
@@ -87,8 +88,6 @@ module.exports = {
         css: [
             'vendor/angular-loading-bar/build/loading-bar.css'
         ],
-        assets: [
-
-        ]
+        assets: []
     }
 };

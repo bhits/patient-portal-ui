@@ -84,7 +84,6 @@ body.mini-navbar .nav-header {
 .lasb {
   min-height: 23px;
   ul {
-    //display: inline;
     padding: 3px;
     border-radius: 0 0 0 11px;
     li {
@@ -98,8 +97,6 @@ body.mini-navbar .nav-header {
         font-style: normal;
         font-weight: normal;
         text-decoration: inherit;
-        /*--adjust as necessary--*/
-        //color: #000;
         font-size: 6px;
         position: absolute;
         top: 4px;
@@ -143,13 +140,11 @@ body.mini-navbar .nav-header {
 
 /* End Styling SPECIFIC for Medical Information Controls */
 
-
 .top-rule {
   border-top: solid thin #CFD4D6;
   margin-top: 6px;
   padding-top: 6px;
 }
-
 
 /* Bootstrap Breakpoint Sizes */
 @bs-xs-max: 767px;
@@ -175,7 +170,7 @@ body.mini-navbar .nav-header {
 @padding-xs-vertical: 1px;
 @padding-xs-horizontal: 5px;
 
-@line-height-base: 1.428571429; // 20/14
+@line-height-base: 1.428571429;
 @line-height-large: 1.33;
 @line-height-small: 1.5;
 
@@ -263,7 +258,6 @@ body.mini-navbar .nav-header {
 .text-orange {
   color: @pp-orange;
 }
-
 /* End of Font Colors*/
 
 /* Mixins */
@@ -275,7 +269,6 @@ body.mini-navbar .nav-header {
 .highlight-component-foreground(){
   color: @pp-strong-blue;
 }
-
 /* End Mixins */
 
 /* Color Schemes */
@@ -286,7 +279,7 @@ body.mini-navbar .nav-header {
 /* End of Color Schemes */
 
 /* Components */
-.pp-activation-button {
+.c2s-activation-button {
   position: absolute;
   top: 1px;
   right: 13px;
@@ -343,16 +336,6 @@ body.mini-navbar .nav-header {
 .border-bottom-medium-gray-thin {
   border-bottom: @pp-medium-gray thin solid;
 }
-
-/* Bug #7321:Create Consent :: Accordion (Chevrons) Not Appearing
-This implementation must be improved to prevent similar issues.
-.ibox .fa.fa-chevron-up {
-  color: white;
-}
-.ibox .fa.fa-chevron-down {
-  color: white;
-}
-*/
 
 .white .ibox-tools .fa.fa-chevron-up, .white .ibox-tools .fa.fa-chevron-down  {color: white;}
 
@@ -446,8 +429,6 @@ This implementation must be improved to prevent similar issues.
   padding-top: 10px;
 }
 
-
-
 .ibox-content.modified {
   border-style: none;
   border-width: 0;
@@ -476,8 +457,6 @@ This implementation must be improved to prevent similar issues.
 .custom-login-column.modified {
   height: auto;
 }
-
-
 
 // WCAG 2.0 AA Compliance Modifications
 .dark-green {
@@ -531,7 +510,6 @@ body.ng-scope.pace-done.grey{
   color:#262727;
 }
 
-
 .green-white
 {
   background-color: white;
@@ -548,36 +526,14 @@ body.ng-scope.pace-done.grey{
   color: black;
 }
 
-
-//home page
-
 .nav-header .light-blue {
   color: @pp-light-blue;
 }
 
-
 .nav.navbar-right .dark-grey {
   color: @pp-dark-gray;
 }
-
 //End of WCAG 2.0 AA Compliance Modifications
-
-
-/*mixins*/
-.side-padding(@paddingAmount) {
-  padding-left: @paddingAmount !important;
-  padding-right: @paddingAmount !important;
-
-}
-.left-padding(@paddingAmount) {
-  padding-left: @paddingAmount;
-}
-
-.right-padding(@paddingAmount) {
-  padding-right: @paddingAmount;
-}
-
-/*end mixins*/
 
 /* Positioning */
 .relative {
@@ -594,7 +550,6 @@ body.ng-scope.pace-done.grey{
 }
 
 /*Text-Font Classes */
-
 .vertical-align {
   display: flex;
   align-items: center;
@@ -642,16 +597,13 @@ body.ng-scope.pace-done.grey{
 .font-extraBold {
   font-weight: 700;
 }
-/*
+
 .font-bold {
   font-weight: 600;
 }
-.font-normal {
-  font-weight: 400;
-}
-*/
+
 .font-medium {
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .font-light {
@@ -663,15 +615,9 @@ body.ng-scope.pace-done.grey{
 }
 
 /*PALETTE*/
-
 .bg-white-page {
   background-color: white !important;
 }
-/*.darkblue-panel {
-    background-color: #4D565E;
-    border-color: #4D565E;
-  color: #000;
-}*/
 
 .white {
   color: white;
@@ -722,7 +668,6 @@ body.ng-scope.pace-done.grey{
 
   & .panel-heading {
     background-color: rgba(188, 212,224, .5);
-    //border-color: @pp-dark-blue;
     color: #2F435A;
     &:hover { background-color: #fffac0; font-weight: 600;}
   }
@@ -768,8 +713,6 @@ body.ng-scope.pace-done.grey{
 }
 
 /* HEADER */
-
-
 .custom-header {
   width: 100%;
   height: 80px;
@@ -777,15 +720,9 @@ body.ng-scope.pace-done.grey{
 }
 
 /* TOP NAV BAR */
-
-
 .margin-left-220 {
   margin-left: 220px;
 }
-//
-//.margin-left-70 {
-//  margin-ft: 70px;
-//}
 
 .margin-left-0 {
   margin-left: 0;
@@ -799,7 +736,6 @@ body.ng-scope.pace-done.grey{
 }
 
 /* SIDE BAR */
-
 .fix-sidebar {
   position: fixed;
   height: 100%;
@@ -809,7 +745,6 @@ body.ng-scope.pace-done.grey{
 }
 
 /* CONTENT */
-
 .padding-top-60 {
   padding-top: 60px;
 }
@@ -850,27 +785,14 @@ body.ng-scope.pace-done.grey{
   padding-left: 0;
   padding-right: 0;
 }
-// Will be revisit for stickyheader
-//.fixed-header {
-//    position: fixed;
-//    top:55px;
-//    left:220px;
-//    min-width: 90%;
-//    background: white;
-//    z-index: 1000;
-//}
 
 /* FOOTER */
-
 .footer-container {
   padding: 40px;
   margin-right: @footer-margin;
   margin-left: @footer-margin;
   background-color: white;
 }
-
-/* FORMS */
-
 
 /* GENERAL*/
 .mini-Label {
@@ -891,9 +813,6 @@ body.ng-scope.pace-done.grey{
   color: white;
   padding: 10px 20px;
   border-radius: 6px;
-  //&:hover {
-  //  background-color: #e7eaec;
-  //}
 }
 
 .border-radius-top-0 {
@@ -955,6 +874,20 @@ body.ng-scope.pace-done.grey{
 .p-none {
   padding: 0 !important;
 }
+
+.side-padding(@paddingAmount) {
+  padding-left: @paddingAmount !important;
+  padding-right: @paddingAmount !important;
+}
+
+.left-padding(@paddingAmount) {
+  padding-left: @paddingAmount;
+}
+
+.right-padding(@paddingAmount) {
+  padding-right: @paddingAmount;
+}
+
 .side-padding0 {
   .side-padding(0px) !important;
 }
@@ -1003,7 +936,6 @@ body.ng-scope.pace-done.grey{
   padding-top: 10px;
 }
 
-
 .login-content-align {
   background-color: white;
   align: left;
@@ -1014,7 +946,6 @@ body.ng-scope.pace-done.grey{
   margin-bottom: @value;
 }
 
-
 .set-padding-bottom(@value) {
   padding-bottom: @value;
 }
@@ -1023,11 +954,9 @@ body.ng-scope.pace-done.grey{
   .set-margin-bottom(10px)
 }
 
-
 .padding-bottom-15{
   .set-padding-bottom(15px)
 }
-
 
 .feed-element a{
   font-weight: bold;
@@ -1068,7 +997,7 @@ body.ng-scope.pace-done.grey{
   float: left;
   font-size: 18px;
 }
-//
+
 //health information page
 
 .ibox-title h2{
@@ -1098,7 +1027,6 @@ body.ng-scope.pace-done.grey{
   }
 }
 
-
 /*provider-list-page*/
 .btn-red{
   background-color:@pp-dark-red;
@@ -1121,13 +1049,4 @@ body.ng-scope.pace-done.grey{
   background-color: @pp-navy-blue ;
   color: white;
 }
-
-
 /* end of provider-lookup search page */
-
-
-
-/* State Modifiers */
-
-
-/* End of State Modifiers */

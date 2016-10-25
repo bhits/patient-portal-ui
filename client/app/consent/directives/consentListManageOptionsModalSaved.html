@@ -1,39 +1,51 @@
 <div class="inmodal">
     <form name="consentOptionsForm">
         <div class="modal-header">
-            <pp-consent-modal-header option="manageConsentModalVm.option" cancel="manageConsentModalVm.cancel()"></pp-consent-modal-header>
+            <c2s-consent-modal-header option="manageConsentModalVm.option"
+                                      cancel="manageConsentModalVm.cancel()"></c2s-consent-modal-header>
         </div>
         <div class="modal-body">
             <div ng-if="manageConsentModalVm.option === 'manageConcent'">
                 <h3>I want to:</h3>
                 <div class="list-group">
-                    <a href="#" class="list-group-item" ng-click="manageConsentModalVm.edit()"><h4><i class="fa fa-edit fa-lg m-r-sm"></i>Edit This Consent</h4></a>
-                    <a href="#" class="list-group-item" ng-click="manageConsentModalVm.downloadUnattestedConsent('unsigned')" ><h4><i class="fa fa-search fa-lg m-r-sm"></i>Preview This Consent</h4></a>
-                    <a href="#" class="list-group-item" ng-click="manageConsentModalVm.viewAttestation()" ><h4><i class="fa fa-mail-forward fa-lg m-r-sm"></i>Provide eSignature</h4></a>
-                    <a href="#" class="list-group-item" ng-click="manageConsentModalVm.setOption('tryMyPolicy')"><h4><i class="fa fa-gear fa-lg m-r-sm"></i>Try My Consent Settings against My Medical Record before Sharing</h4></a>
-                    <a href="#" class="list-group-item" ng-click="manageConsentModalVm.setOption('delete')"><h4><i class="fa fa-trash-o fa-lg m-r-sm"></i>Delete This Consent</h4></a>
+                    <a href="#" class="list-group-item" ng-click="manageConsentModalVm.edit()">
+                        <h4><i class="fa fa-edit fa-lg m-r-sm"></i>Edit This Consent</h4>
+                    </a>
+                    <a href="#" class="list-group-item" ng-click="manageConsentModalVm.downloadUnattestedConsent('unsigned')">
+                        <h4><i class="fa fa-search fa-lg m-r-sm"></i>Preview This Consent</h4>
+                    </a>
+                    <a href="#" class="list-group-item" ng-click="manageConsentModalVm.viewAttestation()">
+                        <h4><i class="fa fa-mail-forward fa-lg m-r-sm"></i>Provide eSignature</h4>
+                    </a>
+                    <a href="#" class="list-group-item" ng-click="manageConsentModalVm.setOption('tryMyPolicy')">
+                        <h4><i class="fa fa-gear fa-lg m-r-sm"></i>Try My Consent Settings against My Medical Record before
+                        Sharing</h4>
+                    </a>
+                    <a href="#" class="list-group-item" ng-click="manageConsentModalVm.setOption('delete')">
+                        <h4><i class="fa fa-trash-o fa-lg m-r-sm"></i>Delete This Consent</h4>
+                    </a>
                 </div>
             </div>
 
-            <pp-consent-try-policy-dropdown
+            <c2s-consent-try-policy-dropdown
                     documentid="manageConsentModalVm.selMedicalDocumentId"
                     option="manageConsentModalVm.option"
                     shareforpurposeofuse="manageConsentModalVm.shareForPurposeOfUse"
                     purposeofusecode="manageConsentModalVm.purposeOfUseCode"
-                    medicaldocuments="manageConsentModalVm.medicalDocuments" >
-            </pp-consent-try-policy-dropdown>
+                    medicaldocuments="manageConsentModalVm.medicalDocuments">
+            </c2s-consent-try-policy-dropdown>
 
             <div ng-if="manageConsentModalVm.option === 'delete'">
                 <h3 class="text-center">Are you sure you want to delete this consent?</h3>
             </div>
         </div>
-        <div class="modal-footer" >
-            <pp-consent-modal-footer
+        <div class="modal-footer">
+            <c2s-consent-modal-footer
                     option="manageConsentModalVm.option"
                     setoption="manageConsentModalVm.setOption(option)"
                     applytrymypolicy="manageConsentModalVm.applyTryMyPolicy()"
                     deleteconsent="manageConsentModalVm.deleteConsent()">
-            </pp-consent-modal-footer>
+            </c2s-consent-modal-footer>
         </div>
     </form>
 </div>

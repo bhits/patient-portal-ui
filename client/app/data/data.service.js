@@ -5,17 +5,17 @@
         .module('app.data')
             .factory('dataService', dataService);
 
-            /* @ngInject */
-            function dataService($resource,envService) {
-                var medicalDocumentsListResource = $resource(envService.securedApis.pcmApiBaseUrl + "/clinicaldocuments");
+    /* @ngInject */
+    function dataService($resource,envService) {
+        var medicalDocumentsListResource = $resource(envService.securedApis.pcmApiBaseUrl + "/clinicaldocuments");
 
-                var service = {};
-                service.listMedicalDocuments = listMedicalDocuments;
+        var service = {};
+        service.listMedicalDocuments = listMedicalDocuments;
 
-                return service;
+        return service;
 
-                function listMedicalDocuments(success, error) {
-                    return medicalDocumentsListResource.query(success, error);
-                }
-            }
+        function listMedicalDocuments(success, error) {
+            return medicalDocumentsListResource.query(success, error);
+        }
+    }
 })();

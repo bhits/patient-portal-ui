@@ -1,23 +1,21 @@
-
-<nav class="navbar navbar-fixed-top height-55 gray-bg border-bottom m-b-none" role="navigation" ng-class="{'margin-left-220': AppVm.togglebar}">
+<nav class="navbar navbar-fixed-top height-55 gray-bg border-bottom m-b-none"
+     role="navigation"
+     ng-class="{'margin-left-220': AppVm.togglebar}">
     <div class="container-fluid">
         <div class="row ">
             <div class="col-sm-12">
                 <div class="navbar-header">
-                    <span pp-minimaliza-sidebar togglesidebar="AppVm.toggleSideBar()"></span>
+                    <span c2s-minimaliza-sidebar togglesidebar="AppVm.toggleSideBar()"></span>
                 </div>
                 <div class="pull-right">
                     <div class="m-t-sm m-b-sm m-r inline">
                         <c2s-oauth-logout></c2s-oauth-logout>
                     </div>
-
                     <div class="m-t-sm m-b-sm m-r inline">
                         <img class="hidden-xs" src="assets/img/c2s.png" alt="Consent 2 Share">
                         <img class="visible-xs-inline" src="assets/img/c2s_xs.png" alt="c2s logo">
                     </div>
-
                 </div>
-
             </div>
         </div>
     </div>

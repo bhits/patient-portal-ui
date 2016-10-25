@@ -1,7 +1,7 @@
 /**Created by cindy.ren on 6/15/2016.*/
 'use strict';
 
-xdescribe("app.activateController", function() {
+xdescribe("app.activateController", function () {
 
     beforeEach(module('app.account'));
 
@@ -10,17 +10,19 @@ xdescribe("app.activateController", function() {
     var patientInfo = {firstName: 'firstName', lastName: 'lastName'};
 
     beforeEach(function () {
-        var fakeModule = angular.module('test.app.brand', function () {});
-        fakeModule.config( function (brandProvider) {
+        var fakeModule = angular.module('test.app.brand', function () {
+        });
+        fakeModule.config(function (brandProvider) {
             brand = brandProvider;
         });
         module('app.brand', 'test.app.brand');
-        inject(function () {});
+        inject(function () {
+        });
         brand.setBrandName("Brand Name");
         brand.setBrandInitial("BI");
     });
 
-    beforeEach(inject(function( $controller, _$state_, _accountService_) {
+    beforeEach(inject(function ($controller, _$state_, _accountService_) {
 
         $state = _$state_;
         accountService = _accountService_;
@@ -30,29 +32,29 @@ xdescribe("app.activateController", function() {
             accountService: accountService,
             brand: brand
         });
-        
+
     }));
 
-    it('should create controller ', function(){
+    it('should create controller ', function () {
         expect(controller).toBeDefined();
     });
 
-    it('should have correct patient name', function(){
+    it('should have correct patient name', function () {
         expect(controller.patientName).toBeDefined();
         expect(controller.patientName).toEqual('firstName lastName');
     });
 
-    it('should have correct title', function(){
+    it('should have correct title', function () {
         expect(controller.title).toBeDefined();
         expect(controller.title).toEqual('Brand Name Account Activation Complete');
     });
 
-    it('should have correct brand name', function(){
+    it('should have correct brand name', function () {
         expect(controller.brandName).toBeDefined();
         expect(controller.brandName).toEqual('Brand Name');
     });
 
-    it('should call on activated()', function(){
+    it('should call on activated()', function () {
         spyOn($state, 'go');
         spyOn(controller, 'activated').and.callThrough();
         spyOn(accountService, 'removeActivateInfo').and.callThrough();

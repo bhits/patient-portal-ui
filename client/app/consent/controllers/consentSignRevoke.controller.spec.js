@@ -4,13 +4,13 @@
 
 'use strict';
 
-describe("app.ConsentSignRevokeController", function() {
+describe("app.ConsentSignRevokeController", function () {
 
     beforeEach(module('app.consent'));
 
     var controller, $state, loadedData = {data: "something"};
 
-    beforeEach(inject(function( $controller, _$state_) {
+    beforeEach(inject(function ($controller, _$state_) {
         $state = _$state_;
 
         controller = $controller('ConsentSignRevokeController', {
@@ -20,16 +20,16 @@ describe("app.ConsentSignRevokeController", function() {
 
     }));
 
-    it('should create controller ', function(){
+    it('should create controller ', function () {
         expect(controller).toBeDefined();
     });
 
-    it('should set correct data', function(){
+    it('should set correct data', function () {
         expect(controller.javascriptCode).toBeDefined();
         expect(controller.javascriptCode).toEqual(loadedData);
     });
 
-    it('should call on activated()', function(){
+    it('should call on activated()', function () {
         spyOn($state, 'go');
         spyOn(controller, 'close').and.callThrough();
 

@@ -41,8 +41,8 @@ xdescribe('app.providerService ', function () {
     beforeEach(module('app.config'));
     beforeEach(module('app.core'));
 
-    beforeEach(inject(function(_$resource_, _envService_,
-                               _providerService_, _$rootScope_, $injector){
+    beforeEach(inject(function (_$resource_, _envService_,
+                                _providerService_, _$rootScope_, $injector) {
         resource = _$resource_;
         envService = _envService_;
         providerService = _providerService_;
@@ -53,7 +53,7 @@ xdescribe('app.providerService ', function () {
     }));
 
     it('should return providers resource (getProvidersResource)', function () {
-        $httpBackend.expect('POST',"/pcm/patients/providers").respond(200);
+        $httpBackend.expect('POST', "/pcm/patients/providers").respond(200);
         providerService.addProvider(providerData.npi, providerSuccess, providerError);
         var provider = providerService.getProvidersResource();
 
@@ -63,7 +63,7 @@ xdescribe('app.providerService ', function () {
     });
 
     it('should add providers (addProvider)', function () {
-        $httpBackend.expect('POST',"/pcm/patients/providers").respond(200, providerData.npi);
+        $httpBackend.expect('POST', "/pcm/patients/providers").respond(200, providerData.npi);
         providerService.addProvider(providerData.npi, providerSuccess, providerError);
 
         $httpBackend.flush();
@@ -71,14 +71,14 @@ xdescribe('app.providerService ', function () {
     });
 
     it('should fail delete Providers ', function () {
-        $httpBackend.expect('DELETE','/pcm/patients/providers').respond(500, null);
+        $httpBackend.expect('DELETE', '/pcm/patients/providers').respond(500, null);
         providerService.deleteProvider(null, providerSuccess, providerError);
         $httpBackend.flush();
         expect(passed).toBeFalsy();
     });
 
     it('should fail delete Providers ', function () {
-        $httpBackend.expect('DELETE','/pcm/patients/providers/111').respond(200, 111);
+        $httpBackend.expect('DELETE', '/pcm/patients/providers/111').respond(200, 111);
         providerService.deleteProvider(111, providerSuccess, providerError);
         $httpBackend.flush();
         expect(passed).toBeTruthy();
@@ -176,7 +176,7 @@ xdescribe('app.providerService ', function () {
         var providerLookupResult = {someProperty: 'somePropertyValue', providers: []};
 
         expect(providerService.isEmptyLookupResult(providerLookupResult)).toEqual(true);
-    }); 
+    });
 
     it('should return false if providerLookupResult.providers has at least one element', function () {
 

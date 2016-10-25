@@ -1,5 +1,8 @@
-FROM java:8
+FROM bhits/java-jar-runner:8u102-jre
 VOLUME /java
+# Copy application jar to container, argument is defined in pom.xml
 ARG finalName
-ADD $finalName /pp-ui.jar
-ENTRYPOINT ["java","-Djavax.net.ssl.trustStore=/java/keystore/c2s.keystore","-Djavax.net.ssl.trustStorePassword=changeit","-jar","/pp-ui.jar","--spring.profiles.active=docker"]
+ENV JAR_FILE $finalName
+COPY $finalName /
+# Default active docker profile
+ENV DEFAULT_PROGRAM_ARGS --spring.profiles.active=docker
