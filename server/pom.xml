@@ -60,6 +60,7 @@
         <maven-war-plugin.version>2.6</maven-war-plugin.version>
 		<frontend-maven-plugin.version>1.0</frontend-maven-plugin.version>
         <docker.maven.version>0.4.3</docker.maven.version>
+        <lombok.version>1.16.10</lombok.version>
     </properties>
 
     <repositories>
@@ -123,10 +124,19 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-eureka</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
         </dependency>
 
         <dependency>

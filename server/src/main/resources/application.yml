@@ -15,6 +15,23 @@ eureka:
     service-url:
       # endpoint for discovery-server, pass '--eureka.client.protocol=https' if discovery-server is running on https
       defaultZone: ${eureka.client.protocol:http}://localhost:8761/eureka/
+c2s:
+  pp-ui:
+    oauth2:
+      client:
+        client-id: patient-portal-ui
+        secret: changeit
+    secured-apis:
+      pcm-api-base-url: /pcm/patients
+      phr-api-base-url: /phr
+      try-policy-api-base-url: /tryPolicy
+      user-info: /uaa/userinfo
+    unsecured-apis:
+      pls-api-base-url: /pls/providers
+      token-url: /uaa/oauth/token
+      verification-url: /patientUser/verifications
+      activation-url: /patientUser/activations
+      forgot-password-url: /uaa/forgot_password.do
 ---
 # enables ssl in this service when activated
 spring.profiles: ssl
