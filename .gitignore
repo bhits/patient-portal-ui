@@ -1,5 +1,5 @@
-# Generated AngularJS configuration module #
-client/app/config/
+# Generated AngularJS configuration file #
+client/app/config/config.js
 
 # Bower dependencies #
 vendor/
