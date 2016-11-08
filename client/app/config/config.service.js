@@ -10,11 +10,56 @@
 
         var service = {};
         service.getOauthBasicKey = getOauthBasicKey;
+        service.getPcmApiBaseUrl = getPcmApiBaseUrl;
+        service.getPhrApiBaseUrl = getPhrApiBaseUrl;
+        service.getTryPolicyApiBaseUrl = getTryPolicyApiBaseUrl;
+        service.getUserInfo = getUserInfo;
+        service.getPlsApiBaseUrl = getPlsApiBaseUrl;
+        service.getTokenUrl = getTokenUrl;
+        service.getVerificationUrl = getVerificationUrl;
+        service.getActivationUrl = getActivationUrl;
+        service.getForgotPasswordUrl = getForgotPasswordUrl;
 
         return service;
 
         function getOauthBasicKey() {
             return configConstants.oauth2.client.base64BasicKey;
+        }
+
+        function getPcmApiBaseUrl() {
+            return configConstants.securedApis.pcmApiBaseUrl;
+        }
+
+        function getPhrApiBaseUrl() {
+            return configConstants.securedApis.phrApiBaseUrl;
+        }
+
+        function getTryPolicyApiBaseUrl() {
+            return configConstants.securedApis.tryPolicyApiBaseUrl;
+        }
+
+        function getUserInfo() {
+            return configConstants.securedApis.userInfo;
+        }
+
+        function getPlsApiBaseUrl() {
+            return configConstants.unsecuredApis.plsApiBaseUrl;
+        }
+
+        function getTokenUrl() {
+            return configConstants.unsecuredApis.tokenUrl;
+        }
+
+        function getVerificationUrl() {
+            return configConstants.unsecuredApis.verificationUrl;
+        }
+
+        function getActivationUrl() {
+            return configConstants.unsecuredApis.activationUrl;
+        }
+
+        function getForgotPasswordUrl() {
+            return configConstants.unsecuredApis.forgotPasswordUrl;
         }
     }
 })();

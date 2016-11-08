@@ -6,7 +6,7 @@
         var initInjector = angular.injector(['ng']);
         var _http = initInjector.get('$http');
 
-        return _http.get('http://localhost:9999/config').then(function (response) {
+        return _http.get('/pp-ui/config').then(function (response) {
             bootstrapApp.constant('configConstants', response.data);
         }, function (errorResponse) {
             angular.element(document.body).addClass('load-config-error');
