@@ -109,6 +109,16 @@ module.exports = function (grunt) {
                     }
                 ]
             },
+            build_bootstrapjs: {
+                files: [
+                    {
+                        src: ['<%= bootstrap_files.js %>'],
+                        dest: '<%= build_debug_dir %>/',
+                        cwd: '.',
+                        expand: true
+                    }
+                ]
+            },
             build_appjs: {
                 files: [
                     {
@@ -501,11 +511,11 @@ module.exports = function (grunt) {
                             pcmApiBaseUrl: '/pcm/patients',
                             phrApiBaseUrl: '/phr',
                             tryPolicyApiBaseUrl: '/tryPolicy',
-                            userInfo : '/uaa/userinfo'
+                            userInfo: '/uaa/userinfo'
                         },
                         unsecuredApis: {
                             plsApiBaseUrl: '/pls/providers',
-                            tokenUrl : '/uaa/oauth/token',
+                            tokenUrl: '/uaa/oauth/token',
                             verificationUrl: '/patientUser/verifications',
                             activationUrl: '/patientUser/activations',
                             forgotPasswordUrl: '/uaa/forgot_password.do'
@@ -526,11 +536,11 @@ module.exports = function (grunt) {
                             pcmApiBaseUrl: '/pcm/patients',
                             phrApiBaseUrl: '/phr',
                             tryPolicyApiBaseUrl: '/tryPolicy',
-                            userInfo : '/uaa/userinfo'
+                            userInfo: '/uaa/userinfo'
                         },
                         unsecuredApis: {
                             plsApiBaseUrl: '/pls/providers',
-                            tokenUrl : '/uaa/oauth/token',
+                            tokenUrl: '/uaa/oauth/token',
                             verificationUrl: '/patientUser/verifications',
                             activationUrl: '/patientUser/activations',
                             forgotPasswordUrl: '/uaa/forgot_password.do'
@@ -551,11 +561,11 @@ module.exports = function (grunt) {
                             pcmApiBaseUrl: '/pcm/patients',
                             phrApiBaseUrl: '/phr',
                             tryPolicyApiBaseUrl: '/tryPolicy',
-                            userInfo : '/uaa/userinfo'
+                            userInfo: '/uaa/userinfo'
                         },
                         unsecuredApis: {
                             plsApiBaseUrl: '/pls/providers',
-                            tokenUrl : '/uaa/oauth/token',
+                            tokenUrl: '/uaa/oauth/token',
                             verificationUrl: '/patientUser/verifications',
                             activationUrl: '/patientUser/activations',
                             forgotPasswordUrl: '/uaa/forgot_password.do'
@@ -617,6 +627,7 @@ module.exports = function (grunt) {
             return file.match(/\.js$/);
         });
     }
+
     /**
      * A utility function to get all app CSS sources.
      */
@@ -625,6 +636,7 @@ module.exports = function (grunt) {
             return file.match(/\.css$/);
         });
     }
+
     /**
      * The index.html template includes the stylesheet and javascript sources
      * based on dynamic names calculated in this Gruntfile. This task assembles
@@ -733,12 +745,12 @@ module.exports = function (grunt) {
             taskList.push('ngconstant:dev');
         } else if (target === targetEnum.qa) {
             taskList.push('ngconstant:qa');
-        }else if (target === targetEnum.docker) {
+        } else if (target === targetEnum.docker) {
             taskList.push('ngconstant:docker');
         }
 
         taskList.push('html2js', 'jshint-all', 'recess:build', 'concat:build_css', 'copy:build_app_assets',
-            'copy:build_vendor_assets', 'copy:build_appjs', 'copy:build_vendorjs', 'index:build', 'angularFileLoader', 'karmaconfig');
+            'copy:build_vendor_assets', 'copy:build_bootstrapjs', 'copy:build_appjs', 'copy:build_vendorjs', 'index:build', 'angularFileLoader', 'karmaconfig');
 
         if (target === targetEnum.debug || target === targetEnum.dist || target === targetEnum.dev) {
             taskList.push('karma:unit');

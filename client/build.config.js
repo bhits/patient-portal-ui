@@ -12,7 +12,8 @@ module.exports = {
     build_dist_dir: '<%=build_dir%>' + 'dist',
     build_reports_dir: '<%=build_dir%>' + '.reports',
     build_war_dir: '<%=build_dir%>',
-    config_dir: 'app/config' ,
+    config_dir: 'app/config',
+    bootstrap_dir: 'bootstrap',
 
     /**
      * The `karma_conf_file` file name is where karma testing configuration resides.
@@ -38,7 +39,15 @@ module.exports = {
 
         html: ['index.html'],
         less: 'less/main.less',
-        debug_js:['target/debug/**/*.js', '!target/debug/**/karma.conf.js', '!target/debug/vendor/**/*.js', '!target/debug/assets/**/*.js'],
+        debug_js: ['target/debug/**/*.js', '!target/debug/**/karma.conf.js', '!target/debug/vendor/**/*.js', '!target/debug/assets/**/*.js'],
+    },
+
+    /**
+     * This is a collection of file patterns that used for manually initialize Angular application
+     * The order of the files: These files will be put in the html files as the order in the array
+     */
+    bootstrap_files: {
+        js: ['bootstrap/**/*.js']
     },
 
     /**
