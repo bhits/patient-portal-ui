@@ -5,7 +5,7 @@
 
 'use strict';
 
-describe('app.providerFiltersModule ', function () {
+xdescribe('app.providerFiltersModule ', function () {
 
     var pcmProviderAddress, pcmNameorfacility, utilityService, plsName, plsAddress;
 

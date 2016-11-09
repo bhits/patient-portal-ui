@@ -6,7 +6,7 @@
 
 'use strict';
 
-describe('app.authInterceptorService', function () {
+xdescribe('app.authInterceptorService', function () {
     var $q, $location, utilityService, oauthTokenService,
         urlAuthorizationConfigurerService, securityConstants, authInterceptorService;
 

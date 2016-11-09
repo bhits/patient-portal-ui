@@ -4,7 +4,7 @@
 
 'use strict';
 
-describe('app.hasStringFilter', function () {
+xdescribe('app.hasStringFilter', function () {
 
     var $filter, utilityService;
 

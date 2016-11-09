@@ -4,7 +4,7 @@
 
 'use strict';
 
-describe('app.zipFilter', function () {
+xdescribe('app.zipFilter', function () {
 
     var $filter;
 

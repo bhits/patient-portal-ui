@@ -5,7 +5,7 @@
 
 'use strict';
 
-describe('app.utilityService ', function () {
+xdescribe('app.utilityService ', function () {
     var utilityService, $location, $anchorScroll, $window, envService;
 
     var npi1 = [111, 333], npi2 = [222, 444];
