@@ -1,6 +1,6 @@
 'use strict';
 
-xdescribe('app.consentServices', function () {
+describe('app.consentServices', function () {
 
     var consentService, $resource, configService, utilityService,
         notificationService, $httpBackend, $scope, status, passed, testURL;
@@ -43,6 +43,16 @@ xdescribe('app.consentServices', function () {
         consentEnd: ["consentEnd"],
         status: 0
     };
+
+    beforeEach(function () {
+        module(function ($provide) {
+            $provide.constant('configConstants', {
+                securedApis: {
+                    pcmApiBaseUrl: "/pcm/patients"
+                }
+            });
+        });
+    });
 
     beforeEach(module('app.config'));
     beforeEach(module('app.consent'));
