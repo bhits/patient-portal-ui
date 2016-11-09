@@ -6,9 +6,9 @@
         .factory('authenticationService', authenticationService);
 
     /* @ngInject */
-    function authenticationService($resource, envService, configService, oauthTokenService, utilityService, securityConstants) {
+    function authenticationService($resource, configService, oauthTokenService, utilityService, securityConstants) {
         function loginResource() {
-            return $resource(envService.unsecuredApis.tokenUrl, {},
+            return $resource(configService.getTokenUrl(), {},
                 {
                     save: {
                         method: 'POST',
@@ -29,7 +29,7 @@
         }
 
         function forgotPasswordResource() {
-            return $resource(envService.unsecuredApis.forgotPasswordUrl, {},
+            return $resource(configService.getForgotPasswordUrl(), {},
                 {
                     save: {
                         method: 'POST',
