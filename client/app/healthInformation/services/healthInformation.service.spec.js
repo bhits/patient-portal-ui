@@ -5,7 +5,7 @@
 
 'use strict';
 
-xdescribe('app.healthInformationService ', function () {
+describe('app.healthInformationService ', function () {
     var healthInformationService, $resource, configService;
 
     var expectEmpty;
@@ -25,8 +25,12 @@ xdescribe('app.healthInformationService ', function () {
     var AllergySection = {Allergies: allergies, Code: {}, Name: "Allergy", Narrative: "", Title: ""};
     var ccdaDocument = {AllergySection: AllergySection, CCDAHeader: {}, EncounterSection: {}};
     var document = null;
-    var patientData = null;
 
+    beforeEach(function () {
+        module(function ($provide) {
+            $provide.constant('configConstants', {securedApis: 'dummyValue'});
+        });
+    });
 
     beforeEach(module('app.config'));
     beforeEach(module('app.healthInformation'));
@@ -80,6 +84,4 @@ xdescribe('app.healthInformationService ', function () {
         document = {CDAdocuments: ['doc1.doc', 'doc2.doc']};
         expect(healthInformationService.getCDADocument(document)).toBe('doc1.doc');
     });
-
-
 });

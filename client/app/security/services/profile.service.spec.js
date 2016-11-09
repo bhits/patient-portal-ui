@@ -2,11 +2,17 @@
 
 'use strict';
 
-xdescribe('app.profileService ', function () {
+describe('app.profileService ', function () {
     var profileService, sessionStorage, resource, configService, notificationService, httpBackend;
 
     var emptyProfile;
     var profile = {name: 'testProfile', user_name: 'username', user_id: 101};
+
+    beforeEach(function () {
+        module(function ($provide) {
+            $provide.constant('configConstants', {securedApis: {userInfo: 'dummyValue'}});
+        });
+    });
 
     beforeEach(module('app.security'));
 
@@ -72,5 +78,4 @@ xdescribe('app.profileService ', function () {
         profileService.getName();
         expect(profileService.getName()).toBe('testProfile');
     });
-
 });
