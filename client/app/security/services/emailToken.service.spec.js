@@ -3,8 +3,14 @@
  */
 'use strict';
 
-xdescribe('app.emailTokenService ', function () {
+describe('app.emailTokenService ', function () {
     var emailTokenService;
+
+    beforeEach(function () {
+        module(function ($provide) {
+            $provide.constant('configConstants', {unsecuredApis: {verificationUrl: 'dummyValue'}});
+        });
+    });
 
     beforeEach(module('app.security'));
 
@@ -43,6 +49,4 @@ xdescribe('app.emailTokenService ', function () {
 
         expect(emailTokenService.token).toBeUndefined();
     });
-
-
 });
