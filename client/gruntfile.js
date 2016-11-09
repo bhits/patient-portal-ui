@@ -506,7 +506,6 @@ module.exports = function (grunt) {
                     envService: {
                         name: 'Development',
                         version: '<%= pkg.version %>',
-                        base64BasicKey: 'cGF0aWVudC1wb3J0YWwtdWk6Y2hhbmdlaXQ=',
                         securedApis: {
                             pcmApiBaseUrl: '/pcm/patients',
                             phrApiBaseUrl: '/phr',
@@ -531,7 +530,6 @@ module.exports = function (grunt) {
                     envService: {
                         name: 'docker',
                         version: '<%= pkg.version %>',
-                        base64BasicKey: 'cGF0aWVudC1wb3J0YWwtdWk6Y2hhbmdlaXQ=',
                         securedApis: {
                             pcmApiBaseUrl: '/pcm/patients',
                             phrApiBaseUrl: '/phr',
@@ -556,7 +554,6 @@ module.exports = function (grunt) {
                     envService: {
                         name: 'QA',
                         version: '<%= pkg.version %>',
-                        base64BasicKey: 'cGF0aWVudC1wb3J0YWwtdWk6QllqeVdYU2JEdmRx',
                         securedApis: {
                             pcmApiBaseUrl: '/pcm/patients',
                             phrApiBaseUrl: '/phr',
