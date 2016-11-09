@@ -3,7 +3,7 @@
  */
 'use strict';
 
-describe('app.emailTokenService ', function () {
+xdescribe('app.emailTokenService ', function () {
     var emailTokenService;
 
     beforeEach(module('app.security'));

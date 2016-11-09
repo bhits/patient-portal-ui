@@ -13,10 +13,10 @@
         .factory('accountService', accountService);
 
     /* @ngInject */
-    function accountService($resource, $sessionStorage, envService) {
+    function accountService($resource, $sessionStorage, configService) {
 
-        var verificationResource = $resource(envService.unsecuredApis.verificationUrl);
-        var activationResource = $resource(envService.unsecuredApis.activationUrl);
+        var verificationResource = $resource(configService.getVerificationUrl());
+        var activationResource = $resource(configService.getActivationUrl());
 
         var patientFullName = '';
         var service = {};
@@ -75,6 +75,3 @@
         }
     }
 })();
-
-
-
