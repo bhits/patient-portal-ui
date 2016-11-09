@@ -5,7 +5,7 @@
 
 'use strict';
 
-xdescribe('app.utilityService ', function () {
+describe('app.utilityService ', function () {
     var utilityService, $location, $anchorScroll, $window, envService;
 
     var npi1 = [111, 333], npi2 = [222, 444];
@@ -13,6 +13,19 @@ xdescribe('app.utilityService ', function () {
     var dummyValue = {entityType: 'Individual', npi: 111};
     var dummyValue2 = {entityType: 'Organization', npi: 222};
     var dummyProviderList = [dummyValue, dummyValue2];
+
+    beforeEach(function () {
+        module(function ($provide) {
+            $provide.constant('configConstants', {
+                securedApis: {
+                    pcmApiBaseUrl: '/pcm/patients',
+                    phrApiBaseUrl: '/phr',
+                    tryPolicyApiBaseUrl: '/tryPolicy',
+                    userInfo: '/uaa/userinfo'
+                }
+            });
+        });
+    });
 
     beforeEach(module('app.core'));
     beforeEach(module('app.config'));

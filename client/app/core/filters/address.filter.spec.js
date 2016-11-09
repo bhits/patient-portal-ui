@@ -4,9 +4,15 @@
 
 'use strict';
 
-xdescribe('app.addressFilter', function () {
+describe('app.addressFilter', function () {
 
     var utilityService, $filter;
+
+    beforeEach(function () {
+        module(function ($provide) {
+            $provide.constant('configConstants');
+        });
+    });
 
     beforeEach(module('app.core'));
     beforeEach(module('app.account'));
@@ -32,11 +38,9 @@ xdescribe('app.addressFilter', function () {
 
     });
 
-
     it('should return empty', function () {
         var data;
         expect($filter(data)).toEqual("");
 
     });
-
 });
