@@ -12,9 +12,16 @@ import java.nio.charset.StandardCharsets;
 @Data
 public class PPUIProperties {
 
+    private Branding branding;
     private Oauth2 oauth2;
     private SecuredApis securedApis;
     private UnsecuredApis unsecuredApis;
+
+    @Data
+    public static class Branding {
+        private String name;
+        private String initial;
+    }
 
     @Data
     public static class Oauth2 {

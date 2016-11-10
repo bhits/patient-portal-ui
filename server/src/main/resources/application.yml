@@ -15,8 +15,12 @@ eureka:
     service-url:
       # endpoint for discovery-server, pass '--eureka.client.protocol=https' if discovery-server is running on https
       defaultZone: ${eureka.client.protocol:http}://localhost:8761/eureka/
+# the configuration used for UI
 c2s:
   pp-ui:
+    branding:
+      name: Consent2Share
+      initial: C2S
     oauth2:
       client:
         client-id: patient-portal-ui
