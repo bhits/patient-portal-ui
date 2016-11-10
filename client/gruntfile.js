@@ -495,33 +495,8 @@ module.exports = function (grunt) {
             options: {
                 space: '  ',
                 wrap: '"use strict";\n\n {%= __ngModule %}',
-                name: 'app.config'
-            },
-            // Environment targets
-            dev: {
-                options: {
-                    dest: '<%= config_dir %>/config.js'
-                },
-                constants: {
-                    envService: {
-                        version: '<%= pkg.version %>'
-                    }
-                }
-            },
-            docker: {
-                options: {
-                    dest: '<%= config_dir %>/config.js'
-                },
-                constants: {
-                    envService: {
-                        version: '<%= pkg.version %>'
-                    }
-                }
-            },
-            qa: {
-                options: {
-                    dest: '<%= config_dir %>/config.js'
-                },
+                name: 'app.config',
+                dest: '<%= config_dir %>/config.js',
                 constants: {
                     envService: {
                         version: '<%= pkg.version %>'
@@ -695,14 +670,6 @@ module.exports = function (grunt) {
         var taskList;
 
         taskList = ['clean', 'bower:install'];
-
-        if (target === targetEnum.dev || target === targetEnum.ci) {
-            taskList.push('ngconstant:dev');
-        } else if (target === targetEnum.qa) {
-            taskList.push('ngconstant:qa');
-        } else if (target === targetEnum.docker) {
-            taskList.push('ngconstant:docker');
-        }
 
         taskList.push('html2js', 'jshint-all', 'recess:build', 'concat:build_css', 'copy:build_app_assets',
             'copy:build_vendor_assets', 'copy:build_bootstrapjs', 'copy:build_appjs', 'copy:build_vendorjs', 'index:build', 'angularFileLoader', 'karmaconfig');
