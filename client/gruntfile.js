@@ -504,21 +504,7 @@ module.exports = function (grunt) {
                 },
                 constants: {
                     envService: {
-                        name: 'Development',
-                        version: '<%= pkg.version %>',
-                        securedApis: {
-                            pcmApiBaseUrl: '/pcm/patients',
-                            phrApiBaseUrl: '/phr',
-                            tryPolicyApiBaseUrl: '/tryPolicy',
-                            userInfo: '/uaa/userinfo'
-                        },
-                        unsecuredApis: {
-                            plsApiBaseUrl: '/pls/providers',
-                            tokenUrl: '/uaa/oauth/token',
-                            verificationUrl: '/patientUser/verifications',
-                            activationUrl: '/patientUser/activations',
-                            forgotPasswordUrl: '/uaa/forgot_password.do'
-                        }
+                        version: '<%= pkg.version %>'
                     }
                 }
             },
@@ -528,21 +514,7 @@ module.exports = function (grunt) {
                 },
                 constants: {
                     envService: {
-                        name: 'docker',
-                        version: '<%= pkg.version %>',
-                        securedApis: {
-                            pcmApiBaseUrl: '/pcm/patients',
-                            phrApiBaseUrl: '/phr',
-                            tryPolicyApiBaseUrl: '/tryPolicy',
-                            userInfo: '/uaa/userinfo'
-                        },
-                        unsecuredApis: {
-                            plsApiBaseUrl: '/pls/providers',
-                            tokenUrl: '/uaa/oauth/token',
-                            verificationUrl: '/patientUser/verifications',
-                            activationUrl: '/patientUser/activations',
-                            forgotPasswordUrl: '/uaa/forgot_password.do'
-                        }
+                        version: '<%= pkg.version %>'
                     }
                 }
             },
@@ -552,21 +524,7 @@ module.exports = function (grunt) {
                 },
                 constants: {
                     envService: {
-                        name: 'QA',
-                        version: '<%= pkg.version %>',
-                        securedApis: {
-                            pcmApiBaseUrl: '/pcm/patients',
-                            phrApiBaseUrl: '/phr',
-                            tryPolicyApiBaseUrl: '/tryPolicy',
-                            userInfo: '/uaa/userinfo'
-                        },
-                        unsecuredApis: {
-                            plsApiBaseUrl: '/pls/providers',
-                            tokenUrl: '/uaa/oauth/token',
-                            verificationUrl: '/patientUser/verifications',
-                            activationUrl: '/patientUser/activations',
-                            forgotPasswordUrl: '/uaa/forgot_password.do'
-                        }
+                        version: '<%= pkg.version %>'
                     }
                 }
             }
