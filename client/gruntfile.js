@@ -632,19 +632,9 @@ module.exports = function (grunt) {
      */
     grunt.registerTask('build-debug', 'build:debug');
     /**
-     * Snake case build:dev
-     */
-    grunt.registerTask('build-dev', 'build:dev');
-    /**
      * Snake case build:dist
      */
     grunt.registerTask('build-dist', 'build:dist');
-    /**
-     * Snake case build:dev
-     */
-    grunt.registerTask('build-qa', 'build:qa');
-
-    grunt.registerTask('build-docker', 'build:docker');
     /**
      * Snake case build:ci
      */
@@ -659,9 +649,6 @@ module.exports = function (grunt) {
      */
     grunt.registerTask('build', function (target) {
         var targetEnum = {
-            dev: 'dev',
-            qa: 'qa',
-            docker: 'docker',
             debug: 'debug',
             dist: 'dist',
             ci: 'ci'
@@ -674,16 +661,15 @@ module.exports = function (grunt) {
         taskList.push('html2js', 'jshint-all', 'recess:build', 'concat:build_css', 'copy:build_app_assets',
             'copy:build_vendor_assets', 'copy:build_bootstrapjs', 'copy:build_appjs', 'copy:build_vendorjs', 'index:build', 'angularFileLoader', 'karmaconfig');
 
-        if (target === targetEnum.debug || target === targetEnum.dist || target === targetEnum.dev) {
+        if (target === targetEnum.debug || target === targetEnum.dist) {
             taskList.push('karma:unit');
         } else if (target === targetEnum.ci) {
             taskList.push('karma:ci');
         }
 
-        if (target === targetEnum.dev || target === targetEnum.debug || target === targetEnum.dist || target === targetEnum.qa || target === targetEnum.docker || target === targetEnum.ci) {
+        if (target === targetEnum.debug || target === targetEnum.dist || target === targetEnum.ci) {
             taskList = taskList.concat(['compile']);
         }
-
         grunt.task.run(taskList);
     });
 
