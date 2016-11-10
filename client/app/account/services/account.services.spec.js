@@ -4,9 +4,9 @@
 
 'use strict';
 
-xdescribe('app.accountService', function(){
+xdescribe('app.accountService', function () {
 
-    var accountService, $resource, envService, sessionStorage, scope, $httpBackend, utilityService;
+    var accountService, sessionStorage, scope, $httpBackend, utilityService;
 
     var verifyInfo = {
         emailToken: 'emailToken',
@@ -28,8 +28,8 @@ xdescribe('app.accountService', function(){
 
     beforeEach(module('app.account'));
 
-    beforeEach(inject(function(_accountService_, _$sessionStorage_,
-                               $controller, $rootScope, _$httpBackend_, _utilityService_){
+    beforeEach(inject(function (_accountService_, _$sessionStorage_,
+                                $controller, $rootScope, _$httpBackend_, _utilityService_) {
         accountService = _accountService_;
         sessionStorage = _$sessionStorage_;
         scope = $rootScope.$new();
@@ -41,7 +41,7 @@ xdescribe('app.accountService', function(){
 
     it('should verify patient', function () {
 
-        $httpBackend.expect('GET','/patientUser/verifications?birthDate=2015-5-20&emailToken=emailToken&verificationCode=11111').respond(200, verifyInfo);
+        $httpBackend.expect('GET', '/patientUser/verifications?birthDate=2015-5-20&emailToken=emailToken&verificationCode=11111').respond(200, verifyInfo);
 
         function verifySuccess(response) {
             accountService.setVerifyInfo(verifyInfo);
@@ -63,7 +63,7 @@ xdescribe('app.accountService', function(){
 
     it('should activate patient', function () {
 
-        $httpBackend.expect('POST','/patientUser/activations').respond(200, patientInfo);
+        $httpBackend.expect('POST', '/patientUser/activations').respond(200, patientInfo);
 
         function activateSuccess(response) {
             utilityService.redirectTo('/fe/account/activationSuccess');
@@ -82,40 +82,39 @@ xdescribe('app.accountService', function(){
         expect(accountService.getPatientName()).toBe("firstName lastName");
     });
 
-    it('should remove the verify info', function(){
+    it('should remove the verify info', function () {
         expect(sessionStorage.verifyInfo).toBeUndefined();
     });
 
-    it('should set the verify info', function(){
+    it('should set the verify info', function () {
         expect(sessionStorage.verifyInfo).toBeUndefined();
         accountService.setVerifyInfo(basicVerifyInfo);
         expect(sessionStorage.verifyInfo).toEqual(basicVerifyInfo);
     });
 
-    it('should get the verify info', function(){
+    it('should get the verify info', function () {
         accountService.setVerifyInfo(basicVerifyInfo);
         expect(accountService.getVerifyInfo()).toEqual(basicVerifyInfo);
     });
 
-    it('should set the username', function(){
+    it('should set the username', function () {
         expect(sessionStorage.userName).toBeUndefined();
         accountService.setUserName(userName);
         expect(sessionStorage.userName).toEqual(userName);
     });
 
-    it('should set the username', function(){
+    it('should set the username', function () {
         accountService.setUserName(userName);
         expect(accountService.getUserName(userName)).toEqual(userName);
     });
 
-    it('should set patient name', function(){
+    it('should set patient name', function () {
         accountService.setPatientName(patientInfo);
         expect(accountService.getPatientName()).toBe('firstName lastName');
     });
 
-    it('should reset session storage', function(){
+    it('should reset session storage', function () {
         accountService.removeActivateInfo();
         //expect(sessionStorage).toBe(undefined);
     });
-
 });

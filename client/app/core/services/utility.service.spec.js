@@ -6,7 +6,7 @@
 'use strict';
 
 describe('app.utilityService ', function () {
-    var utilityService, $location, $anchorScroll, $window, envService;
+    var utilityService, $location, $anchorScroll, $window, configService;
 
     var npi1 = [111, 333], npi2 = [222, 444];
     var dummyEmptyValue;
@@ -31,12 +31,12 @@ describe('app.utilityService ', function () {
     beforeEach(module('app.config'));
 
     beforeEach(inject(function (_utilityService_, _$location_, _$anchorScroll_,
-                                _$window_, _envService_) {
+                                _$window_, _configService_) {
         utilityService = _utilityService_;
         $location = _$location_;
         $anchorScroll = _$anchorScroll_;
         $window = _$window_;
-        envService = _envService_;
+        configService = _configService_;
     }));
 
     beforeEach(function () {
