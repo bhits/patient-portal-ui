@@ -10,22 +10,8 @@ xdescribe("app.login.controller ", function () {
     beforeEach(module('app.account'));
     beforeEach(module('app.config'));
     beforeEach(module('app.security'));
-    beforeEach(module('app.brand'));
 
-    var envService, controller, $resource, brand, utilityService, accountConfig;
-
-    beforeEach(function () {
-        var fakeModule = angular.module('test.app.brand', function () {
-        });
-        fakeModule.config(function (brandProvider) {
-            brand = brandProvider;
-        });
-        module('app.brand', 'test.app.brand');
-        inject(function () {
-        });
-        brand.setBrandName("Brand Name");
-        brand.setBrandInitial("BI");
-    });
+    var envService, controller, $resource, utilityService, accountConfig;
 
     beforeEach(inject(function ($controller, _envService_,
                                 _utilityService_, _$resource_, _accountConfig_) {
@@ -38,8 +24,7 @@ xdescribe("app.login.controller ", function () {
         controller = $controller('LoginController', {
             envService: envService,
             utilityService: utilityService,
-            accountConfig: accountConfig,
-            brand: brand
+            accountConfig: accountConfig
         });
 
     }));
@@ -67,5 +52,4 @@ xdescribe("app.login.controller ", function () {
         expect(controller.altLogoText).toBeDefined();
         expect(controller.altLogoText).toEqual('BI Logo');
     });
-
 });

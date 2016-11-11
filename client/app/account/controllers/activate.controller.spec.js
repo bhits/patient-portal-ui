@@ -5,22 +5,9 @@ xdescribe("app.activateController", function () {
 
     beforeEach(module('app.account'));
 
-    var controller, $state, accountService, brand;
+    var controller, $state, accountService;
 
     var patientInfo = {firstName: 'firstName', lastName: 'lastName'};
-
-    beforeEach(function () {
-        var fakeModule = angular.module('test.app.brand', function () {
-        });
-        fakeModule.config(function (brandProvider) {
-            brand = brandProvider;
-        });
-        module('app.brand', 'test.app.brand');
-        inject(function () {
-        });
-        brand.setBrandName("Brand Name");
-        brand.setBrandInitial("BI");
-    });
 
     beforeEach(inject(function ($controller, _$state_, _accountService_) {
 
@@ -29,8 +16,7 @@ xdescribe("app.activateController", function () {
         accountService.setPatientName(patientInfo);
 
         controller = $controller('ActivateController', {
-            accountService: accountService,
-            brand: brand
+            accountService: accountService
         });
 
     }));
