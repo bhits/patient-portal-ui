@@ -491,12 +491,13 @@ module.exports = function (grunt) {
             }
         },
         ngconstant: {
-            // Options for all targets
             options: {
                 space: '  ',
                 wrap: '"use strict";\n\n {%= __ngModule %}',
                 name: 'app.config',
-                dest: '<%= config_dir %>/config.js',
+                dest: '<%= config_dir %>/config.js'
+            },
+            app: {
                 constants: {
                     envService: {
                         version: '<%= pkg.version %>'
@@ -658,7 +659,7 @@ module.exports = function (grunt) {
 
         taskList = ['clean', 'bower:install'];
 
-        taskList.push('html2js', 'jshint-all', 'recess:build', 'concat:build_css', 'copy:build_app_assets',
+        taskList.push('html2js', 'jshint-all', 'recess:build', 'ngconstant:app', 'concat:build_css', 'copy:build_app_assets',
             'copy:build_vendor_assets', 'copy:build_bootstrapjs', 'copy:build_appjs', 'copy:build_vendorjs', 'index:build', 'angularFileLoader', 'karmaconfig');
 
         if (target === targetEnum.debug || target === targetEnum.dist) {
