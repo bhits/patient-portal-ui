@@ -20,7 +20,7 @@ public class PPUIProperties {
     @Data
     public static class Branding {
         private String name;
-        private String initial;
+        private String initials;
     }
 
     @Data

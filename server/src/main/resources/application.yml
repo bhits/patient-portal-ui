@@ -20,7 +20,7 @@ c2s:
   pp-ui:
     branding:
       name: Consent2Share
-      initial: C2S
+      initials: C2S
     oauth2:
       client:
         client-id: patient-portal-ui

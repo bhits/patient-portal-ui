@@ -10,10 +10,10 @@
         .controller('ActivateErrorController', ActivateErrorController);
 
     /* @ngInject */
-    function ActivateErrorController(brand) {
+    function ActivateErrorController(configService) {
         var vm = this;
-        vm.title = brand.getBrandName() + " Account Activation - Invalid";
-        vm.brandName = brand.getBrandName();
-        vm.brandInitial = brand.getBrandInitials();
+        vm.title = configService.getBrandName() + " Account Activation - Invalid";
+        vm.brandName = configService.getBrandName();
+        vm.brandInitial = configService.getBrandInitials();
     }
 })();

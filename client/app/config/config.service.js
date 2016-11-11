@@ -9,6 +9,8 @@
     function configService(configConstants) {
 
         var service = {};
+        service.getBrandName = getBrandName;
+        service.getBrandInitials = getBrandInitials;
         service.getOauthBasicKey = getOauthBasicKey;
         service.getPcmApiBaseUrl = getPcmApiBaseUrl;
         service.getPhrApiBaseUrl = getPhrApiBaseUrl;
@@ -21,6 +23,14 @@
         service.getForgotPasswordUrl = getForgotPasswordUrl;
 
         return service;
+
+        function getBrandName() {
+            return configConstants.branding.name;
+        }
+
+        function getBrandInitials() {
+            return configConstants.branding.initials;
+        }
 
         function getOauthBasicKey() {
             return configConstants.oauth2.client.base64BasicKey;
