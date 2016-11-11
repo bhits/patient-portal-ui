@@ -59,7 +59,7 @@ describe('app.consentServices', function () {
     beforeEach(module('ngMock'));
 
     beforeEach(inject(function (_consentService_, _$resource_, _$rootScope_, _configService_,
-                                _utilityService_, _notificationService_, $injector) {
+                                _utilityService_, _notificationService_, $injector, $templateCache) {
         consentService = _consentService_;
         $resource = _$resource_;
         $scope = _$rootScope_.$new();
@@ -70,6 +70,8 @@ describe('app.consentServices', function () {
 
         passed = null;
         status = null;
+
+        $templateCache.put('app/core/services/notify.html', '<div>Here goes the template</div>');
     }));
 
     beforeEach(function () {

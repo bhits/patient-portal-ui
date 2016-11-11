@@ -6,7 +6,7 @@
         .factory('configService', configService);
 
     /* @ngInject */
-    function configService(configConstants) {
+    function configService(configConstants, notificationService) {
 
         var service = {};
         service.getBrandName = getBrandName;
@@ -24,52 +24,82 @@
 
         return service;
 
+        function getConfigByPropertyKey(key, errorMessage) {
+            if (checkKeyExistsInObject(configConstants, key)) {
+                return accessPropertyByStringKey(configConstants, key);
+            } else {
+                notificationService.error('Failed to get configuration for ' + errorMessage);
+            }
+        }
+
         function getBrandName() {
-            return configConstants.branding.name;
+            return getConfigByPropertyKey('branding.name', 'Brand Name');
         }
 
         function getBrandInitials() {
-            return configConstants.branding.initials;
+            return getConfigByPropertyKey('branding.initials', 'Brand Initials');
         }
 
         function getOauthBasicKey() {
-            return configConstants.oauth2.client.base64BasicKey;
+            return getConfigByPropertyKey('oauth2.client.base64BasicKey', 'Oauth Basic Key');
         }
 
         function getPcmApiBaseUrl() {
-            return configConstants.securedApis.pcmApiBaseUrl;
+            return getConfigByPropertyKey('securedApis.pcmApiBaseUrl', 'Pcm Base URL');
         }
 
         function getPhrApiBaseUrl() {
-            return configConstants.securedApis.phrApiBaseUrl;
+            return getConfigByPropertyKey('securedApis.phrApiBaseUrl', 'Phr Base URL');
         }
 
         function getTryPolicyApiBaseUrl() {
-            return configConstants.securedApis.tryPolicyApiBaseUrl;
+            return getConfigByPropertyKey('securedApis.tryPolicyApiBaseUrl', 'TryPolicy Base URL');
         }
 
         function getUserInfo() {
-            return configConstants.securedApis.userInfo;
+            return getConfigByPropertyKey('securedApis.userInfo', 'UserInfo Base URL');
         }
 
         function getPlsApiBaseUrl() {
-            return configConstants.unsecuredApis.plsApiBaseUrl;
+            return getConfigByPropertyKey('unsecuredApis.plsApiBaseUrl', 'Pls Base URL');
         }
 
         function getTokenUrl() {
-            return configConstants.unsecuredApis.tokenUrl;
+            return getConfigByPropertyKey('unsecuredApis.tokenUrl', 'Token URL');
         }
 
         function getVerificationUrl() {
-            return configConstants.unsecuredApis.verificationUrl;
+            return getConfigByPropertyKey('unsecuredApis.verificationUrl', 'Verification URL');
         }
 
         function getActivationUrl() {
-            return configConstants.unsecuredApis.activationUrl;
+            return getConfigByPropertyKey('unsecuredApis.activationUrl', 'Activation URL');
         }
 
         function getForgotPasswordUrl() {
-            return configConstants.unsecuredApis.forgotPasswordUrl;
+            return getConfigByPropertyKey('unsecuredApis.forgotPasswordUrl', 'ForgotPassword URL');
+        }
+
+        function checkKeyExistsInObject(obj, key) {
+            var components = key.split(".");
+            for (var i = 0; i < components.length; i++) {
+                if ((typeof obj !== "object") || (!obj.hasOwnProperty(components[i]))) {
+                    return false;
+                }
+                obj = obj[components[i]];
+            }
+            return true;
+        }
+
+        function accessPropertyByStringKey(obj, stringKey) {
+            var parts = stringKey.split('.');
+            var newObj = obj[parts[0]];
+            if (parts[1]) {
+                parts.splice(0, 1);
+                var newString = parts.join('.');
+                return accessPropertyByStringKey(newObj, newString);
+            }
+            return newObj;
         }
     }
 })();
