@@ -25,10 +25,12 @@
         return service;
 
         function getConfigByPropertyKey(key, errorMessage) {
-            if (checkKeyExistsInObject(configConstants, key)) {
-                return accessPropertyByStringKey(configConstants, key);
-            } else {
-                notificationService.error('Failed to get configuration for ' + errorMessage);
+            if (configConstants !== null) {
+                if (checkKeyExistsInObject(configConstants, key)) {
+                    return accessPropertyByStringKey(configConstants, key);
+                } else {
+                    notificationService.error('Failed to get configuration for ' + errorMessage);
+                }
             }
         }
 
