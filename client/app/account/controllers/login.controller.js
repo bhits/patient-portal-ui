@@ -12,6 +12,7 @@
         vm.version = envService.version;
         vm.forgotPassword = forgotPassword;
         vm.brandName = configService.getBrandName();
+        vm.brandLargeLogo = configService.getBrandLargeLogo();
         vm.altLogoText = configService.getBrandInitials() + " Logo";
 
         function forgotPassword() {

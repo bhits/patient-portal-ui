@@ -23,7 +23,9 @@
     }
 
     /* @ngInject */
-    function TopNavbarController() {
+    function TopNavbarController(configService) {
         var vm = this;
+        vm.brandSmallLogo = configService.getBrandSmallLogo();
+        vm.brandMediumLogo = configService.getBrandMediumLogo();
     }
 })();
