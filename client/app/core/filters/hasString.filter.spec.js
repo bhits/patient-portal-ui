@@ -8,6 +8,12 @@ describe('app.hasStringFilter', function () {
 
     var $filter, utilityService;
 
+    beforeEach(function () {
+        module(function ($provide) {
+            $provide.constant('configConstants');
+        });
+    });
+
     beforeEach(module('app.core'));
     beforeEach(module('app.account'));
 
@@ -26,6 +32,4 @@ describe('app.hasStringFilter', function () {
         expect($filter(input)).toEqual('inputValue');
         expect(utilityService.hasString).toHaveBeenCalledWith(input);
     });
-
-
 });

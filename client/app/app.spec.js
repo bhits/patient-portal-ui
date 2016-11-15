@@ -4,78 +4,78 @@
 
 'use strict';
 
-describe('app module', function(){
+describe('app module', function () {
     var module;
 
-    beforeEach(function() {
+    beforeEach(function () {
         module = angular.module("app");
     });
 
-    it("should be registered", function() {
+    it("should be registered", function () {
         expect(module).not.toEqual(null);
     });
 
-    describe("Dependencies:", function() {
+    describe("Dependencies:", function () {
 
         var dependencies;
 
-        var hasModule = function(m) {
+        var hasModule = function (m) {
             return dependencies.indexOf(m) >= 0;
         };
-        beforeEach(function() {
+        beforeEach(function () {
             dependencies = module.value('app').requires;
         });
 
         /* Shared modules*/
-        it("should have app.core as a dependency", function() {
+        it("should have app.core as a dependency", function () {
             expect(hasModule('app.core')).toEqual(true);
         });
 
-        it("should have templates-app as a dependency", function() {
+        it("should have templates-app as a dependency", function () {
             expect(hasModule('templates-app')).toEqual(true);
         });
 
-        it("should have app.security as a dependency", function() {
+        it("should have app.security as a dependency", function () {
             expect(hasModule('app.security')).toEqual(true);
         });
 
-        it("should have app.config as a dependency", function() {
+        it("should have app.config as a dependency", function () {
             expect(hasModule('app.config')).toEqual(true);
         });
 
         /*Feature areas*/
-        it("should have app.home as a dependency", function() {
+        it("should have app.home as a dependency", function () {
             expect(hasModule('app.home')).toEqual(true);
         });
 
-        it("should have app.home as a dependency", function() {
+        it("should have app.home as a dependency", function () {
             expect(hasModule('app.consent')).toEqual(true);
         });
 
-        it("should have app.healthInformation as a dependency", function() {
+        it("should have app.healthInformation as a dependency", function () {
             expect(hasModule('app.healthInformation')).toEqual(true);
         });
 
-        it("should have app.provider as a dependency", function() {
+        it("should have app.provider as a dependency", function () {
             expect(hasModule('app.provider')).toEqual(true);
         });
 
-        it("should have app.layout as a dependency", function() {
+        it("should have app.layout as a dependency", function () {
             expect(hasModule('app.layout')).toEqual(true);
         });
 
-        it("should have app.medicalDocument as a dependency", function() {
+        it("should have app.medicalDocument as a dependency", function () {
             expect(hasModule('app.medicalDocument')).toEqual(true);
         });
 
-        it("should have app.home as a dependency", function() {
+        it("should have app.home as a dependency", function () {
             expect(hasModule('app.account')).toEqual(true);
         });
 
     });
 });
 
-describe("app AppController ", function() {
+describe("app AppController ", function () {
 
     beforeEach(module('ui.router'));
     beforeEach(module('ngIdle'));
@@ -98,7 +98,13 @@ describe("app AppController ", function() {
         $rootScope.$digest();
     }
 
-    beforeEach(inject(function(_$rootScope_, _$templateCache_, _$location_, $controller, _$state_, $anchorScroll, _utilityService_, _authenticationService_, _Idle_, _$modal_, _idleConfigParams_) {
+    beforeEach(function () {
+        module(function ($provide) {
+            $provide.constant('configConstants');
+        });
+    });
+
+    beforeEach(inject(function (_$rootScope_, _$templateCache_, _$location_, $controller, _$state_, $anchorScroll, _utilityService_, _authenticationService_, _Idle_, _$modal_, _idleConfigParams_) {
         $rootScope = _$rootScope_;
         scope = $rootScope.$new();
         $state = _$state_;
@@ -123,19 +129,18 @@ describe("app AppController ", function() {
             authenticationService: _authenticationService_,
             state: $state,
             utilityService: _utilityService_,
-            $modal:_$modal_,
+            $modal: _$modal_,
             Idle: _Idle_,
             idleConfigParams: _idleConfigParams_,
             rootScope: $rootScope
         });
     }));
 
-
-    it('should show Health Information Menu.', function(){
+    it('should show Health Information Menu.', function () {
         expect(controller.healthInformationMenu).toBeFalsy();
     });
 
-    it('should scroll to and expand', function(){
+    it('should scroll to and expand', function () {
         var arg1 = {to: "a"};
         var arg2 = {expand: false};
         controller.scrollToAndExpand("a", false);
@@ -143,20 +148,19 @@ describe("app AppController ", function() {
         expect(scope.$broadcast).toHaveBeenCalledWith("ExpandAccordion", arg2);
     });
 
-    it('should route to Health Information.', function(){
+    it('should route to Health Information.', function () {
         $state.current.name = "home";
         spyOn($state, 'go').and.callThrough();
         controller.routeToHealthInformation();
         expect($state.go).toHaveBeenCalledWith('fe.patient.healthinformation', {scrollTo: 'none', expand: 'none'});
     });
 
-    it('should expect undefined if warning is never opened', function(){
+    it('should expect undefined if warning is never opened', function () {
         controller.closeModals();
         expect(controller.warning).toBe(undefined);
     });
 
-    it ('should state change (stateChangeSuccess)', function(){
-        
+    it('should state change (stateChangeSuccess)', function () {
+
     });
-    
 });

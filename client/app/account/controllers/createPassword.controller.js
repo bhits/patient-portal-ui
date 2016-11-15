@@ -10,9 +10,9 @@
         .controller('CreatePasswordController', CreatePasswordController);
 
     /* @ngInject */
-    function CreatePasswordController(allowActivation, brand) {
+    function CreatePasswordController(allowActivation, configService) {
         var vm = this;
         vm.allowActivation = allowActivation;
-        vm.title = brand.getBrandName() + " Create Password";
+        vm.title = configService.getBrandName() + " Create Password";
     }
 })();

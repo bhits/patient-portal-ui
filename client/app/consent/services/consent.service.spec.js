@@ -1,8 +1,8 @@
 'use strict';
 
-xdescribe('app.consentServices', function () {
+describe('app.consentServices', function () {
 
-    var consentService, $resource, envService, utilityService,
+    var consentService, $resource, configService, utilityService,
         notificationService, $httpBackend, $scope, status, passed, testURL;
 
     var mockConsent, mockState = {};
@@ -44,22 +44,34 @@ xdescribe('app.consentServices', function () {
         status: 0
     };
 
+    beforeEach(function () {
+        module(function ($provide) {
+            $provide.constant('configConstants', {
+                securedApis: {
+                    pcmApiBaseUrl: "/pcm/patients"
+                }
+            });
+        });
+    });
+
     beforeEach(module('app.config'));
     beforeEach(module('app.consent'));
     beforeEach(module('ngMock'));
 
-    beforeEach(inject(function (_consentService_, _$resource_, _$rootScope_, _envService_,
-                                _utilityService_, _notificationService_, $injector) {
+    beforeEach(inject(function (_consentService_, _$resource_, _$rootScope_, _configService_,
+                                _utilityService_, _notificationService_, $injector, $templateCache) {
         consentService = _consentService_;
         $resource = _$resource_;
         $scope = _$rootScope_.$new();
-        envService = _envService_;
+        configService = _configService_;
         utilityService = _utilityService_;
         notificationService = _notificationService_;
         $httpBackend = $injector.get('$httpBackend');
 
         passed = null;
         status = null;
+
+        $templateCache.put('app/core/services/notify.html', '<div>Here goes the template</div>');
     }));
 
     beforeEach(function () {
@@ -87,17 +99,17 @@ xdescribe('app.consentServices', function () {
     });
 
     it('should get consent resource (getConsentResource)', function () {
-        testURL = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/pageNumber/:pageNumber", {pageNumber: '@pageNumber'});
+        testURL = $resource(configService.getPcmApiBaseUrl() + "/consents/pageNumber/:pageNumber", {pageNumber: '@pageNumber'});
         expect(consentService.getConsentResource().toString()).toEqual(testURL.toString());
     });
 
     it('should get purpose of use resource (getPurposeOfUseResource)', function () {
-        testURL = $resource(envService.securedApis.pcmApiBaseUrl + "/purposeOfUse");
+        testURL = $resource(configService.getPcmApiBaseUrl() + "/purposeOfUse");
         expect(consentService.getPurposeOfUseResource().toString()).toEqual(testURL.toString());
     });
 
     it('should get purpose of use resource (getSensitivityPolicyResource)', function () {
-        testURL = $resource(envService.securedApis.pcmApiBaseUrl + "/sensitivityPolicy");
+        testURL = $resource(configService.getPcmApiBaseUrl() + "/sensitivityPolicy");
         expect(consentService.getSensitivityPolicyResource().toString()).toEqual(testURL.toString());
     });
 
@@ -473,6 +485,4 @@ xdescribe('app.consentServices', function () {
         $httpBackend.expect('GET', "/pcm/patients/consents/attested").respond(200, "success");
         consentService.downloadAttestedConsentRevocationPdf("consent.service.spec.js", success, error);
     });
-
-
 });

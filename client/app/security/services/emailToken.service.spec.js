@@ -6,6 +6,12 @@
 describe('app.emailTokenService ', function () {
     var emailTokenService;
 
+    beforeEach(function () {
+        module(function ($provide) {
+            $provide.constant('configConstants', {unsecuredApis: {verificationUrl: 'dummyValue'}});
+        });
+    });
+
     beforeEach(module('app.security'));
 
     beforeEach(inject(function (_emailTokenService_) {
@@ -43,6 +49,4 @@ describe('app.emailTokenService ', function () {
 
         expect(emailTokenService.token).toBeUndefined();
     });
-
-
 });

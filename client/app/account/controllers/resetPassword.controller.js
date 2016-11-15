@@ -7,9 +7,8 @@
         .controller('ResetPasswordController', ResetPasswordController);
 
     /* @ngInject */
-    function ResetPasswordController(brand) {
+    function ResetPasswordController(configService) {
         var vm = this;
-        vm.title = brand.getBrandName() + " Reset Password Complete";
-
+        vm.title = configService.getBrandName() + " Reset Password Complete";
     }
 })();

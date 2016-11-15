@@ -8,6 +8,12 @@ describe('app.zipFilter', function () {
 
     var $filter;
 
+    beforeEach(function () {
+        module(function ($provide) {
+            $provide.constant('configConstants');
+        });
+    });
+
     beforeEach(module('app.core'));
     beforeEach(module('app.account'));
 
@@ -26,10 +32,8 @@ describe('app.zipFilter', function () {
 
     });
 
-
     it('should return empty', function () {
         var data;
         expect($filter(data)).toBe('NaN');
     });
-
 });

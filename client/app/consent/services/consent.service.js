@@ -9,20 +9,20 @@
         .factory('consentService', consentService);
 
     /* @ngInject */
-    function consentService($resource, $http, envService, utilityService) {
-        var consentListResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/pageNumber/:pageNumber", {pageNumber: '@pageNumber'});
-        var consentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/:id", {id: '@id'}, {'update': {method: 'PUT'}});
-        var consentExportConsentDirective = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/exportConsentDirective/:id", {id: '@id'});
-        var purposeOfUseResource = $resource(envService.securedApis.pcmApiBaseUrl + "/purposeOfUse");
-        var sensitivityPolicyResource = $resource(envService.securedApis.pcmApiBaseUrl + "/sensitivityPolicy");
-        var attestedConsentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/:consentId/attested", {consentId: '@consentId'});
-        var revokeConsentResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/revokeConsent/:id", {id: '@id'});
-        var consentAttestationResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/:consentId/attestation", {consentId: '@consentId'});
-        var consentRevokeAttestationResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/:consentId/revokeConsent", {consentId: '@consentId'});
-        var attestedConsentRevocationResource = $resource(envService.securedApis.pcmApiBaseUrl + "/consents/:consentId/revocation", {consentId: '@consentId'});
+    function consentService($resource, $http, configService, utilityService) {
+        var consentListResource = $resource(configService.getPcmApiBaseUrl() + "/consents/pageNumber/:pageNumber", {pageNumber: '@pageNumber'});
+        var consentResource = $resource(configService.getPcmApiBaseUrl() + "/consents/:id", {id: '@id'}, {'update': {method: 'PUT'}});
+        var consentExportConsentDirective = $resource(configService.getPcmApiBaseUrl() + "/consents/exportConsentDirective/:id", {id: '@id'});
+        var purposeOfUseResource = $resource(configService.getPcmApiBaseUrl() + "/purposeOfUse");
+        var sensitivityPolicyResource = $resource(configService.getPcmApiBaseUrl() + "/sensitivityPolicy");
+        var attestedConsentResource = $resource(configService.getPcmApiBaseUrl() + "/consents/:consentId/attested", {consentId: '@consentId'});
+        var revokeConsentResource = $resource(configService.getPcmApiBaseUrl() + "/consents/revokeConsent/:id", {id: '@id'});
+        var consentAttestationResource = $resource(configService.getPcmApiBaseUrl() + "/consents/:consentId/attestation", {consentId: '@consentId'});
+        var consentRevokeAttestationResource = $resource(configService.getPcmApiBaseUrl() + "/consents/:consentId/revokeConsent", {consentId: '@consentId'});
+        var attestedConsentRevocationResource = $resource(configService.getPcmApiBaseUrl() + "/consents/:consentId/revocation", {consentId: '@consentId'});
         var selectedNpi = {authorizeNpi: "", discloseNpi: ""};
         var selectedProvider = [];
-        var tryPolicyResource = $resource(envService.securedApis.tryPolicyApiBaseUrl + "/tryPolicyXHTML", {},
+        var tryPolicyResource = $resource(configService.getTryPolicyApiBaseUrl() + "/tryPolicyXHTML", {},
             {
                 'query': {
                     method: 'GET',
@@ -103,7 +103,7 @@
             var request = {
                 method: 'GET',
                 responseType: 'arraybuffer',
-                url: envService.securedApis.pcmApiBaseUrl + "/consents/" + id + "/unattested/"
+                url: configService.getPcmApiBaseUrl() + "/consents/" + id + "/unattested/"
             };
             $http(request).success(success).error(error);
         }
@@ -112,7 +112,7 @@
             var request = {
                 method: 'GET',
                 responseType: 'arraybuffer',
-                url: envService.securedApis.pcmApiBaseUrl + "/consents/" + id + "/attested/download"
+                url: configService.getPcmApiBaseUrl() + "/consents/" + id + "/attested/download"
             };
             $http(request).success(success).error(error);
         }
@@ -296,7 +296,7 @@
             var request = {
                 method: 'GET',
                 responseType: 'arraybuffer',
-                url: envService.securedApis.pcmApiBaseUrl + "/consents/" + id + "/revoked/download"
+                url: configService.getPcmApiBaseUrl() + "/consents/" + id + "/revoked/download"
             };
             $http(request).success(success).error(error);
         }

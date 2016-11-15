@@ -9,6 +9,12 @@ describe('app.providerFiltersModule ', function () {
 
     var pcmProviderAddress, pcmNameorfacility, utilityService, plsName, plsAddress;
 
+    beforeEach(function () {
+        module(function ($provide) {
+            $provide.constant('configConstants');
+        });
+    });
+
     beforeEach(module('app.provider'));
     beforeEach(module('app.config'));
 

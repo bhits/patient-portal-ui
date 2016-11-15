@@ -9,9 +9,9 @@
         .factory('medicalDocumentsService', medicalDocumentsService);
 
     /* @ngInject */
-    function medicalDocumentsService($resource, envService) {
-        var medicalDocumentsResource = $resource(envService.securedApis.pcmApiBaseUrl + "/clinicaldocuments/:id", {id: '@id'});
-        var phrResource = $resource(envService.securedApis.phrApiBaseUrl + "/patients/healthInformation/publish");
+    function medicalDocumentsService($resource, configService) {
+        var medicalDocumentsResource = $resource(configService.getPcmApiBaseUrl() + "/clinicaldocuments/:id", {id: '@id'});
+        var phrResource = $resource(configService.getPhrApiBaseUrl() + "/patients/healthInformation/publish");
 
         var service = {};
         service.downloadMedicalDocument = downloadMedicalDocument;
@@ -22,7 +22,7 @@
         return service;
 
         function medicalDocumentUploadResource() {
-            return $resource(envService.securedApis.pcmApiBaseUrl + "/clinicaldocuments", {},
+            return $resource(configService.getPcmApiBaseUrl() + "/clinicaldocuments", {},
                 {
                     save: {
                         method: 'POST',
@@ -57,6 +57,3 @@
         }
     }
 })();
-
-
-

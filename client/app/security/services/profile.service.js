@@ -6,8 +6,8 @@
         .factory('profileService', profileService);
 
     /* @ngInject */
-    function profileService($sessionStorage, $resource, envService, notificationService) {
-        var profileResource = $resource(envService.securedApis.userInfo);
+    function profileService($sessionStorage, $resource, configService, notificationService) {
+        var profileResource = $resource(configService.getUserInfo());
 
         var service = {};
 

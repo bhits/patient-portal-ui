@@ -1,8 +1,8 @@
 {
-  "name": "Consent2Share",
-  "version": "0.20.0",
-  "description": "Proof of concept",
-  "license": "Copyright @FEi Systems",
+  "name": "pp-ui",
+  "version": "0.21.0",
+  "description": "",
+  "license": "Copyright © 2016 SAMHSA",
   "private": true,
   "ignore": [
     "**/.*",
@@ -21,7 +21,7 @@
     "angular-bootstrap": "1.2.x",
     "angular-ui-router": "0.2.x",
     "checklist-model": "0.9.x",
-    "x2js":"1.2.x",
+    "x2js": "1.2.x",
     "ngstorage": "0.3.x",
     "angular-jwt": "0.0.x"
   },

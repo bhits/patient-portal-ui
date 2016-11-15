@@ -9,8 +9,8 @@
         .factory('emailTokenService', emailTokenService);
 
     /* @ngInject */
-    function emailTokenService($resource, $sessionStorage, envService) {
-        var emailTokenResource = $resource(envService.unsecuredApis.verificationUrl);
+    function emailTokenService($resource, $sessionStorage, configService) {
+        var emailTokenResource = $resource(configService.getVerificationUrl());
         var service = {};
 
         service.loadEmailToken = loadEmailToken;

@@ -6,14 +6,14 @@
         .factory('authenticationService', authenticationService);
 
     /* @ngInject */
-    function authenticationService($resource, envService, oauthTokenService, utilityService, securityConstants) {
+    function authenticationService($resource, configService, oauthTokenService, utilityService, securityConstants) {
         function loginResource() {
-            return $resource(envService.unsecuredApis.tokenUrl, {},
+            return $resource(configService.getTokenUrl(), {},
                 {
                     save: {
                         method: 'POST',
                         headers: {
-                            'Authorization': 'Basic ' + envService.base64BasicKey,
+                            'Authorization': 'Basic ' + configService.getOauthBasicKey(),
                             'Content-Type': 'application/x-www-form-urlencoded'
                         },
                         /* convert to url encoded string */
@@ -29,7 +29,7 @@
         }
 
         function forgotPasswordResource() {
-            return $resource(envService.unsecuredApis.forgotPasswordUrl, {},
+            return $resource(configService.getForgotPasswordUrl(), {},
                 {
                     save: {
                         method: 'POST',

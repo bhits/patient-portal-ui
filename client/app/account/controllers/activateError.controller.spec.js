@@ -8,26 +8,12 @@ xdescribe("app.activateErrorController", function () {
 
     beforeEach(module('app.account'));
 
-    var controller, $state, brand;
-
-    beforeEach(function () {
-        var fakeModule = angular.module('test.app.brand', function () {
-        });
-        fakeModule.config(function (brandProvider) {
-            brand = brandProvider;
-        });
-        module('app.brand', 'test.app.brand');
-        inject(function () {
-        });
-        brand.setBrandName("Brand Name");
-        brand.setBrandInitial("BI");
-    });
+    var controller, $state;
 
     beforeEach(inject(function ($controller, _$state_) {
         $state = _$state_;
 
         controller = $controller('ActivateErrorController', {
-            brand: brand
         });
     }));
 
@@ -49,6 +35,4 @@ xdescribe("app.activateErrorController", function () {
         expect(controller.brandInitial).toBeDefined();
         expect(controller.brandInitial).toEqual('BI');
     });
-
-
 });

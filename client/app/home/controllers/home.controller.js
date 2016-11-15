@@ -9,8 +9,8 @@
         .controller('HomeController', HomeController);
 
     /* @ngInject */
-    function HomeController(brand) {
+    function HomeController(configService) {
         var vm = this;
-        vm.brandName = brand.getBrandName();
+        vm.brandName = configService.getBrandName();
     }
 })();

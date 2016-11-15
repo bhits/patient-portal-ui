@@ -7,28 +7,14 @@ xdescribe("app.CreatePasswordController", function () {
 
     beforeEach(module('app.account'));
 
-    var controller, $state, allowActivation, brand;
-
-    beforeEach(function () {
-        var fakeModule = angular.module('test.app.brand', function () {
-        });
-        fakeModule.config(function (brandProvider) {
-            brand = brandProvider;
-        });
-        module('app.brand', 'test.app.brand');
-        inject(function () {
-        });
-        brand.setBrandName("Brand Name");
-        brand.setBrandInitial("BI");
-    });
+    var controller, $state, allowActivation;
 
     beforeEach(inject(function ($controller, _$state_) {
 
         $state = _$state_;
 
         controller = $controller('CreatePasswordController', {
-            allowActivation: true,
-            brand: brand
+            allowActivation: true
         });
 
     }));
@@ -53,14 +39,10 @@ xdescribe("app.CreatePasswordController", function () {
             $state = _$state_;
 
             controller = $controller('CreatePasswordController', {
-                allowActivation: false,
-                brand: brand
+                allowActivation: false
             });
-
         });
         expect(controller.allowActivation).toBeDefined();
         expect(controller.allowActivation).toBeFalsy();
     });
-
-
 });

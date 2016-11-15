@@ -8,26 +8,11 @@ xdescribe("app.resetPassword.controller", function () {
 
     beforeEach(module('app.account'));
 
-    var controller, brand;
-
-
-    beforeEach(function () {
-        var fakeModule = angular.module('test.app.brand', function () {
-        });
-        fakeModule.config(function (brandProvider) {
-            brand = brandProvider;
-        });
-        module('app.brand', 'test.app.brand');
-        inject(function () {
-        });
-        brand.setBrandName("Brand Name");
-        brand.setBrandInitial("BI");
-    });
+    var controller;
 
     beforeEach(inject(function ($controller) {
 
         controller = $controller('ResetPasswordController', {
-            brand: brand
         });
 
     }));

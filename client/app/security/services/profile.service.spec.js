@@ -3,19 +3,25 @@
 'use strict';
 
 describe('app.profileService ', function () {
-    var profileService, sessionStorage, resource, envService, notificationService, httpBackend;
+    var profileService, sessionStorage, resource, configService, notificationService, httpBackend;
 
     var emptyProfile;
     var profile = {name: 'testProfile', user_name: 'username', user_id: 101};
 
+    beforeEach(function () {
+        module(function ($provide) {
+            $provide.constant('configConstants', {securedApis: {userInfo: 'dummyValue'}});
+        });
+    });
+
     beforeEach(module('app.security'));
 
     beforeEach(inject(function (_profileService_, _$sessionStorage_, _$resource_,
-                                _envService_, _notificationService_, _$httpBackend_) {
+                                _configService_, _notificationService_, _$httpBackend_) {
         profileService = _profileService_;
         sessionStorage = _$sessionStorage_;
         resource = _$resource_;
-        envService = _envService_;
+        configService = _configService_;
         notificationService = _notificationService_;
         httpBackend = _$httpBackend_;
     }));
@@ -72,5 +78,4 @@ describe('app.profileService ', function () {
         profileService.getName();
         expect(profileService.getName()).toBe('testProfile');
     });
-
 });
