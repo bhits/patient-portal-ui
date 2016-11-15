@@ -12,11 +12,15 @@
         vm.version = envService.version;
         vm.forgotPassword = forgotPassword;
         vm.brandName = configService.getBrandName();
-        vm.brandLargeLogo = configService.getBrandLargeLogo();
+        vm.brandLargeLogo = specifyImageType(configService.getBrandLargeLogo());
         vm.altLogoText = configService.getBrandInitials() + " Logo";
 
         function forgotPassword() {
             utilityService.redirectTo(accountConfig.forgotPasswordPath);
+        }
+
+        function specifyImageType(base64Image) {
+            return "data:image/png;base64," + base64Image;
         }
     }
 })();

@@ -25,7 +25,11 @@
     /* @ngInject */
     function TopNavbarController(configService) {
         var vm = this;
-        vm.brandSmallLogo = configService.getBrandSmallLogo();
-        vm.brandMediumLogo = configService.getBrandMediumLogo();
+        vm.brandSmallLogo = specifyImageType(configService.getBrandSmallLogo());
+        vm.brandMediumLogo = specifyImageType(configService.getBrandMediumLogo());
+
+        function specifyImageType(base64Image) {
+            return "data:image/png;base64," + base64Image;
+        }
     }
 })();
