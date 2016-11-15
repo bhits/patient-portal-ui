@@ -21,6 +21,9 @@ public class PPUIProperties {
     public static class Branding {
         private String name;
         private String initials;
+        private String smallLogo;
+        private String mediumLogo;
+        private String largeLogo;
     }
 
     @Data
