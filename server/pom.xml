@@ -222,8 +222,6 @@
                         <phase>generate-resources</phase>
 
                         <configuration>
-                            <!-- optional: if not specified, it will run Grunt's default task
-                                (and you can remove this whole <configuration> section.) -->
                             <!-- srcdir (optional, for M2Eclipse integration) - a directory to check for changed files before executing in an incremental build -->
                             <!-- The changed file checking only occurs during an incremental build when using M2Eclipse. In any other environment those options are ignored and builds are always run. -->
                             <srcdir>${basedir}/../client</srcdir>
