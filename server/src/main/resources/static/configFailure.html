@@ -6,32 +6,35 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 </head>
 <body>
-    <div class="container-fluid">
+<div class="container-fluid">
+    <div class="row">
         <nav class="navbar navbar-default navbar-static-top" role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <h3>Consent2Share Configuration Access Failure</h3>
+                    <p style="margin: 20px 0 20px 10px;">Consent2Share Configuration Access Failure</p>
                 </div>
             </div>
         </nav>
-        <div class="m-b-lg m-l-none m-r-none">
-            <div class="row">
-                <div class="col-sm-offset-1 col-sm-10">
-                    <h1>Sorry, cannot get configuration!</h1>
-                    <div class="m-t-md">
-                        <label class="m-t-md">Please report this to the administrator if it happened constantly.</label>
-                        <label class="m-t-md">Later, please try to click the link below to login page</label>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-offset-1 col-sm-10 m-t-md">
-                    <a class="btn btn-primary">
-                        Back to Login Page
-                    </a>
+    </div>
+    <div class="m-b-lg m-l-none m-r-none">
+        <div class="row">
+            <div class="col-sm-offset-1 col-sm-10">
+                <h1 style="font-size: 30px; font-weight: 100; margin: 0 0 10px 0;">Sorry! Could not run application!</h1>
+                <div>
+
+                    <p style="margin-top: 20px;"><strong>Could not load configuration from the server.</strong> Please return to the Login Page and try again.</p>
+                    <p style="margin-top: 20px;">If this persists, please contact your administrator for assistance.</p>
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-sm-offset-1 col-sm-10" style="margin-top: 15px;">
+                <a class="btn btn-primary">
+                    Back to Login Page
+                </a>
+            </div>
+        </div>
     </div>
+</div>
 </body>
 </html>
