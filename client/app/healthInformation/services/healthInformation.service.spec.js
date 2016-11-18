@@ -28,6 +28,16 @@ describe('app.healthInformationService ', function () {
 
     beforeEach(function () {
         module(function ($provide) {
+            $provide.constant('configPropertyList', [
+                '0', '1', '2',
+                '3', '4', '5', '6',
+                'phrDummyValue'
+            ]);
+        });
+    });
+
+    beforeEach(function () {
+        module(function ($provide) {
             $provide.constant('configConstants', {securedApis: 'dummyValue'});
         });
     });

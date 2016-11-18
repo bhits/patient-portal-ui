@@ -6,7 +6,7 @@
         .factory('configService', configService);
 
     /* @ngInject */
-    function configService(configConstants, notificationService) {
+    function configService(configConstants, configPropertyList) {
 
         var service = {};
         service.getBrandName = getBrandName;
@@ -27,85 +27,70 @@
 
         return service;
 
-        function getConfigByPropertyKey(key, errorMessage) {
+        function getConfigByPropertyKey(index) {
             if (configConstants !== null) {
-                if (checkKeyExistsInObject(configConstants, key)) {
-                    return accessPropertyByStringKey(configConstants, key);
-                } else {
-                    notificationService.error('Failed to get configuration for ' + errorMessage);
-                }
+                return accessPropertyByStringKey(configConstants, configPropertyList[index]);
             }
         }
 
         function getBrandName() {
-            return getConfigByPropertyKey('branding.name', 'Brand Name');
+            return getConfigByPropertyKey(0);
         }
 
         function getBrandInitials() {
-            return getConfigByPropertyKey('branding.initials', 'Brand Initials');
+            return getConfigByPropertyKey(1);
         }
 
         function getBrandSmallLogo() {
-            return getConfigByPropertyKey('branding.smallLogo', 'Brand Small Logo');
+            return getConfigByPropertyKey(2);
         }
 
         function getBrandMediumLogo() {
-            return getConfigByPropertyKey('branding.mediumLogo', 'Brand Medium Logo');
+            return getConfigByPropertyKey(3);
         }
 
         function getBrandLargeLogo() {
-            return getConfigByPropertyKey('branding.largeLogo', 'Brand Large Logo');
+            return getConfigByPropertyKey(4);
         }
 
         function getOauthBasicKey() {
-            return getConfigByPropertyKey('oauth2.client.base64BasicKey', 'Oauth Basic Key');
+            return getConfigByPropertyKey(5);
         }
 
         function getPcmApiBaseUrl() {
-            return getConfigByPropertyKey('securedApis.pcmApiBaseUrl', 'Pcm Base URL');
+            return getConfigByPropertyKey(6);
         }
 
         function getPhrApiBaseUrl() {
-            return getConfigByPropertyKey('securedApis.phrApiBaseUrl', 'Phr Base URL');
+            return getConfigByPropertyKey(7);
         }
 
         function getTryPolicyApiBaseUrl() {
-            return getConfigByPropertyKey('securedApis.tryPolicyApiBaseUrl', 'TryPolicy Base URL');
+            return getConfigByPropertyKey(8);
         }
 
         function getUserInfo() {
-            return getConfigByPropertyKey('securedApis.userInfo', 'UserInfo Base URL');
+            return getConfigByPropertyKey(9);
         }
 
         function getPlsApiBaseUrl() {
-            return getConfigByPropertyKey('unsecuredApis.plsApiBaseUrl', 'Pls Base URL');
+            return getConfigByPropertyKey(10);
         }
 
         function getTokenUrl() {
-            return getConfigByPropertyKey('unsecuredApis.tokenUrl', 'Token URL');
+            return getConfigByPropertyKey(11);
         }
 
         function getVerificationUrl() {
-            return getConfigByPropertyKey('unsecuredApis.verificationUrl', 'Verification URL');
+            return getConfigByPropertyKey(12);
         }
 
         function getActivationUrl() {
-            return getConfigByPropertyKey('unsecuredApis.activationUrl', 'Activation URL');
+            return getConfigByPropertyKey(13);
         }
 
         function getForgotPasswordUrl() {
-            return getConfigByPropertyKey('unsecuredApis.forgotPasswordUrl', 'ForgotPassword URL');
-        }
-
-        function checkKeyExistsInObject(obj, key) {
-            var components = key.split(".");
-            for (var i = 0; i < components.length; i++) {
-                if ((typeof obj !== "object") || (!obj.hasOwnProperty(components[i]))) {
-                    return false;
-                }
-                obj = obj[components[i]];
-            }
-            return true;
+            return getConfigByPropertyKey(14);
         }
 
         function accessPropertyByStringKey(obj, stringKey) {

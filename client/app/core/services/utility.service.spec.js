@@ -27,6 +27,12 @@ describe('app.utilityService ', function () {
         });
     });
 
+    beforeEach(function () {
+        module(function ($provide) {
+            $provide.constant('configPropertyList');
+        });
+    });
+
     beforeEach(module('app.core'));
     beforeEach(module('app.config'));
 
