@@ -10,6 +10,17 @@ describe('app.profileService ', function () {
 
     beforeEach(function () {
         module(function ($provide) {
+            $provide.constant('configPropertyList', [
+                '0', '1', '2',
+                '3', '4', '5',
+                '6', '7', '8',
+                'securedApis.userInfo'
+            ]);
+        });
+    });
+
+    beforeEach(function () {
+        module(function ($provide) {
             $provide.constant('configConstants', {securedApis: {userInfo: 'dummyValue'}});
         });
     });

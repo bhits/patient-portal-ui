@@ -104,6 +104,12 @@ describe("app AppController ", function () {
         });
     });
 
+    beforeEach(function () {
+        module(function ($provide) {
+            $provide.constant('configPropertyList');
+        });
+    });
+
     beforeEach(inject(function (_$rootScope_, _$templateCache_, _$location_, $controller, _$state_, $anchorScroll, _utilityService_, _authenticationService_, _Idle_, _$modal_, _idleConfigParams_) {
         $rootScope = _$rootScope_;
         scope = $rootScope.$new();
