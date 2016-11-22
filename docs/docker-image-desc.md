@@ -31,9 +31,9 @@ Be sure to familiarize yourself with the repository's [README.md](https://github
 
 This API runs with a [default configuration](https://github.com/bhits/patient-portal-ui/blob/master/patient-portal-ui/src/main/resources/application.yml) that is primarily targeted for the development environment.  The Spring profile `docker` is actived by default when building images. [Spring Boot](https://projects.spring.io/spring-boot/) supports several methods to override the default configuration to configure the API for a certain deployment environment. 
 
-Here is example to override default database password:
+Here is example to override one default configuration:
 
-`docker run -d bhits/pp-ui:latest --spring.datasource.password=strongpassword`
+`docker run -d bhits/pp-ui:latest --c2s.pp-ui.oauth2.client.secret=strongpassword`
 
 ## Using a custom configuration file
 
