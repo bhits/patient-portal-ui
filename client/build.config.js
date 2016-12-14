@@ -32,6 +32,7 @@ module.exports = {
      */
     app_files: {
         js: ['app/**/*.js', '!app/**/*.spec.js', '!app/**/*.e2e.js'],
+        js_generated: ['app_ts/**/*.js'],
         jsunit: ['app/**/*.spec.js'],
         e2e: ['app/**/*.e2e.js'],
 
@@ -39,15 +40,30 @@ module.exports = {
 
         html: ['index.html'],
         less: 'less/main.less',
-        debug_js: ['target/debug/**/*.js', '!target/debug/**/karma.conf.js', '!target/debug/node_modules/**/*.js', '!target/debug/assets/**/*.js'],
+        debug_js: [
+            'target/debug/**/*.js',
+            '!target/debug/**/karma.conf.js',
+            '!target/debug/node_modules/**/*.js',
+            '!target/debug/assets/**/*.js',
+            '!target/debug/bootstrap/**/*.js',
+            '!target/debug/app_ts/**/*.js',
+            '!target/debug/resources/**/*.js'
+        ]
     },
 
     /**
-     * This is a collection of file patterns that used for manually initialize Angular application
+     * This is a collection of file patterns that used for loading configuration for initialize Angular application
      * The order of the files: These files will be put in the html files as the order in the array
      */
     bootstrap_files: {
         js: ['bootstrap/**/*.js']
+    },
+
+    /**
+     * Configuration for System.js
+     */
+    system_resources: {
+        js: ['resources/**/*.js']
     },
 
     /**
@@ -92,11 +108,16 @@ module.exports = {
             'node_modules/ngstorage/ngStorage.js',
             'node_modules/checklist-model/checklist-model.js',
             'node_modules/x2js/xml2json.js',
-            'node_modules/angular-jwt/dist/angular-jwt.js'
+            'node_modules/angular-jwt/dist/angular-jwt.js',
+            'node_modules/core-js/client/shim.js',
+            'node_modules/zone.js/dist/zone.js',
+            'node_modules/reflect-metadata/Reflect.js',
+            'node_modules/systemjs/dist/system.src.js'
         ],
         css: [
             'node_modules/angular-loading-bar/build/loading-bar.css'
         ],
-        assets: []
+        assets: [],
+        angular2_lib: ['node_modules/@angular/**/*.js', 'node_modules/rxjs/**/*.js']
     }
 };
