@@ -39,7 +39,7 @@ module.exports = {
 
         html: ['index.html'],
         less: 'less/main.less',
-        debug_js: ['target/debug/**/*.js', '!target/debug/**/karma.conf.js', '!target/debug/vendor/**/*.js', '!target/debug/assets/**/*.js'],
+        debug_js: ['target/debug/**/*.js', '!target/debug/**/karma.conf.js', '!target/debug/node_modules/**/*.js', '!target/debug/assets/**/*.js'],
     },
 
     /**
@@ -56,7 +56,7 @@ module.exports = {
      */
     test_files: {
         js: [
-            'vendor/angular-mocks/angular-mocks.js'
+            'node_modules/angular-mocks/angular-mocks.js'
         ]
     },
 
@@ -82,20 +82,20 @@ module.exports = {
      */
     vendor_files: {
         js: [
-            'vendor/angular/angular.js',
-            'vendor/angular-resource/angular-resource.js',
-            'vendor/angular-sanitize/angular-sanitize.js',
-            'vendor/angular-aria/angular-aria.js',
-            'vendor/angular-messages/angular-messages.js',
-            'vendor/angular-loading-bar/build/loading-bar.js',
-            'vendor/angular-ui-router/release/angular-ui-router.js',
-            'vendor/ngstorage/ngStorage.js',
-            'vendor/checklist-model/checklist-model.js',
-            'vendor/x2js/xml2json.js',
-            'vendor/angular-jwt/dist/angular-jwt.js'
+            'node_modules/angular/angular.js',
+            'node_modules/angular-resource/angular-resource.js',
+            'node_modules/angular-sanitize/angular-sanitize.js',
+            'node_modules/angular-aria/angular-aria.js',
+            'node_modules/angular-messages/angular-messages.js',
+            'node_modules/angular-loading-bar/build/loading-bar.js',
+            'node_modules/angular-ui-router/release/angular-ui-router.js',
+            'node_modules/ngstorage/ngStorage.js',
+            'node_modules/checklist-model/checklist-model.js',
+            'node_modules/x2js/xml2json.js',
+            'node_modules/angular-jwt/dist/angular-jwt.js'
         ],
         css: [
-            'vendor/angular-loading-bar/build/loading-bar.css'
+            'node_modules/angular-loading-bar/build/loading-bar.css'
         ],
         assets: []
     }
