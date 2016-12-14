@@ -40,30 +40,15 @@ module.exports = function (grunt) {
             '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
             ' Licensed <%= _.map(pkg.licenses, "type").join(", ") %> */\n'
         },
-        bower: {
-            install: {
-                options: {
-                    targetDir: 'vendor/',
-                    install: true,
-                    copy: false // See https://github.com/yatskevich/grunt-bower-task/issues/44
-                }
-            }
-        },
         /**
          * Increments the version number, etc.
          */
         bump: {
             options: {
-                files: [
-                    "package.json",
-                    "bower.json"
-                ],
+                files: ["package.json"],
                 commit: false,
                 commitMessage: 'chore(release): v%VERSION%',
-                commitFiles: [
-                    "package.json",
-                    "bower.json"
-                ],
+                commitFiles: ["package.json"],
                 createTag: false,
                 tagName: 'v%VERSION%',
                 tagMessage: 'Version %VERSION%',
@@ -657,7 +642,7 @@ module.exports = function (grunt) {
 
         var taskList;
 
-        taskList = ['clean', 'bower:install'];
+        taskList = ['clean'];
 
         taskList.push(
             'html2js',
