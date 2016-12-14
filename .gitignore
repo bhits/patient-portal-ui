@@ -125,6 +125,17 @@ bower_components
 # Optional REPL history
 .node_repl_history
 
+# Typescript #
+##################################
+
+# Typing directory
+typings
+
+# Typescript
+.tscache
+client/app_ts/**/*.js
+client/app_ts/**/*.js.map
+
 
 # SASS #
 ##################################
