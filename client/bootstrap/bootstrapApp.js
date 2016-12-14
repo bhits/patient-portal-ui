@@ -21,6 +21,9 @@
         'unsecuredApis.forgotPasswordUrl'
     ];
 
+    // Load the initial configuration
+    getAppConfig();
+
     function getAppConfig() {
         var initInjector = angular.injector(['ng']);
         var _http = initInjector.get('$http');
@@ -38,13 +41,6 @@
             _window.location.href = '/pp-ui/configError';
         });
     }
-
-    getAppConfig().then(function () {
-        // manually initializing Angular
-        angular.element(document).ready(function () {
-            angular.bootstrap(document, ['bootstrapApp']);
-        });
-    });
 
     function checkPropertyExistsInConfiguration(configObj) {
         for (var i = 0; i < configPropertyList.length; i++) {
