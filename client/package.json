@@ -21,7 +21,22 @@
       "url": ""
     }
   ],
+  "dependencies": {
+    "angular": "1.5.0",
+    "angular-resource": "1.5.0",
+    "angular-sanitize": "1.5.0",
+    "angular-aria": "1.5.0",
+    "angular-messages": "1.5.0",
+    "angular-loading-bar": "0.8.x",
+    "angular-bootstrap": "1.2.x",
+    "angular-ui-router": "0.2.x",
+    "checklist-model": "0.9.x",
+    "x2js": "1.2.x",
+    "ngstorage": "0.3.x",
+    "angular-jwt": "0.0.x"
+  },
   "devDependencies": {
+    "angular-mocks": "~1.5.0",
     "bower": "~1.7.7",
     "grunt": "^1.0.1",
     "grunt-angular-file-loader": "~1.2.0",
