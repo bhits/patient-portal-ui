@@ -31,13 +31,12 @@
 
         return _http.get('/pp-ui/config').then(function (response) {
             if (checkPropertyExistsInConfiguration(response.data)) {
-                configInitial.constant('configConstants', response.data);
+                configInitial.constant('configProvider', response.data);
                 configInitial.constant('configPropertyList', configPropertyList);
             } else {
                 _window.location.href = '/pp-ui/configError';
             }
         }, function (errorResponse) {
-            configInitial.constant('configConstants', null);
             _window.location.href = '/pp-ui/configError';
         });
     }

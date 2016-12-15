@@ -38,7 +38,7 @@ describe('app.healthInformationService ', function () {
 
     beforeEach(function () {
         module(function ($provide) {
-            $provide.constant('configConstants', {securedApis: 'dummyValue'});
+            $provide.constant('configProvider', {securedApis: 'dummyValue'});
         });
     });
 

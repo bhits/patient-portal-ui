@@ -18,7 +18,7 @@ describe('app.emailTokenService ', function () {
 
     beforeEach(function () {
         module(function ($provide) {
-            $provide.constant('configConstants', {unsecuredApis: {verificationUrl: 'dummyValue'}});
+            $provide.constant('configProvider', {unsecuredApis: {verificationUrl: 'dummyValue'}});
         });
     });
 

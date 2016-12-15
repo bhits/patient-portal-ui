@@ -6,7 +6,7 @@
         .factory('utilityService', utilityService);
 
     /* @ngInject */
-    function utilityService($location, $anchorScroll, $window, configConstants, browser, coreConstants) {
+    function utilityService($location, $anchorScroll, $window, configProvider, browser, coreConstants) {
         var service = {};
 
         service.getYear = getYear;
@@ -212,7 +212,7 @@
         function isSecuredApi(url) {
             var isSecured = false;
             if (angular.isDefined(url)) {
-                angular.forEach(configConstants.securedApis, function (value) {
+                angular.forEach(configProvider.securedApis, function (value) {
                     if (startsWith(url.toLowerCase(), value.toLowerCase())) {
                         isSecured = true;
                     }

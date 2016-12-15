@@ -16,7 +16,7 @@ describe('app.utilityService ', function () {
 
     beforeEach(function () {
         module(function ($provide) {
-            $provide.constant('configConstants', {
+            $provide.constant('configProvider', {
                 securedApis: {
                     pcmApiBaseUrl: '/pcm/patients',
                     phrApiBaseUrl: '/phr',

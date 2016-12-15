@@ -11,7 +11,7 @@ describe('app.providerFiltersModule ', function () {
 
     beforeEach(function () {
         module(function ($provide) {
-            $provide.constant('configConstants');
+            $provide.constant('configProvider');
         });
     });
 
