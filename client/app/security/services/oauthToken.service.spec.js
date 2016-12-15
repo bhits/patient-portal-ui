@@ -1,14 +1,17 @@
 /* Created by cindy.ren on 6/9/2016.*/
 'use strict';
 
-xdescribe('app.oauthTokenService ', function () {
+describe('app.oauthTokenService ', function () {
     var oauthTokenService, sessionStorage, profileService, timeout;
 
     var token = {access_token: 'access_token', refresh_token: 'refresh_token', expires_in: 1};
 
     beforeEach(module('ngResource'));
     beforeEach(module('app.security'));
-    beforeEach(jasmine.clock().install());
+    beforeEach(
+        // Clean up application timers.
+        jasmine.clock().uninstall()
+    );
 
     beforeEach(inject(function (_oauthTokenService_, _$sessionStorage_, _profileService_, _$timeout_) {
         oauthTokenService = _oauthTokenService_;
@@ -16,8 +19,6 @@ xdescribe('app.oauthTokenService ', function () {
         sessionStorage = _$sessionStorage_;
         timeout = _$timeout_;
     }));
-
-    afterEach(jasmine.clock().uninstall());
 
     it("should set token", function () {
         oauthTokenService.removeToken();
