@@ -33,4 +33,4 @@ class PPUIModule {
 /*
  * Bootstrap the App
  */
-upgradeAdapter.bootstrap(document.body, ['bootstrapApp']);
+upgradeAdapter.bootstrap(document.body, ['configInitial']);

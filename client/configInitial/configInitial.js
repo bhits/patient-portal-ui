@@ -1,6 +1,6 @@
 ﻿(function () {
     'use strict';
-    var bootstrapApp = angular.module('bootstrapApp', ['app']);
+    var configInitial = angular.module('configInitial', ['app']);
 
     // Define all expected configuration object properties
     var configPropertyList = [
@@ -31,13 +31,13 @@
 
         return _http.get('/pp-ui/config').then(function (response) {
             if (checkPropertyExistsInConfiguration(response.data)) {
-                bootstrapApp.constant('configConstants', response.data);
-                bootstrapApp.constant('configPropertyList', configPropertyList);
+                configInitial.constant('configConstants', response.data);
+                configInitial.constant('configPropertyList', configPropertyList);
             } else {
                 _window.location.href = '/pp-ui/configError';
             }
         }, function (errorResponse) {
-            bootstrapApp.constant('configConstants', null);
+            configInitial.constant('configConstants', null);
             _window.location.href = '/pp-ui/configError';
         });
     }
