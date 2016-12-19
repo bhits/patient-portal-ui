@@ -10,6 +10,9 @@ import {BrowserModule} from "@angular/platform-browser";
 import {UpgradeAdapter} from '@angular/upgrade';
 import {HttpModule} from "@angular/http";
 
+declare var angular: any;
+import {LogoutComponent} from './components/logout.component';
+
 
 /*
  * Create our upgradeAdapter
@@ -17,8 +20,12 @@ import {HttpModule} from "@angular/http";
 const upgradeAdapter: UpgradeAdapter = new UpgradeAdapter(
     forwardRef(() => PPUIModule));
 
+angular.module('configInitial')
+    .directive('c2sLogout',
+        upgradeAdapter.downgradeNg2Component(LogoutComponent));
+
 @NgModule({
-    declarations: [],
+    declarations: [LogoutComponent],
     imports: [
         CommonModule,
         BrowserModule,

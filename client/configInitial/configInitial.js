@@ -22,7 +22,9 @@
     ];
 
     // Load the initial configuration
-    getAppConfig();
+    angular.element(document).ready(function () {
+        getAppConfig();
+    });
 
     function getAppConfig() {
         var initInjector = angular.injector(['ng']);
