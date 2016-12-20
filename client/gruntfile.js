@@ -94,10 +94,10 @@ module.exports = function (grunt) {
                     }
                 ]
             },
-            build_configInitialjs: {
+            build_configInitializationjs: {
                 files: [
                     {
-                        src: ['<%= configInitial_files.js %>'],
+                        src: ['<%= configInitialization_files.js %>'],
                         dest: '<%= build_debug_dir %>/',
                         cwd: '.',
                         expand: true
@@ -719,7 +719,7 @@ module.exports = function (grunt) {
             'concat:build_css',
             'copy:build_app_assets',
             'copy:build_vendor_assets',
-            'copy:build_configInitialjs',
+            'copy:build_configInitializationjs',
             'copy:build_appjs',
             'copy:build_systemjs_resources',
             'copy:angular2_lib',

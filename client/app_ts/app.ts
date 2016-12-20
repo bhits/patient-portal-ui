@@ -13,12 +13,14 @@ import {HttpModule} from "@angular/http";
 declare var angular: any;
 import {LogoutComponent} from './components/logout.component';
 
-// This allows both Angular 1 & Angular 2 code to be used together in the same application;
-// it'll be removed once all remaining Angular 1 code has been replaced with Angular 2.
+/*
+ This allows both Angular 1 & Angular 2 code to be used together in the same application;
+ it'll be removed once all remaining Angular 1 code has been replaced with Angular 2.
+ */
 const upgradeAdapter: UpgradeAdapter = new UpgradeAdapter(
     forwardRef(() => PPUIModule));
 
-angular.module('configInitial')
+angular.module('configInitialization')
     .directive('c2sLogout',
         upgradeAdapter.downgradeNg2Component(LogoutComponent));
 
@@ -38,4 +40,4 @@ class PPUIModule {
 /*
  * Bootstrap the App
  */
-upgradeAdapter.bootstrap(document.body, ['configInitial']);
+upgradeAdapter.bootstrap(document.body, ['configInitialization']);

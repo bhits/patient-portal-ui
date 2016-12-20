@@ -1,6 +1,6 @@
 ﻿(function () {
     'use strict';
-    var configInitial = angular.module('configInitial', ['app']);
+    var configInitialization = angular.module('configInitialization', ['app']);
 
     // Define all expected configuration object properties
     var configPropertyList = [
@@ -23,23 +23,27 @@
 
     // Load the initial configuration
     angular.element(document).ready(function () {
-        getAppConfig();
+        getAppConfig().then(function () {
+            console.log('Initial configuration successful.');
+        }, function () {
+            console.log('Initial configuration failed.');
+        });
     });
 
     function getAppConfig() {
         var initInjector = angular.injector(['ng']);
-        var _http = initInjector.get('$http');
-        var _window = initInjector.get('$window');
+        var ngHttp = initInjector.get('$http');
+        var ngWindow = initInjector.get('$window');
 
-        return _http.get('/pp-ui/config').then(function (response) {
+        return ngHttp.get('/pp-ui/config').then(function (response) {
             if (checkPropertyExistsInConfiguration(response.data)) {
-                configInitial.constant('configProvider', response.data);
-                configInitial.constant('configPropertyList', configPropertyList);
+                configInitialization.constant('configProvider', response.data);
+                configInitialization.constant('configPropertyList', configPropertyList);
             } else {
-                _window.location.href = '/pp-ui/configError';
+                ngWindow.location.href = '/pp-ui/configError';
             }
         }, function (errorResponse) {
-            _window.location.href = '/pp-ui/configError';
+            ngWindow.location.href = '/pp-ui/configError';
         });
     }
 

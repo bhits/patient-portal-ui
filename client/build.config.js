@@ -13,7 +13,7 @@ module.exports = {
     build_reports_dir: '<%=build_dir%>' + '.reports',
     build_war_dir: '<%=build_dir%>',
     config_dir: 'app/config',
-    configInitial_dir: 'configInitial',
+    configInitialization_dir: 'configInitialization',
 
     /**
      * The `karma_conf_file` file name is where karma testing configuration resides.
@@ -46,7 +46,7 @@ module.exports = {
             '!target/debug/**/karma.conf.js',
             '!target/debug/node_modules/**/*.js',
             '!target/debug/assets/**/*.js',
-            '!target/debug/configInitial/**/*.js',
+            '!target/debug/configInitialization/**/*.js',
             '!target/debug/app_ts/**/*.js',
             '!target/debug/resources/**/*.js'
         ]
@@ -56,8 +56,8 @@ module.exports = {
      * This is a collection of file patterns that used for loading configuration for initializing Angular application
      * The order of the files: These files will be put in the html files as the order in the array
      */
-    configInitial_files: {
-        js: ['configInitial/**/*.js']
+    configInitialization_files: {
+        js: ['configInitialization/**/*.js']
     },
 
     /**
