@@ -33,6 +33,7 @@ module.exports = {
     app_files: {
         js: ['app/**/*.js', '!app/**/*.spec.js', '!app/**/*.e2e.js'],
         js_generated: ['app_ts/**/*.js'],
+        jsmap_generated: ['app_ts/**/*'],
         jsunit: ['app/**/*.spec.js'],
         e2e: ['app/**/*.e2e.js'],
 
