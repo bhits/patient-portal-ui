@@ -53,7 +53,7 @@ module.exports = {
     },
 
     /**
-     * This is a collection of file patterns that used for loading configuration for initialize Angular application
+     * This is a collection of file patterns that used for loading configuration for initializing Angular application
      * The order of the files: These files will be put in the html files as the order in the array
      */
     configInitial_files: {
@@ -108,7 +108,6 @@ module.exports = {
             'node_modules/angular-ui-router/release/angular-ui-router.js',
             'node_modules/ngstorage/ngStorage.js',
             'node_modules/checklist-model/checklist-model.js',
-            'node_modules/x2js/xml2json.js',
             'node_modules/angular-jwt/dist/angular-jwt.js',
             'node_modules/core-js/client/shim.js',
             'node_modules/zone.js/dist/zone.js',

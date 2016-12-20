@@ -13,10 +13,6 @@ import {HttpModule} from "@angular/http";
 declare var angular: any;
 import {LogoutComponent} from './components/logout.component';
 
-
-/*
- * Create our upgradeAdapter
- */
 const upgradeAdapter: UpgradeAdapter = new UpgradeAdapter(
     forwardRef(() => PPUIModule));
 
