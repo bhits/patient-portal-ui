@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 
 @Component({
     selector: 'c2s-logout',
+    // TODO: Need to address 508 compliant
     template: `
                 <span>
                     <a href="#" class="btn btn-success navbar-blueGray" (click)="logout()">
