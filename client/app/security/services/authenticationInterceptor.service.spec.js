@@ -14,7 +14,7 @@ describe('app.authInterceptorService', function () {
 
     beforeEach(function () {
         module(function ($provide) {
-            $provide.constant('configConstants');
+            $provide.constant('configProvider');
         });
     });
 

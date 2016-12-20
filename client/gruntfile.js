@@ -40,30 +40,15 @@ module.exports = function (grunt) {
             '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
             ' Licensed <%= _.map(pkg.licenses, "type").join(", ") %> */\n'
         },
-        bower: {
-            install: {
-                options: {
-                    targetDir: 'vendor/',
-                    install: true,
-                    copy: false // See https://github.com/yatskevich/grunt-bower-task/issues/44
-                }
-            }
-        },
         /**
          * Increments the version number, etc.
          */
         bump: {
             options: {
-                files: [
-                    "package.json",
-                    "bower.json"
-                ],
+                files: ["package.json"],
                 commit: false,
                 commitMessage: 'chore(release): v%VERSION%',
-                commitFiles: [
-                    "package.json",
-                    "bower.json"
-                ],
+                commitFiles: ["package.json"],
                 createTag: false,
                 tagName: 'v%VERSION%',
                 tagMessage: 'Version %VERSION%',
@@ -79,7 +64,7 @@ module.exports = function (grunt) {
          */
         clean: {
             all: {
-                src: ['<%= build_dir %>**', '<%= build_reports_dir %>']
+                src: ['<%= build_dir %>**', '<%= build_reports_dir %>', 'app_ts/**/*.js', 'app_ts/**/*.map']
             }
         },
         /**
@@ -109,10 +94,10 @@ module.exports = function (grunt) {
                     }
                 ]
             },
-            build_bootstrapjs: {
+            build_configInitializationjs: {
                 files: [
                     {
-                        src: ['<%= bootstrap_files.js %>'],
+                        src: ['<%= configInitialization_files.js %>'],
                         dest: '<%= build_debug_dir %>/',
                         cwd: '.',
                         expand: true
@@ -123,6 +108,36 @@ module.exports = function (grunt) {
                 files: [
                     {
                         src: ['<%= app_files.js %>'],
+                        dest: '<%= build_debug_dir %>/',
+                        cwd: '.',
+                        expand: true
+                    }
+                ]
+            },
+            build_appjs_generated: {
+                files: [
+                    {
+                        src: ['<%= app_files.js_generated %>'],
+                        dest: '<%= build_debug_dir %>/',
+                        cwd: '.',
+                        expand: true
+                    }
+                ]
+            },
+            build_appjsmap_generated: {
+                files: [
+                    {
+                        src: ['<%= app_files.jsmap_generated %>'],
+                        dest: '<%= build_debug_dir %>/',
+                        cwd: '.',
+                        expand: true
+                    }
+                ]
+            },
+            build_systemjs_resources: {
+                files: [
+                    {
+                        src: ['<%= system_resources.js %>'],
                         dest: '<%= build_debug_dir %>/',
                         cwd: '.',
                         expand: true
@@ -155,6 +170,16 @@ module.exports = function (grunt) {
                         src: ['**'],
                         dest: '<%= build_dist_dir %>/assets',
                         cwd: '<%= build_debug_dir %>/assets',
+                        expand: true
+                    }
+                ]
+            },
+            angular2_lib: {
+                files: [
+                    {
+                        src: ['<%= vendor_files.angular2_lib %>'],
+                        dest: '<%= build_debug_dir %>/',
+                        cwd: '.',
                         expand: true
                     }
                 ]
@@ -547,6 +572,31 @@ module.exports = function (grunt) {
             compile: {
                 src: ['<%= build_debug_dir %>/index.html']
             }
+        },
+        typings: {
+            install: {}
+        },
+        ts: {
+            default: {
+                src: [
+                    "app_ts/**/*.ts",
+                    "!node_modules/**", "!target/**", "!vendor/**", "!protractor/**", "!resources/**",
+                    "!node/**", "!less/**", "!karma/**", "!assets/**", "!app/**/*.js",
+                    "typings/globals/angular/*.d.ts", "typings/globals/jquery/*.d.ts", "typings/globals/es6-shim/*.d.ts"
+                ],
+                dest: "app_ts/",
+                options: {
+                    module: 'commonjs',
+                    moduleResolution: 'node',
+                    target: 'ES5',
+                    sourceMap: true,
+                    experimentalDecorators: true,
+                    emitDecoratorMetadata: true,
+                    removeComments: false,
+                    noImplicitAny: false,
+                    lib: ['es2015', 'dom']
+                }
+            }
         }
     };
     grunt.initConfig(grunt.util._.extend(taskConfig, userConfig));
@@ -657,9 +707,11 @@ module.exports = function (grunt) {
 
         var taskList;
 
-        taskList = ['clean', 'bower:install'];
+        taskList = ['clean'];
 
         taskList.push(
+            'typings',
+            'ts:default',
             'html2js',
             'jshint-all',
             'recess:build',
@@ -667,13 +719,21 @@ module.exports = function (grunt) {
             'concat:build_css',
             'copy:build_app_assets',
             'copy:build_vendor_assets',
-            'copy:build_bootstrapjs',
+            'copy:build_configInitializationjs',
             'copy:build_appjs',
+            'copy:build_systemjs_resources',
+            'copy:angular2_lib',
             'copy:build_vendorjs',
             'index:build',
             'angularFileLoader',
             'karmaconfig'
         );
+
+        if (target === targetEnum.debug) {
+            taskList.push('copy:build_appjsmap_generated');
+        } else {
+            taskList.push('copy:build_appjs_generated');
+        }
 
         if (target === targetEnum.debug || target === targetEnum.dist) {
             taskList.push('karma:unit');

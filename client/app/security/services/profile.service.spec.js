@@ -21,7 +21,7 @@ describe('app.profileService ', function () {
 
     beforeEach(function () {
         module(function ($provide) {
-            $provide.constant('configConstants', {securedApis: {userInfo: 'dummyValue'}});
+            $provide.constant('configProvider', {securedApis: {userInfo: 'dummyValue'}});
         });
     });
 

@@ -1,6 +1,6 @@
 ﻿(function () {
     'use strict';
-    var bootstrapApp = angular.module('bootstrapApp', ['app']);
+    var configInitialization = angular.module('configInitialization', ['app']);
 
     // Define all expected configuration object properties
     var configPropertyList = [
@@ -21,30 +21,31 @@
         'unsecuredApis.forgotPasswordUrl'
     ];
 
-    function getAppConfig() {
-        var initInjector = angular.injector(['ng']);
-        var _http = initInjector.get('$http');
-        var _window = initInjector.get('$window');
-
-        return _http.get('/pp-ui/config').then(function (response) {
-            if (checkPropertyExistsInConfiguration(response.data)) {
-                bootstrapApp.constant('configConstants', response.data);
-                bootstrapApp.constant('configPropertyList', configPropertyList);
-            } else {
-                _window.location.href = '/pp-ui/configError';
-            }
-        }, function (errorResponse) {
-            bootstrapApp.constant('configConstants', null);
-            _window.location.href = '/pp-ui/configError';
-        });
-    }
-
-    getAppConfig().then(function () {
-        // manually initializing Angular
-        angular.element(document).ready(function () {
-            angular.bootstrap(document, ['bootstrapApp']);
+    // Load the initial configuration
+    angular.element(document).ready(function () {
+        getAppConfig().then(function () {
+            console.log('Initial configuration successful.');
+        }, function () {
+            console.log('Initial configuration failed.');
         });
     });
+
+    function getAppConfig() {
+        var initInjector = angular.injector(['ng']);
+        var ngHttp = initInjector.get('$http');
+        var ngWindow = initInjector.get('$window');
+
+        return ngHttp.get('/pp-ui/config').then(function (response) {
+            if (checkPropertyExistsInConfiguration(response.data)) {
+                configInitialization.constant('configProvider', response.data);
+                configInitialization.constant('configPropertyList', configPropertyList);
+            } else {
+                ngWindow.location.href = '/pp-ui/configError';
+            }
+        }, function (errorResponse) {
+            ngWindow.location.href = '/pp-ui/configError';
+        });
+    }
 
     function checkPropertyExistsInConfiguration(configObj) {
         for (var i = 0; i < configPropertyList.length; i++) {

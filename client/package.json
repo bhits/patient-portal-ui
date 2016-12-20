@@ -21,12 +21,39 @@
       "url": ""
     }
   ],
+  "dependencies": {
+    "angular": "1.5.0",
+    "angular-resource": "1.5.0",
+    "angular-sanitize": "1.5.0",
+    "angular-aria": "1.5.0",
+    "angular-messages": "1.5.0",
+    "angular-loading-bar": "0.8.x",
+    "angular-ui-bootstrap": "1.2.x",
+    "angular-ui-router": "0.2.x",
+    "checklist-model": "0.9.x",
+    "ngstorage": "0.3.x",
+    "angular-jwt": "0.0.x",
+    "@angular/common": "2.2.0-rc.0",
+    "@angular/compiler": "2.2.0-rc.0",
+    "@angular/core": "2.2.0-rc.0",
+    "@angular/forms": "2.2.0-rc.0",
+    "@angular/http": "2.2.0-rc.0",
+    "@angular/platform-browser": "2.2.0-rc.0",
+    "@angular/platform-browser-dynamic": "2.2.0-rc.0",
+    "@angular/router": "3.2.0-rc.0",
+    "@angular/upgrade": "2.2.0-rc.0",
+    "core-js": "2.4.x",
+    "es6-shim": "0.35.x",
+    "reflect-metadata": "0.1.x",
+    "rxjs": "5.0.0-beta.12",
+    "systemjs": "0.19.x",
+    "zone.js": "0.6.x"
+  },
   "devDependencies": {
-    "bower": "~1.7.7",
+    "angular-mocks": "~1.5.0",
     "grunt": "^1.0.1",
     "grunt-angular-file-loader": "~1.2.0",
     "grunt-autoprefixer": "~3.0.4",
-    "grunt-bower-task": "^0.4.0",
     "grunt-bump": "^0.8.0",
     "grunt-cli": "^1.2.0",
     "grunt-contrib-clean": "~1.0.0",
@@ -47,6 +74,12 @@
     "grunt-svgmin": "~3.3.0",
     "grunt-usemin": "~3.1.1",
     "grunt-war": "^0.5.1",
+    "ts-helpers": "1.1.1",
+    "tslint": "3.7.0-dev.2",
+    "typescript": "2.1.4",
+    "typings": "0.8.1",
+    "grunt-ts": "6.0.0-beta.3",
+    "grunt-typings": "0.1.x",
     "jasmine-core": "~2.4.1",
     "jshint-stylish": "~2.2.0",
     "karma": "^1.1.2",
@@ -67,6 +100,6 @@
     "time-grunt": "~1.4.0"
   },
   "engines": {
-    "node": ">= 0.8.4"
+    "node": ">= 4.4.7"
   }
 }
