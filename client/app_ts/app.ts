@@ -13,6 +13,8 @@ import {HttpModule} from "@angular/http";
 declare var angular: any;
 import {LogoutComponent} from './components/logout.component';
 
+// This allows both Angular 1 & Angular 2 code to be used together in the same application;
+// it'll be removed once all remaining Angular 1 code has been replaced with Angular 2.
 const upgradeAdapter: UpgradeAdapter = new UpgradeAdapter(
     forwardRef(() => PPUIModule));
 
