@@ -10,7 +10,7 @@ describe('app.addressFilter', function () {
 
     beforeEach(function () {
         module(function ($provide) {
-            $provide.constant('configConstants');
+            $provide.constant('configProvider');
         });
     });
 
