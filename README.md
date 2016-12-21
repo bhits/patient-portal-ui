@@ -50,6 +50,17 @@ This is a [Spring Boot](https://projects.spring.io/spring-boot/) project and ser
 
 *NOTE: In order for this application to fully function as a microservice in the C2S application, it is also required to setup the dependency microservices and support level infrastructure. Please refer to the [Consent2Share Deployment Guide](https://github.com/bhits/consent2share/releases/download/2.0.0/c2s-deployment-guide.pdf) for instructions to setup the C2S infrastructure.*
 
+## Debug TypeScript
+
+[TypeScript](https://www.typescriptlang.org/index.html) is used to write code in Angular 2. The default build task in the `client` module only generates JavaScript files without source maps when transpiling TypeScript. 
+
+In order to debug TypeScript, we need source maps to be generated as well:
+
+1. Run Grunt build debug task in the `client` module to generate source maps along with transpiled JavaScript: *run `grunt build:debug` in the client folder*
+2. Run the application and use browser development tools to set breakpoints in related TypeScript files to start debugging.
+
+*NOTE: The [source maps](https://code.tutsplus.com/tutorials/source-maps-101--net-29173) file is also generated when TypeScript translate into JavaScript, it sets correspondence between lines in the TypeScript code and in the generated JavaScript code.*
+
 ## Configure
 
 The `server` module runs with some default configuration that is primarily targeted for development environment. However, [Spring Boot](https://projects.spring.io/spring-boot/) supports several methods to override the default configuration to configure the API for a certain deployment environment.
