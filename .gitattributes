@@ -25,6 +25,7 @@
 *.js text
 *.json text
 *.coffee text
+*.ts text
 
 # PHP files:
 *.php text diff=php
