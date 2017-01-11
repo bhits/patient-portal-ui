@@ -12,11 +12,11 @@
     /* @ngInject */
     function plsAddressFilter(utilityService) {
         return function (provider) {
-            var providerAddressArray = [provider.providerFirstLineBusinessPracticeLocationAddress,
-                provider.providerSecondLineBusinessPracticeLocationAddress,
-                provider.providerBusinessPracticeLocationAddressCityName,
-                provider.providerBusinessPracticeLocationAddressStateName,
-                utilityService.formatZipCode(provider.providerBusinessPracticeLocationAddressPostalCode)].filter(function (element) {
+            var providerAddressArray = [provider.firstLineBusinessPracticeLocationAddress,
+                provider.secondLineBusinessPracticeLocationAddress,
+                provider.businessPracticeLocationAddressCityName,
+                provider.businessPracticeLocationAddressStateName,
+                utilityService.formatZipCode(provider.businessPracticeLocationAddressPostalCode)].filter(function (element) {
                 return !!utilityService.hasString(element);
             });
             return providerAddressArray.join(", ");
