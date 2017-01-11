@@ -63,7 +63,7 @@
                 function loadPageSuccess(response) {
                     oldPage = newPage;
                     vm.pagination.currentPage = newPage;
-                    vm.providerLookupResult = response;
+                    vm.providerLookupResult = providerService.getLookupResult(response);
                     vm.pagination.totalItems = vm.providerLookupResult.totalNumberOfProviders;
                     vm.pagination.itemsPerPage = vm.providerLookupResult.itemsPerPage;
                     vm.providersData = getCurrentProviderList();
@@ -78,7 +78,7 @@
             }
 
             function isEmptyResult() {
-                return providerService.isEmptyLookupResult(vm.providerLookupResult);
+                return angular.isDefined(vm.providerLookupResult) && angular.isDefined(vm.providerLookupResult.providers) && (vm.providerLookupResult.providers.length === 0);
             }
 
             function addProvider(npi) {
