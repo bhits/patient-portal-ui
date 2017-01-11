@@ -21,6 +21,7 @@
         service.lookupProviders = lookupProviders;
         service.isEmptyLookupResult = isEmptyLookupResult;
         service.hasNpi = hasNpi;
+        service.getLookupResult = getLookupResult;
 
         return service;
 
@@ -62,8 +63,8 @@
             var queryParams = prepareQueryParams(plsQueryParameters, page) ;
 
             function adjustPageOnSuccessResponse(response) {
-                if (angular.isDefined(response.currentPage) && angular.isNumber(response.currentPage)) {
-                    response.currentPage += 1;
+                if (angular.isDefined(response.page) && angular.isDefined(response.page.number)&& angular.isNumber(response.page.number)) {
+                    response.page.number += 1;
                 }
                 (success || angular.identity)(response);
             }
@@ -71,6 +72,22 @@
             patientListResource.query(queryParams,adjustPageOnSuccessResponse, error);
         }
 
+        function getLookupResult(response){
+            var result = {};
+
+            if(response){
+                if(angular.isDefined(response.page) ){
+                    var page = response.page;
+                    result.currentPage = page.number;
+                    result.totalNumberOfProviders = page.totalElements;
+                    result.itemsPerPage = page.size;
+                }
+                if(!isEmptyLookupResult(response)){
+                    result.providers = response._embedded.providers;
+                }
+            }
+            return result;
+        }
         function prepareQueryParams(plsQueryParameters, page){
             var queryParams = {};
 
@@ -108,7 +125,7 @@
 
         function isEmptyLookupResult(providerLookupResult) {
             var empty = false;
-            if (!providerLookupResult || !providerLookupResult.providers || providerLookupResult.providers.length === 0) {
+            if (!providerLookupResult || !providerLookupResult._embedded|| !providerLookupResult._embedded.providers || providerLookupResult._embedded.providers.length === 0) {
                 empty = true;
             }
             return empty;
