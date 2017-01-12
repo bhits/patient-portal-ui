@@ -89,7 +89,7 @@
             return result;
         }
         function prepareQueryParams(plsQueryParameters, page){
-            var queryParams = {};
+            var queryParams = {projection:"ProviderProjection"};
 
             if(utilityService.isDefinedAndLengthNotZero(plsQueryParameters.usstate)){
                 queryParams.state = utilityService.addQueryParameterPrefixAndSuffix(plsQueryParameters.usstate);
@@ -119,7 +119,6 @@
             if(utilityService.isDefinedAndLengthNotZero(page) && !isNaN(page) ){
                 queryParams.page = page - 1;
             }
-
             return queryParams;
         }
 
