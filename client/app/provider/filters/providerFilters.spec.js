@@ -92,10 +92,8 @@ describe('app.providerFiltersModule ', function () {
     it('should filter PLS name from individual PLS provider object with middle name', function () {
         // Arrange
         var provider = {
-            entityType: {
-                code:1,
-                displayName: 'Individual'
-            },
+            entityTypeCode:1,
+            entityTypeDisplayName:  'Individual',
             lastName: 'lastName',
             firstName: 'firstName',
             middleName: 'middleName'
@@ -109,10 +107,8 @@ describe('app.providerFiltersModule ', function () {
     it('should filter PLS name from individual PLS provider object without middle name', function () {
         // Arrange
         var provider = {
-            entityType: {
-                code:1,
-                displayName: 'Individual'
-            },
+            entityTypeCode:1,
+            entityTypeDisplayName:  'Individual',
             firstName: 'firstName',
             lastName: 'lastName'
         };
@@ -125,10 +121,8 @@ describe('app.providerFiltersModule ', function () {
     it('should filter PLS name from organizational PLS provider object', function () {
         // Arrange
         var provider = {
-            entityType: {
-                code:2,
-                displayName: 'Organization'
-            },
+            entityTypeCode:2,
+            entityTypeDisplayName:  'Organization',
             organizationName: 'organizationName'
         };
         var expectedResult = 'organizationName';
@@ -143,9 +137,9 @@ describe('app.providerFiltersModule ', function () {
         var provider = {
             firstLineBusinessPracticeLocationAddress: "FirstLine",
             secondLineBusinessPracticeLocationAddress: "SecondLine",
-            businessPracticeLocationAddressCityName: "City",
-            businessPracticeLocationAddressStateName: "State",
-            businessPracticeLocationAddressPostalCode: "207702033"
+            practiceLocationAddressCityName: "City",
+            practiceLocationAddressStateName: "State",
+            practiceLocationAddressPostalCode: "207702033"
         };
         spyOn(utilityService, 'hasString').and.returnValue(true);
         spyOn(utilityService, 'formatZipCode').and.returnValue(formattedZipCode);
@@ -155,10 +149,10 @@ describe('app.providerFiltersModule ', function () {
         expect(plsAddress(provider)).toEqual(expectedResult);
         expect(utilityService.hasString).toHaveBeenCalledWith(provider.firstLineBusinessPracticeLocationAddress);
         expect(utilityService.hasString).toHaveBeenCalledWith(provider.secondLineBusinessPracticeLocationAddress);
-        expect(utilityService.hasString).toHaveBeenCalledWith(provider.businessPracticeLocationAddressCityName);
-        expect(utilityService.hasString).toHaveBeenCalledWith(provider.businessPracticeLocationAddressStateName);
+        expect(utilityService.hasString).toHaveBeenCalledWith(provider.practiceLocationAddressCityName);
+        expect(utilityService.hasString).toHaveBeenCalledWith(provider.practiceLocationAddressStateName);
         expect(utilityService.hasString).toHaveBeenCalledWith(formattedZipCode);
-        expect(utilityService.formatZipCode).toHaveBeenCalledWith(provider.businessPracticeLocationAddressPostalCode);
+        expect(utilityService.formatZipCode).toHaveBeenCalledWith(provider.practiceLocationAddressPostalCode);
     });
 
     it('should filter PLS address leaving empty string if hasString returns false', function () {
@@ -167,9 +161,9 @@ describe('app.providerFiltersModule ', function () {
         var provider = {
             firstLineBusinessPracticeLocationAddress: "FirstLine",
             secondLineBusinessPracticeLocationAddress: "SecondLine",
-            businessPracticeLocationAddressCityName: "City",
-            businessPracticeLocationAddressStateName: "State",
-            businessPracticeLocationAddressPostalCode: "207702033"
+            practiceLocationAddressCityName: "City",
+            practiceLocationAddressStateName: "State",
+            practiceLocationAddressPostalCode: "207702033"
         };
         spyOn(utilityService, 'hasString').and.returnValue(false);
         spyOn(utilityService, 'formatZipCode').and.returnValue(formattedZipCode);
@@ -179,9 +173,9 @@ describe('app.providerFiltersModule ', function () {
         expect(plsAddress(provider)).toEqual(expectedResult);
         expect(utilityService.hasString).toHaveBeenCalledWith(provider.firstLineBusinessPracticeLocationAddress);
         expect(utilityService.hasString).toHaveBeenCalledWith(provider.secondLineBusinessPracticeLocationAddress);
-        expect(utilityService.hasString).toHaveBeenCalledWith(provider.businessPracticeLocationAddressCityName);
-        expect(utilityService.hasString).toHaveBeenCalledWith(provider.businessPracticeLocationAddressStateName);
+        expect(utilityService.hasString).toHaveBeenCalledWith(provider.practiceLocationAddressCityName);
+        expect(utilityService.hasString).toHaveBeenCalledWith(provider.practiceLocationAddressStateName);
         expect(utilityService.hasString).toHaveBeenCalledWith(formattedZipCode);
-        expect(utilityService.formatZipCode).toHaveBeenCalledWith(provider.businessPracticeLocationAddressPostalCode);
+        expect(utilityService.formatZipCode).toHaveBeenCalledWith(provider.practiceLocationAddressPostalCode);
     });
 });
