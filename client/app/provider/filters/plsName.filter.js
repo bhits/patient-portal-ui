@@ -12,13 +12,13 @@
     function plsNameFilter() {
         return function (provider) {
             var providerName = '';
-            if (angular.isDefined(provider) && angular.isDefined(provider.entityType) && angular.isDefined(provider.entityType.displayName)) {
-                switch (provider.entityType.displayName) {
-                    case 'Organization':
-                        providerName = provider.organizationName;
-                        break;
-                    case 'Individual':
+            if (angular.isDefined(provider) && angular.isDefined(provider.entityTypeDisplayName)) {
+                switch (provider.entityTypeDisplayName) {
+                    case "Individual":
                         providerName = provider.firstName + ' ' + provider.lastName;
+                        break;
+                    case "Organization":
+                        providerName = provider.organizationName;
                         break;
                 }
             }
