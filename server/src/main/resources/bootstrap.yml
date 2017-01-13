@@ -45,7 +45,7 @@ eureka:
 spring.profiles: docker
 spring:
   profiles:
-    include: eureka-instance
+    include: config-client,eureka-instance
 eureka:
   client:
     service-url:
