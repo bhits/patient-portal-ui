@@ -11,7 +11,7 @@ encrypt:
 spring.profiles: application-default
 spring:
   profiles:
-    include: config-client,eureka-instance,eureka-client
+    include: config-client,eureka-instance,eureka-client,oauth2-resource-default
 ---
 spring.profiles: config-client
 spring:
@@ -45,7 +45,7 @@ eureka:
 spring.profiles: docker
 spring:
   profiles:
-    include: config-client,eureka-instance
+    include: config-client,eureka-instance,oauth2-resource-default
 eureka:
   client:
     service-url:
