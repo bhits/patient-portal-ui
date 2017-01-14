@@ -149,6 +149,20 @@ body.mini-navbar .nav-header {
 
 /* End Styling SPECIFIC for Medical Information Controls */
 
+.top-right-ribbon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-top: 5px solid #50687F;
+  border-left: 5px solid #fff;
+  border-bottom: 20px solid #fff;
+  border-right: 20px solid #50687F;
+  border-radius: 0 4px 0 4px;
+  box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
+}
+
 .top-rule {
   border-top: solid thin #CFD4D6;
   margin-top: 6px;
@@ -710,6 +724,16 @@ body.ng-scope.pace-done.grey {
     background-color: @pp-dark-blue;
     border-color: @pp-dark-blue;
     color: white;
+  }
+}
+
+.panel-providerSelect {
+  border-color: #bfd3b7;
+
+  & > .panel-heading {
+    background-color: #dff0d8;
+    border-color: #bfd3b7;
+    color: @pp-dark-green !important;
   }
 }
 
