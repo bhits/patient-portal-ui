@@ -33,19 +33,10 @@ c2s:
       activation-url: /patientUser/activations
       forgot-password-url: /uaa/forgot_password.do
 ---
-# enables ssl in this service when activated
-spring.profiles: ssl
-server:
-  port: 8444
-  # configure keystore and keystore password for ssl per environment
-  ssl:
-    key-store: /ssl_keystore.keystore
-    key-store-password: changeit
----
 # enables ssl and adds /pp-ui context path when activated
 spring.profiles: standalone-ssl
 spring:
   profiles:
-    include: ssl
+    include: ssl-default
 server:
   context-path: /pp-ui
