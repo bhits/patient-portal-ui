@@ -4,17 +4,6 @@ logging:
   file: /java/C2S_LOGS/pp-ui/ppui.log
 info:
   component: Patient Portal UI
-eureka:
-  instance:
-    instance-id: ${spring.cloud.client.hostname}:${spring.application.name}:${spring.application.instance_id:${random.value}}
-    secure-port-enabled: false
-    non-secure-port-enabled: true
-  client:
-    healthcheck:
-      enabled: true
-    service-url:
-      # endpoint for discovery-server, pass '--eureka.client.protocol=https' if discovery-server is running on https
-      defaultZone: ${eureka.client.protocol:http}://localhost:8761/eureka/
 # the configuration used for UI
 c2s:
   pp-ui:
@@ -37,40 +26,17 @@ c2s:
       phr-api-base-url: /phr
       try-policy-api-base-url: /tryPolicy
       user-info: /uaa/userinfo
-    unsecured-apis:
       pls-api-base-url: /pls/providers
+    unsecured-apis:
       token-url: /uaa/oauth/token
       verification-url: /patientUser/verifications
       activation-url: /patientUser/activations
       forgot-password-url: /uaa/forgot_password.do
 ---
-# enables ssl in this service when activated
-spring.profiles: ssl
-server:
-  port: 8444
-  # configure keystore and keystore password for ssl per environment
-  ssl:
-    key-store: /ssl_keystore.keystore
-    key-store-password: changeit
-eureka:
-  instance:
-    secure-port: ${server.port}
-    secure-port-enabled: true
-    non-secure-port-enabled: false
----
 # enables ssl and adds /pp-ui context path when activated
 spring.profiles: standalone-ssl
 spring:
   profiles:
-    include: ssl
+    include: ssl-default
 server:
   context-path: /pp-ui
----
-# updates configuration for docker environment
-spring.profiles: docker
-eureka:
-  client:
-    service-url:
-      defaultZone: ${eureka.client.protocol:http}://discovery-server.c2s.com:8761/eureka/
-  instance:
-    prefer-ip-address: true

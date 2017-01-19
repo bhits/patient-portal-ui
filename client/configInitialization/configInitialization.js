@@ -14,7 +14,7 @@
         'securedApis.phrApiBaseUrl',
         'securedApis.tryPolicyApiBaseUrl',
         'securedApis.userInfo',
-        'unsecuredApis.plsApiBaseUrl',
+        'securedApis.plsApiBaseUrl',
         'unsecuredApis.tokenUrl',
         'unsecuredApis.verificationUrl',
         'unsecuredApis.activationUrl',

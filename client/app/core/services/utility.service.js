@@ -32,6 +32,7 @@
         service.isSecuredApi = isSecuredApi;
         service.digitFormat = digitFormat;
         service.isValidDate = isValidDate;
+        service.addQueryParameterPrefixAndSuffix = addQueryParameterPrefixAndSuffix;
 
         return service;
 
@@ -263,6 +264,10 @@
                 }
             }
             return true;  // date is valid
+        }
+
+        function addQueryParameterPrefixAndSuffix(param){
+            return angular.isDefined(param) && (param.length > 0) ? ("%" + param + "%"): param;
         }
     }
 })();

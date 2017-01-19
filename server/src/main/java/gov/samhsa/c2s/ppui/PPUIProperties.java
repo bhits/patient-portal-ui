@@ -83,13 +83,13 @@ public class PPUIProperties {
 
         @NotEmpty
         private String userInfo;
+
+        @NotEmpty
+        private String plsApiBaseUrl;
     }
 
     @Data
     public static class UnsecuredApis {
-        @NotEmpty
-        private String plsApiBaseUrl;
-
         @NotEmpty
         private String tokenUrl;
 
