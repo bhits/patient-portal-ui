@@ -89,7 +89,7 @@
             return result;
         }
         function prepareQueryParams(plsQueryParameters, page){
-            var queryParams = {projection:"ProviderProjection"};
+            var queryParams = {projection:"FlattenSmallProvider"};
 
             if(utilityService.isDefinedAndLengthNotZero(plsQueryParameters.usstate)){
                 queryParams.state = utilityService.addQueryParameterPrefixAndSuffix(plsQueryParameters.usstate);
