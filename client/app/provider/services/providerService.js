@@ -10,7 +10,7 @@
         .factory('providerService', providerService);
 
     /* @ngInject */
-    function providerService($resource, configService) {
+    function providerService($resource, configService, utilityService) {
         var providers = $resource(configService.getPcmApiBaseUrl() + "/providers/:npi", {npi: '@npi'});
 
         var service = {};
@@ -21,6 +21,7 @@
         service.lookupProviders = lookupProviders;
         service.isEmptyLookupResult = isEmptyLookupResult;
         service.hasNpi = hasNpi;
+        service.getLookupResult = getLookupResult;
 
         return service;
 
@@ -38,31 +39,92 @@
         }
 
         function lookupProviders(plsQueryParameters, page, success, error) {
-            var queryParameters = "";
-            queryParameters = plsQueryParameters.usstate ? queryParameters + "/usstate/" + plsQueryParameters.usstate : queryParameters;
-            queryParameters = plsQueryParameters.city ? queryParameters + "/city/" + plsQueryParameters.city : queryParameters;
-            queryParameters = plsQueryParameters.zipcode ? queryParameters + "/zipcode/" + plsQueryParameters.zipcode : queryParameters;
-            queryParameters = plsQueryParameters.gender ? queryParameters + "/gender/" + plsQueryParameters.gender : queryParameters;
-            queryParameters = plsQueryParameters.specialty ? queryParameters + "/specialty/" + plsQueryParameters.specialty : queryParameters;
-            queryParameters = plsQueryParameters.phone ? queryParameters + "/phone/" + plsQueryParameters.phone.replace(/-/g, '') : queryParameters;
-            queryParameters = plsQueryParameters.firstname ? queryParameters + "/firstname/" + plsQueryParameters.firstname : queryParameters;
-            queryParameters = plsQueryParameters.lastname ? queryParameters + "/lastname/" + plsQueryParameters.lastname : queryParameters;
-            queryParameters = plsQueryParameters.facilityname ? queryParameters + "/facilityname/" + plsQueryParameters.facilityname : queryParameters;
+            var params = {
+                state: '@state',
+                city: '@city',
+                zipcode: '@zipcode',
+                gender: '@gender',
+                phone: '@phone',
+                firstname: '@firstname',
+                lastname: '@lastname',
+                orgname: '@orgname'
+            };
 
-            var providerResource = $resource(configService.getPlsApiBaseUrl() + "/pageNumber/:pageNumber" + queryParameters, {pageNumber: page});
-            providerResource.get({pageNumber: page - 1}, adjustPageOnSuccessResponse, error);
+            var patientListResource = $resource(configService.getPlsApiBaseUrl() + "/search/query",
+                params,
+                {
+                    'query': {
+                        method: 'GET',
+                        params: params
+                    }
+                }
+            );
+
+            var queryParams = prepareQueryParams(plsQueryParameters, page) ;
 
             function adjustPageOnSuccessResponse(response) {
-                if (angular.isDefined(response.currentPage) && angular.isNumber(response.currentPage)) {
-                    response.currentPage += 1;
+                if (angular.isDefined(response.page) && angular.isDefined(response.page.number)&& angular.isNumber(response.page.number)) {
+                    response.page.number += 1;
                 }
                 (success || angular.identity)(response);
             }
+
+            patientListResource.query(queryParams,adjustPageOnSuccessResponse, error);
+        }
+
+        function getLookupResult(response){
+            var result = {};
+
+            if(response){
+                if(angular.isDefined(response.page) ){
+                    var page = response.page;
+                    result.currentPage = page.number;
+                    result.totalNumberOfProviders = page.totalElements;
+                    result.itemsPerPage = page.size;
+                }
+                if(!isEmptyLookupResult(response)){
+                    result.providers = response._embedded.providers;
+                }
+            }
+            return result;
+        }
+        function prepareQueryParams(plsQueryParameters, page){
+            var queryParams = {projection:"FlattenSmallProvider"};
+
+            if(utilityService.isDefinedAndLengthNotZero(plsQueryParameters.usstate)){
+                queryParams.state = utilityService.addQueryParameterPrefixAndSuffix(plsQueryParameters.usstate);
+            }
+            if(utilityService.isDefinedAndLengthNotZero(plsQueryParameters.city)){
+                queryParams.city = utilityService.addQueryParameterPrefixAndSuffix(plsQueryParameters.city);
+            }
+            if(utilityService.isDefinedAndLengthNotZero(plsQueryParameters.zipcode)){
+                queryParams.zipcode = utilityService.addQueryParameterPrefixAndSuffix(plsQueryParameters.zipcode);
+            }
+            if(utilityService.isDefinedAndLengthNotZero(plsQueryParameters.gender) ){
+                queryParams.gender = utilityService.addQueryParameterPrefixAndSuffix(plsQueryParameters.gender);
+            }
+            if(utilityService.isDefinedAndLengthNotZero(plsQueryParameters.phone)){
+                queryParams.phone = utilityService.addQueryParameterPrefixAndSuffix(plsQueryParameters.phone);
+            }
+            if(utilityService.isDefinedAndLengthNotZero(plsQueryParameters.firstname) ){
+                queryParams.firstname = utilityService.addQueryParameterPrefixAndSuffix(plsQueryParameters.firstname);
+            }
+            if(utilityService.isDefinedAndLengthNotZero(plsQueryParameters.lastname) ){
+                queryParams.lastname = utilityService.addQueryParameterPrefixAndSuffix(plsQueryParameters.lastname);
+            }
+            if(utilityService.isDefinedAndLengthNotZero(plsQueryParameters.orgname) ){
+                queryParams.orgname = utilityService.addQueryParameterPrefixAndSuffix(plsQueryParameters.orgname);
+            }
+
+            if(utilityService.isDefinedAndLengthNotZero(page) && !isNaN(page) ){
+                queryParams.page = page - 1;
+            }
+            return queryParams;
         }
 
         function isEmptyLookupResult(providerLookupResult) {
             var empty = false;
-            if (!providerLookupResult || !providerLookupResult.providers || providerLookupResult.providers.length === 0) {
+            if (!providerLookupResult || !providerLookupResult._embedded|| !providerLookupResult._embedded.providers || providerLookupResult._embedded.providers.length === 0) {
                 empty = true;
             }
             return empty;
@@ -80,6 +142,5 @@
             }
             return isAlreadyAdded;
         }
-
     }
 })();
