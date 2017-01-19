@@ -78,10 +78,10 @@ describe('app.providerFiltersModule ', function () {
         // Arrange
         var provider = {
             entityType: 'InvalidEntityTypeValue',
-            providerLastName: 'lastName',
-            providerFirstName: 'firstName',
-            providerMiddleName: 'middleName',
-            providerOrganizationName: 'organizationName'
+            lastName: 'lastName',
+            firstName: 'firstName',
+            middleName: 'middleName',
+            organizationName: 'organizationName'
         };
         var expectedResult = '';
 
@@ -92,10 +92,11 @@ describe('app.providerFiltersModule ', function () {
     it('should filter PLS name from individual PLS provider object with middle name', function () {
         // Arrange
         var provider = {
-            entityType: 'Individual',
-            providerLastName: 'lastName',
-            providerFirstName: 'firstName',
-            providerMiddleName: 'middleName'
+            entityTypeCode:1,
+            entityTypeDisplayName:  'Individual',
+            lastName: 'lastName',
+            firstName: 'firstName',
+            middleName: 'middleName'
         };
         var expectedResult = 'firstName lastName';
 
@@ -106,9 +107,10 @@ describe('app.providerFiltersModule ', function () {
     it('should filter PLS name from individual PLS provider object without middle name', function () {
         // Arrange
         var provider = {
-            entityType: 'Individual',
-            providerLastName: 'lastName',
-            providerFirstName: 'firstName'
+            entityTypeCode:1,
+            entityTypeDisplayName:  'Individual',
+            firstName: 'firstName',
+            lastName: 'lastName'
         };
         var expectedResult = 'firstName lastName';
 
@@ -119,8 +121,9 @@ describe('app.providerFiltersModule ', function () {
     it('should filter PLS name from organizational PLS provider object', function () {
         // Arrange
         var provider = {
-            entityType: 'Organization',
-            providerOrganizationName: 'organizationName'
+            entityTypeCode:2,
+            entityTypeDisplayName:  'Organization',
+            organizationName: 'organizationName'
         };
         var expectedResult = 'organizationName';
 
@@ -132,11 +135,11 @@ describe('app.providerFiltersModule ', function () {
         // Arrange
         var formattedZipCode = '20770-2033';
         var provider = {
-            providerFirstLineBusinessPracticeLocationAddress: "FirstLine",
-            providerSecondLineBusinessPracticeLocationAddress: "SecondLine",
-            providerBusinessPracticeLocationAddressCityName: "City",
-            providerBusinessPracticeLocationAddressStateName: "State",
-            providerBusinessPracticeLocationAddressPostalCode: "207702033"
+            firstLineBusinessPracticeLocationAddress: "FirstLine",
+            secondLineBusinessPracticeLocationAddress: "SecondLine",
+            practiceLocationAddressCityName: "City",
+            practiceLocationAddressStateName: "State",
+            practiceLocationAddressPostalCode: "207702033"
         };
         spyOn(utilityService, 'hasString').and.returnValue(true);
         spyOn(utilityService, 'formatZipCode').and.returnValue(formattedZipCode);
@@ -144,23 +147,23 @@ describe('app.providerFiltersModule ', function () {
 
         // Act & Assert
         expect(plsAddress(provider)).toEqual(expectedResult);
-        expect(utilityService.hasString).toHaveBeenCalledWith(provider.providerFirstLineBusinessPracticeLocationAddress);
-        expect(utilityService.hasString).toHaveBeenCalledWith(provider.providerSecondLineBusinessPracticeLocationAddress);
-        expect(utilityService.hasString).toHaveBeenCalledWith(provider.providerBusinessPracticeLocationAddressCityName);
-        expect(utilityService.hasString).toHaveBeenCalledWith(provider.providerBusinessPracticeLocationAddressStateName);
+        expect(utilityService.hasString).toHaveBeenCalledWith(provider.firstLineBusinessPracticeLocationAddress);
+        expect(utilityService.hasString).toHaveBeenCalledWith(provider.secondLineBusinessPracticeLocationAddress);
+        expect(utilityService.hasString).toHaveBeenCalledWith(provider.practiceLocationAddressCityName);
+        expect(utilityService.hasString).toHaveBeenCalledWith(provider.practiceLocationAddressStateName);
         expect(utilityService.hasString).toHaveBeenCalledWith(formattedZipCode);
-        expect(utilityService.formatZipCode).toHaveBeenCalledWith(provider.providerBusinessPracticeLocationAddressPostalCode);
+        expect(utilityService.formatZipCode).toHaveBeenCalledWith(provider.practiceLocationAddressPostalCode);
     });
 
     it('should filter PLS address leaving empty string if hasString returns false', function () {
         // Arrange
         var formattedZipCode = '20770-2033';
         var provider = {
-            providerFirstLineBusinessPracticeLocationAddress: "FirstLine",
-            providerSecondLineBusinessPracticeLocationAddress: "SecondLine",
-            providerBusinessPracticeLocationAddressCityName: "City",
-            providerBusinessPracticeLocationAddressStateName: "State",
-            providerBusinessPracticeLocationAddressPostalCode: "207702033"
+            firstLineBusinessPracticeLocationAddress: "FirstLine",
+            secondLineBusinessPracticeLocationAddress: "SecondLine",
+            practiceLocationAddressCityName: "City",
+            practiceLocationAddressStateName: "State",
+            practiceLocationAddressPostalCode: "207702033"
         };
         spyOn(utilityService, 'hasString').and.returnValue(false);
         spyOn(utilityService, 'formatZipCode').and.returnValue(formattedZipCode);
@@ -168,11 +171,11 @@ describe('app.providerFiltersModule ', function () {
 
         // Act & Assert
         expect(plsAddress(provider)).toEqual(expectedResult);
-        expect(utilityService.hasString).toHaveBeenCalledWith(provider.providerFirstLineBusinessPracticeLocationAddress);
-        expect(utilityService.hasString).toHaveBeenCalledWith(provider.providerSecondLineBusinessPracticeLocationAddress);
-        expect(utilityService.hasString).toHaveBeenCalledWith(provider.providerBusinessPracticeLocationAddressCityName);
-        expect(utilityService.hasString).toHaveBeenCalledWith(provider.providerBusinessPracticeLocationAddressStateName);
+        expect(utilityService.hasString).toHaveBeenCalledWith(provider.firstLineBusinessPracticeLocationAddress);
+        expect(utilityService.hasString).toHaveBeenCalledWith(provider.secondLineBusinessPracticeLocationAddress);
+        expect(utilityService.hasString).toHaveBeenCalledWith(provider.practiceLocationAddressCityName);
+        expect(utilityService.hasString).toHaveBeenCalledWith(provider.practiceLocationAddressStateName);
         expect(utilityService.hasString).toHaveBeenCalledWith(formattedZipCode);
-        expect(utilityService.formatZipCode).toHaveBeenCalledWith(provider.providerBusinessPracticeLocationAddressPostalCode);
+        expect(utilityService.formatZipCode).toHaveBeenCalledWith(provider.practiceLocationAddressPostalCode);
     });
 });

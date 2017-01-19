@@ -75,7 +75,7 @@
                     function (response) {
                         if (!providerService.isEmptyLookupResult(response)) {
                             collapseSearchAccordion();
-                            vm.providerLookupResult = response;
+                            vm.providerLookupResult = providerService.getLookupResult(response);
                         } else {
                             notificationService.info('Sorry, no results found.');
                         }

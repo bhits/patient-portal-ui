@@ -37,8 +37,8 @@ c2s:
       phr-api-base-url: /phr
       try-policy-api-base-url: /tryPolicy
       user-info: /uaa/userinfo
-    unsecured-apis:
       pls-api-base-url: /pls/providers
+    unsecured-apis:
       token-url: /uaa/oauth/token
       verification-url: /patientUser/verifications
       activation-url: /patientUser/activations
