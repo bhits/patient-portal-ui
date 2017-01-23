@@ -5,7 +5,7 @@
 
     <groupId>gov.samhsa.c2s</groupId>
     <artifactId>pp-ui</artifactId>
-    <version>0.21.0-SNAPSHOT</version>
+    <version>0.23.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>ppui</name>
@@ -113,22 +113,34 @@
             <optional>true</optional>
         </dependency>
         <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-oauth2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.retry</groupId>
+            <artifactId>spring-retry</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
         </dependency>
 
+        <!-- Test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
-
     </dependencies>
 
     <dependencyManagement>
@@ -148,6 +160,13 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>pl.project13.maven</groupId>
+                <artifactId>git-commit-id-plugin</artifactId>
+                <configuration>
+                    <dotGitDirectory>${project.basedir}/../.git</dotGitDirectory>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>com.spotify</groupId>
@@ -228,8 +247,6 @@
                         <phase>generate-resources</phase>
 
                         <configuration>
-                            <!-- optional: if not specified, it will run Grunt's default task
-                                (and you can remove this whole <configuration> section.) -->
                             <!-- srcdir (optional, for M2Eclipse integration) - a directory to check for changed files before executing in an incremental build -->
                             <!-- The changed file checking only occurs during an incremental build when using M2Eclipse. In any other environment those options are ignored and builds are always run. -->
                             <srcdir>${basedir}/../client</srcdir>

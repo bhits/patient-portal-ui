@@ -8,7 +8,10 @@ describe('app.oauthTokenService ', function () {
 
     beforeEach(module('ngResource'));
     beforeEach(module('app.security'));
-    beforeEach(jasmine.clock().install());
+    beforeEach(
+        // Clean up application timers.
+        jasmine.clock().uninstall()
+    );
 
     beforeEach(inject(function (_oauthTokenService_, _$sessionStorage_, _profileService_, _$timeout_) {
         oauthTokenService = _oauthTokenService_;
@@ -16,8 +19,6 @@ describe('app.oauthTokenService ', function () {
         sessionStorage = _$sessionStorage_;
         timeout = _$timeout_;
     }));
-
-    afterEach(jasmine.clock().uninstall());
 
     it("should set token", function () {
         oauthTokenService.removeToken();

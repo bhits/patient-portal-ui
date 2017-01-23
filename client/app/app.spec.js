@@ -100,7 +100,13 @@ describe("app AppController ", function () {
 
     beforeEach(function () {
         module(function ($provide) {
-            $provide.constant('configConstants');
+            $provide.constant('configProvider');
+        });
+    });
+
+    beforeEach(function () {
+        module(function ($provide) {
+            $provide.constant('configPropertyList');
         });
     });
 

@@ -46,7 +46,18 @@ describe('app.consentServices', function () {
 
     beforeEach(function () {
         module(function ($provide) {
-            $provide.constant('configConstants', {
+            $provide.constant('configPropertyList', [
+                '0', '1', '2',
+                '3', '4', '5',
+                'securedApis.pcmApiBaseUrl',
+                '7', '8'
+            ]);
+        });
+    });
+
+    beforeEach(function () {
+        module(function ($provide) {
+            $provide.constant('configProvider', {
                 securedApis: {
                     pcmApiBaseUrl: "/pcm/patients"
                 }
