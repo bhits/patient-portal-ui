@@ -112,8 +112,9 @@
             if(utilityService.isDefinedAndLengthNotZero(plsQueryParameters.lastname) ){
                 queryParams.lastname = utilityService.addQueryParameterPrefixAndSuffix(plsQueryParameters.lastname);
             }
-            if(utilityService.isDefinedAndLengthNotZero(plsQueryParameters.orgname) ){
-                queryParams.orgname = utilityService.addQueryParameterPrefixAndSuffix(plsQueryParameters.orgname);
+            //Mapping facility name in the UI to organizational name in the backend
+            if(utilityService.isDefinedAndLengthNotZero(plsQueryParameters.facilityname) ){
+                queryParams.orgname = utilityService.addQueryParameterPrefixAndSuffix(plsQueryParameters.facilityname);
             }
 
             if(utilityService.isDefinedAndLengthNotZero(page) && !isNaN(page) ){
