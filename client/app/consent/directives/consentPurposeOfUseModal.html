@@ -1,16 +1,16 @@
 <div class="inmodal" ng-form name="purposeOfUseModalObj" c2s-popover-close>
     <div class="modal-header">
-        <h4 class="modal-title">Share for selected purpose only</h4>
+        <h4 class="modal-title">{{"CONSENT_MANAGEMENT.CONSENT_PURPOSE_5" | translate}}</h4>
     </div>
     <div class="modal-body">
         <div></div>
-        <div class="alert alert-warning"> Share my information <strong>only</strong> for specified purposes of use.
+        <div class="alert alert-warning">{{"CONSENT_MANAGEMENT.CONSENT_PURPOSE_6" | translate}}<strong>{{"CONSENT_MANAGEMENT.CONSENT_PURPOSE_7" | translate}}</strong>{{"CONSENT_MANAGEMENT.CONSENT_PURPOSE_9" | translate}}
         </div>
         <button class="btn btn-primary btn-xs dark-green"
-                ng-click="purposeOfUseModalVm.selectAll(purposeOfUseModalObj)">Select All
+                ng-click="purposeOfUseModalVm.selectAll(purposeOfUseModalObj)">{{"CONSENT_MANAGEMENT.CONSENT_MEDICAL_INFO_16" | translate}}
         </button>
         <button class="btn btn-primary btn-xs dark-green"
-                ng-click="purposeOfUseModalVm.deselectAll(purposeOfUseModalObj)">Deselect All
+                ng-click="purposeOfUseModalVm.deselectAll(purposeOfUseModalObj)"> {{"CONSENT_MANAGEMENT.CONSENT_MEDICAL_INFO_17" | translate}}
         </button>
         <div class="row">
             <div class="col-sm-6">
@@ -27,9 +27,9 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-white m-r-xs" ng-click="purposeOfUseModalVm.cancel()">Cancel</button>
+        <button type="button" class="btn btn-white m-r-xs" ng-click="purposeOfUseModalVm.cancel()">{{"CONSENT_MANAGEMENT.CONSENT_CREATE_3" | translate}}</button>
         <button type="button" class="btn btn-primary dark-green" ng-click="purposeOfUseModalVm.ok()"
-                ng-disabled="purposeOfUseModalObj.$pristine">Save changes
+                ng-disabled="purposeOfUseModalObj.$pristine">{{"CONSENT_MANAGEMENT.CONSENT_PURPOSE_8" | translate}}
         </button>
     </div>
 </div>

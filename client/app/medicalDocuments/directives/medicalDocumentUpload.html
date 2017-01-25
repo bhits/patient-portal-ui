@@ -2,51 +2,50 @@
     <form role="form" name="medicalDocumentUploadForm" enctype="multipart/form-data">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h2 class="custom-no-margin-top"><i class="fa fa-upload"></i> Upload</h2>
+                <h2 class="custom-no-margin-top"><i class="fa fa-upload"></i>{{"MEDICAL_DOC_MANAGEMENT.UPLOAD_CONTENTS_1" | translate}}</h2>
             </div>
             <div class="panel-body">
                 <div class="alert alert-info">
-                    <b>Name</b> and <b>Medical Document</b> fields are required.
+                    <b>{{"MEDICAL_DOC_MANAGEMENT.UPLOAD_CONTENTS_2" | translate}}</b>{{"MEDICAL_DOC_MANAGEMENT.UPLOAD_CONTENTS_3" | translate}}<b>{{"MEDICAL_DOC_MANAGEMENT.UPLOAD_CONTENTS_4" | translate}}</b>{{"MEDICAL_DOC_MANAGEMENT.UPLOAD_CONTENTS_5" | translate}}
                 </div>
                 <div class="form-group">
-                    <label for="name">Name</label>
-                    <input id="name" name="name" type="text" class="form-control" placeholder="Document Name"
+                    <label for="name">{{"MEDICAL_DOC_MANAGEMENT.UPLOAD_CONTENTS_2" | translate}}</label>
+                    <input id="name" name="name" type="text" class="form-control" placeholder="{{'MEDICAL_DOC_MANAGEMENT.UPLOAD_CONTENTS_20' | translate}}"
                            ng-model="medicalDocumentsUploadVm.name" required/>
                     <div ng-messages="medicalDocumentUploadForm.name.$error"
                          class="text-alert" role="alert">
                         <div class="m-t-xs" ng-message="required" ng-if="medicalDocumentUploadForm.name.$dirty">
-                            Required
+                            {{"MEDICAL_DOC_MANAGEMENT.UPLOAD_CONTENTS_6" | translate}}
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="description">Description</label>
+                    <label for="description">{{"MEDICAL_DOC_MANAGEMENT.UPLOAD_CONTENTS_7" | translate}}</label>
                     <textarea name="description" id="description" class="form-control"
                               ng-model="medicalDocumentsUploadVm.description"
-                              placeholder="Description" rows="3"></textarea>
+                              placeholder="{{'MEDICAL_DOC_MANAGEMENT.UPLOAD_CONTENTS_7' | translate}}" rows="3"></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label for="documentType">Medical Document Type: </label>
+                    <label for="documentType">{{"MEDICAL_DOC_MANAGEMENT.UPLOAD_CONTENTS_8" | translate}}</label>
                     <select id="documentType" class="form-control m-b"
-                            ng-options="type for type in ['-- Please Select --', 'Episode Summary Note']"
+                            ng-options="type for type in ['{{'PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_14' | translate}}', '{{'MEDICAL_DOC_MANAGEMENT.UPLOAD_CONTENTS_21' | translate}}']"
                             ng-model="medicalDocumentsUploadVm.documentType"
                             ng-init="medicalDocumentsUploadVm.documentType='Episode Summary Note'">
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="file">Medical Document</label>
+                    <label for="file">{{"MEDICAL_DOC_MANAGEMENT.UPLOAD_CONTENTS_9" | translate}}</label>
                     <input type="file" name="file" id="file" accept=".xml" c2s-file-validate
                            ng-model="medicalDocumentsUploadVm.file"
                            c2s-file-model="medicalDocumentsUploadVm.medicalFile"
                            ng-pattern="medicalDocumentsUploadVm.extension" required/>
                     <div ng-messages="medicalDocumentUploadForm.file.$error"
                          class="text-alert" role="alert">
-                        <div class="m-t-xs" ng-message="pattern">Only .xml files are permitted.</div>
-                        <div class="m-t-xs" ng-if="medicalDocumentUploadForm.file.$error.sizeLimit">The file you tried
-                            to upload is over the 10MB limit.
+                        <div class="m-t-xs" ng-message="pattern">{{"MEDICAL_DOC_MANAGEMENT.UPLOAD_CONTENTS_10" | translate}}</div>
+                        <div class="m-t-xs" ng-if="medicalDocumentUploadForm.file.$error.sizeLimit">{{"MEDICAL_DOC_MANAGEMENT.UPLOAD_CONTENTS_11" | translate}}
                         </div>
                     </div>
                 </div>
@@ -54,13 +53,13 @@
                 <button class="btn btn-primary dark-green" type="button"
                         ng-click="medicalDocumentsUploadVm.uploadDocument()"
                         ng-disabled="medicalDocumentUploadForm.$invalid">
-                    <strong>Upload</strong>
+                    <strong>{{"MEDICAL_DOC_MANAGEMENT.UPLOAD_CONTENTS_1" | translate}}</strong>
                 </button>
             </div>
         </div>
         <div class="m-t-n-xs" ng-show="medicalDocumentUploadForm.$invalid && medicalDocumentUploadForm.name.$dirty">
             <div class="text-alert italic m-b m-l">
-                Please complete ALL required fields to upload document.
+                {{"MEDICAL_DOC_MANAGEMENT.UPLOAD_CONTENTS_12" | translate}}
             </div>
         </div>
     </form>

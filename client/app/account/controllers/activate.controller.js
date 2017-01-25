@@ -10,12 +10,17 @@
         .controller('ActivateController', ActivateController);
 
     /* @ngInject */
-    function ActivateController($state, accountService, brand) {
+    function ActivateController($state, accountService, brand, $translate) {
         var vm = this;
         vm.activated = activated;
         vm.patientName = accountService.getPatientName();
-        vm.title = brand.getBrandName() + " Account Activation Complete";
+        vm.title = brand.getBrandName() + "_ACCOUNT_ACTIVATION_COMPLETE";
         vm.brandName = brand.getBrandName();
+
+        if (window.localStorage.lang === null) {
+            window.localStorage.lang = navigator.language;
+        }
+        $translate.use(window.localStorage.lang);
 
         function activated() {
             accountService.removeActivateInfo();

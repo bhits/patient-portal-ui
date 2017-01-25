@@ -56,20 +56,40 @@
                     return daysList;
                 },
                 months: function () {
-                    var monthName = [
-                        'January',
-                        'February',
-                        'March',
-                        'April',
-                        'May',
-                        'June',
-                        'July',
-                        'August',
-                        'September',
-                        'October',
-                        'November',
-                        'December'
-                    ];
+                    var language = window.localStorage.lang || 'en';
+                    var monthName;
+                    if (language.substring(0,2) === 'en') {
+                        monthName = [
+                            'January',
+                            'February',
+                            'March',
+                            'April',
+                            'May',
+                            'June',
+                            'July',
+                            'August',
+                            'September',
+                            'October',
+                            'November',
+                            'December'
+                        ];
+                    } else {
+                        monthName = [
+                            'Enero',
+                            'Febrero',
+                            'Marzo',
+                            'Abril',
+                            'Mayo',
+                            'Junio',
+                            'Julio',
+                            'Agosto',
+                            'Septiembre',
+                            'Octubre',
+                            'Noviembre',
+                            'Diciembre'
+                        ];
+                    }
+
                     var monthList = [];
                     for (var i = 1; i <= 12; i++) {
                         var iS = i.toString();

@@ -20,6 +20,9 @@
                 'app.medicalDocument',
                 'app.account',
                 'app.activity',
-                'app.brand'
+                'app.brand',
+                'tmh.dynamicLocale',
+                'pascalprecht.translate',
+                'ui.bootstrap'
             ]);
 })();

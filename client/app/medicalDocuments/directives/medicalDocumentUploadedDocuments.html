@@ -2,19 +2,19 @@
     <div>
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h2 class="custom-no-margin-top"><i class="fa fa-files-o"></i> Uploaded Documents</h2>
+                <h2 class="custom-no-margin-top"><i class="fa fa-files-o"></i>{{"MEDICAL_DOC_MANAGEMENT.UPLOAD_CONTENTS_13" | translate}}</h2>
             </div>
             <div class="panel-body">
                 <div class="side-padding10">
                     <div class="row p-b-xs border-bottom-medium-gray-thin hidden-xs">
                         <div class="col-sm-4 bold">
-                            Document Type
+                            {{"MEDICAL_DOC_MANAGEMENT.UPLOAD_CONTENTS_14" | translate}}
                         </div>
                         <div class="col-sm-4 bold">
-                            Name
+                            {{"MEDICAL_DOC_MANAGEMENT.UPLOAD_CONTENTS_2" | translate}}
                         </div>
                         <div class="col-sm-4 bold">
-                            Description
+                            {{"MEDICAL_DOC_MANAGEMENT.UPLOAD_CONTENTS_7" | translate}}
                         </div>
                     </div>
                     <div class="row row-striped p-t-xs p-b-sm"
@@ -22,7 +22,7 @@
                         <div class="col-sm-12">
                             <div class="row m-b-xs">
                                 <div class="col-sm-4 font-size12 bold">
-                                    Summary of Episode Note
+                                    {{"MEDICAL_DOC_MANAGEMENT.UPLOAD_CONTENTS_15" | translate}}
                                 </div>
                                 <div class="col-sm-4 font-size12">
                                     <span ng-bind="medicalDocument.name"></span>
@@ -38,18 +38,18 @@
                                     <button type="button"
                                             class="btn btn-success dark-green btn-xs m-r-xs"
                                             ng-click="uploadedDocumentVm.uploadDocumentToHIE(medicalDocument)">
-                                        <span class="fa fa-upload m-r-xs"></span>Publish
+                                        <span class="fa fa-upload m-r-xs"></span>{{"MEDICAL_DOC_MANAGEMENT.UPLOAD_CONTENTS_16" | translate}}
                                     </button>
                                     <button type="button"
                                             class="btn btn-default btn-outline btn-xs m-r-sm"
                                             ng-click="uploadedDocumentVm.downloadFile(medicalDocument)">
-                                        <span class="fa fa-download m-r-xs"></span>Download
+                                        <span class="fa fa-download m-r-xs"></span>{{"MEDICAL_DOC_MANAGEMENT.UPLOAD_CONTENTS_17" | translate}}
                                     </button>
                                     <a href=""
                                        type="button"
                                        class="hover-extraBold"
                                        ng-click="uploadedDocumentVm.openDeleteMedicalDocumentModal(medicalDocument, 'sm')">
-                                        <span class="fa fa-times m-r-xxs text-dark-red"></span> Remove
+                                        <span class="fa fa-times m-r-xxs text-dark-red"></span>{{"MEDICAL_DOC_MANAGEMENT.UPLOAD_CONTENTS_18" | translate}}
                                     </a>
 
                                 </div>
@@ -58,7 +58,7 @@
                     </div>
                     <div class="row row-striped p-t-xs p-b-xs"
                          ng-if="uploadedDocumentVm.medicaldocumentslist.length == 0">
-                        <strong> No document has been uploaded.</strong>
+                        <strong>{{"MEDICAL_DOC_MANAGEMENT.UPLOAD_CONTENTS_19" | translate}}</strong>
                     </div>
                 </div>
             </div>

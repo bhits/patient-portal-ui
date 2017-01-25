@@ -3,7 +3,7 @@
         <div class="ibox float-e-margins margin-bottom-10">
             <p>
                 <a class="btn btn-primary dark-green" ui-sref="fe.consent.create">
-                    Add a Consent
+                    {{"CONSENT_MANAGEMENT.OPTIONS_13" | translate}}
                 </a>
             </p>
         </div>
@@ -28,9 +28,9 @@
 <div class="row" ng-if="!consentCardListVm.hasConsents()">
     <div class="col-sm-12">
         <div class="alert alert-danger">
-            There are currently no Consents available. Please click the <a class="alert-link"
-                                                                           ui-sref="fe.consent.create">Add a Consent</a>
-            button to create a new consent.
+            {{"CONSENT_MANAGEMENT.OPTIONS_13_CONTENTS_1" | translate}} <a class="alert-link"
+                                                                           ui-sref="fe.consent.create">{{"CONSENT_MANAGEMENT.OPTIONS_13" | translate}}</a>
+            {{"CONSENT_MANAGEMENT.OPTIONS_13_CONTENTS_2" | translate}}
         </div>
     </div>
 </div>

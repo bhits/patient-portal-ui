@@ -1,14 +1,14 @@
 <div id="provider_lookup_result">
     <div class="row">
         <div class="col-md-6" ng-if="providerLookupResultVm.isEmptyResult()">
-            <div class="alert alert-danger">Sorry, no results found.</div>
+            <div class="alert alert-danger">{{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_1" | translate}}</div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-6" ng-if="!providerLookupResultVm.isEmptyResult()">
             <div class="panel panel-darkblue">
                 <div class="ibox-title modified panel-heading">
-                    <h2>Results</h2>
+                    <h2>{{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_2" | translate}}</h2>
                 </div>
             </div>
         </div>
@@ -36,15 +36,14 @@
                             ng-click="providerLookupResultVm.addProvider(provider.npi)"
                             ng-disabled="providerLookupResultVm.isProviderAlreadyAdded(provider.npi)">
                         <i class="fa fa-plus">
-                            <span class="sr-only">Add Provider</span>
+                            <span class="sr-only">{{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_3" | translate}}</span>
                         </i>
                     </button>
-                    <div class="inline" ng-if="!providerLookupResultVm.isProviderAlreadyAdded(provider.npi)">&nbsp;Add
-                        this Provider.
+                    <div class="inline" ng-if="!providerLookupResultVm.isProviderAlreadyAdded(provider.npi)">&nbsp;
+                        {{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_4" | translate}}
                     </div>
-                    <div class="inline" ng-if="providerLookupResultVm.isProviderAlreadyAdded(provider.npi)">&nbsp;Provider
-                        already
-                        added.
+                    <div class="inline" ng-if="providerLookupResultVm.isProviderAlreadyAdded(provider.npi)">&nbsp;
+                        {{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_5" | translate}}
                     </div>
                 </div>
                 <div class="panel-body">

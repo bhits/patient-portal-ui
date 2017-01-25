@@ -110,7 +110,12 @@
                 manageConsentModalVm.medicalDocuments = response;
                 manageConsentModalVm.selMedicalDocumentId = getFirstMedicalDocument(manageConsentModalVm.medicalDocuments);
             }, function (error) {
-                notificationService.error('Error in getting list of documents for current user.');
+                if (isEnglish()) {
+                    notificationService.error('Error in getting list of documents for current user.');
+                } else {
+                    notificationService.error('No se pudo obtener la lista de consentimientos de este usuario.');
+                }
+
             });
         }
 
@@ -128,7 +133,12 @@
             consentService.deleteConsent(consent.id, onDeleteSuccess, onDeleteError);
 
             function onDeleteSuccess() {
-                notificationService.success('Consent is successfully deleted');
+                if (isEnglish()) {
+                    notificationService.success('Consent is successfully deleted');
+                } else {
+                    notificationService.success('El consentimiento ha sido eliminado');
+                }
+
                 $modalInstance.close();
                 $state.reload();
             }
@@ -178,9 +188,17 @@
 
         function tryPolicySuccess(response) {
             var encodedDocument = response.document;
-            var decodedDocument = atob(encodedDocument);
+            //var decodedDocument = atob(encodedDocument);
+            var decodedDocument = b64DecodedUnicode (encodedDocument);
             var viewer = $window.open('', '_blank');
             viewer.document.open().write(decodedDocument);
+        }
+
+        // deal with non-ASCII characters of Spanish - Wentao
+        function b64DecodedUnicode(str) {
+            return decodeURIComponent(Array.prototype.map.call(atob(str), function(c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
         }
 
         function tryPolicyError(response) {
@@ -195,7 +213,12 @@
                     purposeOfUseCode: manageConsentModalVm.purposeOfUseCode
                 };
             } else {
-                notificationService.error("Insufficient parameters to apply try my policy.");
+                if (isEnglish()) {
+                    notificationService.error("Insufficient parameters to apply try my policy.");
+                } else {
+                    notificationService.error("Parámetros insuficientes para usar Probar mi Politica.");
+                }
+
             }
         }
 
@@ -208,7 +231,12 @@
                 function (response) {
                     var xmlString = response.data;
                     utilityService.downloadFile(xmlString, "consentDirective" + consent.id + ".xml", "application/xml;");
-                    notificationService.success('Consent directive is successfully downloaded.');
+                    if (isEnglish()) {
+                        notificationService.success('Consent directive is successfully downloaded.');
+                    } else {
+                        notificationService.success('El consentimiento ha sido descargado.');
+                    }
+
                     $modalInstance.close();
                     $state.reload();
                 },
@@ -218,6 +246,14 @@
                     $state.reload();
                 }
             );
+        }
+
+        function isEnglish () {
+            var language = window.localStorage.lang || 'en';
+            if (language.substring(0, 2) === 'en') {
+                return true;
+            }
+            return false;
         }
 
         function downloadUnattestedConsent(docType) {

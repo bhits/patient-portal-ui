@@ -35,7 +35,7 @@ module.exports = {
         e2e: ['app/**/*.e2e.js'],
 
         atpl: ['app/**/*.html'],
-
+        i18nLib: ['app/languagesLib/*.json'],
         html: ['index.html'],
         less: 'less/main.less',
         debug_js:['target/debug/**/*.js', '!target/debug/**/karma.conf.js', '!target/debug/vendor/**/*.js', '!target/debug/assets/**/*.js'],
@@ -83,7 +83,15 @@ module.exports = {
             'vendor/ngstorage/ngStorage.js',
             'vendor/checklist-model/checklist-model.js',
             'vendor/x2js/xml2json.js',
-            'vendor/angular-jwt/dist/angular-jwt.js'
+            'vendor/angular-jwt/dist/angular-jwt.js',
+            'vendor/angular-translate/angular-translate.js',
+            'vendor/angular-translate-loader-static-files/angular-translate-loader-static-files.js',
+            'vendor/angular-i18n/angular-locale_en.js',
+            'vendor/angular-i18n/angular-locale_es.js',
+            'vendor/angular-i18n/angular-locale_zh.js',
+            'vendor/angular-dynamic-locale/tmhDynamicLocale.min.js'
+            /*'vendor/angular-translate-storage-local/angular-translate-storage-local.js'*/
+
         ],
         css: [
             'vendor/angular-loading-bar/build/loading-bar.css'

@@ -5,7 +5,7 @@
             .controller('AppController', AppController);
 
             /* @ngInject */
-            function AppController($rootScope , utilityService, idleConfigParams, $state,  $modal, $modalStack, Idle) {
+            function AppController($rootScope , utilityService, idleConfigParams, $state,  $modal, $modalStack, Idle, $scope, $translate, tmhDynamicLocale, paginationConfig) {
 
                 var appVm = this;
 
@@ -22,6 +22,7 @@
                 /**
                  * follows after the IdleStart event, but includes a countdown until the user is considered timed out
                  * the countdown arg is the number of seconds remaining until then.
+                 *
                  * you can change the title or display a warning dialog from here.
                  * you can let them resume their session by calling Idle.watch()
                  */
@@ -126,5 +127,46 @@
                 function toggleSideBar() {
                     appVm.togglebar = !appVm.togglebar;
                 }
+
+                // change language dynamically- add by Wentao
+                var lang = window.localStorage.lang || 'en';
+                setDynamicLanguage(lang);
+                $scope.changeLanguage = function (language) {
+                    $translate.use(language);
+                    window.localStorage.lang = language;
+                    setDynamicLanguage(language);
+                    //window.location.reload();
+                };
+
+                function setDynamicLanguage (language) {
+                    if (language === null || language.length < 2) {
+                        tmhDynamicLocale.set("en");
+                    } else {
+                        tmhDynamicLocale.set (language.substring(0,2));
+                        setTextofPagination (language.substring(0,2));
+                    }
+                }
+
+                //translate the text of pagination of bootstrap
+                function setTextofPagination(language) {
+                    if (language === "zh") {
+                        paginationConfig.firstText = "第一页";
+                        paginationConfig.previousText = "上一页";
+                        paginationConfig.lastText = "最后一页";
+                        paginationConfig.nextText = "下一页";
+                    } else if (language === "es"){
+                        paginationConfig.firstText = "Inicio";
+                        paginationConfig.previousText = "Anterior";
+                        paginationConfig.lastText = "Fin";
+                        paginationConfig.nextText = "Próximo";
+                    } else if (language === "en"){
+                        // note the different effects between REFRESH and choosing LANGUAGE
+                        paginationConfig.firstText = "First";
+                        paginationConfig.previousText = "Previous";
+                        paginationConfig.lastText = "Last";
+                        paginationConfig.nextText = "Next";
+                    }
+                }
             }
+
 })();

@@ -3,20 +3,19 @@
     <div id="page-wrapper " class="padding-top-60 m-b-lg m-l-none m-r-none">
         <div class="row">
             <div class="col-sm-offset-1 col-sm-10">
-                <h1> Account Activation Complete!</h1>
+                <h1> {{"ACTIVATION.SUCCESS_CONTENTS_5" | translate}}</h1>
                 <div class="m-t-md">
-                    <strong>Congratulations!
+                    <strong>{{"ACTIVATION.SUCCESS_CONTENTS_1" | translate}}
                         <span ng-bind="activateVm.patientName"></span>
                     </strong>
-                    You have successfully created your <span ng-bind="activateVm.brandName"></span> password. Click
-                    on the link below to log in to your account.
+                    {{"ACTIVATION.SUCCESS_CONTENTS_2" | translate}} <span ng-bind="activateVm.brandName"></span> {{"ACTIVATION.SUCCESS_CONTENTS_3" | translate}}
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-offset-1 col-sm-10 m-t-md">
                 <button type="button" class="btn btn-primary dark-green" ng-click="activateVm.activated()">
-                    Continue to Login Page
+                    {{"ACTIVATION.SUCCESS_CONTENTS_4" | translate}}
                 </button>
             </div>
         </div>

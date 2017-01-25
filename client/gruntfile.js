@@ -139,6 +139,16 @@ module.exports = function (grunt) {
                     }
                 ]
             },
+            build_i18n_json: {
+                files: [
+                    {
+                        src: ['<%=app_files.i18nLib %>'],
+                        dest: '<%= build_debug_dir %>/',
+                        cwd: '.',
+                        expand: true
+                    }
+                ]
+            },
             compile_assets: {
                 files: [
                     {
@@ -738,7 +748,7 @@ module.exports = function (grunt) {
         }
 
         taskList.push('html2js', 'jshint-all', 'recess:build', 'concat:build_css', 'copy:build_app_assets',
-            'copy:build_vendor_assets', 'copy:build_appjs', 'copy:build_vendorjs', 'index:build', 'angularFileLoader', 'karmaconfig');
+            'copy:build_vendor_assets', 'copy:build_appjs', 'copy:build_vendorjs','copy:build_i18n_json', 'index:build', 'angularFileLoader', 'karmaconfig');
 
         if (target === targetEnum.debug || target === targetEnum.dist || target === targetEnum.dev) {
             taskList.push('karma:unit');

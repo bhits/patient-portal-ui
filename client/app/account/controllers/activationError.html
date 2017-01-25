@@ -3,15 +3,14 @@
     <div id="page-wrapper " class="padding-top-60 m-b-lg m-l-none m-r-none">
         <div class="row">
             <div class="col-sm-offset-1 col-sm-10">
-                <h1> Sorry! Activation Code Expired! </h1>
+                <h1> {{"ACTIVATION.ERROR_CONTENTS_1" | translate}} </h1>
                 <div class="m-t-md">
                     <p>
-                        <strong>We're very sorry. This email link is no longer valid.</strong> Please contact your
-                        provider for a new Verification Code.
+                        <strong>{{"ACTIVATION.ERROR_CONTENTS_2" | translate}}</strong> {{"ACTIVATION.ERROR_CONTENTS_3" | translate}}
                     </p>
-                    <p class="m-t-md">Please click the link below for more information about
-                        <span ng-bind="activateErrorVm.brandName"></span> available on the
-                        <span ng-bind="activateErrorVm.brandInitial"></span> Login Page.
+                    <p class="m-t-md">{{"ACTIVATION.ERROR_CONTENTS_4" | translate}}
+                        <span ng-bind="activateErrorVm.brandName"></span> {{"ACTIVATION.ERROR_CONTENTS_5" | translate}}
+                        <span ng-bind="activateErrorVm.brandInitial"></span> {{"ACTIVATION.ERROR_CONTENTS_6" | translate}}
                     </p>
                 </div>
             </div>
@@ -19,7 +18,7 @@
         <div class="row">
             <div class="col-sm-offset-1 col-sm-10 m-t-md">
                 <a class="btn btn-primary dark-green" ui-sref="fe.login">
-                    Back to Login Page
+                    {{"ACTIVATION.ERROR_CONTENTS_7" | translate}}
                 </a>
             </div>
         </div>

@@ -14,7 +14,7 @@
         vm.forgotPassword = forgotPassword;
         vm.cancel = cancel;
         vm.canSubmit = canSubmit;
-        vm.title = brand.getBrandName() + " Forgot Password";
+        vm.title = brand.getBrandName() + "_FORGOT_PASSWORD";
 
         function prepareInfo() {
             return {

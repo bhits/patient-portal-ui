@@ -23,7 +23,13 @@
     "checklist-model": "0.9.x",
     "x2js":"1.2.x",
     "ngstorage": "0.3.x",
-    "angular-jwt": "0.0.x"
+    "angular-jwt": "0.0.x",
+    "angular-translate": "2.10.0",
+    "angular-translate-loader-static-files": "2.10.0",
+    "angular-i18n": "1.4.0",
+    "angular-translate-storage-local": "2.10.0",
+    "angular-translate-storage-cookie": "2.10.0",
+    "angular-dynamic-locale": ""
   },
   "devDependencies": {
     "angular-mocks": "~1.5.0"
