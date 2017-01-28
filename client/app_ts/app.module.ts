@@ -4,7 +4,7 @@ import {FormsModule} from '@angular/forms';
 import {BrowserModule} from "@angular/platform-browser";
 import {HttpModule} from "@angular/http";
 
-import {ShareModule} from "./shared/share.module";
+import {SharedModule} from "./shared/shared.module";
 import {CoreModule} from "./core/core.module";
 import {ProviderModule} from "./provider/provider.module";
 
@@ -15,7 +15,7 @@ import {ProviderModule} from "./provider/provider.module";
         BrowserModule,
         FormsModule,
         HttpModule,
-        ShareModule,
+        SharedModule,
         CoreModule,
         ProviderModule
     ],

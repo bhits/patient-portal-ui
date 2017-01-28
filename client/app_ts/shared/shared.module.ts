@@ -7,5 +7,5 @@ import {NgModule} from '@angular/core';
     providers: []
 })
 
-export class ShareModule {
+export class SharedModule {
 }
