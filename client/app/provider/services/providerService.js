@@ -12,7 +12,7 @@
     /* @ngInject */
     function providerService($resource, configService, utilityService) {
         var providers = $resource(configService.getPcmApiBaseUrl() + "/providers/:npi", {npi: '@npi'});
-
+        var selectedProvidersNpi = [];
         var service = {};
 
         service.getProvidersResource = getProvidersResource;
@@ -22,6 +22,9 @@
         service.isEmptyLookupResult = isEmptyLookupResult;
         service.hasNpi = hasNpi;
         service.getLookupResult = getLookupResult;
+        service.getSelectedProviders = getSelectedProviders;
+        service.addSelectedProvider = addSelectedProvider;
+        service.isProviderSelected = isProviderSelected;
 
         return service;
 
@@ -136,6 +139,27 @@
             if (angular.isDefined(providersData) && angular.isArray(providersData) && providersData.length > 0) {
                 for (var i = 0; i < providersData.length; i++) {
                     if (npi === providersData[i].npi) {
+                        isAlreadyAdded = true;
+                        break;
+                    }
+                }
+            }
+            return isAlreadyAdded;
+        }
+
+        function getSelectedProviders(){
+            return selectedProvidersNpi;
+        }
+
+        function addSelectedProvider(npi){
+            selectedProvidersNpi.push(npi);
+        }
+
+        function isProviderSelected(npi){
+            var isAlreadyAdded = false;
+            if (angular.isArray(selectedProvidersNpi) && selectedProvidersNpi.length > 0) {
+                for (var i = 0; i < selectedProvidersNpi.length; i++) {
+                    if (npi === selectedProvidersNpi[i]) {
                         isAlreadyAdded = true;
                         break;
                     }

@@ -43,6 +43,9 @@
             vm.isEmptyResult = isEmptyResult;
             vm.addProvider = addProvider;
             vm.paginationSummary = paginationSummary;
+            vm.selectProvider = selectProvider;
+            vm.isProviderCurrentlySelected = isProviderCurrentlySelected;
+            vm.canSelectProvider = canSelectProvider;
 
             function scrollToSearchResults() {
                 utilityService.scrollTo('provider_lookup_result');
@@ -53,9 +56,12 @@
             }
 
             function isProviderAlreadyAdded(npi) {
-                return providerService.hasNpi(vm.providersData, npi);
+                return providerService.hasNpi(vm.providersData, npi) && !providerService.isProviderSelected(npi) ;
             }
 
+            function isProviderAlreadySelected(npi){
+
+            }
             function loadPage() {
                 var newPage = vm.pagination.currentPage;
                 vm.pagination.currentPage = oldPage;
@@ -85,6 +91,14 @@
                 providerService.addProvider(npi, addProviderSuccess, addProviderError);
             }
 
+            function selectProvider(npi){
+                providerService.addSelectedProvider(npi);
+            }
+
+            function isProviderCurrentlySelected(npi){
+                return providerService.isProviderSelected(npi) && !vm.isProviderAlreadyAdded(npi);
+            }
+
             function addProviderSuccess() {
                 $state.go('fe.provider.list');
             }
@@ -99,6 +113,10 @@
                 var total = (vm.providerLookupResult.totalNumberOfProviders);
                 var summary = 'Showing '.concat(rangeStart, ' to ', rangeEnd, ' of ', total, ' entries');
                 return summary;
+            }
+
+            function canSelectProvider(npi){
+                return !vm.isProviderAlreadyAdded(npi) && !vm.isProviderCurrentlySelected(npi);
             }
         }
     }

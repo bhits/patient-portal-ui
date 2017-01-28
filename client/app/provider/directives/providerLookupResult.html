@@ -27,24 +27,41 @@
                     </div>
 
                     <div class="row">
+
                         <div class="col-md-12" ng-if="!providerLookupResultVm.isEmptyResult()">
-                            <div class="panel panel-default"
+                            <div class="panel"
+                                 ng-class="{'panel-providerSelect': providerLookupResultVm.canSelectProvider(provider.npi),
+                                            'panel-default': !providerLookupResultVm.canSelectProvider(provider.npi),
+                                            'relative': !providerLookupResultVm.canSelectProvider(provider.npi)}"
                                  ng-repeat="provider in providerLookupResultVm.providerLookupResult.providers">
-                                <div class="panel-heading">
-                                    <h3>{{provider | plsName}}&nbsp;<span>[NPI: {{provider.npi}}]</span></h3>
-                                    <button type="button" class="btn btn-xs btn-primary dark-green"
-                                            ng-click="providerLookupResultVm.addProvider(provider.npi)"
-                                            ng-disabled="providerLookupResultVm.isProviderAlreadyAdded(provider.npi)">
+                                <div class="panel-heading" ng-if="providerLookupResultVm.canSelectProvider(provider.npi)">
+                                    <h3 class="m-b-sm">{{provider | plsName}}&nbsp;<span>[NPI: {{provider.npi}}]</span></h3>
+                                    <button type="button" class="btn btn-xs btn-primary dark-green" ng-click="providerLookupResultVm.selectProvider(provider.npi)">
                                         <i class="fa fa-plus">
-                                            <span class="sr-only">Add Provider</span>
+                                            <span class="sr-only">Select this Provider</span>
                                         </i>
                                     </button>
-                                    <div class="inline" ng-if="!providerLookupResultVm.isProviderAlreadyAdded(provider.npi)">&nbsp;Add
-                                        this Provider.
+                                    <div class="inline" >
+                                        &nbsp;Select this Provider.
                                     </div>
-                                    <div class="inline" ng-if="providerLookupResultVm.isProviderAlreadyAdded(provider.npi)">&nbsp;Provider
-                                        already
-                                        added.
+                                </div>
+                                <div class="panel-heading" ng-if="providerLookupResultVm.isProviderCurrentlySelected(provider.npi)">
+                                    <span class="top-right-ribbon"></span>
+                                    <h3 class="m-b-sm">{{provider | plsName}}&nbsp;<span>[NPI: {{provider.npi}}]</span></h3>
+                                    <button type="button" class="btn btn-xs white" >
+                                        <i class="fa fa-plus">
+                                            <span class="sr-only">Provider currently selected.</span>
+                                        </i>
+                                    </button>
+                                    <div class="inline text-dark-gray" >
+                                        &nbsp;Provider currently selected.
+                                    </div>
+                                </div>
+                                <div class="panel-heading" ng-if="providerLookupResultVm.isProviderAlreadyAdded(provider.npi)">
+                                    <h3 class="m-b-sm text-medium-gray">{{provider | plsName}}&nbsp;<span>[NPI: {{provider.npi}}]</span></h3>
+                                    <div class="inline" >
+                                        &nbsp;<span class="fa fa-lg fa-check text-navbar-blueGray">
+                                        &nbsp;</span>Provider already added.
                                     </div>
                                 </div>
                                 <div class="panel-body">
@@ -53,70 +70,6 @@
                                     <p>{{provider | plsAddress}}</p>
 
                                     <p>{{provider.practiceLocationAddressTelephoneNumber | phone}}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="panel panel-default">
-                                <div class="panel-heading relative">
-
-                                    <h3 class="m-b-sm text-medium-gray">LAUREL PINES DENTAL GROUP, CHARTERED [NPI: 1114084514]</h3>
-
-                                    <div class="inline">&nbsp;<span class="fa fa-lg fa-check text-navbar-blueGray">&nbsp;</span>Provider already added.
-                                    </div>
-                                </div>
-                                <div class="panel-body text-medium-gray">
-                                    <p>14333 LAUREL BOWIE RD, SUITE 100, LAUREL, MD, 20708-1126</p>
-                                    <p>301-953-3081</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="panel panel-default">
-                                <div class="panel-heading relative">
-                                    <span class="top-right-ribbon"></span>
-                                    <h3 class="m-b-sm">DRS. GOLDBAUM AND ROSENBERG [NPI: 1669605549]</h3>
-                                    <button type="button" class="btn btn-xs white">
-                                        <i class="fa fa-plus">
-                                            <span class="sr-only">Provider currently selected.</span>
-                                        </i>
-                                    </button>
-
-                                    <div class="inline text-dark-gray">&nbsp;Provider currently selected.
-                                    </div>
-                                </div>
-                                <div class="panel-body">
-                                    <p>11921 ROCKVILLE PIKE, SUITE 101, ROCKVILLE, MD, 20852-2737</p>
-
-                                    <p>301-770-1555</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="panel panel-providerSelect">
-                                <div class="panel-heading">
-                                    <h3 class="m-b-sm">NANCY NGA BARLOW, DDS [NPI: 1164602850]</h3>
-                                    <button type="button" class="btn btn-xs btn-primary dark-green">
-                                        <i class="fa fa-plus">
-                                            <span class="sr-only">Select this Provider</span>
-                                        </i>
-                                    </button>
-                                    <div class="inline">&nbsp;Select this Provider.
-                                    </div>
-                                </div>
-                                <div class="panel-body">
-                                    <p>7501 EPSILON DR, ROCKVILLE, MD, 20855-2574</p>
-
-                                    <p>301-258-8822</p>
                                 </div>
                             </div>
                         </div>
