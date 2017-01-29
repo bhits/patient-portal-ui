@@ -348,7 +348,7 @@
 
   },
   "CONSENT_PROPERTY": {
-    "PROPERTIES_1": "Effective Dates:",
+    "PROPERTIES_1": "Effective Dates: ",
     "PROPERTIES_2": "Authorized to share",
     "PROPERTIES_3": "Sharing with:"
   },
@@ -414,7 +414,8 @@
     "UPLOAD_CONTENTS_18": " Remove",
     "UPLOAD_CONTENTS_19": " No document has been uploaded.",
     "UPLOAD_CONTENTS_20": "Document Name",
-    "UPLOAD_CONTENTS_21": "Episode Summary Note"
+    "UPLOAD_CONTENTS_21": "Episode Summary Note",
+    "UPLOAD_CONTENTS_22": "Choose File"
 
   },
   "PROVIDER_MANAGEMENT": {

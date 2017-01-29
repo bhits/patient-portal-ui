@@ -37,8 +37,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="file">{{"MEDICAL_DOC_MANAGEMENT.UPLOAD_CONTENTS_9" | translate}}</label>
-                    <input type="file" name="file" id="file" accept=".xml" c2s-file-validate
+                    <label for="file">{{"MEDICAL_DOC_MANAGEMENT.UPLOAD_CONTENTS_9" | translate}}</label><br/>
+                    <input type="file" name="file" id="file" class="filestyle" data-buttonText="{{'MEDICAL_DOC_MANAGEMENT.UPLOAD_CONTENTS_22' | translate}}"
+                           data-size="sm" data-buttonName="btn-primary" data-icon= "true" data-input="false" accept=".xml" c2s-file-validate
                            ng-model="medicalDocumentsUploadVm.file"
                            c2s-file-model="medicalDocumentsUploadVm.medicalFile"
                            ng-pattern="medicalDocumentsUploadVm.extension" required/>

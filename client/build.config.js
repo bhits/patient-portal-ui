@@ -89,7 +89,8 @@ module.exports = {
             'vendor/angular-i18n/angular-locale_en.js',
             'vendor/angular-i18n/angular-locale_es.js',
             'vendor/angular-i18n/angular-locale_zh.js',
-            'vendor/angular-dynamic-locale/tmhDynamicLocale.min.js'
+            'vendor/angular-dynamic-locale/tmhDynamicLocale.min.js',
+            'vendor/bootstrap-filestyle/src/bootstrap-filestyle.js'
             /*'vendor/angular-translate-storage-local/angular-translate-storage-local.js'*/
 
         ],

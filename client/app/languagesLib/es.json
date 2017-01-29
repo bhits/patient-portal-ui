@@ -348,7 +348,7 @@
   },
 
   "CONSENT_PROPERTY": {
-    "PROPERTIES_1": "Fecha efectiva:",
+    "PROPERTIES_1": "Fecha efectivo: ",
     "PROPERTIES_2": "Autorizado para compartir",
     "PROPERTIES_3": "Compartir con:"
   },
@@ -372,7 +372,7 @@
     "CONTENTS_1": "Expandir Todos",
     "CONTENTS_2": "Colapsar Todos",
     "CONTENTS_3": " Ningún documento fue recuperado.",
-    "CCDA_DOC_1": "Creado en",
+    "CCDA_DOC_1": "Creado en ",
     "CCDA_DOC_2": " ",
     "CCDA_DOC_3": "Nombre del Paciente:",
     "CCDA_DOC_4": "Sexo: ",
@@ -413,10 +413,11 @@
     "UPLOAD_CONTENTS_15": "Resumen de la Nota del Episodio",
     "UPLOAD_CONTENTS_16": "Publicar",
     "UPLOAD_CONTENTS_17": "Descargar",
-    "UPLOAD_CONTENTS_18": "Retirar",
+    "UPLOAD_CONTENTS_18": "Borrar",
     "UPLOAD_CONTENTS_19": "Ningún documento ha sido subido.",
     "UPLOAD_CONTENTS_20": "Nombre del Documento",
-    "UPLOAD_CONTENTS_21": "Nota del Resumen del Episodio "
+    "UPLOAD_CONTENTS_21": "Nota del Resumen del Episodio ",
+    "UPLOAD_CONTENTS_22": "Elija Archivo"
 
 
   },
