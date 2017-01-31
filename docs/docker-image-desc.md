@@ -3,9 +3,11 @@ The Patient Portal UI is used by the patient to manage his or her health informa
 
 # Full Description
 
-# Supported Tags and Respective `Dockerfile` Links
+# Supported Source Code Tags and Current `Dockerfile` Link
 
-[`0.24.0`](https://github.com/bhits/patient-portal-ui/blob/master/server/src/main/docker/Dockerfile),[`latest`](https://github.com/bhits/patient-portal-ui/blob/master/server/src/main/docker/Dockerfile)[(0.24.0/Dockerfile)](https://github.com/bhits/patient-portal-ui/blob/master/server/src/main/docker/Dockerfile)
+[`0.24.0 (latest)`](https://github.com/bhits/patient-portal-ui/releases/tag/0.24.0), [`0.20.0`](https://github.com/bhits/patient-portal-ui/releases/tag/0.20.0)
+
+[`Current Dockerfile`](https://github.com/bhits/patient-portal-ui/blob/master/server/src/main/docker/Dockerfile)
 
 For more information about this image, the source code, and its history, please see the [GitHub repository](https://github.com/bhits/patient-portal-ui).
 
