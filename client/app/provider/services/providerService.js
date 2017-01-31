@@ -117,7 +117,7 @@
                 queryParams.orgname = utilityService.addQueryParameterPrefixAndSuffix(plsQueryParameters.facilityname);
             }
 
-            if(utilityService.isDefinedAndLengthNotZero(page) && !isNaN(page) ){
+            if(!isNaN(page) && (parseInt(page)>= 0) ){
                 queryParams.page = page - 1;
             }
             return queryParams;
