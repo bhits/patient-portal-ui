@@ -5,4 +5,4 @@ ARG finalName
 ENV JAR_FILE $finalName
 COPY $finalName /
 # Default active docker profile
-ENV DEFAULT_PROGRAM_ARGS --spring.profiles.active=docker
+ENV DEFAULT_PROGRAM_ARGS --spring.profiles.active=application-default,docker
