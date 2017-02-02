@@ -6,7 +6,7 @@
 
 xdescribe('app.c2sAccountVerification.directive', function () {
 
-    var $resource, envService, controller, $scope, $httpBackend, utilityService,
+    var $resource, controller, $scope, $httpBackend, utilityService,
         accountService, emailTokenService, accountConfig, form;
 
     var verifyInfo = {
@@ -20,13 +20,12 @@ xdescribe('app.c2sAccountVerification.directive', function () {
     beforeEach(module('app.security'));
     beforeEach(module('ngResource'));
 
-    beforeEach(inject(function (_$resource_, _envService_, $compile, $controller, $rootScope,
+    beforeEach(inject(function (_$resource_, $compile, $controller, $rootScope,
                                 _$httpBackend_, _utilityService_, _accountService_, _emailTokenService_,
                                 _accountConfig_) {
 
         $httpBackend = _$httpBackend_;
         $resource = _$resource_;
-        envService = _envService_;
         $scope = $rootScope.$new();
         utilityService = _utilityService_;
         accountService = _accountService_;

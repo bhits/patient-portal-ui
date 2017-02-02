@@ -6,6 +6,22 @@
 describe('app.emailTokenService ', function () {
     var emailTokenService;
 
+    beforeEach(function () {
+        module(function ($provide) {
+            $provide.constant('configPropertyList', [
+                '0', '1', '2', '3',
+                '4', '5', '6', '7',
+                '8', '9', '10', '11', '12'
+            ]);
+        });
+    });
+
+    beforeEach(function () {
+        module(function ($provide) {
+            $provide.constant('configProvider', {unsecuredApis: {verificationUrl: 'dummyValue'}});
+        });
+    });
+
     beforeEach(module('app.security'));
 
     beforeEach(inject(function (_emailTokenService_) {
@@ -43,6 +59,4 @@ describe('app.emailTokenService ', function () {
 
         expect(emailTokenService.token).toBeUndefined();
     });
-
-
 });

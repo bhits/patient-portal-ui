@@ -3,11 +3,11 @@
 
     angular
         .module('app.data')
-            .factory('dataService', dataService);
+        .factory('dataService', dataService);
 
     /* @ngInject */
-    function dataService($resource,envService) {
-        var medicalDocumentsListResource = $resource(envService.securedApis.pcmApiBaseUrl + "/clinicaldocuments");
+    function dataService($resource, configService) {
+        var medicalDocumentsListResource = $resource(configService.getPcmApiBaseUrl() + "/clinicaldocuments");
 
         var service = {};
         service.listMedicalDocuments = listMedicalDocuments;

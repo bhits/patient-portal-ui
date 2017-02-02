@@ -6,7 +6,7 @@
 
 xdescribe('app.medicalDocumentsService', function () {
 
-    var medicalDocumentsService, $resource, envService, $httpBackend, $scope, status, passed;
+    var medicalDocumentsService, $resource, configService, $httpBackend, $scope, status, passed;
 
     var success = function (data) {
         status = data.status;
@@ -22,11 +22,11 @@ xdescribe('app.medicalDocumentsService', function () {
     beforeEach(module('app.medicalDocument'));
     beforeEach(module('ngMock'));
 
-    beforeEach(inject(function (_medicalDocumentsService_, _$resource_, _$rootScope_, _envService_, $injector) {
+    beforeEach(inject(function (_medicalDocumentsService_, _$resource_, _$rootScope_, _configService_, $injector) {
         medicalDocumentsService = _medicalDocumentsService_;
         $resource = _$resource_;
         $scope = _$rootScope_.$new();
-        envService = _envService_;
+        configService = _configService_;
         $httpBackend = $injector.get('$httpBackend');
 
         passed = null;
@@ -66,5 +66,4 @@ xdescribe('app.medicalDocumentsService', function () {
         $httpBackend.flush();
         expect(passed).toBeTruthy();
     });
-
 });

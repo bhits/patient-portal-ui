@@ -12,9 +12,14 @@ describe('app.authInterceptorService', function () {
 
     var config;
 
+    beforeEach(function () {
+        module(function ($provide) {
+            $provide.constant('configProvider');
+        });
+    });
+
     beforeEach(module('app.security'));
     beforeEach(module('app.account'));
-
 
     beforeEach(inject(function (_$q_, _$location_, _utilityService_, _oauthTokenService_,
                                 _urlAuthorizationConfigurerService_, _securityConstants_, _authInterceptorService_) {
@@ -100,5 +105,4 @@ describe('app.authInterceptorService', function () {
         config = authInterceptorService.responseError(rejection);
         expect($location.path()).toEqual("/fe/login");
     });
-
 });

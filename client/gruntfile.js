@@ -40,30 +40,15 @@ module.exports = function (grunt) {
             '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
             ' Licensed <%= _.map(pkg.licenses, "type").join(", ") %> */\n'
         },
-        bower: {
-            install: {
-                options: {
-                    targetDir: 'vendor/',
-                    install: true,
-                    copy: false // See https://github.com/yatskevich/grunt-bower-task/issues/44
-                }
-            }
-        },
         /**
          * Increments the version number, etc.
          */
         bump: {
             options: {
-                files: [
-                    "package.json",
-                    "bower.json"
-                ],
+                files: ["package.json"],
                 commit: false,
                 commitMessage: 'chore(release): v%VERSION%',
-                commitFiles: [
-                    "package.json",
-                    "bower.json"
-                ],
+                commitFiles: ["package.json"],
                 createTag: false,
                 tagName: 'v%VERSION%',
                 tagMessage: 'Version %VERSION%',
@@ -79,7 +64,7 @@ module.exports = function (grunt) {
          */
         clean: {
             all: {
-                src: ['<%= build_dir %>**', '<%= build_reports_dir %>']
+                src: ['<%= build_dir %>**', '<%= build_reports_dir %>', 'app_ts/**/*.js', 'app_ts/**/*.map']
             }
         },
         /**
@@ -109,10 +94,50 @@ module.exports = function (grunt) {
                     }
                 ]
             },
+            build_configInitializationjs: {
+                files: [
+                    {
+                        src: ['<%= configInitialization_files.js %>'],
+                        dest: '<%= build_debug_dir %>/',
+                        cwd: '.',
+                        expand: true
+                    }
+                ]
+            },
             build_appjs: {
                 files: [
                     {
                         src: ['<%= app_files.js %>'],
+                        dest: '<%= build_debug_dir %>/',
+                        cwd: '.',
+                        expand: true
+                    }
+                ]
+            },
+            build_appjs_generated: {
+                files: [
+                    {
+                        src: ['<%= app_files.js_generated %>'],
+                        dest: '<%= build_debug_dir %>/',
+                        cwd: '.',
+                        expand: true
+                    }
+                ]
+            },
+            build_appjsmap_generated: {
+                files: [
+                    {
+                        src: ['<%= app_files.jsmap_generated %>'],
+                        dest: '<%= build_debug_dir %>/',
+                        cwd: '.',
+                        expand: true
+                    }
+                ]
+            },
+            build_systemjs_resources: {
+                files: [
+                    {
+                        src: ['<%= system_resources.js %>'],
                         dest: '<%= build_debug_dir %>/',
                         cwd: '.',
                         expand: true
@@ -145,6 +170,16 @@ module.exports = function (grunt) {
                         src: ['**'],
                         dest: '<%= build_dist_dir %>/assets',
                         cwd: '<%= build_debug_dir %>/assets',
+                        expand: true
+                    }
+                ]
+            },
+            angular2_lib: {
+                files: [
+                    {
+                        src: ['<%= vendor_files.angular2_lib %>'],
+                        dest: '<%= build_debug_dir %>/',
+                        cwd: '.',
                         expand: true
                     }
                 ]
@@ -481,85 +516,16 @@ module.exports = function (grunt) {
             }
         },
         ngconstant: {
-            // Options for all targets
             options: {
                 space: '  ',
                 wrap: '"use strict";\n\n {%= __ngModule %}',
-                name: 'app.config'
+                name: 'app.config',
+                dest: '<%= config_dir %>/config.js'
             },
-            // Environment targets
-            dev: {
-                options: {
-                    dest: '<%= config_dir %>/config.js'
-                },
+            app: {
                 constants: {
                     envService: {
-                        name: 'Development',
-                        version: '<%= pkg.version %>',
-                        base64BasicKey: 'cGF0aWVudC1wb3J0YWwtdWk6Y2hhbmdlaXQ=',
-                        securedApis: {
-                            pcmApiBaseUrl: '/pcm/patients',
-                            phrApiBaseUrl: '/phr',
-                            tryPolicyApiBaseUrl: '/tryPolicy',
-                            userInfo : '/uaa/userinfo'
-                        },
-                        unsecuredApis: {
-                            plsApiBaseUrl: '/pls/providers',
-                            tokenUrl : '/uaa/oauth/token',
-                            verificationUrl: '/patientUser/verifications',
-                            activationUrl: '/patientUser/activations',
-                            forgotPasswordUrl: '/uaa/forgot_password.do'
-                        }
-                    }
-                }
-            },
-            docker: {
-                options: {
-                    dest: '<%= config_dir %>/config.js'
-                },
-                constants: {
-                    envService: {
-                        name: 'docker',
-                        version: '<%= pkg.version %>',
-                        base64BasicKey: 'cGF0aWVudC1wb3J0YWwtdWk6Y2hhbmdlaXQ=',
-                        securedApis: {
-                            pcmApiBaseUrl: '/pcm/patients',
-                            phrApiBaseUrl: '/phr',
-                            tryPolicyApiBaseUrl: '/tryPolicy',
-                            userInfo : '/uaa/userinfo'
-                        },
-                        unsecuredApis: {
-                            plsApiBaseUrl: '/pls/providers',
-                            tokenUrl : '/uaa/oauth/token',
-                            verificationUrl: '/patientUser/verifications',
-                            activationUrl: '/patientUser/activations',
-                            forgotPasswordUrl: '/uaa/forgot_password.do'
-                        }
-                    }
-                }
-            },
-            qa: {
-                options: {
-                    dest: '<%= config_dir %>/config.js'
-                },
-                constants: {
-                    envService: {
-                        name: 'QA',
-                        version: '<%= pkg.version %>',
-                        base64BasicKey: 'cGF0aWVudC1wb3J0YWwtdWk6QllqeVdYU2JEdmRx',
-                        securedApis: {
-                            pcmApiBaseUrl: '/pcm/patients',
-                            phrApiBaseUrl: '/phr',
-                            tryPolicyApiBaseUrl: '/tryPolicy',
-                            userInfo : '/uaa/userinfo'
-                        },
-                        unsecuredApis: {
-                            plsApiBaseUrl: '/pls/providers',
-                            tokenUrl : '/uaa/oauth/token',
-                            verificationUrl: '/patientUser/verifications',
-                            activationUrl: '/patientUser/activations',
-                            forgotPasswordUrl: '/uaa/forgot_password.do'
-                        }
+                        version: '<%= pkg.version %>'
                     }
                 }
             }
@@ -606,6 +572,31 @@ module.exports = function (grunt) {
             compile: {
                 src: ['<%= build_debug_dir %>/index.html']
             }
+        },
+        typings: {
+            install: {}
+        },
+        ts: {
+            default: {
+                src: [
+                    "app_ts/**/*.ts",
+                    "!node_modules/**", "!target/**", "!vendor/**", "!protractor/**", "!resources/**",
+                    "!node/**", "!less/**", "!karma/**", "!assets/**", "!app/**/*.js",
+                    "typings/globals/angular/*.d.ts", "typings/globals/jquery/*.d.ts", "typings/globals/es6-shim/*.d.ts"
+                ],
+                dest: "app_ts/",
+                options: {
+                    module: 'commonjs',
+                    moduleResolution: 'node',
+                    target: 'ES5',
+                    sourceMap: true,
+                    experimentalDecorators: true,
+                    emitDecoratorMetadata: true,
+                    removeComments: false,
+                    noImplicitAny: false,
+                    lib: ['es2015', 'dom']
+                }
+            }
         }
     };
     grunt.initConfig(grunt.util._.extend(taskConfig, userConfig));
@@ -617,6 +608,7 @@ module.exports = function (grunt) {
             return file.match(/\.js$/);
         });
     }
+
     /**
      * A utility function to get all app CSS sources.
      */
@@ -625,6 +617,7 @@ module.exports = function (grunt) {
             return file.match(/\.css$/);
         });
     }
+
     /**
      * The index.html template includes the stylesheet and javascript sources
      * based on dynamic names calculated in this Gruntfile. This task assembles
@@ -690,19 +683,9 @@ module.exports = function (grunt) {
      */
     grunt.registerTask('build-debug', 'build:debug');
     /**
-     * Snake case build:dev
-     */
-    grunt.registerTask('build-dev', 'build:dev');
-    /**
      * Snake case build:dist
      */
     grunt.registerTask('build-dist', 'build:dist');
-    /**
-     * Snake case build:dev
-     */
-    grunt.registerTask('build-qa', 'build:qa');
-
-    grunt.registerTask('build-docker', 'build:docker');
     /**
      * Snake case build:ci
      */
@@ -717,9 +700,6 @@ module.exports = function (grunt) {
      */
     grunt.registerTask('build', function (target) {
         var targetEnum = {
-            dev: 'dev',
-            qa: 'qa',
-            docker: 'docker',
             debug: 'debug',
             dist: 'dist',
             ci: 'ci'
@@ -727,29 +707,43 @@ module.exports = function (grunt) {
 
         var taskList;
 
-        taskList = ['clean', 'bower:install'];
+        taskList = ['clean'];
 
-        if (target === targetEnum.dev || target === targetEnum.ci) {
-            taskList.push('ngconstant:dev');
-        } else if (target === targetEnum.qa) {
-            taskList.push('ngconstant:qa');
-        }else if (target === targetEnum.docker) {
-            taskList.push('ngconstant:docker');
+        taskList.push(
+            'typings',
+            'ts:default',
+            'html2js',
+            'jshint-all',
+            'recess:build',
+            'ngconstant:app',
+            'concat:build_css',
+            'copy:build_app_assets',
+            'copy:build_vendor_assets',
+            'copy:build_configInitializationjs',
+            'copy:build_appjs',
+            'copy:build_systemjs_resources',
+            'copy:angular2_lib',
+            'copy:build_vendorjs',
+            'index:build',
+            'angularFileLoader',
+            'karmaconfig'
+        );
+
+        if (target === targetEnum.debug) {
+            taskList.push('copy:build_appjsmap_generated');
+        } else {
+            taskList.push('copy:build_appjs_generated');
         }
 
-        taskList.push('html2js', 'jshint-all', 'recess:build', 'concat:build_css', 'copy:build_app_assets',
-            'copy:build_vendor_assets', 'copy:build_appjs', 'copy:build_vendorjs', 'index:build', 'angularFileLoader', 'karmaconfig');
-
-        if (target === targetEnum.debug || target === targetEnum.dist || target === targetEnum.dev) {
+        if (target === targetEnum.debug || target === targetEnum.dist) {
             taskList.push('karma:unit');
         } else if (target === targetEnum.ci) {
             taskList.push('karma:ci');
         }
 
-        if (target === targetEnum.dev || target === targetEnum.debug || target === targetEnum.dist || target === targetEnum.qa || target === targetEnum.docker || target === targetEnum.ci) {
+        if (target === targetEnum.debug || target === targetEnum.dist || target === targetEnum.ci) {
             taskList = taskList.concat(['compile']);
         }
-
         grunt.task.run(taskList);
     });
 

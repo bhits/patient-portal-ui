@@ -2,9 +2,5 @@
     'use strict';
 
     angular
-        .module('app.home',
-            [
-                'app.core',
-                'app.brand'
-            ]);
+        .module('app.home', ['app.core']);
 })();

@@ -6,19 +6,19 @@
 
 xdescribe('app.activityService', function () {
 
-    var activityService, notificationService, $resource, envService, scope, $httpBackend;
+    var activityService, notificationService, $resource, configService, scope, $httpBackend;
 
     beforeEach(module('app.account'));
     beforeEach(module('app.config'));
     beforeEach(module('app.activity'));
     beforeEach(module('ngResource'));
 
-    beforeEach(inject(function (_activityService_, _$resource_, _envService_, _notificationService_,
+    beforeEach(inject(function (_activityService_, _$resource_, _configService_, _notificationService_,
                                 $controller, $rootScope, _$httpBackend_) {
         activityService = _activityService_;
         notificationService = _notificationService_;
         $resource = _$resource_;
-        envService = _envService_;
+        configService = _configService_;
         scope = $rootScope.$new();
         $httpBackend = _$httpBackend_;
     }));

@@ -6,7 +6,7 @@
         .factory('utilityService', utilityService);
 
     /* @ngInject */
-    function utilityService($location, $anchorScroll, $window, envService, browser, coreConstants) {
+    function utilityService($location, $anchorScroll, $window, configProvider, browser, coreConstants) {
         var service = {};
 
         service.getYear = getYear;
@@ -32,7 +32,7 @@
         service.isSecuredApi = isSecuredApi;
         service.digitFormat = digitFormat;
         service.isValidDate = isValidDate;
-
+        service.addQueryParameterPrefixAndSuffix = addQueryParameterPrefixAndSuffix;
 
         return service;
 
@@ -196,7 +196,6 @@
             }
         }
 
-
         function saveFileToDiskInChromeAndFF(blobFile, filename) {
             var blobURL = ($window.URL || $window.webkitURL).createObjectURL(blobFile);
             var anchor = document.createElement("a");
@@ -211,11 +210,10 @@
             }, 100);
         }
 
-
         function isSecuredApi(url) {
             var isSecured = false;
             if (angular.isDefined(url)) {
-                angular.forEach(envService.securedApis, function (value) {
+                angular.forEach(configProvider.securedApis, function (value) {
                     if (startsWith(url.toLowerCase(), value.toLowerCase())) {
                         isSecured = true;
                     }
@@ -268,6 +266,8 @@
             return true;  // date is valid
         }
 
+        function addQueryParameterPrefixAndSuffix(param){
+            return angular.isDefined(param) && (param.length > 0) ? ("%" + param + "%"): param;
+        }
     }
-
 })();

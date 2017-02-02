@@ -12,7 +12,8 @@ module.exports = {
     build_dist_dir: '<%=build_dir%>' + 'dist',
     build_reports_dir: '<%=build_dir%>' + '.reports',
     build_war_dir: '<%=build_dir%>',
-    config_dir: 'app/config' ,
+    config_dir: 'app/config',
+    configInitialization_dir: 'configInitialization',
 
     /**
      * The `karma_conf_file` file name is where karma testing configuration resides.
@@ -31,6 +32,8 @@ module.exports = {
      */
     app_files: {
         js: ['app/**/*.js', '!app/**/*.spec.js', '!app/**/*.e2e.js'],
+        js_generated: ['app_ts/**/*.js'],
+        jsmap_generated: ['app_ts/**/*'],
         jsunit: ['app/**/*.spec.js'],
         e2e: ['app/**/*.e2e.js'],
 
@@ -38,7 +41,30 @@ module.exports = {
 
         html: ['index.html'],
         less: 'less/main.less',
-        debug_js:['target/debug/**/*.js', '!target/debug/**/karma.conf.js', '!target/debug/vendor/**/*.js', '!target/debug/assets/**/*.js'],
+        debug_js: [
+            'target/debug/**/*.js',
+            '!target/debug/**/karma.conf.js',
+            '!target/debug/node_modules/**/*.js',
+            '!target/debug/assets/**/*.js',
+            '!target/debug/configInitialization/**/*.js',
+            '!target/debug/app_ts/**/*.js',
+            '!target/debug/resources/**/*.js'
+        ]
+    },
+
+    /**
+     * This is a collection of file patterns that used for loading configuration for initializing Angular application
+     * The order of the files: These files will be put in the html files as the order in the array
+     */
+    configInitialization_files: {
+        js: ['configInitialization/**/*.js']
+    },
+
+    /**
+     * Configuration for System.js
+     */
+    system_resources: {
+        js: ['resources/**/*.js']
     },
 
     /**
@@ -47,7 +73,7 @@ module.exports = {
      */
     test_files: {
         js: [
-            'vendor/angular-mocks/angular-mocks.js'
+            'node_modules/angular-mocks/angular-mocks.js'
         ]
     },
 
@@ -73,21 +99,25 @@ module.exports = {
      */
     vendor_files: {
         js: [
-            'vendor/angular/angular.js',
-            'vendor/angular-resource/angular-resource.js',
-            'vendor/angular-sanitize/angular-sanitize.js',
-            'vendor/angular-aria/angular-aria.js',
-            'vendor/angular-messages/angular-messages.js',
-            'vendor/angular-loading-bar/build/loading-bar.js',
-            'vendor/angular-ui-router/release/angular-ui-router.js',
-            'vendor/ngstorage/ngStorage.js',
-            'vendor/checklist-model/checklist-model.js',
-            'vendor/x2js/xml2json.js',
-            'vendor/angular-jwt/dist/angular-jwt.js'
+            'node_modules/angular/angular.js',
+            'node_modules/angular-resource/angular-resource.js',
+            'node_modules/angular-sanitize/angular-sanitize.js',
+            'node_modules/angular-aria/angular-aria.js',
+            'node_modules/angular-messages/angular-messages.js',
+            'node_modules/angular-loading-bar/build/loading-bar.js',
+            'node_modules/angular-ui-router/release/angular-ui-router.js',
+            'node_modules/ngstorage/ngStorage.js',
+            'node_modules/checklist-model/checklist-model.js',
+            'node_modules/angular-jwt/dist/angular-jwt.js',
+            'node_modules/core-js/client/shim.js',
+            'node_modules/zone.js/dist/zone.js',
+            'node_modules/reflect-metadata/Reflect.js',
+            'node_modules/systemjs/dist/system.src.js'
         ],
         css: [
-            'vendor/angular-loading-bar/build/loading-bar.css'
+            'node_modules/angular-loading-bar/build/loading-bar.css'
         ],
-        assets: []
+        assets: [],
+        angular2_lib: ['node_modules/@angular/**/*.js', 'node_modules/rxjs/**/*.js']
     }
 };

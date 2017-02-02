@@ -6,7 +6,7 @@
 'use strict';
 
 xdescribe('app.providerService ', function () {
-    var providerService, $httpBackend, resource, envService, scope, status, passed;
+    var providerService, $httpBackend, resource, configService, scope, status, passed;
 
     var providerData = [{
         deletable: false,
@@ -41,10 +41,10 @@ xdescribe('app.providerService ', function () {
     beforeEach(module('app.config'));
     beforeEach(module('app.core'));
 
-    beforeEach(inject(function (_$resource_, _envService_,
+    beforeEach(inject(function (_$resource_, _configService_,
                                 _providerService_, _$rootScope_, $injector) {
         resource = _$resource_;
-        envService = _envService_;
+        configService = _configService_;
         providerService = _providerService_;
         scope = _$rootScope_.$new();
         $httpBackend = $injector.get('$httpBackend');

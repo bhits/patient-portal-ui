@@ -6,7 +6,7 @@
 'use strict';
 
 describe('app.healthInformationService ', function () {
-    var healthInformationService, $resource, envService, patientResource;
+    var healthInformationService, $resource, configService;
 
     var expectEmpty;
     var allergies = [{
@@ -25,16 +25,30 @@ describe('app.healthInformationService ', function () {
     var AllergySection = {Allergies: allergies, Code: {}, Name: "Allergy", Narrative: "", Title: ""};
     var ccdaDocument = {AllergySection: AllergySection, CCDAHeader: {}, EncounterSection: {}};
     var document = null;
-    var patientData = null;
 
+    beforeEach(function () {
+        module(function ($provide) {
+            $provide.constant('configPropertyList', [
+                '0', '1', '2',
+                '3', '4', '5', '6',
+                'phrDummyValue'
+            ]);
+        });
+    });
+
+    beforeEach(function () {
+        module(function ($provide) {
+            $provide.constant('configProvider', {securedApis: 'dummyValue'});
+        });
+    });
 
     beforeEach(module('app.config'));
     beforeEach(module('app.healthInformation'));
 
-    beforeEach(inject(function (_healthInformationService_, _$resource_, _envService_) {
+    beforeEach(inject(function (_healthInformationService_, _$resource_, _configService_) {
         healthInformationService = _healthInformationService_;
         $resource = _$resource_;
-        envService = _envService_;
+        configService = _configService_;
     }));
 
     it("should be registered", function () {
@@ -80,6 +94,4 @@ describe('app.healthInformationService ', function () {
         document = {CDAdocuments: ['doc1.doc', 'doc2.doc']};
         expect(healthInformationService.getCDADocument(document)).toBe('doc1.doc');
     });
-
-
 });

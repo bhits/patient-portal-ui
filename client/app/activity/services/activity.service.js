@@ -10,9 +10,9 @@
         .factory('activityService', activityService);
 
     /* @ngInject */
-    function activityService($resource, envService) {
+    function activityService($resource, configService) {
 
-        var patientListResource = $resource(envService.securedApis.pcmApiBaseUrl + "/activities/pageNumber",
+        var patientListResource = $resource(configService.getPcmApiBaseUrl() + "/activities/pageNumber",
             {pageNumber: '@pageNumber'},
             {
                 'query': {

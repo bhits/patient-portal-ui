@@ -8,23 +8,9 @@ xdescribe("app.forgotPassword.controller ", function () {
 
     beforeEach(module('app.account'));
     beforeEach(module('app.security'));
-    beforeEach(module('app.brand'));
 
     var utilityService, securityConstants, accountConfig, authenticationService, $httpBackend;
-    var controller, brand, $scope, form;
-
-    beforeEach(function () {
-        var fakeModule = angular.module('test.app.brand', function () {
-        });
-        fakeModule.config(function (brandProvider) {
-            brand = brandProvider;
-        });
-        module('app.brand', 'test.app.brand');
-        inject(function () {
-        });
-        brand.setBrandName("Brand Name");
-        brand.setBrandInitial("BI");
-    });
+    var controller, $scope, form;
 
     beforeEach(inject(function ($controller, $state, $rootScope, $compile, _authenticationService_,
                                 _utilityService_, _securityConstants_, _accountConfig_, _$httpBackend_) {
@@ -50,8 +36,7 @@ xdescribe("app.forgotPassword.controller ", function () {
             utilityService: utilityService,
             securityConstants: securityConstants,
             accountConfig: accountConfig,
-            authenticationService: authenticationService,
-            brand: brand
+            authenticationService: authenticationService
         });
 
     }));
@@ -110,5 +95,4 @@ xdescribe("app.forgotPassword.controller ", function () {
         var valid = controller.canSubmit(form);
         expect(valid).toBeTruthy();
     });
-
 });

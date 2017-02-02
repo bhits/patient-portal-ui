@@ -6,11 +6,7 @@
         .config(appConfig);
 
     /* @ngInject */
-    function appConfig($urlRouterProvider, $locationProvider, $httpProvider, KeepaliveProvider, IdleProvider, idleConfigParams, brandProvider) {
-
-        //Set Brand Name
-        brandProvider.setBrandName("Consent2Share");
-        brandProvider.setBrandInitial("C2S");
+    function appConfig($urlRouterProvider, $locationProvider, $httpProvider, KeepaliveProvider, IdleProvider, idleConfigParams) {
 
         // enable html5 mode
         $locationProvider.html5Mode(true).hashPrefix('!');
