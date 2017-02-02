@@ -5,7 +5,7 @@
 
     <groupId>gov.samhsa.c2s</groupId>
     <artifactId>pp-ui</artifactId>
-    <version>0.23.0-SNAPSHOT</version>
+    <version>0.24.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>ppui</name>
@@ -70,21 +70,6 @@
             <url>https://repo.spring.io/libs-milestone-local</url>
         </repository>
     </repositories>
-
-    <!-- This configuration is for BHITS team to deploy the artifacts to organization repository with 'mvn deploy' command -->
-    <!-- Please reconfigure based on your environment setup to run 'mvn deploy' -->
-    <distributionManagement>
-        <repository>
-            <id>deployment</id>
-            <name>Internal Releases</name>
-            <url>http://${maven.nexus.servername}/repository/releases/</url>
-        </repository>
-        <snapshotRepository>
-            <id>deployment</id>
-            <name>Internal Releases</name>
-            <url>http://${maven.nexus.servername}/repository/snapshots/</url>
-        </snapshotRepository>
-    </distributionManagement>
 
     <profiles>
         <profile>
