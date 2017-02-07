@@ -10,6 +10,7 @@ declare var angular: any;
 const upgradeAdapter: UpgradeAdapter = new UpgradeAdapter(forwardRef(() => PPUIModule));
 
 // Downgrade component(s) from Angular 2 to Angular 1
+
 angular.module('configInitialization')
     .directive('c2sLogout', upgradeAdapter.downgradeNg2Component(LogoutComponent));
 

@@ -22,9 +22,6 @@
         service.isEmptyLookupResult = isEmptyLookupResult;
         service.hasNpi = hasNpi;
         service.getLookupResult = getLookupResult;
-        // service.getSelectedProviders = getSelectedProviders;
-        // service.addSelectedProvider = addSelectedProvider;
-        // service.isProviderSelected = isProviderSelected;
 
         return service;
 
@@ -147,25 +144,5 @@
             return isAlreadyAdded;
         }
 
-        // function getSelectedProviders(){
-        //     return selectedProvidersNpi;
-        // }
-
-        // function addSelectedProvider(npi){
-        //     selectedProvidersNpi.push(npi);
-        // }
-
-        // function isProviderSelected(npi){
-        //     var isAlreadyAdded = false;
-        //     if (angular.isArray(selectedProvidersNpi) && selectedProvidersNpi.length > 0) {
-        //         for (var i = 0; i < selectedProvidersNpi.length; i++) {
-        //             if (npi === selectedProvidersNpi[i]) {
-        //                 isAlreadyAdded = true;
-        //                 break;
-        //             }
-        //         }
-        //     }
-        //     return isAlreadyAdded;
-        // }
     }
 })();

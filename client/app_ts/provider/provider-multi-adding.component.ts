@@ -1,4 +1,5 @@
 import {Component, Input, ViewChild } from '@angular/core';
+import {Provider} from "./Provider";
 
 @Component({
     // moduleId:  module.id,
@@ -40,7 +41,7 @@ import {Component, Input, ViewChild } from '@angular/core';
                                                     </button>
                                                 </td>
                                                 <td>
-                                                    <span> {{provider}}</span>
+                                                    <span> {{provider | providerName}}</span>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -62,6 +63,7 @@ import {Component, Input, ViewChild } from '@angular/core';
                           <div> 
                             <strong>Are you sure you want to add the selected provider(s)?</strong>
                           </div>
+                          <br/>
                       <button (click)="toggleAddProviderModal()" class="btn">Close</button>
                       <button (click)="addProviders()" class="btn">Add providers</button>
                     </c2s-modal>
@@ -70,8 +72,9 @@ import {Component, Input, ViewChild } from '@angular/core';
                      <c2s-modal [(visible)]="showDeleteProviderModal">
                       <h1>Delete Provider</h1>
                           <div> 
-                            <strong>Are you sure you want to delete  this {{selectedProvider}} provider?</strong>
+                            <strong>Are you sure you want to delete   {{selectedProvider | providerName}} ?</strong>
                           </div>
+                          <br/>
                       <button (click)="toggleDeleteProviderModal()" class="btn">Close</button>
                       <button (click)="deleteProvider()" class="btn">Delete provider</button>
                     </c2s-modal>
@@ -84,7 +87,7 @@ export class ProviderMultiAddingComponent {
     showDeleteProviderModal = false;
 
     @Input() providers: any[];
-    selectedProvider:any = null;
+    selectedProvider:Provider = null;
 
     addProviders(){
         this.showAddProviderModal = false;
@@ -103,7 +106,7 @@ export class ProviderMultiAddingComponent {
     toggleDeleteProviderModal(){
         this.showDeleteProviderModal = !this.showDeleteProviderModal;
     }
-    enableDeleteProviderModal(provider:any){
+    enableDeleteProviderModal(provider:Provider){
         this.selectedProvider = provider;
         this.toggleDeleteProviderModal();
     }

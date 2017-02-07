@@ -38,7 +38,7 @@
                                  ng-repeat="provider in providerLookupResultVm.providerLookupResult.providers">
                                 <div class="panel-heading" ng-if="providerLookupResultVm.canSelectProvider(provider.npi)">
                                     <h3 class="m-b-sm">{{provider | plsName}}&nbsp;<span>[NPI: {{provider.npi}}]</span></h3>
-                                    <button type="button" class="btn btn-xs btn-primary dark-green" ng-click="providerLookupResultVm.selectProvider(provider.npi)">
+                                    <button type="button" class="btn btn-xs btn-primary dark-green" ng-click="providerLookupResultVm.addSelectedProvider(provider)">
                                         <i class="fa fa-plus">
                                             <span class="sr-only">Select this Provider</span>
                                         </i>

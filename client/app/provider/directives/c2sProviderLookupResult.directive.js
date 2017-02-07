@@ -43,9 +43,9 @@
             vm.isEmptyResult = isEmptyResult;
             vm.addProvider = addProvider;
             vm.paginationSummary = paginationSummary;
-            vm.selectProvider = selectProvider;
             vm.isProviderCurrentlySelected = isProviderCurrentlySelected;
             vm.canSelectProvider = canSelectProvider;
+            vm.addSelectedProvider = addSelectedProvider;
             vm.selectedProvidersNpi = [];
 
             function scrollToSearchResults() {
@@ -89,10 +89,6 @@
                 providerService.addProvider(npi, addProviderSuccess, addProviderError);
             }
 
-            function selectProvider(npi){
-                addSelectedProvider(npi);
-            }
-
             function isProviderCurrentlySelected(npi){
                 return isProviderSelected(npi) && !vm.isProviderAlreadyAdded(npi);
             }
@@ -121,7 +117,7 @@
                 var isAlreadyAdded = false;
                 if (angular.isArray(vm.selectedProvidersNpi) && vm.selectedProvidersNpi.length > 0) {
                     for (var i = 0; i < vm.selectedProvidersNpi.length; i++) {
-                        if (npi === vm.selectedProvidersNpi[i]) {
+                        if (npi === vm.selectedProvidersNpi[i].npi) {
                             isAlreadyAdded = true;
                             break;
                         }
@@ -130,8 +126,8 @@
                 return isAlreadyAdded;
             }
 
-            function addSelectedProvider(npi){
-                vm.selectedProvidersNpi.push(npi);
+            function addSelectedProvider(provider){
+                vm.selectedProvidersNpi.push(provider);
             }
         }
     }
