@@ -26,7 +26,7 @@
         return directive;
 
         /* @ngInject */
-        function ProviderLookupResultController($timeout, $state, utilityService, providerService, notificationService) {
+        function ProviderLookupResultController($timeout, $state, utilityService, providerService, notificationService, $scope) {
             var vm = this;
 
             vm.pagination = {
@@ -46,6 +46,7 @@
             vm.selectProvider = selectProvider;
             vm.isProviderCurrentlySelected = isProviderCurrentlySelected;
             vm.canSelectProvider = canSelectProvider;
+            vm.selectedProvidersNpi = [];
 
             function scrollToSearchResults() {
                 utilityService.scrollTo('provider_lookup_result');
@@ -56,12 +57,9 @@
             }
 
             function isProviderAlreadyAdded(npi) {
-                return providerService.hasNpi(vm.providersData, npi) && !providerService.isProviderSelected(npi) ;
+                return providerService.hasNpi(vm.providersData, npi) && !isProviderSelected(npi) ;
             }
 
-            function isProviderAlreadySelected(npi){
-
-            }
             function loadPage() {
                 var newPage = vm.pagination.currentPage;
                 vm.pagination.currentPage = oldPage;
@@ -92,11 +90,11 @@
             }
 
             function selectProvider(npi){
-                providerService.addSelectedProvider(npi);
+                addSelectedProvider(npi);
             }
 
             function isProviderCurrentlySelected(npi){
-                return providerService.isProviderSelected(npi) && !vm.isProviderAlreadyAdded(npi);
+                return isProviderSelected(npi) && !vm.isProviderAlreadyAdded(npi);
             }
 
             function addProviderSuccess() {
@@ -117,6 +115,23 @@
 
             function canSelectProvider(npi){
                 return !vm.isProviderAlreadyAdded(npi) && !vm.isProviderCurrentlySelected(npi);
+            }
+
+            function isProviderSelected(npi){
+                var isAlreadyAdded = false;
+                if (angular.isArray(vm.selectedProvidersNpi) && vm.selectedProvidersNpi.length > 0) {
+                    for (var i = 0; i < vm.selectedProvidersNpi.length; i++) {
+                        if (npi === vm.selectedProvidersNpi[i]) {
+                            isAlreadyAdded = true;
+                            break;
+                        }
+                    }
+                }
+                return isAlreadyAdded;
+            }
+
+            function addSelectedProvider(npi){
+                vm.selectedProvidersNpi.push(npi);
             }
         }
     }

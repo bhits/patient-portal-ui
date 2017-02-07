@@ -12,7 +12,7 @@
     /* @ngInject */
     function providerService($resource, configService, utilityService) {
         var providers = $resource(configService.getPcmApiBaseUrl() + "/providers/:npi", {npi: '@npi'});
-        var selectedProvidersNpi = [];
+        // var selectedProvidersNpi = [];
         var service = {};
 
         service.getProvidersResource = getProvidersResource;
@@ -22,9 +22,9 @@
         service.isEmptyLookupResult = isEmptyLookupResult;
         service.hasNpi = hasNpi;
         service.getLookupResult = getLookupResult;
-        service.getSelectedProviders = getSelectedProviders;
-        service.addSelectedProvider = addSelectedProvider;
-        service.isProviderSelected = isProviderSelected;
+        // service.getSelectedProviders = getSelectedProviders;
+        // service.addSelectedProvider = addSelectedProvider;
+        // service.isProviderSelected = isProviderSelected;
 
         return service;
 
@@ -120,7 +120,7 @@
                 queryParams.orgname = utilityService.addQueryParameterPrefixAndSuffix(plsQueryParameters.facilityname);
             }
 
-            if(utilityService.isDefinedAndLengthNotZero(page) && !isNaN(page) ){
+            if(!isNaN(page) && (parseInt(page)>=0) ){
                 queryParams.page = page - 1;
             }
             return queryParams;
@@ -147,25 +147,25 @@
             return isAlreadyAdded;
         }
 
-        function getSelectedProviders(){
-            return selectedProvidersNpi;
-        }
+        // function getSelectedProviders(){
+        //     return selectedProvidersNpi;
+        // }
 
-        function addSelectedProvider(npi){
-            selectedProvidersNpi.push(npi);
-        }
+        // function addSelectedProvider(npi){
+        //     selectedProvidersNpi.push(npi);
+        // }
 
-        function isProviderSelected(npi){
-            var isAlreadyAdded = false;
-            if (angular.isArray(selectedProvidersNpi) && selectedProvidersNpi.length > 0) {
-                for (var i = 0; i < selectedProvidersNpi.length; i++) {
-                    if (npi === selectedProvidersNpi[i]) {
-                        isAlreadyAdded = true;
-                        break;
-                    }
-                }
-            }
-            return isAlreadyAdded;
-        }
+        // function isProviderSelected(npi){
+        //     var isAlreadyAdded = false;
+        //     if (angular.isArray(selectedProvidersNpi) && selectedProvidersNpi.length > 0) {
+        //         for (var i = 0; i < selectedProvidersNpi.length; i++) {
+        //             if (npi === selectedProvidersNpi[i]) {
+        //                 isAlreadyAdded = true;
+        //                 break;
+        //             }
+        //         }
+        //     }
+        //     return isAlreadyAdded;
+        // }
     }
 })();
