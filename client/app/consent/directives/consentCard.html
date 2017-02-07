@@ -1,42 +1,39 @@
 <!-- Dynamic IDs Panel-Group ID, data-target ID, panel-collapse panel-body ID -->
 <div class="row">
     <div class="col-lg-12">
-        <div class="panel-group" id="accordion">
+        <div class="panel-group">
             <div class="panel panel-navbar-blueGray">
-                <div class="panel-heading right-padding30" data-toggle="collapse" data-parent="#accordion" data-target="#collapseOne">
-                    <!--<div class="panel-heading right-padding30" ng-click="consentCardVm.toggleCollapse()">-->
+                <div class="panel-heading right-padding30 accordion-toggle" data-toggle="collapse" data-target="#collapseOne">
                     <div class="chevron_absolute">
                         <i class="indicator fa fa-chevron-up"></i>
                     </div>
                     <div class="panel-title">
-                        <a class="accordion-toggle">
-                            <div class="row">
-                                <div class="col-sm-4 col-sm-push-8 col-xs-12">
-                                    <p class="">Effective Dates: <strong><span
-                                            ng-bind="(consentCardVm.consent.consentStart | date) + ' - ' + (consentCardVm.consent.consentEnd | date)"></span></strong>
-                                    </p>
-                                </div>
-                                <div class="col-sm-8 col-sm-pull-4 col-xs-12">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <p class="m-b-xxs">Authorized to share:
-                                            </p>
-                                            <p><strong><span
-                                                    ng-repeat="discloseName in consentCardVm.consent.toDiscloseName"
-                                                    ng-bind="discloseName"></span></strong>
-                                            </p>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <p class="m-b-xxs">Sharing with:</p>
-                                            <p><strong><span
-                                                    ng-repeat="madeToName in consentCardVm.consent.isMadeToName"
-                                                    ng-bind="madeToName"></span></strong>
-                                            </p>
-                                        </div>
+                        <div class="row">
+                            <div class="col-sm-4 col-sm-push-8 col-xs-12">
+                                <p class="">Effective Dates: <strong><span
+                                        ng-bind="(consentCardVm.consent.consentStart | date) + ' - ' + (consentCardVm.consent.consentEnd | date)"></span></strong>
+                                </p>
+                            </div>
+                            <div class="col-sm-8 col-sm-pull-4 col-xs-12">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <p class="m-b-xxs">Authorized to share:
+                                        </p>
+                                        <p><strong><span
+                                                ng-repeat="discloseName in consentCardVm.consent.toDiscloseName"
+                                                ng-bind="discloseName"></span></strong>
+                                        </p>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p class="m-b-xxs">Sharing with:</p>
+                                        <p><strong><span
+                                                ng-repeat="madeToName in consentCardVm.consent.isMadeToName"
+                                                ng-bind="madeToName"></span></strong>
+                                        </p>
                                     </div>
                                 </div>
                             </div>
-                        </a>
+                        </div>
                     </div>
                 </div>
 
