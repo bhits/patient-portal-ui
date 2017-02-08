@@ -17,7 +17,8 @@
             templateUrl: 'app/provider/directives/providerLookupResult.html',
             bindToController: {
                 providerLookupResult: '=',
-                queryParameters: '='
+                queryParameters: '=',
+                selectedProviders: '='
             },
             scope: {},
             controller: ProviderLookupResultController,
@@ -46,7 +47,6 @@
             vm.isProviderCurrentlySelected = isProviderCurrentlySelected;
             vm.canSelectProvider = canSelectProvider;
             vm.addSelectedProvider = addSelectedProvider;
-            vm.selectedProviders = [];
 
             function scrollToSearchResults() {
                 utilityService.scrollTo('provider_lookup_result');
