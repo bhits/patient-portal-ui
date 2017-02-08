@@ -1,5 +1,8 @@
-import {Component, Input, ViewChild } from '@angular/core';
+import {Component, Input } from '@angular/core';
 import {Provider} from "./Provider";
+import {ProviderService} from "./provider-service";
+
+import { Response} from '@angular/http';
 
 @Component({
     // moduleId:  module.id,
@@ -86,17 +89,39 @@ export class ProviderMultiAddingComponent {
     showAddProviderModal = false;
     showDeleteProviderModal = false;
 
-    @Input() providers: any[];
+    @Input() providers: Provider[];
     selectedProvider:Provider = null;
 
+    constructor(private providerService: ProviderService) {
+    }
+
     addProviders(){
-        this.showAddProviderModal = false;
-        console.log("Adding providers: " + this.selectedProvider);
+        if(this.providers){
+            let selectedProvidersNPI = this.providerService.getNPIs(this.providers);
+            this.showAddProviderModal = false;
+            this.providerService.addProviders(selectedProvidersNPI)
+                .subscribe(
+                    this.success,
+                    this.error,
+                    () => console.log("Done!")
+                );
+        }
+    }
+
+    private success(res: Response) {
+        console.log(res);
+        window.location.href = "fe/provider/list";
+    }
+
+    private error(res: Response) {
+        console.error(res);
     }
 
     deleteProvider(){
-        this.providers.splice(this.providers.indexOf(this.selectedProvider), 1);
-        this.toggleDeleteProviderModal();
+        if(this.providers){
+            this.providers.splice(this.providers.indexOf(this.selectedProvider), 1);
+            this.toggleDeleteProviderModal();
+        }
     }
 
     toggleAddProviderModal(){
@@ -110,4 +135,5 @@ export class ProviderMultiAddingComponent {
         this.selectedProvider = provider;
         this.toggleDeleteProviderModal();
     }
+
 }
