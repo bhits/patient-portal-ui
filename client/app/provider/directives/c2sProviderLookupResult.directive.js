@@ -46,7 +46,7 @@
             vm.isProviderCurrentlySelected = isProviderCurrentlySelected;
             vm.canSelectProvider = canSelectProvider;
             vm.addSelectedProvider = addSelectedProvider;
-            vm.selectedProvidersNpi = [];
+            vm.selectedProviders = [];
 
             function scrollToSearchResults() {
                 utilityService.scrollTo('provider_lookup_result');
@@ -115,9 +115,9 @@
 
             function isProviderSelected(npi){
                 var isAlreadyAdded = false;
-                if (angular.isArray(vm.selectedProvidersNpi) && vm.selectedProvidersNpi.length > 0) {
-                    for (var i = 0; i < vm.selectedProvidersNpi.length; i++) {
-                        if (npi === vm.selectedProvidersNpi[i].npi) {
+                if (angular.isArray(vm.selectedProviders) && vm.selectedProviders.length > 0) {
+                    for (var i = 0; i < vm.selectedProviders.length; i++) {
+                        if (npi === vm.selectedProviders[i].npi) {
                             isAlreadyAdded = true;
                             break;
                         }
@@ -127,7 +127,7 @@
             }
 
             function addSelectedProvider(provider){
-                vm.selectedProvidersNpi.push(provider);
+                vm.selectedProviders.push(provider);
             }
         }
     }
