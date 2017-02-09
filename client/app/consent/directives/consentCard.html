@@ -3,9 +3,9 @@
     <div class="col-lg-12">
         <div class="panel-group">
             <div class="panel panel-navbar-blueGray">
-                <div class="panel-heading right-padding30 accordion-toggle" data-toggle="collapse" data-target="#collapseOne">
+                <div class="panel-heading right-padding30 accordion-toggle" data-toggle="collapse" data-target="#collapse-{{consentCardVm.cardIndex}}" ng-click="consentCardVm.toggleCollapse()">
                     <div class="chevron_absolute">
-                        <i class="indicator fa fa-chevron-up"></i>
+                        <i class="indicator fa" ng-class="{'fa-chevron-down': consentCardVm.collapsed,'fa-chevron-up' : !consentCardVm.collapsed}"></i>
                     </div>
                     <div class="panel-title">
                         <div class="row">
@@ -37,7 +37,7 @@
                     </div>
                 </div>
 
-                <div id="collapseOne" class="panel-collapse collapse">
+                <div id="collapse-{{consentCardVm.cardIndex}}" class="panel-collapse collapse">
                     <div class="panel-body">
                     <div class="row">
                         <div class="col-md-6 m-b">

@@ -8,7 +8,7 @@
     function c2sConsentCard() {
         var directive = {
             scope: {},
-            bindToController: {consent: '='},
+            bindToController: {consent: '=', cardIndex: "="},
             restrict: 'E',
             templateUrl: 'app/consent/directives/consentCard.html',
             controller: ConsentCardController,

@@ -12,8 +12,8 @@
 
 <div class="row" id="consent_list" ng-if="consentCardListVm.hasConsents()">
     <div class="col-sm-12">
-        <div ng-repeat="consent in consentCardListVm.consentList.consentList">
-            <c2s-consent-card consent="consent"></c2s-consent-card>
+        <div ng-repeat="consent in consentCardListVm.consentList.consentList track by $index">
+            <c2s-consent-card consent="consent" card-index="$index"></c2s-consent-card>
         </div>
         <div class="text-center">
             <pagination total-items="consentCardListVm.pagination.totalItems"
