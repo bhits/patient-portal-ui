@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/http';
 import {ProviderMultiAddingComponent} from "./provider-multi-adding.component";
 import {SharedModule} from "../shared/shared.module";
 import {providerName} from "./provider-name.pipe";
-import {ProviderService} from "./provider-service";
+import {ProviderService} from "./provider.service";
 
 
 @NgModule({

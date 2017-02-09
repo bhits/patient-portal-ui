@@ -1,6 +1,6 @@
 
 import { Pipe, PipeTransform } from '@angular/core';
-import {Provider} from "./Provider";
+import {Provider} from "./provider";
 
 @Pipe({name: 'providerName'})
 export class providerName implements PipeTransform {

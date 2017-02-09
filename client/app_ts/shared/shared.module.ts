@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
-import {C2SModalComponent} from './C2SModal.component';
+import {C2SModalComponent} from './modal.component';
 
 @NgModule({
     declarations: [C2SModalComponent],

@@ -1,6 +1,6 @@
 import {Component, Input } from '@angular/core';
-import {Provider} from "./Provider";
-import {ProviderService} from "./provider-service";
+import {Provider} from "./provider";
+import {ProviderService} from "./provider.service";
 
 import { Response} from '@angular/http';
 
@@ -109,6 +109,7 @@ export class ProviderMultiAddingComponent {
     }
 
     private success(res: Response) {
+        this.selectedProvider = null;
         console.log(res);
         window.location.href = "fe/provider/list";
     }
