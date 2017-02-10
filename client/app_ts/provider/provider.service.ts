@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Headers, Http, Response, RequestOptions} from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
+
 import {Provider} from "./provider";
 
 @Injectable()
@@ -12,9 +13,8 @@ export class ProviderService {
     }
 
     addProviders(params): Observable<Response> {
-
-        let plsUrl = "http://localhost/pcm/patients/providers";
-        return this.http.post(plsUrl, JSON.stringify({npiList:params}));
+        //TODO get configuratoin dynamically
+        return this.http.post("/pcm/patients/providers", JSON.stringify({npiList:params}));
     }
 
     getNPIs(providers: Provider[]): string[]{

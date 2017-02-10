@@ -5,9 +5,7 @@ import {ProviderService} from "./provider.service";
 import { Response} from '@angular/http';
 
 @Component({
-    // moduleId:  module.id,
     selector: 'c2s-provider-multi-adding',
-    // templateUrl:'./provider-multi-adding.html',
     template:`<div class="col-sm-6 col-sm-push-6">
                     <div class="ibox panel panel-darkblue">
                         <div class="ibox-title modified panel-heading">
@@ -53,36 +51,36 @@ import { Response} from '@angular/http';
                             </div>
                             <div class="row m-b-sm">
                                 <div class="col-sm-12">
-                                    <button class="btn btn-sm btn-primary dark-green" (click)="toggleAddProviderModal()">Add to Provider List</button>
+                                    <button class="btn btn-sm btn-primary dark-green" (click)="toggleAddProviderModal()" [disabled]="(providers.length == 0)">Add to Provider List</button>
                                 </div>
                             </div>
 
                         </div>
                     </div>
-                    
+
                     <!-- Add providers -->
                     <c2s-modal [(visible)]="showAddProviderModal">
                       <h1>Add Selected Providers</h1>
-                          <div> 
+                          <div>
                             <strong>Are you sure you want to add the selected provider(s)?</strong>
                           </div>
                           <br/>
-                      <button (click)="toggleAddProviderModal()" class="btn">Close</button>
-                      <button (click)="addProviders()" class="btn">Add providers</button>
+                      <button type="button" class="btn btn-white" (click)="toggleAddProviderModal()" class="btn">Cancel</button>
+                      <button type="button" class="btn btn-primary dark-green" (click)="addProviders()" class="btn">Add Providers</button>
                     </c2s-modal>
-                    
+
                     <!-- Delete provider -->
                      <c2s-modal [(visible)]="showDeleteProviderModal">
                       <h1>Delete Provider</h1>
-                          <div> 
+                          <div>
                             <strong>Are you sure you want to delete   {{selectedProvider | providerName}} ?</strong>
                           </div>
                           <br/>
-                      <button (click)="toggleDeleteProviderModal()" class="btn">Close</button>
-                      <button (click)="deleteProvider()" class="btn">Delete provider</button>
+                         <button type="button" class="btn btn-white" (click)="toggleDeleteProviderModal()" class="btn">Cancel</button>
+                         <button type="button" class="btn btn-sm btn-primary dark-green" (click)="deleteProvider()" class="btn" >Delete</button>
                     </c2s-modal>
                 </div>
-                `
+                `,
 })
 
 export class ProviderMultiAddingComponent {
