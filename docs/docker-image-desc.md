@@ -3,9 +3,11 @@ The Patient Portal UI is used by the patient to manage his or her health informa
 
 # Full Description
 
-# Supported Tags and Respective `Dockerfile` Links
+# Supported Source Code Tags and Current `Dockerfile` Link
 
-[`0.20.0`](https://github.com/bhits/patient-portal-ui/blob/master/server/src/main/docker/Dockerfile),[`latest`](https://github.com/bhits/patient-portal-ui/blob/master/server/src/main/docker/Dockerfile)[(0.20.0/Dockerfile)](https://github.com/bhits/patient-portal-ui/blob/master/server/src/main/docker/Dockerfile)
+[`0.24.0 (latest)`](https://github.com/bhits/patient-portal-ui/releases/tag/0.24.0), [`0.20.0`](https://github.com/bhits/patient-portal-ui/releases/tag/0.20.0)
+
+[`Current Dockerfile`](https://github.com/bhits/patient-portal-ui/blob/master/server/src/main/docker/Dockerfile)
 
 For more information about this image, the source code, and its history, please see the [GitHub repository](https://github.com/bhits/patient-portal-ui).
 
@@ -24,22 +26,21 @@ Be sure to familiarize yourself with the repository's [README.md](https://github
 
 `docker run  --name patient-portal-ui -d bhits/pp-ui:latest <additional program arguments>`
 
-*NOTE: In order for this API to fully function as a microservice in the Consent2Share application, it is required to setup the dependency microservices and support level infrastructure. Please refer to the [Consent2Share Deployment Guide](https://github.com/bhits/consent2share/releases/download/2.0.0/c2s-deployment-guide.pdf) for instructions to setup the Consent2Share infrastructure.*
-
+*NOTE: In order for this API to fully function as a microservice in the Consent2Share application, it is required to setup the dependency microservices and the support level infrastructure. Please refer to the Consent2Share Deployment Guide in the corresponding Consent2Share release (see [Consent2Share Releases Page](https://github.com/bhits/consent2share/releases)) for instructions to setup the Consent2Share infrastructure.*
 
 ## Configure
 
-This API runs with a [default configuration](https://github.com/bhits/patient-portal-ui/blob/master/patient-portal-ui/src/main/resources/application.yml) that is primarily targeted for the development environment.  The Spring profile `docker` is actived by default when building images. [Spring Boot](https://projects.spring.io/spring-boot/) supports several methods to override the default configuration to configure the API for a certain deployment environment. 
+The Spring profiles `application-default` and `docker` are activated by default when building images.
 
-Here is example to override one default configuration:
+This API can run with the default configuration which is from three places: `bootstrap.yml`, `application.yml`, and the data which the [`Configuration Server`](https://github.com/bhits/config-server) reads from the `Configuration Data Git Repository`. Both `bootstrap.yml` and `application.yml` files are located in the class path of the running application.
+
+We **recommend** overriding the configuration as needed in the `Configuration Data Git Repository`, which is used by the `Configuration Server`.
+
+Also, [Spring Boot](https://projects.spring.io/spring-boot/) supports other ways to override the default configuration to configure the API for a certain deployment environment. 
+
+The following is an example to override the default configuration:
 
 `docker run -d bhits/pp-ui:latest --c2s.pp-ui.oauth2.client.secret=strongpassword`
-
-## Using a custom configuration file
-
-To use custom `application.yml`, mount the file to the docker host and set the environment variable `spring.config.location`.
-
-`docker run -v "/path/on/dockerhost/C2S_PROPS/patient-portal-ui/application.yml:/java/C2S_PROPS/patient-portal-ui/application.yml" -d bhits/pp-ui:tag --spring.config.location="file:/java/C2S_PROPS/patient-portal-ui/"`
 
 ## Environment Variables
 
@@ -56,9 +57,10 @@ This environment variable is used to setup JVM argument, such as memory configur
 `docker run --name patient-portal-ui -e "JAVA_OPTS=-Xms512m -Xmx700m -Xss1m" -d bhits/pp-ui:latest`
 
 ### DEFAULT_PROGRAM_ARGS 
-This environment variable is used to setup application arugument. The default value of is "--spring.profiles.active=docker".
 
-`docker run --name patient-portal-ui -e DEFAULT_PROGRAM_ARGS="--spring.profiles.active=ssl,docker" -d bhits/pp-ui:latest`
+This environment variable is used to setup an application argument. The default value of is "--spring.profiles.active=application-default, docker".
+
+`docker run --name patient-portal-ui -e DEFAULT_PROGRAM_ARGS="--spring.profiles.active=application-default,ssl,docker" -d bhits/pp-ui:latest`
 
 # Supported Docker versions
 This image is officially supported on Docker version 1.12.1.

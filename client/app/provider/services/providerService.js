@@ -12,7 +12,7 @@
     /* @ngInject */
     function providerService($resource, configService, utilityService) {
         var providers = $resource(configService.getPcmApiBaseUrl() + "/providers/:npi", {npi: '@npi'});
-        // var selectedProvidersNpi = [];
+
         var service = {};
 
         service.getProvidersResource = getProvidersResource;
@@ -117,7 +117,7 @@
                 queryParams.orgname = utilityService.addQueryParameterPrefixAndSuffix(plsQueryParameters.facilityname);
             }
 
-            if(!isNaN(page) && (parseInt(page)>=0) ){
+            if(!isNaN(page) && (parseInt(page)>= 0) ){
                 queryParams.page = page - 1;
             }
             return queryParams;
@@ -143,6 +143,5 @@
             }
             return isAlreadyAdded;
         }
-
     }
 })();
