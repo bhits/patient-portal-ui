@@ -27,7 +27,7 @@
         return directive;
 
         /* @ngInject */
-        function ProviderLookupResultController($timeout, $state, utilityService, providerService, notificationService, $scope) {
+        function ProviderLookupResultController($timeout, $state, utilityService, providerService, notificationService) {
             var vm = this;
 
             vm.pagination = {
