@@ -57,7 +57,7 @@
             }
 
             function isProviderAdded(npi) {
-                return providerService.hasNpi(vm.providersData, npi) && !hasSelectedNPI(npi) ;
+                return providerService.hasNpi(vm.providersData, npi)  ;
             }
 
             function loadPage() {
@@ -90,7 +90,7 @@
             }
 
             function isProviderSelected(npi){
-                return hasSelectedNPI(npi) && !vm.isProviderAdded(npi);
+                return providerService.hasSelectedNPI(vm.selectedProviders,npi) ;
             }
 
             function addProviderSuccess() {
@@ -111,19 +111,6 @@
 
             function canSelectProvider(npi){
                 return !vm.isProviderAdded(npi) && !vm.isProviderSelected(npi);
-            }
-
-            function hasSelectedNPI(npi){
-                var isAlreadyAdded = false;
-                if (angular.isArray(vm.selectedProviders) && vm.selectedProviders.length > 0) {
-                    for (var i = 0; i < vm.selectedProviders.length; i++) {
-                        if (npi === vm.selectedProviders[i].npi) {
-                            isAlreadyAdded = true;
-                            break;
-                        }
-                    }
-                }
-                return isAlreadyAdded;
             }
 
             function addSelectedProvider(provider){
