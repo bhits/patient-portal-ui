@@ -8,13 +8,14 @@ import {Provider} from "./provider";
 
 @Injectable()
 export class ProviderService {
+    private pcm_url = "/pcm/patients/providers";
 
-    constructor(public http: Http) {
+    constructor(private http: Http) {
     }
 
-    addProviders(params): Observable<Response> {
+    addProviders(params:string[]): Observable<Response> {
         //TODO get configuratoin dynamically
-        return this.http.post("/pcm/patients/providers", JSON.stringify({npiList:params}));
+        return this.http.post(this.pcm_url, JSON.stringify({npiList:params}));
     }
 
     getNPIs(providers: Provider[]): string[]{
