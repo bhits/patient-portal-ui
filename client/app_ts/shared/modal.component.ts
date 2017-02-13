@@ -76,7 +76,6 @@ import {
 export class C2SModalComponent implements OnInit {
     @Input() closable = true;
     @Input() visible: boolean;
-    @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     constructor() { }
 
@@ -84,6 +83,5 @@ export class C2SModalComponent implements OnInit {
 
     close() {
         this.visible = false;
-        this.visibleChange.emit(this.visible);
     }
 }
