@@ -17,7 +17,8 @@
             templateUrl: 'app/provider/directives/providerLookupResult.html',
             bindToController: {
                 providerLookupResult: '=',
-                queryParameters: '='
+                queryParameters: '=',
+                selectedProviders: '='
             },
             scope: {},
             controller: ProviderLookupResultController,
@@ -37,12 +38,15 @@
             };
             var oldPage = vm.pagination.currentPage;
             vm.providersData = getCurrentProviderList();
-            vm.isProviderAlreadyAdded = isProviderAlreadyAdded;
+            vm.isProviderAdded = isProviderAdded;
             $timeout(scrollToSearchResults, 200);
             vm.loadPage = loadPage;
             vm.isEmptyResult = isEmptyResult;
             vm.addProvider = addProvider;
             vm.paginationSummary = paginationSummary;
+            vm.isProviderSelected = isProviderSelected;
+            vm.canSelectProvider = canSelectProvider;
+            vm.addSelectedProvider = addSelectedProvider;
 
             function scrollToSearchResults() {
                 utilityService.scrollTo('provider_lookup_result');
@@ -52,8 +56,8 @@
                 return providerService.getProvidersResource().query(angular.identity, angular.identity);
             }
 
-            function isProviderAlreadyAdded(npi) {
-                return providerService.hasNpi(vm.providersData, npi);
+            function isProviderAdded(npi) {
+                return providerService.hasNpi(vm.providersData, npi)  ;
             }
 
             function loadPage() {
@@ -85,6 +89,10 @@
                 providerService.addProvider(npi, addProviderSuccess, addProviderError);
             }
 
+            function isProviderSelected(npi){
+                return providerService.hasSelectedNPI(vm.selectedProviders,npi) ;
+            }
+
             function addProviderSuccess() {
                 $state.go('fe.provider.list');
             }
@@ -99,6 +107,14 @@
                 var total = (vm.providerLookupResult.totalNumberOfProviders);
                 var summary = 'Showing '.concat(rangeStart, ' to ', rangeEnd, ' of ', total, ' entries');
                 return summary;
+            }
+
+            function canSelectProvider(npi){
+                return !vm.isProviderAdded(npi) && !vm.isProviderSelected(npi);
+            }
+
+            function addSelectedProvider(provider){
+                vm.selectedProviders.push(provider);
             }
         }
     }

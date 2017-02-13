@@ -46,6 +46,7 @@
             vm.lookupProvider = lookupProvider;
             vm.reset = reset;
             vm.formViewValue = formViewValue;
+            vm.selectedProviders = [];
 
             function usstateChanged() {
                 if (!utilityService.hasString(vm.plsQueryParameters.usstate)) {

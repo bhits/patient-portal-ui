@@ -22,6 +22,7 @@
         service.isEmptyLookupResult = isEmptyLookupResult;
         service.hasNpi = hasNpi;
         service.getLookupResult = getLookupResult;
+        service.hasSelectedNPI = hasSelectedNPI;
 
         return service;
 
@@ -136,6 +137,25 @@
             if (angular.isDefined(providersData) && angular.isArray(providersData) && providersData.length > 0) {
                 for (var i = 0; i < providersData.length; i++) {
                     if (npi === providersData[i].npi) {
+                        isAlreadyAdded = true;
+                        break;
+                    }
+                }
+            }
+            return isAlreadyAdded;
+        }
+
+        /**
+         *
+         * @param selectedProviders List of providers objects
+         * @param npi
+         * @returns {boolean}
+         */
+        function hasSelectedNPI(selectedProviders, npi) {
+            var isAlreadyAdded = false;
+            if (angular.isArray(selectedProviders) && selectedProviders.length > 0) {
+                for (var i = 0; i < selectedProviders.length; i++) {
+                    if (npi === selectedProviders[i].npi) {
                         isAlreadyAdded = true;
                         break;
                     }
