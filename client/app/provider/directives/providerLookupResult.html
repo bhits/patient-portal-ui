@@ -47,7 +47,7 @@
                                         &nbsp;Select this Provider.
                                     </div>
                                 </div>
-                                <div class="panel-heading" ng-if="providerLookupResultVm.isProviderCurrentlySelected(provider.npi)">
+                                <div class="panel-heading" ng-if="providerLookupResultVm.isProviderSelected(provider.npi)">
                                     <span class="top-right-ribbon"></span>
                                     <h3 class="m-b-sm">{{provider | plsName}}&nbsp;<span>[NPI: {{provider.npi}}]</span></h3>
                                     <button type="button" class="btn btn-xs white" >
@@ -59,7 +59,7 @@
                                         &nbsp;Provider currently selected.
                                     </div>
                                 </div>
-                                <div class="panel-heading" ng-if="providerLookupResultVm.isProviderAlreadyAdded(provider.npi)">
+                                <div class="panel-heading" ng-if="providerLookupResultVm.isProviderAdded(provider.npi)">
                                     <h3 class="m-b-sm text-medium-gray">{{provider | plsName}}&nbsp;<span>[NPI: {{provider.npi}}]</span></h3>
                                     <div class="inline" >
                                         &nbsp;<span class="fa fa-lg fa-check text-navbar-blueGray">

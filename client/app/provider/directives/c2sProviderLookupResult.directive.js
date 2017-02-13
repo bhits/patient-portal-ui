@@ -38,13 +38,13 @@
             };
             var oldPage = vm.pagination.currentPage;
             vm.providersData = getCurrentProviderList();
-            vm.isProviderAlreadyAdded = isProviderAlreadyAdded;
+            vm.isProviderAdded = isProviderAdded;
             $timeout(scrollToSearchResults, 200);
             vm.loadPage = loadPage;
             vm.isEmptyResult = isEmptyResult;
             vm.addProvider = addProvider;
             vm.paginationSummary = paginationSummary;
-            vm.isProviderCurrentlySelected = isProviderCurrentlySelected;
+            vm.isProviderSelected = isProviderSelected;
             vm.canSelectProvider = canSelectProvider;
             vm.addSelectedProvider = addSelectedProvider;
 
@@ -56,8 +56,8 @@
                 return providerService.getProvidersResource().query(angular.identity, angular.identity);
             }
 
-            function isProviderAlreadyAdded(npi) {
-                return providerService.hasNpi(vm.providersData, npi) && !isProviderSelected(npi) ;
+            function isProviderAdded(npi) {
+                return providerService.hasNpi(vm.providersData, npi) && !hasSelectedNPI(npi) ;
             }
 
             function loadPage() {
@@ -89,8 +89,8 @@
                 providerService.addProvider(npi, addProviderSuccess, addProviderError);
             }
 
-            function isProviderCurrentlySelected(npi){
-                return isProviderSelected(npi) && !vm.isProviderAlreadyAdded(npi);
+            function isProviderSelected(npi){
+                return hasSelectedNPI(npi) && !vm.isProviderAdded(npi);
             }
 
             function addProviderSuccess() {
@@ -110,10 +110,10 @@
             }
 
             function canSelectProvider(npi){
-                return !vm.isProviderAlreadyAdded(npi) && !vm.isProviderCurrentlySelected(npi);
+                return !vm.isProviderAdded(npi) && !vm.isProviderSelected(npi);
             }
 
-            function isProviderSelected(npi){
+            function hasSelectedNPI(npi){
                 var isAlreadyAdded = false;
                 if (angular.isArray(vm.selectedProviders) && vm.selectedProviders.length > 0) {
                     for (var i = 0; i < vm.selectedProviders.length; i++) {
