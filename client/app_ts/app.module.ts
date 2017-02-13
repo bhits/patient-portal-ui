@@ -6,7 +6,7 @@ import {Http, XHRBackend, RequestOptions} from "@angular/http";
 
 import {CoreModule} from "./core/core.module";
 import {ProviderModule} from "./provider/provider.module";
-import {HttpInterceptor} from "./core/HttpInterceptor.service";
+import {HttpInterceptor} from "./core/http-interceptor.service";
 
 @NgModule({
     declarations: [],
