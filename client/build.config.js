@@ -38,7 +38,7 @@ module.exports = {
         e2e: ['app/**/*.e2e.js'],
 
         atpl: ['app/**/*.html'],
-
+        i18nLib: ['app/languagesLib/*.json'],
         html: ['index.html'],
         less: 'less/main.less',
         debug_js: [
@@ -112,7 +112,15 @@ module.exports = {
             'node_modules/core-js/client/shim.js',
             'node_modules/zone.js/dist/zone.js',
             'node_modules/reflect-metadata/Reflect.js',
-            'node_modules/systemjs/dist/system.src.js'
+            'node_modules/systemjs/dist/system.src.js',
+			'node_modules/x2js/xml2json.js',
+			'node_modules/angular-translate/angular-translate.js',
+            'node_modules/angular-translate-loader-static-files/angular-translate-loader-static-files.js',
+            'node_modules/angular-i18n/angular-locale_en.js',
+            'node_modules/angular-i18n/angular-locale_es.js',
+            'node_modules/angular-i18n/angular-locale_zh.js',
+            'node_modules/angular-dynamic-locale/tmhDynamicLocale.min.js',
+            'node_modules/bootstrap-filestyle/src/bootstrap-filestyle.js'
         ],
         css: [
             'node_modules/angular-loading-bar/build/loading-bar.css'

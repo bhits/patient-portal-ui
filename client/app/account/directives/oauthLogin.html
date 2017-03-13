@@ -1,28 +1,28 @@
 <form class="form-horizontal" name="loginForm">
     <fieldset>
-        <legend class="alert alert-success center p-xs">Log in with your <span ng-bind="loginVm.brand"></span> account
+        <legend class="alert alert-success center p-xs">{{"OAUTH_LOG.IN_CONTENT_2" | translate}}<span ng-bind="loginVm.brand"></span>{{"OAUTH_LOG.IN_CONTENT_3" | translate}}
         </legend>
         <div class="form-group">
-            <label for="email" class="col-sm-2 control-label">Username:</label>
-            <div class="col-sm-10">
+            <label for="email" class="col-sm-3 control-label">{{"OAUTH_LOG.IN_CONTENT_4" | translate}}</label>
+            <div class="col-sm-9">
                 <input type="text" class="form-control" id="email" name="email" ng-model="oauthLoginVm.user.email"
                        name="email" required>
                 <div ng-messages="loginForm.email.$error" ng-if="loginForm.email.$dirty" class="text-alert m-t-xs">
                     <div ng-message="required">
-                        <small>A username is required to login, please try again.</small>
+                        <small>{{"OAUTH_LOG.IN_CONTENT_5" | translate}}</small>
                     </div>
                 </div>
             </div>
         </div>
         <div class="form-group">
-            <label for="password" class="col-sm-2 control-label">Password:</label>
-            <div class="col-sm-10">
+            <label for="password" class="col-sm-3 control-label">{{"OAUTH_LOG.IN_CONTENT_6" | translate}}</label>
+            <div class="col-sm-9">
                 <input type="password" class="form-control" id="password" name="password"
                        ng-model="oauthLoginVm.user.password" name="password" required>
                 <div ng-messages="loginForm.password.$error" ng-if="loginForm.password.$dirty"
                      class="text-alert m-t-xs">
                     <div ng-message="required">
-                        <small>A password is required to login, please try again.</small>
+                        <small>{{"OAUTH_LOG.IN_CONTENT_7" | translate}}</small>
                     </div>
                 </div>
             </div>
@@ -30,33 +30,33 @@
         <div class="row">
             <div class="col-sm-offset-2 col-sm-10 text-alert m-t-n-xs m-b-xs" id="login-error"
                  ng-if="oauthLoginVm.loginError">
-                <span><small>Sorry, the user name and/or password entered does not match, please try again.</small></span>
+                <span><small>{{"OAUTH_LOG.IN_CONTENT_8" | translate}}</small></span>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-offset-2 col-sm-10 text-alert m-t-n-xs m-b-xs" id="account-locked"
                  ng-if="oauthLoginVm.accountLocked">
                 <span>
-                    <small>Your account has exceeded maximum failed authentication attempts. Please wait 10 minutes to retry.</small>
+                    <small>{{"OAUTH_LOG.IN_CONTENT_9" | translate}}</small>
                 </span>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-offset-2 col-sm-10 text-alert m-t-n-xs" id="profile-error"
                  ng-if="oauthLoginVm.profileError">
-                <span><small>Whoops! We can't seem to find your account.</small></span>
+                <span><small>{{"OAUTH_LOG.IN_CONTENT_10" | translate}}</small></span>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-offset-2 col-sm-10 text-alert m-t-n-xs" id="scope-error"
                  ng-if="oauthLoginVm.scopeError">
-                <span><small>Sorry, you do not have permission to access this site.</small></span>
+                <span><small>{{"OAUTH_LOG.IN_CONTENT_11" | translate}}</small></span>
             </div>
         </div>
         <div class="form-group m-t-lg text-center">
             <div class="col-sm-offset-3 col-sm-6">
                 <button type="button" class="btn btn-block btn-primary dark-green" ng-click="oauthLoginVm.login()"
-                        ng-disabled="!oauthLoginVm.canSubmit(loginForm)">Login
+                        ng-disabled="!oauthLoginVm.canSubmit(loginForm)">{{"OAUTH_LOG.IN_CONTENT_1" | translate}}
                 </button>
             </div>
         </div>

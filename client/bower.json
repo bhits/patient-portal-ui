@@ -1,0 +1,41 @@
+{
+  "name": "Consent2Share",
+  "version": "0.20.0",
+  "description": "Proof of concept",
+  "license": "Copyright @FEi Systems",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "1.5.0",
+    "angular-resource": "1.5.0",
+    "angular-sanitize": "1.5.0",
+    "angular-aria": "1.5.0",
+    "angular-messages": "1.5.0",
+    "angular-loading-bar": "0.8.x",
+    "angular-bootstrap": "1.2.x",
+    "angular-ui-router": "0.2.x",
+    "checklist-model": "0.9.x",
+    "x2js":"1.2.x",
+    "ngstorage": "0.3.x",
+    "angular-jwt": "0.0.x",
+    "angular-translate": "2.10.0",
+    "angular-translate-loader-static-files": "2.10.0",
+    "angular-i18n": "1.4.0",
+    "angular-translate-storage-local": "2.10.0",
+    "angular-translate-storage-cookie": "2.10.0",
+    "angular-dynamic-locale": "",
+    "bootstrap-filestyle": "1.2.1"
+  },
+  "devDependencies": {
+    "angular-mocks": "~1.5.0"
+  },
+  "resolutions": {
+    "angular": "~1.5.0"
+  }
+}

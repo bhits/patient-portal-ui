@@ -164,6 +164,16 @@ module.exports = function (grunt) {
                     }
                 ]
             },
+            build_i18n_json: {
+                files: [
+                    {
+                        src: ['<%=app_files.i18nLib %>'],
+                        dest: '<%= build_debug_dir %>/',
+                        cwd: '.',
+                        expand: true
+                    }
+                ]
+            },
             compile_assets: {
                 files: [
                     {

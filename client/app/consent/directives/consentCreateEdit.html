@@ -1,7 +1,7 @@
 <form name="consentForm">
     <div class="row">
         <div class="col-md-10">
-            <h1> I, <span ng-bind="consentCreateVm.username"></span>, hereby authorize... </h1>
+            <h1>{{"CONSENT_MANAGEMENT.CONSENT_CREATE_1" | translate}}<span ng-bind="consentCreateVm.username"></span>{{"CONSENT_MANAGEMENT.CONSENT_CREATE_2" | translate}}</h1>
             <div class="hr-line-dashed"></div>
             <div class="row">
                 <div class="col-md-5">
@@ -45,15 +45,15 @@
                 <div class="col-md-11">
                     <div class="pull-right">
                         <button class="btn btn-white m-r" type="reset" ng-click="consentCreateVm.cancelConsent()">
-                            Cancel
+                            {{"CONSENT_MANAGEMENT.CONSENT_CREATE_3" | translate}}
                         </button>
                         <button class="btn btn-primary dark-green" type="submit"
                                 ng-click="consentCreateVm.createConsent()" ng-disabled="!consentCreateVm.canSave()"
-                                ng-if="!consentCreateVm.isEditMode">Save
+                                ng-if="!consentCreateVm.isEditMode">{{"CONSENT_MANAGEMENT.CONSENT_CREATE_4" | translate}}
                         </button>
                         <button class="btn btn-primary dark-green" type="submit"
                                 ng-click="consentCreateVm.updateConsent()" ng-disabled="!consentCreateVm.canSave()"
-                                ng-if="consentCreateVm.isEditMode">Save
+                                ng-if="consentCreateVm.isEditMode">{{"CONSENT_MANAGEMENT.CONSENT_CREATE_4" | translate}}
                         </button>
                     </div>
                 </div>

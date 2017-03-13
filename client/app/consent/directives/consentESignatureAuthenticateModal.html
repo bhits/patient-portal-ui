@@ -1,16 +1,16 @@
 <div class="inmodal" ng-form>
     <div class="modal-header">
-        <h2 class="modal-title">Please Authenticate</h2>
+        <h2 class="modal-title">{{"CONSENT_MANAGEMENT.CONSENT_ESIGNATURE_21" | translate}}</h2>
     </div>
     <div class="modal-body">
         <div class="row">
             <div class="col-sm-12">
-                <strong> Please provide your account password to authenticate, and complete e-signature</strong>
+                <strong>{{"CONSENT_MANAGEMENT.CONSENT_ESIGNATURE_22" | translate}}</strong>
             </div>
         </div>
         <div class="row m-t">
             <div class="col-sm-2 ">
-                <label for="password">Password</label>
+                <label for="password">{{"CONSENT_MANAGEMENT.CONSENT_ESIGNATURE_23" | translate}}</label>
             </div>
             <div class="col-sm-3">
                 <input type="password" name="password" id="password" ng-model="authenticateVm.password">
@@ -24,7 +24,7 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-white m-r-xs" ng-click="authenticateVm.cancel()">Cancel</button>
-        <button type="button" class="btn btn-primary dark-green" ng-click="authenticateVm.ok()">Continue</button>
+        <button type="button" class="btn btn-white m-r-xs" ng-click="authenticateVm.cancel()">{{"CONSENT_MANAGEMENT.CONSENT_CREATE_3" | translate}}</button>
+        <button type="button" class="btn btn-primary dark-green" ng-click="authenticateVm.ok()">{{"CONSENT_MANAGEMENT.CONSENT_ESIGNATURE_24" | translate}}</button>
     </div>
 </div>

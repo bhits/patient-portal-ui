@@ -25,7 +25,7 @@
     }
 
     /* @ngInject */
-    function CreatePasswordController(utilityService, accountService, accountConfig) {
+    function CreatePasswordController(utilityService, accountService, accountConfig, $translate) {
         var vm = this;
         var original = vm.patient;
         vm.clearField = clearField;
@@ -39,16 +39,32 @@
         }
 
         //TODO popover data should come from the backend
-        vm.popoverData = {
-            title: "Password Instructions",
-            items: [
-                "8 characters in length",
-                "one number",
-                "one upper case letter (A, B, C)",
-                "one lower case letter (a, b, c)",
-                "one special character (e.g. #, *, @)"
-            ]
-        };
+        var language = window.localStorage.lang || 'en';
+        $translate.use(language);
+        if (language.substring(0,2) === 'en') {
+            vm.popoverData = {
+                title: "Password Instructions",
+                items: [
+                    "8 characters in length",
+                    "one number",
+                    "one upper case letter (A, B, C)",
+                    "one lower case letter (a, b, c)",
+                    "one special character (e.g. #, *, @)"
+                ]
+            };
+        } else if (language.substring(0,2) === 'es') {
+            vm.popoverData = {
+                title: "Instrucciones para crear la Contraseña",
+                items: [
+                    "8 caracteres de longitud",
+                    "un numero",
+                    "una letra mayúscula (A, B, C)",
+                    "una letra minúscula (a, b, c)",
+                    "un carácter especial (por ejemplo, #, *, @)"
+                ]
+            };
+        }
+
 
         function prepareActivation() {
             return {

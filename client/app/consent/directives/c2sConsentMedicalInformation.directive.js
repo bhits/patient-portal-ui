@@ -66,16 +66,20 @@
             medicalInfoModalVm.consent.selectedSensitivityPolicies = !angular.isDefined(vm.selectedSensitivityPolicies) ? [] : consentService.getCodes(vm.selectedSensitivityPolicies);
 
             medicalInfoModalVm.federalInfo = {
-                title: 'Federal Categories',
-                description: 'Federal requirements strictly restrict health professionals from disclosing substance abuse treatment information without signed patient consent ' +
+                //title: 'Federal Categories',
+                title: 'CONSENT_MANAGEMENT.CONSENT_MEDICAL_INFO_18',
+                /*description: 'Federal requirements strictly restrict health professionals from disclosing substance abuse treatment information without signed patient consent ' +
                 '(called <a href="http://www.samhsa.gov/about-us/who-we-are/laws/confidentiality-regulations-faqs" target="_blank"> 42 CFR Part 2 <i class="fa fa-external-link"></i></a> ).' +
-                'You have the right to choose the information you wish to share or not share and with whom.'
+                'You have the right to choose the information you wish to share or not share and with whom.'*/
+                description: 'CONSENT_MANAGEMENT.CONSENT_MEDICAL_INFO_21',
             };
 
             medicalInfoModalVm.stateInfo = {
-                title: 'State Categories',
-                description: 'Most states have laws restricting health professionals from disclosing information related to substance abuse, HIV/AIDS, and mental health. ' +
-                'Some states have restrictions regarding genetic information and communicable diseases. You have the right to choose the information you wish to share or not share and with whom.'
+                //title: 'State Categories',
+                title: 'CONSENT_MANAGEMENT.CONSENT_MEDICAL_INFO_19',
+                /*description: 'Most states have laws restricting health professionals from disclosing information related to substance abuse, HIV/AIDS, and mental health. ' +
+                'Some states have restrictions regarding genetic information and communicable diseases. You have the right to choose the information you wish to share or not share and with whom.'*/
+                description: 'CONSENT_MANAGEMENT.CONSENT_MEDICAL_INFO_22',
             };
 
             $scope.$watch("vm.selectedSensitivityPolicies", watchSensitivityPolicies);

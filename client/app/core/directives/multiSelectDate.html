@@ -1,30 +1,30 @@
 <div class="row">
     <div class="col-xs-6 col-sm-3">
         <div class="form-group">
-            <label>Month</label>
+            <label>{{"DATE_PICKER.MONTH" | translate}}</label>
             <select ng-model="date.month"
                     ng-options="month.value as month.name for month in selects.months() track by month.value"
                     class="form-control">
-                <option value="" disabled>Month</option>
+                <option value="" disabled>{{"DATE_PICKER.MONTH" | translate}}</option>
             </select>
         </div>
     </div>
 
     <div class="col-xs-2 col-sm-1 side-padding0">
         <div class="form-group">
-            <label>Day</label>
+            <label>{{"DATE_PICKER.DAY" | translate}}</label>
             <select ng-model="date.day" ng-options="day for day in selects.days()" class="form-control">
-                <option value="" disabled>Day</option>
+                <option value="" disabled>{{"DATE_PICKER.DAY" | translate}}</option>
             </select>
         </div>
     </div>
 
     <div class="col-xs-3 col-sm-2">
         <div class="form-group">
-            <label>Year</label>
+            <label>{{"DATE_PICKER.YEAR" | translate}}</label>
             <select ng-model="date.year" ng-options="year for year in selects.years() | orderBy: year:yearOrder"
                     class="form-control">
-                <option value="" disabled>Year</option>
+                <option value="" disabled>{{"DATE_PICKER.YEAR" | translate}}</option>
             </select>
         </div>
     </div>

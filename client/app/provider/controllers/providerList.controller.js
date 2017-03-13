@@ -33,11 +33,19 @@
                 providerService.deleteProvider(deleteProviderModalVm.npi,
                     function (data) {
                         $state.go($state.current, {}, {reload: true});
-                        notificationService.success('Success in deleting provider');
-
+                        if (isEnglish()) {
+                            notificationService.success('Success in deleting provider');
+                        } else {
+                            notificationService.success('El proveedor ha sido eliminado');
+                        }
                     },
                     function (data) {
-                        notificationService.error('Error in deleting provider');
+                        if (isEnglish()) {
+                            notificationService.error('Error in deleting provider');
+                        } else {
+                            notificationService.error('El proveedor no pudo ser eliminado');
+                        }
+
                     }
                 );
                 $modalInstance.close();
@@ -46,6 +54,15 @@
             deleteProviderModalVm.cancel = function () {
                 $modalInstance.dismiss('cancel');
             };
+
+            function isEnglish() {
+                var language = window.localStorage.lang || 'en';
+                if (language.substring(0,2) === 'en') {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
         }
 
     }

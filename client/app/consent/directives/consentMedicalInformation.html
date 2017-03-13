@@ -1,25 +1,25 @@
 <div>
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h2> Medical Information</h2>
+            <h2>{{"CONSENT_MANAGEMENT.CONSENT_MEDICAL_INFO_1" | translate}}</h2>
         </div>
         <div class="panel-body">
-            <p>Select how you would like to share your medical information.</p>
+            <p>{{"CONSENT_MANAGEMENT.CONSENT_MEDICAL_INFO_2" | translate}}</p>
             <fieldset>
-                <legend class="hidden">Sharing Medical Information</legend>
+                <legend class="hidden">{{"CONSENT_MANAGEMENT.CONSENT_MEDICAL_INFO_3" | translate}}</legend>
                 <p><input aria-label="SHARE ALL information in my medical record." type="radio" c2s-icheck
                           class="m-r-xs" ng-model="consentMedicalInformationVm.medicalInformation" value="A"
                           name="medicalInformation" ng-checked="consentMedicalInformationVm.medicalInformation == 'A'"
-                          ng-change="consentMedicalInformationVm.clearMedicalInfoData()"> <span class="m-l-xs"><strong>SHARE ALL</strong> information in my medical record.</span>
+                          ng-change="consentMedicalInformationVm.clearMedicalInfoData()"> <span class="m-l-xs"><strong>{{"CONSENT_MANAGEMENT.CONSENT_MEDICAL_INFO_4" | translate}}</strong>{{"CONSENT_MANAGEMENT.CONSENT_MEDICAL_INFO_5" | translate}}</span>
                 </p>
                 <p><input aria-label="SHARE my medical record WITH EXCEPTION of specific information." type="radio"
                           c2s-icheck ng-model="consentMedicalInformationVm.medicalInformation" value="B"
                           name="medicalInformation" ng-checked="consentMedicalInformationVm.hasException()"
                           ng-change="consentMedicalInformationVm.openPrivacySettingsModal()">
-                    <span class="m-l-xs m-r-sm"><strong>SHARE</strong> my medical record <strong>WITH EXCEPTION</strong> of specific information.</span>
+                    <span class="m-l-xs m-r-sm"><strong>{{"CONSENT_MANAGEMENT.CONSENT_MEDICAL_INFO_6" | translate}}</strong>{{"CONSENT_MANAGEMENT.CONSENT_MEDICAL_INFO_7" | translate}}<strong>{{"CONSENT_MANAGEMENT.CONSENT_MEDICAL_INFO_8" | translate}}</strong>{{"CONSENT_MANAGEMENT.CONSENT_MEDICAL_INFO_9" | translate}}</span>
                     <button type="button" class="btn btn-primary btn-xs dark-green"
                             ng-if="consentMedicalInformationVm.hasException()"
-                            ng-click="consentMedicalInformationVm.openPrivacySettingsModal()">Edit
+                            ng-click="consentMedicalInformationVm.openPrivacySettingsModal()">{{"CONSENT_MANAGEMENT.CONSENT_MEDICAL_INFO_10" | translate}}
                     </button>
                 </p>
             </fieldset>

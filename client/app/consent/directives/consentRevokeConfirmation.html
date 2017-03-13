@@ -2,19 +2,19 @@
     <div class="col-sm-12">
         <div class="row">
             <div class="col-sm-12">
-                <h2 class="m-t-none"><strong>Revocation of Consent to Participate in Health Information
-                    Exchange</strong></h2>
+                <h2 class="m-t-none"><strong>{{"CONSENT_MANAGEMENT.REVOKE_CONFIRMATION_1" | translate}}
+                    </strong></h2>
                 <div class="">
-                    <p class="m-b-xxs">Consent Reference Number:</p>
+                    <p class="m-b-xxs">{{"CONSENT_MANAGEMENT.REVOKE_CONFIRMATION_2" | translate}}</p>
                     <p><strong ng-bind="consentRevokeVm.revokeAttestation.consentReferenceId"></strong></p>
                 </div>
             </div>
             <div class="col-sm-6">
-                <span> Patient Name:</span>
+                <span>{{"CONSENT_MANAGEMENT.REVOKE_CONFIRMATION_3" | translate}}</span>
                 <strong ng-bind="consentRevokeVm.revokeAttestation.patient | fullName"></strong>
             </div>
             <div class="col-sm-6">
-                <span> Patient DOB:</span>
+                <span>{{"CONSENT_MANAGEMENT.REVOKE_CONFIRMATION_4" | translate}}</span>
                 <strong ng-bind="consentRevokeVm.revokeAttestation.patientDateOfBirth"></strong>
             </div>
         </div>
@@ -28,15 +28,15 @@
         <div>
             <input type="checkbox" c2s-icheck ng-model="consentRevokeVm.revokeAttestation.acceptTerms"
                    ng-change="consentRevokeVm.onchecked()">
-            <span>I, <strong ng-bind="consentRevokeVm.revokeAttestation.patient | fullName"></strong>, hereby accept, and understand the terms of this consent.</span>
+            <span>{{"CONSENT_MANAGEMENT.CONSENT_CREATE_1" | translate}}<strong ng-bind="consentRevokeVm.revokeAttestation.patient | fullName"></strong>{{"CONSENT_MANAGEMENT.REVOKE_CONFIRMATION_5" | translate}}</span>
         </div>
     </div>
     <div class="row m-b-md">
         <div class="col-md-12">
             <div class="pull-right">
-                <button class="btn btn-white m-r" ng-click="consentRevokeVm.cancel()">Cancel</button>
+                <button class="btn btn-white m-r" ng-click="consentRevokeVm.cancel()">{{"CONSENT_MANAGEMENT.CONSENT_CREATE_3" | translate}}</button>
                 <button class="btn btn-primary dark-green" type="submit" ng-disabled="!consentRevokeVm.isAuthenticated"
-                        ng-click="consentRevokeVm.sign()">Complete
+                        ng-click="consentRevokeVm.sign()">{{"CONSENT_MANAGEMENT.CONSENT_ESIGNATURE_20" | translate}}
                 </button>
             </div>
         </div>

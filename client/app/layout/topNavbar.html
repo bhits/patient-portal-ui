@@ -14,6 +14,21 @@
                     <div class="m-t-sm m-b-sm m-r inline">
                         <c2s-top-navbar-logo></c2s-top-navbar-logo>
                     </div>
+
+                    <!--Select language - add by Wentao-->
+                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span translate="SELECT_LANGUAGE"></span><span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a ng-click="changeLanguage('en-US')" translate="BUTTON_LANG_EN"></a>
+                        </li>
+                        <li>
+                            <a ng-click="changeLanguage('zh-CN')" translate="BUTTON_LANG_ZH"></a>
+                        </li>
+                        <li>
+                            <a ng-click="changeLanguage('es-AR')" translate="BUTTON_LANG_ES"></a>
+                        </li>
+                    </ul>
+
                 </div>
             </div>
         </div>

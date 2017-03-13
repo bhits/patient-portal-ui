@@ -1,7 +1,7 @@
 <div id="provider_lookup_result">
     <div class="row">
         <div class="col-md-6" ng-if="providerLookupResultVm.isEmptyResult()">
-            <div class="alert alert-danger">Sorry, no results found.</div>
+            <div class="alert alert-danger">{{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_1" | translate}}</div>
         </div>
     </div>
     <div class="row">
@@ -11,7 +11,7 @@
         <div class="col-sm-6 col-sm-pull-6">
             <div class="ibox panel panel-darkblue">
                 <div class="ibox-title modified panel-heading">
-                    <h2 class="font-light">Results</h2>
+                    <h2 class="font-light">{{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_2" | translate}}</h2>
                 </div>
                 <div class="panel-body">
                     <div class="row">
@@ -40,11 +40,11 @@
                                     <h3 class="m-b-sm">{{provider | plsName}}&nbsp;<span>[NPI: {{provider.npi}}]</span></h3>
                                     <button type="button" class="btn btn-xs btn-primary dark-green" ng-click="providerLookupResultVm.addSelectedProvider(provider)">
                                         <i class="fa fa-plus">
-                                            <span class="sr-only">Select this Provider</span>
+                                            <span class="sr-only">{{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_3" | translate}}</span>
                                         </i>
                                     </button>
                                     <div class="inline" >
-                                        &nbsp;Select this Provider.
+                                        &nbsp;{{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_4" | translate}}
                                     </div>
                                 </div>
                                 <div class="panel-heading" ng-if="providerLookupResultVm.isProviderSelected(provider.npi)">
@@ -52,18 +52,18 @@
                                     <h3 class="m-b-sm">{{provider | plsName}}&nbsp;<span>[NPI: {{provider.npi}}]</span></h3>
                                     <button type="button" class="btn btn-xs white" >
                                         <i class="fa fa-plus">
-                                            <span class="sr-only">Provider currently selected.</span>
+                                            <span class="sr-only">{{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_5" | translate}}</span>
                                         </i>
                                     </button>
                                     <div class="inline text-dark-gray" >
-                                        &nbsp;Provider currently selected.
+                                        &nbsp;{{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_5" | translate}}
                                     </div>
                                 </div>
                                 <div class="panel-heading" ng-if="providerLookupResultVm.isProviderAdded(provider.npi)">
                                     <h3 class="m-b-sm text-medium-gray">{{provider | plsName}}&nbsp;<span>[NPI: {{provider.npi}}]</span></h3>
                                     <div class="inline" >
                                         &nbsp;<span class="fa fa-lg fa-check text-navbar-blueGray">
-                                        &nbsp;</span>Provider already added.
+                                        &nbsp;</span>{{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_5" | translate}}
                                     </div>
                                 </div>
                                 <div class="panel-body">

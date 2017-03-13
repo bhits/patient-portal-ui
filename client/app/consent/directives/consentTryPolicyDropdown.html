@@ -1,7 +1,7 @@
 <div ng-if="tryPolicyDropdownVm.option === 'tryMyPolicy'">
     <div class="form-horizontal">
         <div class="form-group m-b-xs">
-            <label for="document" class="col-sm-3 control-label">Document</label>
+            <label for="document" class="col-sm-3 control-label">{{"CONSENT_MANAGEMENT.TRY_POLICY_1" | translate}}</label>
             <div class="col-sm-9">
                 <select id="document" class="form-control m-b" name="account" ng-model="tryPolicyDropdownVm.documentid">
                     <option ng-repeat="document in tryPolicyDropdownVm.medicaldocuments" value="{{document.id}}">
@@ -11,12 +11,12 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="purposeOfUse" class="col-sm-3 control-label">Purpose of Use</label>
+            <label for="purposeOfUse" class="col-sm-3 control-label">{{"CONSENT_MANAGEMENT.TRY_POLICY_2" | translate}}</label>
             <div class="col-sm-9">
                 <select id="purposeOfUse" class="form-control m-b" name="account"
                         ng-model="tryPolicyDropdownVm.purposeofusecode">
                     <option ng-repeat="purposeOfUse in tryPolicyDropdownVm.shareforpurposeofuse"
-                            value="{{purposeOfUse.code}}">{{purposeOfUse.displayName}}
+                            value="{{purposeOfUse.code}}">{{purposeOfUse.code | translate}}<!--{{purposeOfUse.displayName}}-->
                     </option>
                 </select>
             </div>
