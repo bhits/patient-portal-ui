@@ -734,6 +734,7 @@ module.exports = function (grunt) {
             'copy:build_systemjs_resources',
             'copy:angular2_lib',
             'copy:build_vendorjs',
+            'copy:build_i18n_json',
             'index:build',
             'angularFileLoader',
             'karmaconfig'
