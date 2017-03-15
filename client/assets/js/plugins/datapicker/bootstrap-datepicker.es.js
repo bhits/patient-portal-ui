@@ -2,7 +2,7 @@
  * Created by ZHOU WENTAO on 1/9/2017.
  */
 ;(function($){
-    $.fn.datetimepicker.dates['es'] = {
+    $.fn.datepicker.dates['es'] = {
         days: ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"],
         daysShort: ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"],
         daysMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa", "Do"],
