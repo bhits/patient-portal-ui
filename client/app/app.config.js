@@ -20,8 +20,6 @@
         IdleProvider.timeout(idleConfigParams.timeout);
         KeepaliveProvider.interval(idleConfigParams.keepalive);
 
-        // realize i18n for PP-UI : ADD BY Wentao
-        //get dynamic local value
         var language = window.localStorage.lang || 'en';
         $translateProvider.preferredLanguage(language);
         $translateProvider.useSanitizeValueStrategy('escape');
@@ -31,9 +29,8 @@
          var language = window.localStorage.lang || 'en';
         $translateProvider.preferredLanguage(language);*/
 
-        $translateProvider.registerAvailableLanguageKeys(['en', 'zh', 'es'], {
+        $translateProvider.registerAvailableLanguageKeys(['en', 'es'], {
             'en-*': 'en',
-            'zh-*': 'zh',
             'es-*': 'es'
         });
 

@@ -1,7 +1,3 @@
-/**
- * Created by ZHOU WENTAO on 1/26/2017.
- */
-
 (function() {
     'use strict';
 

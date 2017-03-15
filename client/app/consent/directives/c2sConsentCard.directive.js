@@ -194,7 +194,7 @@
             viewer.document.open().write(decodedDocument);
         }
 
-        // deal with non-ASCII characters of Spanish - Wentao
+        // Deal with non-ASCII characters of Spanish
         function b64DecodedUnicode(str) {
             return decodeURIComponent(Array.prototype.map.call(atob(str), function(c) {
                 return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);

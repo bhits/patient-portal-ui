@@ -17,7 +17,7 @@
 
         function request(config) {
             var currentPath = $location.path();
-            //set Accept-Language - Wentao
+
             var lang = window.localStorage.lang || 'en';
             config.headers = config.headers || {};
             config.headers['Cache-Control'] = 'no-cache';

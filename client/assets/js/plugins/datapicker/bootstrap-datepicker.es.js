@@ -1,6 +1,3 @@
-/**
- * Created by ZHOU WENTAO on 1/9/2017.
- */
 ;(function($){
     $.fn.datepicker.dates['es'] = {
         days: ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"],
