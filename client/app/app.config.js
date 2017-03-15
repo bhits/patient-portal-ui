@@ -6,11 +6,7 @@
         .config(appConfig);
 
     /* @ngInject */
-    function appConfig($urlRouterProvider, $locationProvider, $httpProvider, KeepaliveProvider, IdleProvider, idleConfigParams, brandProvider, $translateProvider, tmhDynamicLocaleProvider) {
-
-        //Set Brand Name
-        brandProvider.setBrandName("Consent2Share");
-        brandProvider.setBrandInitial("C2S");
+    function appConfig($urlRouterProvider, $locationProvider, $httpProvider, KeepaliveProvider, IdleProvider, idleConfigParams, $translateProvider, tmhDynamicLocaleProvider) {
 
         // enable html5 mode
         $locationProvider.html5Mode(true).hashPrefix('!');
@@ -28,7 +24,8 @@
         //get dynamic local value
         var language = window.localStorage.lang || 'en';
         $translateProvider.preferredLanguage(language);
-        tmhDynamicLocaleProvider.localeLocationPattern('vendor/angular-i18n/angular-locale_{{locale}}.js');
+        $translateProvider.useSanitizeValueStrategy('escape');
+        tmhDynamicLocaleProvider.localeLocationPattern('node_modules/angular-i18n/angular-locale_{{locale}}.js');
 
         /* get dynamic local value - solution 2
          var language = window.localStorage.lang || 'en';
