@@ -23,7 +23,7 @@
     }
 
     /* @ngInject */
-    function MedicalInformationController($modal, consentService) {
+    function MedicalInformationController($modal, $scope, consentService) {
         var vm = this;
         vm.selectedSensitivityPolicies = consentService.getLookupEntities(vm.sensitivitypolicies, vm.ngModel.doNotShareSensitivityPolicyCodes);
         vm.medicalInformation = (vm.selectedSensitivityPolicies.length > 0) ? 'B' : 'A';
@@ -45,6 +45,8 @@
             //In case of sharing medical record with exception.
             if (vm.medicalInformation === 'B') {
                 var modalInstance = $modal.open({
+                    backdrop  : 'static',
+                    keyboard  : false,
                     templateUrl: 'app/consent/directives/consentMedicalInformationModal.html',
                     resolve: {
                         data: function () {
@@ -110,11 +112,21 @@
                 vm.ngModel = {
                     doNotShareSensitivityPolicyCodes: medicalInfoModalVm.consent.selectedSensitivityPolicies
                 };
+
+                resetSelection();
+
                 $modalInstance.close();
             }
 
             function cancel() {
+                resetSelection();
                 $modalInstance.dismiss('cancel');
+            }
+
+            function resetSelection(){
+                if(vm.selectedSensitivityPolicies.length === 0){
+                    clearMedicalInfoData();
+                }
             }
         }
     }
