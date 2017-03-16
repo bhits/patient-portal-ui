@@ -33,7 +33,13 @@
                         };
 
                         var error = function (data) {
-                            notificationService.error('Failed to get the patient health information, please try again later...');
+                            var language = window.localStorage.lang || 'en';
+                            if (language.substring(0,2) === 'es') {
+                                notificationService.error('El acceso a la información medica del paciente no funciono, por favor inténtelo de nuevo...');
+                            } else {
+                                notificationService.error('Failed to get the patient health information, please try again later...');
+                            }
+
                             return data;
                         };
 

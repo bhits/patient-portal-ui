@@ -14,7 +14,7 @@
         vm.forgotPassword = forgotPassword;
         vm.cancel = cancel;
         vm.canSubmit = canSubmit;
-        vm.title = configService.getBrandName() + " Forgot Password";
+        vm.title = configService.getBrandName() + "_FORGOT_PASSWORD";
 
         function prepareInfo() {
             return {

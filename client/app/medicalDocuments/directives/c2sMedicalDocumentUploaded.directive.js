@@ -37,10 +37,19 @@
             medicalDocumentsService.downloadMedicalDocument(medicalDocument.id,
                 function (response) {
                     utilityService.downloadFile(response.data, medicalDocument.name + ".xml", "application/xml");
-                    notificationService.success('Success in downloading medical document');
+                    if (isEnglish()) {
+                        notificationService.success('Success in downloading medical document');
+                    } else {
+                        notificationService.success('El documento médico ha sido descargado');
+                    }
                 },
                 function (err) {
-                    notificationService.error('Error in downloading medical document');
+                    if (isEnglish()) {
+                        notificationService.error('Error in downloading medical document');
+                    } else {
+                        notificationService.error('El documento médico no puso ser descargado');
+                    }
+
                 }
             );
         }
@@ -49,10 +58,19 @@
             var content = {document: medicalDocument.content};
             medicalDocumentsService.uploadDocumentToHIE(content,
                 function (response) {
-                    notificationService.success('Success in publishing medical document to HIE.');
+                    if (isEnglish()) {
+                        notificationService.success('Success in publishing medical document to HIE.');
+                    } else {
+                        notificationService.success('El documento médico ha sido publicado en el HIE.');
+                    }
+
                 },
                 function (err) {
-                    notificationService.error('Error in publishing medical document to HIE.');
+                    if (isEnglish()) {
+                        notificationService.error('Error in publishing medical document to HIE.');
+                    } else {
+                        notificationService.error('El documento médico no pudo ser publicado en el HIE.');
+                    }
                 }
             );
         }
@@ -81,10 +99,18 @@
                     medicalDocumentsService.deleteMedicalDocument(vm.id,
                         function (data) {
                             $state.go($state.current, {}, {reload: true});
-                            notificationService.success('Success in deleting medical document');
+                            if (isEnglish()) {
+                                notificationService.success('Success in deleting medical document');
+                            } else {
+                                notificationService.success('El documento médico ha sido eliminado');
+                            }
                         },
                         function (data) {
-                            notificationService.error('Error in deleting medical document');
+                            if (isEnglish()) {
+                                notificationService.error('Error in deleting medical document');
+                            } else {
+                                notificationService.error('El documento médico no pudo ser eliminado');
+                            }
                         }
                     );
                     $modalInstance.close();
@@ -92,6 +118,15 @@
                 vm.cancel = function () {
                     $modalInstance.dismiss('cancel');
                 };
+            }
+        }
+
+        function isEnglish() {
+            var language = window.localStorage.lang || 'en';
+            if (language.substring(0,2) === 'en') {
+                return true;
+            } else {
+                return false;
             }
         }
     }

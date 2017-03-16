@@ -1,3 +1,5 @@
+<script type="text/javascript">
+</script>
 <nav class="navbar-default navbar-static-side fix-sidebar" role="navigation">
     <div class="sidebar-collapse">
         <ul c2s-side-navigation class="nav" id="side-menu">
@@ -7,37 +9,43 @@
             <li ui-sref-active="active">
                 <a ui-sref="fe.index.home">
                     <i class="fa fa-home"></i>
-                    <span class="nav-label">Home</span>
+                    <!--<span class="nav-label">Home</span>-->
+                    <span class="nav-label">{{'HOME_LINK' | translate}}</span>
                 </a>
             </li>
             <li ng-class="{active: $state.includes('fe.consent')}">
                 <a ui-sref="fe.consent.list">
                     <i class="fa fa-file-text"></i>
-                    <span class="nav-label">Consents</span>
+                    <!--<span class="nav-label">Consents</span>-->
+                    <span class="nav-label" translate="CONSENTS_LINK"></span>
                 </a>
             </li>
             <li ng-class="{active: $state.includes('fe.provider')}">
                 <a ui-sref="fe.provider.list">
                     <i class="fa fa-user-md"></i>
-                    <span class="nav-label">Providers</span>
+                    <!--<span class="nav-label">Providers</span>-->
+                    <span class="nav-label" translate="PROVIDERS_LINK"></span>
                 </a>
             </li>
             <li ng-class="{active: $state.includes('fe.medicaldocuments')}">
                 <a ui-sref="fe.medicaldocuments.info">
                     <i class="fa fa-folder-open"></i>
-                    <span class="nav-label">Medical Documents</span>
+                    <!--<span class="nav-label">Medical Documents</span>-->
+                    <span class="nav-label" translate="MEDICAL_DOCUMENTS"></span>
                 </a>
             </li>
             <li ng-class="{active: $state.includes('fe.activity')}">
                 <a ui-sref="fe.activity.list">
                     <i class="fa fa-clock-o"></i>
-                    <span class="nav-label">Activity History</span>
+                    <!--<span class="nav-label">Activity History</span>-->
+                    <span class="nav-label" translate="ACTIVITY_HISTORY"></span>
                 </a>
             </li>
             <li ng-class="{active: $state.includes('fe.patient')}">
                 <a ui-sref="fe.patient.healthinformation">
                     <i class="fa fa-user-md"></i>
-                    <span class="nav-label">Health Information</span>
+                    <!--<span class="nav-label">Health Information</span>-->
+                    <span class="nav-label" translate="HEALTH_INFORMATION"></span>
                 </a>
             </li>
         </ul>

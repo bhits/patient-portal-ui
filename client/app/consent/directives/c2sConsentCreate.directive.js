@@ -95,14 +95,29 @@
 
             consentService.createConsent(consent,
                 function (response) {
-                    notificationService.success("Success in creating consent.");
+                    if (isEnglish()) {
+                        notificationService.success("Success in creating consent.");
+                    } else {
+                        notificationService.success("El consentimiento ha sido creado.");
+                    }
+
                     $state.go('fe.consent.list');
                 },
                 function (error) {
                     if (error.status === 409) {
-                        notificationService.warn("Error you cannot create duplicate consent.");
+                        if (isEnglish()) {
+                            notificationService.warn("Error you cannot create duplicate consent.");
+                        } else {
+                            notificationService.warn("No es posible crear consentimientos duplicados.");
+                        }
+
                     } else {
-                        notificationService.error("Error in creating consent");
+                        if (isEnglish()) {
+                            notificationService.error("Error in creating consent");
+                        } else {
+                            notificationService.error("El consentimiento no pudo ser creado");
+                        }
+
                     }
                 }
             );
@@ -115,18 +130,41 @@
             consentService.updateConsent(
                 consent,
                 function (response) {
-                    notificationService.success("Success in updating consent.");
+                    if (isEnglish()) {
+                        notificationService.success("Success in updating consent.");
+                    } else {
+                        notificationService.success("El consentimiento ha sido modificado.");
+                    }
+
                     $state.go('fe.consent.list');
                 },
                 function (error) {
                     if (error.status === 409) {
-                        notificationService.warn("Error you cannot create duplicate consent.");
+                        if (isEnglish()) {
+                            notificationService.warn("Error you cannot create duplicate consent.");
+                        } else {
+                            notificationService.warn("No es posible crear consentimientos duplicados.");
+                        }
+
                     } else {
-                        notificationService.error("Error in updating consent.");
+                        if (isEnglish()) {
+                            notificationService.error("Error in updating consent.");
+                        } else {
+                            notificationService.error("El consentimiento no pudo ser modificado.");
+                        }
+
                     }
 
                 }
             );
+        }
+
+        function isEnglish() {
+            var language = window.localStorage.lang || 'en';
+            if (language.substring(0, 2) === 'en') {
+                return true;
+            }
+            return false;
         }
 
         function cancelConsent() {

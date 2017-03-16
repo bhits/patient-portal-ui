@@ -1,36 +1,36 @@
 <div class="inmodal" ng-form name="medicalInfofmationModalObj" c2s-popover-close>
     <div class="modal-header">
-        <h2 class="modal-title">Privacy Settings</h2>
+        <h2 class="modal-title">{{"CONSENT_MANAGEMENT.CONSENT_MEDICAL_INFO_11" | translate}}</h2>
     </div>
     <div class="modal-body">
         <div class="row">
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Sensitive Information Categories</h5>
+                        <h5>{{"CONSENT_MANAGEMENT.CONSENT_MEDICAL_INFO_12" | translate}}</h5>
                         <div c2s-ibox-tools></div>
                     </div>
                     <div class="ibox-content">
                         <div class="alert alert-warning">
-                            Select the medical information that you <strong>DO
-                            NOT</strong> wish to share.
+                            {{"CONSENT_MANAGEMENT.CONSENT_MEDICAL_INFO_13" | translate}}<strong>
+                            {{"CONSENT_MANAGEMENT.CONSENT_MEDICAL_INFO_14" | translate}}</strong>{{"CONSENT_MANAGEMENT.CONSENT_MEDICAL_INFO_15" | translate}}
                         </div>
                         <button class="btn btn-primary btn-xs m-r-xs dark-green"
                                 ng-click="medicalInfoModalVm.selectAllSensitivityPolicies(medicalInfofmationModalObj)">
-                            Select All
+                            {{"CONSENT_MANAGEMENT.CONSENT_MEDICAL_INFO_16" | translate}}
                         </button>
                         <button class="btn btn-primary btn-xs dark-green"
                                 ng-click="medicalInfoModalVm.deselectAllSensitivityPolicies(medicalInfofmationModalObj)">
-                            Deselect All
+                            {{"CONSENT_MANAGEMENT.CONSENT_MEDICAL_INFO_17" | translate}}
                         </button>
                         <div>
                             <div class="border-bottom p-xxs m-t-sm m-b-xs text-dark-blue fw-600">
                                 <span class="fa fa-university m-r-xxs"></span>
-                                Federal Categories
+                                {{"CONSENT_MANAGEMENT.CONSENT_MEDICAL_INFO_18" | translate}}
                                 <span class="text-navy-blue m-l-xs">
                                     <c2s-popover popover-placement="bottom"
-                                                 popover-title="medicalInfoModalVm.federalInfo.title"
-                                                 popover-content="medicalInfoModalVm.federalInfo.description"></c2s-popover>
+                                                 popover-title="medicalInfoModalVm.federalInfo.title | translate"
+                                                 popover-content="medicalInfoModalVm.federalInfo.description | translate"></c2s-popover>
                                 </span>
                             </div>
                             <div ng-repeat="sensitivityPolicy in medicalInfoModalVm.sensitivityPolicies | orderBy:'displayOrder'">
@@ -46,11 +46,11 @@
                         <div>
                             <div class="border-bottom p-xxs m-t-sm m-b-xs text-dark-blue fw-600">
                                 <span class="fa fa-flag m-r-xs"></span>
-                                State Categories
+                                {{"CONSENT_MANAGEMENT.CONSENT_MEDICAL_INFO_19" | translate}}
                                 <span class="text-navy-blue m-l-xs">
                                     <c2s-popover popover-placement="bottom"
-                                                 popover-title="medicalInfoModalVm.stateInfo.title"
-                                                 popover-content="medicalInfoModalVm.stateInfo.description"></c2s-popover>
+                                                 popover-title="medicalInfoModalVm.stateInfo.title | translate"
+                                                 popover-content="medicalInfoModalVm.stateInfo.description | translate"></c2s-popover>
                                 </span>
                             </div>
                             <div ng-repeat="sensitivityPolicy in medicalInfoModalVm.sensitivityPolicies | orderBy:'displayOrder'">
@@ -69,9 +69,9 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-white m-r-xs" ng-click="medicalInfoModalVm.cancel()">Cancel</button>
+        <button type="button" class="btn btn-white m-r-xs" ng-click="medicalInfoModalVm.cancel()">{{"CONSENT_MANAGEMENT.CONSENT_CREATE_3" | translate}}</button>
         <button type="button" class="btn btn-primary dark-green" ng-click="medicalInfoModalVm.ok()"
-                ng-disabled="medicalInfofmationModalObj.$pristine">Save changes
+                ng-disabled="medicalInfofmationModalObj.$pristine">{{"CONSENT_MANAGEMENT.CONSENT_MEDICAL_INFO_20" | translate}}
         </button>
     </div>
 </div>

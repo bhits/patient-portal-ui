@@ -1,15 +1,15 @@
 <div>
     <div>
-        <label for="consent_start">Consent Start</label>
+        <label for="consent_start">{{"DATE_PICKER.START" | translate}}</label>
         <input type="text" class="input-small" id="consent_start" name="start"
                ng-model="datePickerVm.consent.consentStart"/>
-        <label for="consent_end">Consent End</label>
+        <label for="consent_end">{{"DATE_PICKER.END" | translate}}</label>
         <input type="text" class="input-small" id="consent_end" name="end" ng-model="datePickerVm.consent.consentEnd"/>
     </div>
 
     <div ng-if="datePickerVm.showError">
         <div class="alert alert-danger">
-            <span ng-bind="datePickerVm.error"></span>
+            <span ng-bind="datePickerVm.error | translate"></span>
         </div>
     </div>
 </div>
