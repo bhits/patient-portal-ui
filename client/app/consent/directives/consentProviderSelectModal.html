@@ -1,19 +1,19 @@
 <div class="inmodal">
     <div class="modal-header">
-        <h2 class="modal-title"><span ng-bind="selectProviderModalVm.title"></span></h2>
+        <h2 class="modal-title"><span ng-bind="selectProviderModalVm.title | translate"></span></h2>
     </div>
     <div class="modal-body">
-        <p ng-if="!selectProviderModalVm.hasAtLeastTwoProviders()|| selectProviderModalVm.hasNoProviders()">In order to
-            create a consent, you must add at least <strong>two Health Providers</strong></p>
+        <p ng-if="!selectProviderModalVm.hasAtLeastTwoProviders()|| selectProviderModalVm.hasNoProviders()">
+            {{"CONSENT_MANAGEMENT.PROVIDER_SELECT_1" | translate}} <strong>{{"CONSENT_MANAGEMENT.PROVIDER_SELECT_2" | translate}}</strong></p>
         <p ng-if="!selectProviderModalVm.hasAtLeastTwoProviders()|| selectProviderModalVm.hasNoProviders()"><a
-                class="btn btn-primary dark-green" ui-sref="fe.provider.lookup">Add a Health Provider</a></p>
-        <p ng-if="selectProviderModalVm.hasAtLeastTwoProviders() && selectProviderModalVm.title === 'Authorize'">Please
-            select <strong>one</strong> individual or organization authorized to share your information:</p>
-        <p ng-if="selectProviderModalVm.hasAtLeastTwoProviders() && selectProviderModalVm.title === 'Disclosure'">Please
-            select <strong>one</strong> individual or organization for disclosure:</p>
+                class="btn btn-primary dark-green" ui-sref="fe.provider.lookup">{{"CONSENT_MANAGEMENT.PROVIDER_SELECT_3" | translate}}</a></p>
+        <p ng-if="selectProviderModalVm.hasAtLeastTwoProviders() && selectProviderModalVm.title === 'Authorize'">{{"CONSENT_MANAGEMENT.PROVIDER_SELECT_4" | translate}}
+            <strong>{{"CONSENT_MANAGEMENT.PROVIDER_SELECT_5" | translate}}</strong>{{"CONSENT_MANAGEMENT.PROVIDER_SELECT_6" | translate}}</p>
+        <p ng-if="selectProviderModalVm.hasAtLeastTwoProviders() && selectProviderModalVm.title === 'Disclosure'">
+            {{"CONSENT_MANAGEMENT.PROVIDER_SELECT_4" | translate}} <strong>{{"CONSENT_MANAGEMENT.PROVIDER_SELECT_5" | translate}}</strong>{{"CONSENT_MANAGEMENT.PROVIDER_SELECT_7" | translate}}</p>
         <div class="row">
             <div class="col-sm-12 m-b-xs">
-                <h2 ng-if="!selectProviderModalVm.hasNoProviders()"><strong>Individuals:</strong></h2>
+                <h2 ng-if="!selectProviderModalVm.hasNoProviders()"><strong>{{"CONSENT_MANAGEMENT.PROVIDER_SELECT_8" | translate}}</strong></h2>
                 <div ng-repeat="provider in selectProviderModalVm.providers">
                     <div ng-if="selectProviderModalVm.isIndividualProvider(provider)">
                         <div class="radio">
@@ -30,7 +30,7 @@
         </div>
         <div class="row">
             <div class="col-sm-12 m-b-md">
-                <h2 ng-if="!selectProviderModalVm.hasNoProviders()"><strong>Organization:</strong></h2>
+                <h2 ng-if="!selectProviderModalVm.hasNoProviders()"><strong>{{"CONSENT_MANAGEMENT.PROVIDER_SELECT_9" | translate}}</strong></h2>
                 <div ng-repeat="provider in selectProviderModalVm.providers">
                     <div ng-if="selectProviderModalVm.isOrganizationProvider(provider)">
                         <div class="radio">
@@ -47,10 +47,10 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-white" ng-click="selectProviderModalVm.cancel()">Cancel</button>
+        <button type="button" class="btn btn-white" ng-click="selectProviderModalVm.cancel()">{{"CONSENT_MANAGEMENT.CONSENT_CREATE_3" | translate}}</button>
         <button type="button" class="btn btn-primary dark-green"
-                ng-disabled="!selectProviderModalVm.hasAtLeastTwoProviders()" ng-click="selectProviderModalVm.ok()">Add
-            Selected
+                ng-disabled="!selectProviderModalVm.hasAtLeastTwoProviders()" ng-click="selectProviderModalVm.ok()">
+            {{"CONSENT_MANAGEMENT.PROVIDER_SELECT_10" | translate}}
         </button>
     </div>
 </div>

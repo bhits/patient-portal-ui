@@ -1,10 +1,10 @@
-<c2s-content-wrapper contenttitle="List Providers">
+<c2s-content-wrapper contenttitle="TITLE.LIST_PROVIDERS">
     <div class="row">
         <div class="col-sm-12">
             <div class="ibox float-e-margins margin-bottom-10">
                 <p>
                     <a class="btn btn-primary dark-green" ui-sref="fe.provider.lookup">
-                        Add a Health Provider
+                        {{"PROVIDER_MANAGEMENT.PROVIDER_LIST_1" | translate}}
                     </a>
                 </p>
             </div>
@@ -14,7 +14,7 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h2>Current Healthcare Providers</h2>
+                    <h2>{{"PROVIDER_MANAGEMENT.PROVIDER_LIST_2" | translate}}</h2>
 
                     <div c2s-ibox-tools></div>
                 </div>
@@ -23,15 +23,15 @@
                         <thead>
                         <tr>
                             <td></td>
-                            <th>Name/Facility</th>
-                            <th>NPI</th>
-                            <th>Contact Number</th>
-                            <th>Address</th>
+                            <th>{{"PROVIDER_MANAGEMENT.PROVIDER_LIST_3" | translate}}</th>
+                            <th>{{"PROVIDER_MANAGEMENT.PROVIDER_LIST_4" | translate}}</th>
+                            <th>{{"PROVIDER_MANAGEMENT.PROVIDER_LIST_5" | translate}}</th>
+                            <th>{{"PROVIDER_MANAGEMENT.PROVIDER_LIST_6" | translate}}</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr ng-if="providerListVm.providers.length === 0">
-                            <td colspan="5" class="text-center"> No provider has been added.</td>
+                            <td colspan="5" class="text-center"> {{"PROVIDER_MANAGEMENT.PROVIDER_LIST_7" | translate}}</td>
                         </tr>
                         <tr ng-repeat="provider in providerListVm.providers">
                             <td>
@@ -40,7 +40,7 @@
                                         ng-disabled="!provider.deletable"
                                         ng-click="providerListVm.openDeleteProviderModal(provider, 'sm')">
                                     <div class="fa fa-minus">
-                                        <span class="sr-only">delete provider</span>
+                                        <span class="sr-only">{{"PROVIDER_MANAGEMENT.PROVIDER_LIST_8" | translate}}</span>
                                         <span class="sr-only" ng-bind="provider.lastName"></span>
                                         <span class="sr-only" ng-bind="provider.firstName"></span>
                                     </div>

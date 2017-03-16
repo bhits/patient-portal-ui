@@ -78,11 +78,19 @@
                             collapseSearchAccordion();
                             vm.providerLookupResult = providerService.getLookupResult(response);
                         } else {
-                            notificationService.info('Sorry, no results found.');
+                            if (isEnglish()) {
+                                notificationService.info('Sorry, no results found.');
+                            } else {
+                                notificationService.info('Lo sentimos, no se encontraron resultados.');
+                            }
                         }
                     },
                     function (response) {
-                        notificationService.error('Failed to lookup providers, please try again later...');
+                        if (isEnglish()) {
+                            notificationService.error('Failed to lookup providers, please try again later...');
+                        } else {
+                            notificationService.error('La búsqueda de proveedores no funciono, por favor inténtelo de nuevo...');
+                        }
                     }
                 );
             }
@@ -111,6 +119,15 @@
 
             function formViewValue(form, fieldName) {
                 return form[fieldName].$viewValue;
+            }
+
+            function isEnglish() {
+                var language = window.localStorage.lang || 'en';
+                if (language.substring(0,2) === 'en') {
+                    return true;
+                } else {
+                    return false;
+                }
             }
         }
     }

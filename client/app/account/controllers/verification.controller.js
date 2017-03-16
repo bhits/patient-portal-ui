@@ -13,6 +13,7 @@
     function VerificationController(allowVerification, configService) {
         var vm = this;
         vm.allowVerification = allowVerification;
-        vm.title = configService.getBrandName() + " Account Setup Activation";
+        vm.title = configService.getBrandName() + "_ACCOUNT_SETUP_ACTIVATION";
+
     }
 })();

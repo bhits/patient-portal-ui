@@ -3,7 +3,7 @@
         <div class="col-sm-12" id="provider_lookup_search">
             <div class="ibox panel panel-darkblue float-e-margins">
                 <div class="ibox-title  modified panel-heading">
-                    <h2>Search</h2>
+                    <h2>{{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_6" | translate}}</h2>
 
                     <div c2s-ibox-tools></div>
                 </div>
@@ -12,42 +12,40 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="alert alert-info">
-                                    <span class="badge btn-success btn-circle bg-color-blue m-r-xs">1</span>&nbsp;<b>Step
-                                    1.</b>
-                                    Please enter
-                                    the
-                                    provider <b>State and City</b> OR <b>Zip Code</b>.
+                                    <span class="badge btn-success btn-circle bg-color-blue m-r-xs">1</span>&nbsp;<b>
+                                    {{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_7" | translate}}</b>
+                                    {{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_8" | translate}}
+                                    <b>{{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_9" | translate}}</b>{{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_10" | translate}}<b>{{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_11" | translate}}</b>.
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-5"
                                  ng-class="{'light-grey': providerLookupSearchVm.formViewValue(providerSearchForm, 'providerZipCode')}">
-                                <h3 class="m-t-none m-b">Enter State and City.</h3>
+                                <h3 class="m-t-none m-b">{{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_12" | translate}}</h3>
 
                                 <div class="form-group">
-                                    <label for="state" class="control-label">State</label>
+                                    <label for="state" class="control-label">{{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_13" | translate}}</label>
                                     <select id="state" class="form-control m-b" name="providerState"
                                             ng-model="providerLookupSearchVm.plsQueryParameters.usstate"
                                             ng-change="providerLookupSearchVm.usstateChanged()"
                                             ng-disabled="providerLookupSearchVm.formViewValue(providerSearchForm, 'providerZipCode')"
                                             ng-required="!providerLookupSearchVm.plsQueryParameters.zipcode">
-                                        <option value="">-- Please Select --</option>
-                                        <option value="AZ">ARIZONA</option>
-                                        <option value="DC">DISTRICT OF COLUMBIA</option>
-                                        <option value="MD">MARYLAND</option>
-                                        <option value="VA">VIRGINIA</option>
+                                        <option value="">{{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_14" | translate}}</option>
+                                        <option value="AZ">{{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_15" | translate}}</option>
+                                        <option value="DC">{{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_16" | translate}}</option>
+                                        <option value="MD">{{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_17" | translate}}</option>
+                                        <option value="VA">{{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_18" | translate}}</option>
                                     </select>
 
                                     <div class="info-blue italic m-b"
                                          ng-if="providerLookupSearchVm.formViewValue(providerSearchForm, 'providerZipCode')">
-                                        Please clear "Enter Zip Code" information to add "Enter State and City"
-                                        information.
+                                        {{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_19" | translate}}
                                     </div>
                                 </div>
                                 <div class="form-group" ng-if="providerLookupSearchVm.plsQueryParameters.usstate">
-                                    <label for="city" class="control-label">City (Required)</label>
-                                    <Input id="city" class="form-control m-b" type="text" placeholder="Enter City"
+                                    <label for="city" class="control-label">{{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_20" | translate}}</label>
+                                    <Input id="city" class="form-control m-b" type="text" placeholder="{{'PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_48' | translate}}"
                                            name="providerCity"
                                            ng-model="providerLookupSearchVm.plsQueryParameters.city"
                                            ng-minlength="providerLookupSearchVm.formMinlength"
@@ -56,28 +54,28 @@
 
                                     <div ng-messages="providerSearchForm.providerCity.$error"
                                          class="text-alert" role="alert">
-                                        <div ng-message="minlength">Minimum {{providerLookupSearchVm.formMinlength}}
-                                            characters
+                                        <div ng-message="minlength">{{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_21" | translate}}{{providerLookupSearchVm.formMinlength}}
+                                            {{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_22" | translate}}
                                         </div>
-                                        <div ng-message="maxlength">Maximum {{providerLookupSearchVm.formMaxlength}}
-                                            characters
+                                        <div ng-message="maxlength">{{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_23" | translate}} {{providerLookupSearchVm.formMaxlength}}
+                                            {{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_22" | translate}}
                                         </div>
-                                        <div ng-message="required">Required</div>
+                                        <div ng-message="required">{{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_24" | translate}}</div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-1 m-b">
-                                <p>OR</p>
+                                <p>{{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_10" | translate}}</p>
                             </div>
                             <div class="col-sm-5"
                                  ng-class="{'light-grey': providerLookupSearchVm.formViewValue(providerSearchForm, 'providerState')}">
-                                <h3 class="m-t-none m-b">Enter Zip Code</h3>
+                                <h3 class="m-t-none m-b">{{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_25" | translate}}</h3>
 
                                 <div class="row">
                                     <div class="col-sm-5 form-group">
-                                        <label for="zip" class="control-label">Zip Code</label>
+                                        <label for="zip" class="control-label">{{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_26" | translate}}</label>
                                         <Input id="zip" class="form-control m-b" type="text" name="providerZipCode"
-                                               placeholder="Enter Zip Code"
+                                               placeholder="{{'PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_25' | translate}}"
                                                ng-model="providerLookupSearchVm.plsQueryParameters.zipcode"
                                                ng-disabled="providerLookupSearchVm.formViewValue(providerSearchForm, 'providerState')"
                                                ng-pattern="/^\d{5}(?:[-\s]\d{4})?$/"
@@ -85,15 +83,13 @@
 
                                         <div ng-messages="providerSearchForm.providerZipCode.$error"
                                              class="text-alert" role="alert">
-                                            <div ng-message="pattern">Please provide a valid zip code (12345 or
-                                                12345-6789)
+                                            <div ng-message="pattern">{{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_27" | translate}}
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 info-blue italic m-b m-t-n"
                                          ng-if="providerLookupSearchVm.formViewValue(providerSearchForm, 'providerState')">
-                                        Please clear "Enter State and City" information to add "Enter Zip Code"
-                                        information.
+                                        {{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_28" | translate}}
                                     </div>
                                 </div>
                             </div>
@@ -101,24 +97,23 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="alert alert-info">
-                                    <span class="badge btn-success bg-color-blue btn-circle m-r-xs">2</span>&nbsp;<b>Step
-                                    2.</b>
-                                    Please enter
-                                    the
-                                    <b>Facility Name</b> OR <b>Provider Name and
-                                    Other Criteria</b>.
+                                    <span class="badge btn-success bg-color-blue btn-circle m-r-xs">2</span>&nbsp;<b>
+                                    {{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_29" | translate}}</b>
+                                    {{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_30" | translate}}
+                                    <b>{{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_31" | translate}}</b>{{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_10" | translate}}<b>
+                                    {{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_32" | translate}}</b>.
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-5"
                                  ng-class="{'light-grey': providerLookupSearchVm.formViewValue(providerSearchForm, 'providerFacilityName')}">
-                                <h3 class="m-t-none m-b">Enter Provider Name and Other Criteria</h3>
+                                <h3 class="m-t-none m-b">{{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_33" | translate}}</h3>
 
                                 <div class="form-group">
-                                    <label for="last_name" class="control-label">Provider Last Name</label>
+                                    <label for="last_name" class="control-label">{{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_34" | translate}}</label>
                                     <Input id="last_name" class="form-control m-b" type="text" name="providerLastName"
-                                           placeholder="Last Name"
+                                           placeholder="{{'PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_49' | translate}}"
                                            ng-model="providerLookupSearchVm.plsQueryParameters.lastname"
                                            ng-change="providerLookupSearchVm.lastnameChanged()"
                                            ng-disabled="providerLookupSearchVm.formViewValue(providerSearchForm, 'providerFacilityName')"
@@ -128,51 +123,51 @@
 
                                     <div ng-messages="providerSearchForm.providerLastName.$error"
                                          class="text-alert" role="alert">
-                                        <div ng-message="minlength">Minimum {{providerLookupSearchVm.formMinlength}}
-                                            characters
+                                        <div ng-message="minlength">{{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_21" | translate}} {{providerLookupSearchVm.formMinlength}}
+                                            {{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_22" | translate}}
                                         </div>
-                                        <div ng-message="maxlength">Maximum {{providerLookupSearchVm.formMaxlength}}
-                                            characters
+                                        <div ng-message="maxlength">{{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_23" | translate}} {{providerLookupSearchVm.formMaxlength}}
+                                            {{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_22" | translate}}
                                         </div>
                                         <!--<div ng-message="required">Required</div>-->
                                     </div>
                                 </div>
                                 <div class="form-group" ng-if="providerLookupSearchVm.plsQueryParameters.lastname">
-                                    <label for="first_name" class="control-label">First Name (Optional)</label>
+                                    <label for="first_name" class="control-label">{{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_35" | translate}}</label>
                                     <Input id="first_name" class="form-control m-b" type="text" name="providerFirstName"
-                                           placeholder="First Name"
+                                           placeholder="{{'PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_50' | translate}}"
                                            ng-model="providerLookupSearchVm.plsQueryParameters.firstname"
                                            ng-minlength="providerLookupSearchVm.formMinlength"
                                            ng-maxlength="providerLookupSearchVm.formMaxlength"/>
 
                                     <div ng-messages="providerSearchForm.providerFirstName.$error"
                                          class="text-alert" role="alert">
-                                        <div ng-message="minlength">Minimum {{providerLookupSearchVm.formMinlength}}
-                                            characters
+                                        <div ng-message="minlength">{{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_21" | translate}} {{providerLookupSearchVm.formMinlength}}
+                                            {{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_22" | translate}}
                                         </div>
-                                        <div ng-message="maxlength">Maximum {{providerLookupSearchVm.formMaxlength}}
-                                            characters
+                                        <div ng-message="maxlength">{{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_23" | translate}} {{providerLookupSearchVm.formMaxlength}}
+                                            {{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_22" | translate}}
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-md-6"
                                          ng-if="providerLookupSearchVm.plsQueryParameters.lastname">
-                                        <label for="gender" class="control-label">Gender (Optional)</label>
+                                        <label for="gender" class="control-label">{{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_36" | translate}}</label>
                                         <select id="gender" class="form-control m-b" name="providerGender"
                                                 ng-model="providerLookupSearchVm.plsQueryParameters.gender">
-                                            <option value="">Please Select</option>
-                                            <option value="M">Male</option>
-                                            <option value="F">Female</option>
+                                            <option value="">{{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_37" | translate}}</option>
+                                            <option value="M">{{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_38" | translate}}</option>
+                                            <option value="F">{{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_39" | translate}}</option>
                                         </select>
                                     </div>
 
                                     <div class="form-group col-md-6"
                                          ng-if="providerLookupSearchVm.plsQueryParameters.lastname">
-                                        <label for="individual_provider_telephone" class="control-label">Telephone
-                                            (Optional)</label>
+                                        <label for="individual_provider_telephone" class="control-label">
+                                            {{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_40" | translate}}</label>
                                         <Input id="individual_provider_telephone" class="form-control m-b" type="tel"
-                                               placeholder="Telephone"
+                                               placeholder="{{'PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_51' | translate}}"
                                                name="providerPhone"
                                                ng-model="providerLookupSearchVm.plsQueryParameters.phone"
                                                ng-pattern="/\d{3}-\d{3}-\d{4}/"
@@ -180,28 +175,27 @@
 
                                         <div ng-messages="providerSearchForm.providerPhone.$error"
                                              class="text-alert" role="alert">
-                                            <div ng-message="pattern">Phone pattern must be 123-456-7890</div>
+                                            <div ng-message="pattern">{{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_41" | translate}}</div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="info-blue italic m-b"
                                      ng-if="providerLookupSearchVm.formViewValue(providerSearchForm, 'providerFacilityName')">
-                                    Please clear "Facility Name" information to add "Enter Provider Name and Other
-                                    Criteria" information.
+                                    {{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_42" | translate}}
                                 </div>
                             </div>
                             <div class="col-sm-1 m-b">
-                                <p>OR</p>
+                                <p>{{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_10" | translate}}</p>
                             </div>
                             <div class="col-sm-5"
                                  ng-class="{'light-grey': providerLookupSearchVm.formViewValue(providerSearchForm,'providerLastName')}">
 
-                                <h3 class="m-t-none m-b">Facility Name</h3>
+                                <h3 class="m-t-none m-b">{{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_43" | translate}}</h3>
 
                                 <div class="form-group">
-                                    <label for="facility_name" class="control-label">Facility Name</label>
+                                    <label for="facility_name" class="control-label">{{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_43" | translate}}</label>
                                     <Input id="facility_name" class="form-control m-b" type="text"
-                                           placeholder="Facility Name"
+                                           placeholder="{{'PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_31' | translate}}"
                                            ng-model="providerLookupSearchVm.plsQueryParameters.facilityname"
                                            ng-change="providerLookupSearchVm.facilitynameChanged()"
                                            ng-minlength="providerLookupSearchVm.formMinlength"
@@ -212,24 +206,23 @@
 
                                     <div ng-messages="providerSearchForm.providerFacilityName.$error"
                                          class="text-alert" role="alert">
-                                        <div ng-message="minlength">Minimum {{providerLookupSearchVm.formMinlength}}
-                                            characters
+                                        <div ng-message="minlength">{{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_21" | translate}} {{providerLookupSearchVm.formMinlength}}
+                                            {{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_22" | translate}}
                                         </div>
-                                        <div ng-message="maxlength">Maximum {{providerLookupSearchVm.formMaxlength}}
-                                            characters
+                                        <div ng-message="maxlength">{{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_23" | translate}} {{providerLookupSearchVm.formMaxlength}}
+                                            {{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_22" | translate}}
                                         </div>
                                     </div>
                                     <div class="info-blue italic m-b"
                                          ng-if="providerLookupSearchVm.formViewValue(providerSearchForm,'providerLastName')">
-                                        Please clear "Enter Provider Name and Other Criteria" information to add
-                                        "Facility Name" information.
+                                        {{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_44" | translate}}
                                     </div>
                                 </div>
                                 <div class="form-group" ng-if="providerLookupSearchVm.plsQueryParameters.facilityname">
-                                    <label for="organizational_provider_telephone" class="control-label">Telephone
-                                        (Optional)</label>
+                                    <label for="organizational_provider_telephone" class="control-label">
+                                        {{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_40" | translate}}</label>
                                     <Input id="organizational_provider_telephone" class="form-control m-b" type="tel"
-                                           placeholder="Telephone"
+                                           placeholder="{{'PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_51' | translate}}"
                                            name="providerPhoneForFacility"
                                            ng-model="providerLookupSearchVm.plsQueryParameters.phone"
                                            ng-pattern="/\d{3}-\d{3}-\d{4}/"
@@ -237,7 +230,7 @@
 
                                     <div ng-messages="providerSearchForm.providerPhoneForFacility.$error"
                                          class="text-alert" role="alert">
-                                        <div ng-message="pattern">Phone pattern must be 123-456-7890</div>
+                                        <div ng-message="pattern">{{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_41" | translate}}</div>
                                     </div>
                                 </div>
                             </div>
@@ -246,20 +239,20 @@
                         <div class="row">
                             <div class="col-xs-5 col-sm-3 col-lg-2">
                                 <button class="btn btn-block btn-sm m-r" type="reset"
-                                        ng-click="providerLookupSearchVm.reset(providerSearchForm)">Clear
-                                    All
+                                        ng-click="providerLookupSearchVm.reset(providerSearchForm)">
+                                    {{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_45" | translate}}
                                 </button>
                             </div>
                             <div class="col-xs-5 col-sm-3 col-lg-2">
                                 <button class="btn btn-block btn-sm btn-primary dark-green" type="button"
                                         ng-click="providerLookupSearchVm.lookupProvider(providerLookupSearchVm.firstPage)"
                                         ng-disabled="providerSearchForm.$invalid">
-                                    <strong>Search</strong>
+                                    <strong>{{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_46" | translate}}</strong>
                                 </button>
                             </div>
                             <div class="col-xs-12 col-sm-6 col-lg-8" ng-show="providerSearchForm.$invalid">
                                 <div class="info-blue italic m-b">
-                                    Please complete ALL required fields to activate Search.
+                                    {{"PROVIDER_MANAGEMENT.PROVIDER_LOOKUP_47" | translate}}
                                 </div>
                             </div>
                         </div>

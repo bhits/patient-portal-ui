@@ -8,7 +8,7 @@
                         <h3>
                             <span ng-bind="ccdaDocumentVm.cdaDocument.type"></span>
                             <span class="m-b-none m-l-sm">
-                                Created on <span ng-bind="ccdaDocumentVm.cdaDocument.date"></span> at
+                                {{"HEALTH_INFORMATION_DOC.CCDA_DOC_1" | translate}}<span ng-bind="ccdaDocumentVm.cdaDocument.date"></span> {{"HEALTH_INFORMATION_DOC.CCDA_DOC_2" | translate}}
                                 <span ng-bind="ccdaDocumentVm.cdaDocument.title"></span>
                             </span>
                         </h3>
@@ -22,19 +22,19 @@
                 <div class="row m-b">
                     <div class="col-sm-6">
                         <div>
-                            <label for="patientName">Patient Name:</label>
+                            <label for="patientName">{{"HEALTH_INFORMATION_DOC.CCDA_DOC_3" | translate}}</label>
                             <span ng-bind="ccdaDocumentVm.patient.name" id="patientName"></span>
                         </div>
                         <div>
-                            <label for="patientGender">Gender: </label>
+                            <label for="patientGender">{{"HEALTH_INFORMATION_DOC.CCDA_DOC_4" | translate}}</label>
                             <span ng-bind="ccdaDocumentVm.patient.gender" id="patientGender"></span>
                         </div>
                         <div>
-                            <label for="patientDOB">Birthdate: </label>
+                            <label for="patientDOB">{{"HEALTH_INFORMATION_DOC.CCDA_DOC_5" | translate}}</label>
                             <span ng-bind="ccdaDocumentVm.patient.dob" id="patientDOB"></span>
                         </div>
                         <div>
-                            <label for="patientAddress">Address: </label>
+                            <label for="patientAddress">{{"HEALTH_INFORMATION_DOC.CCDA_DOC_6" | translate}}</label>
                             <span ng-bind="ccdaDocumentVm.address.addressLine" id="patientAddress"></span>
                             <span ng-bind="ccdaDocumentVm.address.city"></span>
                         </div>
@@ -42,22 +42,22 @@
                     </div>
                     <div class="col-sm-6">
                         <div>
-                            <label for="author">Provider: </label>
+                            <label for="author">{{"HEALTH_INFORMATION_DOC.CCDA_DOC_7" | translate}}</label>
                             <span ng-repeat="author in ccdaDocumentVm.authors">
                                 <span ng-bind="author.providerName" id="author"></span>
                                 <span ng-if="!$last">,</span>
                             </span>
                         </div>
                         <div>
-                            <label for="service">Treatment: </label>
+                            <label for="service">{{"HEALTH_INFORMATION_DOC.CCDA_DOC_8" | translate}}</label>
                             <span ng-bind="ccdaDocumentVm.treatment.service" id="service"></span>
                         </div>
                         <div>
-                            <label for="serviceStartDate">Treatement Start Date: </label>
+                            <label for="serviceStartDate">{{"HEALTH_INFORMATION_DOC.CCDA_DOC_9" | translate}}</label>
                             <span ng-bind="ccdaDocumentVm.treatment.serviceStartDate" id="serviceStartDate"></span>
                         </div>
                         <div>
-                            <label for="serviceEndDate">Treatment End Date: </label>
+                            <label for="serviceEndDate">{{"HEALTH_INFORMATION_DOC.CCDA_DOC_10" | translate}}</label>
                             <span ng-bind="ccdaDocumentVm.treatment.serviceEndDate" id="serviceEndDate"></span>
                         </div>
                     </div>
@@ -68,7 +68,7 @@
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        <strong> Document does not contain sections.</strong>
+                        <strong>{{"HEALTH_INFORMATION_DOC.CCDA_DOC_11" | translate}}</strong>
                     </div>
                 </div>
                 <div ng-repeat="section in ccdaDocumentVm.sections">

@@ -1,11 +1,10 @@
-<c2s-content-wrapper contenttitle="Sign Revoke Consent">
+<c2s-content-wrapper contenttitle="TITLE.SIGN_REVOKE_CONSENT">
     <div ng-bind-html="consentSignRevokeVm.javascriptCode |trustAsHTML" style="height: 600px"/>
     <div class="navbar navbar-inverse navbar-fixed-bottom">
         <div class="container">
-            <p class="navbar-text pull-left">If you have finished signing this Consent or wish to cancel, please click
-                the Close button to exit this window.</p>
+            <p class="navbar-text pull-left">{{"CONSENT_MANAGEMENT.E_REVOKE_CONTENTS_1" | translate}}</p>
             <button type="button" class="navbar-btn btn btn-primary pull-right" ng-click="consentSignRevokeVm.close()">
-                Close
+                {{"CONSENT_MANAGEMENT.E_REVOKE_CONTENTS_2" | translate}}
             </button>
         </div>
     </div>

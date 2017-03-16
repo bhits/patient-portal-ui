@@ -2,47 +2,47 @@
     <div class="col-sm-12">
         <div class="row m-b-md">
             <div class="col-sm-12">
-                <h2 class="m-t-none"><strong>Consent to Share My Medical Information</strong></h2>
+                <h2 class="m-t-none"><strong>{{"CONSENT_MANAGEMENT.CONSENT_ESIGNATURE_1" | translate}}</strong></h2>
                 <div class="">
-                    <p class="m-b-xxs">Consent Reference Number:</p>
+                    <p class="m-b-xxs">{{"CONSENT_MANAGEMENT.CONSENT_ESIGNATURE_2" | translate}}</p>
                     <p><strong ng-bind="consentESignatureVm.attestation.consentReferenceNumber"></strong></p>
                 </div>
             </div>
             <div class="col-sm-6">
-                <span> Patient Name:</span>
+                <span>{{"CONSENT_MANAGEMENT.CONSENT_ESIGNATURE_3" | translate}}</span>
                 <strong ng-bind="consentESignatureVm.attestation | fullName"></strong>
             </div>
             <div class="col-sm-6">
-                <span> Patient DOB:</span>
+                <span>{{"CONSENT_MANAGEMENT.CONSENT_ESIGNATURE_4" | translate}}</span>
                 <strong ng-bind="consentESignatureVm.attestation.patientDateOfBirth"></strong>
             </div>
         </div>
 
         <div class="row">
             <div class="col-sm-12">
-                <div class="alert alert-info navbar-blue p-xs"><strong>AUTHORIZATION TO DISCLOSE</strong></div>
+                <div class="alert alert-info navbar-blue p-xs"><strong>{{"CONSENT_MANAGEMENT.CONSENT_ESIGNATURE_5" | translate}}</strong></div>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-12">
-                <p class="font-size16 text-navy-blue bold">Authorizes:</p>
+                <p class="font-size16 text-navy-blue bold">{{"CONSENT_MANAGEMENT.CONSENT_ESIGNATURE_6" | translate}}</p>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-3">
-                <p class="m-b-xs">Provider Name</p>
+                <p class="m-b-xs">{{"CONSENT_MANAGEMENT.CONSENT_ESIGNATURE_7" | translate}}</p>
                 <p><strong ng-bind="consentESignatureVm.authorizeProvider | fullName"></strong></p>
             </div>
             <div class="col-sm-3">
-                <p class="m-b-xs">NPI Number</p>
+                <p class="m-b-xs">{{"CONSENT_MANAGEMENT.CONSENT_ESIGNATURE_8" | translate}}</p>
                 <p><strong ng-bind="consentESignatureVm.authorizeProvider.npi"></strong></p>
             </div>
             <div class="col-sm-3">
-                <p class="m-b-xs">Address</p>
+                <p class="m-b-xs">{{"CONSENT_MANAGEMENT.CONSENT_ESIGNATURE_9" | translate}}</p>
                 <p><strong ng-bind="consentESignatureVm.authorizeProvider | address"></strong></p>
             </div>
             <div class="col-sm-3">
-                <p class="m-b-xs">Phone</p>
+                <p class="m-b-xs">{{"CONSENT_MANAGEMENT.CONSENT_ESIGNATURE_10" | translate}}</p>
                 <p><strong
                         ng-bind="consentESignatureVm.authorizeProvider.practiceLocationAddressTelephoneNumber | phone"></strong>
                 </p>
@@ -51,25 +51,25 @@
 
         <div class="row">
             <div class="col-sm-12">
-                <p class="font-size16 text-navy-blue bold">To disclose to:</p>
+                <p class="font-size16 text-navy-blue bold">{{"CONSENT_MANAGEMENT.CONSENT_ESIGNATURE_11" | translate}}</p>
             </div>
         </div>
 
         <div class="row m-b">
             <div class="col-sm-3">
-                <p class="m-b-xs">Provider Name</p>
+                <p class="m-b-xs">{{"CONSENT_MANAGEMENT.CONSENT_ESIGNATURE_7" | translate}}</p>
                 <p><strong ng-bind="consentESignatureVm.disclosureProvider | fullName"></strong></p>
             </div>
             <div class="col-sm-3">
-                <p class="m-b-xs">NPI Number</p>
+                <p class="m-b-xs">{{"CONSENT_MANAGEMENT.CONSENT_ESIGNATURE_8" | translate}}</p>
                 <p><strong ng-bind="consentESignatureVm.disclosureProvider.npi"></strong></p>
             </div>
             <div class="col-sm-3">
-                <p class="m-b-xs">Address</p>
+                <p class="m-b-xs">{{"CONSENT_MANAGEMENT.CONSENT_ESIGNATURE_9" | translate}}</p>
                 <p><strong ng-bind="consentESignatureVm.disclosureProvider | address"></strong></p>
             </div>
             <div class="col-sm-3">
-                <p class="m-b-xs">Phone</p>
+                <p class="m-b-xs">{{"CONSENT_MANAGEMENT.CONSENT_ESIGNATURE_10" | translate}}</p>
                 <p><strong
                         ng-bind="consentESignatureVm.disclosureProvider.practiceLocationAddressTelephoneNumber | phone"></strong>
                 </p>
@@ -78,24 +78,22 @@
 
         <div class="row">
             <div class="col-sm-12">
-                <div class="alert alert-info navbar-blue p-xs"><strong>HEALTH INFORMATION TO BE DISCLOSED</strong></div>
+                <div class="alert alert-info navbar-blue p-xs"><strong>{{"CONSENT_MANAGEMENT.CONSENT_ESIGNATURE_12" | translate}}</strong></div>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-6">
-                <div class="text-navy-blue bold font-size16 m-t-xs m-b-xs">To SHARE the following medical
-                    information:
+                <div class="text-navy-blue bold font-size16 m-t-xs m-b-xs">{{"CONSENT_MANAGEMENT.CONSENT_ESIGNATURE_13" | translate}}
                 </div>
-                <strong>Sensitivity Categories:</strong> <span
-                    ng-if="!consentESignatureVm.hasSensitiveCategoriesToDisplay()">None</span>
+                <strong>{{"CONSENT_MANAGEMENT.CONSENT_ESIGNATURE_25" | translate}}</strong> <span
+                    ng-if="!consentESignatureVm.hasSensitiveCategoriesToDisplay()">{{"CONSENT_MANAGEMENT.CONSENT_ESIGNATURE_14" | translate}}</span>
                 <ul>
                     <li ng-repeat="category in consentESignatureVm.attestation.doNotShareSensitivityPolicyDisplayNames">
                         <span ng-bind="category"></span></li>
                 </ul>
             </div>
             <div class="col-sm-6">
-                <div class="text-navy-blue bold font-size16 m-t-xs m-b-xs"><strong>To SHARE for the following
-                    purpose(s):</strong></div>
+                <div class="text-navy-blue bold font-size16 m-t-xs m-b-xs"><strong>{{"CONSENT_MANAGEMENT.CONSENT_ESIGNATURE_15" | translate}}</strong></div>
                 <ul>
                     <li ng-repeat="purposeOfUse in consentESignatureVm.attestation.purposeOfUseCodes"><span
                             ng-bind="purposeOfUse.displayName"></span></li>
@@ -105,15 +103,15 @@
 
         <div class="row m-t">
             <div class="col-sm-12">
-                <div class="alert alert-info navbar-blue p-xs"><strong>CONSENT TERMS</strong></div>
+                <div class="alert alert-info navbar-blue p-xs"><strong>{{"CONSENT_MANAGEMENT.CONSENT_ESIGNATURE_16" | translate}}</strong></div>
                 <p ng-bind-html="consentESignatureVm.termsWithUserName"></p>
             </div>
             <div class="col-sm-4">
-                <span><strong>Effective Date:</strong></span>
+                <span><strong>{{"CONSENT_MANAGEMENT.CONSENT_ESIGNATURE_17" | translate}}</strong></span>
                 <strong ng-bind="consentESignatureVm.attestation.consentStart | date: 'MM/dd/yyyy' "></strong>
             </div>
             <div class="col-sm-4">
-                <span><strong>Expiration Date:</strong></span>
+                <span><strong>{{"CONSENT_MANAGEMENT.CONSENT_ESIGNATURE_18" | translate}}</strong></span>
                 <strong ng-bind="consentESignatureVm.attestation.consentEnd | date: 'MM/dd/yyyy' "></strong>
             </div>
         </div>
@@ -125,7 +123,7 @@
                         <input id="acceptConsent" type="checkbox" c2s-icheck
                                ng-model="consentESignatureVm.attestation.acceptTerms"
                                ng-change="consentESignatureVm.onchecked()">
-                        <span class="m-l-xs">I, <strong ng-bind="consentESignatureVm.attestation | fullName"></strong>, hereby accept, and understand the terms of this consent.</span>
+                        <span class="m-l-xs">{{"CONSENT_MANAGEMENT.CONSENT_CREATE_1" | translate}}<strong ng-bind="consentESignatureVm.attestation | fullName"></strong>{{"CONSENT_MANAGEMENT.CONSENT_ESIGNATURE_19" | translate}}</span>
                     </label>
                 </div>
             </div>
@@ -135,10 +133,10 @@
     <div class="col-sm-12 m-b-md">
         <div class="m-r">
             <div class="pull-right">
-                <button class="btn btn-white m-r" type="button" ui-sref="fe.consent.list">Cancel</button>
+                <button class="btn btn-white m-r" type="button" ui-sref="fe.consent.list">{{"CONSENT_MANAGEMENT.CONSENT_CREATE_3" | translate}}</button>
                 <button class="btn btn-primary dark-green" type="submit"
                         ng-disabled="!consentESignatureVm.isAuthenticated"
-                        ng-click="consentESignatureVm.onCompleteAttestation()">Complete
+                        ng-click="consentESignatureVm.onCompleteAttestation()">{{"CONSENT_MANAGEMENT.CONSENT_ESIGNATURE_20" | translate}}
                 </button>
             </div>
         </div>

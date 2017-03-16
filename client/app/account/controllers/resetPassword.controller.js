@@ -9,6 +9,6 @@
     /* @ngInject */
     function ResetPasswordController(configService) {
         var vm = this;
-        vm.title = configService.getBrandName() + " Reset Password Complete";
+        vm.title = configService.getBrandName() + "_RESET_PASSWORD_COMPLETE";
     }
 })();

@@ -1,7 +1,3 @@
-/*
- * Created by cindy.ren on 6/9/2016.
- */
-
 'use strict';
 
 describe('app module', function () {
@@ -75,17 +71,19 @@ describe('app module', function () {
     });
 });
 
-describe("app AppController ", function () {
+xdescribe("app AppController ", function () {
 
     beforeEach(module('ui.router'));
     beforeEach(module('ngIdle'));
     beforeEach(module('angular-loading-bar'));
     beforeEach(module('app.security'));
-    beforeEach(module('ui.bootstrap'));
     beforeEach(module('templates-app'));
     beforeEach(module('ui.bootstrap'));
     beforeEach(module('ngAria'));
+    beforeEach (module('ngCookies'));
+    beforeEach (module('pascalprecht.translate'));
     beforeEach(module('app'));
+    beforeEach(module('app.core'));
 
     var controller, scope, $location, $templateCache, $rootScope, $state, anchorScroll, utilityService, authenticationService, Idle;
 
@@ -110,7 +108,7 @@ describe("app AppController ", function () {
         });
     });
 
-    beforeEach(inject(function (_$rootScope_, _$templateCache_, _$location_, $controller, _$state_, $anchorScroll, _utilityService_, _authenticationService_, _Idle_, _$modal_, _idleConfigParams_) {
+    beforeEach(inject(function (_$rootScope_, _$templateCache_, _$location_, $controller, _$state_, $anchorScroll, _utilityService_, _authenticationService_, _Idle_, _$modal_, _$modalStack_, _idleConfigParams_, _$translate_, _tmhDynamicLocale_, _paginationConfig_) {
         $rootScope = _$rootScope_;
         scope = $rootScope.$new();
         $state = _$state_;
@@ -132,16 +130,18 @@ describe("app AppController ", function () {
 
         controller = $controller('AppController', {
             $scope: scope,
-            authenticationService: _authenticationService_,
             state: $state,
             utilityService: _utilityService_,
             $modal: _$modal_,
             Idle: _Idle_,
             idleConfigParams: _idleConfigParams_,
+            $translate: _$translate_,
+            tmhDynamicLocale: _tmhDynamicLocale_,
+            paginationConfig: _paginationConfig_,
+            $modalStack:_$modalStack_,
             rootScope: $rootScope
         });
     }));
-
     it('should show Health Information Menu.', function () {
         expect(controller.healthInformationMenu).toBeFalsy();
     });
