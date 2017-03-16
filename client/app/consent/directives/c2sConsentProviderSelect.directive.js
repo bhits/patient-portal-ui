@@ -26,7 +26,7 @@
     /* @ngInject */
     function ConsentSelectProviderController($modal, consentService, notificationService) {
         var vm = this;
-        vm.fieldplaceholder = vm.modaltitle === 'Authorize' ? "The following individual or organization" : "To disclose my information to";
+        vm.fieldplaceholder = vm.modaltitle === 'Authorize' ? "AUTHORIZE.TITLE_1" : "AUTHORIZE.TITLE_2";
         vm.openSelectProviderModal = openSelectProviderModal;
         vm.selectedProvider = vm.ngModel;
 

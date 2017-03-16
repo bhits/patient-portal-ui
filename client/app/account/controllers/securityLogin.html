@@ -8,7 +8,17 @@
                             <img ng-src="{{loginVm.brandLargeLogo}}" class="c2sLoginLogo"
                                  alt="loginVm.altLogoText">
                             <span class="pull-right m-r-md m-t-xs">
-                                <span class="side-padding10">HOME</span> <span>ABOUT</span>
+                                <span class="side-padding10">{{"HOME" | translate}}</span> <span>{{"ABOUT" | translate}}</span>
+                                <!--Select language-->
+                                <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span translate="SELECT_LANGUAGE"></span><span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a ng-click="changeLanguage('en-US')" translate="BUTTON_LANG_EN"></a>
+                                    </li>
+                                    <li>
+                                        <a ng-click="changeLanguage('es-AR')" translate="BUTTON_LANG_ES"></a>
+                                    </li>
+                                </ul>
                             </span>
                         </div>
                     </div>
@@ -19,12 +29,12 @@
                     <div class="loginColumns animated fadeInDown custom-login-column modified">
                         <div class="row m-b-xl">
                             <div class="col-md-5 m-b-md">
-                                <h1 class="font-bold text-navbar-blue">Take control of your health and well-being with
+                                <h1 class="font-bold text-navbar-blue">{{"SECURITY_LOGIN.CONTENTS_1" | translate}}
                                     <span ng-bind="loginVm.brandName"></span>.</h1>
                                 <div class="m-t border-top-navbar-blue">
-                                    <h2 class="m-t-xs font-bold m-t text-dark-blue">No Account? Register Today!</h2>
-                                    <p> To register for <span ng-bind="loginVm.brandName"></span>, please contact your
-                                        provider and ask about a <span ng-bind="loginVm.brandName"></span> Account.</p>
+                                    <h2 class="m-t-xs font-bold m-t text-dark-blue">{{"SECURITY_LOGIN.CONTENTS_2" | translate}}</h2>
+                                    <p> {{"SECURITY_LOGIN.CONTENTS_3" | translate}} <span ng-bind="loginVm.brandName"></span>,
+                                        {{"SECURITY_LOGIN.CONTENTS_4" | translate}} <span ng-bind="loginVm.brandName"></span> {{"SECURITY_LOGIN.CONTENTS_5" | translate}}.</p>
                                 </div>
                             </div>
                             <div class="col-md-7 skin-1">
@@ -34,9 +44,9 @@
                                     </div>
                                     <div class="text-center">
                                         <a ng-click="loginVm.forgotPassword()">
-                                            <small>Forgot Password?</small>
+                                            <small>{{"SECURITY_LOGIN.CONTENTS_6" | translate}}</small>
                                         </a>
-                                        <p> Version: {{::loginVm.version}} </p>
+                                        <p> {{"SECURITY_LOGIN.CONTENTS_7" | translate}} {{::loginVm.version}} </p>
                                     </div>
                                 </div>
                             </div>
@@ -49,52 +59,43 @@
             <div class="row " style="background-color: #fff">
                 <div class="col-md-4 padding-bottom-15">
                     <div id="ppTop" class="text-left">
-                        <h3><i class="fa fa-graduation-cap fa-2x"></i> About Your <span
-                                ng-bind="loginVm.brandName"></span> account.</h3>
+                        <h3><i class="fa fa-graduation-cap fa-2x"></i> {{"SECURITY_LOGIN.CONTENTS_8" | translate}} <span
+                                ng-bind="loginVm.brandName"></span> {{"SECURITY_LOGIN.CONTENTS_5" | translate}}</h3>
                     </div>
                     <p>
-                        <span ng-bind="loginVm.brandName"></span> is a secure online website that gives you convenient
-                        24-hour access to your personal health record from anywhere using an internet connection. It can
-                        help you to become more informed about your health care and thus to be more involved in your
-                        health care.
+                        <span ng-bind="loginVm.brandName"></span> {{"SECURITY_LOGIN.CONTENTS_9" | translate}}
                     </p>
                     <span>
                         <a href="#aboutHIEPortal" class="btn btn-xs btn-primary dark-green"
-                           ng-click="loginVm.scrollTo('aboutHIEPortal')">Learn more about this topic.</a>
+                           ng-click="loginVm.scrollTo('aboutHIEPortal')">{{"SECURITY_LOGIN.CONTENTS_10" | translate}}</a>
                     </span>
                 </div>
                 <div class="col-md-4 padding-bottom-15">
                     <div class="text-left">
-                        <h3><i class="fa fa-medkit fa-2x"></i> How Can <span ng-bind="loginVm.brandName"></span> Help
-                            Me?</h3>
+                        <h3><i class="fa fa-medkit fa-2x"></i> {{"SECURITY_LOGIN.CONTENTS_11" | translate}} <span ng-bind="loginVm.brandName"></span>
+                            {{"SECURITY_LOGIN.CONTENTS_12" | translate}}</h3>
                     </div>
                     <p>
-                        Think of <span ng-bind="loginVm.brandName"></span> as a very helpful tool. It can help put you
-                        in charge of your own health information. It will help you quickly find your health
-                        information—from all of your health care providers—in one place! Not only can you view and print
-                        your health information, you can add information, communicate with your providers, manage your
-                        prescriptions, and many more actions, described below.
+                        {{"SECURITY_LOGIN.CONTENTS_13" | translate}} <span ng-bind="loginVm.brandName"></span>
+                        {{"SECURITY_LOGIN.CONTENTS_14" | translate}}
                     </p>
 
                     <span>
                         <a href="#patientPortalHelpMe" class="btn btn-xs btn-primary dark-green"
-                           ng-click="loginVm.scrollTo('patientPortalHelpMe')">Read more about this topic.</a>
+                           ng-click="loginVm.scrollTo('patientPortalHelpMe')">{{"SECURITY_LOGIN.CONTENTS_67" | translate}}</a>
                     </span>
 
                 </div>
                 <div class="col-md-4 padding-bottom-15">
                     <div class="text-left">
-                        <h3><i class="fa fa-eye-slash fa-2x"></i> Is My Information Private and Secure?</h3>
+                        <h3><i class="fa fa-eye-slash fa-2x"></i> {{"SECURITY_LOGIN.CONTENTS_59" | translate}}</h3>
                     </div>
                     <p>
-                        Yes. Your <span ng-bind="loginVm.brandName"></span> account has many privacy and security
-                        safeguards designed to protect your health information. Even though your health information is
-                        online, it is private and only accessible by authorized people, such as your health care
-                        providers.
+                        {{"SECURITY_LOGIN.CONTENTS_60" | translate}} <span ng-bind="loginVm.brandName"></span> {{"SECURITY_LOGIN.CONTENTS_61" | translate}}
                     </p>
                     <span>
                         <a href="#informationPrivacySecure" class="btn btn-xs btn-primary dark-green"
-                           ng-click="loginVm.scrollTo('informationPrivacySecure')">Learn about this topic.</a>
+                           ng-click="loginVm.scrollTo('informationPrivacySecure')">{{"SECURITY_LOGIN.CONTENTS_15" | translate}}</a>
                     </span>
                 </div>
             </div>
@@ -109,43 +110,28 @@
                 </div>
                 <div class="row ">
                     <div class="col-sm-10 col-sm-offset-1">
-                        <h3> About your <span ng-bind="loginVm.brandName"></span> account.</h3>
+                        <h3> {{"SECURITY_LOGIN.CONTENTS_8" | translate}} <span ng-bind="loginVm.brandName"></span> {{"SECURITY_LOGIN.CONTENTS_5" | translate}}</h3>
                         <p>
-                            <span ng-bind="loginVm.brandName"></span> is a secure online website that gives you
-                            convenient 24-hours access to your personal health record from anywhere using an internet
-                            connection. It can help you to become more informed about your health care and thus to be
-                            more involved in your health care.
+                            <span ng-bind="loginVm.brandName"></span> {{"SECURITY_LOGIN.CONTENTS_9" | translate}}
                         </p>
-                        <h4> What is an HIE?</h4>
+                        <h4> {{"SECURITY_LOGIN.CONTENTS_16" | translate}}</h4>
                         <p>
-                            The term HIE is an abbreviation for electronic health record (HIE). Your HIE is a digital or
-                            electronic version of your health record. An HIE is a real-time, patient-centered electronic
-                            health record that makes your health information instantly available to you and authorized
-                            users.
+                            {{"SECURITY_LOGIN.CONTENTS_17" | translate}}
                         </p>
-                        <h4>What is <span ng-bind="loginVm.brandName"></span>?</h4>
+                        <h4>{{"SECURITY_LOGIN.CONTENTS_18" | translate}}<span ng-bind="loginVm.brandName"></span>?</h4>
                         <p>
-                            <span ng-bind="loginVm.brandName"></span> is a secure online website that gives you
-                            convenient 24-hour access to your personal health record from anywhere using an internet
-                            connection. It can help you to become more informed about your health care and thus to be
-                            more involved in your health care.
+                            <span ng-bind="loginVm.brandName"></span> {{"SECURITY_LOGIN.CONTENTS_9" | translate}}
                         </p>
-                        <h4>What are the Benefits of a <span ng-bind="loginVm.brandName"></span> account?</h4>
+                        <h4>{{"SECURITY_LOGIN.CONTENTS_19" | translate}}<span ng-bind="loginVm.brandName"></span> account?</h4>
                         <p>
-                            <span ng-bind="loginVm.brandName"></span> allow patients and health care providers to
-                            communicate and share health information online, as a supplement to face-to-face office
-                            visits. They can help you to view your health information and test results. There are many
-                            more benefits, described on the How Can <span ng-bind="loginVm.brandName"></span> Help Me?
-                            page.
+                            <span ng-bind="loginVm.brandName"></span> {{"SECURITY_LOGIN.CONTENTS_20" | translate}}
                         </p>
-                        <h4>How to Navigate Your <span ng-bind="loginVm.brandName"></span>?</h4>
+                        <h4>{{"SECURITY_LOGIN.CONTENTS_21" | translate}} <span ng-bind="loginVm.brandName"></span>?</h4>
                         <p>
-                            This brief presentation will demonstrate how to log in and navigate through your <span
-                                ng-bind="loginVm.brandName"></span> account, view your health records, manage your
-                            prescriptions, add health information, review reminders, access health education materials,
-                            and more.
+                            {{"SECURITY_LOGIN.CONTENTS_22" | translate}} <span
+                                ng-bind="loginVm.brandName"></span> {{"SECURITY_LOGIN.CONTENTS_23" | translate}}
                             <br><br><a href="#ppTop" class="btn btn-xs btn-primary dark-green"
-                                       ng-click="loginVm.scrollTo('topPage')">Back to Top</a>
+                                       ng-click="loginVm.scrollTo('topPage')">{{"SECURITY_LOGIN.CONTENTS_24" | translate}}</a>
                         </p>
                     </div>
                 </div>
@@ -159,84 +145,57 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-10 col-sm-offset-1">
-                        <h3> How can <span ng-bind="loginVm.brandName"></span> Help Me?</h3>
+                        <h3> {{"SECURITY_LOGIN.CONTENTS_25" | translate}} <span ng-bind="loginVm.brandName"></span> {{"SECURITY_LOGIN.CONTENTS_26" | translate}}</h3>
                         <p>
-                            Think of <span ng-bind="loginVm.brandName"></span> as a very helpful tool. It can help put
-                            you in charge of your own health information. It will help you quickly find your health
-                            information—from all of your health care providers—in one place! Not only can you view and
-                            print your health information, you can add information, communicate with your providers,
-                            manage your prescriptions, and many more actions, described below.
+                            {{"SECURITY_LOGIN.CONTENTS_13" | translate}} <span ng-bind="loginVm.brandName"></span> {{"SECURITY_LOGIN.CONTENTS_27" | translate}}
                         </p>
-                        <h4>How can I Use <span ng-bind="loginVm.brandName"></span>?</h4>
+                        <h4>{{"SECURITY_LOGIN.CONTENTS_28" | translate}} <span ng-bind="loginVm.brandName"></span>?</h4>
                         <p>
-                            One of the most obvious and powerful ways you can use <span
-                                ng-bind="loginVm.brandName"></span> is to view your health records from all of your
-                            providers in a single location. Also, <span ng-bind="loginVm.brandName"></span> organizes
-                            your health information in ways that are meaningful and useful to you. It will help you
-                            better understand your health information, help you to be better informed, and help you to
-                            be more involved in your health care.
+                            {{"SECURITY_LOGIN.CONTENTS_29" | translate}} <span
+                                ng-bind="loginVm.brandName"></span> {{"SECURITY_LOGIN.CONTENTS_30" | translate}} <span ng-bind="loginVm.brandName"></span> {{"SECURITY_LOGIN.CONTENTS_31" | translate}}
                         </p>
-                        <h4>How Else can I Use <span ng-bind="loginVm.brandName"></span>?</h4>
+                        <h4>{{"SECURITY_LOGIN.CONTENTS_32" | translate}} <span ng-bind="loginVm.brandName"></span>?</h4>
                         <p>
-                            Your <span ng-bind="loginVm.brandName"></span> account can help you to do many things:
+                            {{"SECURITY_LOGIN.CONTENTS_33" | translate}}<span ng-bind="loginVm.brandName"></span>{{"SECURITY_LOGIN.CONTENTS_34" | translate}}
                         </p>
                         <ul style="list-style-type: disc">
                             <li><p>
-                                <strong>Add Health Information:</strong> Not only can you view your health information,
-                                you can add to it. For example, if you monitor certain health activities, such as
-                                monitoring your blood glucose levels, you can use <span
-                                    ng-bind="loginVm.brandName"></span> to store your blood glucose levels. If you
-                                collect data using medical and health apps, you can download your health data to your
-                                <span ng-bind="loginVm.brandName"></span> account and share that information with your
-                                physician. You can use <span ng-bind="loginVm.brandName"></span> to keep a health diary
-                                and document your medical symptoms.
+                                <strong>{{"SECURITY_LOGIN.CONTENTS_35" | translate}}</strong>{{"SECURITY_LOGIN.CONTENTS_36" | translate}} <span
+                                    ng-bind="loginVm.brandName"></span>{{"SECURITY_LOGIN.CONTENTS_37" | translate}}
+                                <span ng-bind="loginVm.brandName"></span>{{"SECURITY_LOGIN.CONTENTS_38" | translate}}<span ng-bind="loginVm.brandName"></span>
+                                {{"SECURITY_LOGIN.CONTENTS_39" | translate}}
                             </p></li>
                             <li><p>
-                                <strong>Obtain Laboratory Results:</strong> After a lab or other test, your physician
-                                may have explained the results to you. But you can use <span
-                                    ng-bind="loginVm.brandName"></span> to obtain a complete copy of the test results so
-                                that you can better understand it, share with your family, and share with other
-                                providers.
+                                <strong>{{"SECURITY_LOGIN.CONTENTS_40" | translate}}</strong>{{"SECURITY_LOGIN.CONTENTS_41" | translate}} <span
+                                    ng-bind="loginVm.brandName"></span> {{"SECURITY_LOGIN.CONTENTS_42" | translate}}
                             </p></li>
                             <li><p>
-                                <strong>Correct Inaccurate Information:</strong> As you view your health information, do
-                                you notice any inaccuracies? If so, you can use <span
-                                    ng-bind="loginVm.brandName"></span> to contact your health care provider and make
-                                your health information accurate.
+                                <strong>{{"SECURITY_LOGIN.CONTENTS_43" | translate}}</strong>{{"SECURITY_LOGIN.CONTENTS_44" | translate}}<span
+                                    ng-bind="loginVm.brandName"></span>{{"SECURITY_LOGIN.CONTENTS_45" | translate}}
                             </p></li>
                             <li><p>
-                                <strong>Get Reminders:</strong> You can use <span ng-bind="loginVm.brandName"></span> to
-                                get reminders about upcoming medical appointments, lab test appointments, prescription
-                                refills and other health-related events.
+                                <strong>{{"SECURITY_LOGIN.CONTENTS_46" | translate}}</strong>{{"SECURITY_LOGIN.CONTENTS_47" | translate}}<span ng-bind="loginVm.brandName"></span>
+                                {{"SECURITY_LOGIN.CONTENTS_48" | translate}}
                             </p></li>
                             <li><p>
-                                <strong>Communicate, Make Appointments, and Manage Prescriptions:</strong> You can use
-                                <span ng-bind="loginVm.brandName"></span> to communicate electronically with your health
-                                care provider to ask questions or share information with your health care provider. You
-                                can view your upcoming health care appointments and make appointments. You can view your
-                                prescription medication history, view your current medication regimen, and request
-                                refills of your medications from your provider.
+                                <strong>{{"SECURITY_LOGIN.CONTENTS_49" | translate}}</strong>{{"SECURITY_LOGIN.CONTENTS_47" | translate}}
+                                <span ng-bind="loginVm.brandName"></span>{{"SECURITY_LOGIN.CONTENTS_50" | translate}}
                             </p></li>
                             <li><p>
-                                <strong>Access Health Educational Materials:</strong> You can use <span
-                                    ng-bind="loginVm.brandName"></span> to obtain authoritative information about
-                                medical problems, prevention, treatments, and what you can do to manage your medical
-                                problems and improve your health.
+                                <strong>{{"SECURITY_LOGIN.CONTENTS_51" | translate}}</strong>{{"SECURITY_LOGIN.CONTENTS_47" | translate}}<span
+                                    ng-bind="loginVm.brandName"></span>{{"SECURITY_LOGIN.CONTENTS_52" | translate}}
                             </p></li>
                             <li><p>
-                                <strong>Complete Assessments and Forms:</strong> There may be times when your health
-                                care providers ask you to complete medical assessments or forms. You can use <span
-                                    ng-bind="loginVm.brandName"></span> to complete these forms online rather than using
-                                a paper version.
+                                <strong>{{"SECURITY_LOGIN.CONTENTS_53" | translate}}</strong>{{"SECURITY_LOGIN.CONTENTS_54" | translate}}<span
+                                    ng-bind="loginVm.brandName"></span>{{"SECURITY_LOGIN.CONTENTS_55" | translate}}
                             </p></li>
                             <li><p>
-                                <strong>Manage Online Billing and Payment:</strong> You can use your <span
-                                    ng-bind="loginVm.brandName"></span> account to view your billing and payment
-                                information and to make medical payments online.
+                                <strong>{{"SECURITY_LOGIN.CONTENTS_56" | translate}}</strong>{{"SECURITY_LOGIN.CONTENTS_57" | translate}}<span
+                                    ng-bind="loginVm.brandName"></span>{{"SECURITY_LOGIN.CONTENTS_58" | translate}}
                             </p></li>
                         </ul>
                         <a href="#ppTop" class="btn btn-xs btn-primary dark-green m-t-xs"
-                           ng-click="loginVm.scrollTo('topPage')">Back to Top</a>
+                           ng-click="loginVm.scrollTo('topPage')">{{"SECURITY_LOGIN.CONTENTS_24" | translate}}</a>
                     </div>
                 </div>
             </div>
@@ -248,30 +207,22 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-10 col-sm-offset-1">
-                        <h3>Is My Information Private and Secure?</h3>
+                        <h3>{{"SECURITY_LOGIN.CONTENTS_59" | translate}}</h3>
                         <p>
-                            Yes. Your <span ng-bind="loginVm.brandName"></span> account has many privacy and security
-                            safeguards designed to protect your health information. Even though your health information
-                            is online, it is private and only accessible by authorized people, such as your health care
-                            providers.
+                            {{"SECURITY_LOGIN.CONTENTS_60" | translate}}<span ng-bind="loginVm.brandName"></span>
+                            {{"SECURITY_LOGIN.CONTENTS_61" | translate}}
                         </p>
-                        <h4>Is My Health Information Secure?</h4>
+                        <h4>{{"SECURITY_LOGIN.CONTENTS_62" | translate}}</h4>
                         <p>
-                            Yes. Your EHR Portal protects your health information through password protection, data
-                            encryption, and other technical safeguards. Your EHR <span
-                                ng-bind="loginVm.brandName"></span> meets very high health information technology
-                            standards regarding privacy, security, and protection. It also complies with federal laws
-                            regarding health information.
+                            {{"SECURITY_LOGIN.CONTENTS_63" | translate}}<span
+                                ng-bind="loginVm.brandName"></span>{{"SECURITY_LOGIN.CONTENTS_64" | translate}}
                         </p>
-                        <h4>How can I Keep my Health Information Safe?</h4>
+                        <h4>{{"SECURITY_LOGIN.CONTENTS_65" | translate}}</h4>
                         <p>
-                            You can help to keep your information safe by using normal safe internet practices. For
-                            instance, use a strong password and update it often. Do not share your username or password
-                            with others. You should log on to the EHR Patient Portal only from a personal or secure
-                            computer and not a public computer.<br><br> <a href="#ppTop"
+                            {{"SECURITY_LOGIN.CONTENTS_66" | translate}}<br><br> <a href="#ppTop"
                                                                            class="btn btn-xs btn-primary dark-green"
-                                                                           ng-click="loginVm.scrollTo('topPage')">Back
-                            to top</a>
+                                                                           ng-click="loginVm.scrollTo('topPage')">
+                            {{"SECURITY_LOGIN.CONTENTS_24" | translate}}</a>
                         </p>
                     </div>
                 </div>

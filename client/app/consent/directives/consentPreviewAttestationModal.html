@@ -1,6 +1,6 @@
 <div class="inmodal" ng-form>
     <div class="modal-header">
-        <h4 class="modal-title">Success in created Signed Consent.</h4>
+        <h4 class="modal-title">{{"CONSENT_MANAGEMENT.CONSENT_PREVIEW_1" | translate}}</h4>
     </div>
     <div class="modal-body">
         <div class="row">
@@ -8,10 +8,10 @@
                 <span>
                     <button class="btn btn-primary dark-green"
                             ng-click="attestedConsentModalVm.downloadAttestedConsentAndRedirectToConsentList()">
-                        Download Signed Consent
+                        {{"CONSENT_MANAGEMENT.CONSENT_PREVIEW_2" | translate}}
                     </button>
                 </span>
-                <span> <button class="btn btn-white m-r" ui-sref="fe.consent.list">Continue</button> </span>
+                <span> <button class="btn btn-white m-r" ui-sref="fe.consent.list">{{"CONSENT_MANAGEMENT.CONSENT_ESIGNATURE_24" | translate}}</button> </span>
             </div>
 
         </div>
