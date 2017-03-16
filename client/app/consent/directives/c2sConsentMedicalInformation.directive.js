@@ -112,9 +112,10 @@
             }
 
             function cancel() {
-                vm.medicalInformation = 'A';
+                clearMedicalInfoData();
                 $modalInstance.dismiss('cancel');
             }
+
         }
     }
 })();
