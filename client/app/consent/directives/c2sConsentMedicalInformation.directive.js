@@ -108,14 +108,22 @@
                 vm.ngModel = {
                     doNotShareSensitivityPolicyCodes: medicalInfoModalVm.consent.selectedSensitivityPolicies
                 };
+
+                resetSelection();
+
                 $modalInstance.close();
             }
 
             function cancel() {
-                clearMedicalInfoData();
+                resetSelection();
                 $modalInstance.dismiss('cancel');
             }
 
+            function resetSelection(){
+                if(vm.selectedSensitivityPolicies.length === 0){
+                    clearMedicalInfoData();
+                }
+            }
         }
     }
 })();
