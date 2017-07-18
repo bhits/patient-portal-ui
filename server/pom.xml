@@ -54,7 +54,7 @@
         <skip.grunt.build>false</skip.grunt.build>
         <java.version>1.8</java.version>
         <spring.cloud.version>Camden.SR2</spring.cloud.version>
-        <node.version>4.4.7</node.version>
+        <node.version>6.11.1</node.version>
         <npm.version>2.15.8</npm.version>
         <maven-resources-plugin.version>2.7</maven-resources-plugin.version>
         <maven-war-plugin.version>2.6</maven-war-plugin.version>
